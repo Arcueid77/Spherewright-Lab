@@ -1,0 +1,3 @@
+[submodule "deps/Spherewright"]
+	path = deps/Spherewright
+	url = https://github.com/AvaloNero/Spherewright.git
