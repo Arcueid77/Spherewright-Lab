@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "id": "v0.4-final-owned-peaceful-1x",
+  "sourceLock": "../../source-lock.json",
+  "productVersion": "0.4.0",
+  "nativeVersion": "0.10.35.29145",
+  "world": {"mode": "single-player", "peaceful": true, "sandbox": false, "resourceMultiplier": 1},
+  "executionPolicy": "historical-acceptance-and-offline-verification-only",
+  "continuousSupply": {"minimumGameTicks": 36000, "warperMinimumPerMinute": 1, "fuelRodMinimumPerMinute": 1},
+  "requiredInterfaces": ["MCP", "Plugin"],
+  "gameWritesAuthorizedByThisFile": false
+}

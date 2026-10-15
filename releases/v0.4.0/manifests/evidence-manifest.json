@@ -1,0 +1,1828 @@
+{
+  "schemaVersion": 1,
+  "kind": "evidence",
+  "sourceRepository": "AvaloNero/Spherewright",
+  "sourceSha": "e7d5f7d8661092b7c8089710488c448f290638be",
+  "fileCount": 259,
+  "files": [
+    {
+      "sourcePath": "AGENTS.md",
+      "path": "operations/agent-rules-imported.md",
+      "size": 19187,
+      "sha256": "0ED32E7C6400019EFA87D1E79FA854B5D716AA1E9C2D309FD5A655364F151788",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/current-status.md",
+      "path": "operations/current-status.md",
+      "size": 37818,
+      "sha256": "4906B11F53B75ECC02DC8C63DE8BE6F38DF0DA4C237CEED743B0C7B1D05E393B",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-09-26/belt-input-proof.md",
+      "path": "releases/v0.4.0/evidence/2026-09-26/belt-input-proof.md",
+      "size": 1925,
+      "sha256": "35DE20434C8D25E834A8B9A72570211AE5873EC1A793DDBBC70BCD7367E31F11",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-09-26/bounded-action-history.md",
+      "path": "releases/v0.4.0/evidence/2026-09-26/bounded-action-history.md",
+      "size": 2645,
+      "sha256": "0066C96499E094EB91BE6D0143CF316AE3FFC5B8C4F18A1EBA5950221E2BBDB6",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-09-26/factory-reentry-audit.md",
+      "path": "releases/v0.4.0/evidence/2026-09-26/factory-reentry-audit.md",
+      "size": 2306,
+      "sha256": "7FC4698D3EC574D3EAFBCFACBC556E5B34C741164A50DE0B872C2BEF31717C6E",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-09-26/harvest-approach.md",
+      "path": "releases/v0.4.0/evidence/2026-09-26/harvest-approach.md",
+      "size": 2734,
+      "sha256": "B19DE6EC0AFB2543D811AA85D5B32B4A8057B6F1B907A738DC419909DB56F4EC",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-09-26/hps-output-save-audit.md",
+      "path": "releases/v0.4.0/evidence/2026-09-26/hps-output-save-audit.md",
+      "size": 4133,
+      "sha256": "6414C64BBC6E164DD215BEE1661A636321AB51744BDF40E055B6D9B9BF896144",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-09-26/install-preflight.md",
+      "path": "releases/v0.4.0/evidence/2026-09-26/install-preflight.md",
+      "size": 2099,
+      "sha256": "7D4BAEC250702583B813B83CA76BE74F3F6A751234FC92A36BD55850D791CA35",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-09-26/install-release-stage-only.md",
+      "path": "releases/v0.4.0/evidence/2026-09-26/install-release-stage-only.md",
+      "size": 2453,
+      "sha256": "976942B3CAA076328E712A0DCEE1857E94D58147230EA955CDDBB5066D248CC8",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-09-26/reentry-preview.md",
+      "path": "releases/v0.4.0/evidence/2026-09-26/reentry-preview.md",
+      "size": 1635,
+      "sha256": "6A52C73C8BB786EA662A6C0B753149F19DEE2AD9BB11E8347FADA1795CE4E743",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-09-26/same-primary-recovery.md",
+      "path": "releases/v0.4.0/evidence/2026-09-26/same-primary-recovery.md",
+      "size": 1900,
+      "sha256": "B1852BBC22A0907EE8147C41283CFE17A5F475BAAB632306BD47DBE32A567AE6",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-09-27/fixed-autosave-cold-deployment.md",
+      "path": "releases/v0.4.0/evidence/2026-09-27/fixed-autosave-cold-deployment.md",
+      "size": 4774,
+      "sha256": "301291DBC7B12AA2422771F0E444DE2E32CE8C682710BF4E2A782537AF3ECEB2",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-09-27/fixed-autosave-inspection.md",
+      "path": "releases/v0.4.0/evidence/2026-09-27/fixed-autosave-inspection.md",
+      "size": 3587,
+      "sha256": "5E273C743338955AD997125D74FCC73065EAFEDBDF26BFC90DA9BCC91A953B99",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-09-27/fixed-autosave-recovery-live.md",
+      "path": "releases/v0.4.0/evidence/2026-09-27/fixed-autosave-recovery-live.md",
+      "size": 5141,
+      "sha256": "BAF6BCAC8E26AA852AF936E434245704154A3DFAB4DF6CD330589143B51CBFBB",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-09-27/fixed-autosave-recovery-source.md",
+      "path": "releases/v0.4.0/evidence/2026-09-27/fixed-autosave-recovery-source.md",
+      "size": 4136,
+      "sha256": "855D61668161F61AD6811ACC63254B5719CBC839770D0231F5A2FBC56425CE32",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-09-27/hps-first-infeed-reconciliation.md",
+      "path": "releases/v0.4.0/evidence/2026-09-27/hps-first-infeed-reconciliation.md",
+      "size": 6747,
+      "sha256": "D5F24EDDE5E33FFE8819B74AB10E4B9A8DC84C89B2447B97EE267BCAC435A9DB",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-09-27/hps-remaining-infeeds-save.md",
+      "path": "releases/v0.4.0/evidence/2026-09-27/hps-remaining-infeeds-save.md",
+      "size": 2771,
+      "sha256": "EFA110C39B4F2B7DE57E8AD2283F7B20DDC2E76948B25F671FA110B2B2BE4B76",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-09-27/hps-supply-diagnostic-windows.md",
+      "path": "releases/v0.4.0/evidence/2026-09-27/hps-supply-diagnostic-windows.md",
+      "size": 3875,
+      "sha256": "F71C7F19F9EF450AC2D88582CB3CB66685FD8BB14EEBB6AC0BC3B86DD6B63CAB",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-09-27/install-caught-failure-rollback.md",
+      "path": "releases/v0.4.0/evidence/2026-09-27/install-caught-failure-rollback.md",
+      "size": 4312,
+      "sha256": "846A766682D30F6789250A04F45D4851F5A98EC6B189BA90352C286011DAC886",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-09-27/install-explicit-recovery.md",
+      "path": "releases/v0.4.0/evidence/2026-09-27/install-explicit-recovery.md",
+      "size": 4698,
+      "sha256": "7333A0B2F38344A0F7306EF7F70E6C5B49D3EA3CF043AFEFB2113B418B1212D8",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-09-27/install-package-cli.md",
+      "path": "releases/v0.4.0/evidence/2026-09-27/install-package-cli.md",
+      "size": 2908,
+      "sha256": "1D101D5247230C7199F05C59E4DDBFA1FBFEA8787A566B6D6644AB3438101D4A",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-09-27/install-package-interruption-recovery.md",
+      "path": "releases/v0.4.0/evidence/2026-09-27/install-package-interruption-recovery.md",
+      "size": 4713,
+      "sha256": "F51942EB3D2CB6D962C0842476A28FABE5240F25C6A54216A76D340F1B6734AE",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-09-27/install-path-budget-package.md",
+      "path": "releases/v0.4.0/evidence/2026-09-27/install-path-budget-package.md",
+      "size": 3399,
+      "sha256": "6744D574AEF1A7A06C335EADDB24189DD47D8E3B6ECACC22FBA02DC4BB3217D2",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-09-27/install-path-budget.md",
+      "path": "releases/v0.4.0/evidence/2026-09-27/install-path-budget.md",
+      "size": 3694,
+      "sha256": "D3A1BDDC2482947FBD2ACC1512EAE429567E60A81CBA7579FB302D74AAF068E3",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-09-27/install-pending-startup-gate.md",
+      "path": "releases/v0.4.0/evidence/2026-09-27/install-pending-startup-gate.md",
+      "size": 4752,
+      "sha256": "D24005483DDB521C92BB659DAC62833C3CF05393760B84194A47A4EC119CBA00",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-09-27/package-native-version.md",
+      "path": "releases/v0.4.0/evidence/2026-09-27/package-native-version.md",
+      "size": 2933,
+      "sha256": "B6E3740FD6A0240151080ABD8E573996E174491AA950617759222D8E7A7C3E1F",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-09-27/staged-mcp-metadata.md",
+      "path": "releases/v0.4.0/evidence/2026-09-27/staged-mcp-metadata.md",
+      "size": 3858,
+      "sha256": "53FD66DC07425B76D1C52897D180AA697BF041610CB3647E4602CBF1057668CB",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-09-28/cnt-hydrogen-ring-dependency.md",
+      "path": "releases/v0.4.0/evidence/2026-09-28/cnt-hydrogen-ring-dependency.md",
+      "size": 3466,
+      "sha256": "0CB29B57F8D0874827C01AD8877E39AA3CEC9B233A2E0FF3E8E37129FABDE93A",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-09-28/coal-graphite-capacity-plan.md",
+      "path": "releases/v0.4.0/evidence/2026-09-28/coal-graphite-capacity-plan.md",
+      "size": 4164,
+      "sha256": "400E58F2CEC1F1BBCD436C11EEA1EC5BED2D654CFC57521F6D230794F0DC864C",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-09-28/coal-materials-approach-ten-audit.md",
+      "path": "releases/v0.4.0/evidence/2026-09-28/coal-materials-approach-ten-audit.md",
+      "size": 2366,
+      "sha256": "3232A00F48347649F225ADAF76181DB739B8F589D4F2E7FC1681E54544A01A63",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-09-28/coal-node319-power-miner-save-audit.md",
+      "path": "releases/v0.4.0/evidence/2026-09-28/coal-node319-power-miner-save-audit.md",
+      "size": 3216,
+      "sha256": "F34B4011D00B01299FE074DE56EEE11AA31EA8B0B37AF120C028E36545A4E144",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-09-28/coal-outlet-single-span-blocker.md",
+      "path": "releases/v0.4.0/evidence/2026-09-28/coal-outlet-single-span-blocker.md",
+      "size": 1590,
+      "sha256": "F3F0459B6044D4A49E0D0B46625A7836BDC249404A3322011F098508AE5256F3",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-09-28/coal-short-ends-save-audit.md",
+      "path": "releases/v0.4.0/evidence/2026-09-28/coal-short-ends-save-audit.md",
+      "size": 2664,
+      "sha256": "D54ABB9753809DD2DF15208109BBFA0E14917D83DF4623CCA56F5C327D882F49",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-09-28/coal-short-ends-sorter-save-audit.md",
+      "path": "releases/v0.4.0/evidence/2026-09-28/coal-short-ends-sorter-save-audit.md",
+      "size": 3270,
+      "sha256": "71F8E7B089F6DD3095E037C0CC024F30B134BC98C78C728D7159BB1CF49F66DB",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-09-28/coal-site-approach-ten-audit.md",
+      "path": "releases/v0.4.0/evidence/2026-09-28/coal-site-approach-ten-audit.md",
+      "size": 3037,
+      "sha256": "B4437BA22B1B36483B9C6900F4200EE9F72683C0379EB11D66F4517928D4570E",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-09-28/fuel-staging-ten-audit.md",
+      "path": "releases/v0.4.0/evidence/2026-09-28/fuel-staging-ten-audit.md",
+      "size": 4466,
+      "sha256": "45B6B9FE99B73B25BFD8C5FD06184CFF035F7108CCC18215AAD0F11671A64951",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-09-28/graphite-route-material-kit.md",
+      "path": "releases/v0.4.0/evidence/2026-09-28/graphite-route-material-kit.md",
+      "size": 3805,
+      "sha256": "50F08D2846CE5589AA584DC869AE653CE75DD262C4AB77A6F05A52EA3F7F9685",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-09-28/hydrogen-bootstrap-staging.md",
+      "path": "releases/v0.4.0/evidence/2026-09-28/hydrogen-bootstrap-staging.md",
+      "size": 7098,
+      "sha256": "90246E2C02162B9DFF19EBD2C304D0AA4521762D99682907E1A315D3DF29B223",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-09-28/silicon-expedition-kit-ten-audit.md",
+      "path": "releases/v0.4.0/evidence/2026-09-28/silicon-expedition-kit-ten-audit.md",
+      "size": 4580,
+      "sha256": "07CE02DDE260C025A555F368741B941D931E22D44138A8E1B5C8E93352DC8598",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-09-28/silicon-parallel-outlet-save-audit.md",
+      "path": "releases/v0.4.0/evidence/2026-09-28/silicon-parallel-outlet-save-audit.md",
+      "size": 3322,
+      "sha256": "5C1601AC19038DC3BC5884E4D624AF20C48CAB02D95CA75F973C861916256766",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-09-28/silicon-post-repair-supply-windows.md",
+      "path": "releases/v0.4.0/evidence/2026-09-28/silicon-post-repair-supply-windows.md",
+      "size": 3212,
+      "sha256": "A375409F3D06E7848DD0C688D5FE2FFBDB5BE9CADE263F1127096F53A1E81416",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-09-28/silicon-return-mother-save-audit.md",
+      "path": "releases/v0.4.0/evidence/2026-09-28/silicon-return-mother-save-audit.md",
+      "size": 3394,
+      "sha256": "D70A990B6D40A342D4ACB755AE0058002C54B397DAB1AFACF87FB265253E6E00",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-09-28/silicon-sorter174-native-upgrade.md",
+      "path": "releases/v0.4.0/evidence/2026-09-28/silicon-sorter174-native-upgrade.md",
+      "size": 2311,
+      "sha256": "DDBEA60A28669C20E488D1908195115D4A15142F034947B4CAFE4C44B3F2F175",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-09-28/silicon-sorter179-native-upgrade.md",
+      "path": "releases/v0.4.0/evidence/2026-09-28/silicon-sorter179-native-upgrade.md",
+      "size": 2037,
+      "sha256": "6E4394CDEFB08D0D246C3C55004ED48AFE874EDBF211688DD3BB1F66532B5222",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-09-28/silicon-source-flight-arrival.md",
+      "path": "releases/v0.4.0/evidence/2026-09-28/silicon-source-flight-arrival.md",
+      "size": 4375,
+      "sha256": "F121DE379A1405128BACD4EE96581723C0D6421AD8B98BECA163E1F35699FE1C",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-09-28/silicon-source-parallel-sorter.md",
+      "path": "releases/v0.4.0/evidence/2026-09-28/silicon-source-parallel-sorter.md",
+      "size": 2321,
+      "sha256": "CBFA88862455F76A2808DAA24DD9BDC33B5D577E3EE9BB566E3230DBC1AC4BE2",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-09-28/silicon-source-sorter-capacity.md",
+      "path": "releases/v0.4.0/evidence/2026-09-28/silicon-source-sorter-capacity.md",
+      "size": 4650,
+      "sha256": "11A23D910F72A43B0A76B88052C457D6F2F2FBE2A99AA529D1BD8F130E1296AC",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-09-28/silicon-upgrade-materials-save-audit.md",
+      "path": "releases/v0.4.0/evidence/2026-09-28/silicon-upgrade-materials-save-audit.md",
+      "size": 3496,
+      "sha256": "DEB4CA91AE17DB2906827EFE01A50623674655822D447927D676FD3DE741281A",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-09-29/coal-resume-move-ten-write-audit.md",
+      "path": "releases/v0.4.0/evidence/2026-09-29/coal-resume-move-ten-write-audit.md",
+      "size": 5681,
+      "sha256": "94F44B05975695928A79271B451B200495F884AA0E369F04845BF8C6D94F9976",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-09-29/coal-sorter-approach-stall-pilot.md",
+      "path": "releases/v0.4.0/evidence/2026-09-29/coal-sorter-approach-stall-pilot.md",
+      "size": 3275,
+      "sha256": "9D6B1AFFC298EBE404FA5A2A2F0745AF87B7F14B72E6CE065E52855CBEF7C823",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-09-29/dsp-29104-owned-primary-live-recovery.md",
+      "path": "releases/v0.4.0/evidence/2026-09-29/dsp-29104-owned-primary-live-recovery.md",
+      "size": 3523,
+      "sha256": "92F0EF2F71521FDC4FEA436C029FD72DB225C7A2F233F1FA9E7416595C15E4D2",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-09-29/dsp-29104-source-adaptation.md",
+      "path": "releases/v0.4.0/evidence/2026-09-29/dsp-29104-source-adaptation.md",
+      "size": 4079,
+      "sha256": "E4E52F57B7C53D2DB77F07B2243BC71241C5CAC71450357E53B39F8BB7281C9B",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-09-30/AGENTS-history-through-2026-09-30.md",
+      "path": "releases/v0.4.0/evidence/2026-09-30/AGENTS-history-through-2026-09-30.md",
+      "size": 75496,
+      "sha256": "20A4A8D16B0B043D33071427E1FEE885C4359AF135F07ED78265822D665240E9",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-09-30/blue-backup-sorter-binding.md",
+      "path": "releases/v0.4.0/evidence/2026-09-30/blue-backup-sorter-binding.md",
+      "size": 2607,
+      "sha256": "DC7F76D0E4B5678DB017164F0548D8DD2C2F1B582BBE27A162FCF602D859213F",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-09-30/coal-approach-stall-and-save.md",
+      "path": "releases/v0.4.0/evidence/2026-09-30/coal-approach-stall-and-save.md",
+      "size": 3954,
+      "sha256": "6AA8B9E657F76D53D92D12ED9834CF275EAAD15F744D76C0FF8688611BC1B691",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-09-30/coal-backpressure-and-idle-research.md",
+      "path": "releases/v0.4.0/evidence/2026-09-30/coal-backpressure-and-idle-research.md",
+      "size": 7022,
+      "sha256": "7C77AF6AAB552EFE5F9DAC740BE7A8AC2D31E08456EB0C31450FA9D9428B9CCC",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-09-30/coal-corridor-probe-and-ten-write-audit.md",
+      "path": "releases/v0.4.0/evidence/2026-09-30/coal-corridor-probe-and-ten-write-audit.md",
+      "size": 5240,
+      "sha256": "8D36B4DDBB8F2908DCE6C5150BBC6A3C2262E07AD36C9D88DAB848D7D5B6459C",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-09-30/coal-furnace-input-recipe-save.md",
+      "path": "releases/v0.4.0/evidence/2026-09-30/coal-furnace-input-recipe-save.md",
+      "size": 4010,
+      "sha256": "5995DCEAB94AC0BE091461D43D4E018CDA3B05B24F0B4FE16332336A969078D7",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-09-30/coal-historical-approach-sorter-upgrade-save.md",
+      "path": "releases/v0.4.0/evidence/2026-09-30/coal-historical-approach-sorter-upgrade-save.md",
+      "size": 3690,
+      "sha256": "C91DF45F9F18D50831A0362063C94BC2AB99CFD266F86763846DC11CB7C6E6F0",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-09-30/coal-miner-kit-craft-and-caller-timing.md",
+      "path": "releases/v0.4.0/evidence/2026-09-30/coal-miner-kit-craft-and-caller-timing.md",
+      "size": 3108,
+      "sha256": "E2C09CD56B71EFAA9D392B0C0543D746A1C36757A0543887427EF828177DB37E",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-09-30/coal-miner-materials-ten-write-audit.md",
+      "path": "releases/v0.4.0/evidence/2026-09-30/coal-miner-materials-ten-write-audit.md",
+      "size": 5160,
+      "sha256": "060C417B1386FF10D429AF11CAE0C2296BD836FA3FCDBE59980D38FF8F3E5FFB",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-09-30/coal-miner-outlet-furnace-save.md",
+      "path": "releases/v0.4.0/evidence/2026-09-30/coal-miner-outlet-furnace-save.md",
+      "size": 4539,
+      "sha256": "DD5B48082D8DBBE6573B9BC4D4199E0061A88B90B4F7ED6DAA0B57C9F656022F",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-09-30/coal-short-move-revision-readback.md",
+      "path": "releases/v0.4.0/evidence/2026-09-30/coal-short-move-revision-readback.md",
+      "size": 2798,
+      "sha256": "8102CAB97A97DD039941DAEE6863314606F7709C427153047CA230521E5E6401",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-09-30/coal-to-graphite-native-route-preview.md",
+      "path": "releases/v0.4.0/evidence/2026-09-30/coal-to-graphite-native-route-preview.md",
+      "size": 3438,
+      "sha256": "3509A86B67379019B67683B2E00D2687A39141E5609F1AE7B1C4DEFFC5709C71",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-09-30/core-materials-normal-save.md",
+      "path": "releases/v0.4.0/evidence/2026-09-30/core-materials-normal-save.md",
+      "size": 1663,
+      "sha256": "313D9E3A793B9A7C25B2F5DC9985E84B5CF0A562D1550F37EC5F5E48164ABF46",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-09-30/core-materials-ten-write-audit.md",
+      "path": "releases/v0.4.0/evidence/2026-09-30/core-materials-ten-write-audit.md",
+      "size": 6378,
+      "sha256": "398F49D0C6AC8498C5B0DC7CFB3952713723F3CB50C00B7BE50704A8E3CF4D9A",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-09-30/core2104-shared-research-save.md",
+      "path": "releases/v0.4.0/evidence/2026-09-30/core2104-shared-research-save.md",
+      "size": 3305,
+      "sha256": "40ECF2DF3EFE0247513A6A7C39101425A680BB946EE5D5FAF2FA8F4938AF621A",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-09-30/current-status-history-through-2026-09-30.md",
+      "path": "releases/v0.4.0/evidence/2026-09-30/current-status-history-through-2026-09-30.md",
+      "size": 63321,
+      "sha256": "B8DF7B099DFC42303E93CBF225CAACDB5C1387CB6066B68AFCF4AD2DC1DA7CC6",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-09-30/graphite-fuel-three-window-consumer-blocker.md",
+      "path": "releases/v0.4.0/evidence/2026-09-30/graphite-fuel-three-window-consumer-blocker.md",
+      "size": 5408,
+      "sha256": "1722AF4AF4D24A8B1239891A48E977FB3094A696CD4D34DEFCBC0C03633AE0D8",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-09-30/graphite-inlet-two-sorters-save.md",
+      "path": "releases/v0.4.0/evidence/2026-09-30/graphite-inlet-two-sorters-save.md",
+      "size": 2356,
+      "sha256": "45C35E24705194A95936BB639FC69EF007BC452B6702238396583654472FBBCA",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-09-30/graphite-outlet-extension-ten-audit.md",
+      "path": "releases/v0.4.0/evidence/2026-09-30/graphite-outlet-extension-ten-audit.md",
+      "size": 4851,
+      "sha256": "A2CB51C1D0A7AD17BFBEF6364285350AAC42CECE72B7492A67229E38AC7D1E71",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-09-30/graphite-outlet-short-belt-save.md",
+      "path": "releases/v0.4.0/evidence/2026-09-30/graphite-outlet-short-belt-save.md",
+      "size": 3875,
+      "sha256": "A3F144B8A66DE8B01E8A6CD8B1707A7A2B47A7657849B73104C1261AA7C3C002",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-09-30/hydrogen-exit-upgrade-save.md",
+      "path": "releases/v0.4.0/evidence/2026-09-30/hydrogen-exit-upgrade-save.md",
+      "size": 2871,
+      "sha256": "65A4D73CA96CD514D8FB189F63BD8AFBEFA342EF618006293A328CD106373E09",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-09-30/hydrogen-sink-demand-gate.md",
+      "path": "releases/v0.4.0/evidence/2026-09-30/hydrogen-sink-demand-gate.md",
+      "size": 3632,
+      "sha256": "FDB4D2E79BCDE5400EDF7AE0D171403332E7B1981F5F50A7E39FA38FB6301F3E",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-09-30/hydrogen-upgrade-three-window-diagnostic.md",
+      "path": "releases/v0.4.0/evidence/2026-09-30/hydrogen-upgrade-three-window-diagnostic.md",
+      "size": 2635,
+      "sha256": "A1CBF587F1DAAFC2722F08E29D716D46439C483D782380FC48D4963F5C206B1E",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-09-30/local-040-package-surface-preview.md",
+      "path": "releases/v0.4.0/evidence/2026-09-30/local-040-package-surface-preview.md",
+      "size": 2130,
+      "sha256": "2799254A1322F5F20842554B508B4BED8FB21DE8BF7B441B5FF26A444B3ACEF3",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-09-30/local-coal-graphite-candidate.md",
+      "path": "releases/v0.4.0/evidence/2026-09-30/local-coal-graphite-candidate.md",
+      "size": 4146,
+      "sha256": "770EAD522DBBC4F87D12D65FC150011727CBA2B0CA2FD6C59788EE108449C2D3",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-09-30/minimal-workflow-efficiency.md",
+      "path": "releases/v0.4.0/evidence/2026-09-30/minimal-workflow-efficiency.md",
+      "size": 12899,
+      "sha256": "0E874CBC52CC326711A1CF3FEA29731E89CAD066927CC21E3D6052C0FE5BCF4B",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-09-30/normal-save-ten-write-fastpath-audit.md",
+      "path": "releases/v0.4.0/evidence/2026-09-30/normal-save-ten-write-fastpath-audit.md",
+      "size": 5846,
+      "sha256": "495FDEC4FFCDE1A6F591C43B1FE574A7464CE1A89B15A486A61421CB211375C9",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-09-30/owned-recovery-readonly-and-error-fields.md",
+      "path": "releases/v0.4.0/evidence/2026-09-30/owned-recovery-readonly-and-error-fields.md",
+      "size": 2776,
+      "sha256": "9F79E18A9AEEBB025718243DE452F103B6A24209076C33D47A5D57CA65B10DE0",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-09-30/post-research-zero-output-window.md",
+      "path": "releases/v0.4.0/evidence/2026-09-30/post-research-zero-output-window.md",
+      "size": 2325,
+      "sha256": "330BFC906EEA9D9B7E02EE9E76A27150E984C121591B89C0B499672A15E69A5C",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-09-30/purple-route-sorter-materials.md",
+      "path": "releases/v0.4.0/evidence/2026-09-30/purple-route-sorter-materials.md",
+      "size": 2055,
+      "sha256": "7EB106A78DBDA50F0910D00D11C38D841E09239B9B7B8932F1613973BC35B268",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-09-30/purple-source-stub.md",
+      "path": "releases/v0.4.0/evidence/2026-09-30/purple-source-stub.md",
+      "size": 1882,
+      "sha256": "D48482D7D9A6A410DD5446A954D48A447646938B2E4D219148ABAC972C5C98ED",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-09-30/purple-trunk-collision-and-save-unavailable.md",
+      "path": "releases/v0.4.0/evidence/2026-09-30/purple-trunk-collision-and-save-unavailable.md",
+      "size": 2133,
+      "sha256": "AABECD90ED4E452458F121317ABBB4288A3E29C736BEEDDEFF51AEA157ACE2F2",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-09-30/research-1126-caller-and-save.md",
+      "path": "releases/v0.4.0/evidence/2026-09-30/research-1126-caller-and-save.md",
+      "size": 4384,
+      "sha256": "789FA991CD00271D825C2E7005660B6126923BB531C3CEAB0C8F407C16AA0EDC",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-09-30/research-demand-save-resume-two-windows.md",
+      "path": "releases/v0.4.0/evidence/2026-09-30/research-demand-save-resume-two-windows.md",
+      "size": 5508,
+      "sha256": "9DC4A1650714A6B07FE2D28E7C74F4AF1719956A8BA14331DF89F3FF7103A6A5",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-09-30/runtime-item-identity-correction.md",
+      "path": "releases/v0.4.0/evidence/2026-09-30/runtime-item-identity-correction.md",
+      "size": 2585,
+      "sha256": "F6655EAF34FF35ECBE386ADFE63BFEA8877363755CF96293BC201E8AA6ADDC1E",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-09-30/science-consumer-sorter.md",
+      "path": "releases/v0.4.0/evidence/2026-09-30/science-consumer-sorter.md",
+      "size": 2045,
+      "sha256": "699DA3512A4AAB880AF6EDAE5E4F8CAAC2A4B46D29D6A0275A401582A578F6F1",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-09-30/science-consumer-stub.md",
+      "path": "releases/v0.4.0/evidence/2026-09-30/science-consumer-stub.md",
+      "size": 2696,
+      "sha256": "F00064BFF1514D32D6B8B018EB19061DADE083D6A58F413EB2C97496458B99A7",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-09-30/six-node-coal-miner-save-ten-write-audit.md",
+      "path": "releases/v0.4.0/evidence/2026-09-30/six-node-coal-miner-save-ten-write-audit.md",
+      "size": 5183,
+      "sha256": "F63D761AA52A43131E69EBEA5741BFD9749A93341F32C1306EEB3370826C2491",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-09-30/storage-buffer-caller-fix.md",
+      "path": "releases/v0.4.0/evidence/2026-09-30/storage-buffer-caller-fix.md",
+      "size": 2149,
+      "sha256": "1A99B90660976602B29FAB425F5289E51E8C5E7A01223EBEE75EBB96582342DF",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-09-30/technology-1104-selection-and-save.md",
+      "path": "releases/v0.4.0/evidence/2026-09-30/technology-1104-selection-and-save.md",
+      "size": 2739,
+      "sha256": "0C19609973F9A8FA94E4B14B0EF3007342A05F8FBD37C1D60849C0B608B9FC21",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-09-30/technology-1607-selection-save-caller-delay.md",
+      "path": "releases/v0.4.0/evidence/2026-09-30/technology-1607-selection-save-caller-delay.md",
+      "size": 3477,
+      "sha256": "E8A3C42BB4236735AD3419F8F523CF430CDD8185932008E87D2B0F3A72932767",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-10-01/active-fixed-autosave-recovery.md",
+      "path": "releases/v0.4.0/evidence/2026-10-01/active-fixed-autosave-recovery.md",
+      "size": 6547,
+      "sha256": "1B042D0229BCA41465EDE2286CA7325F3DE2FE549EF913B6B2F245DDC7F05729",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-10-01/drive-engine-four-selection-save.md",
+      "path": "releases/v0.4.0/evidence/2026-10-01/drive-engine-four-selection-save.md",
+      "size": 2835,
+      "sha256": "6C73CAD9BE3C9FC3D271BA0758EC9A2AFEDA924EA433AE63844C6708F753625A",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-10-01/drive-four-save-and-fuel-graphite-boundary.md",
+      "path": "releases/v0.4.0/evidence/2026-10-01/drive-four-save-and-fuel-graphite-boundary.md",
+      "size": 7458,
+      "sha256": "51E6D106FA539B87ACB1BB5FA559733033EDA2F7E4E66434F893799839CAC99A",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-10-01/fuel-continuous-readiness-check.md",
+      "path": "releases/v0.4.0/evidence/2026-10-01/fuel-continuous-readiness-check.md",
+      "size": 4954,
+      "sha256": "0B9EB6FD73EE5A92F06602015E4D453ACF230C61ED1F2BF1893D0FC8E81DAC0D",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-10-01/powershell-stdin-entry-noop.md",
+      "path": "releases/v0.4.0/evidence/2026-10-01/powershell-stdin-entry-noop.md",
+      "size": 2127,
+      "sha256": "BA1997C6F4C064532150D5BADC89EA79DE514AB8267EDA5D3299D168E5F373CC",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-10-01/purple-consumer-down-ramp-and-save.md",
+      "path": "releases/v0.4.0/evidence/2026-10-01/purple-consumer-down-ramp-and-save.md",
+      "size": 2349,
+      "sha256": "0BADF347CCEAFCBF5D8D676E2B94B33B14E29912BE16A28D3E24FCB0ECAD9119",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-10-01/purple-consumer-interface-sorter-and-save.md",
+      "path": "releases/v0.4.0/evidence/2026-10-01/purple-consumer-interface-sorter-and-save.md",
+      "size": 3362,
+      "sha256": "1D48CB0E1FBB9C72FEC1978F74B20BE3FC7AE155BA5DBD912DF972966284C947",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-10-01/purple-corner-east-interface-and-save.md",
+      "path": "releases/v0.4.0/evidence/2026-10-01/purple-corner-east-interface-and-save.md",
+      "size": 2462,
+      "sha256": "29A47FA93BB2C3D37B1C2DD12F4BC80C0C4B287E7857094824DC7D2294277132",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-10-01/purple-critical-path-source-route-demand.md",
+      "path": "releases/v0.4.0/evidence/2026-10-01/purple-critical-path-source-route-demand.md",
+      "size": 11327,
+      "sha256": "7A57644CAD9D2708EACF26F20BD71F5D8701A1E73CB4ABC74BB04F244446D0A1",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-10-01/purple-demand-gate-and-stone-shortfall.md",
+      "path": "releases/v0.4.0/evidence/2026-10-01/purple-demand-gate-and-stone-shortfall.md",
+      "size": 5891,
+      "sha256": "C48F136082A0008468B17A39C5E3B436F09FACE19D580CCEA820FB884EB2C904",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-10-01/purple-east-consumer-interface-span.md",
+      "path": "releases/v0.4.0/evidence/2026-10-01/purple-east-consumer-interface-span.md",
+      "size": 2478,
+      "sha256": "39BD25FB1F087F1D88F5315C9B5689F90A70CB38B407017C63AC4A0447E9C29E",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-10-01/purple-east-interface-power-tower.md",
+      "path": "releases/v0.4.0/evidence/2026-10-01/purple-east-interface-power-tower.md",
+      "size": 2932,
+      "sha256": "37C62DBFEDF8BDF5774A3F0FF25E798162680FAEEDDAF4EFE1712654BB8D7210",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-10-01/purple-east1-east2-powered-interface-and-save.md",
+      "path": "releases/v0.4.0/evidence/2026-10-01/purple-east1-east2-powered-interface-and-save.md",
+      "size": 2593,
+      "sha256": "641743333EA687E1BD23F5BDF196570434A5948ADC75B8C9EB76F7452EC96510",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-10-01/purple-east1-native-span.md",
+      "path": "releases/v0.4.0/evidence/2026-10-01/purple-east1-native-span.md",
+      "size": 2209,
+      "sha256": "C5B358EE8B9D6DB2B62A30CAE14F1A508BDD103C158E1A2350A8EEE474C588F6",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-10-01/purple-east2-consumer-cover-and-save.md",
+      "path": "releases/v0.4.0/evidence/2026-10-01/purple-east2-consumer-cover-and-save.md",
+      "size": 2519,
+      "sha256": "A8EE47950B36FC65449EDA36081EE59DD648B78987C8CE1C2918A96DDA00E5C0",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-10-01/purple-east2-native-span.md",
+      "path": "releases/v0.4.0/evidence/2026-10-01/purple-east2-native-span.md",
+      "size": 2604,
+      "sha256": "5FD52DE13CFBB8E20E6DE842A996876964846525833C2A772554D1875FAFF477",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-10-01/purple-elevated-prefix-interface-and-save.md",
+      "path": "releases/v0.4.0/evidence/2026-10-01/purple-elevated-prefix-interface-and-save.md",
+      "size": 3060,
+      "sha256": "263FF1A1AF9B161B87827B7B772C3579432ED7B07ECE0073FAE728A86025FBDB",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-10-01/purple-ground-trunk-crossing-blocker.md",
+      "path": "releases/v0.4.0/evidence/2026-10-01/purple-ground-trunk-crossing-blocker.md",
+      "size": 2106,
+      "sha256": "C0D1C5AAC0CB060D0D9C7489B248AF3C444DFB77D732DB4EBD9966CE4D73212E",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-10-01/purple-north-native-cover.md",
+      "path": "releases/v0.4.0/evidence/2026-10-01/purple-north-native-cover.md",
+      "size": 2745,
+      "sha256": "F095258684CE68BE152971CBB3C5CE506B479F88D86BD2094AE59FE71417B0EA",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-10-01/purple-north-ramp-occupancy-blocker.md",
+      "path": "releases/v0.4.0/evidence/2026-10-01/purple-north-ramp-occupancy-blocker.md",
+      "size": 1726,
+      "sha256": "6DF84B437A8F70D65C040DC1ABB7855A06555BA63114E230C1C5EBE7B9C763D6",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-10-01/purple-raised-corner-native-span.md",
+      "path": "releases/v0.4.0/evidence/2026-10-01/purple-raised-corner-native-span.md",
+      "size": 2265,
+      "sha256": "C319478706140CA78922A2BDF7ECA90B300CE9589BDE9AEBA0A4460D9877CA02",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-10-01/purple-raised-window-ten-write-audit.md",
+      "path": "releases/v0.4.0/evidence/2026-10-01/purple-raised-window-ten-write-audit.md",
+      "size": 3262,
+      "sha256": "D2039B8FF675F6EADFF7F16BAF33CF2702CEA7DF72786F35FDFE84F98D2A2508",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-10-01/purple-sorter-material-kit-and-save.md",
+      "path": "releases/v0.4.0/evidence/2026-10-01/purple-sorter-material-kit-and-save.md",
+      "size": 2508,
+      "sha256": "D9CF75C3B1AA3795B8BFF1F7164D46FFD9931A34042440A2027A0C511ED22FAA",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-10-01/purple-source-dogleg-ten-write-audit.md",
+      "path": "releases/v0.4.0/evidence/2026-10-01/purple-source-dogleg-ten-write-audit.md",
+      "size": 5197,
+      "sha256": "010E2CB37C093F350CEAF48E938E49368D3E0C9D5DADC3779EACF1174450076D",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-10-01/purple-source-normal-save.md",
+      "path": "releases/v0.4.0/evidence/2026-10-01/purple-source-normal-save.md",
+      "size": 1531,
+      "sha256": "E186109F9DF39DC2E168C19925B260830381EB93DAF313192C6B2FD05465A9ED",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-10-01/purple-source-warehouse-outlet-and-save.md",
+      "path": "releases/v0.4.0/evidence/2026-10-01/purple-source-warehouse-outlet-and-save.md",
+      "size": 2695,
+      "sha256": "A41FC4C7E9D931350D13E4F93C000AFBB2FA380B3F491284BB15F0D6788A2F35",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-10-01/purple-source-west-cover-and-save.md",
+      "path": "releases/v0.4.0/evidence/2026-10-01/purple-source-west-cover-and-save.md",
+      "size": 3646,
+      "sha256": "096727F74870E0730429DFE774F3AB1F6FCA396AD626B36A93C1119260D9C019",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-10-01/purple-supply-ten-write-audit-and-output-diagnostic.md",
+      "path": "releases/v0.4.0/evidence/2026-10-01/purple-supply-ten-write-audit-and-output-diagnostic.md",
+      "size": 3847,
+      "sha256": "385E1DA8C5BE959BC087CEAB4C9943EFF843E596D53AAADC6FD8B23F07B1B4A7",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-10-01/purple-west-ramp-normal-save.md",
+      "path": "releases/v0.4.0/evidence/2026-10-01/purple-west-ramp-normal-save.md",
+      "size": 2310,
+      "sha256": "8C672ABD2FCF417700F9169DE7171EEEDF88AD9512D943365E15493AE0BB5F0E",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-10-01/purple-west-ramp-ten-write-audit.md",
+      "path": "releases/v0.4.0/evidence/2026-10-01/purple-west-ramp-ten-write-audit.md",
+      "size": 2656,
+      "sha256": "F2927A8FE436407E8CFE76400886D9EA07832F3CF769488912DF234ED3E73500",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-10-01/stone-source-exhaustion-and-recovery.md",
+      "path": "releases/v0.4.0/evidence/2026-10-01/stone-source-exhaustion-and-recovery.md",
+      "size": 4834,
+      "sha256": "809C7C52F5E2A695EC486AC1588FB8A904FED48BD9EF3AECDF2E8EFD32173B62",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-10-02/bounded-belt-site-caller.md",
+      "path": "releases/v0.4.0/evidence/2026-10-02/bounded-belt-site-caller.md",
+      "size": 7082,
+      "sha256": "D425E6BEEBD678277D3E1DEB80C5F95B03ACA2CEEC13A051372240F616FE57FB",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-10-02/fuel-startup-and-owned-resume.md",
+      "path": "releases/v0.4.0/evidence/2026-10-02/fuel-startup-and-owned-resume.md",
+      "size": 17440,
+      "sha256": "4E628EA346B4657DEA7954304E7960D3A8B5B354A73CBA00546A7A4655B3C6B6",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-10-02/warper-automatic-source-and-build.md",
+      "path": "releases/v0.4.0/evidence/2026-10-02/warper-automatic-source-and-build.md",
+      "size": 178629,
+      "sha256": "147A32F2AB481B948482A0F108589FA76E7FAB84F78416583154360E1471559B",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-10-02/warper-plan-material-reserve.md",
+      "path": "releases/v0.4.0/evidence/2026-10-02/warper-plan-material-reserve.md",
+      "size": 6902,
+      "sha256": "267CEA4C85655B9F91ADE77DD83E08DDF5F66AAC37FD358556A9989A97EE381D",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-10-04/material-inventory-cuts.md",
+      "path": "releases/v0.4.0/evidence/2026-10-04/material-inventory-cuts.md",
+      "size": 111814,
+      "sha256": "8D92294042BCC89F264FFF818FFA6BD1BCB8DA12148FF64EE98E789B8625004E",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-10-07/continuing-oil-supply.md",
+      "path": "releases/v0.4.0/evidence/2026-10-07/continuing-oil-supply.md",
+      "size": 56333,
+      "sha256": "2C782D290DB1741881A2999C816201C0D4C38A7562EED53B18CF5BA814961CB5",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-10-08/departure-ils-ten-r303.md",
+      "path": "releases/v0.4.0/evidence/2026-10-08/departure-ils-ten-r303.md",
+      "size": 2768,
+      "sha256": "7EF5422C2732531F37695E5580B932055EF8697F1221D70CE29F5E2D3766DBD5",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-10-08/departure-rod-carry-seven-r320.md",
+      "path": "releases/v0.4.0/evidence/2026-10-08/departure-rod-carry-seven-r320.md",
+      "size": 2615,
+      "sha256": "9F01FA4A619202BD44F4A8CBCF2A253E3F6099BA14197B7F98ECE0A422B8C88E",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-10-08/departure-small-kit-ten-r312.md",
+      "path": "releases/v0.4.0/evidence/2026-10-08/departure-small-kit-ten-r312.md",
+      "size": 2616,
+      "sha256": "B51B90F56365CE55978002A7283B2EDEAAF2285BF269535412DA1AF2C0BD1D23",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-10-08/fixed20-window-close-r355.md",
+      "path": "releases/v0.4.0/evidence/2026-10-08/fixed20-window-close-r355.md",
+      "size": 2009,
+      "sha256": "DF25EE686A61E05F6D122AF44BB761F38CCDC877166D3652B372C3A67AE87AC1",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-10-08/fuel-coupling-ten-r185.md",
+      "path": "releases/v0.4.0/evidence/2026-10-08/fuel-coupling-ten-r185.md",
+      "size": 3271,
+      "sha256": "05DC56840EED0FB542DDA917D3C77427A1AD4D1BB8C3C762F6C2CFC65BA23D3D",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-10-08/iron-admission-upgrade-r334.md",
+      "path": "releases/v0.4.0/evidence/2026-10-08/iron-admission-upgrade-r334.md",
+      "size": 2145,
+      "sha256": "122467D76A9E2F633B7974DE6B49679F650D8D3C1C3CCA1EF8EA00F47504602A",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-10-08/iron-ore-feeder-r340.md",
+      "path": "releases/v0.4.0/evidence/2026-10-08/iron-ore-feeder-r340.md",
+      "size": 2266,
+      "sha256": "B30C755EFCE93F0F30A0F91691BADC07D63627A529E3689FA38856C0DE980F56",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-10-08/iron-routing-full-material-ten-r282.md",
+      "path": "releases/v0.4.0/evidence/2026-10-08/iron-routing-full-material-ten-r282.md",
+      "size": 2628,
+      "sha256": "587C4CF5BA9CA43E686F3DCB1F028D4497578A9742A2E745EEB766D884AAF55F",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-10-08/iron-source-recovery-ten-r218.md",
+      "path": "releases/v0.4.0/evidence/2026-10-08/iron-source-recovery-ten-r218.md",
+      "size": 5058,
+      "sha256": "A95011A3F733A0B01E756C5E642E529E43672F15CDE6E2D2531701F4FA0775FC",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-10-08/joint-observation-gap-r321.md",
+      "path": "releases/v0.4.0/evidence/2026-10-08/joint-observation-gap-r321.md",
+      "size": 1929,
+      "sha256": "77FA84F940B83503706A6BF4CCD3BEA30C6C3A224D50D951E5C57A342ED7E2E5",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-10-08/joint-supply-long-window-r324.md",
+      "path": "releases/v0.4.0/evidence/2026-10-08/joint-supply-long-window-r324.md",
+      "size": 2902,
+      "sha256": "59B5C95D115E7239D1527C4C0199292C6876DDC200EE4809B852FC9731CB4816",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-10-08/oil-cover-prefix-r372.md",
+      "path": "releases/v0.4.0/evidence/2026-10-08/oil-cover-prefix-r372.md",
+      "size": 2958,
+      "sha256": "A28DF645CA2B86E77E11CF2A497B910FD592A90DFAF02BF973D7F85647E2FDDB",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-10-08/oil-detour-material-r365.md",
+      "path": "releases/v0.4.0/evidence/2026-10-08/oil-detour-material-r365.md",
+      "size": 3649,
+      "sha256": "88C64C0C902EF6AB454C2A82E3DC21D186CBF7ED41C0439C6A88ADA949ABBF09",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-10-08/oil-source-admission-r353.md",
+      "path": "releases/v0.4.0/evidence/2026-10-08/oil-source-admission-r353.md",
+      "size": 2930,
+      "sha256": "E6277796072799C6FCB7360FA1893535FAED0A387DF814249BD4D6CFED35FFAC",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-10-08/p102-empty-source-binding-maintenance.md",
+      "path": "releases/v0.4.0/evidence/2026-10-08/p102-empty-source-binding-maintenance.md",
+      "size": 7907,
+      "sha256": "7923ADCA506B0F6858AB9C76B9A5F00853D8060A29BFCE9EC45880FA0800CBA6",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-10-08/shared-refinery-fuel-coupling-material-ten.md",
+      "path": "releases/v0.4.0/evidence/2026-10-08/shared-refinery-fuel-coupling-material-ten.md",
+      "size": 4069,
+      "sha256": "F4689E7002E9BE50930871B0D3FBBAFAAC11F1233C127DD553915782EA33D7DC",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-10-08/simulation-resident-material-read-maintenance.md",
+      "path": "releases/v0.4.0/evidence/2026-10-08/simulation-resident-material-read-maintenance.md",
+      "size": 6191,
+      "sha256": "42383622B437B4A07AFB444C53AF289A3AE998F9197C481ED0C5F1694D64289C",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-10-08/ti-source-five-belts-reclaim-ten.md",
+      "path": "releases/v0.4.0/evidence/2026-10-08/ti-source-five-belts-reclaim-ten.md",
+      "size": 4091,
+      "sha256": "DC1EDCD22AD45ABBD6A6FE49E05E1ED1695D70373443AECCC9514E77A840BFE3",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-10-08/ti-source-powered-return.md",
+      "path": "releases/v0.4.0/evidence/2026-10-08/ti-source-powered-return.md",
+      "size": 3395,
+      "sha256": "4322B821D698D75C8297D3818D900C73F17D37888EE5AFE96707C8B5A36C8F91",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-10-08/workflow-overhead-convergence.md",
+      "path": "releases/v0.4.0/evidence/2026-10-08/workflow-overhead-convergence.md",
+      "size": 8308,
+      "sha256": "121E4A57D9AE183EAF165C3FD1B7B596D8632B0BD857BA095BE112291FFC57FF",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-10-09/empty-belt-live-quarantine-r472.md",
+      "path": "releases/v0.4.0/evidence/2026-10-09/empty-belt-live-quarantine-r472.md",
+      "size": 6757,
+      "sha256": "BF284794D761BAB9A5BBFB964656760FC69F097B55C1D685B36597F81FB7CFCA",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-10-09/empty-belt-recovery-adapter-r454.md",
+      "path": "releases/v0.4.0/evidence/2026-10-09/empty-belt-recovery-adapter-r454.md",
+      "size": 2223,
+      "sha256": "502D324DB81C4B780A1807C4641CF4624A8C057B90879C92DAE610061690C8E2",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-10-09/fixed-quarantine-recovery-r492.md",
+      "path": "releases/v0.4.0/evidence/2026-10-09/fixed-quarantine-recovery-r492.md",
+      "size": 3578,
+      "sha256": "D3A8D1274C04DB4C8794B0364C946A8AB1142A5B41562CD29C51044312BAE85B",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-10-09/full-source-bookends-r441.md",
+      "path": "releases/v0.4.0/evidence/2026-10-09/full-source-bookends-r441.md",
+      "size": 4771,
+      "sha256": "AC9472AD8DD69E7203AE09E210940BA98366DA0778A61797ADEC474328B78F9F",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-10-09/joint-source-gap-and-prefix-r391.md",
+      "path": "releases/v0.4.0/evidence/2026-10-09/joint-source-gap-and-prefix-r391.md",
+      "size": 4073,
+      "sha256": "6119E2194EC0FB8412F5F4BCFA4FC3D8761A511D8E3337071E63DC98FF005DDD",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-10-09/minimum-ti-demand-r423.md",
+      "path": "releases/v0.4.0/evidence/2026-10-09/minimum-ti-demand-r423.md",
+      "size": 3314,
+      "sha256": "26B5587652DB4FF7313677D652BF906A03690F380F464C70CB61CFD2AC17C4E2",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-10-09/oil-arrival-window-close-r377.md",
+      "path": "releases/v0.4.0/evidence/2026-10-09/oil-arrival-window-close-r377.md",
+      "size": 2182,
+      "sha256": "44737793AD72D659F19E7C6436A81454630F12ED3DFF80D56FF1E37A3FF73C10",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-10-09/oil-route-completion-r375.md",
+      "path": "releases/v0.4.0/evidence/2026-10-09/oil-route-completion-r375.md",
+      "size": 2177,
+      "sha256": "B07D3FBBDEA8747ADECBEFDFC62660468720EB494BD2B209AD0DD42BB76618FD",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-10-09/stone-return-join-quarantine-r505.md",
+      "path": "releases/v0.4.0/evidence/2026-10-09/stone-return-join-quarantine-r505.md",
+      "size": 6530,
+      "sha256": "B8AF0E2D5A785192DCA25BC16C57EB861A351585F09303D9F610181E2CD2C6C3",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-10-09/stone-source-recovery-r449.md",
+      "path": "releases/v0.4.0/evidence/2026-10-09/stone-source-recovery-r449.md",
+      "size": 3485,
+      "sha256": "F9DAED1CA7A18270C59B927915A564A8470E42E250CB82F8B2103259383E13BC",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-10-09/ti-warp-demand-save-r440.md",
+      "path": "releases/v0.4.0/evidence/2026-10-09/ti-warp-demand-save-r440.md",
+      "size": 1941,
+      "sha256": "C617D044AF099DA055AAE98ECBE5BB4703E01021A8F67846130BB8BBC2EFE083",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-10-09/warper-output-headroom-r388.md",
+      "path": "releases/v0.4.0/evidence/2026-10-09/warper-output-headroom-r388.md",
+      "size": 2550,
+      "sha256": "2B218A3C7B17175C058C5B553FAE0C36E50015FD15CEA0BCFAC726AF0434FD9E",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-10-10/coal-fuel-approach-state-change-r697.md",
+      "path": "releases/v0.4.0/evidence/2026-10-10/coal-fuel-approach-state-change-r697.md",
+      "size": 7912,
+      "sha256": "14C3F288CC6BA428FC61961882498AC73484154E6C35F1516EBEEC4BBE29C6F0",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-10-10/current-full-source-long-r783.md",
+      "path": "releases/v0.4.0/evidence/2026-10-10/current-full-source-long-r783.md",
+      "size": 2825,
+      "sha256": "18115E818AA96D05BE34DB995829EF67B1FB2380953B73C55F6057648E19818D",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-10-10/finite-mecha-fuel-stationary-north-r623.md",
+      "path": "releases/v0.4.0/evidence/2026-10-10/finite-mecha-fuel-stationary-north-r623.md",
+      "size": 3268,
+      "sha256": "A87901A025CD164D69765149CAE4F012B06BA3319A69F8AECF6B31FA54593A35",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-10-10/full-source-readiness-r682.md",
+      "path": "releases/v0.4.0/evidence/2026-10-10/full-source-readiness-r682.md",
+      "size": 3752,
+      "sha256": "1A751EE8B88A0F72E66956B23B54F0BEAE82539F3C5A4A9F33D19F7864F911B5",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-10-10/iron-source-connection-and-save-r753.md",
+      "path": "releases/v0.4.0/evidence/2026-10-10/iron-source-connection-and-save-r753.md",
+      "size": 2127,
+      "sha256": "ADCDBE05726E93CB0BB83AA7DF6E834E4CF4AD48CDB36F852FEBA6236FF2F1A8",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-10-10/iron-source-flow-and-full-readiness-r757.md",
+      "path": "releases/v0.4.0/evidence/2026-10-10/iron-source-flow-and-full-readiness-r757.md",
+      "size": 2903,
+      "sha256": "68358845046105803591AD6C9AB3A8B96ED3A46AC65DB907A58D35C5AD5FF7A1",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-10-10/iron40-miner-and-qualified-seam-r743.md",
+      "path": "releases/v0.4.0/evidence/2026-10-10/iron40-miner-and-qualified-seam-r743.md",
+      "size": 2316,
+      "sha256": "3A49CE4BD00A87B8D7B1D3C2E1F95B390C378E9ACE03535C9940616B079B75D7",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-10-10/near-iron-source-arrival-r729.md",
+      "path": "releases/v0.4.0/evidence/2026-10-10/near-iron-source-arrival-r729.md",
+      "size": 2587,
+      "sha256": "9AB2E2515F766F45FB046CDA90FEE7137B270A3174BB8B57C91162952CEBE367",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-10-10/passive-drift-maintenance-r605.md",
+      "path": "releases/v0.4.0/evidence/2026-10-10/passive-drift-maintenance-r605.md",
+      "size": 4274,
+      "sha256": "E4F6F604A03B6AAAC25B74606D1CA79355F1AA3258D7AACFC129560DCBFE9B6F",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-10-10/rod-carry-and-window-closure-r763.md",
+      "path": "releases/v0.4.0/evidence/2026-10-10/rod-carry-and-window-closure-r763.md",
+      "size": 2227,
+      "sha256": "81F1C7EAC6026954823F4E342BE7CE95C6785ABC37047E9857153A595D2E7E8A",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-10-10/stationary-north-route-r626.md",
+      "path": "releases/v0.4.0/evidence/2026-10-10/stationary-north-route-r626.md",
+      "size": 2522,
+      "sha256": "2DFB053827E3851D5CEA9E0CA89A0CDA8E93CDF797F665920CC738B2C94E2AFB",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-10-10/stone-filter-sorter-r519.md",
+      "path": "releases/v0.4.0/evidence/2026-10-10/stone-filter-sorter-r519.md",
+      "size": 2199,
+      "sha256": "B6670C4E86BCC3F842609858731737CC8AD845455A7F4A5226E5670651DF8786",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-10-10/stone-finite-material-kit-r546.md",
+      "path": "releases/v0.4.0/evidence/2026-10-10/stone-finite-material-kit-r546.md",
+      "size": 2926,
+      "sha256": "82A83D64FBA014FB636945D57E389C9C03C382EBF8911559D7BAF42073C80E35",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-10-10/stone-fixed-recovery-r514.md",
+      "path": "releases/v0.4.0/evidence/2026-10-10/stone-fixed-recovery-r514.md",
+      "size": 4372,
+      "sha256": "1A8CF22635E46B6F3D74E828BF51CB4275753B54F022D4188C219DCB552AC3CC",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-10-10/stone-native-source-outlet-r536.md",
+      "path": "releases/v0.4.0/evidence/2026-10-10/stone-native-source-outlet-r536.md",
+      "size": 2712,
+      "sha256": "ACF7BBB12F84E8032E17CF96A6566AE78777D8BC9BEE541B7DAD7293A2FCB483",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-10-10/stone-overpass-critical-interface-r568.md",
+      "path": "releases/v0.4.0/evidence/2026-10-10/stone-overpass-critical-interface-r568.md",
+      "size": 3528,
+      "sha256": "552090E51C4A0768397BF111FE34A6C0C85FE12D85DE18819ACE4A064DC88846",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-10-10/stone-raised-dual-cover-r577.md",
+      "path": "releases/v0.4.0/evidence/2026-10-10/stone-raised-dual-cover-r577.md",
+      "size": 2403,
+      "sha256": "54E5B58A9C669EFBDD04540CCCDAED036F9755A4662B229A6C45BAE0D0B55933",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-10-10/stone-route-prefix-save-r585.md",
+      "path": "releases/v0.4.0/evidence/2026-10-10/stone-route-prefix-save-r585.md",
+      "size": 2767,
+      "sha256": "59EEEEB90EBEE6755E3824872B4E34396147770A93EB08FE378C62794336B96F",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-10-10/stone-source-approach-r528.md",
+      "path": "releases/v0.4.0/evidence/2026-10-10/stone-source-approach-r528.md",
+      "size": 2155,
+      "sha256": "3FA52DC974B7041BCA38E1708BB2498059E1DF5C4EC17880DE6C5742C3DE7C57",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-10-10/stone-source-seam-power-save-r641.md",
+      "path": "releases/v0.4.0/evidence/2026-10-10/stone-source-seam-power-save-r641.md",
+      "size": 4900,
+      "sha256": "C8D52FF25C0D2E4E86D6339B3198FC89E67E35505A27748B50AFF74C77131DED",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-10-10/stone-uphill-prefix-r573.md",
+      "path": "releases/v0.4.0/evidence/2026-10-10/stone-uphill-prefix-r573.md",
+      "size": 1931,
+      "sha256": "E1FBDE21A54BD3ED23497BC060548685642C45DFECB6E7830413D380EE0A613C",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-10-10/warehouse-return-recovery-r665.md",
+      "path": "releases/v0.4.0/evidence/2026-10-10/warehouse-return-recovery-r665.md",
+      "size": 6271,
+      "sha256": "96ABBCE546EF117C031D96F8A0706AC5412056CEDE75A127A3A8EF6D3402E1C6",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-10-10/warp-carry-approach-and-save-r766.md",
+      "path": "releases/v0.4.0/evidence/2026-10-10/warp-carry-approach-and-save-r766.md",
+      "size": 1928,
+      "sha256": "46BB8C712186EDFC29BC72C30A6BA8100F0D9515C3773BD7C30DB4D438A2AD84",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-10-10/warp-demand-and-current-source-r777.md",
+      "path": "releases/v0.4.0/evidence/2026-10-10/warp-demand-and-current-source-r777.md",
+      "size": 2949,
+      "sha256": "1F6D87682678F5BADBE93237E17BCECFFE2616681B2CD7B1FA49EA971EFE8835",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-10-11/consumer-output-and-process-r820.md",
+      "path": "releases/v0.4.0/evidence/2026-10-11/consumer-output-and-process-r820.md",
+      "size": 4121,
+      "sha256": "5FDBD04BD0F91785797A593CA25C73A439993AF5728DA39E1D338C937CC38302",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-10-11/current-source-audit-performance-r931.md",
+      "path": "releases/v0.4.0/evidence/2026-10-11/current-source-audit-performance-r931.md",
+      "size": 4661,
+      "sha256": "3DFE8EAF61276FFDCF3933D32F60A4A0B5030A79111763D501D8A4BC69FE7E99",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-10-11/finite-belt150-kit-saved-r1099.md",
+      "path": "releases/v0.4.0/evidence/2026-10-11/finite-belt150-kit-saved-r1099.md",
+      "size": 2596,
+      "sha256": "F905193C32E1A9826E372914CA88A39ACE9B16F557789DFA23B60A8B37CBE4FC",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-10-11/finite-iron-route-approach-saved-r1109.md",
+      "path": "releases/v0.4.0/evidence/2026-10-11/finite-iron-route-approach-saved-r1109.md",
+      "size": 2704,
+      "sha256": "E63388FBC09BEBDD225DC29DA16D94C81D492269136755ABC8E1B0CE8BBB680C",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-10-11/finite-iron200-kit-saved-flow-r1094.md",
+      "path": "releases/v0.4.0/evidence/2026-10-11/finite-iron200-kit-saved-flow-r1094.md",
+      "size": 2893,
+      "sha256": "5D41FB3C8A2BE2192F6A008FE284BB4E5EC5AEE4181EEB8F71E9151FD82D2883",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-10-11/finite-source-refill-workflow-r914.md",
+      "path": "releases/v0.4.0/evidence/2026-10-11/finite-source-refill-workflow-r914.md",
+      "size": 4817,
+      "sha256": "5E857212A554CCBCF88BCF0A42AE39871B376FA2C4353D42ED52848DFF28AE04",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-10-11/iron-route-existing-silicon-barrier-r1114.md",
+      "path": "releases/v0.4.0/evidence/2026-10-11/iron-route-existing-silicon-barrier-r1114.md",
+      "size": 5542,
+      "sha256": "E955D9828444D05F13FA348594D1C135CE68C7C9B4042AA30CCCD54FD654EEB8",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-10-11/known-walk-south-three-moves-and-bounded-save-process-r885.md",
+      "path": "releases/v0.4.0/evidence/2026-10-11/known-walk-south-three-moves-and-bounded-save-process-r885.md",
+      "size": 2874,
+      "sha256": "DFDABE7316CCCF6DA3A48A50A512663CE1DF3B04D6370E53E0727735DC114668",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-10-11/magnet-feed-short-r807.md",
+      "path": "releases/v0.4.0/evidence/2026-10-11/magnet-feed-short-r807.md",
+      "size": 2816,
+      "sha256": "D5DD81E190553B6416B206B47A1C1EEB9E39ECBED265ECD522ACF9BBA69DC6CD",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-10-11/move-stop-save-and-window-close-r893.md",
+      "path": "releases/v0.4.0/evidence/2026-10-11/move-stop-save-and-window-close-r893.md",
+      "size": 2971,
+      "sha256": "E92B67FD683B86231561C9232B61AFAB48EED1FE7A778F351357BD7C483C3EF6",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-10-11/native-inland-four-moves-shore-refusal-covering-save-r858.md",
+      "path": "releases/v0.4.0/evidence/2026-10-11/native-inland-four-moves-shore-refusal-covering-save-r858.md",
+      "size": 3006,
+      "sha256": "ED10D01A2E07828906838189E898B23263208DBDDFEAEC6F2F573130D703AB8E",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-10-11/native-inland-ti-approach-and-save-r852.md",
+      "path": "releases/v0.4.0/evidence/2026-10-11/native-inland-ti-approach-and-save-r852.md",
+      "size": 1934,
+      "sha256": "A2B844F1C487867109508BBE56E28E3D3E1FA7672E7E6E7A0A608096BD59F913",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-10-11/native-north-two-moves-bounded-save-process-r865.md",
+      "path": "releases/v0.4.0/evidence/2026-10-11/native-north-two-moves-bounded-save-process-r865.md",
+      "size": 3282,
+      "sha256": "19F9A18A79BF2746BA087808487B2914C04E1E6897F3B51E614017DBD318ECF5",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-10-11/native-route-stop-save-and-process-r839.md",
+      "path": "releases/v0.4.0/evidence/2026-10-11/native-route-stop-save-and-process-r839.md",
+      "size": 3783,
+      "sha256": "AC9DC19F81AC171966BD449CC675CC6972E8DEDCE2BE2C129A2527209E7D5572",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-10-11/native-west-approach-and-save-r845.md",
+      "path": "releases/v0.4.0/evidence/2026-10-11/native-west-approach-and-save-r845.md",
+      "size": 2610,
+      "sha256": "E6608B9B34B3DE2D2C3AE3D4D329CBAA0C7F82AB3A9D3076FCBC8F0FAF1808FE",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-10-11/northeast-prefix-save-r1046.md",
+      "path": "releases/v0.4.0/evidence/2026-10-11/northeast-prefix-save-r1046.md",
+      "size": 3325,
+      "sha256": "732C55EC59B124CE393E9E5B42FA2F42AED969B1E4189C9F958E3FA30D3F5EC5",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-10-11/northern-prefix-flow-r997.md",
+      "path": "releases/v0.4.0/evidence/2026-10-11/northern-prefix-flow-r997.md",
+      "size": 2899,
+      "sha256": "0AA81F537A501F4A9417720BE3420F044235F80C57BFE222DB584757CA1DA73A",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-10-11/northern-two-move-save-r1055.md",
+      "path": "releases/v0.4.0/evidence/2026-10-11/northern-two-move-save-r1055.md",
+      "size": 3567,
+      "sha256": "014392CB7318A3921A633CE87D50C32C4C1FEB3EA721D99CA306C7F9DD8E8E39",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-10-11/one-magnet-feed-upgrade-r802.md",
+      "path": "releases/v0.4.0/evidence/2026-10-11/one-magnet-feed-upgrade-r802.md",
+      "size": 2256,
+      "sha256": "3E5B55EDA9F967CB6329C98F5773393F70C5AD16231A387914EEE3BCFA8545B0",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-10-11/owned-material-custody-capacity-r924.md",
+      "path": "releases/v0.4.0/evidence/2026-10-11/owned-material-custody-capacity-r924.md",
+      "size": 2896,
+      "sha256": "3EA52133B5E0F82A2DB5E5B138AC0930F01A61D3199AAD87007BA51EF37BB355",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-10-11/owned-stock-warp-demand-save-r1075.md",
+      "path": "releases/v0.4.0/evidence/2026-10-11/owned-stock-warp-demand-save-r1075.md",
+      "size": 4445,
+      "sha256": "AFBCA87C62342A0FAA8BFA2015CAEBA600638F90754DA4CA4299FB7448FE2AD9",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-10-11/recent-flow-and-caller-recovery-r953.md",
+      "path": "releases/v0.4.0/evidence/2026-10-11/recent-flow-and-caller-recovery-r953.md",
+      "size": 4711,
+      "sha256": "66DE48A5DBA1BF9F7F8F1F537BF2391A3BAE781B7F477C5EEB09AAB791BED882",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-10-11/rod-capacity-custody-r988.md",
+      "path": "releases/v0.4.0/evidence/2026-10-11/rod-capacity-custody-r988.md",
+      "size": 3114,
+      "sha256": "650715C536465FDF1D1C1FE6E7CEA220D9DF60EBA3FBA491C5A436A3275E38FC",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-10-11/row-skirt-prefix-r1027.md",
+      "path": "releases/v0.4.0/evidence/2026-10-11/row-skirt-prefix-r1027.md",
+      "size": 3616,
+      "sha256": "14930A0CEA0CC1A841792C2CB7E431D3FB9D87D5705676B080460B980398EBE5",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-10-11/saved13-window-close-r935.md",
+      "path": "releases/v0.4.0/evidence/2026-10-11/saved13-window-close-r935.md",
+      "size": 2975,
+      "sha256": "A1953F18262DB0D0AB9B51DE73C7DDAF18EB508DCB4D1C5D2CB950DAA8FCC06A",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-10-11/saved17-flow-r1013.md",
+      "path": "releases/v0.4.0/evidence/2026-10-11/saved17-flow-r1013.md",
+      "size": 2900,
+      "sha256": "BE592D91F314AEEF6091A7283513C9C4CDD9157A66FB56BBC0BAFC44B42708F3",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-10-11/shared-deuterium-iron-gap-window-close-r1088.md",
+      "path": "releases/v0.4.0/evidence/2026-10-11/shared-deuterium-iron-gap-window-close-r1088.md",
+      "size": 4116,
+      "sha256": "27844FCB2840FAC9328D006D71D50FCE556D91AE63C67CAFD1E76352C818A46F",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-10-11/south-turn-stall-save-r1038.md",
+      "path": "releases/v0.4.0/evidence/2026-10-11/south-turn-stall-save-r1038.md",
+      "size": 3447,
+      "sha256": "3213DAAF29761C5D0C1C9F0156CC454F0C94D30F04652BCEDB1ED1E2D50069D9",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-10-11/ti-demand-withdrawal-and-short-samples-r896.md",
+      "path": "releases/v0.4.0/evidence/2026-10-11/ti-demand-withdrawal-and-short-samples-r896.md",
+      "size": 3505,
+      "sha256": "F9328C282E10858F1A631C4F5471F6FF1B6D7891F21B4C3F5850F456A714E318",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-10-11/ti-station-demand-restoration-r905.md",
+      "path": "releases/v0.4.0/evidence/2026-10-11/ti-station-demand-restoration-r905.md",
+      "size": 4997,
+      "sha256": "A695036F09A41F89FF5E9D88220D076AA8A29E51571061C751826BFCAECB4985",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-10-11/upper-bank-rod400-save-source-r1065.md",
+      "path": "releases/v0.4.0/evidence/2026-10-11/upper-bank-rod400-save-source-r1065.md",
+      "size": 3725,
+      "sha256": "9D1FF6886B1802EC765FD5AF7CAEAFE3A8C40D78F181DCC7E0CEE59AC1B82815",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-10-11/warp-escape-save-r977.md",
+      "path": "releases/v0.4.0/evidence/2026-10-11/warp-escape-save-r977.md",
+      "size": 3195,
+      "sha256": "22AEA819343AA570832557484C64AC5E05D09AA174DA11677385221C49C66AF7",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-10-11/zero-accepted-shore-preview-r849.md",
+      "path": "releases/v0.4.0/evidence/2026-10-11/zero-accepted-shore-preview-r849.md",
+      "size": 1317,
+      "sha256": "4391DB5BDD9EF92D09D1430DE8A8CFF7437BD59405A7DB2D008E75F3DE481FBD",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-10-12/bounded-route-readonly-interfaces.md",
+      "path": "releases/v0.4.0/evidence/2026-10-12/bounded-route-readonly-interfaces.md",
+      "size": 5523,
+      "sha256": "53D853C957F46665F948EBAF95FC53DB2FE707881F11C4D4FF808179DB7480F0",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-10-12/iron-interior-ramp-qualification-r1125.md",
+      "path": "releases/v0.4.0/evidence/2026-10-12/iron-interior-ramp-qualification-r1125.md",
+      "size": 3707,
+      "sha256": "506B415C733DFA4892B93E4BE7B1CA47346E258398DC058D2C2E2EF2062B18DB",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-10-12/iron-multi-route-native-geometry-survey-r1176.md",
+      "path": "releases/v0.4.0/evidence/2026-10-12/iron-multi-route-native-geometry-survey-r1176.md",
+      "size": 6664,
+      "sha256": "FCCE2881753F8FF14201E719D8A17AAE392759A08AB427CF59958B0AAEEC05F7",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-10-12/iron-native-grid-batch-live-and-maintenance-r1197.md",
+      "path": "releases/v0.4.0/evidence/2026-10-12/iron-native-grid-batch-live-and-maintenance-r1197.md",
+      "size": 5936,
+      "sha256": "84287954979422B02462632567DC18A800938E87D557CB28B713B9E4A65439F0",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-10-12/iron-native-grid-point-generation-and-batch-reader-r1189.md",
+      "path": "releases/v0.4.0/evidence/2026-10-12/iron-native-grid-point-generation-and-batch-reader-r1189.md",
+      "size": 7510,
+      "sha256": "484E8289DE3DCEBB2E9CB8BEC91CBA081010E5F19C344C8B3A9C301D4EF2EBA8",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-10-12/iron-raised-underpass-and-seam-capability-r1183.md",
+      "path": "releases/v0.4.0/evidence/2026-10-12/iron-raised-underpass-and-seam-capability-r1183.md",
+      "size": 3738,
+      "sha256": "2E94534586F4BC3B098A4DA81DBCD01C014A8A6E5D08910F26449180DF398212",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-10-12/iron-readonly-underpass-and-fingerprint-r1206.md",
+      "path": "releases/v0.4.0/evidence/2026-10-12/iron-readonly-underpass-and-fingerprint-r1206.md",
+      "size": 11855,
+      "sha256": "1BE05F9383D06AD7F9B2CDA981C325CE6A427F4A867ECA21165A425018356DBB",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-10-12/native-primary-29131-preparation-r1218.md",
+      "path": "releases/v0.4.0/evidence/2026-10-12/native-primary-29131-preparation-r1218.md",
+      "size": 11716,
+      "sha256": "01BC8842C20D993116EBCFB1CD9C9094296D36DEFFE7998305BE92DE5387A002",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-10-12/raised-tail-maintenance-and-healthy-resume-r1235.md",
+      "path": "releases/v0.4.0/evidence/2026-10-12/raised-tail-maintenance-and-healthy-resume-r1235.md",
+      "size": 4798,
+      "sha256": "F6827E9606A21CCB44D3B006FD44F1C83F2E8E6C35426CBDFD64DD9C5485627F",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-10-12/readonly-fingerprint-maintenance-and-native-drift-r1214.md",
+      "path": "releases/v0.4.0/evidence/2026-10-12/readonly-fingerprint-maintenance-and-native-drift-r1214.md",
+      "size": 6638,
+      "sha256": "8ECF23FB7AB1F2E56C75FA2ABD0381A48DA4BD6E8E4E7C67DA68B25BDCCF5B77",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-10-13/fixed-quarantine-recovery-and-saved-prefix-r1249.md",
+      "path": "releases/v0.4.0/evidence/2026-10-13/fixed-quarantine-recovery-and-saved-prefix-r1249.md",
+      "size": 4214,
+      "sha256": "2004254BB7EAF64E509EA5ED13516B84C3575A49B782AA44398AAEA15BCFE463",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-10-13/fixed-quarantine-recovery-and-saved-prefix-r1251.md",
+      "path": "releases/v0.4.0/evidence/2026-10-13/fixed-quarantine-recovery-and-saved-prefix-r1251.md",
+      "size": 2543,
+      "sha256": "F57D88AB6F8816425FD678AA5A57651C7528F2C3A8BA7CB79C5C114C1179CC19",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-10-13/iron-source-connected-r1257.md",
+      "path": "releases/v0.4.0/evidence/2026-10-13/iron-source-connected-r1257.md",
+      "size": 33344,
+      "sha256": "6D93DFCAA4302FDD8BCBC92B9C4D75E6119DDE9E9DC7F596F2D336DF8844C168",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-10-13/raised-iron-route-saved-r1253.md",
+      "path": "releases/v0.4.0/evidence/2026-10-13/raised-iron-route-saved-r1253.md",
+      "size": 3507,
+      "sha256": "3D34D0EA2F429FA413E5462D445A4944A42F196FFB1EAC594AB73FFCF1F6EACC",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-10-13/raised-source-creation-binding-and-quarantine-r1238.md",
+      "path": "releases/v0.4.0/evidence/2026-10-13/raised-source-creation-binding-and-quarantine-r1238.md",
+      "size": 7578,
+      "sha256": "9BCC623B48FB665BED3251C5B1A3512CD281631851A4C29639207207E2E05A63",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-10-14/foundry-progress-recovery-r1307.md",
+      "path": "releases/v0.4.0/evidence/2026-10-14/foundry-progress-recovery-r1307.md",
+      "size": 9089,
+      "sha256": "AB3036810E5CB62FFDD941DAD3A473B192EBB8DC0F4C669B72D44B6D5B035E05",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-10-15/confirmed-primary-29145-migration.md",
+      "path": "releases/v0.4.0/evidence/2026-10-15/confirmed-primary-29145-migration.md",
+      "size": 4980,
+      "sha256": "ABCAD20328CDAC88EA3F0986C302FC7ABA5ADF2032485DFE1595988D6803B279",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-10-15/current-departure-kit.md",
+      "path": "releases/v0.4.0/evidence/2026-10-15/current-departure-kit.md",
+      "size": 3314,
+      "sha256": "AB2123292991440C12424047B2B28B1B55572FDF2C16A7EADB7B9DFAEAB14116",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-10-15/delivery-build-validation.md",
+      "path": "releases/v0.4.0/evidence/2026-10-15/delivery-build-validation.md",
+      "size": 5525,
+      "sha256": "F835B61D36369EB6B53827A1E73DE1F6DE5FD06D3D79EEABCCB54475E7897683",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-10-15/delivery-candidates-2a7a98d.md",
+      "path": "releases/v0.4.0/evidence/2026-10-15/delivery-candidates-2a7a98d.md",
+      "size": 12552,
+      "sha256": "D0532F10AA05BE0F415A03C00BE41A31687A4219D849B0D1E3C13993B1E7016E",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-10-15/final-joint-supply-36060.md",
+      "path": "releases/v0.4.0/evidence/2026-10-15/final-joint-supply-36060.md",
+      "size": 5944,
+      "sha256": "01F065EB8EC0F96F7BDE8F43293EFB5F62A5E01B5F89534FCA58313BA2F05F6B",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-10-15/final-whole-preparation-recovery.md",
+      "path": "releases/v0.4.0/evidence/2026-10-15/final-whole-preparation-recovery.md",
+      "size": 4109,
+      "sha256": "CD18464BEF038E3E67D84E4997ABD5EC40F26DC73283EB36EED4B889158F30A0",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-10-15/manual-candidate-install-resume.md",
+      "path": "releases/v0.4.0/evidence/2026-10-15/manual-candidate-install-resume.md",
+      "size": 3903,
+      "sha256": "9A463F31FA0BF3F4681711748A1C164C9282DB706347B070E93C36C777C871D0",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-10-15/owned-primary-29145-blocker.md",
+      "path": "releases/v0.4.0/evidence/2026-10-15/owned-primary-29145-blocker.md",
+      "size": 5057,
+      "sha256": "2A7A72D4CE92494480E5D910AC54DF0A53B8A8902DDF316730A22AEDBDE6323C",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-10-15/owned-primary-29145-candidate-validation.md",
+      "path": "releases/v0.4.0/evidence/2026-10-15/owned-primary-29145-candidate-validation.md",
+      "size": 4810,
+      "sha256": "D7C46C0DBAE7F6E0BF81357090A779716B6A23D27810A0275A0EB3109A035705",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-10-15/owned-primary-29145-menu-deployment.md",
+      "path": "releases/v0.4.0/evidence/2026-10-15/owned-primary-29145-menu-deployment.md",
+      "size": 9562,
+      "sha256": "3C40910B10EA92DDDA8817718D402B6804D1FEF0D8E6FA6548DEBEFE9ABCFFF4",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-10-15/release-notes.md",
+      "path": "releases/v0.4.0/evidence/2026-10-15/release-notes.md",
+      "size": 5998,
+      "sha256": "4C3ECEE7596A0AE740379F4FA112630E366010F0CE266C95A242CE6C5AAC89A5",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-10-15/review-delivery.md",
+      "path": "releases/v0.4.0/evidence/2026-10-15/review-delivery.md",
+      "size": 9333,
+      "sha256": "AA52B8AAE4CD144322E4B9769C187A0C52C0FBF0908A90084FFAC8336C957576",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-10-15/three-stage-input-checkpoint.md",
+      "path": "releases/v0.4.0/evidence/2026-10-15/three-stage-input-checkpoint.md",
+      "size": 4339,
+      "sha256": "9302E4FDD485B1580BFAB7BA621B96097412578508AF47163FD0B17157AA07E6",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-10-15/three-stage-output-prefix.md",
+      "path": "releases/v0.4.0/evidence/2026-10-15/three-stage-output-prefix.md",
+      "size": 4163,
+      "sha256": "EFB7F91DEF3ADC4A31C3F4B68411AD257AEDDED6A7A61BBBC00D11418AF26109",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-10-15/three-stage-source-allocation.md",
+      "path": "releases/v0.4.0/evidence/2026-10-15/three-stage-source-allocation.md",
+      "size": 2773,
+      "sha256": "A3D8EF506E730B8E8CFAA1FFD205709C3F4ADA674D1C53ACD96BEBD9FED8EE13",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/2026-10-15/thunderstore-candidate-install-resume.md",
+      "path": "releases/v0.4.0/evidence/2026-10-15/thunderstore-candidate-install-resume.md",
+      "size": 3404,
+      "sha256": "39C5FC9D1F81C1A1FAE8157BC35D5A643299B47F4A2D2A011744A301ED660393",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/evidence/README.md",
+      "path": "releases/v0.4.0/evidence/README.md",
+      "size": 1407,
+      "sha256": "FB21FF20B70070581B6E14D702FA0502E869E366F40A2213FC41A2B1BBF87D16",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/experience-ledger.md",
+      "path": "operations/experience-ledger.md",
+      "size": 2010299,
+      "sha256": "1BAEB2DD2827F85EBCDB137BDBD5A82BE0930AE472383D92876BE36F996AD709",
+      "redacted": true
+    },
+    {
+      "sourcePath": "docs/gameplay-timeline.md",
+      "path": "operations/gameplay-timeline.md",
+      "size": 1633777,
+      "sha256": "2D5C5B060BC6315B232E3EFA3E77802811677A343A6A8EBB89D0224B5C408AEB",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/incident-fix-log.md",
+      "path": "operations/incident-log/full-history.md",
+      "size": 363059,
+      "sha256": "85EF9883C723A0F527413BF463C4AAAEB55050839B79DE03F57C90CAE620C91C",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/save-diaries/README.md",
+      "path": "operations/save-diaries/README.md",
+      "size": 2486,
+      "sha256": "0AC7E4C54CAE63281F700443E50CEAB579CDF509662B3B1DBF9A1CEBA7371A89",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/v0.3.2-sol-vs-luna-black-box.md",
+      "path": "scenarios/v0.3.2-black-box/comparison.md",
+      "size": 16014,
+      "sha256": "31594823195C61C94E83E59600508EC291B71A280EBB01649041E94A433B2C76",
+      "redacted": false
+    },
+    {
+      "sourcePath": "docs/v0.4-delivery.md",
+      "path": "scenarios/v0.4-final/delivery-contract.md",
+      "size": 11506,
+      "sha256": "C58FF02204165E5FCF1176217BF35DC2CE06827CE2092169D7FF2FFB6810253B",
+      "redacted": false
+    },
+    {
+      "sourcePath": "ROADMAP-HISTORY-2026-09-24.md",
+      "path": "archive/roadmap-history/ROADMAP-HISTORY-2026-09-24.md",
+      "size": 389638,
+      "sha256": "5CD084CD69701D902040ED1FD96EE68CD7B4D0E2C45E882E0996E3F233713ED4",
+      "redacted": false
+    }
+  ],
+  "importManifest": "releases/v0.4.0/manifests/import-manifest.json",
+  "importManifestSha256": "984E6FCB2126379E4B8898D862D60C849FB6D6E9ED99F113B1E9AA2FEA7E740F",
+  "linkManifest": "releases/v0.4.0/manifests/link-resolution.json",
+  "linkManifestSha256": "7838FC2A263CB159C5D737578DE2E5A4A50CEF27A676464A362F34EE688F5461",
+  "redactions": 1,
+  "protectedOriginalsRequiredForGitVerification": false
+}
