@@ -144,5 +144,116 @@
     "status": "completed",
     "conclusion": "success",
     "url": "https://github.com/AvaloNero/Spherewright-Lab/actions/runs/38720927372"
+  },
+  "productSplitValidation": {
+    "sourceHead": "1619223ad388f0a970f615b75862b2c85adfe9d5",
+    "branch": "chore/split-sample-operations",
+    "commits": [
+      {
+        "sha": "1624265ab231cd40bbb62c8d643fe869734a5e10",
+        "subject": "docs: document v0.4 validation and Lab workflow",
+        "paths": 3
+      },
+      {
+        "sha": "5dedd49a99c91f0933ad15a85e9727cf43fd97aa",
+        "subject": "docs: redirect operational evidence to Lab",
+        "paths": 264
+      },
+      {
+        "sha": "1619223ad388f0a970f615b75862b2c85adfe9d5",
+        "subject": "docs: point product guidance to Spherewright Lab",
+        "paths": 4
+      }
+    ],
+    "pullRequest": {
+      "url": "https://github.com/AvaloNero/Spherewright/pull/1",
+      "title": "Separate operational evidence into Spherewright-Lab",
+      "state": "OPEN",
+      "draft": true,
+      "headSha": "1619223ad388f0a970f615b75862b2c85adfe9d5",
+      "bodyUpdatedWithExactBuildAndCi": true,
+      "merged": false
+    },
+    "originalMain": {
+      "head": "e7d5f7d8661092b7c8089710488c448f290638be",
+      "originMain": "e7d5f7d8661092b7c8089710488c448f290638be",
+      "clean": true,
+      "formalV040TagPresent": false,
+      "githubV040ReleasePresent": false
+    },
+    "ci": {
+      "name": "Windows Core CI",
+      "databaseId": 38723951815,
+      "url": "https://github.com/AvaloNero/Spherewright/actions/runs/38723951815",
+      "headSha": "1619223ad388f0a970f615b75862b2c85adfe9d5",
+      "status": "completed",
+      "conclusion": "success",
+      "testCounts": {
+        "contracts": 73,
+        "core": 2777,
+        "mcp": 258,
+        "total": 3108
+      },
+      "logSha256": "31CD3BBAD933C3D3CEAE279D016131ABCAA75F81397CD6D6F8DE6F936516B6E1"
+    },
+    "fullBuild": {
+      "sdkVersion": "8.0.424",
+      "lockedRestoreExitCode": 0,
+      "releaseExitCode": 0,
+      "warnings": 0,
+      "errors": 0,
+      "nativeReferences": [
+        {
+          "name": "BepInEx.dll",
+          "sha256": "DC1CB6B58B962BDA5AAA1D6B5F9AE14EC174F61836A1A1F96C1A040C7E8381F7",
+          "matchesAcceptedCandidate": true
+        },
+        {
+          "name": "Assembly-CSharp.dll",
+          "sha256": "B84B60DF5A24947A014801F23B9B85D1E77853F42A331918E2DC85B153E50527",
+          "matchesAcceptedCandidate": true
+        },
+        {
+          "name": "UnityEngine.dll",
+          "sha256": "72CC73EEF0036530ABE21F82971FF06002CEE37EFFDD4DD7D5D4EC8DF3911F8D",
+          "matchesAcceptedCandidate": true
+        },
+        {
+          "name": "UnityEngine.CoreModule.dll",
+          "sha256": "E2B5AE2FD12646D03FC3D04D1A37D522572A3B97022FE1B95BBF2A2F2B04853A",
+          "matchesAcceptedCandidate": true
+        },
+        {
+          "name": "UnityEngine.PhysicsModule.dll",
+          "sha256": "9B8C76635404945AD690B219415151E244C3D6D0A76851FBD40045272F160D38",
+          "matchesAcceptedCandidate": true
+        }
+      ],
+      "restoreStdoutSha256": "B25885A183FA8171FFBFF76DD5E78E8484156BEBAB19D84683B86102FD93D8B0",
+      "buildStdoutSha256": "0D206DC34DCB6A9AC63D6E81007396A9B4FF53FFA85EE7160869300099765936"
+    },
+    "authorizedPaths": {
+      "redirects": 258,
+      "updatedLinks": 6,
+      "authoredDocs": 7,
+      "total": 271
+    },
+    "protectedProductFilesUnchanged": 488,
+    "fixedLabTransferSha": "14478a03c64c550e644c559405c8496b647552e7",
+    "fixedLabLinksVerified": 555,
+    "guideSha256": "2E354DB900B7822F47092B023EA971BEEA688DEF97798D666D8C12C3FC16AB70",
+    "guideMatchesFrozenCandidate": true,
+    "packagingReadmeLinkChanges": 4,
+    "cleanAndPushed": true,
+    "productUsesLabAsBuildDependency": false,
+    "frozenCandidatesModified": false,
+    "originalMainReferenceCachePreservedUnused": true,
+    "candidateMatchingBuildReferencesUsed": true,
+    "productReceiptSha256": "0776F47DF354939B52CB381884C9BD0BBC2309A80165D65EA6EE2693F8076ADC",
+    "gameCalls": 0,
+    "bridgeCalls": 0,
+    "installedOrDeployed": false,
+    "merged": false,
+    "published": false
   }
 }

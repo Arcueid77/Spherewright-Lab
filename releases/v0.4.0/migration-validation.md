@@ -40,3 +40,17 @@ The clean remote clone called the product's own `package-release.ps1` → `packa
 Hashes, sizes, sidecars and the run manifest agree. Fresh preview archive metadata produces different ZIP hashes; these outputs are not substituted for the two frozen accepted candidates. The original candidate hashes in [SHA256SUMS](hashes/SHA256SUMS.txt) were rechecked unchanged. Preview packages are not committed, installed or published.
 
 The historical installation, recovery and continuous-window acceptance remains in [the final validation summary](validation-summary.md) and its original evidence. This repository migration does not repeat or enlarge that acceptance. The product cleanup is a separate draft; absent a formal v0.4.0 tag it requires the owner's separate merge gate.
+
+## Product repository verification
+
+The product split is now a separate three-commit draft at `1619223ad388f0a970f615b75862b2c85adfe9d5`, pushed and clean at the verification boundary. [Product PR #1](https://github.com/AvaloNero/Spherewright/pull/1) remains open/draft. Its [exact Windows Core CI 38723951815](https://github.com/AvaloNero/Spherewright/actions/runs/38723951815) completed successfully: Contracts 73, Bridge.Core 2777, MCP 258, total 3108; all passed with zero failed/skipped.
+
+The independent full `Spherewright.sln` locked restore and Release build passed with SDK `8.0.424`, zero warnings and zero errors. All five legal Native references match the accepted candidate, including Assembly-CSharp SHA-256 `B84B60DF5A24947A014801F23B9B85D1E77853F42A331918E2DC85B153E50527`. An older main-local reference cache was preserved unused; the feature build used the verified matching set. No Lab source is a product build input.
+
+The product branch changes 271 paths: 258 short redirects, six files with link updates, and seven authored product documents. All 555 Lab targets resolve to the fixed transfer commit `14478a03c64c550e644c559405c8496b647552e7`; the product does not follow a floating Lab branch. 488 protected code/test/script/CI/build/resource inputs retain their feature preimage bytes and unchanged Git content. The embedded playbook SHA-256 `2E354DB900B7822F47092B023EA971BEEA688DEF97798D666D8C12C3FC16AB70` matches the frozen manual candidate. The packaging README has exactly four link replacements and no other content changes.
+
+Original product main remains `e7d5f7d8661092b7c8089710488c448f290638be`, clean and unchanged. No existing tag/history, frozen ZIP, game state, installation or deployment was modified. Native build and CI receipts are indexed by their hashes in the machine report; local raw logs are protected/ignored rather than claimed to ship in a clone.
+
+The immutable transfer boundary stays at `14478a03c64c550e644c559405c8496b647552e7` with successful Lab CI 38722214953 and a genuine canonical-URL clean clone. These subsequent closing facts do not change imported manifests, source locks, tested tools or the product submodule, and do not cause another product build or package. The final CI status for this closing note belongs to Lab PR #1.
+
+Both drafts are ready for owner review. No formal v0.4.0 tag/Release exists; the product cleanup merge still requires the owner's separate approval or the formal-tag gate. Recommended order: review/merge Lab ownership first, explicitly approve the product cleanup merge, then separately review formal v0.4 publication from the accepted candidate boundary.
