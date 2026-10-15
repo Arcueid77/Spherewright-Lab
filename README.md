@@ -1,6 +1,6 @@
 # Spherewright-Lab
 
-Spherewright 的私有场景、运行交接与黑盒验收仓。产品的 Plugin、MCP、Contracts、Bridge.Core、通用测试和打包实现继续保留在 [Spherewright](https://github.com/AvaloNero/Spherewright) 一个 monorepo 内。
+Spherewright 的公开场景、运行交接与黑盒验收仓。产品的 Plugin、MCP、Contracts、Bridge.Core、通用测试和打包实现继续保留在 [Spherewright](https://github.com/AvaloNero/Spherewright) 一个 monorepo 内。公开审查的范围与限制见[安全审查记录](operations/public-review-2026-10-16.md)。
 
 本仓通过只读子模块消费精确产品提交，不反向成为产品构建依赖。0.4 的历史验收已完成，本次拆仓只组织 Git、文件、工具和 CI，不部署、不读写游戏、不重做验收、不发布版本。
 
@@ -15,7 +15,7 @@ pwsh -File scripts/verify-evidence.ps1
 pwsh -File scenarios/v0.4-final/scripts/verify-acceptance.ps1
 ```
 
-审查尚未合并时，请 clone PR 的 `chore/import-v0.4-sample` 分支，或 checkout 审查报告里的精确 Sample commit。`bootstrap` 只初始化固定子模块并建立忽略目录，既不追踪 latest main，也不会覆盖意外 HEAD 或 dirty 子模块。
+拆分已经合并，当前工作从 `main` 的 [AGENTS.md](AGENTS.md) 与[活动交接](operations/active-handoff.md)开始。复核冻结证据时使用不可变迁移快照 `14478a03c64c550e644c559405c8496b647552e7`，不要把历史授权当作当前授权。`bootstrap` 只初始化固定子模块并建立忽略目录，既不追踪 latest main，也不会覆盖意外 HEAD 或 dirty 子模块。
 
 [source-lock.json](source-lock.json) 固定产品 `2a7a98d1932c404e3a7abc2c11233d9c0b8780d9`。没有正式 `v0.4.0` tag，因此 `releaseTag: null`、`status: provisional`。证据导入自较后的文档提交 `e7d5f7d8661092b7c8089710488c448f290638be`；后续文档不是候选源码。两个冻结包的校验值保持原样，不把重新构建的预览包冒充原候选。
 
@@ -37,7 +37,7 @@ archive/imported-from-spherewright/<facts-sha>/   unchanged original bytes
 archive/roadmap-history/           normalized historical roadmap
 scripts/                          bootstrap, lock/import/evidence checks, bump, preview
 schemas/                          machine validation
-.github/workflows/                light Sample validation
+.github/workflows/                light Lab validation
 .local/                           ignored protected originals and local logs
 artifacts/                        ignored frozen inputs or local previews
 ```
@@ -56,7 +56,7 @@ artifacts/                        ignored frozen inputs or local previews
 pwsh -File scripts/update-spherewright.ps1 -Sha <FULL_SHA> -NewLockPath .local/reviewed-next-lock.json
 ```
 
-更新入口要求 Sample 干净、产品 CI 绿，只暂存子模块与锁文件并写 bump 摘要，不 commit/push。Sample 的提交记录消费版本与场景事实；可复用能力回产品仓实现。
+更新入口要求 Lab 干净、产品 CI 绿，只暂存子模块与锁文件并写 bump 摘要，不 commit/push。Lab 的提交记录消费版本与场景事实；可复用能力回产品仓实现。脚本中的既有 Sample 函数名和文件名是兼容接口，不代表另一个仓库。
 
 需本机合法安装的 DSP Native 引用和 .NET 8 SDK 时，可以生成独立本地预览：
 
@@ -64,6 +64,6 @@ pwsh -File scripts/update-spherewright.ps1 -Sha <FULL_SHA> -NewLockPath .local/r
 pwsh -File scripts/package-from-submodule.ps1 -DspDir <LOCAL_DSP_DIRECTORY> -DotNetPath <DOTNET_SDK_EXECUTABLE>
 ```
 
-它从子模块自身 HEAD/clean 状态调用产品 `package-release.ps1`，由该入口调用 `package-thunderstore.ps1` 一次，输出到 Sample `artifacts/previews/` 并生成 run manifest。所需外部输入是 SDK 和合法游戏程序集，不是未提交产品源码。不会覆盖原冻结候选、部署或接触游戏。预览包哈希与冻结包哈希分开记录。
+它从子模块自身 HEAD/clean 状态调用产品 `package-release.ps1`，由该入口调用 `package-thunderstore.ps1` 一次，输出到 Lab `artifacts/previews/` 并生成 run manifest。所需外部输入是 SDK 和合法游戏程序集，不是未提交产品源码。不会覆盖原冻结候选、部署或接触游戏。预览包哈希与冻结包哈希分开记录。
 
 完整规则见 [AGENTS.md](AGENTS.md)。原记录和场景参数不能授予新的游戏写入或正式发布权限。
