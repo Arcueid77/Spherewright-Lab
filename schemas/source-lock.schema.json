@@ -1,0 +1,50 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "required": ["schemaVersion", "status", "scenario", "spherewright", "native", "packages", "acceptance", "evidenceSource"],
+  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": {"const": 1},
+    "status": {"enum": ["provisional", "tagged"]},
+    "scenario": {"type": "string", "minLength": 1},
+    "spherewright": {
+      "type": "object", "additionalProperties": false,
+      "required": ["repository", "submodulePath", "sourceSha", "releaseTag", "productVersion"],
+      "properties": {
+        "repository": {"const": "AvaloNero/Spherewright"},
+        "submodulePath": {"const": "deps/Spherewright"},
+        "sourceSha": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+        "releaseTag": {"type": ["string", "null"]},
+        "productVersion": {"type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"}
+      }
+    },
+    "native": {
+      "type": "object", "additionalProperties": false,
+      "required": ["version", "assemblySha256"],
+      "properties": {
+        "version": {"type": "string", "minLength": 1},
+        "assemblySha256": {"type": ["string", "null"], "pattern": "^[A-F0-9]{64}$"}
+      }
+    },
+    "packages": {
+      "type": "object", "additionalProperties": false, "required": ["manual", "thunderstore"],
+      "properties": {"manual": {"$ref": "#/definitions/package"}, "thunderstore": {"$ref": "#/definitions/package"}}
+    },
+    "acceptance": {
+      "type": "object", "additionalProperties": false,
+      "required": ["spec", "evidenceManifest", "evidenceManifestSha256"],
+      "properties": {"spec": {"type": "string"}, "evidenceManifest": {"type": "string"}, "evidenceManifestSha256": {"type": "string", "pattern": "^[A-F0-9]{64}$"}}
+    },
+    "evidenceSource": {
+      "type": "object", "additionalProperties": false,
+      "required": ["repository", "sourceSha"],
+      "properties": {"repository": {"const": "AvaloNero/Spherewright"}, "sourceSha": {"type": "string", "pattern": "^[0-9a-f]{40}$"}}
+    }
+  },
+  "definitions": {
+    "package": {
+      "type": "object", "additionalProperties": false, "required": ["file", "sha256", "size"],
+      "properties": {"file": {"type": "string", "pattern": "^[A-Za-z0-9._-]+\\.zip$"}, "sha256": {"type": "string", "pattern": "^[A-F0-9]{64}$"}, "size": {"type": "integer", "minimum": 1}}
+    }
+  }
+}

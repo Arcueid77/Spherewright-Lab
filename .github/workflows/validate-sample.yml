@@ -1,0 +1,36 @@
+name: Validate locked Sample
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: windows-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          fetch-depth: 0
+      - name: Bootstrap exact product dependency
+        shell: pwsh
+        run: ./scripts/bootstrap.ps1
+      - name: Verify source lock and JSON schema
+        shell: pwsh
+        run: ./scripts/verify-source-lock.ps1
+      - name: Verify archive, evidence, links and sensitive-data guard
+        shell: pwsh
+        run: ./scripts/verify-evidence.ps1
+      - name: Verify historical scenario contract without a game
+        shell: pwsh
+        run: ./scenarios/v0.4-final/scripts/verify-acceptance.ps1
+      - name: Exercise fail-closed verifiers in the disposable CI checkout
+        shell: pwsh
+        run: ./scripts/test-verifiers.ps1 -FixtureRoot $pwd.Path -AllowFixtureMutation
