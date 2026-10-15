@@ -1,4 +1,4 @@
-# Spherewright-Sample
+# Spherewright-Lab
 
 Spherewright 的私有场景、运行交接与黑盒验收仓。产品的 Plugin、MCP、Contracts、Bridge.Core、通用测试和打包实现继续保留在 [Spherewright](https://github.com/AvaloNero/Spherewright) 一个 monorepo 内。
 
@@ -7,8 +7,8 @@ Spherewright 的私有场景、运行交接与黑盒验收仓。产品的 Plugin
 ## 开始使用
 
 ```powershell
-git clone --recurse-submodules https://github.com/AvaloNero/Spherewright-Sample.git
-cd Spherewright-Sample
+git clone --recurse-submodules https://github.com/AvaloNero/Spherewright-Lab.git
+cd Spherewright-Lab
 pwsh -File scripts/bootstrap.ps1
 pwsh -File scripts/verify-source-lock.ps1
 pwsh -File scripts/verify-evidence.ps1

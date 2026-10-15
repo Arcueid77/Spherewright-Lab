@@ -28,9 +28,10 @@
     "evidenceManifestSha256": "F191917B5279F2A4EA5BE3CF3A6F227801C3AB1CC42693C078531AD22CF62C50"
   },
   "links": {
-    "validRelativeLinks": 750,
+    "validRelativeLinks": 756,
     "historicalUnresolvedReferences": 80,
-    "historicalUnresolvedAreAcceptanceProof": false
+    "historicalUnresolvedAreAcceptanceProof": false,
+    "testedToolCommitRelativeLinks": 750
   },
   "cleanClone": {
     "passed": true,
@@ -115,7 +116,7 @@
     "headSha": "8750a24537e904e484e207317beab57209440869",
     "status": "completed",
     "conclusion": "success",
-    "url": "https://github.com/AvaloNero/Spherewright-Sample/actions/runs/38718529989"
+    "url": "https://github.com/AvaloNero/Spherewright-Lab/actions/runs/38718529989"
   },
   "limitations": [
     "One earlier incomplete clone is retained; its original Git diagnostic was not captured, so no root cause is asserted.",
@@ -130,5 +131,18 @@
   "deployed": false,
   "savedOrLoaded": false,
   "merged": false,
-  "published": false
+  "published": false,
+  "repository": {
+    "name": "AvaloNero/Spherewright-Lab",
+    "private": true,
+    "renamedByOwnerDirection": true,
+    "historyAndDraftPrPreserved": true
+  },
+  "factsCiBeforeNameCorrection": {
+    "databaseId": 38720927372,
+    "headSha": "bae5d6e5a8dda856f58fc24d0ce077801dc2506c",
+    "status": "completed",
+    "conclusion": "success",
+    "url": "https://github.com/AvaloNero/Spherewright-Lab/actions/runs/38720927372"
+  }
 }

@@ -1,4 +1,4 @@
-# Spherewright-Sample working rules
+# Spherewright-Lab working rules
 
 - Start Agent work at this repository root. Read `source-lock.json`, `operations/current-status.md`, and `operations/active-handoff.md` as needed; do not load whole historical ledgers into model context.
 - Treat `deps/Spherewright` as a fixed, read-only product dependency. Verify its Git gitlink, checked-out HEAD, clean state, product version, and the source lock before a scenario. A branch name is never a runtime lock.
