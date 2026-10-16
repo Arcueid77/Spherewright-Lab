@@ -58,6 +58,10 @@ pwsh -File scripts/update-spherewright.ps1 -Sha <FULL_SHA> -NewLockPath .local/r
 
 更新入口要求 Lab 干净、产品 CI 绿，只暂存子模块与锁文件并写 bump 摘要，不 commit/push。Lab 的提交记录消费版本与场景事实；可复用能力回产品仓实现。脚本中的既有 Sample 函数名和文件名是兼容接口，不代表另一个仓库。
 
+活动候选需要换源码时，可在根锁的 `acceptance` 中明确设置 `scope: historical_reference`，并用 `sourceLock` / `sourceLockSha256` 固定既有 `releases/v<产品版本>/source-lock.json`。旧 manifest、spec 和来源必须与该冻结锁一致；它们只证明冻结源码，验证输出会明确 `acceptanceAppliesToActiveSource: false`。不带这三个字段的旧格式仍要求根锁与发布锁逐字节一致。更新入口先验证准确产品 SHA 的 CI，仅暂存根锁与 gitlink，永不改写冻结发布锁。新候选的实机结果另行记录，历史引用不算新验收。
+
+For an active candidate with different source, explicitly set `acceptance.scope` to `historical_reference` and pin the existing `releases/v<product-version>/source-lock.json` with `sourceLock` and `sourceLockSha256`. Its manifest, specification and provenance must match that frozen lock. They prove only the frozen source; verifier output reports `acceptanceAppliesToActiveSource: false`. Legacy locks without these three fields must remain byte-identical to the release lock. The update entry verifies successful CI for the exact product SHA, then stages only the root lock and gitlink, never rewriting the frozen release lock. Record new runtime results separately; historical references are not new acceptance.
+
 需本机合法安装的 DSP Native 引用和 .NET 8 SDK 时，可以生成独立本地预览：
 
 ```powershell

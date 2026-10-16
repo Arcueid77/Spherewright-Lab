@@ -33,7 +33,18 @@
     "acceptance": {
       "type": "object", "additionalProperties": false,
       "required": ["spec", "evidenceManifest", "evidenceManifestSha256"],
-      "properties": {"spec": {"type": "string"}, "evidenceManifest": {"type": "string"}, "evidenceManifestSha256": {"type": "string", "pattern": "^[A-F0-9]{64}$"}}
+      "properties": {
+        "spec": {"type": "string"},
+        "evidenceManifest": {"type": "string"},
+        "evidenceManifestSha256": {"type": "string", "pattern": "^[A-F0-9]{64}$"},
+        "scope": {"const": "historical_reference"},
+        "sourceLock": {"type": "string", "minLength": 1},
+        "sourceLockSha256": {"type": "string", "pattern": "^[A-F0-9]{64}$"}
+      },
+      "oneOf": [
+        {"not": {"anyOf": [{"required": ["scope"]}, {"required": ["sourceLock"]}, {"required": ["sourceLockSha256"]}]}},
+        {"required": ["scope", "sourceLock", "sourceLockSha256"]}
+      ]
     },
     "evidenceSource": {
       "type": "object", "additionalProperties": false,

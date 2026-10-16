@@ -10,7 +10,11 @@ if(-not $NewLockPath){throw 'A changed product SHA requires -NewLockPath with re
 Assert-SampleJsonSchema $NewLockPath (Get-SamplePath $root 'schemas/source-lock.schema.json')
 $next=Read-SampleJson $NewLockPath
 if($next.spherewright.sourceSha -cne $Sha -or $next.spherewright.repository -cne 'Arcueid77/Spherewright' -or $next.spherewright.submodulePath -cne 'deps/Spherewright'){throw 'New lock does not match the requested exact SHA.'}
-if((Get-FileHash -LiteralPath (Get-SamplePath $root $next.acceptance.evidenceManifest)).Hash -cne $next.acceptance.evidenceManifestSha256){throw 'Reviewed evidence manifest for new lock is missing or changed.'}
+$acceptance=Assert-SampleAcceptanceReference -Root $root -Lock $next -LockPath $NewLockPath
+$releasePath='releases/v'+$next.spherewright.productVersion+'/source-lock.json'
+$releaseLockPath=Get-SamplePath $root $releasePath
+$frozenHash=(Get-FileHash -LiteralPath $releaseLockPath).Hash
+$newLockBytes=[IO.File]::ReadAllBytes((Resolve-Path -LiteralPath $NewLockPath).Path)
 $runsJson=@(& gh run list --repo Arcueid77/Spherewright --commit $Sha --workflow windows-core-ci.yml --limit 20 --json headSha,status,conclusion,databaseId 2>&1)
 if($LASTEXITCODE -ne 0){throw 'Cannot verify the exact product CI; preserve the current lock.'}
 $runs=($runsJson -join "`n")|ConvertFrom-Json
@@ -22,11 +26,10 @@ if($null -ne $next.spherewright.releaseTag){Invoke-SampleGit $product @('fetch',
 Invoke-SampleGit $product @('checkout','--detach',$Sha)|Out-Null
 [xml]$props=Get-Content -LiteralPath (Join-Path $product 'Directory.Build.props') -Raw
 if([string]$props.Project.PropertyGroup.VersionPrefix -cne $next.spherewright.productVersion){throw 'New checkout version differs from the reviewed lock; preserve and inspect the bounded bump state.'}
-$releasePath='releases/v'+$next.spherewright.productVersion+'/source-lock.json'
-Write-SampleJson (Get-SamplePath $root 'source-lock.json') $next
-Write-SampleJson (Get-SamplePath $root $releasePath) $next
-Invoke-SampleGit $root @('add','--','deps/Spherewright','source-lock.json',$releasePath)|Out-Null
+if((Get-FileHash -LiteralPath $releaseLockPath).Hash -cne $frozenHash){throw 'Preserve a changed frozen release lock; product bump does not rewrite it.'}
+[IO.File]::WriteAllBytes((Get-SamplePath $root 'source-lock.json'),$newLockBytes)
+Invoke-SampleGit $root @('add','--','deps/Spherewright','source-lock.json')|Out-Null
 $checked=Assert-SampleSourceLock $root
-$summary=[ordered]@{changed=$true;oldSourceSha=$current.lock.spherewright.sourceSha;newSourceSha=$Sha;productCiRun=$green[0].databaseId;stagedPaths=@('deps/Spherewright','source-lock.json',$releasePath);committed=$false;pushed=$false;gameCalls=0}
+$summary=[ordered]@{changed=$true;oldSourceSha=$current.lock.spherewright.sourceSha;newSourceSha=$Sha;productCiRun=$green[0].databaseId;stagedPaths=@('deps/Spherewright','source-lock.json');frozenReleaseLockUnchanged=$true;acceptanceScope=$checked.acceptance.scope;acceptanceSourceSha=$checked.acceptance.sourceSha;acceptanceAppliesToActiveSource=$checked.acceptance.appliesToActiveSource;committed=$false;pushed=$false;gameCalls=0}
 Write-SampleJson (Get-SamplePath $root '.local/product-bump-summary.json') $summary
 $summary|ConvertTo-Json -Depth 5
