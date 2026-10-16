@@ -1,13 +1,13 @@
 # Spherewright-Lab
 
-Spherewright 的公开场景、运行交接与黑盒验收仓。产品的 Plugin、MCP、Contracts、Bridge.Core、通用测试和打包实现继续保留在 [Spherewright](https://github.com/AvaloNero/Spherewright) 一个 monorepo 内。公开审查的范围与限制见[安全审查记录](operations/public-review-2026-10-16.md)。
+Spherewright 的公开场景、运行交接与黑盒验收仓。产品的 Plugin、MCP、Contracts、Bridge.Core、通用测试和打包实现继续保留在 [Spherewright](https://github.com/Arcueid77/Spherewright) 一个 monorepo 内。公开审查的范围与限制见[安全审查记录](operations/public-review-2026-10-16.md)。
 
 本仓通过只读子模块消费精确产品提交，不反向成为产品构建依赖。0.4 的历史验收已完成，本次拆仓只组织 Git、文件、工具和 CI，不部署、不读写游戏、不重做验收、不发布版本。
 
 ## 开始使用
 
 ```powershell
-git clone --recurse-submodules https://github.com/AvaloNero/Spherewright-Lab.git
+git clone --recurse-submodules https://github.com/Arcueid77/Spherewright-Lab.git
 cd Spherewright-Lab
 pwsh -File scripts/bootstrap.ps1
 pwsh -File scripts/verify-source-lock.ps1

@@ -48,14 +48,14 @@ function Assert-SampleSourceLock {
     $lockPath = Get-SamplePath $Root 'source-lock.json'
     Assert-SampleJsonSchema $lockPath (Get-SamplePath $Root 'schemas/source-lock.schema.json')
     $lock = Read-SampleJson $lockPath
-    if ($lock.spherewright.repository -cne 'AvaloNero/Spherewright' -or $lock.spherewright.submodulePath -cne 'deps/Spherewright') { throw 'Unexpected product repository or submodule path.' }
+    if ($lock.spherewright.repository -cnotin @('Arcueid77/Spherewright','AvaloNero/Spherewright') -or $lock.spherewright.submodulePath -cne 'deps/Spherewright') { throw 'Unexpected product repository or submodule path.' }
     $sha = [string]$lock.spherewright.sourceSha
     $entry = Invoke-SampleGit $Root @('ls-files','--stage','--','deps/Spherewright')
     if ($entry -cnotmatch '^160000 ([0-9a-f]{40}) 0\s+deps/Spherewright$' -or $Matches[1] -cne $sha) { throw 'Gitlink does not match the source lock.' }
     $product = Get-SamplePath $Root $lock.spherewright.submodulePath
     if ((Invoke-SampleGit $product @('rev-parse','HEAD')) -cne $sha) { throw 'Submodule HEAD does not match the source lock.' }
     if (Invoke-SampleGit $product @('status','--porcelain=v1','--untracked-files=normal')) { throw 'Product submodule must be clean.' }
-    if ((Invoke-SampleGit $Root @('config','--file','.gitmodules','--get','submodule.deps/Spherewright.url')) -cne 'https://github.com/AvaloNero/Spherewright.git') { throw 'Unexpected submodule URL.' }
+    if ((Invoke-SampleGit $Root @('config','--file','.gitmodules','--get','submodule.deps/Spherewright.url')) -cne 'https://github.com/Arcueid77/Spherewright.git') { throw 'Unexpected submodule URL.' }
     $moduleConfig = Get-Content -LiteralPath (Get-SamplePath $Root '.gitmodules') -Raw
     if ($moduleConfig -match '(?m)^\s*branch\s*=') { throw 'Floating submodule branches are forbidden.' }
     if ($null -eq $lock.spherewright.releaseTag) {

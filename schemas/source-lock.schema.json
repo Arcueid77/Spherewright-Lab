@@ -11,7 +11,7 @@
       "type": "object", "additionalProperties": false,
       "required": ["repository", "submodulePath", "sourceSha", "releaseTag", "productVersion"],
       "properties": {
-        "repository": {"const": "AvaloNero/Spherewright"},
+        "repository": {"enum": ["Arcueid77/Spherewright", "AvaloNero/Spherewright"]},
         "submodulePath": {"const": "deps/Spherewright"},
         "sourceSha": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
         "releaseTag": {"type": ["string", "null"]},

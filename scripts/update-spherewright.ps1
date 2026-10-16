@@ -9,9 +9,9 @@ if($current.lock.spherewright.sourceSha -ceq $Sha){@{changed=$false;sourceSha=$S
 if(-not $NewLockPath){throw 'A changed product SHA requires -NewLockPath with reviewed package/provenance metadata; old acceptance cannot silently become evidence for new code.'}
 Assert-SampleJsonSchema $NewLockPath (Get-SamplePath $root 'schemas/source-lock.schema.json')
 $next=Read-SampleJson $NewLockPath
-if($next.spherewright.sourceSha -cne $Sha -or $next.spherewright.repository -cne 'AvaloNero/Spherewright' -or $next.spherewright.submodulePath -cne 'deps/Spherewright'){throw 'New lock does not match the requested exact SHA.'}
+if($next.spherewright.sourceSha -cne $Sha -or $next.spherewright.repository -cne 'Arcueid77/Spherewright' -or $next.spherewright.submodulePath -cne 'deps/Spherewright'){throw 'New lock does not match the requested exact SHA.'}
 if((Get-FileHash -LiteralPath (Get-SamplePath $root $next.acceptance.evidenceManifest)).Hash -cne $next.acceptance.evidenceManifestSha256){throw 'Reviewed evidence manifest for new lock is missing or changed.'}
-$runsJson=@(& gh run list --repo AvaloNero/Spherewright --commit $Sha --workflow windows-core-ci.yml --limit 20 --json headSha,status,conclusion,databaseId 2>&1)
+$runsJson=@(& gh run list --repo Arcueid77/Spherewright --commit $Sha --workflow windows-core-ci.yml --limit 20 --json headSha,status,conclusion,databaseId 2>&1)
 if($LASTEXITCODE -ne 0){throw 'Cannot verify the exact product CI; preserve the current lock.'}
 $runs=($runsJson -join "`n")|ConvertFrom-Json
 $green=@($runs|Where-Object {$_.headSha -ceq $Sha -and $_.status -ceq 'completed' -and $_.conclusion -ceq 'success'})
