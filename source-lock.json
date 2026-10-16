@@ -1,34 +1,37 @@
 {
   "schemaVersion": 1,
   "status": "provisional",
-  "scenario": "v0.4-final-owned-peaceful-1x",
+  "scenario": "v0.4-package-callability-native-29151",
   "spherewright": {
-    "repository": "AvaloNero/Spherewright",
+    "repository": "Arcueid77/Spherewright",
     "submodulePath": "deps/Spherewright",
-    "sourceSha": "2a7a98d1932c404e3a7abc2c11233d9c0b8780d9",
+    "sourceSha": "e018b7f45c70f5fe029418cad987af794b5cb9bf",
     "releaseTag": null,
     "productVersion": "0.4.0"
   },
   "native": {
-    "version": "0.10.35.29145",
-    "assemblySha256": "B84B60DF5A24947A014801F23B9B85D1E77853F42A331918E2DC85B153E50527"
+    "version": "0.10.35.29151",
+    "assemblySha256": "EF314425DADE51F529F184F07BE136CD3C2660A6A81515603C7226FBE7AB1D8C"
   },
   "packages": {
     "manual": {
       "file": "Spherewright-0.4.0-win-x64.zip",
-      "sha256": "665FA1B30A86A4D49AC7E69CE174E08348DCA07D159A24AF766ABED89AFD79CB",
-      "size": 36759398
+      "sha256": "D4988D572F84FEB317ABC9D0E75B404E3CE68ED6F4FD39B0E334C865237C4833",
+      "size": 36737536
     },
     "thunderstore": {
       "file": "Spherewright-0.4.0-thunderstore.zip",
-      "sha256": "81D9D6ED0BAEC843AB22ADE38158102212A5487A43EFEE22769F500B7CF85D91",
-      "size": 32492607
+      "sha256": "067F8598B6E4FA986F63B634E0C712AC57CE6B2EFA5F8018FA287CA15E782231",
+      "size": 32469237
     }
   },
   "acceptance": {
     "spec": "v0.4.0",
     "evidenceManifest": "releases/v0.4.0/manifests/evidence-manifest.json",
-    "evidenceManifestSha256": "F191917B5279F2A4EA5BE3CF3A6F227801C3AB1CC42693C078531AD22CF62C50"
+    "evidenceManifestSha256": "F191917B5279F2A4EA5BE3CF3A6F227801C3AB1CC42693C078531AD22CF62C50",
+    "scope": "historical_reference",
+    "sourceLock": "releases/v0.4.0/source-lock.json",
+    "sourceLockSha256": "A2537F906A058593E05E1BF155AFE6D955F6B6E5110E3B658648E4B67CAF16C7"
   },
   "evidenceSource": {
     "repository": "AvaloNero/Spherewright",

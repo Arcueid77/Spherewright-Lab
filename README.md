@@ -17,7 +17,9 @@ pwsh -File scenarios/v0.4-final/scripts/verify-acceptance.ps1
 
 拆分已经合并，当前工作从 `main` 的 [AGENTS.md](AGENTS.md) 与[活动交接](operations/active-handoff.md)开始。复核冻结证据时使用不可变迁移快照 `14478a03c64c550e644c559405c8496b647552e7`，不要把历史授权当作当前授权。`bootstrap` 只初始化固定子模块并建立忽略目录，既不追踪 latest main，也不会覆盖意外 HEAD 或 dirty 子模块。
 
-[source-lock.json](source-lock.json) 固定产品 `2a7a98d1932c404e3a7abc2c11233d9c0b8780d9`。没有正式 `v0.4.0` tag，因此 `releaseTag: null`、`status: provisional`。证据导入自较后的文档提交 `e7d5f7d8661092b7c8089710488c448f290638be`；后续文档不是候选源码。两个冻结包的校验值保持原样，不把重新构建的预览包冒充原候选。
+[活动 source-lock.json](source-lock.json) 固定本次 `29151` 调用验证候选 `e018b7f45c70f5fe029418cad987af794b5cb9bf` 及同 SHA 双包；[冻结发布锁](releases/v0.4.0/source-lock.json) 仍对应原验收源码 `2a7a98d1932c404e3a7abc2c11233d9c0b8780d9` 和 `29145`。活动锁通过明确的 `historical_reference` 及冻结锁 hash 保留历史引用，不把旧验收计入新候选。没有正式 `v0.4.0` tag，因此 `releaseTag: null`、`status: provisional`。原证据仍导入自文档提交 `e7d5f7d8661092b7c8089710488c448f290638be`；冻结清单、锁和双包字节不变，新候选实机验证尚未通过。
+
+The [active source lock](source-lock.json) pins candidate `e018b7f45c70f5fe029418cad987af794b5cb9bf` and its two packages for the current `29151` callability check. The [frozen release lock](releases/v0.4.0/source-lock.json) retains accepted source `2a7a98d1932c404e3a7abc2c11233d9c0b8780d9` on `29145`. An explicit `historical_reference` and frozen-lock hash preserve that history without granting acceptance to the active candidate. No formal `v0.4.0` tag exists; the lock remains provisional. Imported evidence stays bound to documentation source `e7d5f7d8661092b7c8089710488c448f290638be`; frozen manifests, locks and package bytes are unchanged. The new candidate has not yet passed runtime validation.
 
 ## 查找场景与证据
 
