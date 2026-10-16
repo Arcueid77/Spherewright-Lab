@@ -1,0 +1,28 @@
+# 2026-10-17 package callability / 发布包调用验证
+
+Status: **in progress; not passed**. The owner requests local release-package validation, with all MCP capabilities callable as this phase's criterion. The owner then chose to preserve the original world and repair compatibility before a separately confirmed exact recovery. Formal publication remains pending owner review.
+
+状态：**进行中，尚未通过**。本阶段按所有 MCP 能力可调用验收。所有者随后选择沿原世界补齐兼容，精确恢复仍须在准备披露后确认；正式发布保留审核。
+
+| Criterion / 条款 | Existing evidence and scope / 现有证据及范围 | Gap / 缺口 | Minimum next step / 最小下一步 | Pass condition / 通过条件 |
+| --- | --- | --- | --- | --- |
+| Exact package identity / 精确包身份 | Frozen `2a7a98d` pair and maintenance `48d84e1` pair retain their original hashes; both 48d packaged MCP executables expose the exact 64-name set and one readable resource offline. / 原双包保持原 hash，两份 48d 包内 MCP 离线发现完整集合。 | Local native is now `0.10.35.29151`; historical acceptance covers `29145`. / 本机版本已变化。 | Prepare a bounded compatibility candidate from clean source and exact-SHA CI; retain old bytes. / 准备独立兼容候选并保留旧包。 | Installed Plugin/MCP/Contracts/Core and both candidate packages share one clean pushed source SHA. / 安装与双包来自同一干净已推送源码。 |
+| Installed live interface / 已安装实机接口 | Installed `2a7a98d`, BepInEx `5.4.17.0`: actual menu status/session calls succeeded and reported `29151`, unloaded/healthy. / 旧安装实际菜单调用成功。 | Full all-tool validation of the new candidate has not run. / 新候选完整调用未运行。 | Cold deployment, exact protected adoption, then finite per-tool calls through packaged MCP. / 冷部署、精确接管后有界调用。 | Every registered tool is invoked; data success and expected native guard rejection are recorded separately, with no protocol/transport failure. / 逐工具调用并区分数据成功和预期原生拒绝，无协议或传输失败。 |
+| Original-world continuity / 原世界连续性 | Original save, runtime/handoff tickets, attempts/tombstones and Journal: 1219 protected files unchanged across both menu stages. / 两阶段保护集合均无变化。 | Credential expired; old code supports no `29145→29151` path and at most four durable transitions. / 凭据已过期且旧策略不支持新方向。 | Existing expired-primary mode gains only the researched exact direction and fifth transition; prepare discloses the exact original candidate for later confirmation. / 最小补片后披露原候选，等待后续确认。 | Same identity, complete durable Journal, preserved completed module, normal primary save and same-version recovery evidence. / 身份、持久 Journal、已完成模块、正常保存及同版本恢复有证据。 |
+| Local update layout / 本机更新布局 | 48d manual installer `PreflightOnly` rejected the existing co-located Thunderstore MCP executable; zero files installed. / 手动预检拦住旧 Thunderstore 布局，无安装。 | Switching layouts requires a reviewed cold transaction; deleting the extra file is not a permitted shortcut. / 需明确冷事务保留原安装。 | Use the matching standard Thunderstore payload and preserve a coherent default manual MCP installation with transaction backups. / 同布局更新并保留完整备份。 | Exact installed hashes, no pending transaction, normal MCP exit, live calls and recovery report. / 安装 hash、事务、退出、实机及恢复检查通过。 |
+
+## Completed observations / 已完成观察
+
+- Product main safely fast-forwarded to `4afeb47b52ecccccec68db584cda8f567448463a`; its exact CI `38912062010` succeeded. Lab main fast-forwarded to `4dda1da9aec39b6ba847f3d0bb92283efd54e87d`; exact CI `38911710193` succeeded. These commits only migrate repository links. The fixed read-only product dependency and frozen locks stayed at `2a7a98d`. / 两仓安全同步，新增仅仓库链接迁移，冻结依赖和锁未变。
+- DSP and MCP were initially stopped. One normal Steam dispatch started DSP. The first session read timed out during startup; a local recorder null-handling error was preserved and corrected. That stage ended after 73.17 seconds, with six RPCs, zero accepted actions and unchanged protected files. / 原启动阶段失败记录保留，没有续期或重放启动。
+- A separate stable-menu stage used seven RPCs in 3.73 seconds, below its declared 90-second / eight-RPC limit. Status and session succeeded; unconfirmed expired-primary preparation returned `SESSION_NOT_OWNED`. The generic provenance error is recorded as returned; the missing version direction and four-transition ceiling are independently established from source. / 稳定菜单阶段实际成功及拒绝分别记录，不把泛化错误当唯一原因证明。
+- Both phases performed zero installs, loads, saves or accepted gameplay mutations. The sole DSP process remains at the menu; every MCP child exited normally. Launch intent is closed and must not be replayed. / 两阶段均无安装、加载、保存或接受的游戏写入；DSP 留在菜单，MCP 子进程正常退出。
+- Current native Assembly-CSharp SHA-256: `EF314425DADE51F529F184F07BE136CD3C2660A6A81515603C7226FBE7AB1D8C`. Independent metadata research covers 1026 member references, 166 types, three reflection members, eleven save/load roots and the serialization call graph. A defense-system method body differs; offline comparison does not certify arbitrary-save safety. / 原生元数据研究有明确范围及差异，不冒充任意存档安全。
+
+The last loaded-world boundary remains historical: saved tick `116353747`, observed tick `116353967`, revision 2, durable Journal 102/102 with four version transitions; lifetime 634 / whole 235. The old fixed-20 window ended with ten accepted and ten unused slots forfeited. No new gameplay window has opened. No original accepted action is replayed, including the unsaved four-unit stone action. The old 27-object candidate remains retired; the completed five-object module is preserved.
+
+最后已加载世界的 tick、Journal、预算均为历史边界，未计入新 session；旧窗口已关闭。本阶段未开新游戏写入窗口，不重放任何原 action，旧 27 对象候选退役、五对象成果保留。
+
+Raw requests, capabilities, save identity, paths, snapshots, tickets and logs stay protected-local. Sanitized source research is in the product's native-preflight report. This document does not certify candidate installation, recovery or the complete MCP matrix; those sections must be completed from subsequent original records.
+
+原始请求、能力凭据、存档身份、路径及日志仅保存在本地保护目录。本文尚不认证新候选安装、恢复或完整 MCP 调用矩阵，后续结果必须来自原始记录。

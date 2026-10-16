@@ -1,6 +1,23 @@
 # Repository split handoff
 
-This is a file/Git/CI migration, not a game session. No game process, bridge, save, deployment, or recovery is called by this work.
+## 2026-10-17 active package-validation checkpoint / 当前发布包验证
+
+The owner now requests actual local package validation and chose to keep the original world while repairing compatibility. The next sole objective is a clean, CI-verified `29151` compatibility candidate, cold adoption and a finite all-tool callability matrix. See [the current report](package-callability-2026-10-17.md). This section supersedes the earlier offline-only next step; historical checkpoints below retain their original scope.
+
+所有者现已授权本机发布包验证，并选择沿原世界补兼容。下一唯一目标是完成干净、CI 通过的 `29151` 兼容候选、冷接管及有界完整工具调用矩阵；详见[当前报告](package-callability-2026-10-17.md)。下方旧检查点保留其历史范围。
+
+- Fresh actual state: one normally launched DSP at its healthy unloaded menu on `0.10.35.29151`, installed Plugin/MCP source `2a7a98d`, BepInEx `5.4.17.0`; no MCP child remains. Two bounded menu stages ended, zero accepted writes/loads/saves/installs, 1219 protected files unchanged. The first startup timeout and recorder error are preserved; the later stable session/status reads succeeded. / 当前 DSP 菜单健康、世界未加载，两个阶段均结束且保护集合无变化。
+- The old original credential is expired. Its unconfirmed preview rejects; existing code has no researched `29145→29151` migration and limits Journal to four transitions. Only offline source preparation is underway. Exact prepared recovery still needs the subsequent owner confirmation required by the original scope; do not edit expiry, consume the ticket, load another world or replay accepted actions. / 原票据过期，新方向尚需兼容候选与之后的精确确认。
+- Historical last-world state remains saved `116353747`, observed `116353967`, revision 2, Journal 102/102 durable/four transitions, lifetime 634 / whole 235. Old fixed-20 accepted ten/unused ten forfeited. Old 27-object candidate retired; five-object completed module retained. No new gameplay budget or session is claimed. / 旧成果、旧预算和旧 session 不重算。
+- Root is the sole game writer and owns native source/tests/documents in the independent `fix/native-29151-preflight` worktree. The offline maintainer alone owns Git/gh and disjoint Lab lock tooling; the auditor owns its native comparison and one explicitly assigned Coordinator test file. Existing main/candidate worktrees and ignored originals are retained. / 写者及 dirty 归属明确，其他成果保留。
+- Frozen `2a7a98d` and maintenance `48d84e1` ZIP bytes remain unchanged. Neither is certified for the new all-tool `29151` phase. No source has been hot-adopted, no formal tag/Release/Thunderstore upload occurred. / 两组旧包不改、不冒充新原生阶段验收。
+- Safe next entry: fresh-check the one current process, stopped MCP, protected provenance and source/native hashes; finish source review/tests/exact-SHA CI and matching packages before cold installation. Keep the healthy menu running while offline work continues. Never redispatch the existing launch intent or automatically Save/Exit/Load at a chat boundary. / 先 fresh 核当前进程及证据，完成候选后才冷安装；不因会话结束操作游戏。
+
+## Historical repository split / 历史仓库拆分
+
+The following checkpoints describe the completed file/Git/CI migration, not the active 2026-10-17 validation above. That historical work called no game process, bridge, save, deployment or recovery.
+
+以下检查点描述已结束的文件及 Git/CI 迁移，不是上方当前验证；该历史阶段未调用游戏、Bridge、保存、部署或恢复。
 
 - Product main import boundary: `e7d5f7d8661092b7c8089710488c448f290638be`, clean/pushed and exact CI successful before migration.
 - Accepted candidate and read-only submodule: `2a7a98d1932c404e3a7abc2c11233d9c0b8780d9`; no formal v0.4.0 tag, lock remains provisional.
