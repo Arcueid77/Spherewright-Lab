@@ -1,12 +1,12 @@
 {
   "schemaVersion": 1,
-  "status": "provisional",
+  "status": "tagged",
   "scenario": "v0.4-package-callability-native-29151",
   "spherewright": {
     "repository": "Arcueid77/Spherewright",
     "submodulePath": "deps/Spherewright",
     "sourceSha": "b7c0002dbe2e8f5608c5ca140b0c6326a1818021",
-    "releaseTag": null,
+    "releaseTag": "v0.4.0",
     "productVersion": "0.4.0"
   },
   "native": {
