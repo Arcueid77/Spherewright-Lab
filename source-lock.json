@@ -21,23 +21,23 @@
     "targetVersion": "0.5.0"
   },
   "installed": {
-    "sourceSha": "b7c0002dbe2e8f5608c5ca140b0c6326a1818021",
-    "productVersion": "0.4.0",
-    "releaseTag": "v0.4.0",
+    "sourceSha": "241e1e6530d87f5e1c42ff6894e1219deed408c5",
+    "productVersion": "0.5.0",
+    "releaseTag": null,
     "native": {
       "version": "0.10.35.29151",
       "assemblySha256": "EF314425DADE51F529F184F07BE136CD3C2660A6A81515603C7226FBE7AB1D8C"
     },
     "packages": {
       "manual": {
-        "file": "Spherewright-0.4.0-win-x64.zip",
-        "sha256": "A72403495869C4A34DC6A2242354CF3EE6B3DB82E8787AF9F0A6657A609DCBF4",
-        "size": 36738460
+        "file": "Spherewright-0.5.0-win-x64.zip",
+        "sha256": "FECD05DE6A168E6BC9FF94A35A8060784800553A26DBE3BE864A2952D8B9083F",
+        "size": 36784172
       },
       "thunderstore": {
-        "file": "Spherewright-0.4.0-thunderstore.zip",
-        "sha256": "26876DEED92EB824E5C3BA135BC5D71252B3D407D437E04FBD6E4B25A1C29AE2",
-        "size": 32469734
+        "file": "Spherewright-0.5.0-thunderstore.zip",
+        "sha256": "34591CD2085BE7A0D4584BB439F88478DA94142D02F24304D51724D6C5CA04BD",
+        "size": 32512600
       }
     },
     "evidence": "scenarios/v0.5-voyager/current-status.md",

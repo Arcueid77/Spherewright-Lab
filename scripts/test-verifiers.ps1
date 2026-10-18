@@ -101,7 +101,12 @@ try{
     Expect-Rejection 'legacy-lock-cannot-hide-unbuilt-packages' 'verify-source-lock.ps1' 'JSON schema validation failed'
 }finally{[IO.File]::WriteAllBytes($lockPath,$lockBytes)}
 try{
-    $changed=New-DevelopmentFixture;$changed.installed.sourceSha='1'*40;Write-SampleJson $lockPath $changed
+    $changed=New-DevelopmentFixture
+    $taggedHistory=Read-SampleJson $releasePath
+    $changed.installed.productVersion=$taggedHistory.spherewright.productVersion
+    $changed.installed.releaseTag='v'+$taggedHistory.spherewright.productVersion
+    $changed.installed.packages=$taggedHistory.packages
+    $changed.installed.sourceSha='1'*40;Write-SampleJson $lockPath $changed
     Expect-Rejection 'installed-tag-source-mismatch' 'verify-source-lock.ps1' 'Installed release tag does not match'
 }finally{[IO.File]::WriteAllBytes($lockPath,$lockBytes)}
 try{
