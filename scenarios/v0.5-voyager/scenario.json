@@ -23,9 +23,9 @@
     "returnReserveMustBeLockedBeforeDeparture": true
   },
   "acceptanceState": {
-    "roundTripWithLegallyAbsentResource": "open",
+    "roundTripWithLegallyAbsentResource": "passed",
     "sustainedInterstellarSupply": "open",
-    "recoverableFlightFailure": "open"
+    "recoverableFlightFailure": "passed"
   },
   "exclusions": [
     "dyson-system",
@@ -35,5 +35,10 @@
     "whole-factory-reconstruction",
     "replay-of-v0.4-acceptance",
     "automatic-tag-release-or-upload"
-  ]
+  ],
+  "acceptanceSourceSha": {
+    "roundTripWithLegallyAbsentResource": "463fc888b1e4cf4a90e08cb1022d2b8896447700",
+    "sustainedInterstellarSupply": null,
+    "recoverableFlightFailure": "216f4075e983d78fa4d4f5d222bdd279813e1d86"
+  }
 }
