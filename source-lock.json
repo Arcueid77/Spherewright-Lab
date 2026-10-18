@@ -42,7 +42,7 @@
     },
     "evidence": "scenarios/v0.5-voyager/current-status.md",
     "verification": "disk_verified",
-    "runtimeState": "running_unverified"
+    "runtimeState": "running_verified"
   },
   "acceptance": {
     "spec": "v0.4.0",
