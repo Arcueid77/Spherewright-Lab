@@ -4,6 +4,12 @@ Spherewright 的公开场景、运行交接与黑盒验收仓。产品的 Plugin
 
 本仓通过只读子模块消费精确产品提交，不反向成为产品构建依赖。0.4 历史验收与正式发布保留；所有者 2026-10-19 的指令已启动 [0.5 Voyager](scenarios/v0.5-voyager/README.md)。活动工作是原三项跨恒星验收、最小产品实现与同源码候选交审，仍保留原生、安全、隐私和确认门，不自动正式发布。
 
+Voyager 当前 **1/3**：源码 `463fc888b1e4cf4a90e08cb1022d2b8896447700` / Native `0.10.35.29151` 已正常跨恒星往返，将合法母星系缺失的1013分形硅石10个带回精确原home并正常保存、读回资源及航程完整文件证明。另两门（持续物流、可恢复飞行失败及精确恢复）仍开放，最终双候选仍为null。已发现每腿重复生成检查点的P1，修复、准确CI及必要冷部署实核前停止新飞行/恢复；当前较新主档覆盖全部旧检查点，严禁回滚。详见[活动快照](scenarios/v0.5-voyager/current-status.md)。
+
+Voyager clause1 passed on the installed463 development preview: a real cross-star round trip brought ten legally home-absent item1013 resources back and saved them normally. Progress is **1/3**, with sustained logistics and exact failed-flight recovery open and final candidates still null. The discovered duplicate-checkpoint P1 blocks new flights/reloads until its separately verified fix and cold deployment; the newer primary covers every old checkpoint. The later home-logistics read closed at 477 RPC/14 accepted in total; it proves prerequisites, while sustained logistics remains open.
+
+母星物流前置只读窗已完成19RPC/2.922s/0writes，最新累计477RPC/14accepted；现有一座ILS有3个空物流槽、另两座PLS，已解锁的原生recipe62可将1013×1制成1113×2（Assemble/90tick），可复用母星设施，尚非持续路线。P1修复 `216f4075e983d78fa4d4f5d222bdd279813e1d86` 已推送且[准确CI39172966526](https://github.com/Arcueid77/Spherewright/actions/runs/39172966526)通过，尚未打包、采用或安装；活动锁与实装仍463。
+
 ## 开始使用
 
 ```powershell
@@ -17,7 +23,7 @@ pwsh -File scenarios/v0.4-final/scripts/verify-acceptance.ps1
 
 当前工作从 `main` 的 [AGENTS.md](AGENTS.md)、[活动交接](operations/active-handoff.md)与 [Voyager 活动快照](scenarios/v0.5-voyager/current-status.md)开始。复核冻结证据时使用不可变迁移快照 `14478a03c64c550e644c559405c8496b647552e7`，不要把历史授权当作当前授权。`bootstrap` 只初始化固定子模块并建立忽略目录，既不追踪 latest main，也不会覆盖意外 HEAD 或 dirty 子模块。
 
-[活动 source-lock.json](source-lock.json) 的兼容 v2 格式明确区分 `development.targetVersion: 0.5.0`、`spherewright` 的完整 gitlink 源码 SHA/实际版本、`installed` 的真实 241e `0.5.0`/`29151` 开发预览双包及安装记录、尚未生成的 null 最终双候选与 `historical_reference` 历史验收。锁的 `status: development` / `releaseTag: null` 不取消已发布的 [GitHub v0.4.0](https://github.com/Arcueid77/Spherewright/releases/tag/v0.4.0)，其 annotated tag 仍准确指向 `b7c0002dbe2e8f5608c5ca140b0c6326a1818021`。[冻结发布锁](releases/v0.4.0/source-lock.json) 则继续固定原验收 `2a7a98d1932c404e3a7abc2c11233d9c0b8780d9` / `29145`，历史清单、锁、包和验收不变。未知或缺失工件不填假 hash，旧包不计为 0.5 候选。
+[活动 source-lock.json](source-lock.json) 的兼容 v2 格式明确区分 `development.targetVersion: 0.5.0`、`spherewright` 的完整 gitlink 源码 SHA/实际版本、`installed` 的真实 463 `0.5.0`/`29151` 开发预览双包及安装记录、尚未生成的 null 最终双候选与 `historical_reference` 历史验收。锁的 `status: development` / `releaseTag: null` 不取消已发布的 [GitHub v0.4.0](https://github.com/Arcueid77/Spherewright/releases/tag/v0.4.0)，其 annotated tag 仍准确指向 `b7c0002dbe2e8f5608c5ca140b0c6326a1818021`。[冻结发布锁](releases/v0.4.0/source-lock.json) 则继续固定原验收 `2a7a98d1932c404e3a7abc2c11233d9c0b8780d9` / `29145`，历史清单、锁、包和验收不变。未知或缺失工件不填假 hash，旧包不计为 0.5 候选。
 
 The backward-compatible v2 [active lock](source-lock.json) separates the `0.5.0` development target, exact consumed source/version, recorded actual development-preview installation, null final-review candidates and explicitly pinned historical acceptance. A development lock has no active release tag or claimed candidate hash; the published b7 `v0.4.0` tag and pair remain intact. The frozen `2a7a98d1932c404e3a7abc2c11233d9c0b8780d9`/`29145` acceptance lock and all immutable manifests/package bytes are unchanged. Source adoption, installation, candidate generation and live acceptance are separate evidence. See [the active snapshot](scenarios/v0.5-voyager/current-status.md) and [the historical formal report](operations/formal-release-2026-10-17.md). The owner's Thunderstore website self-upload result remains unverified; that fact does not block unrelated Voyager development or authorize another upload.
 
