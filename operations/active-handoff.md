@@ -1,6 +1,16 @@
 # Repository split handoff
 
-## 2026-10-17 active formal-publication checkpoint / 当前正式发布
+## 2026-10-19 active Voyager stage / 当前 0.5 阶段
+
+The owner's 2026-10-19 instruction starts `0.5.0 Voyager` from this Lab root. Follow the [active scenario snapshot](../scenarios/v0.5-voyager/current-status.md), [three original acceptance gates](../scenarios/v0.5-voyager/acceptance.md) and [finite settings](../scenarios/v0.5-voyager/scenario.json). Normal development, bounded execution and handoff are authorized in this stage; historical 0.4 same-star limits are not a Voyager prohibition. Other native, privacy, reserve, original-action and recovery/confirmation gates remain. Do not create a 0.5 tag, Release or upload automatically.
+
+所有者本轮明确启动 0.5；下一唯一实现结果是当前 Native 的合法可见信息、有限往返预算与航程检查点恢复保护。先用独立产品 clone/worktree 完成最小实现、完整 Plugin 构建、相关测试与准确 SHA 绿 CI，再更新 Lab 固定依赖并在必要边界冷部署。`deps/Spherewright` 仍只读。三个 Voyager 实机门均未关闭，候选双包尚未生成；原 0.4 建厂、两倍扩产与长窗不重做。
+
+Fresh startup disk inventory matches formal b7 `0.4.0` / DSP `0.10.35.29151`. DSP/MCP/old-writer processes were absent at that initial inventory. Root then issued one normal launch: the first six RPC hit a preload session `REQUEST_TIMEOUT`; a separate seven-RPC continuation reused that process and completed status/session plus an expired-primary prepare-only preview. The exact candidate/minimum tick is `116839330`, identity verified, source/target `29151`, `UserConfirmationRequired=true`, `CommitAllowedNow=false`. Owner reauthorization is pending. The original DSP is idle in the unloaded menu; 13 total RPC/one prepare/zero commit/Load/Save/accepted, both finite phases closed, zero MCP child/in-flight/unknown and writer requests stopped. Never relaunch or silently Load to bypass the gate. The old flight checkpoint is retired/expired and Native-incompatible. Save/observation/Journal, source/dirty ownership, budgets and original-action/checkpoint limits are retained in the active snapshot. Root is the sole game writer; the designated offline maintainer serializes all Git/gh.
+
+`operations/current-status.md` is a manifest-protected historical import and stays unchanged. The active root lock now separates development target, fixed source, disk installation, unbuilt candidates and historical acceptance. Published 0.4 tags/packages/hashes and immutable manifests/locks remain intact. The owner's Thunderstore website self-upload result is still unverified and is tracked separately; it does not block independent Voyager work or authorize another publication. The following 0.4 sections retain only their historical scope.
+
+## Historical 2026-10-17 formal-publication checkpoint / 历史正式发布
 
 The owner explicitly authorized completing the tag, GitHub Release and existing Thunderstore update with “都干了吧”. Both final-source layouts are fully qualified, including independent result audits, and [GitHub v0.4.0](https://github.com/Arcueid77/Spherewright/releases/tag/v0.4.0) is now published with the exact existing pair. The owner chose website self-upload for the original Thunderstore update. The actual uploaded version and result remain unverified; no further publication-permission request is needed. See [the final source-specific report](formal-release-2026-10-17.md). All sections below retain their historical scope.
 

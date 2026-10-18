@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "id": "v0.5-voyager",
+  "sourceLock": "../../source-lock.json",
+  "targetProductVersion": "0.5.0",
+  "ownerInstructionDate": "2026-10-19",
+  "acceptance": "acceptance.md",
+  "activeSnapshot": "current-status.md",
+  "gameWritesAuthorizedByThisFile": false,
+  "executionPolicy": "owner-authorized-bounded-voyager-with-existing-native-and-confirmation-gates",
+  "limits": {
+    "simultaneousGameWriters": 1,
+    "simultaneouslyOpenVoyages": 1,
+    "starSystemsPerRoundTrip": 2,
+    "sustainedLogisticsRoutesRequired": 1,
+    "minimumCompleteTransportCycles": 2,
+    "targetSelection": "closest-suitable-native-visible-target",
+    "resourceQuantity": null,
+    "logisticsRatePerMinute": null,
+    "observationGameTicks": null,
+    "writeBudget": null,
+    "saveAllowanceMustBeReserved": true,
+    "returnReserveMustBeLockedBeforeDeparture": true
+  },
+  "acceptanceState": {
+    "roundTripWithLegallyAbsentResource": "open",
+    "sustainedInterstellarSupply": "open",
+    "recoverableFlightFailure": "open"
+  },
+  "exclusions": [
+    "dyson-system",
+    "whole-star-map-development",
+    "arbitrary-automatic-layout",
+    "global-multistar-optimization",
+    "whole-factory-reconstruction",
+    "replay-of-v0.4-acceptance",
+    "automatic-tag-release-or-upload"
+  ]
+}

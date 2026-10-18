@@ -11,7 +11,7 @@ Assert-SampleJsonSchema $NewLockPath (Get-SamplePath $root 'schemas/source-lock.
 $next=Read-SampleJson $NewLockPath
 if($next.spherewright.sourceSha -cne $Sha -or $next.spherewright.repository -cne 'Arcueid77/Spherewright' -or $next.spherewright.submodulePath -cne 'deps/Spherewright'){throw 'New lock does not match the requested exact SHA.'}
 $acceptance=Assert-SampleAcceptanceReference -Root $root -Lock $next -LockPath $NewLockPath
-$releasePath='releases/v'+$next.spherewright.productVersion+'/source-lock.json'
+$releasePath=if($acceptance.scope -ceq 'historical_reference'){$next.acceptance.sourceLock}else{'releases/v'+$next.spherewright.productVersion+'/source-lock.json'}
 $releaseLockPath=Get-SamplePath $root $releasePath
 $frozenHash=(Get-FileHash -LiteralPath $releaseLockPath).Hash
 $newLockBytes=[IO.File]::ReadAllBytes((Resolve-Path -LiteralPath $NewLockPath).Path)
@@ -30,6 +30,6 @@ if((Get-FileHash -LiteralPath $releaseLockPath).Hash -cne $frozenHash){throw 'Pr
 [IO.File]::WriteAllBytes((Get-SamplePath $root 'source-lock.json'),$newLockBytes)
 Invoke-SampleGit $root @('add','--','deps/Spherewright','source-lock.json')|Out-Null
 $checked=Assert-SampleSourceLock $root
-$summary=[ordered]@{changed=$true;oldSourceSha=$current.lock.spherewright.sourceSha;newSourceSha=$Sha;productCiRun=$green[0].databaseId;stagedPaths=@('deps/Spherewright','source-lock.json');frozenReleaseLockUnchanged=$true;acceptanceScope=$checked.acceptance.scope;acceptanceSourceSha=$checked.acceptance.sourceSha;acceptanceAppliesToActiveSource=$checked.acceptance.appliesToActiveSource;committed=$false;pushed=$false;gameCalls=0}
+$summary=[ordered]@{changed=$true;oldSourceSha=$current.lock.spherewright.sourceSha;newSourceSha=$Sha;productCiRun=$green[0].databaseId;stagedPaths=@('deps/Spherewright','source-lock.json');frozenReleaseLockUnchanged=$true;packagesNotBuilt=$checked.packagesNotBuilt;candidatePackagesReady=$checked.candidatePackagesReady;acceptanceScope=$checked.acceptance.scope;acceptanceSourceSha=$checked.acceptance.sourceSha;acceptanceAppliesToActiveSource=$checked.acceptance.appliesToActiveSource;committed=$false;pushed=$false;gameCalls=0}
 Write-SampleJson (Get-SamplePath $root '.local/product-bump-summary.json') $summary
 $summary|ConvertTo-Json -Depth 5

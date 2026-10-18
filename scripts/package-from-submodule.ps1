@@ -5,6 +5,7 @@ param([string]$DspDir,[string]$DotNetPath)
 $root=Get-SampleRoot
 $checked=Assert-SampleSourceLock $root
 $lock=$checked.lock;$product=Get-SamplePath $root 'deps/Spherewright'
+if($lock.PSObject.Properties.Name -ccontains 'development' -and $lock.development.targetVersion -cne $lock.spherewright.productVersion){throw 'The locked product has not adopted the development target version; do not relabel an older product as the new candidate.'}
 $runId=[guid]::NewGuid().ToString('N')
 $relativeOutput='artifacts/previews/'+$lock.spherewright.sourceSha+'/'+$runId
 $output=Get-SamplePath $root $relativeOutput

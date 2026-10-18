@@ -2,7 +2,7 @@
 
 Spherewright 的公开场景、运行交接与黑盒验收仓。产品的 Plugin、MCP、Contracts、Bridge.Core、通用测试和打包实现继续保留在 [Spherewright](https://github.com/Arcueid77/Spherewright) 一个 monorepo 内。公开审查的范围与限制见[安全审查记录](operations/public-review-2026-10-16.md)。
 
-本仓通过只读子模块消费精确产品提交，不反向成为产品构建依赖。0.4 的历史验收已完成，本次拆仓只组织 Git、文件、工具和 CI，不部署、不读写游戏、不重做验收、不发布版本。
+本仓通过只读子模块消费精确产品提交，不反向成为产品构建依赖。0.4 历史验收与正式发布保留；所有者 2026-10-19 的指令已启动 [0.5 Voyager](scenarios/v0.5-voyager/README.md)。活动工作是原三项跨恒星验收、最小产品实现与同源码候选交审，仍保留原生、安全、隐私和确认门，不自动正式发布。
 
 ## 开始使用
 
@@ -15,24 +15,24 @@ pwsh -File scripts/verify-evidence.ps1
 pwsh -File scenarios/v0.4-final/scripts/verify-acceptance.ps1
 ```
 
-拆分已经合并，当前工作从 `main` 的 [AGENTS.md](AGENTS.md) 与[活动交接](operations/active-handoff.md)开始。复核冻结证据时使用不可变迁移快照 `14478a03c64c550e644c559405c8496b647552e7`，不要把历史授权当作当前授权。`bootstrap` 只初始化固定子模块并建立忽略目录，既不追踪 latest main，也不会覆盖意外 HEAD 或 dirty 子模块。
+当前工作从 `main` 的 [AGENTS.md](AGENTS.md)、[活动交接](operations/active-handoff.md)与 [Voyager 活动快照](scenarios/v0.5-voyager/current-status.md)开始。复核冻结证据时使用不可变迁移快照 `14478a03c64c550e644c559405c8496b647552e7`，不要把历史授权当作当前授权。`bootstrap` 只初始化固定子模块并建立忽略目录，既不追踪 latest main，也不会覆盖意外 HEAD 或 dirty 子模块。
 
-[活动 source-lock.json](source-lock.json) 固定 `29151` 已验证源码 `b7c0002dbe2e8f5608c5ca140b0c6326a1818021` 及同 SHA 双包；[冻结发布锁](releases/v0.4.0/source-lock.json) 仍对应原验收源码 `2a7a98d1932c404e3a7abc2c11233d9c0b8780d9` 和 `29145`。活动锁通过明确的 `historical_reference` 及冻结锁 hash 保留历史引用，不把旧验收计入新源码。[正式 GitHub v0.4.0](https://github.com/Arcueid77/Spherewright/releases/tag/v0.4.0) 已发布，annotated tag 准确指向 b7，活动锁为 `releaseTag: v0.4.0`、`status: tagged`。原证据仍导入自文档提交 `e7d5f7d8661092b7c8089710488c448f290638be`；冻结清单、锁和历史双包字节不变。当前安装与发布双包源码均为 b7；两布局各自完成正常冷安装、默认同版本恢复、完整 64 工具调用及独立结果审计，详见[本轮对应源码报告](operations/formal-release-2026-10-17.md)。这些结果不增加新的生产长窗，也不继承旧源码的验收结论。所有者已选择在网站自行上传 Thunderstore 0.4.0，当前等待实际上传版本与结果，无需再次请求发布许可；不能把 GitHub 发布当作该站已更新。
+[活动 source-lock.json](source-lock.json) 的兼容 v2 格式明确区分 `development.targetVersion: 0.5.0`、`spherewright` 的完整 gitlink 源码 SHA/实际版本、`installed` 的 b7 `0.4.0`/`29151` 磁盘记录、尚未生成的 null 双候选与 `historical_reference` 历史验收。锁的 `status: development` / `releaseTag: null` 不取消已发布的 [GitHub v0.4.0](https://github.com/Arcueid77/Spherewright/releases/tag/v0.4.0)，其 annotated tag 仍准确指向 `b7c0002dbe2e8f5608c5ca140b0c6326a1818021`。[冻结发布锁](releases/v0.4.0/source-lock.json) 则继续固定原验收 `2a7a98d1932c404e3a7abc2c11233d9c0b8780d9` / `29145`，历史清单、锁、包和验收不变。未知或缺失工件不填假 hash，旧包不计为 0.5 候选。
 
-The [active source lock](source-lock.json) pins validated source `b7c0002dbe2e8f5608c5ca140b0c6326a1818021` and its two packages on `29151`. The [frozen release lock](releases/v0.4.0/source-lock.json) retains accepted source `2a7a98d1932c404e3a7abc2c11233d9c0b8780d9` on `29145`. An explicit `historical_reference` and frozen-lock hash preserve that history without granting acceptance to the active source. [GitHub v0.4.0](https://github.com/Arcueid77/Spherewright/releases/tag/v0.4.0) is published; its annotated tag resolves exactly to b7, and the active lock is `tagged` with `releaseTag: v0.4.0`. Imported evidence stays bound to documentation source `e7d5f7d8661092b7c8089710488c448f290638be`; frozen manifests, locks and historical package bytes are unchanged. The installed source and released pair are b7. Both layouts independently completed normal cold installation, default same-version recovery, the full 64-tool matrix and independent result audits; see the [source-specific report](operations/formal-release-2026-10-17.md). These results add no production long window and inherit no earlier source's acceptance. The owner chose website self-upload for Thunderstore 0.4.0. The actual uploaded version and result remain unverified; no further publication-permission request is needed. GitHub publication does not update that store.
+The backward-compatible v2 [active lock](source-lock.json) separates the `0.5.0` development target, exact consumed source/version, recorded disk installation, null unbuilt candidates and explicitly pinned historical acceptance. A development lock has no active release tag or claimed candidate hash; the published b7 `v0.4.0` tag and pair remain intact. The frozen `2a7a98d1932c404e3a7abc2c11233d9c0b8780d9`/`29145` acceptance lock and all immutable manifests/package bytes are unchanged. Source adoption, installation, candidate generation and live acceptance are separate evidence. See [the active snapshot](scenarios/v0.5-voyager/current-status.md) and [the historical formal report](operations/formal-release-2026-10-17.md). The owner's Thunderstore website self-upload result remains unverified; that fact does not block unrelated Voyager development or authorize another upload.
 
 ## 查找场景与证据
 
 - [v0.4 真实场景](scenarios/v0.4-final/README.md)、[原验收与结果](scenarios/v0.4-final/acceptance.md)、[拓扑边界](scenarios/v0.4-final/topology.md)。
-- [当前历史截面](operations/current-status.md)、[本次迁移交接](operations/active-handoff.md)、[游戏时间线](operations/gameplay-timeline.md)、[经验](operations/experience-ledger.md)、[事故记录](operations/incident-log/full-history.md)。
+- [Voyager 活动快照](scenarios/v0.5-voyager/current-status.md)、[活动交接](operations/active-handoff.md)、[受保护历史截面](operations/current-status.md)、[游戏时间线](operations/gameplay-timeline.md)、[经验](operations/experience-ledger.md)、[事故记录](operations/incident-log/full-history.md)。
 - [0.4 最终摘要](releases/v0.4.0/validation-summary.md)、[完整证据](releases/v0.4.0/evidence/README.md)、[原样导入清单](releases/v0.4.0/manifests/import-manifest.json)、[规范化清单](releases/v0.4.0/manifests/evidence-manifest.json)、[冻结包校验和](releases/v0.4.0/hashes/SHA256SUMS.txt)。
-- [v0.5 预留入口](scenarios/v0.5-voyager/README.md)，尚无游戏执行授权。
+- [v0.5 Voyager](scenarios/v0.5-voyager/README.md)、[原三项验收](scenarios/v0.5-voyager/acceptance.md)、[有限场景配置](scenarios/v0.5-voyager/scenario.json)。
 
 ```text
 deps/Spherewright/                 exact, read-only product submodule
 scenarios/v0.4-final/              real scenario, acceptance, topology, offline entry
 scenarios/v0.3.2-black-box/         historical comparison
-scenarios/v0.5-voyager/             scope placeholder
+scenarios/v0.5-voyager/             active snapshot, three gates, finite settings
 operations/                       status, handoff, timeline, incidents
 releases/v0.4.0/                   summary, evidence, manifests, hashes
 archive/imported-from-spherewright/<facts-sha>/   unchanged original bytes
@@ -60,9 +60,9 @@ pwsh -File scripts/update-spherewright.ps1 -Sha <FULL_SHA> -NewLockPath .local/r
 
 更新入口要求 Lab 干净、产品 CI 绿，只暂存子模块与锁文件并写 bump 摘要，不 commit/push。Lab 的提交记录消费版本与场景事实；可复用能力回产品仓实现。脚本中的既有 Sample 函数名和文件名是兼容接口，不代表另一个仓库。
 
-活动候选需要换源码时，可在根锁的 `acceptance` 中明确设置 `scope: historical_reference`，并用 `sourceLock` / `sourceLockSha256` 固定既有 `releases/v<产品版本>/source-lock.json`。旧 manifest、spec 和来源必须与该冻结锁一致；它们只证明冻结源码，验证输出会明确 `acceptanceAppliesToActiveSource: false`。不带这三个字段的旧格式仍要求根锁与发布锁逐字节一致。更新入口先验证准确产品 SHA 的 CI，仅暂存根锁与 gitlink，永不改写冻结发布锁。新候选的实机结果另行记录，历史引用不算新验收。
+活动源码需要更新时，在根锁的 `acceptance` 中明确设置 `scope: historical_reference`，并用 `sourceLock` / `sourceLockSha256` 固定既有 `releases/v<历史版本>/source-lock.json`，无需伪造新版本的冻结锁。旧 manifest、spec 和来源必须与该冻结锁一致；它们只证明冻结源码，验证输出明确 `acceptanceAppliesToActiveSource: false`。不带这三个字段的旧格式仍要求根锁与发布锁逐字节一致。更新入口先验证准确产品 SHA 的 CI，仅暂存根锁与 gitlink，永不改写冻结发布锁。开发未生成包时 `packages.manual` / `thunderstore` 必须同时为 null；输出 `packagesNotBuilt: 2`、`candidatePackagesReady: false`，不把缺失包说成已验收。构建候选必须改为精确版本/源码的双包记录；已存在的 v2 包还须核验包内 source/version/Native，不能借 null 绕过校验。
 
-For an active candidate with different source, explicitly set `acceptance.scope` to `historical_reference` and pin the existing `releases/v<product-version>/source-lock.json` with `sourceLock` and `sourceLockSha256`. Its manifest, specification and provenance must match that frozen lock. They prove only the frozen source; verifier output reports `acceptanceAppliesToActiveSource: false`. Legacy locks without these three fields must remain byte-identical to the release lock. The update entry verifies successful CI for the exact product SHA, then stages only the root lock and gitlink, never rewriting the frozen release lock. Record new runtime results separately; historical references are not new acceptance.
+For a different active source/version, pin the actual historical release lock using `acceptance.scope: historical_reference`, `sourceLock` and its real hash. Manifest/spec/provenance must match that frozen lock, independent of the active version. Legacy locks retain their byte-identical release rule. Development locks require two null unbuilt packages and never report ready candidates; provisional/tagged locks still require the real pair. Existing v2 package files also undergo exact-source/version/Native manifest checks. The update entry requires successful exact-SHA product CI and stages only the gitlink/root lock. Preview packaging rejects a product version that has not yet adopted its development target. New live results are recorded separately.
 
 需本机合法安装的 DSP Native 引用和 .NET 8 SDK 时，可以生成独立本地预览：
 

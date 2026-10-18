@@ -4,8 +4,8 @@
   "required": ["schemaVersion", "status", "scenario", "spherewright", "native", "packages", "acceptance", "evidenceSource"],
   "additionalProperties": false,
   "properties": {
-    "schemaVersion": {"const": 1},
-    "status": {"enum": ["provisional", "tagged"]},
+    "schemaVersion": {"enum": [1, 2]},
+    "status": {"enum": ["development", "provisional", "tagged"]},
     "scenario": {"type": "string", "minLength": 1},
     "spherewright": {
       "type": "object", "additionalProperties": false,
@@ -18,17 +18,34 @@
         "productVersion": {"type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"}
       }
     },
-    "native": {
-      "type": "object", "additionalProperties": false,
-      "required": ["version", "assemblySha256"],
-      "properties": {
-        "version": {"type": "string", "minLength": 1},
-        "assemblySha256": {"type": ["string", "null"], "pattern": "^[A-F0-9]{64}$"}
-      }
-    },
+    "native": {"$ref": "#/definitions/native"},
     "packages": {
       "type": "object", "additionalProperties": false, "required": ["manual", "thunderstore"],
-      "properties": {"manual": {"$ref": "#/definitions/package"}, "thunderstore": {"$ref": "#/definitions/package"}}
+      "properties": {
+        "manual": {"anyOf": [{"type": "null"}, {"$ref": "#/definitions/package"}]},
+        "thunderstore": {"anyOf": [{"type": "null"}, {"$ref": "#/definitions/package"}]}
+      }
+    },
+    "development": {
+      "type": "object", "additionalProperties": false, "required": ["targetVersion"],
+      "properties": {"targetVersion": {"type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"}}
+    },
+    "installed": {
+      "type": "object", "additionalProperties": false,
+      "required": ["sourceSha", "productVersion", "releaseTag", "native", "packages", "evidence", "verification", "runtimeState"],
+      "properties": {
+        "sourceSha": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+        "productVersion": {"type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"},
+        "releaseTag": {"type": ["string", "null"]},
+        "native": {"$ref": "#/definitions/native"},
+        "packages": {
+          "type": "object", "additionalProperties": false, "required": ["manual", "thunderstore"],
+          "properties": {"manual": {"$ref": "#/definitions/package"}, "thunderstore": {"$ref": "#/definitions/package"}}
+        },
+        "evidence": {"type": "string", "minLength": 1},
+        "verification": {"enum": ["historical_record", "disk_verified"]},
+        "runtimeState": {"enum": ["not_observed", "not_running", "running_unverified", "running_verified"]}
+      }
     },
     "acceptance": {
       "type": "object", "additionalProperties": false,
@@ -52,7 +69,36 @@
       "properties": {"repository": {"const": "AvaloNero/Spherewright"}, "sourceSha": {"type": "string", "pattern": "^[0-9a-f]{40}$"}}
     }
   },
+  "allOf": [
+    {
+      "if": {"properties": {"schemaVersion": {"const": 1}}},
+      "then": {
+        "properties": {"status": {"enum": ["provisional", "tagged"]}},
+        "not": {"anyOf": [{"required": ["development"]}, {"required": ["installed"]}]}
+      },
+      "else": {"required": ["installed"]}
+    },
+    {
+      "if": {"properties": {"status": {"const": "development"}}},
+      "then": {
+        "required": ["development"],
+        "properties": {
+          "spherewright": {"properties": {"releaseTag": {"type": "null"}}},
+          "packages": {"properties": {"manual": {"type": "null"}, "thunderstore": {"type": "null"}}},
+          "acceptance": {"required": ["scope", "sourceLock", "sourceLockSha256"]}
+        }
+      },
+      "else": {"properties": {"packages": {"properties": {"manual": {"$ref": "#/definitions/package"}, "thunderstore": {"$ref": "#/definitions/package"}}}}}
+    }
+  ],
   "definitions": {
+    "native": {
+      "type": "object", "additionalProperties": false, "required": ["version", "assemblySha256"],
+      "properties": {
+        "version": {"type": "string", "minLength": 1},
+        "assemblySha256": {"type": ["string", "null"], "pattern": "^[A-F0-9]{64}$"}
+      }
+    },
     "package": {
       "type": "object", "additionalProperties": false, "required": ["file", "sha256", "size"],
       "properties": {"file": {"type": "string", "pattern": "^[A-Za-z0-9._-]+\\.zip$"}, "sha256": {"type": "string", "pattern": "^[A-F0-9]{64}$"}, "size": {"type": "integer", "minimum": 1}}

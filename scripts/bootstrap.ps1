@@ -5,6 +5,7 @@ param()
 $root = Get-SampleRoot
 $entry = Invoke-SampleGit $root @('ls-files','--stage','--','deps/Spherewright')
 if ($entry -cnotmatch '^160000 ([0-9a-f]{40}) 0\s+deps/Spherewright$') { throw 'Missing exact product gitlink.' }
+Assert-SampleJsonSchema (Get-SamplePath $root 'source-lock.json') (Get-SamplePath $root 'schemas/source-lock.schema.json')
 $lock = Read-SampleJson (Get-SamplePath $root 'source-lock.json')
 if ($Matches[1] -cne $lock.spherewright.sourceSha) { throw 'Gitlink/lock mismatch before initialization.' }
 $product = Get-SamplePath $root 'deps/Spherewright'
