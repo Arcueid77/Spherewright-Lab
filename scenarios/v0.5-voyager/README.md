@@ -6,6 +6,11 @@ The owner's 2026-10-19 instruction starts this stage from the Lab root and autho
 
 Start with [the active snapshot](current-status.md), [the acceptance table](acceptance.md), [the finite scenario settings](scenario.json), the root [source lock](../../source-lock.json) and [active handoff](../../operations/active-handoff.md). Reusable code, protocols and user guides stay in the independent [Spherewright product repository](https://github.com/Arcueid77/Spherewright). `deps/Spherewright` is a fixed, read-only dependency; adopt a changed SHA only after its complete Plugin build, relevant tests and successful exact-SHA product CI. A documentation-only adoption is not a runtime installation.
 
+## Current checkpoint / 当前检查点
+
+Active source/read-only dependency is `463fc888b1e4cf4a90e08cb1022d2b8896447700` / `0.5.0`, with full Plugin zero warnings/errors, 3,704 tests and [exact green product CI 39163356496](https://github.com/Arcueid77/Spherewright/actions/runs/39163356496). Its same-source manual/Thunderstore development previews passed full payload/bilingual-guide/72-tool metadata/privacy qualification. Actual installation remains the retained 241e/66-tool pair; the new controller is not yet installed, final candidate slots remain paired null and live gates remain **0/3**.
+
+原生4101/4102研究及原三动作读回已完成，合法探索等级现为2；必要部署覆盖保存已完成（保存 `117443502` / 观察 `117443510`）。下一唯一结果是准确 Lab 采用 CI 通过后的必要冷部署，再原生补给有限20翘曲器并 fresh 读取近目标及往返预算。新双包是开发验证预览，不是最终交审候选；较早只读中断和恢复记录按原范围保留在[活动快照](current-status.md)，不冒充原生失败或任何三项实机验收。
 ## Three finite results / 三个有限结果
 
 1. A normal round trip to another star system, returning a resource legally established as absent in the departure system. Unknown or unexplored never means absent.
