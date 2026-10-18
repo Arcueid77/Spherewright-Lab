@@ -8,7 +8,7 @@ Voyager 当前 **1/3**：源码 `463fc888b1e4cf4a90e08cb1022d2b8896447700` / Nat
 
 Voyager clause1 passed on the installed463 development preview: a real cross-star round trip brought ten legally home-absent item1013 resources back and saved them normally. Progress is **1/3**, with sustained logistics and exact failed-flight recovery open and final candidates still null. The discovered duplicate-checkpoint P1 blocks new flights/reloads until its separately verified fix and cold deployment; the newer primary covers every old checkpoint. The later home-logistics read closed at 477 RPC/14 accepted in total; it proves prerequisites, while sustained logistics remains open.
 
-母星物流前置只读窗已完成19RPC/2.922s/0writes，最新累计477RPC/14accepted；现有一座ILS有3个空物流槽、另两座PLS，已解锁的原生recipe62可将1013×1制成1113×2（Assemble/90tick），可复用母星设施，尚非持续路线。P1修复 `216f4075e983d78fa4d4f5d222bdd279813e1d86` 已推送且[准确CI39172966526](https://github.com/Arcueid77/Spherewright/actions/runs/39172966526)通过，尚未打包、采用或安装；活动锁与实装仍463。
+母星物流前置只读窗已完成19RPC/2.922s/0writes，累计477RPC/14accepted；一座ILS有3个空物流槽、另两座PLS，recipe62可将1013×1制成1113×2（Assemble/90tick），仅为前置证据。P1修复216f4075e983d78fa4d4f5d222bdd279813e1d86已通过完整Plugin/3726tests及[准确CI39172966526](https://github.com/Arcueid77/Spherewright/actions/runs/39172966526)，活动锁/gitlink现采用216；同源新开发双包已核验但未安装，实装仍463。新飞行/恢复须等本次Lab准确CI及必要冷部署实核，216本身尚无实机验收，既有463的1/3证据保留，最终候选仍null；详见[活动快照](scenarios/v0.5-voyager/current-status.md)。
 
 ## 开始使用
 

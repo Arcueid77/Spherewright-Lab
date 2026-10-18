@@ -8,7 +8,7 @@ Start with [the active snapshot](current-status.md), [the acceptance table](acce
 
 ## Current checkpoint / 当前检查点
 
-Active source/read-only dependency and actual installed cohort are `463fc888b1e4cf4a90e08cb1022d2b8896447700` / `0.5.0`, Native `0.10.35.29151`. Full Plugin zero warnings/errors, 3,704 tests and [exact product CI 39163356496](https://github.com/Arcueid77/Spherewright/actions/runs/39163356496) passed; [Lab adoption CI 39167203182](https://github.com/Arcueid77/Spherewright-Lab/actions/runs/39167203182) was green before cold. The qualified 72-tool same-source manual/Thunderstore development pair is installed (TS5/manual MCP224). Original clause1 now passed Root's independent audit: **1/3**. Sustained logistics and exact failed-flight recovery remain open; final candidate slots stay paired null.
+Active source/read-only dependency now adopt216f4075e983d78fa4d4f5d222bdd279813e1d86 /0.5.0: full Plugin0warnings/errors,3726tests/22startup cases and [exact product CI39172966526](https://github.com/Arcueid77/Spherewright/actions/runs/39172966526) green. Its same-source development pair is generated/qualified and uninstalled. Actual installation remains463fc888b1e4cf4a90e08cb1022d2b8896447700 /Native0.10.35.29151/TS5/manual MCP224/72tools. Source463 clause1 passed (**1/3**);216 has no live acceptance yet. Sustained logistics and failed-flight recovery remain open; final candidates stay paired null.
 
 原生探索2级下，母星系4/4行星及全系 remaining_veins_and_native_gas_oceans 摘要合法完整，确认1013分形硅石缺失。原去程80RPC/325.406s落在真实异恒星实体行星；抵达后正常扫描及唯一Harvest10完成真实矿点减10/包0→10，原返程45RPC/148.61s回精确母星。预留正常HomeSave以11RPC/4.109s、一次接受/一次原poll完成，保存117563871/观察117563968，背包仍10，Journal104/五次衔接完整，journey以原Save action/session/tick/full-file fingerprint持久关闭，真实返程检查点实读retired。Root独立门1审计通过，当前1/3；普通往返与部署恢复不计门3。HomeSave截点458RPC/14accepted；后续母星物流前置只读19RPC/2.922s/0writes，最新477RPC/14accepted、观察117597934/保存117563871，Journal104原prefix及ticket不变。原父包4/6使用、余2作废，Root已停请求，健康DSP在原home保持运行。
 
@@ -18,7 +18,7 @@ Active source/read-only dependency and actual installed cohort are `463fc888b1e4
 
 返程曾实读核心能量为0；随后正常充能和终点成功不代表全程核心为正。原装载燃料、返程核心门槛与保护能量底线分别保留证据；修复前不展开新航程或故障恢复。
 
-Latest home prerequisites: one ILS has three spare item slots, with two existing PLS. Unlocked native recipe62 consumes1013×1 and outputs1113×2 (Assemble/90ticks). These facilities can be reused; a19RPC/zero-write read is not sustained-route proof. The separate P1 source `216f4075e983d78fa4d4f5d222bdd279813e1d86` is clean/pushed with [exact CI39172966526](https://github.com/Arcueid77/Spherewright/actions/runs/39172966526) green, but has no new package/adoption/installation. Source lock and installed preview stay463; no new flight/reload is permitted yet.
+Latest home prerequisites remain the closed19RPC/zero-write read: one ILS/three spare slots, two PLS and unlocked recipe62 (1013×1→1113×2/90ticks), without sustained-route proof.216 is now adopted as source only, with new payload/bilingual/surface/privacy qualification passed. Actual463 installation has not changed. After exact Lab CI, next is necessary covering Save/cold readback, then one safely controlled failure and exact fresh checkpoint recovery. No new flight/reload before deployment verification and no restoration of a covered old checkpoint; see [the active snapshot](current-status.md).
 
 ## Three finite results / 三个有限结果
 
