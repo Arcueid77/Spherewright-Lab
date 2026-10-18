@@ -8,9 +8,10 @@ Start with [the active snapshot](current-status.md), [the acceptance table](acce
 
 ## Current checkpoint / 当前检查点
 
-Active source/read-only dependency is `463fc888b1e4cf4a90e08cb1022d2b8896447700` / `0.5.0`, with full Plugin zero warnings/errors, 3,704 tests and [exact green product CI 39163356496](https://github.com/Arcueid77/Spherewright/actions/runs/39163356496). Its same-source manual/Thunderstore development previews passed full payload/bilingual-guide/72-tool metadata/privacy qualification. Actual installation remains the retained 241e/66-tool pair; the new controller is not yet installed, final candidate slots remain paired null and live gates remain **0/3**.
+Active source/read-only dependency and actual installed cohort are `463fc888b1e4cf4a90e08cb1022d2b8896447700` / `0.5.0`. Full Plugin zero warnings/errors, 3,704 tests and [exact product CI 39163356496](https://github.com/Arcueid77/Spherewright/actions/runs/39163356496) passed; [Lab adoption CI 39167203182](https://github.com/Arcueid77/Spherewright-Lab/actions/runs/39167203182) was green before cold. The qualified same-source manual/Thunderstore development pair is actually installed (TS5/manual MCP224), with normal same-Native default recovery, both 72-tool metadata surfaces and a real new visibility read proved. Final candidate slots remain paired null; live gates remain **0/3**.
 
-原生4101/4102研究及原三动作读回已完成，合法探索等级现为2；必要部署覆盖保存已完成（保存 `117443502` / 观察 `117443510`）。下一唯一结果是准确 Lab 采用 CI 通过后的必要冷部署，再原生补给有限20翘曲器并 fresh 读取近目标及往返预算。新双包是开发验证预览，不是最终交审候选；较早只读中断和恢复记录按原范围保留在[活动快照](current-status.md)，不冒充原生失败或任何三项实机验收。
+原生探索等级2下，母星系4/4行星与全星系摘要完整，在 remaining_veins_and_native_gas_oceans 范围有合法缺失清单。原生20翘曲器补给及充分预算预览已过；唯一去程80RPC/325.406s成功落地（65原poll/1accepted），检查点flight_succeeded但retiredTick为null，不称已退役。17RPC远端读取合法确认母星缺失1013共950203/17节点，最近41.668m；随后唯一Harvest10以19RPC/32.281s完成，节点44578→44568/包0→10/core1.6GJ，保存117443534/观察117524744。原返程45RPC/148.61s已完成，精确原home/alive-ground、翘曲器19→18/nativeexit0/commandfalse；最新已关窗447RPC/13accepted、保存117443534/观察117535751。父6accepted已完成去程/采集/返程3项，journey为home_landed_awaiting_save；下一唯一结果是预留11RPC的正常homeSave及资源/主档/航程关闭读回，原时钟/返程储备不重开。root返程writer已停、健康DSP续接；三实机门仍0/3，尚不能关闭往返门。首次默认恢复仅preload未就绪且0提交，后续原动作正常恢复，不计飞行故障验收，详见[活动快照](current-status.md)。
+
 ## Three finite results / 三个有限结果
 
 1. A normal round trip to another star system, returning a resource legally established as absent in the departure system. Unknown or unexplored never means absent.
