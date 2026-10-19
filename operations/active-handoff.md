@@ -1,5 +1,20 @@
 # Repository split handoff
 
+## Closed consumer qualification boundary / 消费端资格检查闭合截点
+
+**Latest closed checkpoint (2026-10-19):** Stage1565RPC/49accepted; saved118296544/observed118388547, Journal105 with all five original transitions/full prefix and isolated item1013×10 retained. Root is the sole idle writer, all MCP children are closed, no pending/unknown remains, and every window is closed with zero remaining allowance. Actual source/install ddec09e3e752358043dc7b0bb43486d800c3b940 / Native0.10.35.29151, lock2F,5365/EEBE development previews, paired-null final-review candidates and frozen0.4 evidence are unchanged.
+
+The original BC39 read-only probe closed19RPC/zero accepted. The subsequent single F005 qualification closed17RPC/one prepare/zero commit/zero accepted: the product's pre-Native direct-path occupancy guard rejected a conflict with an already-observed2001. No creation, material debit or connection was performed, and the observed Native whole hash stayed unchanged. The reported rejection is the product pre-Native occupancy guard; it supplies no proof that this reported path passed a Native DLL placement check, and unreported internal-candidate check counts are not inferred. Preserve that original refusal; the original site is retired and must not be retried. Root/independent BC39 audits are0612D6623C4C7E48BB5CE5ACE8276746AD42C17BA7D2C2282BFF071CB7B6195C / FA71C873834564A4AC0A6ABEDC0ED36D64F72C8EC5755B4B03BC26A34292E3BA; F005 audits areBF9B8197E58B1F620A9AFB5B4ED8D176C15BBF58734E64442C1187FA82F0E863 /1DAFACD204544EF43F94FA71E5BD9F90B1DD869A267371EDA774AD224D1E2E05. Raw references remain protected-local.
+
+**Next single target:** the B454 single right-side short outlet derived from actual station colliders and two observed neighbouring-centre spacings, retaining the original consumer/freeEnd. Freshly inspect one additional already-known2001 and obtain one terrain/snap qualification, within24RPC/120s/one prepare/zero commit. This has not run, nothing has been built, no second span is permitted, and total cost remains unknown. A second same-class occupancy refusal stops this station-outlet family. Voyager remains2/3 with sustained logistics open; these probes and the refusal add no gate credit. Earlier entries below retain their original checkpoint scopes.
+
+**最新闭合截点：** 累计1565RPC/49accepted，保存118296544/观察118388547，Journal105/五次原迁移及完整prefix、隔离1013×10保留。Root唯一idle writer，全部MCP已关闭，0pending/unknown；所有窗口均关闭、剩余额度0。实际源码/安装仍为ddec09e3e752358043dc7b0bb43486d800c3b940 / Native29151，2F锁、5365/EEBE开发预览、最终交审双null及冻结0.4证据不变。
+
+原BC39只读probe以19RPC/0接受闭合；随后F005唯一资格检查为17RPC/1prepare/0commit/0接受，产品pre-Native直线路径占位守卫因与已观察2001冲突而拒绝。0创建/物料扣除/连接变更，已观察Native全hash不变，本次报告的拒绝属于产品pre-Native占位守卫，不能据此证明该报告路径通过Native DLL放置检查，亦不推断未报告内部候选的检查数量。原拒绝及其回执保留，原site退休、不得retry；BC39的Root0612/独审FA71与F005的RootBF9B/独审1DAF均保留保护原始索引。
+
+**下一唯一目标：** 由B454实际station collider和两个真实间距导出的单一右侧短出口，保持原consumer/freeEnd；fresh额外核一个已知2001及一次terrain/snap资格，界限≤24RPC/120秒/1prepare/0commit。尚未执行、未建、未许可第二span，总cost未知；出现第二次同类占位拒绝即停止站出口候选族。Voyager仍2/3、持续物流开放，本批probe/拒绝不增加验收信用。以下旧条目保留各自历史截点。
+
+
 ## Closed home ILS supply and Save / 母星ILS补给与保存闭合
 
 **Latest closed checkpoint (2026-10-19):** Stage1529RPC/49accepted; saved118296544/observed118296601, Journal105 with all five original transitions/prefixes and isolated item1013×10 retained. Actual source/install remains ddec09e3e752358043dc7b0bb43486d800c3b940 / Native0.10.35.29151. One fixed48m Move succeeded (52RPC/one accepted), with sampled stable observations spanning600game ticks and actual Native ILS range readback. The existing ILS now has idle1/working1 vessel, warper20 and one previously empty slot configured as item1013/max100/localNone/remoteDemand; old slots0/1 and belt ports are preserved.
