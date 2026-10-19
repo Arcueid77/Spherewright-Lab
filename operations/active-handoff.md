@@ -1,5 +1,20 @@
 # Repository split handoff
 
+## Existing consumer configured and saved / 既有消费设备配置并保存
+
+Closed boundary:1644RPC/52accepted, saved118811439/observed118811561, Journal105/full original prefix/five transitions. The existing assembler now runs the unlocked Native recipe62 (1013×1→1113×2/90ticks); one existing input sorter is filtered1013. Both other input filters, the unfiltered output, all four endpoints and two30-grid stores are preserved. Both stores/machine buffers remain empty and the player's returned1013×10 is isolated. No building, belt, sorter, transfer, flight or Load occurred in this packet. This proves configuration and a normal covering Save, not actual consumption or a logistics route.
+
+The one600s/128RPC/three-acceptance parent completed31RPC/two configurations/one normal Save, all original actions known completed, normal EOF, zero pending/unknown; unused allowance is forfeited. Root is the sole idle game writer. Root41-check closure C7BFAB2B38CF159A54D262B64F7B05EA34E1E4CF856697EC00BA210F90A0760B binds the original wire/action/readbacks and current full Native primary/ticket. Successful Save context8CB9745E257E3D4CF81F10938D6992F34E7688F0FCB0AE8F8AA04DFE9B2A5DE8 is current. Its first reader's private-ACL classification falsely included the existing Native primary; separate reader280CAEF8CC3879D52ABA48C97C9D971429A4546729344BE3CA7CE7D5E26A1D08 corrects only that classification, preserves owned-path/full-SHA/stable-mtime and ticket-private checks, and passes actual read-only loading. Original failed reader/source/receipts remain; neither Native bytes/ACL nor an action was changed or replayed.
+
+Next single result: fresh-qualify the one observed ILS-to-existing-input-store terminal seed using the ordinary Native full-path prepare, zero commit, within24RPC/120s. Complete Native NEW cost, material shortfall and future positive-tail-to-store sorter eligibility remain unknown; reserve the separate remote belt allowance and one home input sorter. The tokenless belt-route interface cannot jointly qualify this bound-station route; no fictitious source/sorter pose or caller waypoint is substituted. The old rejected direct site and new-mother-machine proposal remain retired. Remote mining/power/passive ILS, repeated real ship cycles, mother consumption and normal-save/recovery continuation are still required. Voyager stays2/3 with gates1/3 retaining their original463/216 scopes. Product/install ddec09e3e752358043dc7b0bb43486d800c3b940, Native29151, lock2F and qualified5365/EEBE previews are unchanged; final-review packages remain paired null, no publication.
+
+当前闭合1644RPC/52accepted，正常保存118811439/观察118811561，Journal105/完整原prefix/五迁移保留。现有装配机已配置原生配方62，一个原输入分拣器改为1013；另两个过滤、无过滤输出、四组连接和两座30格仓均保留。机器/两仓仍空，带回1013×10仍隔离。本包没有建造、转移、飞行或Load，仅证明配置与正常覆盖保存，不算真实消费或物流路线。
+
+原600秒/128RPC/三接受父窗以31RPC/两配置/一次Save完成，原动作全部已知completed、正常EOF、0pending/unknown，余量作废；Root唯一idle writer。Root41项闭包C7BF绑定原wire/回执与当前全主档/票据，当前成功Save上下文8CB；其首reader将既有Native主档误列为Lab私有ACL而拒绝，另存280C reader仅修正分类，保留owned-path/fullSHA/mtime和ticket私有门并实测只读载入通过。原失败/source/回执均保留，未改Native内容/ACL，未重放动作。
+
+下一唯一结果为既有ILS到输入仓单终点seed的fresh原生整路径资格（≤24RPC/120秒/一prepare/0commit）；真实全NEW成本、缺料及未来正带尾到仓的分拣器门仍未知，须预留远端皮带和一个母星入仓sorter。现tokenless route接口不能联合验证bound station，不伪造端点/位姿/waypoint。原拒绝site与新母星消费机方案保持退役。远端开采/供电/passive ILS、多完整真实船运周期、母星消费及正常保存恢复后继续运输仍待证明；Voyager仍2/3，门1/3保留463/216历史范围，ddec实装/Native29151/2F锁/5365与EEBE预览不变，最终包双null，未发布。
+
+
 ## Existing consumer reuse / 复用现有消费设备
 
 Closed boundary:1613RPC/49accepted, saved118296544/observed118709732, Journal105/full original prefix and five transitions, returned1013×10 retained. Root is the sole idle game writer; all MCP children and prior windows are closed, with zero remaining allowance and no pending/unknown action. Source/install ddec09e3e752358043dc7b0bb43486d800c3b940, Native29151, lock2F and qualified5365/EEBE development previews remain unchanged; final-review packages stay paired null.
