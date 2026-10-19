@@ -1,5 +1,20 @@
 # Voyager active snapshot / 0.5 活动快照
 
+## Existing consumer reuse / 复用现有消费设备
+
+Closed boundary:1613RPC/49accepted, saved118296544/observed118709732, Journal105/full original prefix and five transitions, returned1013×10 retained. Root is the sole idle game writer; all MCP children and prior windows are closed, with zero remaining allowance and no pending/unknown action. Source/install ddec09e3e752358043dc7b0bb43486d800c3b940, Native29151, lock2F and qualified5365/EEBE development previews remain unchanged; final-review packages stay paired null.
+
+The later short-outlet qualification succeeded17RPC/zero commit (first span8NEW only), then the owner's question stopped the new-machine proposal. It is not a construction authorization or a route. A fresh read-only20-machine comparison (17RPC,657ticks) found5 machines idle/empty at both samples. A further14RPC observed the selected existing vessel assembler, its4basic sorters and2independent30-grid stores: machine idle/progress0/buffers0, stores empty/unbanned/unfiltered, all sorters empty/Picking. Its explicit null output filter maps to Native raw0 in the exact installed reader; it is unfiltered. Other missing/null observations are not zero. Root closures2539D5D9BD5AD3A172A55045DFE2F38F2BDC0AA9EDBE98035E11038AE89BB6DF,6626FBFDD3DF0214D77D748B3F94C717E95219633E128DC50A84BB16C49755E7 and95B1B00890C24CE45C64EF8D7BFD3FA619047B927A1AF5EB8B5FC7CB0F9DC521 retain protected originals.
+
+Next single result: fresh-qualify the existing-device reuse conditions, then only the necessary recipe62/one input-filter change and ILS-to-existing-input-store connection, preserving the old output and other inputs. No recipe/filter change, construction or new parent claim has occurred at this boundary. The original rejected direct site remains retired. Voyage/mining/passive-ILS and multicycle transport/consumption/save-recovery evidence are still required; Voyager stays2/3, with gates1/3 retaining their historical source scopes. Healthy DSP continues without an automatic Save/Exit/Load. Earlier entries below retain their own checkpoint scopes.
+
+当前闭合截点：累计1613RPC/49accepted，保存118296544/观察118709732，Journal105/完整原prefix/五迁移、1013×10保留；Root唯一idle writer，所有MCP与旧窗口已关、余量0、无pending/unknown。源码/实装ddec、Native29151、2F锁和5365/EEBE开发预览不变，最终交审包仍双null。
+
+原短出口后来以17RPC/0commit完成首段8NEW资格；用户质疑后，新造母星消费机方案停止，该资格不等于建造授权或已成路线。随后20机两次fresh读取跨657tick（17RPC），5机两样本空闲空缓冲；再14RPC读取现有运输船装配机、4个基础分拣器及2个独立30格仓：机器未工作/进度0/缓冲0，两仓空/无禁格/无过滤，4sorter空手Picking。此精确已安装reader将output显式null映射自原生raw0，即无过滤；不把其他missing/null泛化为零。原始闭包索引见上述2539/6626/95B1保护原件。
+
+下一唯一结果：fresh核复用条件，再仅做必要recipe62/一个输入过滤变更和ILS到既有输入仓连接，保留原输出与其余输入；此截点尚未改配方/过滤、未建造、未claim新父窗，原直连拒绝site仍退役。远端开采/passive ILS、多真实运输周期、消费和正常保存恢复后继续运输尚待证明，Voyager仍2/3、门1/3保留历史源码范围。健康DSP继续运行，不自动保存/退出/加载；以下旧段保留各自历史截点。
+
+
 ## Closed consumer qualification boundary / 消费端资格检查闭合截点
 
 **Latest closed checkpoint (2026-10-19):** Stage1565RPC/49accepted; saved118296544/observed118388547, Journal105 with all five original transitions/full prefix and isolated item1013×10 retained. Root is the sole idle writer, all MCP children are closed, no pending/unknown remains, and every window is closed with zero remaining allowance. Actual source/install ddec09e3e752358043dc7b0bb43486d800c3b940 / Native0.10.35.29151, lock2F,5365/EEBE development previews, paired-null final-review candidates and frozen0.4 evidence are unchanged.
