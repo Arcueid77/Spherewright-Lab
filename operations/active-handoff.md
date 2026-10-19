@@ -1,5 +1,43 @@
 # Repository split handoff
 
+## Current stop — landed success, protected idle quarantine / 当前停止点：去程成功、空闲守卫保护隔离
+
+Voyager remains **2/3**. The exact original outbound completed/succeeded on installed `c0a91bad59da09895c18410428f46969b6ba9f52` (Native29151); the following remote-idle check triggered Native Pause and write quarantine. This is a successful flight followed by an idle-admission failure, not a new flight-failure acceptance. No remote facility, mining Move or sustained logistics credit was added. The old generic quarantine does not identify its exact failed predicate; core, caches or terrain remain hypotheses, not a proven cause.
+
+Voyager仍**2/3**。准确原去程已完成/成功，之后远端空闲守卫触发原生Pause与写入隔离；不把它改称飞行失败或新的故障验收。没有远端新设施/采矿Move/持续物流证据。旧合并报错不足以确定具体失败谓词，不把核心、缓存或地形猜测当根因。
+
+Last public readback is paused tick120034210, alive Walk/speed0 with core32.956876530MJ; a second read one second later had the same tick. Last normally saved primary remains119921541 and does **not** cover this refuel/flight. Journal105/five transitions and isolated1013×10 remain. The new quarantine ticket is bound to the exact successful outbound and minimum120034210; the old DFC5 saved-context/ticket is historical and cannot authorize current recovery. All32 checkpoint full-file hashes were checked:31 prior covered files unchanged plus the new successful outbound checkpoint. A successful checkpoint remains forbidden to load; its24-hour credential does not override that rule.
+
+末公开读回为暂停tick120034210、存活Walk/速度0、核心32.956876530MJ；隔一秒再读tick未变。主档仍119921541，未覆盖本次补给/去程。Journal105/五衔接及隔离1013×10保持。新的隔离票据绑定准确原成功去程/minimum120034210；旧DFC5上下文/票据已属历史，不能授权当前恢复。32份检查点全文件hash已核；新成功检查点不能因24小时token就加载。
+
+All original actions are settled, with no pending/unknown action. Parent closed at61RPC/one accepted; enclosing refuel/mission window closed at99RPC/two accepted; cumulative stage **2421RPC/72accepted**. Both caller windows forfeit all unused allowance, with `passed=false`, `interventionRequired=true`, `normalSaveStillRequired=true`. They do not claim a normal home Save or a closed Native journey. Original Native journey UTC deadline15:49:06.6394773 and game-tick/return reserves are unchanged; caller closure grants no further execution budget. All MCP Clients are stopped; Root is the sole idle writer. Keep the responding paused DSP in RAM: no automatic Resume, Save, Exit, Load, quarantine clear, replay or old fallback Save.
+
+全部原动作已核销，无pending/unknown。父窗61/1、外层99/2已诚实关闭，阶段累计**2421/72**；余量作废，失败待介入且仍需正常保存，不冒主星保存或Native旅程闭合。原Native deadline15:49:06.6394773及tick/返程储备不改；封caller账不赋新预算。全部MCP客户端已停，Root唯一idle writer。保留暂停中的RAM，不自动解除暂停、保存、退出、加载、核销隔离、重放或执行旧fallback Save。
+
+Protected Root review: `.local/v0.5-voyager/idle-quarantine-root-current-review-once.private.json`, SHA256 `F1BA0683E211DB7C550A4025749AE5775BCC5D88E2DFB2EEA7B5A56C0E904395`. It binds the original public readback, CP/journey snapshots, recovery audit and caller closure. Closure completion SHA256 `27CE9282A710A273BCFACAA5692C536F167B9822850870862CF154B985B70F2A` binds all32 CP/primary/ticket/Journal evidence and zero live Client/writer proof. Raw identities/actions/tokens/paths remain protected-local. Lab facts HEAD `04523f59420f555354993bdc2a7ada143c2b5c82`/CI39268306004, active/installed c0 and raw lock27F333861AAD8C91596C20839DAA4A6B2030659281DB6E16C7EBF39EE53E6BE4 remain; these two new activity heads are Root-owned dirty until the next explicit facts commit.
+
+Next sole result: complete the minimal shared strict landing-to-idle admission and exact blocker diagnostics, with relevant regression/full Plugin build/exact-SHA CI before adoption. Preserve all success guards and historical successful outcomes. Existing in-process reconciliation does not cover this successful-flight idle quarantine; current LastExit119926077 is too old and remote reload lacks the live controller binding. Any isolation recovery needs a concrete preservation/safe-takeover proof and separate owner confirmation. Final manual/Thunderstore review candidates remain paired null; no tag/Release/upload.
+
+下一唯一结果：补齐共享严格落地→空闲交接及准确失败细因，完成回归、完整Plugin构建与准确SHA绿CI后方可采用；不放宽守卫或追改历史成功。既有同进程核销不支持该隔离，现LastExit119926077过旧，远端重载又缺live绑定；任何隔离恢复须先有具体保留进度/安全接管证明，再获独立确认。最终手动/Thunderstore候选仍双null，不创建tag/Release/上传。
+
+## Historical pre-refuel boundary / 历史补给前截点
+
+Lab `04523f59420f555354993bdc2a7ada143c2b5c82` and its exact CI39268306004 are successful; actual product/installation remains c0a91bad59da09895c18410428f46969b6ba9f52, Native29151 and raw lock27F333861AAD8C91596C20839DAA4A6B2030659281DB6E16C7EBF39EE53E6BE4. The current saved-context file/OS entry passed without a Client: protected-local `post-cold-current-context-c0a91-once/saved-context.private.json` SHA256 `DFC5A76C8FE6E1FC5BC5A6D48DFA8D43463471B1697FBD8BC8980CDA893557C0`; reader `active_post_cold_saved_context_v1.py` SHA256 `8EC046CAB49D1A120D614B1995102FB0314FBC08EB789D04CAE2E4661C00C8DF`. They bind the real later default primary/ticket/Journal; old v6 and completed/retired ticks remain historical.
+
+准确Lab事实CI成功，活动/实装仍为c0、Native29151及上述真实锁；最小当前上下文完整纯文件/OS入口已通过，未创建Client。当前主档/票据/Journal来自真实较新默认恢复，旧v6及已完成/退役tick不冒当前值。
+
+A separate11-RPC/zero-accepted read window is closed at cumulative2322RPC/70accepted, all Clients normal EOF/exit0 and no unknown/pending action. Its actual Mother cut at119976126 reports6680 built/zero prebuild, all29 selected geometries unchanged, recipe62, mother ILS12GJ/20warpers/two idle and zero working vessels. It is a current read of the selected connection, not real supply or sustained transport. The Native route preview refused with `fuel_energy_reserve_insufficient`: observed loaded7.991939325GJ versus required8.994691398GJ, with full1.6GJ core, fuel chamber1802×10/inc0 and bag1802×35/inc0. The budget is that observation, not a fresh departure permission.
+
+独立11次只读/零接受窗口已闭合，累计2322/70，全部客户端正常关闭，无未知/未决。母星29选定几何与连接当前已实读，未新建或冒供货验收；当前原生航程被已装载燃料不足拦截，准确能量与物料见上，不能用旧正预览起飞。
+
+Protected receipts: `c0a91-mother-and-outbound-readiness-once/actual-native-budget.private.json` SHA256 `98D7E6BAE05080EF783DC732577A8AAA4DCD5BA5F0C3256FD7F2D57B0DF717EE`; Root Mother review `root-finite-drift-pause-deployment-once/current-mother-independent-review.private.json` SHA256 `1BADE37FD9D83431F7841725AB0C9847A88B653BD2B2ACD0557F409EA127E4F4`. Relative paths in this follow-up start under ignored `.local/v0.5-voyager/`. No current mission Parent or new write lifetime has been created. Root is the sole idle writer and healthy DSP keeps running.
+
+原始回执/当前身份均留上述保护目录，尚未创建新mission Parent或写入lifetime；Root唯一idle writer，健康游戏保持运行，不自动Save/Exit/Load。
+
+Next sole target: finish Root review of the two smallest private existing-interface refuel/fallback-Save successors, perform at most one fresh Native exact20-item refuel into the existing10-item chamber, then obtain a new positive budget before the same-target finite mining mission. This transfer is planned, not executed. Keep the original2100s/1200RPC/26-dispatch mission kernels,108000/54000 flight/reserve,900s return and180s Save. A fixed enclosing refuel/mission window must reserve normal Save before writes and must not renew on phase/session changes; if departure remains blocked, use only the reserved normal fallback Save. No product expansion/new source package is required for ordinary refuel. Voyager remains2/3 and final candidates remain paired null.
+
+下一唯一目标：Root核完最小既有接口补给/备用保存后继，至多fresh原生补给20件至现有10件槽，再获得真实正预算后执行同目标有限开采任务。补给尚未执行；保留原返程/保存与同journey预算，事前固定外层任务窗并预留正常保存，不按阶段/会话重置。若仍无法出发，只用已预留正常fallback Save闭合；普通补给不另开产品能力切片。验收仍2/3、最终候选双null。
+
 ## Active Voyager — finite land adapter installed / 有限陆地适配已安装
 
 Voyager remains **2/3**. Product `c0a91bad59da09895c18410428f46969b6ba9f52` is now the actual paired Plugin/MCP installation after one normal covering Save, one normal cold close/install/launch, same-Native default recovery and a fresh read-only check. Historical gates1/3 retain their distinct source evidence; sustained real remote mining → repeated interstellar vessel deliveries → mother consumption, including continued shipping after normal save/recovery, remains open. No remote facility, Move or new logistics acceptance occurred in this deployment.
