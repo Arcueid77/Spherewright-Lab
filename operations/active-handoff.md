@@ -1,22 +1,26 @@
 # Repository split handoff
 
-## Current result — recovery fix qualified; logistics remains open / 当前结果：恢复修复已核，持续物流未关闭
+## Current result — progress preserved, repair installed; exact Load pending / 当前结果：进度已保全，修复已安装；精确加载待确认
 
-**Voyager2/3.** Gate1 and Gate3 retain their original acceptance; real sustained interstellar logistics and final same-source candidates remain open. No new remote facilities, acceptance credit, tag, Release or upload. The detailed active facts, original-action/build/checkpoint references and remaining budgets are in [the Voyager snapshot](../scenarios/v0.5-voyager/current-status.md); following sections preserve historical boundaries only.
+Voyager **2/3**; original Gates1/3 stand, sustained real interstellar logistics and final same-source candidates remain open. Detailed current budgets, original-action/build/checkpoint references and incident receipts are in [the active Voyager snapshot](../scenarios/v0.5-voyager/current-status.md); following sections preserve historical boundaries only.
 
-**Voyager仍2/3。** 往返/真实故障恢复已过，持续物流与最终同源候选未完；没有新增远端设施或验收分。当前索引/预算详见活动快照，下列旧段仅为历史截点。
+Voyager仍 **2/3**：只剩持续星际物流验收及最终候选；当前预算/索引详见活动快照，下列旧段仅为历史截点，不重做0.4或已过门。
 
-Product is clean/pushed at `0e1a89a8564ee10be215e5d3a67fb032d4befe88`, exact CI39292929377/job118197952308 successful, complete Plugin build zero warnings/errors and4154 tests passed. Clean dependency now pins that SHA; raw lock SHA256 `D08E8E0E8792837CFDB815493FBCDDDE144B544BB62B1AB1AD230323E0110C7A`. Installed source remains `c0a91bad59da09895c18410428f46969b6ba9f52`, Native29151. Both same-source development previews are qualified, not installed or final candidates; their hashes and scoped package/privacy evidence are recorded in the snapshot. Root final package fields stay paired null; historical0.4 remains intact. This four-path Lab update still needs its own commit/CI.
+Product/source dependency/actual installed pair now use `0e1a89a8564ee10be215e5d3a67fb032d4befe88`, Native29151. Product exact CI39292929377 and4154 regression passed; Lab source facts `71c2468a0b1571cebba3a1216679ff3cb88b1c35`/CI39297788612 are green. New installed-facts raw lock SHA256 `F5320467DE2AB643CC2430CCB2929BA5A13639059DC17E93D72936E8372297B9` awaits this three-path commit; only installed.sourceSha and both package hashes/sizes changed. Development previews are installed and verified, not final acceptance candidates; root final fields remain null. No tag/Release/upload.
 
-产品新源码准确CI/完整Plugin/4154回归已过，活动依赖已准备；实际安装仍c0/Native29151，双包仅为必要开发预览，不冒最终候选。本次Lab四路径事实更新待提交/CI。
+源码/实际双包已同0e1，产品准确CI/完整构建/4154回归及Lab源码事实CI已过；本次只更新实际安装的五字段和两份交接，不冒最终候选。0.4历史保持。
 
-Latest public reads prove the same owned world loaded/quarantined and frozen at120034210; primary119921541/LastExit119926077 are older and ineligible. Root is the sole idle writer; all clients/callers closed, no pending/unknown action, cumulative2433RPC/72accepted. No new Game writes, renewed old windows or changed original reserves. Original UTC is expired; newer progress may not roll back. Next unique result is the separately confirmed single preservation/cold-deployment boundary, then an actual new exact load disclosure before any Load. The old116839330 permission does not cover this isolation. No automatic Resume/Save/Exit/Load.
+The owner-confirmed one-close/one-install/one-menu step completed. Full same-identity LastExit now covers120034210; original primary119921541/Journal/all32CP unchanged,1340 files preserved. One official paired transaction committed and one new Native preload/menu launch completed. Root alone, idle; all clients/callers closed,2444RPC/72accepted, one new prepare and zero commit/Load, no pending/unknown native action. Actual published menu is unloaded; it does not prove gameplay restored.
 
-同owned世界仍loaded/quarantined，旧主档/退出档不能覆盖新进度。Root唯一idle writer、无未决动作、阶段2433/72；原期限已过，原储备/已花预算不改。下一唯一结果为单次保进度/冷部署的隔离确认，加载前另出真实预览；旧许可不覆盖，不自动实机写入。
+授权冷步骤已完成，新完整退出档保住120034210，主档/Journal/32检查点未变；仅一次官方安装和启动。当前真实未加载菜单、Root唯一idle writer、阶段2444/72、零Load/未决原生动作。
 
-Root acknowledges the efficiency regression and applies EXP-321/322: concrete report around2minutes without a mature fresh request, Root takeover around5minutes through the existing protected client; reuse receipts and adjacent fresh prepare/commit/readback, no new executor or full Save/audit for every Move. Two same-family refusals stop that family; unknown results reconcile the original action only. This does not weaken native/privacy/confirmation gates. Source/package work is now closed; only original Gate2 blockers remain in scope.
+Next unique result is exact post-preview owner confirmation for this120034210/default/29151-to29151 recovery. Its immutable proposed effective UTC is2026-10-19T18:32:07.729133Z, natural charge cap18000ticks/300s within unchanged original reserves. Original expired UTC/spent/max remain recorded; actual P/g and safe adoption remain unknown. No automatic Load, old-primary fallback, successful-CP rollback or renewal by rekeying. Prepared lease expires18:03:55.6905882Z, independently of the proposal. Prior grant ended at menu. Cold completion protected-local SHA256 `D7C0235A0F7C33E55C9C7AA5887B99CB3E56B70EF34C7FB137539A5BBCC9D367`.
 
-Root承认此前准备空转；按EXP-321/322约两分钟报告、约五分钟接管既有入口，复用回执与相邻fresh操作，不每个Move重造脚本/完整保存审计。两次同类拒绝停候选族，未知只核原action；安全门不减。本修复源码/双包收尾，不再扩大能力，只处理原门2阻塞。
+下一唯一结果为本次真实加载预览后的明确确认；原UTC/tick/返程储备不改，补能可行性待原生核。旧授权只到菜单，不自动加载/回滚/重键续期。
+
+Root acknowledges remaining caller inefficiency (overbroad offline enumeration and local collector errors); originals retained, resolved through bounded capture/original receipts with no repeated prepare/commit. Apply EXP-321/322: about2minute report/5minute Root takeover via existing protected client, adjacent fresh prepare/commit/readback, no full Save/audit per Move, two same-family refusals stop, unknown reconciles the original action. Native/privacy/confirmation gates stay intact; no unrelated product scope.
+
+Root承认本轮仍有可避免的caller低效，已保原件、收窄并复用回执。执行EXP-321/322两分钟报告/五分钟接管，不每个Move重造执行器/完整保存审计；两次同类拒绝停候选族，未知只核原action，安全门不减。
 
 ## Active development — first-tick fix pushed, finite recovery pending / 活动开发：首 tick 修复已推送，有限恢复待完成
 
