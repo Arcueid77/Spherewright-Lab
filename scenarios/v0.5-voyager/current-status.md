@@ -1,5 +1,21 @@
 # Voyager active snapshot / 0.5 活动快照
 
+## Active — finite land operations awaiting installation / 有限陆地操作待安装
+
+**验收仍2/3。** 原跨恒星往返和故障精确恢复保留各自历史证据；当前唯一未关闭结果是同一目标的真实开采、持续跨星船运、母星消费，以及正常保存恢复后继续运输。本轮源码/包切片零Game RPC，未新建远端设施，不增加实机验收信用。
+
+- 产品/活动依赖：`c0a91bad59da09895c18410428f46969b6ba9f52`，干净推送，准确CI39259897813成功；本地完整Plugin零警告/错误，最终Contracts/Core/MCP三项目4047通过、零失败/跳过。中间指南契约失败与修后297项MCP原回执均保留。协议/playbook/status/safety均双语；72tools/1resource未变。
+- 新开发双预览：manual `71C35B3DD767590D046C20E9ECA3C42CB228324DEC635BC10DE6D70F89DC4D17` /36939489字节，Thunderstore `BB65E3590CC782C2208B4442840378AB5DC57695BC03620B9F1D4049AF50960C` /32669292字节。同源指南/嵌入资源/双语包及8次隔离metadata通过，257文件对419当前冻结私有值零命中。资格5FF430DD…、扫描E36D6B41…及完整原件归 `.local/v0.5-voyager/finite-cost-pause-product-git-once/completion.private.json`，完整证明SHA `B612726941CEDB8B97B454A09D4B3FA4985ADA826C78D34622ADC8412E7E4145`。仅development preview，未安装、未当最终候选。
+- 活动锁 `250EDE7504B639DCFEDAD63E48B86AFB9F8719C3AF39AAF61246A74660092D61`；实际安装完整保留 `86666b0d508d0e8ee258bd24ce3d5a436c199033` /原74C、36E双包，Plugin0.5.0、MCP0.5.0.0、DSP0.10.35.29151/EF31，最后读回Unity2022.3.62f3c1。最终候选双null；历史0.4冻结/tag/包未变。
+- Lab写入前HEAD `58f6c9b30fb21765aa3c03e36d5ec5f727a58c36`；维护者独占Git，已stage新依赖/锁，Root拥有三份活动文档修改。后续最终HEAD/准确CI以 `.local/v0.5-voyager/finite-cost-pause-lab-source-adoption-once/completion.private.json` 与实际Git为准，该证明未闭合前不称已提交。
+- Game闭合累计2260RPC/68接受；正常主档119601356，Journal105/五迁移，隔离1013×10/inc0。最后观察player119602741、session119602747、Journal119602749，分别保留，不冒称fresh同tick。Root唯一idle writer，全部旧动作已核销，无pending/unknown、无活动窗口/lifetime额度；健康响应的DSP续跑，不自动保存/退出/加载。31份较新primary已覆盖的检查点不得恢复。
+
+The minimal adapter funds possible Native Walk/Drift horizontal/thrust/background cost and uses ordinary exact-owned Pause when a guard, finite tail or observation fails. Thirteen paid Native ticks and the independent one-second wall bound are distinct; the first bound wins and return UTC includes cleanup. Normal success still requires real Walk/zero speed or genuine drone idle. Pause freezes later Native energy, not physics or unknown evidence. The existing journey keeps guarding remote idle until a budgeted controller takes over. Remote in-journey Host/primary reload without its live landed binding stays fail-closed, never automatic Resume/reload/replay.
+
+**下一唯一入口：** 先审当前主档/票据/Journal与实际86666安装态的最小后继，再一轮fresh覆盖正常Save→必要cold/default/只读核验；通过后进入已验证目标的有限采矿/供货任务包。不得重放旧cold、Save、default、observer及其key/配置，不能改历史旅程完成/退役tick以等于新primary。短边界证明 `.local/v0.5-voyager/native-physics-next-cold-minimal-boundary-v1.private.json` SHA `5F2CDA02F19B73A6C539489DCB1B62776020511B5CB4A84F93E48890A34ABB22`。Native审计者仅写保护目录新后继草稿；Root独审/离线阴性门未过前不执行、不claim新预算。旧全域径向数学WIP已保hash退役至保护目录，不随产品编译。
+
+Earlier dated sections below retain their own source/install/checkpoint scopes; use this active cut first.
+
 ## 2026-10-19 — native physics installed and read back / 原生物理观测已安装并读回
 
 Product `86666b0d508d0e8ee258bd24ce3d5a436c199033` is now the actual paired installation. The one normal covering Save completed at119601325 (15RPC/one original accepted action); the one cold phase closed normally with one paired committed transaction/one normal launch,12 live RPCs plus8 isolated metadata RPCs and all1326 protected files unchanged. The original default recovery then completed (14RPC/one accepted original), renewed the exact owned ticket and saved119601356. Its subsequent read-only observer closed at10RPC/zero writes, retained item1013×10/inc0 and Journal105/five transitions. Distinct final observations are player119602741, session119602747 and Journal119602749. The root closed index is protected-local `.local/v0.5-voyager/root-86666-cold-default-observer-closed-index.private.json`, SHA256 `13B751C79ACCF2DDA91C9549C91B7A1084123A0C802FB3B80B25AD3747E55F9D`; original action/commit/poll, package/config, renewed ticket, primary, Journal and Client receipts remain protected there and in its referenced originals.
