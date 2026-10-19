@@ -1,5 +1,17 @@
 # Repository split handoff
 
+## Current stop — exact recovery action failed safely / 当前停止点：精确恢复原动作已安全失败
+
+**Voyager2/3.** Owner-confirmed exact120034210 Load was submitted once after a fresh identical disclosure digest, then terminally failed the strict idle guard with `remote_idle_independent_mecha_cost_unproved`. Native Pause verified; actual world remains owned/quarantined at120034210 without tick advance. Complete LastExit120034210, primary119921541, Journal105/five transitions,1013x10 and all32CP hashes preserved. Original credential durably consumed; no retry/renewal. Root sole idle writer, all clients closed,2454RPC/73accepted, no pending/unknown action, no normal primary Save.
+
+**Voyager仍2/3。** 精确加载唯一原动作已明确失败并原生暂停，进度未推进/回滚；完整退出档/主档/J/32CP都保住。原凭据已消费，Root唯一idle writer、阶段2454/73、无未决动作，不重放/续期/自动保存或加载。
+
+Next unique offline result: prove whether actual EF31 shield/laser independent core debit paths can fit a finite bound in the existing local P/2P/strict13 and unchanged original journey reserves. Exact failed child is unknown from public receipts; compound RTS code is not a separate RTS diagnosis. Do not assume imported fields from Native defaults, delete guards, switch combat settings or add combat tooling. No product edit/build or new Game action is authorized by this diagnostic task; Root must first review the bounded evidence/design. See [the active snapshot](../scenarios/v0.5-voyager/current-status.md) for complete original indexes and budgets.
+
+下一唯一离线结果是核原生独立费用有限上界，未知保持未知；不切开关/删门/扩大工具。先审证据与最小设计，不因诊断自行写代码、构建或再实机尝试。
+
+Product/installed remains0e1a89a8564ee10be215e5d3a67fb032d4befe88/Native29151, Lab47702e530bad7fb194757da7d9499509bae24489 exactCI39300420965/job1182238476869/9passed. Current two activity heads are Root-owned new facts. Failure summary SHA256 `53EDE5B7320FDE6FBC56D50573B6E504E14DF6C1D299FEE1960549E77692DBB5`, full file/credential reconciliation `017FB1E226CB831EC3FD08EFDD0187DB44FEE656A09B7AE1682C3457BBC96137`, protected under `.local/v0.5-voyager/conditional-energy-cold-preservation-once/`. Existing EXP-321/322 efficiency rules remain; reuse original receipts, no repeated action or full audit per Move. Final candidates remainnull,0.4history intact, no publication. Following blocks preserve historical boundaries.
+
 ## Current result — progress preserved, repair installed; exact Load pending / 当前结果：进度已保全，修复已安装；精确加载待确认
 
 Voyager **2/3**; original Gates1/3 stand, sustained real interstellar logistics and final same-source candidates remain open. Detailed current budgets, original-action/build/checkpoint references and incident receipts are in [the active Voyager snapshot](../scenarios/v0.5-voyager/current-status.md); following sections preserve historical boundaries only.
