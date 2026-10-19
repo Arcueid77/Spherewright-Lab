@@ -1,5 +1,20 @@
 # Original Voyager acceptance / 原 0.5 验收
 
+## Closed home ILS supply and Save / 母星ILS补给与保存闭合
+
+**Latest closed checkpoint (2026-10-19):** Stage1529RPC/49accepted; saved118296544/observed118296601, Journal105 with all five original transitions/prefixes and isolated item1013×10 retained. Actual source/install remains ddec09e3e752358043dc7b0bb43486d800c3b940 / Native0.10.35.29151. One fixed48m Move succeeded (52RPC/one accepted), with sampled stable observations spanning600game ticks and actual Native ILS range readback. The existing ILS now has idle1/working1 vessel, warper20 and one previously empty slot configured as item1013/max100/localNone/remoteDemand; old slots0/1 and belt ports are preserved.
+
+The first suffix stopped after13read-only RPC/zero accepted/zero prepare or commit: it incorrectly treated Native dynamic requested charging power as static configuration. Its original failure and EOF/zero-unknown evidence remain intact. A separately reviewed successor completed34RPC/three accepted, followed by the reserved normal Save16RPC/one accepted. All use the same original900s/256RPC/five-acceptance parent, now closed with unused allowance forfeited; neither the successor nor Save reopened its budget. Root closure proof SHA64B307A3668718A3C603624615FC856EEE5742C896EF9190919AECDD16E9756E retains the protected originals.
+
+**Voyager remains2/3:** Gate1/source463 and Gate3/source216 keep their historical evidence scopes. Gate2 remains open: no new remote mine/station or actual mined-source deliveries and consumer operation have been established. Next unique target: fresh read-only probe of the fixed rank1 minimal home consumer, then only necessary local connections, followed by mining/power/passive ILS at the already verified target. The returned1013×10 remains isolated. Source lock2F, qualified package bytes, null final-review pair and frozen0.4 evidence are unchanged; no new package or publication is implied. Earlier entries below retain their original checkpoint scopes.
+
+**最新闭合截点：** 累计1529RPC/49accepted，保存118296544/观察118296601，Journal105/五次原迁移及完整prefix、隔离1013×10保留；实际源码/安装仍为ddec09e3e752358043dc7b0bb43486d800c3b940 / Native29151。唯一固定48m Move成功（52RPC/1接受），有跨度600game tick的采样稳定证据及真实ILS原生范围读回。原home ILS现为idle1/working1运输船、翘曲器20，原空槽配置1013/max100/localNone/remoteDemand，旧0/1槽和belt ports保留。
+
+首次suffix因误把原生动态请求充电功率当静态配置而在13RPC纯只读后停止，0接受/0prepare/0commit；原失败、正常EOF和无unknown证据保留。另行审核的后继完成34RPC/3接受，再以原预留完成一次正常Save（16RPC/1接受）。均归属同一900秒/256RPC/5接受父窗，现已关闭、余量作废；后继及Save未重开预算，Root独审64B307保留全部保护原件。
+
+**Voyager仍为2/3：** 门1/463与门3/216保留各自历史证据范围；门2仍开放，尚无远端新矿/新站或真实矿源供货、母星消费证据。下一唯一目标是固定rank1最小home consumer的fresh只读核验，再做本地必要连接，然后在已验证目标部署必要矿机/供电/passive ILS；带回1013×10继续隔离。活动锁2F、已合格包字节、最终交审双null及冻结0.4证据均不变，不生成新包或发布。以下旧条目按各自当时截点保留。
+
+
 These are the three existing Voyager clauses, frozen in scope by the owner's 2026-10-19 instruction. The table records capability, gap, smallest implementation and separate offline/live proof. A build, test, commit or new tool count does not close a live gate.
 
 Actual installed implementation now binds ddec09e3e752358043dc7b0bb43486d800c3b940 after the normal cover/cold/default/read-only boundary:229 actual payload files/Native5, saved118201060/observed118201890, Journal105/five preserved transitions, resource1013×10, Native3404 unlocked/queue idle and original home ILS warperCapacity50/count0. Root05B7 and independent9BB8 bind the protected original proof. The final-review pair remains null; clause2 still requires sustained mined-source transport, real home consumption and save/recovery continuation. The table and dated paragraphs below retain their original463/216 source/evidence boundaries; no historical credit or covered-checkpoint authority transfers automatically. See [the current snapshot](current-status.md) for current install/lock and the single next safe entry.
