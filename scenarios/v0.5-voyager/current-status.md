@@ -1,5 +1,36 @@
 # Voyager active snapshot / 0.5 活动快照
 
+## Short connection refused / 短接拒绝已核销
+
+Closed boundary1700RPC/52accepted, saved118811439/observed118939148. The one near-PLS qualification completed21RPC/one prepare/zero commit/zero accepted with a known product new-belt-centre occupancy refusal. The reported conflict matches a real existing2001 in the complete6660-object cut; it is outside the selected nine-object subset. The identical error format is used both before Native validation and after Native adjustment, so the reported pre/post phase and other internal candidates remain unknown. Complete NEW count/cost was not returned. No building, material debit, Save/Load or connection occurred; this candidate is stopped without another endpoint/angle retry.
+
+Root closure7DCBF5397BFEBF9B0405B6D673B00641228C8FC811FD437016B7DCC9E9CC8B2D binds the original21wire, unchanged Native geometry/primary/ticket, current seven-object consumer configuration, player inventory and Journal105/five transitions. Normal EOF/exit0/faults[], no pending/unknown, all allowances0; Root is the sole idle writer. Next unique result: offline inspect the actual reported obstacle and existing topology, then choose a genuinely different bounded design or prove a concrete product gap before any new prepare. No new mother facility or alternative rejected-seed replay. Voyager remains2/3; gate2 sustained mined-source delivery/consumption/save-recovery is open. Source/install ddec/Native29151/lock2F and package preview hashes are unchanged; final candidates remain paired null.
+
+当前闭合1700RPC/52accepted，保存118811439/观察118939148。近PLS唯一资格检查21RPC/一prepare/0commit/0接受，产品新带中心占位守卫明确拒绝；报告障碍在完整6660实体中唯一对应一条真实2001旧带，不在所选九对象子集中。此错误格式可来自Native检查前或调整后，不能据回执判断具体阶段或其他内部候选；整路线NEW数量/成本未返回。未建造/扣料/保存/加载/接通，该候选停止，不换端点或角度重试。
+
+Root7DCB闭包绑定原21wire、未改全几何/主档/票据、既有七对象消费配置、背包及Journal105/五迁移，正常EOF/exit0/faults[]，0pending/unknown/余量，Root唯一idle writer。下一唯一结果为离线核实际障碍和已有拓扑，据此重设计有限方案或证明具体产品缺口后才准新prepare；不新造母星设施、不重放拒绝seed。Voyager仍2/3，门2真实持续矿源供货/消费/保存恢复开放；ddec实装/Native29151/2F锁与预览包不变，最终交审仍双null。
+
+## Existing near PLS verified / 既有近端行星物流站已核验
+
+Closed boundary1679RPC/52accepted, saved118811439/observed118920600. One16RPC read-only packet freshly observed the already-known near PLS:10 idle/0 working drones,180000000/180000000J, power serve ratio1, raw drone range-1, and existing empty slots1/2/3 with zero orders. Existing slot0 remains1106×512/Demand. Native whole geometry stays6660 built/0 prebuild; player inventory, normal primary/ticket and Journal prefix are preserved. Root closure681FFCD2F596F805E25E27989F377BBCF614463E322DBE4A39C9B52BADC5544E binds the original16wire and full cutB6F1D50E92B8FA87FA80E3B1EBA3D46A5AF4949DF283B3D8AB321C4189F27ABC. All clients closed normally; zero prepare/commit/accepted, pending/unknown and remaining allowance. Root is the sole idle writer. No local dispatch or connection has been proved.
+
+Next unique result: qualify one short near-PLS-to-existing-input-store connection, within24RPC/120s/one prepare/zero commit. Preserve all old slots/ports. Equidistant actual free warehouse endpoints use the smallest Native slot as a deterministic single-seed tie rule; a refusal does not authorize trying the other endpoint. The stopped long ILS-to-store family remains retired. Actual complete NEW cost and future positive-tail sorter eligibility remain unknown. Source/install ddec/Native29151 and lock2F, development previews and paired-null final candidates remain unchanged; Voyager stays2/3. The1644 facts commit497434ec548a075ae40b0f56f0a9c18cf9c9a454 now has successful exact CI39213799489. No automatic Save/Exit/Load or publication.
+
+闭合1679RPC/52accepted，保存118811439/观察118920600。唯一16RPC只读包fresh核实原近端PLS：10架闲置/0工作无人机、电量180000000/180000000J、供电比例1、原生范围raw=-1；槽1/2/3为空且订单0，槽0保留1106×512/Demand。全厂6660实体/0预建不变，背包、正常主档/票据和Journal前缀保留。原16wire与完整cut由Root681F闭包绑定，MCP正常关闭，0prepare/commit/接受、0pending/unknown/余量，Root唯一idle writer；尚未证明派机或接通。
+
+下一唯一结果：≤24RPC/120秒/一prepare/0commit核一条近PLS到现有输入仓的短接，保留旧槽/端口。真实free仓端点平距时固定选最小Native slot，拒绝后不改试另端；旧ILS直长族继续退役。完整NEW成本与未来正带尾sorter仍未知。ddec实装/Native29151/2F锁、开发预览与最终双null不变，Voyager仍2/3；1644事实提交497434的准确CI39213799489已成功。不自动保存/退出/加载或发布。
+
+## Direct-route family stopped / 直连候选族停止
+
+Closed boundary1663RPC/52accepted, saved118811439/observed118839900: the single new endpoint qualification completed19RPC/one prepare/zero commit/zero accepted with a known occupancy refusal. No construction or material debit occurred; complete route cost remains unknown. This direct long station-to-store family is stopped, with the rejected seed and original receipts preserved; no angle retry or fake Native approval follows. Root closure851286A796E1F0F92A0294DD4F4CF4978769A91B904B379B1AFADA068211F6F5 verifies the original19wire, unchanged current seven-object consumer/stores/four sorters, Native whole geometry, primary/ticket, Journal105/five transitions and isolated1013×10, normal EOF/exit0/faults[], zero pending/unknown, all allowances0. Root is the sole idle writer.
+
+Next single result: first assess the two already-known home PLS and Native local-drone reuse from existing legitimate receipts/geometry; fresh only the actual eligible station/slots/fleet/short connection conditions if the evidence supports that finite alternative. Do not build a new mother facility, assume empty slots/drones, replay the rejected family or replenish guessed belt quantities. The existing consumer configuration and covering Save remain complete; gate2 still requires actual mined-source sustained shipping, consumption and normal-save/recovery continuation. Source/install ddec/Native29151, lock2F,5365/EEBE previews and paired-null final-review packages are unchanged, Voyager2/3; no automatic Save/Exit/Load or publication. The1644 facts commit is497434ec548a075ae40b0f56f0a9c18cf9c9a454; its exact CI was pending at this header's write, not claimed passed.
+
+闭合1663RPC/52accepted，保存118811439/观察118839900。新单终点资格以19RPC/一prepare/零commit/零接受结束，已知占位拒绝，未建造/扣料，整路线成本仍未知；直长station→仓候选族停止，原seed/回执保留，不换角度重试或假称Native通过。Root8512闭包核原19wire、既有消费端七对象/四sorter、Native全几何hash、主档/票据、Journal105/五迁移与1013×10均保留，正常EOF/exit0/faults[]，0pending/unknown、所有余量0、Root唯一idle writer。
+
+下一唯一结果：先用合法旧回执/几何审两座已知母星PLS及原生物流无人机复用；有依据才fresh核实际合适站的槽、船队和短接条件。不新建母星设施、不假空槽/无人机、不重试已停族、不按米数猜补料。现有消费设备配置和覆盖Save已完成，门2仍待真实开采持续船运/消费及正常保存恢复续运；ddec实装/Native29151/2F锁/5365与EEBE预览/最终双null、Voyager2/3均不变，不自动保存/退出/加载或发布。1644事实提交497434的准确CI在此头写入时仍pending，不伪称绿。
+
+
 ## Existing consumer configured and saved / 既有消费设备配置并保存
 
 Closed boundary:1644RPC/52accepted, saved118811439/observed118811561, Journal105/full original prefix/five transitions. The existing assembler now runs the unlocked Native recipe62 (1013×1→1113×2/90ticks); one existing input sorter is filtered1013. Both other input filters, the unfiltered output, all four endpoints and two30-grid stores are preserved. Both stores/machine buffers remain empty and the player's returned1013×10 is isolated. No building, belt, sorter, transfer, flight or Load occurred in this packet. This proves configuration and a normal covering Save, not actual consumption or a logistics route.
