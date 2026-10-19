@@ -1,5 +1,30 @@
 # Repository split handoff
 
+## 2026-10-19 — read-only physics source adopted; installation unchanged / 只读物理源码已采用，安装态未变
+
+Product `86666b0d508d0e8ee258bd24ce3d5a436c199033` is clean and pushed; exact CI [39244854567](https://github.com/Arcueid77/Spherewright/actions/runs/39244854567) passed all 4,007 Contracts/Core/MCP tests without failures or skips. The post-commit package entry separately completed the full native Plugin build with zero warnings/errors. Its development previews are qualified: manual SHA256 `74C6E75B58E479E0122B8C77EA34A35453B1D075D205377FCADFDCED5280420D`, Thunderstore SHA256 `36E85B6DCBFD91CC89174B7B2AB97AA759258576AEDDD612A973FC778F8E0346`; both expose 72 tools/1 resource and an exact source-matched English embedded guide and both packaged language guides. Qualification proof SHA256 `F92A77278F33D04632E9C36EF71A2C09BFE44A0C14BC4A2BA0146D61D43BC518` covers 243+14 payload files and 8 isolated metadata RPCs with zero Game RPCs. The additional scan of all 257 payload files against 390 frozen current private identity/authentication/path values found zero matches; this is the checked payload scope, not a claim about all session output.
+
+产品 `86666b0d508d0e8ee258bd24ce3d5a436c199033` 已干净推送，准确 CI 39244854567 的 4,007 项 Contracts/Core/MCP 测试全过、零失败/跳过；提交后包入口另行完整构建原生 Plugin，零警告/错误。上述手动及 Thunderstore 包仅为合格开发预览，均为 72 工具/1 资源，双语包内指南及英文嵌入指南与源码一致；243+14 个文件、8 次隔离元数据调用、零游戏调用。全 257 文件对当前冻结的 390 个私有身份/认证/路径值扫描零命中；该结论仅覆盖受检载荷，不代表全会话输出。
+
+The active Lab source and fixed dependency now pin that full SHA. The entire installed-state object remains the actual `ddec09e3e752358043dc7b0bb43486d800c3b940` cohort, with its previous package hashes, DSP29151 and verified disk/running facts unchanged; both final-candidate package fields remain null. The previous runtime lock SHA256 `2F3D7942E0EBD6588FA6EBC627E21E4BBCF18BC9AC42C143EA3190A76AA4BEBC` is preserved in Git and protected evidence. Its v6 receipt may supply the reviewed helpers' world anchor; the old lock-bound loader is not a new execution entry after adoption. This paragraph records the pre-commit source-adoption boundary; the later exact-SHA proof identifies its commit and CI.
+
+Lab 活动源码及固定依赖现锁定上述完整 SHA；实际安装对象仍完整保留 `ddec09e3e752358043dc7b0bb43486d800c3b940`、原双包哈希、DSP29151 与 disk/running 核验事实，最终双候选字段仍为 null。旧 2F3D 运行锁保留于 Git 和受保护证据；旧 v6 回执仅可提供已审 helper 的 worldAnchor，采用新锁后不得把旧锁绑定 loader 当作新动作入口。本段记录提交前源码采用截点，提交及 CI 由后续准确 SHA 证明定位。
+
+The closed game boundary remains 2,209 RPCs/66 accepted actions, primary save tick119430905, Journal105 with its five-transition chain and the isolated resource count10. Root is the sole idle writer; no action is pending or unknown and all MCP child clients are closed; healthy DSP remains running. Gate2 remains open, with historical Gate1/3 evidence retaining its distinct source lineage. The next sole target is the explicitly distinguished new-source/old-installed-cohort covering Save, then normal cold/default recovery and fresh read-only native-physics observations. No Move, ocean-guard relaxation, installation or publication is performed by this source adoption.
+
+已关闭实机截点仍为累计 2,209 RPC/66 接受动作、主档 tick119430905、Journal105 及五次衔接、隔离资源数量10；Root 唯一 writer 空闲，无未决/未知动作，所有 MCP 子客户端已关闭，健康 DSP 继续运行。门2仍开放，门1/3保留各自历史源码证据。下一唯一目标是明确区分新源码/旧实装的覆盖 Save，随后正常冷部署/default 恢复及 fresh 原生物理只读观察；本次源码采用不执行 Move、不放宽海洋守卫、不安装或发布。
+
+
+## Read-only physics source pending qualification / 物理只读源码待资格核验
+
+The independent product is now clean and pushed at `86666b0d508d0e8ee258bd24ce3d5a436c199033`; exact CI39244854567 was in progress at this record, not yet credited green. Its additive `nativePhysics` player observation passed the full local Plugin/solution build and4007/4007 offline tests, embedded-source-guide, package-surface and bilingual checks. It copies actual parameters only, leaves existing hashes/tools/execution guards unchanged and always reports `safetyCertified=false`. It does not close the continuous land/stop proof or Gate2.
+
+Lab last pushed facts remain `95b5704d73474f14a3c8ee7903a304fa34d91381`, exact CI39243040833 successful. The fixed read-only dependency, active lock and actual installed preview are still ddec/2F as specified below; the new86666 source has not been adopted or installed. This top follow-up is Root-owned dirty. Game state remains the closed2209RPC/66accepted boundary, normal Save119430905 and v6 offline entry below: Root sole idle game writer, no pending/unknown original, healthy DSP running. No new gameplay window is claimed. Final review candidates remain paired null, Voyager2/3.
+
+Next unique result: exact-SHA green CI and qualified same-source development-preview pair; then a necessary fresh normal Save against the current installed cohort, fixed Lab adoption and normal cold installation/resume before any new-source physics readback. Reuse existing bounded save/install/resume operations with new exact inputs; never replay old tokens/actions/claims. Actual runtime physics facts still need readback and are not a stopping-region certificate.
+
+独立产品已干净推送至上述86666完整SHA；本记录时准确CI仍运行，不能写成通过。只读参数切片已过完整本地Plugin/solution及4007项测试和指南/包接口/双语检查，未改变hash、工具或执行守卫，未关闭陆地停止证明与持续物流门。Lab已推送95b完整SHA及准确CI成功；依赖/锁/实装仍是下文ddec/2F，新源码未采用或安装。此顶部为Root自有dirty；游戏仍在2209/66已闭合截点及正常保存119430905，Root唯一idle writer、无未决/未知，健康DSP续跑，新游戏窗未claim。下一唯一结果是准确CI绿及同源开发双预览资格，随后对现安装态fresh正常保存，再固定采用/正常冷安装恢复后读取新参数；不重放旧动作，不以读参冒停止区域认证。最终候选双null、Voyager仍2/3。
+
 ## Mining journey saved; ocean-land safety gap / 采矿航程已保存、海洋星陆地安全缺口
 
 **Current closed boundary:** Stage2209RPC/66accepted, arithmetic only within the Voyager stage. The second mining Parent `remote1013-mining-native-journey-v2-once` is CLOSED at145RPC/three accepted originals (outbound, return, normal Save), all known completed and reconciled; unused allowance is forfeited, with no pending/unknown action. All six actual MCP clients have normal EOF, exit0 and no faults. Root is the sole idle writer; the healthy DSP continues running without an automatic Save/Exit/Load.
