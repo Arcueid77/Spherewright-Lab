@@ -1,5 +1,27 @@
 # Repository split handoff
 
+## Active Voyager — finite land adapter installed / 有限陆地适配已安装
+
+Voyager remains **2/3**. Product `c0a91bad59da09895c18410428f46969b6ba9f52` is now the actual paired Plugin/MCP installation after one normal covering Save, one normal cold close/install/launch, same-Native default recovery and a fresh read-only check. Historical gates1/3 retain their distinct source evidence; sustained real remote mining → repeated interstellar vessel deliveries → mother consumption, including continued shipping after normal save/recovery, remains open. No remote facility, Move or new logistics acceptance occurred in this deployment.
+
+Voyager仍 **2/3**；上述c0完整源码现已真实成对安装。一次正常覆盖Save、正常关闭/成对安装/启动、同Native默认恢复及fresh只读核验均成功。门1/3保留原来源证据；门2持续真实开采、重复船运、母星消费与正常保存恢复后续运仍开放。本次部署未建远端设施、未执行Move，不计新的物流验收。
+
+Actual packages remain **development validation previews, not final review candidates**: manual SHA256 `71C35B3DD767590D046C20E9ECA3C42CB228324DEC635BC10DE6D70F89DC4D17` (36939489 bytes), Thunderstore SHA256 `BB65E3590CC782C2208B4442840378AB5DC57695BC03620B9F1D4049AF50960C` (32669292 bytes). Actual229 managed files/Native5, Plugin0.5.0/MCP0.5.0.0, Native0.10.35.29151/EF31 and72tools/1resource were checked. Product exact [CI39259897813](https://github.com/Arcueid77/Spherewright/actions/runs/39259897813) remains successful. Active and installed source now agree; final package fields remain paired null and frozen0.4 records remain unchanged.
+
+实际安装双包仍仅为开发预览，完整hash/大小见上，未冒称最终候选。实际229受管文件/5个Native文件、Plugin/MCP/Native版本及72工具/1资源均已核验；产品准确CI成功。活动与安装源码现一致，最终候选双null、冻结0.4不变，不创建tag/Release/上传。
+
+The deployment closed at51 live RPCs/two accepted originals, plus8 isolated metadata RPCs; cumulative Voyager arithmetic is2311RPC/70accepted. Cover Save119921510 and renewed default Save119921541 are distinct. Final observations remain separate: player119923293, session119923299, Journal119923301. Journal105/five original transitions and isolated item1013×10/inc0 remain. All31 covered Native checkpoints retain their hashes and remain forbidden to restore. All five live-interface Clients ended normal EOF/exit0; no pending/unknown action or open lifetime/window remains, unused allowance is forfeited, Root is the sole idle writer and healthy DSP stays running without another automatic Save/Exit/Load.
+
+本次51次游戏接口/两个原接受动作及8次隔离元数据均闭合，阶段累计2311/70。覆盖保存119921510与默认恢复后新保存119921541各自独立；三次末观察tick见上，不合并同tick。Journal105/五次原衔接、隔离1013×10/inc0完整；31份已覆盖检查点hash保持，禁止回滚。五个实机客户端正常EOF/exit0、无pending/unknown，原lifetime/窗口关闭且余量作废；Root唯一idle writer，健康游戏继续运行，不因会话结束自动保存/退出/加载。
+
+Root independent closure: protected-local `.local/v0.5-voyager/root-finite-drift-pause-deployment-once/closed-index.private.json`, SHA256 `52DA86E87086E39AA6A9D7730229EF4F22ADB99ADC63AB79ADD2A3BA76355C15`. It binds original commit/action/polls, all Client exits, cold protected1330-file proof, exact config/source/pair, renewed ticket, full current primary and readback. Current raw source-lock SHA256 `27F333861AAD8C91596C20839DAA4A6B2030659281DB6E16C7EBF39EE53E6BE4` records the actual installation. This is the pre-fact-commit boundary after Lab `d7a492a2e546e8f5be73378eef7ef57b8fd308e0`; the following exact fact commit/CI will be located by `.local/v0.5-voyager/finite-cost-pause-installed-fact-once/completion.private.json`. Raw identities, tokens, private paths and receipts remain protected-local.
+
+Root独审闭合索引与当前磁盘锁完整hash见上；原动作/票据/主档/Native原始证据留保护目录。本段是d7a采用后的事实提交前边界，后续准确Lab提交/CI由该completion与实际Git核定，不提前冒称通过。
+
+Next sole target: derive the minimal current saved-context reader from this actual default/observer and installed lock, fresh-check mother geometry/departure reserves, then use the already validated target for one necessary miner, bounded power, electrically passive ILS and short connection. Preserve the same journey's return/Save reserve. The finite Native cost/Pause adapter is installed, but sampled terrain is never a continuous dry/physical-stop certificate; no automatic Resume/Load follows a failure. Do not execute old closed cold/mission inputs, reuse keys/windows, rewrite historical completed/retired ticks or borrow their checkpoint authority.
+
+下一唯一目标：以本次真实默认恢复/观察及已安装锁生成最小当前保存上下文，fresh核母星几何/出航储备，再复用已验证目标，仅补必要矿机、有限供电、无电被动ILS及短连接，保留同journey返程/正常保存预算。有限原生费用/Pause适配已安装；地面样本不冒连续干地/物理停稳证书，失败后不自动Resume/Load。旧已闭合冷部署/任务输入、key、窗口及历史完成/退役tick不得重放或改写。
+
 ## Active Voyager — land adapter qualified, cold deployment pending / 陆地适配已离线核验、待冷部署
 
 Voyager remains **2/3**: the original safe round trip and exact flight-failure recovery retain their historical source evidence; sustained real mining → interstellar vessel delivery → mother consumption, including continued transport after normal save/recovery, remains open. No new remote facility or Game action occurred in this source/package slice.
