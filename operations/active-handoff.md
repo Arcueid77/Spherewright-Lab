@@ -1,5 +1,33 @@
 # Repository split handoff
 
+## Mining journey saved; ocean-land safety gap / 采矿航程已保存、海洋星陆地安全缺口
+
+**Current closed boundary:** Stage2209RPC/66accepted, arithmetic only within the Voyager stage. The second mining Parent `remote1013-mining-native-journey-v2-once` is CLOSED at145RPC/three accepted originals (outbound, return, normal Save), all known completed and reconciled; unused allowance is forfeited, with no pending/unknown action. All six actual MCP clients have normal EOF, exit0 and no faults. Root is the sole idle writer; the healthy DSP continues running without an automatic Save/Exit/Load.
+
+Normal Save119430905 covers the completed return. Keep the later observation ticks distinct: session119431019, player119431027, Journal119431037. The Native journey is completed; its one exact return checkpoint/action/journey binding was verified and the checkpoint retired at119430905. The newer primary forbids rollback to that checkpoint. Journal105/full original prefix/five transitions and the isolated returned item1013 (分形硅石)×10/inc0 are retained. Neither of these two mining trips built a remote mine, power supply or station.
+
+The second approach stopped after one Native Move prepare and zero Move commits: the caller's existing dry-surface margin rejected a sample only0.0566m above water; it was not a Native movement failure. Separate offline source review confirms that the installed whole-planet layer4-ocean exclusion cannot qualify this target's land Walk or controlled construction. The first return-readiness child then stopped read-only after7RPC because core energy was insufficient. After finite natural recharge inside the SAME original Parent, a further7-RPC readiness read,44-RPC return and14-RPC normal Save completed. No prior window allowance or original Parent/Native deadline was reopened or reset.
+
+The65-check independent audit is protected at `.local/v0.5-voyager/independent-mining-v2-close-b21b43cd1ae0/independent-result-audit.private.json`, SHA256 `B01B4768D0588B88E10D865B2DF9B665479DB42E4AB6DAFBAFF0D788BC29C346`; original wire/actions, six Client exits, full current primary/header/fingerprint, renewed ticket and actual retired checkpoint are bound there. Raw identities, tokens, coordinates and Native paths remain protected-local.
+
+Product, installed preview and read-only dependency remain `ddec09e3e752358043dc7b0bb43486d800c3b940`, Native `0.10.35.29151`, lock SHA256 `2F3D7942E0EBD6588FA6EBC627E21E4BBCF18BC9AC42C143EA3190A76AA4BEBC`. This section records the pre-commit boundary: Lab last pushed HEAD was `b8898392b49e3ddf1335ddbb9e63e35c3b193053`, with exact CI39238382479 successful. Find the later fact commit and CI via its exact-SHA proof. This fact edit does not change the runtime lock. Voyager remains **2/3**: gates1/3 retain their historical evidence scopes, Gate2 sustained mined-source interstellar logistics/actual home consumption/save-recovery continuation is OPEN, and final manual/Thunderstore candidate fields remain paired null. The v5 saved-context/loader entry below is now historical and cannot authorize a new action against the newer primary.
+
+**Offline continuation entry:** frozen `active_normal_save_context_v6.py` SHA256 `6FBF5FF3E00D0EFF4B01E8642FEB90BB48FC2ED7E877CA19E10C11FB26D9EBFF` reads `.local/v0.5-voyager/post-voyager-normal-save-context-v6-29631da6f0f8/saved-context.private.json`, SHA256 `48234AFBAE481316901FEF9E29F50349E7C0B75B54E0CDF7561AC819E610E633`. Its file-only load and eight negative checks passed without a Client. Current factory hash/count/baseline objects are null and `requiresFreshMotherGeometry=true`; the old29 are historical. Before topology-dependent execution, a separate at-most9-RPC/60-second read-only cut must bind the newer Save/session and29 selected objects plus Journal/material/geometry, then explicitly adopt the actual current hash. This offline entry does not qualify ocean-land Walk.
+
+**Next unique target:** close the actual ocean-planet land-operation Native safety proof and implement only its minimal product adaptation; then complete same-source build/tests, exact-SHA CI, Lab lock adoption and necessary cold deployment before returning to the verified mineral area. Do not merely delete the ocean guard, lower the caller's water margin, enlarge a macro factory or develop the whole map. Earlier sections below retain their own historical scopes and are not current entry points.
+
+**当前闭合截点：** Voyager阶段累计2209RPC/66接受，仅作本阶段算术记账。第二次采矿父窗以145RPC/三原动作（去程、返程、正常保存）关闭，全部已知completed并核销，余量作废、无pending/unknown；六个实际MCP客户端均正常EOF/exit0/无fault。Root为唯一idle writer，健康DSP继续运行，不自动保存、退出或加载。
+
+正常保存119430905已覆盖返程；后置观察分别为session119431019、player119431027、Journal119431037，不合并为同一tick。原生航程completed，唯一实际返程检查点与原action/journey精确绑定并于119430905退役，较新主档禁止回滚。Journal105/完整原prefix/五次迁移，以及隔离的分形硅石1013×10/inc0保持；这两次采矿航程均未建远端矿机、供电或物流站。
+
+第二次approach在一次原生Move prepare后、零Move commit时被调用器既有干地余量门拦截（最低样本仅高出水面0.0566米），不计为原生移动失败。另经离线源证，当前产品整星layer4海洋排除守卫不能为该目标陆地步行或受控施工签安全证明。原返程前置先以7RPC纯只读因核心能量不足停止；随后仍在同一原父窗有限自然回充，再以7RPC前置读、44RPC返程和14RPC正常保存完成，未复用旧窗口余量或重置父窗/原生期限。
+
+上述65项独审的完整SHA及相对保护索引见上。源码/实装/只读依赖仍为ddec，Native29151、2F锁不变；本节记录提交前截点：Lab当时已推送b8898392b49e3ddf1335ddbb9e63e35c3b193053的准确CI39238382479成功。后续事实提交及CI见其准确SHA证明，本事实编辑不改变运行锁。Voyager仍2/3，门1/3仅保留原证据范围，门2持续真实开采供货、母星消费及正常保存恢复后续运仍开放，最终手动/Thunderstore候选双null。下文v5保存上下文/loader已是历史，不能对较新主档作新入口。
+
+**离线续接入口：** 固定v6 loader及实际receipt的完整SHA见上；纯文件load与8项阴性检查均已过，未创建Client。当前全厂hash/count/baseline objects均为null，`requiresFreshMotherGeometry=true`，旧29仅历史。拓扑相关执行前，须另以最多9RPC/60秒纯只读cut绑定新Save/session、29已选对象及Journal/材料/几何，再明确采用实际当前hash；此离线入口不开放海洋星陆地Walk。
+
+**下一唯一目标：** 闭合海洋星球陆地操作的真实Native安全证明及最小产品适配，完成同源码构建/测试、准确SHA绿CI、Lab锁采用和必要冷部署后，再到已验证矿区；不得单删海洋守卫、降低水面余量、扩大宏观工厂或全图开发。后续旧段按各自历史截点保留。
+
 ## Safe return saved; sustained logistics remains open / 安全返航已保存、持续物流仍开放
 
 The original2100-second/1200-RPC/16-dispatch mission is CLOSED:155RPC and exactly three accepted originals (outbound, return, normal Save), all completed and reconciled, with unused allowance forfeited. Cumulative stage2054RPC/63accepted after the strict9-RPC Mother refusal and the separate9-RPC explicit refresh below. Normal primary119297059 covers the return; observed119297182, durable journey completed and its unique return checkpoint retired at that same Save tick. The protected original receipt is `remote1013-minimal-native-journey-once/save-full-runtime-phase-suffix-once/readback.private.json`, SHA256F5D76006F8051C571BB4AF27B8E1AE23EF0595C070B534ADB972075D9B2FD4C8. Root is the sole idle writer, every actual MCP client exited normally, and no original action is pending or unknown. The healthy DSP stays running; no Load/rollback was used.
