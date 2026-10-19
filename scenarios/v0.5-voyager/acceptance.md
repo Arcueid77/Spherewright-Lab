@@ -2,6 +2,10 @@
 
 These are the three existing Voyager clauses, frozen in scope by the owner's 2026-10-19 instruction. The table records capability, gap, smallest implementation and separate offline/live proof. A build, test, commit or new tool count does not close a live gate.
 
+Actual installed implementation now binds ddec09e3e752358043dc7b0bb43486d800c3b940 after the normal cover/cold/default/read-only boundary:229 actual payload files/Native5, saved118201060/observed118201890, Journal105/five preserved transitions, resource1013×10, Native3404 unlocked/queue idle and original home ILS warperCapacity50/count0. Root05B7 and independent9BB8 bind the protected original proof. The final-review pair remains null; clause2 still requires sustained mined-source transport, real home consumption and save/recovery continuation. The table and dated paragraphs below retain their original463/216 source/evidence boundaries; no historical credit or covered-checkpoint authority transfers automatically. See [the current snapshot](current-status.md) for current install/lock and the single next safe entry.
+
+当前实际安装已是ddec；正常覆盖Save/冷部署/默认恢复/只读闭包证明实际229文件与Native5，保存118201060/观察118201890，Journal105/五迁移、1013×10、3404已解锁/队列空、原home ILS翘曲器容量50/数量0。Root05B7/独立9BB8绑定保护原证据，最终交审包仍双null。门2仍须持续真实开采船运、母星消费及保存恢复后继续运输；下表及旧段落保留各自463/216源码与历史截点，不自动移植验收、不恢复已覆盖检查点；最新锁和唯一安全入口见[活动快照](current-status.md)。
+
 Current prerequisites are recorded in [the active snapshot](current-status.md): Native3404 has completed inside its original window; sustained logistics remains open. / 当前前置见[活动快照](current-status.md)：原生3404已在原窗内完成，持续物流仍待验收。
 
 | Original clause / 原条款 | Existing capability / 已有能力 | Gap / 缺口 | Minimum implementation / 最小实现 | Tests and live evidence / 测试与实机证据 |
