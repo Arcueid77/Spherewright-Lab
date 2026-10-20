@@ -1,5 +1,19 @@
 # Original Voyager acceptance / 原 0.5 验收
 
+## Current installed/runtime pointer / 当前实装运行指针：3289RPC / 106accepted
+
+| Boundary | Verified scope |
+| --- | --- |
+| Actual source/dependency/installation12e6 | Root4582/full Plugin and exact product CI39505623574/all13, exact Lab source-adoption CI39507034151/all9; qualified development pair actually installed, Native29151 unchanged. |
+| Normal home recovery and Save | Cover15RPC/one accepted plus unique resume15RPC/one accepted, both completed/succeeded/normalEOF. Final primary120747434; session120747458/Journal120747460/player-protected120747466 are separate reads. |
+| Checkpoint120617857 | Native startup retired it at cover primary120746413 by exactly three metadata fields. Journey recovered_closed; zero checkpoint loads, no replay. |
+| Gate2 | **Open / 未通过**: remote landing recharge and first-handoff execution remain unproved; actual mining, isolated passive ILS, sustained shipment/home consumption and post-save continuation are still required. |
+
+Root verifies35old Native checkpoint binaries and18old consumed replicas unchanged, two new consumed/two active ticket replicas, Journal107/five transitions and1013x10/inc0. The original window is closed/remaining0, all actions known terminal/no unknown, healthy game continues under Root alone. Caller Windows-path spelling refusal was pre-client/zero RPC and is retained, not a Native refusal. Source lock changes only five actual installed source/hash/size facts; active12e6, frozen0.4 and original Gate1/3 evidence remain unchanged. **Original acceptance stays2/3 and final manual/Thunderstore review candidates paired null.** Next is the same selected target's minimal bounded logistics under fresh Native gates, without new research or macro-factory expansion.
+
+Protected Root closure SHAA59073477CAEC327AB0A960FCCB5A4832AE05B6715653EE8BC5307DA2FD788CB and original30RPC audit SHAD6424AAD3DA5FA6E9C2B739294F0B7BE16DCFA46DBDE6BE0345E882DD0C477FA bind this cut. No new Game call is made by fact maintenance; this commit's exact Lab CI is recorded externally at terminal. 以下原三条款、门1/3已过证据及历史快照原字节保留。
+
+
 ## Current source-only acceptance pointer / 当前源码指针：12e6，实际仍4fc
 
 | Boundary | Verified scope |
