@@ -1,5 +1,18 @@
 # Original Voyager acceptance / 原 0.5 验收
 
+## Current acceptance pointer / 当前验收指针：3251RPC / 104accepted
+
+| Original clause | Current status | Current evidence boundary |
+| --- | --- | --- |
+| 1. Normal cross-star return with the missing resource | Historically passed; unchanged | Original clause1 evidence remains below; isolated1013x10 retained. |
+| 2. Sustained cross-star logistics | **Open / 未通过** | Actual4fc580outbound reached the target but handoff failed with `remote_idle_core_stop_reserve_insufficient`; no remote mine or sustained delivery credit. |
+| 3. Recoverable flight failure and exact checkpoint recovery without newer-primary rollback | Historically passed; unchanged | This unique CP120617857 recovery and successful normal primary120617900 are reconciled additional facts, not replay or replacement of original clause3 proof. |
+
+Source/dependency/actual installation4fc580 and source lock are unchanged, Native29151 unchanged. Original42RPC/one-accepted flight remains terminal recovery_required. Matching recovery plus normal Save used18RPC/two accepted; checkpoint=recovered, journey=recovered_closed, newer primary covers it and forbids another reload. Session120617909/player120617910/Journal-protected120617912 are separate observations. All three original actions are known terminal, clients normalEOF, original Parent closed/remaining0, healthy owned home with Journal107/five transitions and1013x10. Root's scope verifies old34checkpoint binaries and18old consumed replicas unchanged,35Native checkpoint binaries total; no blanket unchanged-metadata claim.
+
+**Original acceptance remains2/3; final manual/Thunderstore candidates remain paired null.** Next unique result is the minimal bounded natural-core recharge design inside the existing Native flight for the measured landing reserve deficit, preserving all original budgets/guards; no blind reflight/new research/factory expansion. Protected Root closure SHA42D5B86B8AD9ED7C13F0309FA89745DEC73F95F32036E38CC0A4D1B0FFE97F12 and original84RPC audit SHA1B5365CC21279DD2FD556E5755176117037086F1D56C79EB30B7EDD4E8ECDD24 bind this cut. Root alone owns the healthy game; this fact window makes zero Game calls. 以下原三条款及历史证据原字节保留。
+
+
 ## Current installed/runtime pointer / 当前实装与运行指针：3148RPC / 101accepted
 
 | Boundary | Verified scope |
