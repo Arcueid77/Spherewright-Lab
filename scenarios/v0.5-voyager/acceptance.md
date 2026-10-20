@@ -1,5 +1,17 @@
 # Original Voyager acceptance / 原 0.5 验收
 
+## Current source/runtime pointer / 当前源码与运行指针
+
+| Boundary | Verified scope |
+| --- | --- |
+| Active source/dependency4fc580 | Root4548full validation and exact product CI39495317793/all13success; narrow Native-root contraction and first-handoff diagnostics only. |
+| Actual installation338d | Existing installed development pair and Native29151 unchanged; new4fc580 pair/cold verification not performed at this snapshot. |
+| Last runtime3111RPC/99accepted | Root's correct seven-call read proves healthy owned home; session120506140/player120506144. Earlier five-call wrong-prefix protocol fault is retained separately. |
+| Original acceptance | **2/3** historically passed. Gate2 actual remote mine/power/passive ILS, sustained shipments/home consumption and post-save continuation remain open. Final review packages remain paired null. |
+
+Normal primary120475051 covers the recovered checkpoint120470990; no repeated restore or replay of the failed338d flight family. Next result is the one qualified same-source4fc580development pair followed by necessary bounded cold verification; no new research/factory expansion or Game credit from this source-only adoption. Root remains sole game writer and the healthy world continues running. Source QA review SHABB5D8C3ED5512940843354F483515D9EEDFDA6B920993248DFEA6014AAB6B8A8 and exact product CI review SHAC4E64BA4157E706BBB20811EEDA2ED73142FB3AF7C73DB91896E4C90123C419D retain their protected originals. The original clauses, passed Gate1/3 evidence and historical snapshots below are preserved byte-for-byte.
+
+
 ## Current acceptance pointer / 当前验收指针：3099RPC / 99accepted
 
 | Original clause | Current status | Latest evidence boundary |

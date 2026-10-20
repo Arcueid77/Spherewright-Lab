@@ -1,5 +1,20 @@
 # Voyager active snapshot / 0.5 活动快照
 
+## Current source adoption — bounded Native root contraction / 当前：场景窄适配源码门已过，尚未安装
+
+Active source and fixed dependency select `4fc580f8115e9d947c0184ba21722be64bc13862` (parent338d). Root's complete solution/Plugin build has zero warnings/errors and **4548** passed tests (Contracts96/Core4104/MCP348), with documentation/embedded bytes and all frozen source/docs/Native references checked. Exact product CI39495317793/job118878770185/attempt1 completed all13steps successfully. The15-file slice adds a bounded positive uniform Native-root contraction path under the retained scene/foot/radius/energy gates and a first-landing handoff diagnostic that preserves its first capture. It neither proves a live landing nor grants any new execution permission. Original freeze copied metadata is superseded by Root's exact338d provenance; original QA/failure evidence is retained.
+
+**Actual installation remains338d**, with the existing qualified pair unchanged; Native0.10.35.29151 and frozen0.4 remain unchanged, and final manual/Thunderstore review candidates stay paired null. The new same-source development pair is not yet generated or installed at this snapshot. This adopting commit's exact Lab CI is recorded externally when terminal; source CI and historical successful installation do not substitute for that gate or for runtime acceptance.
+
+The last Root-reported runtime boundary is **3111RPC/99accepted**, healthy loaded/owned home with writesAllowed, alive/onPlanet/Walk. Session observation120506140 and player observation120506144 are separate readbacks. Normal primary120475051 still covers checkpoint120470990; the checkpoint is recovered and journey recovered_closed, so no repeat recovery of the covered checkpoint. Root's first five-call follow-up omitted the public tool prefix and had no Native calls: child exit0/double EOF but client normalEof=false with a recorded protocol fault. The subsequent correct seven-call observation had normalEOF. No Save/Pause/exit/Load was performed in those12read-only calls. The prior failed flight/result remains failed and reconciled; no new remote construction or logistics credit.
+
+**Next unique result:** qualify the one clean4fc580development pair, then only the necessary same-owned-world/no-rollback cold verification under fresh Native admission. Do not fly the old338d failed family again, select new research or expand factories. Keep the healthy game running while offline work proceeds. Voyager remains **2/3**: actual remote mining, bounded power/passive ILS isolated from charging load, sustained real shipments/home consumption and continuation after normal Save/recovery remain open. Root is the sole game writer; this source-only adoption performs no Game call.
+
+Protected Root source/QA review: `.local/v0.5-voyager/validation/native-scene-handoff-root-qa/root-independent-source-qa-review.private.json`, SHABB5D8C3ED5512940843354F483515D9EEDFDA6B920993248DFEA6014AAB6B8A8; exact-source CI review SHAC4E64BA4157E706BBB20811EEDA2ED73142FB3AF7C73DB91896E4C90123C419D. Product Git completion `.local/v0.5-voyager/native-scene-handoff-product-git-once-d6f617bc33ea/completion.private.json`, SHADE4155FCA1395009A7B3C95F465B2A1336C420C3CA3967EC06EAE41E35EBA736; raw identity, tokens and Native addresses remain protected. Following blocks retain their original historical cuts.
+
+当前仅4fc580源码/4548回归与准确产品CI已通过；实际仍338d，合格新开发包和必要实装验证尚待。最近纯读3111/99健康母星，无新保存或加载；早先工具前缀错误的协议fault原件保留，不冒称该客户端normalEOF。原失败族不重飞，历史验收2/3与最终双null不变，以下旧块原字节保留。
+
+
 ## Current recovered home boundary / 当前：失败航程已精确恢复并正常保存
 
 Active source, fixed dependency and actual installation remain `338d043912ad79c8854fbf7dd04d1e25bac2cc39`, Native0.10.35.29151. Root4522/full Plugin validation, exact product CI39482936728 and the qualified installed development pair keep their original scopes. Source lock is unchanged; final review packages remain paired null and frozen0.4 evidence is untouched.
