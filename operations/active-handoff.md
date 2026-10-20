@@ -1,5 +1,22 @@
 # Repository split handoff
 
+## Current successful remote landing, failed Move and safe home Save / 当前：远端落地成功，Move停滞后安全返航保存
+
+Source/dependency/actual installation remain `12e6dfcaaae923c844cc3ae0c2b66c185537b93a`; its exact source CI, installed pair/hash facts and source lock are unchanged. The one original outbound **46RPC/one accepted** completed/succeeded with remote_landed. A same-parent **124RPC/zero accepted** observation captured59real core samples, from167063673.903J to1573746340.569J (above1.56GJ). Net growth was approximately3.28MW per Native game-time second over25732game ticks; this is actual sampled energy, not future recharge credit or an assumption about Unity physics steps. No construction was admitted.
+
+The original walk used **22RPC/one Move accepted**, then ended **action_failed / position_stalled**, with180stalled game ticks (191game ticks between the action's start/end). Native settlement is known; **the Move task remains unfinished**. Its caller's acceptedObserved=2 is cumulative Parent credit after outbound plus Move, not two newly accepted Moves. No build was prepared/committed, and the failed action/family is not replayed. The stall alone does not prove a product defect or a need for another deployment.
+
+After **8read-only withdrawal RPC**, the original return used **49RPC/one accepted**, completed/succeeded, and the original normal Save used **14RPC/one accepted**, completed/succeeded. Final primary **120825768**, session120825889, player120825899 and Journal/protected floor **120825911** are distinct reads. Current checkpoint120817837 is retired at that Save; journey=completed. The unchanged source lock and final manual/Thunderstore paired-null packages remain. Journal107/five transitions and isolated1013x10/inc0 are retained. All four original actions are known Native-settled, all six clients normalEOF, no pending/unknown action; the failed Move is still task-failed.
+
+The original Parent closes at **263RPC/four accepted**, remaining allowance0/unused forfeited. With the external3313RPC/106accepted base, the cumulative protected cut is **3576RPC/110accepted**. The healthy home game continues under Root alone as the idle writer; no Pause/exit/Load or new Game call is performed by this fact-only Git window.
+
+**Next unique result:** use the original Move receipt to inspect nearby obstacles and assess the existing fresh-geometry/finite local-tangent detour capability; first distinguish caller/site conditions from a real product gap. Do not infer a product defect from stagnation alone, replay the failed family or fly blindly. No new research or macro-factory expansion. Voyager stays **2/3**: actual remote mining, passive ILS/power isolation, sustained shipments/home consumption and post-save continuation remain open; final review candidates remain null.
+
+Protected Root closure: `.local/v0.5-voyager/12e6-minimal-logistics-prep-39f9879d09274c3292e935c8dfa7f887/root-current-safe-withdrawal-closure.private.json`, SHA9682735ED200830A88997670D010CC912A51204E404AD276EC73C7C8E58F970A. Short original-wire audit: `.local/v0.5-voyager/12e6-safe-withdrawal-facts-git-once-84e1c52d771b/actual-original-safe-withdrawal-evidence.private.json`, SHAFA0AA2D705C0C68A45431619BE006399F643EDAC3570B9F124AE62F747AA8E79. Private identity, keys, process/Native paths and raw positions remain protected. This fact commit's exact Lab CI is recorded externally at terminal; all following historical blocks retain their original cuts.
+
+本次原去程真实落地、59样本真实补能，随后唯一Move停滞失败；失败任务未改写为成功，未施工。原返航和正常Save均成功，累计3576/110、全部已知终态且无未知未决，健康母星继续运行。下一仅核原Move附近障碍与现有有限绕障能力，不凭停滞推定新产品缺口；验收仍2/3与最终双null，以下旧尾原字节保留。
+
+
 ## Current actual12e6 installation and healthy home / 当前：12e6已实装并健康恢复
 
 Active source, fixed dependency and actual installation are `12e6dfcaaae923c844cc3ae0c2b66c185537b93a`, Native0.10.35.29151. Root4582/full Plugin validation, exact product CI39505623574/all13 and source-adoption Lab0ad209cf45d7e782d1605119576db954183f0ce7/exact CI39507034151/all9 retain their original scopes. The fully qualified development pair is now actually installed: manual3AF8ACA4CC307CA53DA460725FC31E4E7B6A66C3B4652D82462492BA36FFC9C3/37053895bytes; Thunderstore-formatA0F520F3649D02CCA95257A7C490DF1B9EC2172F39E489C6BB39466FEBF8EA56/32781601bytes. Only the five installed source/hash/size lock facts change; active source, Native/frozen0.4/history and final review paired-null packages are preserved.
