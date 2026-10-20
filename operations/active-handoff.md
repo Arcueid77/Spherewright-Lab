@@ -1,5 +1,22 @@
 # Repository split handoff
 
+## Current source-only landing recharge adoption / 当前：落地补能修复通过源码门，尚未安装
+
+Active source and fixed dependency select `12e6dfcaaae923c844cc3ae0c2b66c185537b93a` (parent4fc580). Root's corrected complete solution/Native Plugin build has zero warnings/errors and **4582** passed tests (Contracts96/Core4138/MCP348, zero failed/skipped), with bilingual documentation, exact English embedded bytes and all531source/303documentation/five Native-reference hashes checked. Exact product CI39505623574/job118913675953/attempt1 completed all13steps successfully. The original six test-data Int32-to-NullableInt64 binding failures are retained; only six101-to-101L test literals corrected that fixture issue before successful full validation.
+
+The13-file source slice adds bounded **core-only Native landing recharge within the original flight budget**, retains the13P stop reserve and original journey/UTC/return limits, funds the actual Native501 tick and preserves the pending checkpoint-success sequence. These are source/review facts. **The new landing recharge has not been observed in the game**, and source CI does not prove successful landing, remote construction, mining or sustained logistics.
+
+Actual installation remains `4fc580f8115e9d947c0184ba21722be64bc13862`, with its existing installed development-pair hashes/sizes unchanged. Source lock changes only the active source SHA; installed/Native/frozen0.4/history and final manual/Thunderstore paired-null candidates are preserved. The new12e6development pair and necessary same-world cold verification are the next result; this source-only boundary has no package/install or Gate2 credit. Exact adoption Lab CI is recorded externally when terminal, rather than inserted as a self-referential commit.
+
+The last protected runtime cut remains **3251RPC/104accepted**, a historical observation rather than a fresh read by this offline window. Primary120617900 covers checkpoint120617857; checkpoint=recovered, journey=recovered_closed, protected progress floor120617912. The original4fc580flight remains failed with `remote_idle_core_stop_reserve_insufficient`; matching exact recovery and normal Save genuinely succeeded. Healthy owned home/writesAllowed, Journal107/five transitions, isolated1013x10 and no unknown/pending action are the original closure's scope. Do not load the already covered checkpoint again or replay the failed action; later independent Root reads have their own evidence cuts.
+
+**Next unique result:** qualify one clean same-source12e6manual/Thunderstore-format development pair, then the necessary same-owned-world/no-rollback cold verification under fresh Native admission, original budgets and normal-save coverage. The healthy game keeps running under Root as the sole game writer; this adoption makes no Game call, Save, Pause, close, Load, build, package or publication. Do not re-fly the old failed family, select new research or expand mother facilities. Voyager remains **2/3**, Gate2 open and final review candidates null: actual remote mining, isolated passive-ILS power, sustained shipments/home consumption and continuation after normal Save/recovery remain unproved.
+
+Protected source provenance: `.local/v0.5-voyager/validation/landing-charge-root-qa-corrected/root-current-source-provenance.private.json`, SHA5B2E5B710048F236DBE0081375A1100585C7A2FFD87F4493FF7D4DAEBEA7B722; Root source/QA review SHA860D686DFC26A0EA443B2C84CBCAD6D445686E7C3A42CF79EBCEC202B735A850; completeQA SHAEC7BAB3B2260E372C0BDA5048096E03714C0F0237830125BCFCA1CAF669FB754; exact product CI review SHA3B19881C11A51D8665C0F8CD84320DF0A39DB4BE5809EAC38694BF1242D656C0. Product Git completion `.local/v0.5-voyager/landing-charge-product-git-once-1a827e69e603/completion.private.json`, SHA99518B3D6D0C99BB9899C88405C317E639849DC8979DBE7D1EDF4ECC5D0A7B66. Latest protected runtime closure SHA42D5B86B8AD9ED7C13F0309FA89745DEC73F95F32036E38CC0A4D1B0FFE97F12. Raw identities, keys, tokens and Native/process paths remain private; following blocks retain their historical cuts.
+
+当前仅12e6源码、4582完整回归、真实Plugin与准确产品CI已通过；实际仍4fc，新补能实机未证。旧3251/104不是此次fresh观测，健康游戏继续，验收仍2/3与最终双null。下一仅同源合格开发双包及必要同世界冷验证，以下旧尾原字节保留。
+
+
 ## Current landing reserve failure and recovered home / 当前：落地储备不足已精确恢复并正常保存
 
 Active source, fixed dependency and actual installation remain `4fc580f8115e9d947c0184ba21722be64bc13862`, Native0.10.35.29151. The qualified installed development pair, source lock and frozen0.4 facts are unchanged. Final manual/Thunderstore review candidates remain paired null.

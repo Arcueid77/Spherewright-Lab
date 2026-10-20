@@ -1,5 +1,19 @@
 # Original Voyager acceptance / 原 0.5 验收
 
+## Current source-only acceptance pointer / 当前源码指针：12e6，实际仍4fc
+
+| Boundary | Verified scope |
+| --- | --- |
+| Active source/dependency12e6 | Root complete solution/Native Plugin0warnings/errors; corrected4582tests passed, bilingual/embedded bytes exact; product CI39505623574/job118913675953/all13success. |
+| Actual installation4fc580 | Existing actual development pair/Native29151 unchanged. New core-only landing recharge remains uninstalled and unproved in the game at this source-adoption cut. |
+| Last protected runtime3251RPC/104accepted | Historical healthy home closure; normal primary120617900 covers recovered CP120617857, journey recovered_closed, protected floor120617912. No new Game read or write here. |
+| Original acceptance | **2/3 historically passed**. Gate2 real remote mining, isolated passive ILS, sustained shipments/home consumption and post-save continuation remain open; final manual/Thunderstore candidates paired null. |
+
+The source-only adoption changes the active source SHA/fixed dependency while preserving installed/Native/frozen0.4 and original Gate1/3 evidence. It retains13P and the original Native flight/journey/UTC/return limits, funding the actual Native501 tick; a passed source test is no runtime admission. The original failed4fc580flight remains failed and reconciled; matching recovery/Save succeeded and the covered CP must never be loaded again. Next unique result is one qualified same-source12e6development pair and necessary same-owned-world cold verification, not blind reflight, new research or factory expansion. Root alone owns the healthy game; this fact window makes no Game call.
+
+Protected Root provenance SHA5B2E5B710048F236DBE0081375A1100585C7A2FFD87F4493FF7D4DAEBEA7B722, fullQA SHAEC7BAB3B2260E372C0BDA5048096E03714C0F0237830125BCFCA1CAF669FB754 and exact product CI review SHA3B19881C11A51D8665C0F8CD84320DF0A39DB4BE5809EAC38694BF1242D656C0 retain the original source evidence. Latest runtime closure SHA42D5B86B8AD9ED7C13F0309FA89745DEC73F95F32036E38CC0A4D1B0FFE97F12 remains a separate historical cut. This adopting commit's exact Lab CI is recorded externally after terminal. 以下原三条款、已通过门1/3和历史证据原字节保留。
+
+
 ## Current acceptance pointer / 当前验收指针：3251RPC / 104accepted
 
 | Original clause | Current status | Current evidence boundary |
