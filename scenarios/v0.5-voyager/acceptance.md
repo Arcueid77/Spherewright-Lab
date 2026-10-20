@@ -1,5 +1,19 @@
 # Original Voyager acceptance / 原 0.5 验收
 
+## Current installed/runtime pointer / 当前实装与运行指针：3148RPC / 101accepted
+
+| Boundary | Verified scope |
+| --- | --- |
+| Active/dependency/actual installation4fc580 | Root4548/full Plugin, exact product CI39495317793/all13 and qualified development pair now installed; Native29151 unchanged. |
+| Native recovery and normal Save | One cover Save plus one exact newer-LastExit resume,37RPC/two accepted; normal primary120580935, protected cut120580965, healthy owned home/writesAllowed, Journal107/five transitions and1013x10/inc0. |
+| Old checkpoint120470990 | Native startup retired it at cover primary120578749; only three retirement metadata fields changed. No checkpoint load, covered-primary rollback or action replay. |
+| Gate2 | **Open**: five root fields/matrix16 are actual home observations with safetyCertified=false; remote contraction/first handoff, real mining and sustained logistics remain unproved. |
+
+The first7RPC preview was uncommitted and expired; the actual15RPC Native resume completed/succeeded using the original key within the original20-minute/200RPC/two-accepted total scope. Both accepted actions are terminal, all three clients normalEOF, no unknown/pending action; original window closed/unused allowance forfeited. Do not infer failure from correctly retired metadata or an origin label. Root's original proof preserves34checkpoint binaries,16older consumed replicas and matches two new consumed/two active ticket replicas; primary/metadata/tickets have expected normal-save changes.
+
+**Original acceptance remains2/3**, with historical Gate1/3 evidence below intact and final manual/Thunderstore candidates paired null. Next is the installed4fc580finite Native flight/first-handoff proof and minimal isolated passive-ILS logistics; no old338d failed-family replay/new research/factory expansion. The healthy game keeps running under Root; this fact Git window executes no Game action. Protected closure SHA8DD3793D6A30CA9298100355846F34576A1F5EC51B639EACCB86D2F14018147C and original-RPC audit SHAE60C6C8AA6ECB46C2C8D9C23D52B7160FC172152CFF023B704CD23FCC2BAFC1E bind the current cut. 以下原条款及旧快照原字节保留。
+
+
 ## Current source/runtime pointer / 当前源码与运行指针
 
 | Boundary | Verified scope |
