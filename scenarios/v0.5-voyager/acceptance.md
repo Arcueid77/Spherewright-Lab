@@ -1,5 +1,20 @@
 # Original Voyager acceptance / 原 0.5 验收
 
+## Current acceptance pointer / 当前验收指针：3099RPC / 99accepted
+
+| Original clause | Current status | Latest evidence boundary |
+| --- | --- | --- |
+| 1. Normal cross-star return with the missing resource | Historically passed; unchanged | Original clause1 evidence below is retained; isolated1013x10 remains. |
+| 2. Sustained cross-star logistics | **Open / 未通过** | New338d flight ended recovery_required/remote_idle_scene_unproved; no remote mine or sustained delivery credit. |
+| 3. Recoverable flight failure and exact checkpoint recovery without newer-primary rollback | Historically passed; unchanged | The latest exact recovery and normal Save are additional reconciled facts; they do not replay or replace original clause3 proof. |
+
+Actual installed/source/dependency338d and Native29151 remain unchanged. At this bounded cut, primary120475051 covers the unique new checkpoint120470990; actual lifecycle=recovered and journey=recovered_closed. Save is Native completed/succeeded despite the caller's incorrect retired-metadata postcondition. Healthy home, writesAllowed, Journal107/five transitions and1013x10 remain; fromCheckpoint is an origin label, not a new failure. All three new original actions are known terminal, original Parent closed with remaining allowance forfeited, clients normalEOF and no unknown/pending action. Root's protected floor is120475064 and cumulative accounting is3099RPC/99accepted.
+
+Current observed scale0.99999857 on each axis makes the strict ==1f scene gate false, but its being the unique cause of the original failed handoff is unproved. The next sole result is the minimal bounded Native scene adaptation/diagnostic with full product/Plugin tests, exact CI and necessary same-source verification before execution. Do not re-fly the failed family, add research or expand factories. **2/3 remain passed; final manual/Thunderstore review candidates remain paired null.** Source lock and all original acceptance clauses/evidence below are unchanged historical records.
+
+Protected current closure SHA07A9228CF54F10575989C3A9EBCB7D2C1F4B51E7592110D532DEB45F42DD2087; independent original-RPC audit SHAB88C683012D93F1AF684A6D1EBF1D18DCAEBB2A15DB9A174F41267C0FF049310. Exact refs are in the two current activity snapshots; raw identities and receipts remain protected. 以下原三条款及旧快照保留，不能把旧“当前”段落覆盖本次截点。
+
+
 ## Current source-only return-reserve correction / 当前：返程预留修正通过源码门，尚未部署
 
 Source adoption selects `338d043912ad79c8854fbf7dd04d1e25bac2cc39` (parent4c13); the designated maintainer must prove the fixed dependency and exact Lab CI before execution. Root's complete solution/Plugin build had zero warnings/errors and **4522** passed regressions (Contracts96/Core4078/MCP348), with documentation and embedded-guide bytes verified. Root independently checked exact product CI39482936728/job118835900884/attempt1/all13successful. Actual installed source remains **4c13ee3c3726f122cc0daee45e050d1aab8a40b2**, Native0.10.35.29151/assemblyEF314425DADE51F529F184F07BE136CD3C2660A6A81515603C7226FBE7AB1D8C; installed previews are unchanged and final review packages remain paired null. New development previews/postcommit revision stamps, package/schema/guide/privacy qualification and actual installation are still required. No release/tag/upload or frozen0.4 change.
