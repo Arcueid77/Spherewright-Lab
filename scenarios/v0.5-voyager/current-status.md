@@ -1,5 +1,28 @@
 # Voyager active snapshot / 0.5 活动快照
 
+## Current result — installed repair; exact recovery failed at ground contact / 当前：已安装修复，原恢复因地面接触安全失败
+
+Voyager **2/3**. Gate1 safe absent-resource return and Gate3 controlled failure/checkpoint recovery stand. Gate2 real remote mining, repeated vessel replenishment, mother consumption and post-save/recovery continued shipping remain open. Final candidates remain pairednull; no tag/Release/Thunderstore upload. 用户2026-10-20的持续授权已生效：同身份、保进度的常规冷部署/受保护恢复直接进行，不再逐项确认；fresh Native preview、确认字段、隔离、原预算与禁止回滚门保持。Migration/another world/original-save rollback/new paid permissions/formal publication retain separate gates.
+
+**Actual source/installation:** product main, independent recovery worktree and fixed dependency are8cd8a254f1d37abbfe5c7b7da4f522e7bb628b04/treeaf4dbbce150c14b46118e5cf89709fe492c8e435; exact product CI39360830848/job118426367132/all13steps succeeded, full Plugin/solution0warnings/errors and4244 regressions pass. Lab source adoptiondd76cacdedb02674365938a5b85e9b059f6fb610/treeb77b8baa3b0b22c753da8ad79cb8b244119d514e, exact CI39361780892/job118429384790/all9steps succeeded. One official paired install committed; actual Plugin5/manual MCP224 files match both manifests. Both actual executable schemas/guides passed8 isolated metadata RPC. One menu launch/new-generation Native preload verified the8cd runtime. Plugin0.5.0/MCP0.5.0.0/Native0.10.35.29151/EF314425DADE51F529F184F07BE136CD3C2660A6A81515603C7226FBE7AB1D8C. Source adoption, installation and live acceptance remain separate facts.
+
+| Installed development preview | Bytes | SHA256 |
+| --- | ---: | --- |
+| Manual | 36984230 | 4C1D43955A507DEEB31205F1F9A3E316CBE17A4C095544344DD1DB474CAD973E |
+| Thunderstore format | 32712296 | AABEB2E8993D3E5E2366AF3527503CF707C171DD7CC9A4F33DC03B05EC9E40F0 |
+
+**Original action reconciled:** the one new default prepare proved legacy provenance; the one exact commit was accepted, then known terminal `action_failed`/`succeeded=false`, precise blocker `remote_idle_ground_contact_unproved`. Original receipt verifies Native Pause. Same owned world loaded at120034210 with zero tick advance; quarantined, no normal primary Save, lastOwnedSaveGameTicknull. Original consumed actions were not replayed. New credential replicas are both consumed, byte-identical, bound to this failed action and marked single-hop; another compatibility hop is forbidden. Current quarantine ticket binds this original failure and is not authority to replay it.
+
+**Preservation/writer:** primary119921541/full same-identity LastExit120034210;38 expected unchanged critical roles include journey/checkpoint/Journal/32NativeCP/two prior consumption records. New ticket and new two consumption records are expected changes. Journal105/five transitions and isolated1013x10 remain. Root is sole idle game writer; all clients normalEOF,2484RPC/74accepted, no pending/unknown action. No additional Game calls during file reconciliation. 原动作已安全核销，进度/物料/原检查点完整；不是物流验收完成，也不能重放已消费授权。
+
+**Original budget:** max108000/spent7821/return54000/local46178ticks; original UTC expiry and all return energy/warper floors unchanged. The newly proposed recovery deadline2026-10-20T04:14:20.957367Z belongs to the consumed failed action, not a renewed grant. Actual fresh public P=3643367.314865836J/native tick, independent debits budgeted; executionPremisesProvedfalse after Native Pause. No inference of safe execution from the cost projection.
+
+**Next unique result:** determine why the exact Native Walk CheckSphere contact is false after loading. Compare legal EF31 Native geometry and loader/collider synchronization; distinguish actual terrain/airborne position from initialization without guessing. Read-only audit only until Root reviews a proved minimal existing-adapter correction. Do not remove ground guards, mutate Native state/saves, clear quarantine, replay/rekey, choose an older source or manufacture successful continuation context. Pure offline mining/return drafts remain readyfalse.
+
+Protected originals under ignored `.local/v0.5-voyager/prior-failed-resume-cold-once-8cd8a254/`: original terminal receipt788BF4A14CBD614C605127D87B8AB2C2E8A5EE22C0E6D185A26B92293CCCE7B6; attempt summary1C545FE60DE11E5D491244CA80751DD59B264FC8FAA289A7F2C2CB6F975EA14A; complete file/action/install reconciliationA74DEE016FF9224673C3136ADEB2CF2A3F9D01D8D9B16368F95C2AB03EC5BF0E. Raw identity, tokens, action/key, checkpoint and private path indexes remain local. These three fact files are Root-owned dirty until the designated maintainer's explicit facts commit; prior boundaries below are historical and cannot override this top.
+
+## Historical boundary — prior authorization/adoption preparation / 历史：此前授权与采用准备
+
 ## Active authorization — same-world repair proceeds directly / 当前授权：同档修复直接推进
 
 The owner explicitly instructed on2026-10-20 that this class no longer needs repeated confirmation. Routine cold deployment and protected recovery of this same owned world may proceed under the new standing scope after fresh evidence/preview checks. Preserve Native confirmation flags, original action accounting, identity, no-rollback, tick/energy/warper reserves and quarantine guards; do not replay the prior consumed action. Migration/another world/rollback/paid permissions/formal publication remain separately gated. The older question below is superseded for this class, not still pending.
