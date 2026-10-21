@@ -1,5 +1,22 @@
 # Repository split handoff
 
+## Current remote quarantine and original unknown Move / 当前：远端原Move未知，原生暂停保进度
+
+Active source, fixed dependency and actual installation remain `12e6dfcaaae923c844cc3ae0c2b66c185537b93a` / Native29151. The latest original read is **3841RPC/114accepted**, including Root's independent **7RPC/zero accepted**, normalEOF. It observes loaded/owned remote world, Walk, tick **120906939**, core1599992500.017J, **writeHealth=quarantined / writesAllowed=false**. NativePause and the retained RAM are the current stop; this is not a fresh healthy-home or saved-progress claim. Journal107/five transitions and isolated1013x10/inc0 remain in the original readbacks.
+
+The one outbound succeeded. Two original Moves completed/succeeded; the third original Move remains **outcome_unknown**, although its DTO reports terminal=true. Do not reinterpret that flag as known Native settlement or task success, rekey/replay the action, or clear quarantine. No remote construction was performed and Gate2 earns no mining/logistics credit. The original Parent used **246RPC/four accepted**; a separate screen-read attempt was refused by reserve before client creation, with zero RPC/client creation and its claim retired. The independent seven-call read is outside that Parent.
+
+The caller's fixed deadline **2026-10-20T23:54:37.400127Z / 2026-10-21T07:54:37.400127+08:00** has passed. Unused caller allowance is forfeited and must not be spent or renewed. Its preserved ledger has no appended parent_closed event at this file-only cut; expiry does not close the Native journey or settle the unknown. Native journey remains **remote_landed**, original maximum108000ticks/return reserve54000ticks, spent6365 at the last landed120877437, with unchanged Native UTC deadline **2026-10-21T00:21:40.3589005Z**. At the frozen120906939cut, conservative remaining work after return reserve is18133ticks. This is accounting, not authority for a new write or an extension of either clock.
+
+Normal primary **120825768** is older than the frozen remote progress. Current checkpoint120871072 is **flight_succeeded**; it is not a failed-flight recovery candidate. Do not load an old successful checkpoint, the old primary or an older LastExit. A normal OS close has only been prepared offline, **ready=false / unexecuted**: it preserves the exact quarantine/unknown and would require one reviewed PID/start binding, flushed write-ahead, one CloseMainWindow, at most90seconds and no kill/retry. A fresh complete LastExit would still need exact Native identity/full-file/progress proof and a separate valid recovery path; normal exit never grants Load authority or rewrites the unknown.
+
+**Next unique result:** diagnose the bounded contact-gap/scene issue and the exact newer-LastExit recovery path, preserving original provenance, both clocks and progress. Root remains the sole idle game writer; this maintenance performs no Game/MCP/Save/close/Load/process control. Voyager stays **2/3**, Gate2 open, final manual/Thunderstore candidates paired null. No blind flight, action replay, research or factory expansion.
+
+Protected originals: `.local/v0.5-voyager/post-12e6-normal-save-context-dd2fdccb7557/parent/observe-original/` and `parent/root-independent-status-only-7rpc/`; latest readback SHAB8B2EAFA0F5EF044A283EA522A75DF0E9AB7389F4D56B664C6CD35DF439E7C8E. The file-only close draft/index live in `.local/v0.5-voyager/git-inventory-close-draft-7a9e146bc235/`, close-draft index SHA53A79AAF8789C6A659A2C1F2AA24929D49E58B2C741ED2A173FAC29E093E7068. Private identities, raw keys and Native paths remain protected. Following prior home/handoff blocks are historical cuts retained byte-for-byte.
+
+当前远端原生暂停且原Move仍未知，不能把terminal=true或旧status健康标签当核销成功。累计3841/114；旧caller到期不得续额，Nativejourney仍保留原独立UTC/tick预算。仅准备保进度正常退出与精确LastExit修复，未关闭/保存/加载；2/3和最终双null不变，以下旧块原文保留。
+
+
 ## Current successful remote landing, failed Move and safe home Save / 当前：远端落地成功，Move停滞后安全返航保存
 
 Source/dependency/actual installation remain `12e6dfcaaae923c844cc3ae0c2b66c185537b93a`; its exact source CI, installed pair/hash facts and source lock are unchanged. The one original outbound **46RPC/one accepted** completed/succeeded with remote_landed. A same-parent **124RPC/zero accepted** observation captured59real core samples, from167063673.903J to1573746340.569J (above1.56GJ). Net growth was approximately3.28MW per Native game-time second over25732game ticks; this is actual sampled energy, not future recharge credit or an assumption about Unity physics steps. No construction was admitted.
