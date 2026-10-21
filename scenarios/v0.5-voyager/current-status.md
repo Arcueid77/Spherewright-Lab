@@ -1,5 +1,20 @@
 # Voyager active snapshot / 0.5 活动快照
 
+## Current7fbd installed and original preload verified / 当前：7fbd已实际安装，原单次启动预加载已验证
+
+Active source, fixed dependency and actual installation now match **7fbd5bcbb0f1cfcc7c608f79ba07058f8b496273 / Plugin0.5.0 / Native29151**. The same-source development pair passed original qualification, three fresh actual Contracts checks (60properties/30near-support fields), all source/embedded/package bilingual guides and257actual-payload privacy checks. Package validation used16isolated metadata calls; installation added eight isolated calls, with zeroGame calls by these checks. These development previews remain nonfinal; final review candidates are null/null.
+
+Root performed one normal close and verified its protected comparison: the complete LastExit120906939 covers the frozen floor, primary120825768 is unchanged, and there were zero unexpected protected-role or consumption-set changes. One official paired installation committed; Root verified the actual229payload files and five Native references. Actual manual SHA256 **9C8FD2A9DE5766D891E5A75999EF8F948EE1EC285D1DC487D73F0BD5BC7ECD13**,37100771bytes; Thunderstore **B158A1C02CC76F28026AB270F8D530B9FD0B62C5628EC7AD24EDDD225A6A5E7C**,32827249bytes.
+
+The original launch ran once and exited0; that same new process completed real Native preload. Process identity remains protected. **disk_verified / running_verified proves installation and that original process/preload only**, not loadedhealthy, physical idle, successful7fbdrecovery or Gate2. This installation cut is **3920RPC /117accepted**, with no new Load at this cut. Later Root recovery results are separate cuts. The old original Move permanently remains outcome_unknown and thef28recovery remains known failed; installation settles neither and does not renew any expired caller allowance, original NativeJourney UTC limit or reserve.
+
+Root remains the sole game writer; this facts maintenance makes zeroGame/Save/Close/launch/Load calls. The next unique result is Root's fresh exact Native preview and protected recovery of the same owned world under the original identity/progress/lease/frame/contact/reserve gates. No construction, mining or sustained-logistics credit is claimed: **Voyager2/3 / Gate2 open / final candidates null/null**. Frozen0.4 and the complete older-cut tail remain unchanged.
+
+Protected install/preload originals: `.local/v0.5-voyager/initialization-binding-7fbd5bc-cold-prep-27de48256a4144bdabdeb3f479e283ce/`; installed-payload proof SHA **BB27CA638CAEDD279E008FD38D17F166737A65FEABF1A5465D9D43B4B293388B**, original launch **0467BC4F80EC883747701C5E26686E7E5AE3A332F0045356FB20021AD79283AD**, Native preload **FF93543E375953A18D04D2EBE65E670B0AA8744CCC57194856E4E4EE63D9E474**. Qualified delivery completion: `.local/v0.5-voyager/retained-journey-preview-prep-6eb39d16c67a/completion.private.json`, SHA **4C1714373F9F06E98230721114A00D2FB7C13BE038E67BE637EEE3F29DE62F71**. The exact Lab commit/CI result belongs to this maintenance's protected completion; following source-only and earlier runtime blocks retain their original historical bytes.
+
+当前cut仅证实7fbd实际安装和同一次原启动Native preload完成，3920/117、此cut尚未新Load；运行锁不等于健康加载、physical idle、恢复或门2通过。原主档120825768与完整退出档120906939保留，Root保护比较无意外变化；旧Move永久未知、f28恢复已知失败、原双时钟及储备不续。开发双包资格与实际229payload/5Native已核，下一由Root保护同档精确恢复另记新cut，仍2of3/门2开放/最终双null，旧尾原字节保留。
+
+
 ## Current7fbd source-only adoption / 当前：仅采用真实Store内容绑定修复，实际安装仍f28
 
 Active source and fixed dependency now select **7fbd5bcbb0f1cfcc7c608f79ba07058f8b496273**. Root's complete solution and actual Native Plugin build passed with zero warnings/errors; **4750** tests passed (Contracts104/Core4287/MCP359, zero failures/skips), including five cases using the actual Store. Bilingual docs and embedded guide bytes matched. Exact product CI **39541903191 / job119031313739 / attempt1** completed all13steps successfully; all four committed blobs exactly match the frozen raw bytes. This adoption repeats no product QA.
