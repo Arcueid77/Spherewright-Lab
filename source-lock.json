@@ -1,13 +1,13 @@
 {
   "schemaVersion": 2,
   "status": "development",
-  "scenario": "v0.5-voyager",
+  "scenario": "commanddeck-m3",
   "spherewright": {
     "repository": "Arcueid77/Spherewright",
     "submodulePath": "deps/Spherewright",
-    "sourceSha": "c0a91bad59da09895c18410428f46969b6ba9f52",
+    "sourceSha": "99c2643da17ef46b2e9f47570903d9a0848cc5c1",
     "releaseTag": null,
-    "productVersion": "0.5.0"
+    "productVersion": "0.4.0"
   },
   "native": {
     "version": "0.10.35.29151",
@@ -18,7 +18,7 @@
     "thunderstore": null
   },
   "development": {
-    "targetVersion": "0.5.0"
+    "targetVersion": "0.4.0"
   },
   "installed": {
     "sourceSha": "c0a91bad59da09895c18410428f46969b6ba9f52",
@@ -41,8 +41,8 @@
       }
     },
     "evidence": "scenarios/v0.5-voyager/current-status.md",
-    "verification": "disk_verified",
-    "runtimeState": "running_verified"
+    "verification": "historical_record",
+    "runtimeState": "not_observed"
   },
   "acceptance": {
     "spec": "v0.4.0",
