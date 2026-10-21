@@ -1,5 +1,20 @@
 # Repository split handoff
 
+## Current source-only local-Move recovery adoption / 当前：仅采用本地Move恢复源码，尚未安装
+
+Active source and fixed dependency select `90ddfe152bb611aa467329708eff6b965df80b49` (parent12e6). Root's complete solution and actual Native Plugin build passed with zero warnings/errors; **4670** tests passed (Contracts96/Core4215/MCP359, zero failures/skips), with bilingual docs, exact embedded English and536source/318documentation/five Native-reference hashes preserved. Exact product CI39520164260/job118961787568/attempt1 completed all13steps successfully. The23committed paths map to10exact frozen blobs and13CRLF-to-LF-only blobs; no product test is repeated by this Lab adoption.
+
+The source bounds active-Move ground-contact handling and adds a paired caller-attested legacy local-Move-unknown carrier for default LastExit recovery. Its byte hash does not authenticate an old Native outcome: **the original Move remains outcome_unknown**. Current Native ticket/full LastExit/primary/successful checkpoint/Journal and strict adoption conditions remain independent gates. This source validation grants no runtime recovery, original-budget extension, mining or logistics credit.
+
+Actual installation remains **12e6dfcaaae923c844cc3ae0c2b66c185537b93a**, with its installed developer-pair hashes/sizes unchanged. Only the active source SHA and fixed dependency are adopted; Native29151/frozen0.4/history and final manual/Thunderstore paired-null candidates are preserved. **No90ddpackage has been qualified or installed at this boundary.** The next result is one same-source qualified development pair, including the two actual optional inputs, all four Prepared echoes from each of three packaged Contracts copies, existing21field groups, complete bilingual/embedded guides and full actual-payload privacy checks; actual execution remains separately gated.
+
+Latest runtime remains the original **3841RPC/114accepted**, frozen remote tick120906939, loaded/owned but quarantined and NativePause, with no new observation by this adoption. Two Moves succeeded and the third remains unknown; no remote construction. Caller deadline expiry is separate from the original NativeJourney UTC/tick bounds; neither clock resets through source/CI/adoption or a new preview. Do not replay the Move or load the old successful checkpoint/primary/LastExit. Root alone owns the idle game writer. This window performs no Game/MCP/Save/Close/Load/install; Gate2 stays open, Voyager2/3 and final candidates null.
+
+Protected source QA/review/provenance: `.local/v0.5-voyager/validation/local-move-root-full-qa-v1/`; exact product CI and23blob/1664-value zero-finding privacy originals: `.local/v0.5-voyager/legacy-local-move-product-git-once-0f7934bdabc1/`. This source-adoption commit's final Lab CI is recorded in its protected completion. Following quarantine and older home/handoff blocks retain their original byte content and scope.
+
+当前仅90dd源码/4670本地全验及准确产品CI通过，实际安装仍12e6；远端暂停和原未知Move未改变。新开发双包的真实schema/三份合约回显与全载荷资格尚待，不授Game或延长原预算；门2未过、2/3和最终双null不变，以下旧块原文保留。
+
+
 ## Current remote quarantine and original unknown Move / 当前：远端原Move未知，原生暂停保进度
 
 Active source, fixed dependency and actual installation remain `12e6dfcaaae923c844cc3ae0c2b66c185537b93a` / Native29151. The latest original read is **3841RPC/114accepted**, including Root's independent **7RPC/zero accepted**, normalEOF. It observes loaded/owned remote world, Walk, tick **120906939**, core1599992500.017J, **writeHealth=quarantined / writesAllowed=false**. NativePause and the retained RAM are the current stop; this is not a fresh healthy-home or saved-progress claim. Journal107/five transitions and isolated1013x10/inc0 remain in the original readbacks.
