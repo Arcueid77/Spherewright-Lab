@@ -1,5 +1,20 @@
 # Voyager active snapshot / 0.5 活动快照
 
+## Currentf28ed59 source-only adoption / 当前：仅采用有界原生初始化源码，实际安装仍4bb6
+
+Active source and fixed dependency now select **f28ed59b30a4ab029d63ada5681b7d8cfdcd9d5b**. Root's complete solution/actual Native Plugin build passed with zero warnings/errors; **4745** tests passed without failures/skips, with bilingual docs and embedded guide bytes verified. Exact product CI **39536065241 / job119012879858 / attempt1** completed all13steps successfully. The14committed paths match nine exact frozen blobs and five CRLF-to-LF-only blobs. This adoption repeats no product build or tests.
+
+The source distinguishes an exactly empty Native near-support collection from an over-limit collection and permits a pinned, paused initialization wait only for the exact-empty case: at most **eight host observations / two seconds / zero game ticks**. Observation loss and cancellation remain sticky. Count becoming positive is not physical-idle proof: fresh support/ground plus the original full preflight must still pass before the one NativeResume; original151→501/eight actual601frames/14P and all journey clocks, reserves and state bindings remain intact.
+
+**Actual installation remains4bb6 / Native29151**, with its real installed developer-pair hashes and runtime fields unchanged; no new package, install or recovery has occurred at this source-only cut. Last observed runtime is **3893RPC / 116accepted**, loaded/owned remote tick120906939 under NativePause/quarantine. The original Move remains outcome_unknown; the latest4bb6recovery is known failed, code remote_resume_near_support_registered_collection_unproved. Physical idle and the actual collection count remain unproved. This source change neither settles the old Move nor renews the expired caller or original NativeJourney budgets.
+
+The next unique result is one same-source qualified development pair, then Root's exact protected cold recovery under the current gates. No research, construction, mining or sustained-logistics credit: **Voyager2/3 / Gate2 open / final candidates null/null**. Root remains the sole idle game writer. Frozen0.4/history and installed state are preserved; this adoption performs no Game/Save/Close/Load/install.
+
+Protected4745QA/review: `.local/v0.5-voyager/validation/native-initialization-root-full-qa-v2/`; exact product CI,14blob mapping and Root review: `.local/v0.5-voyager/native-initialization-product-git-once-f9e17c0246ab/`. This adoption's exact LabCI is recorded in its protected completion. Following earlier-cut blocks retain their exact bytes.
+
+当前仅采用f28ed59源码与固定依赖；4745本地全验、完整Plugin零警告错误及准确产品CI13步通过。实际仍4bb6安装，3893/116原tick远端隔离，旧Move未知、本次恢复已知失败；集合实际count与physical idle未证。有界空集合等待≤8host/2秒/0tick，不降低原归属/原帧/14P/双时钟储备门，不授新Game信用。下一仅同源合格开发双包→Root精确冷恢复；门2仍开/2of3/最终双null，旧尾原文保留。
+
+
 ## Current4bb6 recovery known failed / 当前：4bb6恢复已知失败，原生暂停且集合数量未证
 
 Root performed one exact4bb6 recovery: **13RPC / one accepted**, terminal **action_failed / outcomeUnknown=false**, normalEOF; cumulative **3893RPC / 116accepted**. Its stable code is **remote_resume_near_support_registered_collection_unproved**. The loaded/owned remote world remains quarantined at tick **120906939**, NativePause verified, writesAllowed=false and waiting_to_save. **Physical idle is not proved; no normal Save or construction occurred.** This new known-failed recovery is distinct from the old original Move, which permanently remains outcome_unknown.
