@@ -1,5 +1,17 @@
 # Repository split handoff
 
+## Current source: paused Native refresh wait / 当前：暂停中的原生刷新等待源码已采用
+
+Active source and the fixed dependency are **d0604dea8560243edf84808e82c03afc30425c1f**. The nine approved source/test/documentation paths passed the original full Native Plugin/solution build with zero warnings or errors, **4,765 local tests**, bilingual documentation and exact embedded guide checks. Exact product CI **39590069167 / job119188515507 / attempt1** completed all13 steps successfully. Five committed blobs match the frozen bytes exactly; four differ only by CRLF-to-LF normalization. The change waits for pending Native collider refresh while paused before initial exact support binding; ownership, reference, first-frame, energy and original journey limits remain mandatory. This is source validation, with no new runtime recovery credit.
+
+Actual installation and its qualified development pair remain **94cea / Native29151**. The latest observed game cut is **3953RPC /119accepted**, loaded on the owned remote world and quarantined with NativePause. The new94cea recovery is known failed; the older Move permanently remains unknown. Native151 reached **120906941**, while fullLastExit is120906940 and primary120825768; the last tick is not yet covered. Physical idle remains unproved. Original spent6365 / maximum108000 / return54000 / originalUTC are unchanged, with18131 conservative workticks remaining. No retry, Save, Load, construction or budget renewal is authorized by this repository update.
+
+Next: qualify one same-source development pair, then Root may perform the protected normal exit that covers current progress and exact recovery under the original gates. The new source has not been packaged or installed at this cut. **Voyager2/3; Gate2 open; final review pair null/null.** Frozen0.4 and all older handoff bytes are preserved.
+
+源码与固定依赖已采用d0604dea；9路径冻结字节/4765本地全验、完整Native Plugin零警告错误、双语和嵌入指南及准确产品CI13步均通过，5blob完全一致/4仅行尾归一。改动仅在暂停中等待Native待处理刷新后再首次严格绑定，不降低归属、引用、原帧、能量或原航程门。实际仍94cea实装，最新3953/119、远端隔离暂停；新恢复knownfailed，旧Move永久unknown，当前941/退出档940尚差1tick、主档120825768，physical idle未证，18131工作ticks及原UTC/返程预算不续。下一仅同源合格开发包→覆盖当前进度的正常退出→受保护精确恢复；本截点尚未新打包/安装，无门2或物流信用，最终双null，旧尾保留。
+
+Protected source/CI/blob evidence: `.local/v0.5-voyager/paused-refresh-product-git-once-271f9a60b48c/completion.private.json`, SHA **57BB70B97C6890297E58F80F32A5CDDB95674A53680D8207C492BD1B573BD962**. The original runtime cut and its remaining limits are preserved in the following historical block.
+
 ## Current94cea recovery known failed, dirty-refresh identity evidence / 当前：94cea恢复已知失败，已取得dirty刷新前后身份观察
 
 Root performed one exact94cea recovery: **13RPC / one accepted**, terminal **action_failed / outcomeUnknown=false**, normalEOF; cumulative **3953RPC /119accepted**. The stable code remains **remote_resume_first_frame_universe_unproved**, with **remote_resume_near_support_cast_support_changed**. This new recovery is known failed; the old original Move permanently remains outcome_unknown. NativePause is verified by the original reconciliation and the actual nativeLocalControlEnergy blocker native_paused_not_execution_ready; neither implies physical idle. No normal Save, construction or continuation Parent occurred.
