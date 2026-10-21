@@ -1,5 +1,20 @@
 # Voyager active snapshot / 0.5 活动快照
 
+## Current7fbd source-only adoption / 当前：仅采用真实Store内容绑定修复，实际安装仍f28
+
+Active source and fixed dependency now select **7fbd5bcbb0f1cfcc7c608f79ba07058f8b496273**. Root's complete solution and actual Native Plugin build passed with zero warnings/errors; **4750** tests passed (Contracts104/Core4287/MCP359, zero failures/skips), including five cases using the actual Store. Bilingual docs and embedded guide bytes matched. Exact product CI **39541903191 / job119031313739 / attempt1** completed all13steps successfully; all four committed blobs exactly match the frozen raw bytes. This adoption repeats no product QA.
+
+The actual Store getter returns a detached copy, so reference-equality checks in both initialization consumers would reject matching persisted journeys. The fix matches **complete persisted journey contents plus the original recovery evidence**, retaining strict current/retained journey and checkpoint contents, identity/leases and original frame/contact/reserve gates. This changes source validation only; it grants no runtime recovery or budget extension.
+
+**Actual installation remainsf28ed59 / Native29151**, with the real installed965C7E/EA6F026developer-pair hashes, sizes and installed runtime fields unchanged. No7fbdpackage or installation has occurred at this source-only cut. Latest runtime remains **3913RPC /117accepted**, original remote tick120906939 loaded/owned but quarantined and NativePause. Thef28recovery is known failed with remote_resume_initialization_binding_unproved; the old Move permanently remains outcome_unknown. Native registered count0→10 did not prove ownership, ground admission or physical idle; no normal Save or construction was performed.
+
+Original maximum108000ticks / return reserve54000 / spent6365, the18133workticks remaining at the frozen source and all original UTC limits are unchanged. Expired caller allowances stay forfeited; no continuation Parent is created by adoption. Root remains the sole idle game writer. **Voyager2/3 / Gate2 open / final candidates null/null**; frozen0.4/history and all prior evidence remain preserved. No mining or sustained-logistics credit is claimed.
+
+The next unique result is one same-source qualified development pair, then Root's protected exact installation/recovery under every current Native gate. This maintenance performs no Game/MCP/Save/Close/Load/install and authorizes no new research or factory expansion. Protected4750QA and independent source review: `.local/v0.5-voyager/validation/retained-journey-root-full-qa-v1/`; exact product CI, four raw blob proofs and Root review: `.local/v0.5-voyager/retained-journey-product-git-once-67e0d4f38c9b/`. This adoption's accurate LabCI is recorded in its protected completion; following older-cut blocks retain their exact bytes.
+
+当前仅采用7fbd源码及固定依赖，4750完整QA/真实Store五case/实际Plugin零警告错误和准确产品CI13步通过。getter返回副本，两处引用相等必失败；现按完整持久化内容加原恢复证据匹配，严格归属/原帧/储备门不降。实际安装仍f28和965C/EA6F原包，3913/117原tick远端隔离；f28恢复已知失败、旧Move永久未知、未Save或施工。原108000/54000/18133及UTC不续，下一仅同源合格开发包→Root保护实装/恢复，门2仍开/2of3/最终双null，旧尾原文保留。
+
+
 ## Currentf28ed59 exact recovery known failed / 当前：f28ed59精确恢复已知失败，原生初始化计数已读回
 
 Root performed one exact recovery: **13RPC / one accepted**, terminal **action_failed / outcomeUnknown=false**, normalEOF; cumulative **3913RPC /117accepted**. Its stable code is **remote_resume_initialization_binding_unproved**. Native registered count was observed **0before the first frame →10at the initialization hold**. This proves neither ownership/ground admission nor physical idle; post-Universe observation was not reached. The owned remote world remains loaded and quarantined at original tick **120906939**, writesAllowed=false, NativePause verified. No normal Save or construction occurred.
