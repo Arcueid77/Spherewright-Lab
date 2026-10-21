@@ -1,5 +1,20 @@
 # Voyager active snapshot / 0.5 活动快照
 
+## Currentf28ed59 exact recovery known failed / 当前：f28ed59精确恢复已知失败，原生初始化计数已读回
+
+Root performed one exact recovery: **13RPC / one accepted**, terminal **action_failed / outcomeUnknown=false**, normalEOF; cumulative **3913RPC /117accepted**. Its stable code is **remote_resume_initialization_binding_unproved**. Native registered count was observed **0before the first frame →10at the initialization hold**. This proves neither ownership/ground admission nor physical idle; post-Universe observation was not reached. The owned remote world remains loaded and quarantined at original tick **120906939**, writesAllowed=false, NativePause verified. No normal Save or construction occurred.
+
+This new recovery is known failed; the old original Move permanently remains **outcome_unknown**. Primary120825768 and complete LastExit120906939 plus backup remain preserved. Root's protected comparison preserves38old checkpoint binaries and1323old consumption records; two new consumed replicas bring the total to1325. The two current active tickets changed as expected through Native recovery and match each other; do not claim all critical files are unchanged. Journal107/five transitions is preserved, with no progress rollback.
+
+The caller ended with terminal readback and normalEOF, remaining allowance0 and unused allowance forfeited. Thisf28ed59candidate family is retired: no replay or retry of that code. Original maximum108000ticks / return reserve54000 / spent6365 and original UTC limits are not extended; conservative work remaining at the frozen source is18133ticks. Prepared continuation still has no Parent and has not executed. Source/installation remainf28ed59 / Native29151 and the installed package/lock facts are unchanged.
+
+The next unique result is the already bounded **offline** initialization-binding correction and actual Store integration regression under Root's ownership; that WIP has no new runtime acceptance. Preserve strict owner/contact proof, original frame admission, sticky cancellation and original reserves. No further blind Load/Resume/Save, research or factory expansion is granted by this facts update. Root is the sole idle game writer at this cut. Voyager2/3 / Gate2 open / final candidates null/null; no remote mining or sustained-logistics credit.
+
+Protected original cut: `.local/v0.5-voyager/native-initialization-f28ed59-cold-prep-b266d0c6e2624d0ea33051dd29e48648/failed-original-continuity/current-failed-original-cut.private.json`, SHA **C0BB6D07A70D25894977675ACBCF1359C95C899E8558CEB038B14AEA0B6CF971**. Its original action/summary/prepared/request and exact installed-proof refs remain protected. This two-document facts maintenance makes no Game/MCP/Save/Close/Load/deployment call; source-lock, product WIP, frozen0.4 and every following historical block are preserved.
+
+本次恢复knownfailed、旧Move仍永久unknown；3913/117，原tick隔离/NativePause，真实集合计数0→10后停在binding_unproved，不能称接地/physical idle或恢复成功。未Save/施工；38旧CP与1323旧核销保留，新增2至1325，两当前票据原生预期变化。caller余0、本族退役，原双时钟和储备不续；下一仅离线有界绑定修复与真实Store回归。锁F77及产品WIP不动，门2仍开/2of3/最终双null，旧尾原文保留。
+
+
 ## Currentf28ed59 installed, original preload verified / 当前：f28ed59已实装且原启动预加载验证，尚无新恢复信用
 
 Active source, fixed dependency and actual installation now match **f28ed59b30a4ab029d63ada5681b7d8cfdcd9d5b / Plugin0.5.0 / Native29151**. Root's4745test/complete Plugin validation and exact source CI passed. The development pair passed original qualification and the continuation's three fresh actual Contracts checks: **60properties /30near-support fields**, Copy/unknown preservation and constant-false assertions,72tools/one resource/eight optional inputs, bilingual/embedded guides and257payload-file privacy checks. The original OrderedDictionary counter collector failure and diagnostic remain preserved; its two-line correction reused the exact original QP and packages without regeneration or requalification. Package checks used16isolated metadata calls; installation added eight isolated calls, with zeroGame calls by those checks.
