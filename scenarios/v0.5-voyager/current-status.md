@@ -1,5 +1,20 @@
 # Voyager active snapshot / 0.5 活动快照
 
+## Current4bb6 recovery known failed / 当前：4bb6恢复已知失败，原生暂停且集合数量未证
+
+Root performed one exact4bb6 recovery: **13RPC / one accepted**, terminal **action_failed / outcomeUnknown=false**, normalEOF; cumulative **3893RPC / 116accepted**. Its stable code is **remote_resume_near_support_registered_collection_unproved**. The loaded/owned remote world remains quarantined at tick **120906939**, NativePause verified, writesAllowed=false and waiting_to_save. **Physical idle is not proved; no normal Save or construction occurred.** This new known-failed recovery is distinct from the old original Move, which permanently remains outcome_unknown.
+
+Primary120825768 and complete LastExit120906939 remain unchanged. Root's protected comparison preserves all38old checkpoint binaries and1321old consumption records; two newly consumed replicas bring the latter total to1323. Both current active tickets changed as expected through Native recovery and match each other; do not claim every critical file is unchanged. Journal107/five transitions and isolated1013x10 remain preserved.
+
+The recovery caller ended with terminal readback and normalEOF; remaining caller allowance is0 and unused allowance is forfeited. The expired original E246RPC/four-accepted window is not renewed. Original Native elapsed29502/spent6365/return reserve54000 and its original UTC deadline remain unchanged; conservative work remaining at the frozen tick is18133ticks. Prepared continuation has no Parent and has not executed. This candidate family is retired: no repeat of the same code or another automatic Load/Resume/Save is authorized by this facts cut. Root remains the sole idle game writer.
+
+Native source proves initialization starts empty, GameTick does not populate this collection and Update populates it; **actual runtime count is still unknown**. Neither count0 nor count>4096 has been established. The next unique result is an **offline** bounded Native-initialization wait and actual count readback design, preserving strict ownership, original-frame and reserve gates. That design is not validation or execution authority. Source/dependency/actual installation remain4bb6 / Native29151; source-lock, frozen0.4 and history are unchanged. Voyager2/3, Gate2 open, final candidates null/null; no mining or sustained-logistics credit.
+
+Protected original cut: `.local/v0.5-voyager/failed-remote-4bb6-exact-resume-prep-07ad01aaca754b7589a387194c0cc29e/failed-original-continuity/current-failed-original-cut.private.json`, SHA **B1C7FC9C2AA556FA3553ABA1CFF80E0E47680856DD18C9D14FE32957891405D4**. The adjacent offline design `next-native-initialization-entry.private.json`, SHA **7CAF5F7503AEB76EA953BF05903481648B6F2859A32717425B9CDCCB8A6D8702**, grants no runtime qualification. This two-document facts maintenance makes no Game/MCP/Save/Close/Load/deployment call; following blocks retain their exact earlier-cut bytes.
+
+本次4bb6恢复是已知终态失败，旧Move仍永久未知；3893/116，原tick远端隔离/原生暂停，physical idle未证，未Save或施工。旧主档/完整LastExit/38旧CP/1321旧核销保留，新增2份核销至1323，两当前票据原生预期变化。实际集合数量未知，不能断言空或超4096；本族退役，不重试同代码、不续原双时钟。下一仅离线有界初始化等待与count读回设计，严格归属/原帧/储备门不降；门2仍开、2/3、最终双null，旧尾原文保留。
+
+
 ## Current4bb6 installed, Native preload verified / 当前：4bb6已安装且原生预加载验证，尚无新恢复信用
 
 Active source, fixed dependency and actual installation now match **4bb6ab410624b88941471c9e165535ff6b7ae3c7** / Native29151. The same-source developer pair passed full qualification,59actual properties/eight groups in three fresh Contracts processes, unchanged eight optional inputs, bilingual/embedded guides and257payload-file privacy checks. One official paired install committed; Root verified the actual229payload files and five Native references, with eight isolated installation-metadata calls and zeroLoad. Actual manual SHA256 **AD5CB44CCD338E24110BB478761AC7BC8C0EBCAB64BA9D93057B5AD723638629**,37094064bytes; Thunderstore **F1A71FAA3DF1E8E92F19DF9F3C021514922176D20FD9F054095DC579832DB643**,32820778bytes. These remain developer previews; final candidates stay null/null.
