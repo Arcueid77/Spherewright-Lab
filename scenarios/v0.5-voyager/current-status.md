@@ -1,5 +1,22 @@
 # Voyager active snapshot / 0.5 活动快照
 
+## Current7fbd recovery known failed, one tick uncovered / 当前：7fbd恢复已知失败，新增1tick尚未获退出档覆盖
+
+Root performed one exact recovery: **13RPC / one accepted**, terminal **action_failed / outcomeUnknown=false**, normalEOF; cumulative **3933RPC /118accepted**. The stable failure code is **remote_resume_first_frame_universe_unproved**, after the previous initialization-binding gate was passed. The player post-near-support observation reports **remote_resume_near_support_cast_support_changed**. Matching before/after geometry does not prove that the same collider was hit or establish the root cause; physical idle remains unproved. The owned remote world is loaded and quarantined with NativePause verified. No normal Save or construction occurred.
+
+**Native151 actually advanced one tick**: current session/player/ticket tick is **120906940**, while the candidate and complete LastExit remain **120906939**; primary remains **120825768**. The LastExit does **not** cover that final observed tick. This is not a zero-tick or zero-progress result. No old primary/LastExit may be treated as covering newer RAM progress, and this facts block grants no Close/Save/Load/Resume authority. The original Move permanently remains outcome_unknown; this new recovery is separately known failed.
+
+Root's protected comparison preserves38old checkpoint binaries and1325old consumed replicas; two new consumed replicas bring the total to1327. The two current active tickets changed as expected and match at the newer Native tick. LastExit is unchanged against this attempt's verified normal-close baseline, not an earlier pre-close hash. Journal and isolated materials are retained; actual core is approximately1.6GJ with a small Native reactor change. Do not claim every critical file or energy value is unchanged.
+
+The original maximum108000ticks / return reserve54000 / spent6365 and original UTC limits are unchanged. Conservative work remaining after return reserve is now **18132ticks**, one less than the earlier18133. The caller is terminal with remaining allowance0 and unused allowance forfeited; prepared continuation has no Parent and has not executed. This7fbdcandidate family is retired and is not retried. An earlier malformed UTC-offset argument stopped before Client creation with zeroRPC/action/key; correcting the original Native UTC string preserved the same window/proposal and was followed by only the one actual Native recovery above.
+
+Source, dependency and actual installation remain7fbd / Native29151; installed development-pair hashes/sizes and source-lock are unchanged. Root is the sole idle game writer at this cut. **Voyager2/3 / Gate2 open / final candidates null/null**; no construction, mining or sustained-logistics credit. The next unique result is a read-only Native151/ColliderPool/owner-evidence audit, without assuming a root cause, weakening ownership gates or blindly cold-deploying/loading again. Frozen0.4 and all following older-cut bytes remain preserved.
+
+Protected exact original action/summary/prepared/commit/session/player/Journal and comparison: `.local/v0.5-voyager/initialization-binding-7fbd5bc-cold-prep-27de48256a4144bdabdeb3f479e283ce/failed-original-continuity/current-failed-original-cut.private.json`, SHA **1852DA00D5C7994A208567142985A6493B3D5D6591141FE3ED496B4D3E5EB2BE**. This two-document maintenance makes zeroGame/Save/Close/Load/build/package calls; its exact Lab commit and original CI are recorded in the protected completion.
+
+本次3933/118恢复knownfailed、旧Move仍永久unknown；真实Native151已推进1tick至120906940，candidate/完整退出档仍120906939、主档120825768，最后1tick尚未覆盖，绝不能称零tick或已完整保存。NativePause已核但physical idle未证，postNearSupport为cast_support_changed，几何相同不等于同一collider或已证根因。38旧CP/1325旧核销保留，新增2至1327，两当前票据预期变化；原108000/54000/spent6365/UTC不续、工作余18132。caller余0、本族退役，下一仅只读原生归属证据审计，不放宽门、不产生新关闭/保存/加载许可；安装锁和旧尾原文保留，仍2of3/门2开放/最终双null。
+
+
 ## Current7fbd installed and original preload verified / 当前：7fbd已实际安装，原单次启动预加载已验证
 
 Active source, fixed dependency and actual installation now match **7fbd5bcbb0f1cfcc7c608f79ba07058f8b496273 / Plugin0.5.0 / Native29151**. The same-source development pair passed original qualification, three fresh actual Contracts checks (60properties/30near-support fields), all source/embedded/package bilingual guides and257actual-payload privacy checks. Package validation used16isolated metadata calls; installation added eight isolated calls, with zeroGame calls by these checks. These development previews remain nonfinal; final review candidates are null/null.
