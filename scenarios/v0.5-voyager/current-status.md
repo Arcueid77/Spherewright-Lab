@@ -1,5 +1,17 @@
 # Voyager active snapshot / 0.5 活动快照
 
+## Current installation and original preload verified / 当前：实际安装与原单次预加载已验证
+
+Active source, fixed dependency and actual installation now match **d0604dea8560243edf84808e82c03afc30425c1f / Plugin0.5.0 / Native29151**. Root performed one protected normal exit, one official paired installation and one normal launch. The installed229payload files and five Native files match the qualified development pair; installation used eight isolated metadata RPCs and zeroGame calls. The same original new process completed Native preload in63.78seconds; its identity remains in protected evidence. `disk_verified` and `running_verified` mean actual disk installation and this process/preload only. At this cut there was **no Load, prepare or commit**, and no proof of loaded-world health, physical idle, recovery or Gate2 success.
+
+The last preclose read reached **3960RPC /119accepted**, with the94cea recovery known failed and the old Move permanently unknown. One normal close produced fullLastExit **120906941**, covering that observed tick; primary **120825768** remained unchanged. Root's comparison checked1411protected rows, preserving1410other rows with zero unexpected changes; the LastExit replacement is explicit. The captured44critical roles,38checkpoint binaries and1329consumed replicas remain protected. Do not describe the replaced LastExit as unchanged or use installation as authority to replay any old action.
+
+Original work18131ticks, return reserve54000 and all original elapsed/spent/UTC limits remain unrenewed. This facts record grants no additional budget. Root remains the sole game writer; subsequent exact recovery requires the original fresh Native gates and will be recorded as a separate cut. **Voyager2/3; Gate2 open; final review pair null/null.** Frozen0.4 and the complete older-document tail remain unchanged.
+
+活动源/依赖/实际安装现均d0604dea。原一次正常退出已得到完整退出档120906941覆盖最后观察tick，主档120825768未变；1411保护行中1410旧行保留，退出档为明确预期替换。一次官方成对安装229载荷/Native5已核，安装8隔离元数据、零Game；原同一次启动的Native预加载63.78秒已完成，进程身份仅在保护原件。本截点3960/119，旧94cea恢复knownfailed/原Move永久unknown；尚未Load/prepare/commit，disk_verified/running_verified不等于健康加载、physical idle或恢复成功。原work18131/返程54000/UTC不续；后续恢复另切点记录，仍2of3/门2开放/最终双null，旧尾完整保留。
+
+Protected originals: `.local/v0.5-voyager/paused-refresh-cold-prep-a921949df2b1/installed-actual-payload.private.json`, SHA **71558867DD0F1E4313B66B353F8CE40184B65FBE42281702D730EDEC3D4BCA09**; the same directory contains the actual installed address, normal-close comparison and original launch/preload proofs. No source QA, package generation or qualification was repeated for this facts update.
+
 ## Current source: paused Native refresh wait / 当前：暂停中的原生刷新等待源码已采用
 
 Active source and the fixed dependency are **d0604dea8560243edf84808e82c03afc30425c1f**. The nine approved source/test/documentation paths passed the original full Native Plugin/solution build with zero warnings or errors, **4,765 local tests**, bilingual documentation and exact embedded guide checks. Exact product CI **39590069167 / job119188515507 / attempt1** completed all13 steps successfully. Five committed blobs match the frozen bytes exactly; four differ only by CRLF-to-LF normalization. The change waits for pending Native collider refresh while paused before initial exact support binding; ownership, reference, first-frame, energy and original journey limits remain mandatory. This is source validation, with no new runtime recovery credit.
