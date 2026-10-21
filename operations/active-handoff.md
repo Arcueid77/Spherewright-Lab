@@ -1,5 +1,11 @@
 # Repository split handoff
 
+## Isolated CommandDeck M3 override / 独立 CommandDeck M3 交接
+
+This branch's active scenario is [CommandDeck M3](../scenarios/commanddeck-m3/README.md), not the historical Voyager runtime described below. Its new dedicated owned world has one completed new-game action including an initial normal save; shared accepted count is **1/5**, with no pending research intent. Reserve one maintenance save, one default protected resume of that exact new-world save, one Deck research enqueue and one final save. Root serializes Git; Luna is the external game writer, handing the writer to Deck only explicitly. No historical primary/LastExit recovery, rollback, movement or construction is authorized by this scenario. The original Lab checkout and its Voyager state remain independent.
+
+本分支活动场景为上链 CommandDeck M3，后文 Voyager 运行态是独立历史。专用 owned 新世界已完成一次含首次保存的新建，accepted **1/5**，无未决科研 intent；余量仅为部署前保存、同一新世界精确保存点 default protected resume、Deck 单项科研入队及最终保存各1次。root 单点 Git，Luna 为外部 writer，仅显式交接给 Deck；不据此恢复历史主档/LastExit、回档、移动或施工，不更改原 Lab 的 Voyager 状态。
+
 ## Development follow-up — admission fix green, recovery proof in review / 开发续接：交接修复已绿、恢复证明审查中
 
 Independent product main is clean/pushed at `fb3565469ae364eef0eaa9c56014fb5366c2579c` (tree45806368af6cf80bfba6026ff5cfe76459e00449). The landing-success boundary now shares the complete strict idle admission before marking a checkpoint successful; precise first-failure codes are retained. Pending success persistence never becomes a reload-eligible failed flight. Final full Plugin/solution build is zero warnings/errors; Contracts87/Core3685/MCP297 total4069 passed with zero skips/failures. Exact CI39277172449 run/job is completed/success; its API step array retained three stale substep states, so do not claim an independently extracted complete cloud step/test log. The failed original job-log fetch is retained. Protected product completion SHA256 `E7C98C7ADE6FE144FC3C6369E95ECD522E0654FCE2256D5851D29F840BFC601C`.
