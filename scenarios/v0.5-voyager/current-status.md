@@ -1,5 +1,18 @@
 # Voyager active snapshot / 0.5 活动快照
 
+## Current90dd exact recovery known failed / 当前：90dd精确恢复已知失败，原生暂停，尚未正常Save
+
+Root committed the exact default recovery **once**:13RPC/one accepted, bringing accounting to **3866RPC/115accepted**. Its original Native action is terminal **action_failed / outcomeUnknown=false**, with stable code **remote_resume_registered_terrain_foot_unproved**. This known failure belongs to the new recovery action; the earlier Move permanently remains **outcome_unknown**. The original responses and normalEOF are preserved. No second Load, Resume or Save occurred at this cut.
+
+The owned remote world is loaded at its original tick**120906939**, **writesAllowed=false / writeHealth=quarantined**, with NativePause verified. **Physical idle is not proved.** Owned-save state is **waiting_to_save**; no normalSave has run. Normal primary120825768 remains byte-identical, and the complete LastExit120906939 plus its protected backup remain unchanged. The two current active-ticket copies changed as expected through Native recovery; do not claim all seven critical files are unchanged. Journal107/five transitions is preserved.
+
+Active source, fixed dependency and actual installation remain90dd / Native29151; source-lock and package hashes are unchanged. The expired original caller Parent246RPC/four accepted is not renewed, and original NativeJourney UTC/tick bounds are not extended. No new continuation driver has executed and no new Parent has been created. Root is the sole idle game writer, with no new action authorized by this facts-only maintenance. The next unique result is **read-only** proof of actual foot0 Native ground contact and the existing known-failed zero-progress recovery chain; this is not permission for another Load/Resume/Save. No remote construction or sustained logistics acceptance: Voyager2/3, Gate2 open and final candidates paired null; frozen0.4 and older evidence remain intact.
+
+Protected original cut: `.local/v0.5-voyager/legacy-local-move-90dd-exact-resume-once-20261021-0040/failed-original-continuity/current-failed-original-cut.private.json`, SHA**B1ED6DD1193BB747A2F27A062C94E69088EF935A70ECFDDDFF19CCC63190BA75**. Its original summary/action/commit/prepared/session/player/Journal and critical comparisons retain exact private identity and keys locally. Following blocks are preserved byte-for-byte as earlier cuts, including the prior pre-Load installation boundary.
+
+本次恢复action是已知终态失败，不是outcome_unknown；原Move仍永久未知。3866/115，远端原tick已加载但隔离/原生暂停，不能据此称physical idle；waiting_to_save且正常Save未做。两当前票据原生预期变化，旧主档/完整LastExit不变。仅下一只读接地与零进度恢复链核验，不重放、不续原窗、不授第二次Load/Resume/Save；以下旧块原文保留。
+
+
 ## Current90dd installed and original launch observed / 当前：90dd已安装，原启动后续观察完成，尚未Load
 
 Actual installation now matches active source and the fixed dependency `90ddfe152bb611aa467329708eff6b965df80b49` / Plugin0.5.0 / Native29151. One official paired install committed; Root independently verified the actual229payload files and five Native references. The same-source development pair passed complete qualification, actual72tools/one resource, eight optional recovery inputs and27contract properties across three fresh assembly processes, bilingual/embedded guides and257payload-file privacy checks. Manual SHA256 `1E4C9F40B0D1323D7D94D2E558C7AD3652C9A46E231B37F4B76BA6F8880C101B`,37070472bytes; Thunderstore `E7EF3538D0F90C97C8F40891553A63657A3EC5D9C6190C2A8ECA75AE18A51FE4`,32798482bytes. These are installed development previews, not final review candidates; the final pair remains null/null.
