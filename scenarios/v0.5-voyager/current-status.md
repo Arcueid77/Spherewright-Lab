@@ -1,8 +1,8 @@
 # Voyager active snapshot / 0.5 活动快照
 
-This is the only current snapshot. 历史验收、当前候选、磁盘安装和实机结果分别记录。
+This is the only current snapshot. 历史验收、当前修复版本、磁盘安装和实机结果分别记录。开发安装包仅供实装修复验证；最终交付候选仍为空。
 
-## Candidate, installation and saved progress / 候选、实装与进度保全
+## Repair version, installation and saved progress / 修复版本、实装与进度保全
 
 The owner explicitly approved one new20-minute **recover/save/return-only** window. The installed c6603b0 executed its one exact-primary recovery: **completed/succeeded**, healthy owned remote session and immediate ordinary Save **120907006**, independently verified by complete Native file identity/version/length/hash. The earlier exact12488-tick rollback approval was used; original observed Journey time was conservatively charged. One return to the original home was then committed. Its last original response at **11:35:53UTC** was nonterminal approach at tick **120911504**,38689.498m from home. On continuation, the original operator handle was missing and fresh OS queries found neither its operator/client nor game process. No terminal return, new LastExit or home Save was observed. **Return outcome remains unknown; process-exit cause is unknown.** No retry, Load, launch or new window followed.
 
@@ -10,17 +10,27 @@ The owner explicitly approved one new20-minute **recover/save/return-only** wind
 
 |Identity / 身份|Current fact / 当前事实|
 |---|---|
-|Product HEAD / 产品HEAD|Remote main and independent repair worktree **e022d71a45aead056c1a0d0e8b470967534a2383 / 0.5.0**; primary local main remainsc6603b0 / 产品远端与独立修复工作树e022，本地主main仍c660|
-|Last runtime trial / 上次实机候选|**c6603b0197706991994e9986fa774ed6c055aa70**; ended after process disappearance / 已因进程消失结束|
-|Current candidate, Lab lock and gitlink / 当前候选及固定依赖|**e022d71a45aead056c1a0d0e8b470967534a2383**; coherent return-only recovery plus inherited observed-time conservation; offline qualified, not installed / 只返航恢复及既有记账修复，一体离线合格、未实装|
-|Disk installation / 磁盘实装|**c6603b0197706991994e9986fa774ed6c055aa70 / disk_verified**, one committed paired transaction / 一次成对实装完成|
-|Loaded game module / 游戏加载模块|Original process22916 had actual matching Plugin/Core/Contracts/Native MVID/version and completed recovery; now OS-proved **not_running** / 原真实加载及恢复已核，当前进程不存在|
+|Product HEAD / 产品HEAD|Remote main and repair worktree **23a4218** add only the owner packaging workflow rule; selected runtime source remains **e022d71a45aead056c1a0d0e8b470967534a2383** / 纯流程提交不触发重打包重装|
+|Last runtime trial / 上次实机验证版本|**c6603b0197706991994e9986fa774ed6c055aa70**; ended after process disappearance / 已因进程消失结束|
+|Current repair version, Lab lock and gitlink / 当前修复版本及固定依赖|**e022d71a45aead056c1a0d0e8b470967534a2383**; installed and loaded; functional trial ended at health admission / 已实装加载，功能验证在健康接管处结束|
+|Disk installation / 磁盘实装|**e022d71a45aead056c1a0d0e8b470967534a2383 / disk_verified**; official committed transaction, original records preserved / 官方事务完成、原记录保留|
+|Loaded game module / 游戏加载模块|Process36452 has exact e022 Plugin/Core/Contracts and Native MVID/version; public main-menu and Native preload proved. It and Steam are outside all three observed caller-owned terminating jobs / 真实模块及主菜单已核，脱离调用端三个关闭回收组|
 |Native|**0.10.35.29151**, Assembly SHA **EF314425DADE51F529F184F07BE136CD3C2660A6A81515603C7226FBE7AB1D8C**; five references unchanged / 五引用未变|
-|Complete saves and coverage / 完整档及覆盖|Current primary **120907006**; exact current pre-flight **120907158**; old LastExit120919464 retained. All backed up; current return progress after120907158 lacks save coverage / 均备份，新返航后续进度无覆盖|
-|Health / 健康|c660 recovery **proved healthy and ordinarily saved**; current world is not running, return completion unproved / c660接管及保存已证，当前未运行，返航未证完成|
+|Complete saves and coverage / 完整档及覆盖|Primary **120907006**; recovered pre-flight **120907158**; old LastExit120919464 is an earlier branch. Current paused RAM **120907197**, **39tick uncovered** / 最新39tick约0.65秒无覆盖，旧大tick退出档不替代本次覆盖|
+|Health / 健康|**quarantined / writesAllowed=false / Native Pause verified**; e022 exact checkpoint Load completed, health/return/home Save failed or not_reached / 检查点读入成功，健康接管失败，返航与母星保存未执行|
 |Final review pair / 最终双包|**null / null**, Gate2 open / 门2开放|
 
 Original Move remains **outcome_unknown**; d6 execution family stays retired and its first failed conjunction member remains unknown. db97832's completed recovery/healthy admission/normal Save120906976 remain historical facts; the later original return-wall guard paused at120919464. Ordinary-research enqueue authority is retained. 原Move仍unknown，d6执行族退役，原合取首错未知；db既有成功和后续暂停分别保留，科研原授权保留。
+
+## Current functional result / 本轮实机结果
+
+The one approved return-only execution began **2026-10-22 15:27:10.776906UTC** (absolute deadline15:47:10.776906UTC,54000ticks). Exact checkpoint Load completed/succeeded and the separate task was durably granted; old spent is conservatively108000, old UTC/resources and original unknown return remain preserved. The next same-call session at120907197 was quarantined with **remote_idle_binding_unproved** under the old flight identity. No return or normal Save was committed. The operator ended normally, no automatic retry. This proves provenance/adoption, not health or a completed return.
+
+本次准确读档已成功，但未建立新会话的远端停留绑定，下一帧保护在120907197暂停；本轮功能验证已结束。旧账、旧unknown、能源及物品保留；没有发起返航，没有保存。源码复核另发现独立只返航预算未接入停留预算判断，属于同一整链修复范围，不能把它倒称本次已观察的首错。
+
+A separate post-stop public observation confirmed the stable197 boundary. Preservation Save preparation was refused with **paused_save_post_admission_quarantine_required / first predicate idle_quarantine_witness=false**, native_pause=true; remaining checks are not_reached. This later snapshot never impersonates the original failure instant. Current e022 cannot provide the required preserving Save for this checkpoint-adoption quarantine; keep the process open. Protected originals: **.local/v0.5-voyager/return-only-live-e022d71-v1/** (official transaction, actual loaded identities/job memberships, original functional requests/responses, separate preservation refusal). No game kill/relaunch, ticket/Journal edit, resource grant or final-package regeneration.
+
+停后保全预检另证当前安装不允许保存此类检查点接管隔离，首谓词为idle_quarantine_witness=false；原始回执区分false、not_reached与后续观察。进程保持打开，未强杀、重启、重放或手改票据/Journal。流程已写入两仓AGENTS：开发构建测试、按需实装同源程序；验收后才出最终双包，纯流程HEAD不改变实机修复身份。
 
 ## Failure evidence, repair and runtime eligibility / 失败证据、修复及实机条件
 
@@ -40,7 +50,7 @@ Ordinary saved-world opening accepts exact same-owned/same-Native complete prima
 
 Explicitly discarded observed ticks are conservatively counted during admission and persisted once only after strict takeover, without changing original maximum/issued/deadline/return/energy/warper grants. Unknown binding, overflow or failed durable debit blocks health and latches the original failure. 同次失败证据区分true/false/unknown/not_observed/not_reached，保留稳定code、首谓词、阶段/tick、同次原始事实与真实预算，不补采Native或由后续Pause覆盖首错。
 
-## Exact candidate qualification / 准确候选验证
+## Development repair qualification / 开发修复验证
 
 Exact **Push** CI [39762053431](https://github.com/Arcueid77/Spherewright/actions/runs/39762053431) succeeded for c6603b0. The exact clean SHA passed the full local Native Plugin/solution build and complete Contracts/Core/MCP regression; official same-source dual packaging rebuilt the complete solution. Production Store/coordinator/leases/Journal/durable consumption and production contact transitions are real. The offline shell does not run PhysX, real Native energy generation, complete Unity lifecycle or real Save and cannot certify Unity health.
 
@@ -65,7 +75,7 @@ Offline follow-up **beafe5b2b9b1308e3f832e53e69ee726d2baa4f1** passed exact clea
 
 Current **e022d71** passed the exact clean Native Plugin/solution build, complete Contracts/Core/MCP regression, bilingual checks and exact **Push** CI [39794134779](https://github.com/Arcueid77/Spherewright/actions/runs/39794134779). Official same-source development packages: manual **8DC07B77C4013BAABAFB2CA144E67DF77FD35AD934BDADA48F4440E57AB9F650 / 37188184bytes**; Thunderstore **A73ADCBD71F0DF9D4B32448FFFA908ABA652AAA2664395F743524953D6B43C82 / 32913981bytes**. Actual72tools/1resource, optional return-task schema, default-false commit confirmation, fresh Contracts, all11 actual module stamps, complete bilingual guides and positive real-package installer sandbox passed. The unchanged raw scanner reports1 exact manifest size-field collision/exit2;236 exact unchanged files reuse retained old-needle proof, every new needle scans all bytes and21 changed files scan all needles. **0 real leaks/1 exact contextual classification/0 unknown; payloadQualified=true/allChecksPassed=false.** No actual installation, game launch, Load or new owner-window start has occurred.
 
-当前e022已完成准确干净源码的Native完整构建、全回归、双语检查和准确Push CI；上列同源开发双包的真实接口/新参数/默认确认、独立Contracts、11模块、完整指南和安装沙箱均通过。原扫描器保留退出2和一条精确清单size字段碰撞，按内容身份复用并扫描新增检测针，无真实泄漏或未知项；载荷合格，allChecksPassed仍false。Lab固定候选现为e022；磁盘仍c660，未启动游戏、未加载、未开始新用户窗口。
+当前e022已完成准确干净源码的Native完整构建、全回归、双语检查和准确Push CI；上列同源开发双包的真实接口/新参数/默认确认、独立Contracts、11模块、完整指南和安装沙箱均通过。原扫描器保留退出2和一条精确清单size字段碰撞，按内容身份复用并扫描新增检测针，无真实泄漏或未知项；载荷合格，allChecksPassed仍false。该离线截点的修复版本为e022、磁盘仍c660；本轮实装与执行结果见顶部表格。
 
 The preceding f3cae99 package attempt stopped at the unchanged interface checker because an expanded stop description omitted its required original-flight wording. e022 restores the full original contract and appends the separate idle-task meaning; the checker was not relaxed. Raw exception and partial package stay protected and unqualified. The return-only path preserves old UTC/maximum/spent/resource floors and the old unknown result, grants one new task only after exact checkpoint adoption, reserves native stop/tail inside its new total and exposes same-decision first failure. Idle-task cancellation uses normal Pause; an active flight retains its original exit/braking path. Offline Save export, native adoption, flight/landing and PhysX remain substitutes, not Unity acceptance.
 
@@ -105,9 +115,9 @@ The owner subsequently explicitly approved **one restore of the latest complete 
 
 用户随后明确批准 **从最新完整飞行前档恢复，并新开一次至多20分钟/54000游戏tick的只返航任务**，舍弃其后未存进度（已知至少4346tick、约72秒，最终量未知）。新执行窗口仅在离线实现及验证完成、实际执行时起算，当前未起算。旧旅程、原unknown、物品能源及返程储备全部保留；新决定不把旧试验改成失败或重放。保护授权记录不等于可执行Native票据。
 
-**Next unique result: coherently install the qualified e022 pair, verify the actual game is outside the caller's terminating jobs and its loaded modules match, then execute the once-approved exact-checkpoint return-only task and normally Save at the original home.** The1200s/54000tick grant is still pending start; original c660 action/key is never replayed. No desktop unlock is required by this supported command-line/public-MCP path.
+**Next unique result: repair and reproduce the checkpoint-adoption → Native idle-health → normal Save → original-home return chain offline, including the separate return-only budget.** The e022 functional trial ended at missing idle binding; its checkpoint Load completed but health failed. Do not replay its action or automatically renew its window. Keep the paused game open until current progress has a supported preservation path.
 
-**下一唯一结果：一体实装已合格e022双包，核验实际游戏脱离调用端终止组及真实加载身份，再仅一次恢复准确检查点、返原母星并正常保存。** 新20分钟/54000tick窗口仍未起算，原c660动作/key不重放，不重问本次已批范围；当前最新完整飞行前档仍120907158。
+**下一唯一结果：离线修复并复现“检查点接管→Native健康停留→普通保存→原母星返航”的整链，同时接入独立只返航预算。** e022本次试验已在停留绑定缺口处结束；读档completed不等于健康接管，禁止重放或自动续窗。游戏保持暂停打开，当前完整档仍120907158，后续39tick尚无覆盖。
 
 Historical Gates1/3 retain their original scope; Gate2 is open, and historical condition counts are not current-source maturity. After healthy recovery reuse the selected resource1013 and existing home recipe62 consumer: real vein/minimum miner/power/passive ILS, legal vessels/warpers, declared quantity/rate/window and complete shipment cycles, actual consumption, ordinary Save and continuation after recovery. Startup/mined/in-transit/received/consumed quantities remain separate. No0.4 replay, macro-factory, speculative research or changed acceptance. Final review pair remains null/null; formal publication requires separate approval.
 
