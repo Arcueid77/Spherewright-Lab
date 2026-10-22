@@ -3,6 +3,9 @@ artifacts/
 **/bin/
 **/obj/
 **/TestResults/
+**/__pycache__/
+*.pyc
+*.pyo
 *.dsv
 *.dsv.tmp
 *.autosave

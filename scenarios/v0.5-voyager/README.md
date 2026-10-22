@@ -1,5 +1,17 @@
 # v0.5.0 Voyager
 
+Current facts live only in the [active snapshot](current-status.md). The checkpoint sections below are historical. 当前事实只见[唯一活动快照](current-status.md)，下列截点按历史范围保留。
+
+## Offline task lifetime verification / 离线任务生命周期验证
+
+[The launch helper](scripts/detached_python_task.py) starts a pinned, already-reviewed Python task using an explicitly selected Windows route. The same-user WMI route verifies user/session/privilege identity, the independent non-terminating process job, input hashes and the original absolute deadline before entering the target. It grants no game authority or budget and does not enforce the target's work loop; the reviewed target must retain its own finite call/time limits. Creation without an admission/terminal receipt remains unknown and is never permission to launch again. No service, scheduled task or host setting is changed.
+
+[启动辅助模块](scripts/detached_python_task.py)仅以明确选择的Windows方式启动内容锁定、已审查的Python任务。独立启动在进入目标前核验同用户、会话、权限、非宿主终止型进程组、输入内容和原绝对截止时间；不授游戏权限或预算，不替代目标脚本自身的有限调用/时间上限。仅有创建回执不表示接管或完成；缺失回执须核原进程，不重新启动。它不修改服务、计划任务或宿主设置。
+
+Run portable admission checks with `python scenarios/v0.5-voyager/scripts/test_detached_python_task.py`. On Windows, add `--windows-integration --evidence .local/owned-launch-fixture` with a new evidence directory to exercise real nested job closure. The fixture closes only its own synthetic parent jobs, verifies the ordinary child stops and the independent child completes after parent exit, then checks all fixture processes have stopped. It never starts DSP or MCP. CI runs the portable checks; the real Windows result is retained locally and does not prove Unity recovery.
+
+运行同一命令可检查启动策略；Windows下增加上述集成参数及全新保护输出目录，可实际验证双层进程回收。替身只关闭自身新建的父进程组，证明普通子任务被回收、独立任务在父进程退出后收尾，并核验替身进程全部结束。全过程不启动DSP或MCP；CI跑策略检查，真实Windows结果本地保留，不冒充Unity恢复证明。
+
 ## Closed home ILS supply and Save / 母星ILS补给与保存闭合
 
 **Latest closed checkpoint (2026-10-19):** Stage1529RPC/49accepted; saved118296544/observed118296601, Journal105 with all five original transitions/prefixes and isolated item1013×10 retained. Actual source/install remains ddec09e3e752358043dc7b0bb43486d800c3b940 / Native0.10.35.29151. One fixed48m Move succeeded (52RPC/one accepted), with sampled stable observations spanning600game ticks and actual Native ILS range readback. The existing ILS now has idle1/working1 vessel, warper20 and one previously empty slot configured as item1013/max100/localNone/remoteDemand; old slots0/1 and belt ports are preserved.

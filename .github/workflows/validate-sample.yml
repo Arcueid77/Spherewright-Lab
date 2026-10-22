@@ -31,6 +31,9 @@ jobs:
       - name: Verify historical scenario contract without a game
         shell: pwsh
         run: ./scenarios/v0.4-final/scripts/verify-acceptance.ps1
+      - name: Verify finite task launch admission without a game
+        shell: pwsh
+        run: python ./scenarios/v0.5-voyager/scripts/test_detached_python_task.py
       - name: Exercise fail-closed verifiers in the disposable CI checkout
         shell: pwsh
         run: ./scripts/test-verifiers.ps1 -FixtureRoot $pwd.Path -AllowFixtureMutation

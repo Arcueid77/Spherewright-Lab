@@ -42,10 +42,10 @@ if($actualArchive.Count -ne $gitCount -or @($actualArchive|Where-Object {-not $a
 $findings=[Collections.Generic.List[object]]::new();$relativeLinks=0
 foreach($path in $tracked){
     if($path -ceq 'deps/Spherewright'){continue}
-    if($path -match '(^|/)(?:\.local|artifacts|bin|obj|TestResults)/|\.(?:dsv(?:\.tmp)?|autosave|dll|exe|pdb|zip|dmp|dump)$|(?:^|/)(?:bridge-[^/]+|[^/]*(?:ticket|credential)[^/]*)\.json$') {throw "Forbidden tracked local/binary payload: $path"}
+    if($path -match '(^|/)(?:\.local|artifacts|bin|obj|TestResults|__pycache__)/|\.(?:dsv(?:\.tmp)?|autosave|dll|exe|pdb|zip|dmp|dump|pyc|pyo)$|(?:^|/)(?:bridge-[^/]+|[^/]*(?:ticket|credential)[^/]*)\.json$') {throw "Forbidden tracked local/binary payload: $path"}
     $full=Get-SamplePath $Root $path
     if(-not(Test-Path -LiteralPath $full -PathType Leaf)){throw "Tracked sample file missing: $path"}
-    if([IO.Path]::GetExtension($full) -notin @('.md','.ps1','.json','.yml','.yaml','.txt','.schema')){continue}
+    if([IO.Path]::GetExtension($full) -notin @('.md','.ps1','.py','.json','.yml','.yaml','.txt','.schema')){continue}
     $text=[IO.File]::ReadAllText($full)
     if([IO.Path]::GetExtension($full) -eq '.json'){$null=$text|ConvertFrom-Json -Depth 100}
     $rules=@{

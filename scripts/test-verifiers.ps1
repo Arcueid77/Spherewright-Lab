@@ -198,6 +198,13 @@ try{
     [IO.File]::AppendAllText($readme,"`n"+$synthetic+"`n")
     Expect-Rejection 'credential-leak' 'verify-evidence.ps1' 'Potential secret'
 }finally{[IO.File]::WriteAllBytes($readme,$readmeBytes)}
+$pythonFixture=Get-SamplePath $root 'scenarios/v0.5-voyager/scripts/detached_python_task.py'
+$pythonBytes=[IO.File]::ReadAllBytes($pythonFixture)
+try{
+    $synthetic='ghp_' + ('x'*36)
+    [IO.File]::AppendAllText($pythonFixture,"`n# "+$synthetic+"`n")
+    Expect-Rejection 'python-credential-leak' 'verify-evidence.ps1' 'Potential secret'
+}finally{[IO.File]::WriteAllBytes($pythonFixture,$pythonBytes)}
 try{
     $syntheticPath='C:'+[char]92+'Users'+[char]92+'Fixture'+[char]92+'private.dat'
     [IO.File]::AppendAllText($readme,"`n"+$syntheticPath+"`n")
