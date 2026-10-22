@@ -21,7 +21,17 @@ This passes one bounded real connected-observation/expiry slice, **not full M2**
 
 UI运行中读数及原生最终样本见表，但 **UI帧窗195.72秒包含连接前准备，不冒作严格连接期统计**；后期128样本也含断开后工作。当前只通过一次有界真实连接/测量/过期切片，M2独立连接期UI窗口、工厂负载、多世界与长期仍待；M0点击暂缓、M3接手/真实故障、M5发行及历史40秒缺口不关闭。保护证据哈希见上；后文均为已消费准备截面，不恢复旧额度。
 
-### Historical preparation / 历史准备
+## Next isolated UI measurement / 下一独立UI测量
+
+The next candidate is Deck `b3b1908ea15865b9b2b6688ddd7f0df5e0e36a20`, with191 local Node tests, type/renderer build and the real Electron/synthetic-MCP measurement/limited-observation checks passed. Exact [CI39856082608](https://github.com/Arcueid77/Spherewright-CommandDeck/actions/runs/39856082608) is successful; tested source bytes still match. Local Lab source/evidence checks passed with one unavailable protected original still unverified; the matching Lab adoption CI must succeed before live use. Product9a4/native/Pi/installation remain unchanged. The new measurement uses a numeric supervisor-local connection generation, excludes setup and boundary responses, and counts a completed receipt/frame only after a later-started snapshot still proves the same live client. It retains confirmed ended statistics and separately counts the unconfirmed tail. No extra MCP request is added.
+
+This is a **new, unopened scope for that changed UI measurement**, not renewal of the consumed90-second scope. Root remains the sole direct executor, no subagent/new review. The fixed whole window is180 seconds from the first preflight request: one fresh read-only preflight client4 tools/10 seconds, then one normal Deck with `--observe-only --observe-max-tools 24 --observe-max-ms 20000`; observed OS-process exit must be within35 seconds. At most28 tools/two launches, metadata separately counted,0accepted writes/0model requests. Same existing process/dedicated world only; no save/load/restart/deployment or gameplay. All prior M3/M4/first-M2 windows remain closed, with unused allowance forfeited.
+
+Record the normal UI's visible pre-connection/setup state before selecting MCP, then obtain at least3 confirmed connection-only snapshot and frame samples. Its actual frame-window span must fit inside the separately measured client lifetime; report mean/P95/max, window/sample coverage and unconfirmed tails without inventing a latency threshold. Confirm the connection-only statistics stop changing after disconnect while the original all-UI view continues, and retain process/identity/task/Pi continuity. Missing proof, identity/generation change, unknown/quarantine or exceeded bounds stop this phase; do not retry it by reconnecting/rekeying. Factory-load, multiple-world and long-run gates remain independent.
+
+下一候选为上述b3，191本地回归/类型/界面构建及合成服务桌面验证通过，准确Deck/Lab CI过后才可实测；产品/实装不变。此为针对新测量能力的 **尚未开启的独立180秒窗口**，不是续用原90秒范围：预检4工具/10秒，随后Deck24工具/20秒，独立核35秒内退出，共最多28工具/两进程、元数据另计，0写入/0模型。先保留连接前界面样本，再核至少3个已确认连接期快照/帧，窗口不得跨出客户端寿命；断开后连接期统计冻结、整UI统计继续。原预算、身份/进程/任务/Pi及保存确认边界保持，负载/多世界/长期门不据此关闭。
+
+### Historical preparation of the closed first scope / 首轮已封闭范围的历史准备
 
 Prepared 2026-10-23; no live request, model call or accepted game write has been made by this new scope. The active product remains exact `9a4ec982b485db634a3cdbc7129d8b5c41fb86b7` /0.4.0, with successful product CI39834472709, the existing coherent four-file cold installation and Native0.10.35.29151 / Assembly-CSharp `EF314425DADE51F529F184F07BE136CD3C2660A6A81515603C7226FBE7AB1D8C`. Pi remains `71023aec1546d6d677a65669c5665c0927ce0dd0`; the window adapter remains f840f24400aebdb140c9f9b6b6bd55f538434ca3. No deployment is planned.
 
