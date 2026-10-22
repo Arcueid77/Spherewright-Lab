@@ -1,11 +1,11 @@
 {
   "schemaVersion": 2,
   "status": "development",
-  "scenario": "commanddeck-m3",
+  "scenario": "commanddeck-m4-runtime-observation",
   "spherewright": {
     "repository": "Arcueid77/Spherewright",
     "submodulePath": "deps/Spherewright",
-    "sourceSha": "ec85192de776df45593f6433a6064e5f663bdb7b",
+    "sourceSha": "9a4ec982b485db634a3cdbc7129d8b5c41fb86b7",
     "releaseTag": null,
     "productVersion": "0.4.0"
   },
