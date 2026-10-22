@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
   "status": "development",
-  "scenario": "commanddeck-m4-runtime-observation",
+  "scenario": "commanddeck-m2-measurement",
   "spherewright": {
     "repository": "Arcueid77/Spherewright",
     "submodulePath": "deps/Spherewright",
