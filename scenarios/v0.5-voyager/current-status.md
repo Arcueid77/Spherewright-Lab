@@ -1,70 +1,64 @@
 # Voyager active snapshot / 0.5 活动快照
 
-This is the only current snapshot. Historical acceptance, source qualification, development payloads, actual installation and healthy runtime recovery are separate facts. 本文是唯一活动快照；历史验收、源码资格、开发载荷、实际安装和实机健康分别取证。
+This is the only current snapshot. 历史验收、当前候选、磁盘安装和实机结果分别记录。
 
-## One integration candidate and actual installation / 唯一集成候选与实装
+## Candidate, installation and current world / 候选、实装与当前世界
 
-The executed integration candidate and fixed Lab source remain **db97832ee4eb4f7589370714f971fbd2a923c4e0 / 0.5.0**. Product HEAD has advanced separately to **36ec081e93f21f83944603eb7d41ac8946cc3503**, an offline paused-save preservation repair; it has not been adopted, packaged or installed as a new integration candidate. The executed db97832 retains the Native transform-input, contact/charge same-decision evidence, terminal/unknown handling and path-safe packaging fixes. Its additional blocking fix preserves a sealed successful outbound as historical provenance after a normal covering primary save retires checkpoint reload capability. Retirement never authorizes checkpoint loading; the fixed LastExit must still cover the current primary, with unchanged original Journey/Journal, identity and budgets. Existing ordinary-research enqueue authority is retained.
+The owner explicitly approved discarding the exact **12488-tick** interval from paused RAM120919464 to the latest complete owned primary120906976, then requested that ordinary saved-world opening be separated from expiring automatic-task authority. This supersedes the former no-rollback requirement only for that exact primary and interval. It does not authorize an older checkpoint, another world, new task time or replay.
 
-已执行候选、Lab固定源码和实装仍为 **db97832**；产品 HEAD 已另行前进到 **36ec081**，是离线暂停保存修复，尚未作为新集成候选采用、打包或安装。db97832 保留既有 Native 缩放输入/父链、接触充能同次证据、终态/未知保护及包路径修正；修复正常主档覆盖后退役 checkpoint 导致成功出航历史证明丢失的恢复断链。退役档仍不可加载，固定 LastExit 仍须覆盖当前主档，原 Journey/Journal、身份及预算不变。既有普通科研入队授权保留。
-
-Exact **push** CI [39715837389](https://github.com/Arcueid77/Spherewright/actions/runs/39715837389), job **119617602115**, succeeded in all13 steps. The official package entry rebuilt the complete solution including the actual Native Plugin with zero warnings/errors. Full local and exact-source CI regressions pass. The pre-fix production Store/coordinator reproduction rejected a legal covering save with remote_resume_successful_outbound_required; the repaired path, cold Store reopening and failed-resume continuation pass, while rollback, contradictory failure/reload/retirement, expired credentials and changed prepared evidence reject. These filesystem/coordinator fixtures do not simulate Native Data.Export, shutdown callbacks or Unity recovery.
-
-准确 Push CI 全13步成功，完整 solution/真实 Native Plugin 零警告错误，本地与准确源码 CI 完整回归通过。修复前真实 Store/coordinator 将合法覆盖保存拒为 remote_resume_successful_outbound_required；修复后覆盖档、冷 Store 和已失败恢复续接通过，较新主档、矛盾失败/重载/退役、过期凭据及 prepare 后证据变化仍拒绝。替身不模拟 Native 导出、退出回调或 Unity 恢复。
+用户明确批准舍弃当前暂停RAM120919464到最近完整主档120906976之间的 **12488tick**，并要求修正普通读档与旧自动任务期限耦合。该批准仅覆盖此主档及此差额，不扩展到更旧检查点、其他世界、新任务时间或重放。准确主档已完整核验并备份。
 
 | Identity / 身份 | Current fact / 当前事实 |
-| --- | --- |
-| Product HEAD / 产品HEAD | **36ec081e93f21f83944603eb7d41ac8946cc3503**, offline repair only / 仅离线修复 |
-| Executed integration candidate / Lab lock+gitlink | **db97832ee4eb4f7589370714f971fbd2a923c4e0** |
-| Development pair / 开发双包 | Same clean db97832 source; hashes below / 同一干净源码，见下表 |
-| Disk installation / 磁盘实装 | **db97832ee4eb4f7589370714f971fbd2a923c4e0 / disk_verified**; paired transaction committed and both installed metadata probes passed / 配对事务提交，两实装接口已核 |
-| Loaded module identity / 实际加载模块 | New process35176 started from the verified installed cohort; Native preload and Plugin0.5/bridge startup proved. Public interface does not expose the loaded source SHA; running_unverified retained / 新进程预加载及Plugin/桥接启动已核，公开接口无加载SHA，保留未核 |
-| Native | **0.10.35.29151**, Assembly SHA **EF314425DADE51F529F184F07BE136CD3C2660A6A81515603C7226FBE7AB1D8C**, five references unchanged / 五引用未变 |
-| Healthy recovery / 健康恢复 | Exact resume **completed**, healthy owner/ordinary Save120906976 proved; later original return-wall guard paused/quarantined at120919464 / 已证明健康接管及保存，后续原返程时间守卫停在919464 |
-| Final review pair / 最终交审双包 | **null / null** |
+|---|---|
+| Product HEAD and integration candidate / 产品HEAD及唯一候选 | **13a3f3ea45ce980c9692d696fc96421c4f78aebe / 0.5.0** |
+| Lab source-lock and gitlink / Lab固定依赖 | **13a3f3ea45ce980c9692d696fc96421c4f78aebe**, offline adoption / 离线采用 |
+| Disk installation / 磁盘实装 | **db97832ee4eb4f7589370714f971fbd2a923c4e0 / disk_verified**; unchanged / 未变 |
+| Loaded module / 实际加载 | Existing process35176 from verified db97832 cohort. Public API does not expose loaded source SHA; **running_unverified** retained / 旧进程及未核标记保留 |
+| Native | **0.10.35.29151**, Assembly SHA **EF314425DADE51F529F184F07BE136CD3C2660A6A81515603C7226FBE7AB1D8C**; five references unchanged / 五引用未变 |
+| Current world / 当前世界 | Fresh MCP **120919464 / quarantined / writesAllowed=false**, primary120906976, complete LastExit120906946; no game mutations this repair / 本轮未改游戏 |
+| Historical healthy recovery / 已发生的健康恢复 | db97832 original resume completed; healthy admission and normal Save120906976 proved. Later original return-wall guard paused/quarantined at120919464 / 成功恢复后又被原时间守卫暂停 |
+| Final review pair / 最终交审双包 | **null / null**; Gate2 open / 门2开放 |
 
-|db97832 development payload / 开发载荷|SHA256|Bytes / 字节|
+Original Move remains **outcome_unknown**; the d6 execution family stays retired. Its first failed conjunction member remains unknown; later fixes do not establish that original root cause. Existing ordinary-research enqueue authority is retained. 原Move仍unknown，d6执行族退役，原合取首错未知，不倒推根因；既有普通科研入队授权保留。
+
+## Ordinary opening is independent of task expiry / 普通读档与任务过期分开
+
+Public MCP preparation now defaults to **open_saved_primary**. It verifies both protected ownership replicas, the complete exact same-Native primary and original durable Journal, including after days/weeks of inactivity or a quarantine. The exact Native loader completion calls supported Pause and verifies the saved tick/identity/planet. Journal adoption issues a fresh **saved-world-only** credential, usable for later opening despite expiry. Every existing automatic execution/recovery mode rejects that credential. No old action is resumed or relabelled; no charging, automatic Save, fresh task clock, energy/tick/warper grant or checkpoint loading occurs. Original Journey/Journal/consumption history stays intact. Human game controls remain available. Automatic health/takeover and any new return mission are separate and remain unproved/ungranted here.
+
+公共MCP准备默认 **open_saved_primary**：即使闲置数日/数周或处于隔离，也核验归属双副本、同Native精确完整主档及原持久Journal；精确原生加载完成时调用受支持Pause并核存档tick/身份/星球。Journal接管后仅签发以后读档用的凭据，旧执行/恢复入口均拒把它当自动操作许可。旧动作结果、Journey/Journal及消费历史不改，不续跑、充能、自动保存、增加时间/能源/tick/翘曲器或加载检查点。玩家可使用游戏自身操作；自动健康接管与新的返程任务仍须另行完成原生核验和适用授权，本次尚未证明或授予。
+
+Primary normally covers the known floor, including any same-owned fixed LastExit. Explicit exact loss acceptance binds both floor and primary tick plus the full source and matching LastExit fingerprint; it is not a generic >= relaxation or source fallback. The actual current ticket minimum was freshly read as120919464, correcting the earlier diagnosis's unverified120906976 guess. A newer complete preservation primary can be opened without inventing an equal ticket minimum.
+
+普通主档须覆盖已知下限及同owned固定LastExit。用户明确舍弃进度时绑定精确下限、主档tick及两个完整来源指纹，不以泛化>=或换源放宽。当前票据minimum鲜读为120919464，纠正诊断中未核实的120906976推测；较新的完整保全主档可直接核验，不伪造同值票据。
+
+## Candidate qualification / 候选验证
+
+Exact **Push** CI [39742663779](https://github.com/Arcueid77/Spherewright/actions/runs/39742663779) succeeded for13a3f3e. Complete local Plugin/solution build uses the current five Native references with zero warnings/errors; full implementation regressions and the complete subsequent MCP-default regression passed. Final official dual packaging rebuilt the exact final Native Plugin/source. The pre-fix exact78034e9 archived production Store/coordinator rejects the same days-old quarantined opening expectation; repaired Store/coordinator, real full-file leases/Journal/consumption and the production event/adoption guard reach saved-world opening with old automation stopped. Unknowns/order/ownership/file/Journal/digest/floor changes, unapproved rollback, consumed provenance and ambiguous dispatch remain fail closed. Native loader/Pause substitutes are explicit; this is not Unity runtime proof.
+
+准确Push CI及当前Native完整构建、回归已过；最终官方双包按准确SHA重建。修前原始78034e9代码复现拒绝；修后真实Store/coordinator、文件/Journal/消费租约及生产事件守卫可到达仅读档终态。未知、乱序、归属、文件/账本/digest/下限变化、未准回退、已消费及模糊dispatch仍拒绝。加载/Pause替身不认证Unity实机。
+
+|13a3f3e development payload / 开发载荷|SHA256|Bytes / 字节|
 |---|---|---:|
-|Manual / 手动|7916E7F33A91C468A7EF518C701100DBE10F2A65F9B4963CF699999D3AA44089|37126421|
-|Thunderstore layout|3FFD370ED8C281A04076A36237DDD7F4716D05FC20A91AC2FDE4C676F14C1517|32853018|
+|Manual / 手动|453E9887238F5F0594EAFBF8BFDEB0F79B5F3E303F54B75F7F81329AC532C12B|37156890|
+|Thunderstore layout|3486FF98DFD1E45B6F98D59DABCAF263E30CFE3DC90EB7D07BB11845E1F33781|32884649|
 
-Actual manifests/files, matching72tools/1resource schemas, bilingual/embedded guides, seven source stamps and three fresh Contracts processes are checked. The failure DTO keeps deep copies, nulls and constant-false SafetyCertified. Both layouts reject product CodeView records. This exact development pair is now installed; it is not uploaded or a final review candidate.
+Actual manifests/files, matching72tools/1resource/schema/default, bilingual embedded/package guides, fresh Contracts processes and every actual product module stamp match13a3f3e. Raw payload scan remains **1finding / child2 / driver2 / passed=false**: exact manifest-size collision for the actual immutable System.Security payload, newly rebound to this manifest/ZIP. Original needles and matcher remain;236 exact unchanged file hashes reuse only their prior no-finding evidence, all new needles scan all bytes and21 changed files scan all needles. **0real path leaks /1classified /0unclassified; payloadQualified=true / allChecksPassed=false**. Earlier invalid guessed seven-module report is retained but excluded; the corrected complete actual-module inventory is authoritative. Positive installation sandbox, disk installation and real Native opening have not been performed for this candidate. No Tag/Release/upload.
 
-真实 manifest/文件、72工具/1资源及 schema、双语/嵌入指南、七源码标记和三份独立进程 Contracts 已核；失败 DTO 的深拷贝、null 与恒 false 保持，两载荷均无产品 CodeView。准确开发双包已安装，未上传，不是最终交审包。
+真实文件/接口/默认模式、双语嵌入指南、Contracts和实际模块标记一致。扫描原异常1项及child2/driver2/passed=false保留；仅对本manifest/ZIP与实际System.Security文件的精确size/hash归类。原针及检查器保留，按完整文件SHA复用未变证据，新增针覆盖全部字节，变化文件全针扫描；无真实路径泄漏或未知项。载荷合格，allChecksPassed仍false；原猜测模块清单的无效报告保留但不使用，以更正后实际清单为准。新候选尚未做正向安装沙箱、实装或实机读档，未发布。
 
-The original first pair's scanner **7findings / child2 / driver1** remains sealed: six real CodeView build-path leaks plus one exact manifest-size collision; that pair is retired without installation. Current db97832 full-payload scan retains all needles and its own raw **1finding / child2 / driver1**. The one finding is bound to this manifest/ZIP and the actual immutable payload file's exact size/hash; **0real path leaks /1classified /0unclassified**, no deleted needle/global whitelist. **payloadQualified=true / fullDeliveryChecks=false / allChecksPassed=false**. The earlier positive installation sandbox refusal by the live-DSP guard remains sealed. After the authorized normal exit independently proved complete progress coverage, the exact new package passed all positive installer/recovery fixture stages without launching a game. No guard was bypassed. This is not installed or live-save/recovery qualification.
+The actual db97832 installed manual/Thunderstore pair remains7916E7F33A91C468A7EF518C701100DBE10F2A65F9B4963CF699999D3AA44089 /3FFD370ED8C281A04076A36237DDD7F4716D05FC20A91AC2FDE4C676F14C1517. Its old installation and successful Native recovery evidence is historical for that cohort, never13a3f3e proof.
 
-首批原扫描7项及 child2/driver1原件保留，其中6项真实路径泄漏已通过重编译及结构检查修复，首批包未装即退役。db97832仍保留原全载荷扫描1项、child2/driver1；只对本 manifest/ZIP 与实际同一载荷文件的精确 size/hash 做上下文归类，真实路径泄漏0、精确归类1、未知0，不删检测针或全局豁免。载荷合格，但完整交付与 allChecksPassed 均 false：原运行中 DSP 守卫拒绝原件保留；在另行获准且已证保全全部进度的正常退出后，本准确新包通过正向安装/恢复沙箱各阶段，未绕过守卫、未启动游戏。沙箱不替代另述的实装及单次健康恢复回执；当前后续返程守卫仍隔离，Gate2未验收。
+## Failure, repair and runtime eligibility / 失败、修复与实机条件
 
-The previous d6 installed cohort is preserved in the transaction archives. Current installed db97832 is the exact development pair above; no old version evidence is transferred. Native VFPreload and the initial unloaded menu were verified in the new generation before the single completed functional recovery described below.
-
-旧 d6 实装保留在事务归档中；新进程完成 Native 预加载及未加载菜单核验后，执行了下述单次成功功能恢复。
-
-## Current world and original failed action / 当前世界与原失败动作
-
-Fresh public MCP reads while desktop UI was unavailable again observed **120919464 / quarantined / writesAllowed=false**, last normal primary **120906976**, the same installed db97832 cohort and Native0.10.35.29151. They required no UI input, prepare or commit. Desktop unlocking is only relevant to the Native save window; it does not block MCP or offline implementation.
-
-桌面界面不可用时，fresh MCP 再次读回 **120919464 / quarantined / writesAllowed=false**、最新普通主档 **120906976**，实装db97832及Native版本未变；没有界面输入或prepare/commit。解锁仅关系原生保存窗口，不阻塞MCP或离线实现。
-
-The exact db97832 functional resume completed under its original action/key. Native strict admission, healthy writesAllowed=true, a renewed credential and ordinary primary120906976 were observed. Player was Walk/speed0/core1.6GJ. An old file checker then wrongly required exactly one owned primary across all saves; exact current-name full-file verification proves the actual primary. Its caller passed=false/family-closed flags are not the Native outcome and do not authorize another Load. The original d6 failure remains historical; its missing first conjunction member is still unknown.
-
-准确 db97832 原 action/key 已 completed，严格 Native 接管、healthy/writesAllowed=true、续发凭据及普通主档120906976已证；机甲 Walk、速度0、核心1.6GJ。随后旧检查器错误要求所有文件中仅一个 owned 主档；按当前精确保存名核完整文件已纠正此检查假设。调用器 passed=false/closed 标记不代表 Native 失败，不据此再 Load。原 d6 合取首错仍未知。
-
-One normal close preserved all pre-close RAM in complete LastExit120906946 (zero lost ticks). The successful recovery later normally saved complete primary120906976, now backed up by its exact full hash. Subsequent verification/operator delay exhausted the original return-wall margin; the existing remote_idle_return_wall_reserve_insufficient guard attested Native Pause/quarantine at **120919464**. No mining, power or ILS was built. Current RAM is12488ticks newer than the complete primary and12518newer than LastExit; the earlier three-tick exception does not cover this new gap. Do not Close/Load without supported current-progress preservation. Original Move stays outcome_unknown; original Journey/UTC/spent/return constraints are not reset.
-
-单次正常退出已把关闭前全部 RAM 保存到完整 LastExit120906946，实际丢失0tick。功能恢复随后普通保存完整主档120906976，已有同哈希保全副本。其后核验/操作等待耗尽原返程墙钟余量，现有 remote_idle_return_wall_reserve_insufficient 守卫在 **120919464** 核验 NativePause并隔离。未建采矿/供电/ILS。当前 RAM 比完整主档新12488tick、比LastExit新12518；此前3tick例外不覆盖新差额，先受支持保全再 Close/Load。旧 Move 仍unknown，原 Journey/UTC/已花/返程约束不重开。
-
-## Remaining Native chain audit / 剩余 Native 整链审计
-
-|Failure evidence / 失败证据|Native stage/dependency / 阶段与依赖|Repair scope / 修复范围|Positive/negative verification / 正反验证|Runtime eligibility / 实机条件|
+|Failure evidence / 失败证据|Phase/dependency / 阶段与依赖|Repair / 修复|Positive/negative proof / 正反验证|Runtime eligibility / 实机条件|
 |---|---|---|---|---|
-|Paused post-admission quarantine blocks ordinary Save / 暂停后的隔离统一阻塞Save|Normal commit access → Native Save/readback; post601 tail / 普通提交、保存、尾部|Offline36ec081 adds an explicit serialization-only opt-in, bound to the original admitted world/quarantine and stable paused tick; retains every other blocker / 仅有限序列化，绑定原世界隔离及稳定tick|Verbatim old production access rejects the legal fixture; repaired real Store/completion/access/normal-save composition passes. Pending/failed adoption, unknown/order/ownership/version/rollback/readback negatives reject; original Journey/Journal/consumption bytes remain unchanged / 修前复现、修后组合与反例已过|**No**: this repair is not installed, and cannot be cold-deployed across the present uncovered RAM / 未安装，不跨当前缺口冷部署|
-|Current ticket names completed resume / 当前票据绑定成功恢复|Post-healthy idle guard → later protected continuation / 接管后守卫及后续受保护续接|Still open; saving alone does not make a completed action a failed predecessor / 尚开放，保存不把成功变失败|No invented failed outcome, no old d6 proof borrowing; continuation remains not_reached / 未伪造或借旧证明，续接未到达|**No** / 否|
-|Current RAM newer than both complete saves / RAM较完整档新|Supported covering Save before any Close/Load / 冷动作前正常覆盖保存|Preserve current progress first; locked UI does not justify rollback or hot patch / 先保全，不回滚或热补丁|Fresh read-only MCP confirms the unchanged boundary; new Native Save not performed / fresh只读核实，未做新Save|**No**: primary gap12488ticks / 主档差12488tick|
+|Old automation expiry blocks ordinary opening / 旧许可过期挡读档|MCP default → ownership/full primary/Journal → exact Native completion|13a3f3e separates saved-world opening; old tasks stay stopped / 分离读档，停止旧任务|Pre-fix RED, repaired real Store/coordinator/event guard, weeks-later opening; execution reuse/unknown/changed evidence denied / 修前复现、修后组合与反例通过|Offline ready; not installed / 离线就绪，未安装|
+|Paused quarantine Save bootstrap / 隔离保存自举|Save before old required progress-preserving cold deployment|36ec081 save option retained in13a3f3e; owner's exact12488tick discard removes this Save prerequisite for the current chosen primary / 保留修复，本次明确舍弃使该主档不再必须先覆盖保存|Full current primary/backup verified; no new Save or Close / 已核完整主档备份，未保存退出|Current UI unavailable; do not inject/hot-swap / 界面不可用，不注入热换|
+|Completed predecessor and expired Journey / 成功前驱及旧旅程过期|Old automatic continuation/admission|78034e9 unchanged-window continuation retained;13a3f3e ordinary opening does not continue it / 保留原续接，普通读档不继续旧任务|Old completed/unknown outcomes unchanged; new file-opening credential grants no automatic work / 终态不改，不授自动作业|Automatic return/health still separate, unproved / 自动返程与健康仍未证明|
 
-Offline36ec081 exposes the first failed predicate and copied same-decision facts through existing bounded Native evidence DTOs on save errors/action results. Unknowns and not_reached remain distinct; native file failures carry their actual operation observations and never borrow an earlier successful pause sample. Full actual-Native Plugin/solution build, complete regressions, matching bilingual/embedded guidance and the unchanged source privacy scanner passed. Exact **Push** CI [39725305340](https://github.com/Arcueid77/Spherewright/actions/runs/39725305340), job119647728576, succeeded with the exact36ec081 source. No package, installation or live qualification is inherited from db97832. Native flags/render boundaries and Data.Export are explicit test substitutes; production Store, lease completion, commit access, save readback and failure copying are linked.
+## Remaining Native automatic-recovery audit / 保留的自动恢复Native审计
 
-离线36ec081在保存错误/动作结果复用有界Native证据DTO，给出首错及同次复制事实，区分未知与未到达；文件失败使用本次操作观察，不借旧暂停采样。完整真实Native Plugin/solution、完整回归、双语/嵌入指南和未删针源码扫描已过；准确Push CI39725305340已成功，不继承db97832的包、实装或实机资格。Native标志、渲染边界和Data.Export明确为替身，生产Store、租约接管、提交门、保存读回及失败复制直接链接验证。
+The following unchanged audit applies to the existing automatic contact/charging/takeover path. Saved-world-only opening stops at Native load completion/Pause and Journal adoption; its151/501/601/charging/strict-idle stages are **not_reached**, never counted as passed. 下表保留自动接触/充能/接管路径；仅读档停在原生完成/Pause和Journal接管，不把未执行的后续阶段算通过。
 
 This audit uses the current EF3144 assembly and sealed source extractions, not a new Native invocation. **P** is the captured bounded cost per actual Native601; budgets below are checks, never energy grants. 本审计据当前程序集和保护的反编译原件，未为补表新增 Native 调用。P 为实际601的已证每 tick费用上界；表中预算只检查，不加能量。
 
@@ -100,9 +94,9 @@ Original absolute NativeUTC,18000tick/300s caps, return/core/loaded/warper floor
 
 原 UTC、18000tick/300秒上限、全部返程/核心/loaded/翘曲器底线及消费记录不改；本次单次功能恢复沿用既有20分钟续接范围及18000tick/300秒充能上限，未改原Journey UTC或储备；当前idle停机后不再生成提案。同 owned、同Native、不回滚 standing 仍有效，但不把覆盖缺口算通过。
 
-**Next unique result: preserve current paused120919464 progress through a supported normal save.** The owner cannot currently unlock Windows. Only the Native save-window UI needs an unlocked desktop; MCP and offline work do not. Stop UI inputs and continue offline without Close/Load. Installed MCP still blocks Save while quarantined. A second real gap is now proved: this post-healthy idle quarantine ticket names the completed resume, whereas failed-resume continuation requires a known-failed predecessor. Never relabel that completed action as failed, hand-edit the ticket, borrow the old d6 failure, replay recovery or add budget. Continue bounded offline correction of progress preservation and post-healthy continuity; prepare the minimal already-selected resource1013 mine/power/passive-ILS plan before another lawful runtime attempt.
+**Next unique result: open the owner-approved complete primary120906976 with the qualified candidate, leaving old automation stopped.** The owner cannot currently unlock Windows; only Native menu/normal-close UI requires that desktop. The existing db97832 process stays open and paused until that supported interface is available. No Close/Load/install/Resume occurred this repair. Existing same-owned/same-Native standing cold authority and this exact loss grant are retained; fresh actual process/primary/LastExit/protected-record checks still precede the single deployment/opening. A new automatic return window is not inferred from read authorization.
 
-**下一唯一结果：通过受支持的普通保存保全当前暂停919464进度。** 用户暂时无法解锁；只有原生保存窗口操作需要解锁，MCP和离线工作均不需要。停止界面输入，继续离线，不 Close/Load；现装MCP仍拒隔离态Save。另已证明健康接管后的隔离票据绑定已 completed 的恢复，而失败续接要求已失败前驱，形成断链；不得把成功改失败、手改票据、借旧d6失败、重放恢复或加预算。继续范围内离线修正进度保全及接管后连续性，下一合法实机动作前先准备好既定1013矿源/供电/被动ILS最小方案。
+**下一唯一结果：用合格候选打开用户明确获准的完整主档120906976，旧自动任务停止。** 用户暂时无法解锁，原生菜单/正常退出需要可操作桌面；现有db97832进程保持打开、暂停。本轮未Close/Load/安装/Resume。同owned同Native常规冷部署standing及本次准确舍弃批准保留；执行前仍鲜核进程、主档/LastExit和保护记录。读档授权不推导新的自动返程时间。
 
 Historical Gates1/3 retain their original scopes; Gate2 is open. Historical condition counts are not current-source release maturity. After healthy recovery, reuse the already selected resource1013 target and existing home recipe62 consumer: minimal real vein/miner/power/passive ILS, legal vessels/warpers, several declared complete shipment cycles, actual consumer use, and ordinary Save/recovery continuation. Declare quantity/rate and a window based on real flight times before running; separate startup, mined, in-transit, station-received and consumed stocks. No0.4 replay, macro-factory, speculative research or relaxed gate. Final manual/Thunderstore review candidates remain **null/null**; formal Tag/Release/upload needs separate explicit approval.
 
@@ -113,3 +107,7 @@ Root is the sole game writer/offline Git maintainer. No recursive consultation, 
 Current protected evidence is under **.local/v0.5-voyager/progress-preserving-save-audit-20261022-v1/**: exact Native save/UI type cuts, live read-only sharing facts, actual-Core Windows lease fixture and its limits, pre-fix failure and repaired coordinator regressions, full Native build/tests, exact Push CI, same-source dual development payloads/manifests/metadata/three Contracts/seven stamps, unchanged raw scanner and exact contextual disposition, **before-manual-save/** fresh public reads, **preservation-final.private.json**, and protected normal-save inputs/backups. Prior coherent-recovery-correction-20261022 and original d6 continuity receipts remain sealed. One authorized normal close and its complete Native exit save are proved in normal-close-intent/result, normal-close-preservation and latest-complete-save; one exact paired installation, Native-complete menu launch and read-only menu reconciliation are proved; one functional recovery completed; its later idle guard stop and the exact-primary checker reconciliation are retained in recovery-and-later-guard-reconciliation.private.json. No Gate2 construction or publication occurred. The resulting Lab commit/CI is recorded locally after terminal. Private identities, tokens, absolute paths and original UTC remain protected.
 
 The additional **.local/v0.5-voyager/paused-quarantine-save-correction-20261022-v1/** retains the unchanged-parent access RED reproduction, repaired full regression TRX, exact36ec081 Native build, original-needle source scan, exact Push CI and fresh current-paused MCP read proof. No Save/Close/Load/Resume or UI input was performed during this offline repair. 新保护目录保留修前复现、修后完整回归、准确SHA Native构建、原检测针扫描、Push CI及fresh MCP只读回执；本次离线修复没有保存、退出、加载、Resume或界面输入。
+
+Latest implementation/qualification originals: **.local/v0.5-voyager/saved-world-open-20261022-v1/**, including exact-parent RED, Native build/regression, default-dispatch MCP checks and source scans; **final-candidate/** holds exact13a3f3e dual payloads, manifests, fresh metadata/Contracts/module stamps, exact Push CI, raw incremental scan/contextual disposition and offline-repair-qualification.private.json. **last-readback/** independently confirms the unchanged installed db97832/current paused boundary. **owner-approved-primary-rollback-20261022-v1/** retains the exact owner grant, complete current primary and full-hash backup. No private identities/tokens/absolute paths enter Git.
+
+新增保护证据目录保存修前复现、准确源码/双包及CI、原异常和精确归类、最终离线限定、fresh旧实装只读及明确舍弃批准。唯一活动快照沿用；不新增治理平台或修改监控/ACK/通知。
