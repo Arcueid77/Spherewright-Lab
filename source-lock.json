@@ -5,7 +5,7 @@
   "spherewright": {
     "repository": "Arcueid77/Spherewright",
     "submodulePath": "deps/Spherewright",
-    "sourceSha": "61fff38c300808e3fddc23b653014f1dca816861",
+    "sourceSha": "db97832ee4eb4f7589370714f971fbd2a923c4e0",
     "releaseTag": null,
     "productVersion": "0.5.0"
   },
@@ -42,7 +42,7 @@
     },
     "evidence": "scenarios/v0.5-voyager/current-status.md",
     "verification": "disk_verified",
-    "runtimeState": "running_unverified"
+    "runtimeState": "not_running"
   },
   "acceptance": {
     "spec": "v0.4.0",
