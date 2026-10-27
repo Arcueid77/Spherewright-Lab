@@ -5,7 +5,7 @@
   "spherewright": {
     "repository": "Arcueid77/Spherewright",
     "submodulePath": "deps/Spherewright",
-    "sourceSha": "728db7b86e8264432f543716001971504b81ca10",
+    "sourceSha": "dd48be7526b1a186297dc8db8c1fe9300d77b933",
     "releaseTag": null,
     "productVersion": "0.5.0"
   },
@@ -21,7 +21,7 @@
     "targetVersion": "0.5.0"
   },
   "installed": {
-    "sourceSha": "e022d71a45aead056c1a0d0e8b470967534a2383",
+    "sourceSha": "dd48be7526b1a186297dc8db8c1fe9300d77b933",
     "productVersion": "0.5.0",
     "releaseTag": null,
     "native": {
@@ -29,20 +29,18 @@
       "assemblySha256": "EF314425DADE51F529F184F07BE136CD3C2660A6A81515603C7226FBE7AB1D8C"
     },
     "packages": {
-      "manual": {
-        "file": "Spherewright-0.5.0-win-x64.zip",
-        "sha256": "8DC07B77C4013BAABAFB2CA144E67DF77FD35AD934BDADA48F4440E57AB9F650",
-        "size": 37188184
-      },
-      "thunderstore": {
-        "file": "Spherewright-0.5.0-thunderstore.zip",
-        "sha256": "A73ADCBD71F0DF9D4B32448FFFA908ABA652AAA2664395F743524953D6B43C82",
-        "size": 32913981
-      }
+      "manual": null,
+      "thunderstore": null
     },
     "evidence": "scenarios/v0.5-voyager/current-status.md",
     "verification": "disk_verified",
-    "runtimeState": "running_unverified"
+    "runtimeState": "running_verified",
+    "developmentArtifact": {
+      "kind": "plugin_mcp_directory",
+      "manifestSha256": "985B88CCF054C44285CF848DF00840228146B581E95F7EDA84342D16615E2696",
+      "pluginFiles": 5,
+      "mcpFiles": 224
+    }
   },
   "acceptance": {
     "spec": "v0.4.0",

@@ -101,7 +101,15 @@ function Assert-SampleInstalledRecord {
     $evidence = Get-SamplePath $Root $Installed.evidence
     if (-not (Test-Path -LiteralPath $evidence -PathType Leaf)) { throw 'Installed-state evidence reference is unavailable.' }
     if ($null -eq $Installed.native.assemblySha256) { throw 'Installed Native record requires its actual assembly hash.' }
-    Assert-SamplePackageNames -Packages $Installed.packages -Version $Installed.productVersion
+    if ($Installed.PSObject.Properties.Name -ccontains 'developmentArtifact') {
+        if ($null -ne $Installed.packages.manual -or $null -ne $Installed.packages.thunderstore -or $null -ne $Installed.releaseTag) {
+            throw 'A development directory installation cannot borrow distribution packages or a release tag.'
+        }
+        # The immutable protected cohort manifest identifies actual installation
+        # inputs. CI checks this record; it never claims to inspect live files.
+    } else {
+        Assert-SamplePackageNames -Packages $Installed.packages -Version $Installed.productVersion
+    }
     if ($null -ne $Installed.releaseTag) {
         if ($Installed.releaseTag -cne ('v' + $Installed.productVersion) -or
             (Invoke-SampleGit $Product @('rev-parse',($Installed.releaseTag + '^{commit}'))) -cne $Installed.sourceSha) { throw 'Installed release tag does not match the recorded installed source.' }

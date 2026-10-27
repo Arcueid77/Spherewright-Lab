@@ -40,12 +40,33 @@
         "native": {"$ref": "#/definitions/native"},
         "packages": {
           "type": "object", "additionalProperties": false, "required": ["manual", "thunderstore"],
-          "properties": {"manual": {"$ref": "#/definitions/package"}, "thunderstore": {"$ref": "#/definitions/package"}}
+          "properties": {
+            "manual": {"anyOf": [{"type": "null"}, {"$ref": "#/definitions/package"}]},
+            "thunderstore": {"anyOf": [{"type": "null"}, {"$ref": "#/definitions/package"}]}
+          }
+        },
+        "developmentArtifact": {
+          "type": "object", "additionalProperties": false,
+          "required": ["kind", "manifestSha256", "pluginFiles", "mcpFiles"],
+          "properties": {
+            "kind": {"const": "plugin_mcp_directory"},
+            "manifestSha256": {"type": "string", "pattern": "^[0-9A-Fa-f]{64}$"},
+            "pluginFiles": {"type": "integer", "minimum": 4},
+            "mcpFiles": {"type": "integer", "minimum": 1}
+          }
         },
         "evidence": {"type": "string", "minLength": 1},
         "verification": {"enum": ["historical_record", "disk_verified"]},
         "runtimeState": {"enum": ["not_observed", "not_running", "running_unverified", "running_verified"]}
-      }
+      },
+      "allOf": [{
+        "if": {"properties": {"packages": {"properties": {"manual": {"type": "null"}, "thunderstore": {"type": "null"}}}}},
+        "then": {"required": ["developmentArtifact"], "properties": {"releaseTag": {"type": "null"}}},
+        "else": {
+          "not": {"required": ["developmentArtifact"]},
+          "properties": {"packages": {"properties": {"manual": {"$ref": "#/definitions/package"}, "thunderstore": {"$ref": "#/definitions/package"}}}}
+        }
+      }]
     },
     "acceptance": {
       "type": "object", "additionalProperties": false,

@@ -1,0 +1,38 @@
+# Voyager standing execution authority / Voyager 持续执行授权
+
+## Scope and precedence / 范围与优先级
+
+Owner instruction, 2026-10-27: reduce repeated approvals and update repository rules directly. Until the owner changes this instruction or the original 0.5 acceptance and review-ready delivery are complete, the designated executor should continuously perform work necessary for those goals. This records the owner's direct grant; it is not authority inferred from an Agent-written document. It supersedes older per-batch conversation restrictions on product edits/installations, repair-SHA counts, ordinary Save/exit/launch/recovery counts and Agent-selected RPC/observation limits. Historical grants, counts and receipts remain evidence of their original cuts. Apply this policy before interpreting old "pending approval" paragraphs. The original three acceptance clauses remain unchanged.
+
+所有者于 2026-10-27 直接要求减少反复审批并修改仓库规范。在所有者撤回或调整前，指定执行者持续完成原 0.5 三项验收及可交审交付所必需的工作。本文件记录本次直接授权，不是 Agent 自行写文档取得权限。此前批次中的“不改产品或安装”、修复 SHA 个数、普通保存/退出/启动/恢复次数及 Agent 自定 RPC/观察次数限制，不再单独构成聊天审批门。保留旧授权、累计次数和原回执作为历史事实；阅读旧“待批准”段落时先适用本规则。原三项验收标准不变。
+
+## Proceed without another conversation approval / 持续执行，无需逐项请批
+
+- Investigate, reproduce, implement and review directly necessary product or caller fixes and small capability completions, including the currently identified saved-miner recovery entry. Select the smallest sufficient change; distinguish a product gap from caller misuse. No per-patch or per-SHA approval. Continue through relevant builds/tests, exact-SHA CI, fixed Lab adoption, documentation and evidence maintenance; the designated maintainer may make ordinary explicit-path commits and normal pushes. Preserve unrelated work and existing staged changes. Keep reusable product work in an independent product checkout; the Lab dependency stays read-only.
+- 在原验收范围内自主调查、复现、实现和审查直接必要的产品或调用端修复及小范围能力补齐，包括当前已查明的已存矿机恢复入口。先区分产品缺口与调用端误用，选择足够解决问题的最小改动；不按每个补丁或 SHA 请批。连续完成相关构建测试、准确 SHA 的 CI、Lab 固定依赖采用及文档证据维护。指定维护者可显式路径提交、正常推送，保留无关成果和原暂存内容；通用产品修改仍在独立产品检出中完成，Lab 子模块保持只读。
+- On the same owned world, perform necessary normal Save, normal close/launch, coherent same-source cold installation, fresh protected no-loss recovery, original-home return and remaining Gate2 construction/operation through the public MCP/Plugin interface. Reuse the saved miner, selected source and existing home consumer; complete minimal mining/power/passive ILS/connections, real repeated shipments, home consumption and save/recovery continuation. Ordinary operation counts are accounting, not new approval thresholds. Replan caller procedure limits within this grant while retaining finite execution bounds and cumulative accounting. If a caller still enforces an obsolete procedural cap, preserve the original packet and prepare a fresh bounded packet citing this owner grant, or correct that caller-only check; do not edit consumed Native credentials or historical receipts.
+- 在同一 owned 世界内，可经公开 MCP/Plugin 接口连续进行必要的普通保存、正常退出启动、同源冷安装、受保护无损恢复、原母星返航及剩余 Gate2 施工运行。复用已存矿机、既选矿源和已有母星消费链，完成最小采矿/供电/被动 ILS/连接、真实多轮运输、母星消费和保存恢复后续运。普通操作次数计入累计账，不再成为新审批门；调用端流程限额可在本授权内重新规划，仍保留有限执行边界和累计消耗。若调用端仍按已废止流程次数拦截，保留原执行包，引用本次所有者授权准备新的有限执行包，或修正该调用端检查；不改写已耗Native凭据或历史回执。
+- Each live window remains at most one hour, starting only after the required installation, menu, exact-module and complete-backup readiness. A new finite window within the same scope needs no new conversation approval, but must use a fresh public Native plan/digest and truthful current timestamps. Keep prior windows and outcomes; do not revive an expired credential, refund spent ticks or renew an exhausted journey/resource allowance. Native confirmation flags/digests must still be satisfied by the executor under this standing grant.
+- 每个实机窗口仍最多一小时，在所需安装、菜单、准确模块身份和完整备份就绪后起算。同范围内开启下一有限窗口不再请批，但须使用公开 Native 接口产生的新鲜计划/摘要及真实当前时间。保留旧窗口和结果，不复活过期凭据、不返还已耗 tick、不重置已耗尽的旅程或资源额度。Native 确认标志/摘要仍须由执行者在本持续授权下准确完成。
+- After functional acceptance closes, prepare the final same-source manual/Thunderstore-layout pair, hashes, release notes and review evidence. Reuse unchanged qualified development artifacts before that; documentation-only changes do not require a runtime rebuild, installation or package pair.
+- 功能验收闭合后，自主准备最终同源手动/Thunderstore 格式双包、校验和、发布说明及交审证据。此前复用未变的合格开发工件；纯文档变更不触发实机重构建、重装或双包生成。
+
+## Decisions still reserved for the owner / 仍需所有者决定的范围变化
+
+Ask only when the next action actually requires a decision outside this grant: losing/rolling back current progress; another world or a save-format migration/downgrade outside existing compatibility authority; increasing the latest explicitly approved cumulative game-tick, material or construction budgets, lowering return/energy/warper reserves, or expanding beyond the original 0.5 scope; destructive/shared-history Git operations or overwriting unrelated work; new paid/access permissions, Computer Use or external messages without existing explicit authority, or formal tags, Releases and registry uploads. A pending proposal is not permission. For a required decision, identify the concrete new consequence, why existing authority is insufficient and the exact additional scope; do not ask again for unchanged already-authorized work.
+
+只有下一步实际需要超出本授权的决定时才请批：损失或回退当前进度；另一世界或超出现有兼容维护授权的存档格式迁移/降级；增加最新明确批准的累计游戏 tick、材料或施工预算，降低返航/能源/翘曲器储备，或扩展到原 0.5 范围之外；破坏性或共享历史 Git 操作、覆盖无关成果；新增付费/访问权限、未经已有明确授权使用 Computer Use 或对外发消息，或正式 tag、Release 和平台上传。提案不等于批准。确需决定时，说明具体新增后果、现有授权为何不足及准确增量，不再重问已授权且未变的工作。
+
+## Mandatory technical evidence / 必须保留的技术证据
+
+Maintain one game writer and one Git maintainer. Before a live write, prove current source/installed identity, exact owned identity and progress, complete normal-save/LastExit backup coverage where required, fresh prepare/commit binding, material/energy feasibility, original-action reconciliation and remaining work-plus-return budget. Preserve the latest approved resource limits and all prior spending; removal of procedural operation caps adds no game resources or budget. Do not edit tickets, Journal, save contents or evidence to satisfy a gate; do not bypass Native checks, inject items/technology, force-kill the game or replay accepted/unknown actions.
+
+保留一个游戏 writer 和一个 Git 维护者。实机写入前证明当前源码/安装身份、精确 owned 身份与进度、所需完整普通存档/LastExit 备份覆盖、fresh prepare/commit 绑定、材料能源可行性、原动作核销及足够的工作加返航预算。保留最新批准的实际资源上限和全部既耗账目；取消流程次数审批不增加游戏资源或预算。不手改票据、Journal、存档或证据过门，不绕过 Native 检查，不注入物品科技，不强杀游戏，不重放已接受或 unknown 动作。
+
+On a failed or unknown action, stop that write batch and preserve its original receipt. Investigate and reconcile separately; a corrected new action may proceed under this grant only after its own fresh proof and applicable source/CI/deployment checks. An unresolved unknown action stays quarantined; changing its key is not reconciliation. A failed technical predicate means "not executable yet", not "no owner authorization". Continue independent offline diagnosis/repair instead of asking the owner to approve bypassing a failed check. Report authorization, technical readiness, saved/runtime state and acceptance separately, without inventing a passing result.
+
+动作失败或 unknown 时停止该写入批次并保留原回执，另做调查与核销。修复后的新动作必须取得自身的新鲜证明，并通过适用的源码/CI/部署检查后，才可沿本授权执行。未核销 unknown 继续隔离，换幂等键不算核销。技术条件失败是“尚不可执行”，不是“没有用户授权”；继续可独立进行的离线诊断修复，不要求用户批准绕过失败检查。分别报告授权、技术就绪、存档/运行态及验收，不虚构通过。
+
+This policy update itself changes no product binary, installation, runtime, source lock or historical acceptance. It removes the conversation-approval blocker for the current saved-miner repair and further same-scope necessary work; the technical recovery defect remains to be implemented and verified.
+
+本次规范调整本身不改变产品程序、安装、运行态、源码锁或历史验收。当前已存矿机修复及后续同范围必要工作的聊天审批阻塞解除；实际恢复缺陷仍须实现和验证。

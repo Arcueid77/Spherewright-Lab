@@ -1,5 +1,7 @@
 # Active handoff / 活动交接
 
+First apply the owner's 2026-10-27 [standing execution authority](standing-authority.md). It supersedes older per-SHA and ordinary Save/exit/recovery-count approval requests, including the saved-miner proposal; technical checks and actual resource limits remain required. / 先适用所有者2026-10-27[持续执行授权](standing-authority.md)：旧逐SHA、保存/退出/恢复次数待批不再阻塞，当前矿机修复可继续；技术门及实际资源预算仍须满足。
+
 Use the [single Voyager current snapshot](../scenarios/v0.5-voyager/current-status.md) for current facts, original limits and the next guarded result. This file is a route, not a second operational snapshot.
 
 当前事实、原限额和下一受保护目标只见[唯一Voyager活动快照](../scenarios/v0.5-voyager/current-status.md)。本文件仅保留续接路由，不重复实时状态。

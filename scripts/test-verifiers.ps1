@@ -93,6 +93,29 @@ try{
     Expect-Rejection 'provisional-cannot-claim-null-packages' 'verify-source-lock.ps1' 'JSON schema validation failed'
 }finally{[IO.File]::WriteAllBytes($lockPath,$lockBytes)}
 try{
+    $changed=New-DevelopmentFixture
+    $changed.installed.packages=[pscustomobject]@{manual=$null;thunderstore=$null}
+    $changed.installed.releaseTag=$null
+    $changed.installed|Add-Member -NotePropertyName developmentArtifact -NotePropertyValue ([pscustomobject]@{kind='plugin_mcp_directory';manifestSha256=('3'*64);pluginFiles=5;mcpFiles=224}) -Force
+    Write-SampleJson $lockPath $changed
+    $checked=Assert-SampleSourceLock $root
+    if($checked.candidatePackagesReady -or $checked.packagesNotBuilt -ne 2){throw 'A development installation must not create a final distribution candidate.'}
+    $positiveCases.Add('same-source-directory-install-needs-no-distribution-pair')
+    $changed.installed.PSObject.Properties.Remove('developmentArtifact');Write-SampleJson $lockPath $changed
+    Expect-Rejection 'installed-null-pair-needs-directory-identity' 'verify-source-lock.ps1' 'JSON schema validation failed'
+}finally{[IO.File]::WriteAllBytes($lockPath,$lockBytes)}
+try{
+    $changed=New-DevelopmentFixture
+    $changed.installed.packages=[pscustomobject]@{manual=$null;thunderstore=$null}
+    $changed.installed.releaseTag=$null
+    $changed.installed|Add-Member -NotePropertyName developmentArtifact -NotePropertyValue ([pscustomobject]@{kind='plugin_mcp_directory';manifestSha256='unknown';pluginFiles=5;mcpFiles=224}) -Force
+    Write-SampleJson $lockPath $changed
+    Expect-Rejection 'installed-directory-needs-exact-manifest-hash' 'verify-source-lock.ps1' 'JSON schema validation failed'
+    $changed.installed.developmentArtifact.manifestSha256='3'*64
+    $changed.installed.packages.manual=(New-ProvisionalFixture).packages.manual;Write-SampleJson $lockPath $changed
+    Expect-Rejection 'installed-directory-cannot-borrow-one-package' 'verify-source-lock.ps1' 'JSON schema validation failed'
+}finally{[IO.File]::WriteAllBytes($lockPath,$lockBytes)}
+try{
     $changed=New-DevelopmentFixture;$changed.spherewright.releaseTag='v0.5.0';Write-SampleJson $lockPath $changed
     Expect-Rejection 'development-cannot-claim-release-tag' 'verify-source-lock.ps1' 'JSON schema validation failed'
 }finally{[IO.File]::WriteAllBytes($lockPath,$lockBytes)}
@@ -106,6 +129,7 @@ try{
     $changed.installed.productVersion=$taggedHistory.spherewright.productVersion
     $changed.installed.releaseTag='v'+$taggedHistory.spherewright.productVersion
     $changed.installed.packages=$taggedHistory.packages
+    $changed.installed.PSObject.Properties.Remove('developmentArtifact')
     $changed.installed.sourceSha='1'*40;Write-SampleJson $lockPath $changed
     Expect-Rejection 'installed-tag-source-mismatch' 'verify-source-lock.ps1' 'Installed release tag does not match'
 }finally{[IO.File]::WriteAllBytes($lockPath,$lockBytes)}
