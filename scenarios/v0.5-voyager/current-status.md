@@ -2,6 +2,20 @@
 
 This is the only current snapshot. 历史验收、当前修复版本、磁盘安装和实机结果分别记录。开发安装包仅供实装修复验证；最终交付候选仍为空。
 
+## Current ready correction / 当前修复就绪
+
+Selected, installed and actual loaded source is **98bb8129cd2ed47e9b6a22890a13e22f3f474f42**, Native29151.64 relevant and5442 full regressions, Native Release, [exact CI40626149627](https://github.com/Arcueid77/Spherewright/actions/runs/40626149627),74-tool/1-resource coherent qualification, official installation and actual module/menu/lifetime proof passed. The game is at the menu with no world loaded. The Mod update required one normal menu-only process close; total22, all complete save bytes unchanged, zero new loss. Fresh1522-file backup covers Primary/LastExit121100302. The next prepared caller reuses miner1/ILS2/pole3 and performs only the remaining belt/two winds and logistics under the existing budgets. No new Load/window yet. / 当前源、安装及真实模块均98bb812，64相关/5442全量/Native/准确CI/74工具资格及实装菜单生命周期证明通过。游戏在菜单无世界；本次仅因换Mod正常关闭一次，累计22次，完整档字节不变、零新损失。1522项备份覆盖302主档/退出档，下批复用三个原建筑，沿用实际预算继续；尚未Load/开窗。
+
+## Previous saved pole and menu success / 上一轮已存电塔及主界面成功
+
+Actual installed/runtime source remains **28367fb4bb58a23539d97ec358ec456f4ce4d6df**, Native29151. The prepared window completed exact recovery, strict idle, external normal Save, original miner1/ILS2 adoption and one real2201 pole **entity3**. The next belt **prepare only** refused the existing remote1..8-NEW-object/no-cover restriction; no belt, wind or configuration was accepted. Original refusal is retained. / 本轮已恢复、严格闲置、普通保存、接管矿机/ILS并真实建成电塔3；随后传送带仅预检被原8个NEW对象/无cover限制拒绝，未扣传送带、未建风机、未配置物流。
+
+The new public menu action then **completed/succeeded**: ordinary owned Save and complete file proof, native EndGame, actual main menu and original result retained across MCP reconnection. Complete Primary and LastExit are both **121100302**;1522-file backup verified; zero new loss. The **same game process remains at the menu**, no world loaded and no process close in this batch. Counts this batch:1 recovery,1 pole build,2 ordinary Saves (one inside the menu action),1 menu return. Previous21 process closes and4773 charged discarded ticks remain. Original budgets, return reserve and mineral isolation are unchanged. / 新工具实机已完成保存、完整核验、原生回菜单及跨MCP重连原回执查询；主档/退出档均302，1522项备份通过、零新增回退。同进程保留在菜单，本批未关游戏。
+
+Candidate **98bb8129cd2ed47e9b6a22890a13e22f3f474f42** proves at most two completed paid unpowered Tesla poles beside the retained miner/passive ILS, retaining a zero-source/zero-stored-energy whole-graph check. It also continues through bounded Native belt-port candidates when the first valid path exceeds8; if none fit, reports the smallest valid count. The original refusal did not disclose its exact count; do not invent it.64 relevant regressions and Native Release passed; exact full validation/[CI40626149627](https://github.com/Arcueid77/Spherewright/actions/runs/40626149627) pending. No candidate install or new Load yet. / 新源补已存未供电电塔精确入口和额度内端口选择，64相关及Native已过、准确全量/CI待完。原拒绝未回显准确数量，不能猜数字；未采用实装新源。
+
+Gate2 remains OPEN; no real mining/power/transport/consumption credit or final archives. Protected originals: **gate2-menu-28367fb4-live-20261028-v17/**; source qualification: **unpowered-pole-bounded-ports-20261028-v18/**. Next: qualify the minimal correction, coherently install and restore the complete302 boundary, reuse all three existing entities, then finish the remaining logistics. Standing authority covers this work; no new progress loss or resource grant is requested. / Gate2仍开放，真实采矿供电船运消费及双包未闭合；下一步合格换装302无损恢复，复用三个原实体继续物流，无新权限缺口。
+
 ## Current native menu tooling / 当前原生菜单工具
 
 Owner direction: **add tools, no Computer Use**; keep DSP running for ordinary Save/Load, closing only for a necessary Mod update or concrete technical prerequisite. The [tool-gap review](tool-gap-review.md) separates missing ordinary Pause/Continue, complete-save coverage and explicit slot selection from existing Harvest/reconciliation and caller route mistakes. It is a proposal list, not a new Gate2 prerequisite. / 所有者要求加工具、不用Computer Use；普通保存恢复保留进程。缺口清单区分新工具、读回不足和调用错误，不成为新的Gate2前置工程。
