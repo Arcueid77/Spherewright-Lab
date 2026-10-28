@@ -21,7 +21,7 @@
     "targetVersion": "0.5.0"
   },
   "installed": {
-    "sourceSha": "bcae7d7938f3f5c19107a9b614f627cee2275869",
+    "sourceSha": "bf846ec73ea45507c2f4f87e5a91cf65e57cfe0c",
     "productVersion": "0.5.0",
     "releaseTag": null,
     "native": {
@@ -34,10 +34,10 @@
     },
     "evidence": "scenarios/v0.5-voyager/current-status.md",
     "verification": "disk_verified",
-    "runtimeState": "running_verified",
+    "runtimeState": "not_running",
     "developmentArtifact": {
       "kind": "plugin_mcp_directory",
-      "manifestSha256": "A9EC0DC70322740C00E351C3916C417B703B5A17C8B87EFA950F2C8D74684D58",
+      "manifestSha256": "578CE471DE0DB5B1DAA58179D19182EEA3E197B9CFFDD71FDED539EC71506C94",
       "pluginFiles": 5,
       "mcpFiles": 224
     }
