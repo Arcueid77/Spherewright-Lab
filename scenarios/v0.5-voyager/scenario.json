@@ -24,7 +24,7 @@
   },
   "acceptanceState": {
     "roundTripWithLegallyAbsentResource": "passed",
-    "sustainedInterstellarSupply": "open",
+    "sustainedInterstellarSupply": "passed",
     "recoverableFlightFailure": "passed"
   },
   "exclusions": [
@@ -38,7 +38,7 @@
   ],
   "acceptanceSourceSha": {
     "roundTripWithLegallyAbsentResource": "463fc888b1e4cf4a90e08cb1022d2b8896447700",
-    "sustainedInterstellarSupply": null,
+    "sustainedInterstellarSupply": "30bd61198a6a3b2ff4e41eaf172c5d97fb66a19d",
     "recoverableFlightFailure": "216f4075e983d78fa4d4f5d222bdd279813e1d86"
   }
 }

@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "version": "0.5.0",
+  "status": "review_ready",
+  "formalPublication": false,
+  "sourceSha": "30bd61198a6a3b2ff4e41eaf172c5d97fb66a19d",
+  "nativeVersion": "0.10.35.29151",
+  "nativeAssemblySha256": "EF314425DADE51F529F184F07BE136CD3C2660A6A81515603C7226FBE7AB1D8C",
+  "acceptanceState": {
+    "roundTripWithLegallyAbsentResource": "passed",
+    "sustainedInterstellarSupply": "passed",
+    "recoverableFlightFailure": "passed"
+  },
+  "acceptanceSourceSha": {
+    "roundTripWithLegallyAbsentResource": "463fc888b1e4cf4a90e08cb1022d2b8896447700",
+    "sustainedInterstellarSupply": "30bd61198a6a3b2ff4e41eaf172c5d97fb66a19d",
+    "recoverableFlightFailure": "216f4075e983d78fa4d4f5d222bdd279813e1d86"
+  },
+  "historicalClausesRetainOriginalScope": true,
+  "functional": {
+    "fullCyclesBeforeSave": 2,
+    "fullCyclesAfterRecovery": 1,
+    "minedOreDelivered": 300,
+    "deliveredPerMinuteBefore": 30.163385002094678,
+    "deliveredPerMinuteAfter": 50.34965034965035,
+    "consumerProductBeforeSave": [
+      0,
+      130
+    ],
+    "consumerProductAfterRecovery": [
+      132,
+      192
+    ],
+    "actualNativeCapacityJoulesPerTick": 6998,
+    "nominalDemandJoulesPerTick": 7000,
+    "fullNominalPowerNotClaimed": true,
+    "finalCompleteSaveTick": 121137254,
+    "finalCompleteBackupFiles": 1624,
+    "cumulativeBatchTicksConserved": 47992,
+    "maximumBatchGameTicks": 216000,
+    "chargedHistoricalDiscardedTicks": 4773,
+    "newProgressLoss": 0,
+    "finalWorldAtMenu": true
+  },
+  "packages": {
+    "manual": {
+      "file": "Spherewright-0.5.0-win-x64.zip",
+      "sha256": "77C60BD5024FB8CBDA1CBD902F33DBDF898BE97742E5951146B9AE1CD275559A",
+      "size": 37265257
+    },
+    "thunderstore": {
+      "file": "Spherewright-0.5.0-thunderstore.zip",
+      "sha256": "BB457CF8D9D97837F27FC3E1006C9BF2699D8E8204BE145F116189E7FD427389",
+      "size": 32989891
+    }
+  },
+  "packageSurface": {
+    "tools": 74,
+    "resources": 1,
+    "bilingualGuidesVerified": true,
+    "embeddedGuideMatches": true,
+    "cohortPayloadsBound": 233,
+    "actualPackagedMenuProbes": [
+      {
+        "kind": "manual",
+        "publishedBridgeMenuRead": true,
+        "gameLoaded": false,
+        "normalEof": true,
+        "gameWrites": 0
+      },
+      {
+        "kind": "thunderstore",
+        "publishedBridgeMenuRead": true,
+        "gameLoaded": false,
+        "normalEof": true,
+        "gameWrites": 0
+      }
+    ]
+  },
+  "privacy": {
+    "archiveEntries": 257,
+    "uniquePayloads": 248,
+    "realLeaks": 0,
+    "unknownFindings": 0,
+    "contextualFindings": 1,
+    "context": "Exact unchanged qualified System.Security.dll size-field collision; raw scanner result retained; no global exclusion."
+  },
+  "qualification": {
+    "exactProductCiRun": 40671860835,
+    "fullRegressionTests": 5469,
+    "localRelevantEnvironmentTests": 76,
+    "nativeSolutionBuild": true,
+    "finalArchivePayloadEqualsInstalledQualifiedSource": true
+  },
+  "protectedAuditHashes": {
+    "independent-gate2-audit.private.json": "82BA91F8C0391225AD240CB03389D872283F07FA09F98AFE8299E11C04B7012F",
+    "final-payload-audit.private.json": "DF958F8B6399DD2E03A42D901704E07EA814BA17D45BC53080D5CCEA7E24C4C4",
+    "final-manual-check.private.json": "97197C0934FB85E45B77270C1B9F96C46B72AAF219B4E0821AB0AEE15B1097D9",
+    "final-thunderstore-check.private.json": "5BD2D82C885F2D3414B59EABD91CAD981AD54C22EBD07ACB4BF8C2AAABD6374C"
+  },
+  "limitations": [
+    "Gate1/Gate3 retain their historical source and scope; they were not replayed.",
+    "Native power is6998 against nominal7000; sustained delivery was measured at the recorded actual service.",
+    "Thunderstore static validator alone reports runtimeBlackBoxTested=false; separate exact-byte parity and actual packaged MCP menu probes supplement the installed-source gameplay audit.",
+    "Final archives are owner-review candidates; no tag, Release or upload."
+  ],
+  "preparedAtUtc": "2026-10-28T16:49:53.162821+00:00"
+}
