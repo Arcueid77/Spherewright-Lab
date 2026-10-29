@@ -6,6 +6,8 @@ This is the only current snapshot. 以下当前计划/成果优先；下方旧�
 
 **原三项验收3/3闭合，最终同源双包已形成并完成交审核对。** 门1/3保留原历史证据和适用源码，未重跑；门2由本轮原始实机记录及独立复核关闭。当前产品/固定依赖/磁盘/实际加载均 **30bd61198a6a3b2ff4e41eaf172c5d97fb66a19d**，Native29151/原EF3144装配不变。游戏进程保留在主菜单，无世界加载。
 
+2026-10-29：已将临时产品分支的29个提交正常快进合回本地及远端 `main`，准确源码仍为 `30bd61198a6a3b2ff4e41eaf172c5d97fb66a19d`；原提交、候选双包及固定依赖不变，产品主工作区两份未提交协作规则已保全。主分支自动检查 [40846367410](https://github.com/Arcueid77/Spherewright/actions/runs/40846367410)已通过。 / The accepted product source is now on local and remote `main` by fast-forward; existing uncommitted contributor rules are preserved. Main-branch CI passed.
+
 | 阶段 | 可验收结果及实际完成证据 | 状态 |
 | --- | --- | --- |
 | R0 整链前提 | 已核清布局、Native端点完整路径、供电/运输/消费/存档恢复依赖；所有者只增加既有背包4节带，总上限12，其余资源限额不变。 | 完成 |
