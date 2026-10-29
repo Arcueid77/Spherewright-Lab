@@ -2,6 +2,8 @@
 
 Spherewright 的公开场景、运行交接与黑盒验收仓。产品的 Plugin、MCP、Contracts、Bridge.Core、通用测试和打包实现继续保留在 [Spherewright](https://github.com/Arcueid77/Spherewright) 一个 monorepo 内。公开审查的范围与限制见[安全审查记录](operations/public-review-2026-10-16.md)。
 
+后续开发参考[0.5经验复盘](operations/lessons/v0.5-voyager-2026-10-29.md)。当前事实以[活动快照](scenarios/v0.5-voyager/current-status.md)及[source-lock](source-lock.json)为准，下方旧截点仅保留历史。For future development, read the [0.5 lessons](operations/lessons/v0.5-voyager-2026-10-29.md#english); the active snapshot/lock, not older checkpoints below, identify current state.
+
 本仓通过只读子模块消费精确产品提交，不反向成为产品构建依赖。0.4 历史验收与正式发布保留；所有者 2026-10-19 的指令已启动 [0.5 Voyager](scenarios/v0.5-voyager/README.md)。活动工作是原三项跨恒星验收、最小产品实现与同源码候选交审，仍保留原生、安全、隐私和确认门，不自动正式发布。
 
 ## Actual installed checkpoint / 当前实装截点

@@ -6,6 +6,8 @@ Use the [single Voyager current snapshot](../scenarios/v0.5-voyager/current-stat
 
 当前事实、原限额和下一受保护目标只见[唯一Voyager活动快照](../scenarios/v0.5-voyager/current-status.md)。本文件仅保留续接路由，不重复实时状态。
 
+For future development, consult the [0.5 lessons](lessons/v0.5-voyager-2026-10-29.md#english) for chain planning, recovery states, caller contracts and evidence boundaries. This reference adds no approval gate or execution authority. / 后续开发参考[0.5经验复盘](lessons/v0.5-voyager-2026-10-29.md)：整链规划、恢复状态、调用合同和证据边界；不新增审批或执行权限。
+
 History: [full earlier handoff at0aed](https://github.com/Arcueid77/Spherewright-Lab/blob/0aed74a708c756a7ed258a867079f36eac4d5841/operations/active-handoff.md); [source-adoption snapshot atb334](https://github.com/Arcueid77/Spherewright-Lab/blob/b334dfb90152761a3c6ea960f0ebc000c434f856/scenarios/v0.5-voyager/current-status.md). Original protected receipts and frozen0.4 records remain intact. See the unchanged [acceptance clauses](../scenarios/v0.5-voyager/acceptance.md).
 
 历史原件保留于固定提交及保护副本；不删除0.4证明，不覆盖历史operations/current-status.md，不把旧顶部当当前状态。
