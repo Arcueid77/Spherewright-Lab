@@ -1,5 +1,7 @@
 # Spherewright 0.5.0 Voyager 交审记录
 
+本记录及下列双包是2026-10-29已验收Voyager基线。2026-11-01所有者新增[首帆目标](../../scenarios/v0.5-voyager/first-sail-extension.md)，正在独立推进；原双包不包含新增首帆能力，也不冒充扩展后的最终候选。 / This record and pair remain the accepted Voyager baseline; the new first-sail extension has separate pending implementation and runtime acceptance.
+
 0.5 原三项验收已闭合。门1（缺失资源往返）与门3（受控失败及精确恢复）保留[原条款](../../scenarios/v0.5-voyager/acceptance.md)及其历史源码适用范围；本轮门2在源码 `30bd61198a6a3b2ff4e41eaf172c5d97fb66a19d`、DSP `0.10.35.29151` 完成。最终双包仅供审核，未创建 tag、Release 或上传。
 
 该已验收源码已于2026-10-29正常快进合回产品本地及远端 `main`，保留全部原提交；双包源码和哈希不变。主分支自动检查 [40846367410](https://github.com/Arcueid77/Spherewright/actions/runs/40846367410)已通过。 / The accepted source is now on local and remote product `main`; the candidate source and hashes are unchanged. Main-branch CI passed.

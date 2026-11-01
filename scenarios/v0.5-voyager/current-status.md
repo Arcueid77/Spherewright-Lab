@@ -1,8 +1,18 @@
 # Voyager active snapshot / 0.5 活动快照
 
-This is the only current snapshot. 以下当前计划/成果优先；下方旧截点保留为历史证据。最后更新：2026-10-29。
+This is the only current snapshot. 以下当前计划/成果优先；下方旧截点保留为历史证据。最后更新：2026-11-01。
 
-## Rolling delivery outcome / 滚动交付结果
+## First-sail extension / 首帆扩展（当前）
+
+所有者2026-11-01明确扩展0.5，以正常制造并真实发射第一张太阳帆为目标，先列方案、尽量减少人工干预及重复批准、自主推进。[整链方案及验收](first-sail-extension.md)已形成。原Voyager三门3/3及旧双候选保留为已验收基线；新首帆目标尚未验收，不声称旧包已包含新增能力。
+
+S0已核准目标及当前真实安装的29151/EF3144参考。S1已在产品main工作区实现弹射器/云详细读回及复用普通配置接口的固定轨道设置：35项新回归、5504项完整回归、Native/solution零警告错误构建、74工具/1资源及内嵌指南精确检查通过；独立只读审查进行中，尚未提交/准确CI/采用/安装，不能算实机发射。S3实际发射、S4保存恢复及新双包均未完成。
+
+当前固定依赖和实装仍为30bd6119，已重新逐文件核验原5插件/224MCP同源程序；真实游戏进程未运行，源锁运行态更新为not_running。首帆v2准备包已完整覆盖1624文件，其中显式包含4份原生主档/退出档/检查点，主档与LastExit均137254，零游戏调用、零新增扣料。v1遗漏原生文件的完整性声明已明确作废并保留覆盖审计，1620项已核验副本被v2复用；未换装、未读档、无进度损失。现场库存、布局、供电、轨道和剩余额度仍须fresh核验。下一成果：完成审查、准确源码CI及一体同源安装，再公开接口恢复/只读清点。
+
+Owner target and autonomy direction are recorded in the linked plan. Current product/install remains the accepted baseline; no first-sail runtime or new-package credit exists. Routine work retains standing safeguards; actual budget increases and formal publication remain separately gated.
+
+## Accepted Voyager baseline / 已验收Voyager基线（2026-10-29）
 
 **原三项验收3/3闭合，最终同源双包已形成并完成交审核对。** 门1/3保留原历史证据和适用源码，未重跑；门2由本轮原始实机记录及独立复核关闭。当前产品/固定依赖/磁盘/实际加载均 **30bd61198a6a3b2ff4e41eaf172c5d97fb66a19d**，Native29151/原EF3144装配不变。游戏进程保留在主菜单，无世界加载。
 

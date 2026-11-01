@@ -28,7 +28,7 @@
     "recoverableFlightFailure": "passed"
   },
   "exclusions": [
-    "dyson-system",
+    "rockets-and-dyson-structural-design",
     "whole-star-map-development",
     "arbitrary-automatic-layout",
     "global-multistar-optimization",
@@ -40,5 +40,13 @@
     "roundTripWithLegallyAbsentResource": "463fc888b1e4cf4a90e08cb1022d2b8896447700",
     "sustainedInterstellarSupply": "30bd61198a6a3b2ff4e41eaf172c5d97fb66a19d",
     "recoverableFlightFailure": "216f4075e983d78fa4d4f5d222bdd279813e1d86"
+  },
+  "extension": {
+    "id": "first-solar-sail",
+    "ownerInstructionDate": "2026-11-01",
+    "plan": "first-sail-extension.md",
+    "acceptanceState": "in_progress",
+    "baselineAcceptanceRetained": true,
+    "gameWritesAuthorizedByThisFile": false
   }
 }
