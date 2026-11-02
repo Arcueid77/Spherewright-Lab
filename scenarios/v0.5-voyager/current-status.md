@@ -2,6 +2,16 @@
 
 This is the only current snapshot. 以下当前计划/成果优先；下方旧截点保留为历史证据。最后更新：2026-11-03。
 
+**2026-11-03原始失败截点已实机取得，证实墙钟期限先于原13tick预算耗尽；a78修复已推送未安装。** 产品/锁/磁盘当前5a343f98（准确CI41543141569成功，112+5151+461=5724）。干净工作区及两MCP开发形态74工具/1资源/载荷/指南验证、官方脚本采用及一次冷安装均成功；输入在`.local/v0.5-voyager/move-stop-source-5a343f98-20261103-v1/`，manifest **611B8C314E7C166E107128C15358BCF8D306B1B8A72CCA1F2FA183064BD6FA67**、cohort **BA1A2BBEB6A950C1E8FC891573BDCD5949CDA0691D74582D28A54FBEB37D167A**。该安装意图/回执不可重放，1750原备份保留。
+
+新独立4m任务见`.local/v0.5-voyager/caph-power-foundation-20261103-v3/`，不是原0adf目标重放。恢复成功，新Move **6679fa7e-8f32-4ba8-9b62-6a4511c16711** accepted，started121202067、terminal unknown121202082，startup报告reconciliation_required/284.078秒，不算实操通过。**决定性nativeFirstFailure**：ground=true、actual/frame Walk=true；firstFailedPredicate=strict_speed_at_rest，speed1.5060m/s、walk/drift rts squared1.94147、订单已空；停止arm121202075、deadlineTick121202088，失败仅在arm+7tick，尚余6tick。fixedDelta0.124278s，墙钟约1秒已到。不能再把问题泛称为地面没命中或延长游戏tick需求：本截点明确是1秒墙钟过早截止使真实RTS尾部尚未归零。原6679和0adf仍unknown，不回写成功。
+
+只读同owned复核仍paused/quarantined、tick/core稳定、实际Walk0；公开原action核销与Save-preserve准备仍分别因未知移动不支持/idle_quarantine_witness拒绝，均未commit。按standing只做一次正常OS退出原生SaveAsLastExit保全（非受控Save成功）。最新 **LastExit121202082、Primary121202034**，1756文件/四Native完整备份在v3/after-normal-close-complete-backup/manifest.private.json；本次78tick已全计，累计 **112820/216000、剩103180、返航54000不变**，无退款/新增。游戏/MCP关闭，新外星建筑依旧零、冷启动燃料API仍未实际点火验收。
+
+产品**a78db781122bf29735ba1cd4d77a0b18ae96e5cc**正常提交推送：仅严格准入Move停止初次arm时，根据已观测原生fixedDelta锁定墙钟等待（60Hz仍1秒；慢节奏1+ceil(13*step)秒，step正且<=.25，硬限5秒；本现场对应3秒），不更改游戏速度、物理时钟、8tick接触工作、13个付费停止tick或严格停稳/能源/翘曲器条件。墙钟间隔必须另在原ReturnUTC储备之外全额留足；latch后不刷新延长。普通Harvest/legacy保持旧墙钟。真实失败形状arm+7/旧1秒仍有6tick的新回归验证通过；新增7项、合计42相关检查及Native零警告错误。双语指南更新。[准确CI41545262426](https://github.com/Arcueid77/Spherewright/actions/runs/41545262426)运行中。**a78尚未采用或安装，不把源码检查算实机修复。**
+
+下步直接等待/复用准确a78 CI，必要同源开发输入和冷安装，再从固定最新LastExit121202082做新显式健康来源恢复；原unknown不能重判或换键重放。复用v3有界小段/实际SDK/三对象原额度施工包，但caller的floor/累计消耗/current_preservation必须切到新1756与112820，不能运行旧输入。新Move成功后继续真正矿机1/聚变1/电塔1独立电网、8燃料冷插入及1011当地采矿；沿全链目标推进，不再追加泛化观测。额外5塔审批仍无回复，保持原4塔上限；其他原17主体/24分拣/120带、太阳帆/火箭/同源双包交审目标均保留。
+
 **2026-11-03已有移动事实分析与同截点物理标量已补充，未新增实机。** 进一步复用foundation-v2私有观测：原10m提案实际地表目标弦距9.7606m；原unknown后实际位移12.8443m、距目标3.0968m，位置半径从200.4375到200.5502，目标原生grid-snap半径200.2000；公共玩家physics实际fixedDeltaTime=**0.125秒**、autoSimulation/autoSyncTransforms=true、事后groundSphereHit/cachedWalkGrounded=true。仅是已有事实，不能把post-Pause地面命中当原停止截点命中，也不能据此修改游戏速度/物理时钟、认定根因或续发停止tick。完整紧凑分析在v2/native-move-fact-analysis.private.json。
 
 源码继续正常线性提交推送**5a343f9813bef788c0193e7b7712ddcd60c74770**，在d49原始停止失败DTO中追加Time.fixedDeltaTime、controller.velocity.sqrMagnitude及可观测rigid.velocity.sqrMagnitude；均是该原决策点标量复制，不是额外物理推进/干预。35相关检查及Native零警告错误通过。d49准确CI41542562560现已成功；[准确CI41543141569](https://github.com/Arcueid77/Spherewright/actions/runs/41543141569)运行中。**Lab锁/磁盘仍e48，5a/d49均未安装，游戏仍关闭**；最新1750备份/LastExit121202004/Primary121201952、112742已耗/103258剩余/54000返航全不变，原0adf仍unknown。没有新的外星建筑或冷启动实机验收。
