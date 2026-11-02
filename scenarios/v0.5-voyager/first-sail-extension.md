@@ -64,6 +64,12 @@ c595源检已确认：`StructuredConstructionBinding.SupportsItem`只覆盖2301/
 
 修复必须补足同源公开合同、Native绑定、预算/回读、持久恢复及相关回归，不能只删白名单。当前阶段先完成安装/菜单身份与无损恢复预检，随后围绕实际最小产线补齐能力；同SHA5522项CI复用，不重复本地全量。
 
+本次新增afebbbd2已补上述首帆工厂主体/有限配置/整线保存准入，217+21增量、Native/solution、独立只读审查和准确SHA的5580完整CI通过；开发目录v2同源资格合格。已同源安装并通过真实模块/菜单核验，尚未恢复世界或实机证明新外星路径。火箭最小原生接收目标创建仍未补齐；只读火箭/节点观察不冒充该写入能力。
+
+当前阶段的限量制造目标为当地4帆：recipe32一次用可燃冰2→石墨烯2+氢1；recipe57六次用当地石矿12→玻璃6；recipe11两次→棱镜4；recipe68两次加母星电路板2→光子合并器2；recipe70两次→太阳帆4。这是最低整链产物与原料账，不将正常采矿/上游缓冲余量隐去。设备直层备料上限（假设全无设备库存）为铁144、钢28、钛合金12、石材26、玻璃12、石墨烯24、碳纳米管8、齿轮64、磁线圈10、超级磁场环20、电路板34、处理器21、Mk.I制造台3；**非递归最终扣料表**，先按现场设备/背包抵扣，再展开缺失可手作辅件。母星已有2帆不进入此当地4帆归属账。
+
+供电须明确冷启动：新聚变站最初无燃料，而供料分拣器自身需电。先核原小网的完整成员/真实服务率，仅在其足以驱动有限引燃模块时选择连接；先建并供燃料形成真实15MW服务，再接制造负载。不能把无燃料的额定15MW当已供电，也不能默认原两风机承担完整5.772MW新厂。液罐使用原生portPoses带口，非slotPoses分拣口；母星支援站须真正接通供料，配置Supply/Demand不代表货物已入站或跨星送达。必要的额外母星喂料连接如超出现有施工额度，应先形成具体公开预检和准确增量再交所有者决定。
+
 This continuation resumes authorized work, with Caph II as the manufacturing/launch site. The construction numbers above are planning ceilings awaiting native layout and an exact owner decision for any increase beyond existing hard allowances. Preserve 83316 spent ticks, the latest121172578 progress boundary and all return/energy/warper reserves. Source gaps are proven; deployment, loaded runtime and off-world acceptance remain separate evidence layers.
 
 ## Superseded proposal / 旧母星集中方案（已撤回，不执行）
