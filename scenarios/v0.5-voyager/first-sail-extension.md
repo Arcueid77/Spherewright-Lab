@@ -1,5 +1,15 @@
 # 0.5 first sail and rocket extension / 0.5 首帆与首枚火箭扩展方案
 
+## Current execution refinement / 当前执行细化（2026-11-03）
+
+母星设备和有限燃料已正常备齐。既有空仓765接原站1657的8组原生直线路径均与既有带重叠，拒绝发生在创建前，新增母星带/分拣器仍为零；不在此处继续铺母星工业。首帆先采用所有者已允许的母星运料：从该仓正常取回为跨星运输准备的燃料100，加随身8共108根，携带原有电路板2及首帆设备前往Caph402。仓内板100保留作后续自动供给。该取料是新的反向正常转移，不重放原存入动作、不退款或修改账目。
+
+出发前仍须fresh公开旧Caph站所有权读回、路线/能源/翘曲器及全程工作加54000返航储备预检。最新已保存121194439，累计105177/216000、剩110823tick；新的Native全程上限取min(108000,实时剩余-3000)，其内继续保留54000返航，不能当作新增时间。到场先刷新旧站、全网、当地石矿/可燃冰、建筑端口和布局；短段保全后按既批总额施工。母星尚无新增连接，因此Caph仍保留原120带/24分拣器及全部主体上限。
+
+背包运料只支援首轮当地制造，不代替多物料供需配置/真实物流到货验收。该验收继续纳入完整0.5闭合：Caph布局和用料确定后再完成母星可行接站路径及跨星真实供给；若届时超既有总额才提出准确增量。火箭扩建/科技完整供料/最小接收目标和最终双包仍全部保留，正式发布另批。
+
+The first-sail expedition now carries the already authorized finite fuel/support packet. Eight mother-world straight feeder proposals were rejected before creation because of existing belts; zero new feeder objects were placed. Fresh ownership, route, energy, warper and conserved return-budget checks still precede departure. Carrying supplies does not close the later multi-material station/real-delivery requirement or any offworld manufacture/launch acceptance. No resource or time allowance increases.
+
 ## Current owner intent / 当前执行方案：验证外星系建设
 
 2026-11-02所有者澄清：“就是想验证外星系建设能力”。据此修正此前偏向母星补全产业的方案：**0.5的主验收是远端基地的规划、运输、施工、连接、供电、制造与保存续建；首帆和首枚火箭是该基地的代表性运行成果。** 母星准备完整成品或在母星发射不能替代这项外星建设证据。所有者随后明确续接自主执行，并在启动流程功能实测达标后恢复主目标；此前方案审阅暂停已经被该新指令替代。当前进度和剩余预算仅以[current-status.md](current-status.md)最新条目为准。
