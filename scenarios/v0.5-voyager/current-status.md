@@ -2,6 +2,18 @@
 
 This is the only current snapshot. 以下当前计划/成果优先；下方旧截点保留为历史证据。最后更新：2026-11-03。
 
+**2026-11-03最新：Caph落地补能交接失败，当前外星进度已无损保全，游戏关闭。** 唯一原出航动作**0125d404-d9d9-4fa7-946f-13e41cd07ea8**正常离开母星、原生消耗翘曲器1、进入Caph星系并接触402，但最终为terminal `recovery_required`，不得计作成功抵达或重放。首次交接Native核心停止储备不足（每tick上界3643367.314865836J，13tick约47.36MJ；当时核心约33.06MJ），尝试原生有界补能时被`remote_resume_charge_native_construction_not_empty`拒绝；系统原生Pause并冻结后续能耗，未自动Resume。旧Caph17实体已通电，普通落地补能路径尚不接受这个非空旧站，现为已证实产品缺口。
+
+新源5daa的`voyagerMechaWork`已在实际Native准备中返回quiescenceProved=true、factoryOnlyResearch=true、queue[1141]、无研究/库存修改，后续原航行中持续通过。原260.312秒启动到真实燃料供给槽配置达标；母星第3板槽及第4燃料槽均已成功配置，零新带/分拣器、无真实多物料供给到货验收。原900秒Agent观察包按持续授权在**相同4:09:36+08就绪起点**内续接至最多1小时，不改原文件/Native票据/Journal/资源预算：先连接只读原动作观察器，再仅停止旧Python10480，未停游戏或重发飞行。新writer30868已结束，Game2740已正常关闭，当前无活动game writer。原动作、原观测及交接位于`caph-survey-departure-20261103-v4/`和`caph-original-flight-observer-20261103-v1/`。
+
+**禁止加载较旧Primary或出发检查点。** 当前最新LastExit完整Native边界为**121200886**（Caph402当前进度），Primary仍**121194676**，当前飞行检查点**121194723**均更旧。公开普通保存/回菜单提交因未核销Voyager检查点拒绝，未接受保存；其调用端unresolved_submission标记只是这次明确STALE_STATE拒绝，不是新接受的Save动作。已用fresh公开owned/session/player证明暂停tick不变、Walk/0速，核对固定Native正常退出路径确实调用SaveAsLastExit，正常CloseMainWindow一次后头部/完整身份/版本证实LastExit覆盖当前进度；未强杀、未重载检查点、未清失败。
+
+**1728项全部持久文件/四个注册Native角色（Primary、LastExit、preflight、currentCheckpoint）完整备份**逐字节通过，原件在`caph-paused-normal-close-20261103-v1/after-normal-close-complete-backup/`。累计**111624/216000 tick**、剩**104376**，原54000返航储备不动；历史出航6163tick及当前所有开销照计，零退款/回退/新增游戏时间。原就绪起点一小时上限及Native旅程原截止不能复活；修复后的新恢复准备须用真实时间、Native新计划和完整最新边界，沿持续授权而不续旧凭据。
+
+暂停中的纯公开只读勘察已完成并证明tick121200886始终未变化：402原17实体、旧ILS2（2104）、电网/目录、可燃冰127矿脉点、石矿54点均已完整选定过滤读取，非安全落地/施工许可。数据在`caph-paused-survey-20261103-v1/`；资源对仅离线提案，已给出实际坐标用于后续全线预算，不能以种类/弦长替代Native端口、路面和电网证明。未新增外星建筑、制造或发射。
+
+下一唯一工程目标：补**准确owned非空旧基地**的普通落地补能及相应无损恢复准入，复用已有全付料对象/Native组件/双向连接/零未知及原始扣料证据，不能只删empty-factory门或直接Resume暂停世界。核对`NormalGameActionCoordinator.VoyagerLandingCharge`、`RemoteResumeEnvironment`、`SavedFactorySite`及现有`VoyagerFailedRemoteReauthorizationPolicy`/最新LastExit恢复合同，选择最小充分修复。保留失败原动作与原旅程已耗/返航储备，修复不能把失败改成功。源码250相关/完整5606 CI及同源5daa实装均为当前基线；独立产品主仓两份AGENTS原改动未碰。技术/CI/安装就绪后用fresh公开计划验证完整身份/版本与>=121200886候选，按真实模式合同无损恢复Caph，再继续既批建设与首帆/火箭全目标；不回到母星集中制造方案。
+
 **2026-11-03 04:07+08:00当前执行入口：赴Caph v4。** 5daa新源的实际3产品模块及Native MVID/版本已在v2/v3正常加载核验，公开恢复成功且无回退。v2因调用端遗漏配置接口必填recipeId/expectedFactoryStateHash在接受动作前拒绝；已用游戏关闭时的真实MCP SDK两组入参验证补齐。v3原795a4da6成功把母星站1657第3槽设为板1301/上限100/None+Supply，前三槽配置和背包108燃料/2板保持；后置验证误区分“Supply”与请求“supply”，原报告保留失败，另附成功动作核销，禁止重做第3槽。无航行已接受。
 
 最新完整Primary/LastExit**121194644**、四档/全部**1726项**备份通过，累计**105382/216000**、剩**110618tick**；54000返航储备不动。原件在`caph-survey-departure-20261103-v3/`，研究队列1141和物料继续保存。唯一当前writer为`caph-survey-departure-20261103-v4/`，Python10480、Game2740已正常启动/生命周期核验，当前原生预加载；先fresh检查进程和原动作，不能另开writer或重跑旧v1/v2/v3。v4仅配置仍为空的第4燃料供给槽，按原生观察不区分大小写核对后，检查新`voyagerMechaWork`复制证明、航线/能源/翘曲器及原返航预算，再提交一笔Voyager并只观察原actionId。v4会在真实到场后刷新资源/电网/目录并正常保全；尚未到场，不称新外星验收。
