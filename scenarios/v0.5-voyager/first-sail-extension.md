@@ -1,4 +1,8 @@
-# 0.5 first solar sail extension / 0.5 首帆扩展方案
+# 0.5 first sail and rocket extension / 0.5 首帆与首枚火箭扩展方案
+
+2026-11-02所有者新增：将真实发射第一枚火箭也纳入0.5。在首帆后完成普通研究、最小材料制造、垂直发射井供电供料及原生发射，核对真实火箭飞行与抵达、准确物料消耗，并正常保存恢复。该目标所必需的最小有效戴森结构接收目标纳入本次范围；完整结构规划、批量建设和发射网络仍留在后续版本。沿用现有授权、累计硬预算、唯一writer及正式发布边界，不逐动作重复请批。
+
+Latest owner direction (2026-11-02): include the first normally manufactured and actually launched carrier rocket in0.5. This includes the minimum valid native structural receiving target required for real arrival, ordinary technology/materials/silo/power/supply and save/recovery evidence. Full structural planning, mass construction and launch networks remain later work. Existing cumulative hard budgets and formal publication gates remain unchanged.
 
 Owner direction: 2026-11-01, extend 0.5 with the first normally manufactured and actually launched solar sail, and proceed autonomously with as little manual intervention and repeated approval as possible. This file records that goal and the execution design. Current results, selected source and next action remain only in [current-status.md](current-status.md).
 
@@ -26,6 +30,10 @@ Owner direction: 2026-11-01, extend 0.5 with the first normally manufactured and
 | S3 First actual launch / 首次真实发射 | Fresh inventory/site plan, ordinary manufacture and construction/supply, then bounded native launch observation with original receipts. / 新鲜库存与场地计划、普通制造建设供料、有限原生发射观察及原回执。 | Exact material and game-time spending, power and view feasibility, finite wait/stop/save envelope. / 准确材料和游戏时间、供电射界可行性、有限等待/停止/保存包络。 |
 | S4 Preservation and review / 保全交审 | Normal save/recovery evidence, updated user documents and only then a new qualified review pair. / 正常保存恢复证明、用户文档更新，功能闭合后才形成新双候选。 | Keep old baseline packages/hashes immutable and distinguish all new proof from the old three passed clauses. / 保留旧基线双包与哈希，新增证明不冒充旧三门证据。 |
 
+新增滚动阶段：先关闭首帆及恢复证明，再进入R1火箭科技/材料闭环、R2最小原生结构目标和发射井供电供料、R3真实发射/抵达及保存恢复，最后统一交审双包。当前共同底座先补无人机正常开关与施工前置检查，复用已制造物品及准确待建实体，不重复创建。
+
+火箭前提已有配方观察（待恢复后刷新）：量子芯片、垂直发射井及小型运载火箭尚未解锁；因此必须先核对正常研究依赖、矩阵库存/生产和研究时间。小型运载火箭实际物品为1503；一枚需戴森球组件2、氘核燃料棒4、量子芯片2。一个发射井需钛合金80、框架材料30、引力透镜20、量子芯片10。材料库存、真实供能、结构目标和原生发射生命周期仍待验证；不以此清单冒充已付料、已获任意增量或已能发射。
+
 ## Autonomy and budgets / 自主执行与预算
 
 Proceed with the necessary bounded source/caller investigation, fixes, tests, normal commits/pushes, qualification and evidence maintenance. Routine same-owned-world save, close/launch and no-loss recovery retain the standing technical safeguards. Batch related proven changes and reuse qualified inputs. Native refusal is an implementation/caller/site diagnosis, not a request to waive it. Reconcile every original accepted/unknown action; never rekey or replay it.
@@ -42,6 +50,6 @@ The accepted source/install baseline remains `30bd61198a6a3b2ff4e41eaf172c5d97fb
 
 原验收/实装基线仍为上述准确源码和DSP29151/EF3144原生装配。已有配方记录显示太阳帆和电磁轨道弹射器已解锁；当前库存、电力、场地及轨道仍待新鲜现场证据。一轮普通配方用石墨烯1、光子合并器1产太阳帆2；新弹射器配方用钢20、齿轮20、处理器5、超级磁场环10，另计外部供料/供电连接。这只是清单，不是新增扣料授权或库存证明。
 
-Long-route generalization, multi-outpost scheduling, rockets and Dyson node/frame/shell design are outside this first-sail slice. Existing twelve-belt restrictions remain disclosed until separately changed and validated; they are not silently relaxed for this goal.
+Long-route generalization, multi-outpost scheduling and general Dyson node/frame/shell design remain later work. The owner has now included the first carrier rocket and its minimum receiving structure in0.5. Existing twelve-belt restrictions remain disclosed until separately changed and validated; they are not silently relaxed for this goal.
 
-长线路通用化、多矿点调度、火箭及戴森节点/框架/壳层设计不纳入本次首帆切片。现有十二节限制在另行修改验证前继续披露，不因首帆目标而静默放宽。
+长线路通用化、多矿点调度及通用戴森节点/框架/壳层设计仍属后续工作；首枚火箭及其最小接收结构已由所有者纳入0.5。现有十二节限制在另行修改验证前继续披露，不因新目标静默放宽。
