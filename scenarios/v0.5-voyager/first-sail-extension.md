@@ -1,6 +1,10 @@
 # 0.5 first sail and rocket extension / 0.5 首帆与首枚火箭扩展方案
 
-## Current construction entry / 当前施工入口（2026-11-03）
+## Current preserved construction entry / 当前保全施工入口（2026-11-03）
+
+冷启动燃料公开接口e48已准确CI/冷安装。旧Caph站已有电路板slot1及燃料slot2 Demand；实际多料到货仍未证明。必要短走原action0adf因原生接触停止尾部未证明而unknown，禁止重放/自动Resume，已正常退出保存LastExit121202004并完成1750项完整备份；Primary121201952较旧不得加载。累计112742、剩103258tick，返航54000不变；新增外星建筑仍零。下一技术动作先诊断接触/保全缺口，原整体目标和已批准施工上限保留。电塔上限4→9的增量询问尚未收到批准。
+
+### Preserved earlier healthy entry / 保留的早先健康入口
 
 6e68已真实从最新Caph LastExit无损恢复并形成新的completed_health来源，旧失败出航不改。旧站2的电路板Demand槽已真实配置；尚无自动多料到货、新外星建筑或当地制造验收。正常保存关闭后Primary/LastExit均121201181，1736项完整备份通过。累计111919、剩104081tick，继续保留54000返航。启动到首笔配置289.829秒，通过300秒门。先在关游戏状态下细化独立主电网、材料缓冲及当地首帆全线的分段布局/连接，再按原已批准上限执行。
 
