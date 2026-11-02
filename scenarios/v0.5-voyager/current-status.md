@@ -2,6 +2,12 @@
 
 This is the only current snapshot. 以下当前计划/成果优先；下方旧截点保留为历史证据。最后更新：2026-11-03。
 
+**2026-11-03独立电网预算与冷启动接口缺口已核实，冷启动源码e48已推送但尚未安装。** 最新Native目录明确：两矿机+熔炉+化工+3Mk.II+弹射器+24分拣器声明满载约**5.772MW**，聚变容量15MW够；电塔连接半径22.5m、覆盖10.5m。对127可燃冰/54石矿全部成对离线计算，最近点仍**161.724m（527/395）**，不是此前候选评分漏掉更近组合。原4塔不足覆盖两端和制造区。已向所有者提出上限4→9、最多新增5塔的独立增量决定；**尚无批准，仍只按4塔执行**，不加tick、不动54000返航。离线预算文件`.local/v0.5-voyager/first-sail-layout-20261103-v1/budget-and-premises.private.json`保留完整前提，Native落位仍未资格，不能把离线几何当施工证明。
+
+另已直接读代码确认现有Transfer仅支持StorageComponent，首聚变无电时分拣器不能自举，因此新增必须的公开冷燃料子集：产品**e48f02427f00f1893e66c5c1c1d955df60a41014**已提交推送。prepare_transfer新增direction=player-to-generator-fuel，storageEntityId指2204/2211，fresh玩家及机组full stateHash，限定空手、inc0、原生fuelNeeds接受、空缓存/无当前及已加载燃料、count1..10、正常交互范围。以正常package.TakeItem扣料及原生PlanetFactory.InsertInto一次插入，核对同tick等量反向变化与原生成分其余字段不变，不直接写热量/游戏库存或推进模拟。MCP要求generatorColdStartFuel专用echo；旧Storage转移不变，热机补料/取燃料不在子集内。准确29151 Native源码只读研究在产品`.local/fuel-transfer-native-29151/`（不上Git）；SetNewFuel仅变四个缓冲元字段，未运行发电函数。16新增Core/8新增MCP检查通过；42相关燃料Core、461全MCP、112契约通过，Native编译零警告错误。[准确CI41537335959](https://github.com/Arcueid77/Spherewright/actions/runs/41537335959)运行中。产品AGENTS两份原修改未碰；Lab锁/磁盘实装仍6e68，**该新接口尚不能调用或计实机验收**。
+
+下一步复用e48准确CI后采用/同源开发输入/冷安装，维持最新1736备份121201181。无需为此补丁发行双包。接近施工的独立最近阶段：先用原额度建可燃冰527附近矿机1、聚变1、电塔1的局部基础电网，首次正常装最多8个1802，再证明当地矿产进入矿机缓冲及新网发电；后续化工/仓/储液/分拣带路仍按原17主体/24分拣/120带总上限，全链不能删掉。矿机优先fresh固定节点，原生所得位姿后推导塔/机组近场；各目标在16m施工抛射包络、3架活无人机和原回程能源之内。全网/全链布局及Native端口仍须预检，不能预先声称已可建。原jMax107547/jSpent6426，扣返航后本地最大47121tick（约13.1分钟），全局仍111919已耗/104081剩余；游戏关闭、新增外星建筑仍零。可在等待电塔决定时推进这个不超原额的局部验收。
+
 **2026-11-03真实Caph恢复及首笔外星支援配置通过，已正常保存关闭并完整备份。** 实装/固定依赖仍6e68c2b0。新公开恢复action **5ca2de58-b964-4791-be64-fd54fff7ed96**真实completed/succeeded、planet402，NativeFirstFailure=null；持久角色completed_health，source/adopted121200886、terminal/新LastLanded121201149、jSpent6426，原0125失败仍保留、CP仍recovery_required且successfulFlight=null。随后普通配置action **bd5a77ce-374a-4dc1-a806-a986b7dd9345**真实成功，旧Caph星际站entity2的slot1为1301电路板/max100/local None/remote Demand，其他槽（含slot0分形硅石1013供应）配置保持不变。证明的是新恢复与真实配置，不是新物料已运达或新工厂已建。
 
 启动第二轮`.local/v0.5-voyager/caph-failed-landing-live-20261103-v2/`：原生菜单/模块25.594秒，准备252.547秒，恢复完成288.188秒，真实配置及状态delta **289.829秒**，通过300秒硬上限、未达到120秒目标。期间只是观察唯一原生进程并等待明确的模型/原型preload，未在菜单开发。第一轮v1因调用器误把菜单出现视作Native可恢复而在42.5秒收到BRIDGE_NOT_READY，未Load/commit、已正常关闭，1728原保护文件全部不变；该失败保留。v2仅对未接受的准备调用按同一300秒截止等待，绝不重放已接受动作；SDK真实入参及11项caller gate测试均先离线通过。
