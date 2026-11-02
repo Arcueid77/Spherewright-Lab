@@ -2,6 +2,12 @@
 
 This is the only current snapshot. 以下当前计划/成果优先；下方旧截点保留为历史证据。最后更新：2026-11-03。
 
+**2026-11-03移动停止首个原生失败截点已补源码，尚未安装或重跑。** 聚焦只读研究准确29151的PlayerController及PlayerMove_Walk（产品`.local/local-move-native-29151/`，不上Git）确认原生自身也使用position+normal*.15、radius*.35、mask15873同一CheckSphere，不能先归因为产品查询参数错误。现有Observer在Native501 Physics返回后、601 Player之前检查；停止最终允许的failure601仍可能在Pause后完成，因此“pre-player未严格停稳、后来暂停读到Walk0”存在时序可能性，但**尚无足够事实认定是根因，不能直接延长8tick接触缺口/13tick停止界限或放松地面证明**。
+
+产品新提交推送**d49b1452a1bba4bfbdbafce8e6901304621cf504**仅增观测：在原接触丢失停止耗尽的同一决策点，复用已查询GroundSphereHit及已读实际/帧模式、速度、RTS/手动尾部、core、垂直速度、订单、arm/deadline等复制值生成NativeFirstFailure；标明stage original_move_stop_pre_player，后续post-player停稳/Pause/序列化/Resume均not_reached，不额外Physics、不增加原生tick/尾部、不改原OutcomeUnknown。ActionResult回读深拷贝，不用事后Walk0覆盖原截点。5项新增诊断检查及30项现有GroundGap策略共35通过；准确Native构建零警告错误，双语指南同步。[准确CI41542562560](https://github.com/Arcueid77/Spherewright/actions/runs/41542562560)运行中。**主线d49为观测源码，Lab锁及实装仍e48；未生成发行包、未安装d49、未新开游戏**。
+
+后续优先复用现有证据定位时序/物理条件，必要时仅在技术就绪的新动作上取该原始截点，绝不重放原0adf或把旧unknown改成功。最新保全入口仍foundation-v2的1750项manifest，LastExit121202004/Primary121201952，native ticket双副本minimum121202004/planet402/quarantine=0adf，预算112742已耗/103258剩余/返航54000，均未变。下一次无损来源必须选固定最新LastExit，不能默认旧Primary；记录j6426与LastLanded121201149并继续保守elapsed会计。电塔增量仍无批复、原4塔不变，新外星建筑仍零；冷启动接口e48的真实点火也待验收。
+
 **2026-11-03电力基础两段实机已保全；新移动unknown保持原样，不重放。** 实装/锁仍e48。foundation-v1真实新健康来源恢复成功，旧站2的slot2已正常配置1802燃料Demand/max100、保留slot0/1等其他槽，启动到真实配置273.75秒通过300秒门；后续调用器额外150MJ/90墙钟补能条件拦住施工（无原生依据，已在v2删除），未创建对象。已正常保存关闭：Primary=LastExit121201922，1744完整备份，累计112660已耗/103340剩余，无退款。v1整包结果仍失败，不能把先前startup成功event替代后续失败。
 
 foundation-v2改为首笔必要10m短走、5类SDK离线参数先验证（移动字段targetX/Y/Z，纠正调用器的x/y/z），新恢复成功；原移动 **0adfdbfd-fee6-408e-bb59-b64c66cc7405**、key589f1773-9c97-481d-bb5e-e88092e36c27已accepted，started121201980、completed121202004。它因接触丢失后的原有停止界限未证明严格物理停稳而terminal **outcome_unknown**，failureKind voyager_local_native_tail_unproved；Native Pause verified，禁止自动Resume/重下同目标。窗口报告reconciliation_required，279.719秒，不能算300秒启动通过。原动作和所有原回执保留在`.local/v0.5-voyager/caph-power-foundation-20261103-v2/`。Source_Gap定位产品NormalGameActionCoordinator.VoyagerLocalWalk.cs约592（unchanged contact-loss stop bound）及Core VoyagerActiveMoveGroundGapPolicy；不要先扩大停止窗口或加整段干燥条件。
