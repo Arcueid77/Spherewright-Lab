@@ -34,6 +34,16 @@ class GeometryRequestTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             complete_geometry_arrays({})
 
+    def test_target_also_used_as_obstacle_must_be_deduplicated_by_caller(self):
+        with self.assertRaises(ValueError):
+            complete_geometry_arrays({'objectIds': [7, 7, 9]})
+        selection = list(dict.fromkeys([7, 7, 9]))
+        self.assertEqual(complete_geometry_arrays({'objectIds': selection})['objectIds'], [7, 9])
+
+    def test_collection_limit_is_checked_before_opening_game(self):
+        with self.assertRaises(ValueError):
+            complete_geometry_arrays({'objectIds': list(range(1, 258))})
+
 
 if __name__ == '__main__':
     unittest.main()
