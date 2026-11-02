@@ -11,6 +11,13 @@ class RouteProposalTests(unittest.TestCase):
     def test_projection_roundtrip(self):
         p=Projection((0,0,200));q=p.surface((20,10));x,y=p.project(q)
         self.assertAlmostEqual(20,x);self.assertAlmostEqual(10,y)
+    def test_overlapping_start_enclosures_are_not_erased(self):
+        a=(-7.1,-3.6,1,4.6);b=(-.1,-1.4,6.3,5)
+        r=route((70,70),[a,b],goal_radius=50);x,y=r['points'][0]
+        self.assertTrue(r['escapeConservativeEnclosures'])
+        self.assertEqual(0,x)
+        self.assertTrue(y>8 or y<-6)
+        self.assertFalse(r['nativePathClearance'])
     def test_full_barrier_does_not_become_clear(self):
         with self.assertRaises(ValueError):route((90,0),[(4,-100,80,100)],goal_radius=10)
     def test_large_or_malformed_requests_reject(self):

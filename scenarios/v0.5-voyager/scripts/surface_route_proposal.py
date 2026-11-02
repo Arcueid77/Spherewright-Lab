@@ -37,9 +37,31 @@ def route(goal,rectangles,cell=2.0,goal_radius=45.0):
     lo_y=math.floor((min(0,gy)-35)/cell);hi_y=math.ceil((max(0,gy)+35)/cell)
     if (hi_x-lo_x+1)*(hi_y-lo_y+1)>20000: raise ValueError('proposal grid bound')
     if any(len(r)!=4 or r[0]>r[2] or r[1]>r[3]for r in rectangles):raise ValueError('invalid bounds')
-    # The initial player may touch a conservative build enclosure. Native has
-    # already established current support; omit only that enclosure for escape.
-    obstacles=[r for r in rectangles if not(r[0]<=0<=r[2]and r[1]<=0<=r[3])]
+    # A stable player can touch overlapping conservative build enclosures.
+    # Do not erase those enclosures and route through a machine. Propose one
+    # short outward step which never penetrates either enclosure more deeply.
+    containing=[r for r in rectangles if r[0]<=0<=r[2]and r[1]<=0<=r[3]]
+    obstacles=[r for r in rectangles if r not in containing]
+    if containing:
+        def depth(x,y,r):
+            a,b,c,d=r
+            return max(0,min(x-a,c-x,y-b,d-y)) if a<=x<=c and b<=y<=d else 0
+        limits=[depth(0,0,r)for r in containing];escapes=[]
+        for dx,dy in ((1,0),(-1,0),(0,1),(0,-1),(1,1),(1,-1),(-1,1),(-1,-1)):
+            norm=math.hypot(dx,dy)
+            for length in (8,10,12):
+                x,y=dx*length/norm,dy*length/norm
+                if any(r[0]-3<=x<=r[2]+3 and r[1]-3<=y<=r[3]+3 for r in containing):continue
+                good=True
+                for i in range(1,int(length*2)+1):
+                    px,py=x*i/(length*2),y*i/(length*2)
+                    if any(depth(px,py,r)>limit+1e-6 for r,limit in zip(containing,limits))or any(a<=px<=c and b<=py<=d for a,b,c,d in obstacles):
+                        good=False;break
+                if good:escapes.append((length+.1*math.hypot(x-gx,y-gy),(x,y)))
+        if not escapes:raise ValueError('no bounded outward escape proposal')
+        point=min(escapes,key=lambda x:x[0])[1]
+        return dict(executable=False,terrainVerified=False,nativePathClearance=False,
+                    escapeConservativeEnclosures=True,points=[point],examined=len(escapes))
     def blocked(x,y):return any(a<=x<=c and b<=y<=d for a,b,c,d in obstacles)
     start=(0,0);queue=[(0,0,start)];cost={start:0};parent={};found=None
     while queue:
