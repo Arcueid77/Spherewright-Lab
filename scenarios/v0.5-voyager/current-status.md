@@ -2,6 +2,12 @@
 
 This is the only current snapshot. 以下当前计划/成果优先；下方旧截点保留为历史证据。最后更新：2026-11-03。
 
+**2026-11-03恢复实现继续：第一段准确CI成功，第二段来源策略已提交但尚未接入Native。** 产品5d582497的[准确CI41521587516](https://github.com/Arcueid77/Spherewright/actions/runs/41521587516)已成功；完整已建站补能入口仍未安装，不把它视为当前退出档已可恢复。产品随后提交推送**8128a4c4**，新增`VoyagerFailedLandingRecoveryPolicy`与16项来源/边界/原预算/新窗口测试，全部通过；这是Core策略部件，模式字符串`authorize_failed_landing_last_exit`尚未接入公开MCP/Native协调器，不得调用或声称恢复能力闭合。实装/固定依赖仍5daa，游戏关闭，1728项保护文件和最新Caph LastExit121200886保持不变。
+
+新做的只读持久证据核对纠正了恢复前提：当前Journey真实phase为`recovery_required`，Started121194723、spent6163、lastAccounted121200886、lastLanded=null，lastAccountedFlightActionId/activeActionId均原0125，remote402/home104/star4，原最大107547、返航54000。检查点lifecycle也是recovery_required，successfulFlightAtGameTick=null。**恢复票据仍是母星旧水位expectedPlanet104/minimum121194676**，正常退出没有更新它；不能手改票据。新角色须依据固定完整LastExit==Journal已核销当前边界、原检查点选定目的地402及完整同owned身份版本证明，不能要求票据旧planet/tick冒充当前候选，也不能伪造LastLanded或旧出航成功。
+
+策略部件当前严格要求SourceTick==LastAccountedTick==请求准确minimum/expected，SourceTick>=票据旧minimum且>=Primary，原失败checkpoint/Journal/目的地完整绑定，caller明确已知terminal失败，不接受旧token/legacy见证、进度损失或additionalTicks；产生新的**SavedAccountingAnchor**和保守已耗值，而不是旧LastLanded证明。原恢复角色/旧记录不改。待实现Native选择/完整文件与Journal租约、显式新确认摘要/同源回读、合法登记新恢复角色、501首帧/有界充能/完整已付站点证明、失败退出保全与成功后新准入的持久转换；原航行失败永远保留。已有ReturnOnlyContinuation的登记/证据再绑定结构可参考，但不能退化成只返航目标或给施工重新授料。
+
 **2026-11-03旧站落地补能第一段修复已提交，尚未安装；无损失败落地恢复仍需补齐。** 独立产品main已正常提交推送**5d5824972402f23fa4e7b75110323a8b60da7d9f**，实际改动为原活动落地航行绑定准确Journey，并仅以完整已建成付料站点证明准入补能；复用全部Native组件/姿态、被动站、双向连接和物理无人机闲置证明，待建体/未知批次禁止借用普通落地入口。原有无制造核心的恢复路径仍保持旧规则，避免无关放宽。新增7项覆盖包含在137项站点/旧矿区/落地补能相关回归中，已全部通过；Native编译零警告错误。[准确CI41521587516](https://github.com/Arcueid77/Spherewright/actions/runs/41521587516)仍运行，不能计通过。实装/固定依赖仍5daa7b5d，游戏关闭、最新Caph LastExit121200886及1728完整备份未动，预算111624已耗/104376剩余不变。原两份产品AGENTS修改保留未提交。
 
 继续研发须明确第二个缺口：现有`authorize_remote_primary_recovery`虽能选择固定最新LastExit，但其完整来源证明仍要求旧出航成功且Journey已remote_landed；`reauthorize_failed_remote_last_exit`用于此前已成功落地后失败的resume，也要求successfulFlightTick/LastLanded，不能假借用于本次首次落地交接失败。`GameSessionTracker.RequiresRemoteResumeEvidence`目前只识别remote_landed或加载错误，而本次失败Journey为原出航故障状态；默认/verified模式不能因此被当作完整的远端工作恢复许可。不得伪造successfulFlight、LastLanded或修改Journal。
