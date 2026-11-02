@@ -37,6 +37,8 @@ jobs:
           python ./scenarios/v0.5-voyager/scripts/test_detached_python_task.py
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
           python ./scenarios/v0.5-voyager/scripts/test_structured_batch_receipts.py
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          python ./scenarios/v0.5-voyager/scripts/test_startup_to_action.py
       - name: Exercise fail-closed verifiers in the disposable CI checkout
         shell: pwsh
         run: ./scripts/test-verifiers.ps1 -FixtureRoot $pwd.Path -AllowFixtureMutation
