@@ -2,6 +2,12 @@
 
 This is the only current snapshot. 以下当前计划/成果优先；下方旧截点保留为历史证据。最后更新：2026-11-03。
 
+**2026-11-03恢复持久记录及Native会计锚已完成源码接入，公共入口仍待贯通。** 产品`3c06b5dd528ee761f49c0ac0f529a12acc591864`已提交推送并核对远端同SHA。新增FailedLandingAdmissions持久记录：登记pending_native_load、绑定adopted、完成completed_health/failed_health或outcome_unknown；旧格式空记录不序列化，原CP/旧航行成功字段不写。登记释放原Journey只读句柄后经准确磁盘比对原子追加；同源Native证据随登记重绑并允许唯一当前角色的已加载状态。所有终态经过的真实tick都计费；未知不退款且禁止换键。只有新的健康准入成功才允许phase=remote_landed并写新LastLanded，原CP继续recovery_required且successfulFlight仍null。
+
+Core及501/接触/初始化/充能路径现支持独立SavedLandingAccountingAnchor；混用旧LastLanded、无来源绑定、未知/倒退刻度均拒绝。锚由Native从完整同源、已adopted且当前会话/世界/星球/原旅程精确匹配的角色推导，调用方不能填入；新模式始终用完整已建付料站点证明，不放宽旧模式。最新428项受影响回归及Native零警告错误通过；新增10项持久记录、9项Native绑定、8项会计锚检查（合计27），[准确CI41527015029](https://github.com/Arcueid77/Spherewright/actions/runs/41527015029)运行中。此前来源提交0d59b9d9的准确CI41524487930现已成功。**尚未安装、未开放公开mode、未真实Load**；实装/依赖仍5daa，游戏关闭，LastExit121200886与1728备份未动，111624已耗/104376剩余/54000返航不变。
+
+紧接的具体工作是把现成Source/Store/Native锚贯通：OwnedWorldResumeModes/策略和MCP计划回读、Coordinator的新固定LastExit分支与登记/凭据消费、GameSessionTracker加载期的402期望位置（原票据104不可改）及loaded绑定、501终端持久完成/失败暂停保全。须检查RemoteResumeLeaseHandoffMatches对旧ticket位置/水位的假设，并仅对这一已证实新角色使用固定来源证明。另须处理新准入后原CP仍recovery_required对普通Save/新返航CP/后续远端恢复的门：可用新准入证据安全收束旧CP，但不得伪造旧FlightSucceeded；保留旧完整失败来源并证明下一次保存恢复仍支持。模式完整后再同源资格/准确CI/安装，不能因源码组件已通而提前运行半成品入口。
+
 **2026-11-03恢复来源捕获已完成并推送，公共模式仍未开放。** 产品`0d59b9d9338088e6353d19ac7af204620ab456d5`新增原生`TryOpenFailedLandingSource`：固定LastExit/Primary/原飞行检查点完整文件哈希与只读租约、当前Journey/检查点双份一致、原Journal租约、owned/准确版本/和平非沙盒及已核销边界证明；新增独立SavedAccountingAnchor，不写旧LastLanded或successfulFlight。捕获不执行Load、不修改凭据/Journal/失败记录。13项新增来源/版本/身份/沙盒/损坏/句柄释放检查通过；与此前16项策略合计29项最新检查通过，此前325项相关集通过；准确Native引用编译零警告错误。普通提交推送已核对远端同SHA，[准确CI41524487930](https://github.com/Arcueid77/Spherewright/actions/runs/41524487930)运行中。上一策略8128的准确CI41523245956已成功。实装/固定依赖仍5daa，游戏关闭；1728项完整备份、LastExit121200886、已耗111624/剩104376及54000返航储备不变。
 
 下一步集中完成同一恢复链：公开模式/摘要/回读须在Native流程完成后再开放；待接首次失败落地的新恢复角色登记、独立会计锚到501首帧/接触/充能预算事实、完整已付旧站补能、成功后新准入持久转换及失败暂停退出保全。不能借用旧成功LastLanded，也不能把Source捕获或策略绿灯当作恢复验收。建议按ReturnOnly的追加新角色/证据重绑结构复用，保留0125旧飞行失败及原额度；所有过渡须在增量检查通过后再安装。当前新增Native源文件已在Core测试项目链接，集成fixture支持failedLanding，便于直接补原协调器和真实租约检查，不另起私有恢复器。
