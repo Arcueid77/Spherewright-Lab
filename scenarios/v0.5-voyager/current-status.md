@@ -2,6 +2,12 @@
 
 This is the only current snapshot. 以下当前计划/成果优先；下方旧截点保留为历史证据。最后更新：2026-11-03。
 
+**2026-11-03旧站落地补能第一段修复已提交，尚未安装；无损失败落地恢复仍需补齐。** 独立产品main已正常提交推送**5d5824972402f23fa4e7b75110323a8b60da7d9f**，实际改动为原活动落地航行绑定准确Journey，并仅以完整已建成付料站点证明准入补能；复用全部Native组件/姿态、被动站、双向连接和物理无人机闲置证明，待建体/未知批次禁止借用普通落地入口。原有无制造核心的恢复路径仍保持旧规则，避免无关放宽。新增7项覆盖包含在137项站点/旧矿区/落地补能相关回归中，已全部通过；Native编译零警告错误。[准确CI41521587516](https://github.com/Arcueid77/Spherewright/actions/runs/41521587516)仍运行，不能计通过。实装/固定依赖仍5daa7b5d，游戏关闭、最新Caph LastExit121200886及1728完整备份未动，预算111624已耗/104376剩余不变。原两份产品AGENTS修改保留未提交。
+
+继续研发须明确第二个缺口：现有`authorize_remote_primary_recovery`虽能选择固定最新LastExit，但其完整来源证明仍要求旧出航成功且Journey已remote_landed；`reauthorize_failed_remote_last_exit`用于此前已成功落地后失败的resume，也要求successfulFlightTick/LastLanded，不能假借用于本次首次落地交接失败。`GameSessionTracker.RequiresRemoteResumeEvidence`目前只识别remote_landed或加载错误，而本次失败Journey为原出航故障状态；默认/verified模式不能因此被当作完整的远端工作恢复许可。不得伪造successfulFlight、LastLanded或修改Journal。
+
+下一步沿现有显式新恢复授权/Native首帧与有界充能机制，补“原出航已知失败、当前固定LastExit完整无损、同owned身份版本、准确原Journey/检查点/Journal、原累计消耗和返航储备不变”的独立来源角色/模式；新恢复成功只能证明新的安全运行准入，保留原0125航行失败，不改旧结果。准备/提交须同源回读和新鲜确认摘要，候选>=121200886、additionalVoyagerGameTicks=0，新的有限窗口按持续授权及真实时间产生，不能复活旧截止；恢复后再做Caph既批施工、当地制造发射及最终双包全目标。游戏关闭时完成所有代码/CI/工件/输入准备，启动硬门仍300秒。
+
 **2026-11-03最新：Caph落地补能交接失败，当前外星进度已无损保全，游戏关闭。** 唯一原出航动作**0125d404-d9d9-4fa7-946f-13e41cd07ea8**正常离开母星、原生消耗翘曲器1、进入Caph星系并接触402，但最终为terminal `recovery_required`，不得计作成功抵达或重放。首次交接Native核心停止储备不足（每tick上界3643367.314865836J，13tick约47.36MJ；当时核心约33.06MJ），尝试原生有界补能时被`remote_resume_charge_native_construction_not_empty`拒绝；系统原生Pause并冻结后续能耗，未自动Resume。旧Caph17实体已通电，普通落地补能路径尚不接受这个非空旧站，现为已证实产品缺口。
 
 新源5daa的`voyagerMechaWork`已在实际Native准备中返回quiescenceProved=true、factoryOnlyResearch=true、queue[1141]、无研究/库存修改，后续原航行中持续通过。原260.312秒启动到真实燃料供给槽配置达标；母星第3板槽及第4燃料槽均已成功配置，零新带/分拣器、无真实多物料供给到货验收。原900秒Agent观察包按持续授权在**相同4:09:36+08就绪起点**内续接至最多1小时，不改原文件/Native票据/Journal/资源预算：先连接只读原动作观察器，再仅停止旧Python10480，未停游戏或重发飞行。新writer30868已结束，Game2740已正常关闭，当前无活动game writer。原动作、原观测及交接位于`caph-survey-departure-20261103-v4/`和`caph-original-flight-observer-20261103-v1/`。
