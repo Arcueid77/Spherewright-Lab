@@ -2,6 +2,10 @@
 
 This is the only current snapshot. 以下当前计划/成果优先；下方旧截点保留为历史证据。最后更新：2026-11-03。
 
+**2026-11-03恢复来源捕获已完成并推送，公共模式仍未开放。** 产品`0d59b9d9338088e6353d19ac7af204620ab456d5`新增原生`TryOpenFailedLandingSource`：固定LastExit/Primary/原飞行检查点完整文件哈希与只读租约、当前Journey/检查点双份一致、原Journal租约、owned/准确版本/和平非沙盒及已核销边界证明；新增独立SavedAccountingAnchor，不写旧LastLanded或successfulFlight。捕获不执行Load、不修改凭据/Journal/失败记录。13项新增来源/版本/身份/沙盒/损坏/句柄释放检查通过；与此前16项策略合计29项最新检查通过，此前325项相关集通过；准确Native引用编译零警告错误。普通提交推送已核对远端同SHA，[准确CI41524487930](https://github.com/Arcueid77/Spherewright/actions/runs/41524487930)运行中。上一策略8128的准确CI41523245956已成功。实装/固定依赖仍5daa，游戏关闭；1728项完整备份、LastExit121200886、已耗111624/剩104376及54000返航储备不变。
+
+下一步集中完成同一恢复链：公开模式/摘要/回读须在Native流程完成后再开放；待接首次失败落地的新恢复角色登记、独立会计锚到501首帧/接触/充能预算事实、完整已付旧站补能、成功后新准入持久转换及失败暂停退出保全。不能借用旧成功LastLanded，也不能把Source捕获或策略绿灯当作恢复验收。建议按ReturnOnly的追加新角色/证据重绑结构复用，保留0125旧飞行失败及原额度；所有过渡须在增量检查通过后再安装。当前新增Native源文件已在Core测试项目链接，集成fixture支持failedLanding，便于直接补原协调器和真实租约检查，不另起私有恢复器。
+
 **2026-11-03恢复实现继续：第一段准确CI成功，第二段来源策略已提交但尚未接入Native。** 产品5d582497的[准确CI41521587516](https://github.com/Arcueid77/Spherewright/actions/runs/41521587516)已成功；完整已建站补能入口仍未安装，不把它视为当前退出档已可恢复。产品随后提交推送**8128a4c4**，新增`VoyagerFailedLandingRecoveryPolicy`与16项来源/边界/原预算/新窗口测试，全部通过；这是Core策略部件，模式字符串`authorize_failed_landing_last_exit`尚未接入公开MCP/Native协调器，不得调用或声称恢复能力闭合。实装/固定依赖仍5daa，游戏关闭，1728项保护文件和最新Caph LastExit121200886保持不变。
 
 新做的只读持久证据核对纠正了恢复前提：当前Journey真实phase为`recovery_required`，Started121194723、spent6163、lastAccounted121200886、lastLanded=null，lastAccountedFlightActionId/activeActionId均原0125，remote402/home104/star4，原最大107547、返航54000。检查点lifecycle也是recovery_required，successfulFlightAtGameTick=null。**恢复票据仍是母星旧水位expectedPlanet104/minimum121194676**，正常退出没有更新它；不能手改票据。新角色须依据固定完整LastExit==Journal已核销当前边界、原检查点选定目的地402及完整同owned身份版本证明，不能要求票据旧planet/tick冒充当前候选，也不能伪造LastLanded或旧出航成功。
