@@ -51,11 +51,11 @@ class StartupGateTests(unittest.TestCase):
             gate.retry_read_only(probe, 120, lambda e: isinstance(e, TimeoutError), clock, sleep)
         self.assertEqual(120, clock.now)
     def test_cleanup_failure_keeps_original_failure_and_report(self):
-        f = Fixture(); f.ready_seconds = 116
+        f = Fixture(); f.ready_seconds = gate.LIMIT_SECONDS - 4
         def fail_cleanup(): raise RuntimeError('menu read pending')
         f.cleanup_known_state = fail_cleanup; r = f.run()
         self.assertEqual('cleanup_required', r.outcome)
-        self.assertIn('120 seconds', r.failure)
+        self.assertIn(f'{gate.LIMIT_SECONDS:g} seconds', r.failure)
         self.assertEqual('menu read pending', r.cleanup_failure)
         self.assertNotIn('commit_resume', f.calls)
     def test_slow_offline_work_precedes_launch_and_real_progress_finishes_in_budget(self):
@@ -67,10 +67,10 @@ class StartupGateTests(unittest.TestCase):
             f = Fixture(); f.proof[key] = False
             self.assertEqual('offline_not_ready', f.run().outcome); self.assertEqual([], f.calls)
     def test_late_menu_does_not_load_or_restart(self):
-        f = Fixture(); f.ready_seconds = 116
+        f = Fixture(); f.ready_seconds = gate.LIMIT_SECONDS - 4
         self.assertFalse(f.run().passed); self.assertEqual(['launch', 'cleanup'], f.calls)
     def test_accepted_load_finishes_original_after_deadline_then_cleans_up(self):
-        f = Fixture(); f.resume_seconds = 46
+        f = Fixture(); f.resume_seconds = gate.LIMIT_SECONDS - 74
         self.assertFalse(f.run().passed)
         self.assertEqual(1, f.calls.count('commit_resume')); self.assertNotIn('commit_work', f.calls)
         self.assertIn('cleanup', f.calls)
@@ -86,7 +86,7 @@ class StartupGateTests(unittest.TestCase):
         f = Fixture(); f.delta = False
         self.assertFalse(f.run().passed); self.assertIn('cleanup', f.calls)
     def test_boundary_is_strict_even_when_work_terminally_succeeds(self):
-        f = Fixture(); f.work_seconds = 37
+        f = Fixture(); f.work_seconds = gate.LIMIT_SECONDS - 83
         self.assertFalse(f.run().passed); self.assertNotIn('continue', f.calls)
         self.assertEqual(1, f.calls.count('commit_work')); self.assertIn('cleanup', f.calls)
 

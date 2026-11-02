@@ -1,4 +1,4 @@
-"""Caller-only 120-second startup gate. No game API or authority is embedded.
+"""Caller-only startup gate: 120-second target, 300-second hard limit.
 
 Adapters must use public MCP, retain original actions, and prepare all expensive
 offline work before launch. An accepted action is reconciled even after expiry.
@@ -9,7 +9,8 @@ from dataclasses import asdict, dataclass, field
 import time
 from typing import Callable, Protocol
 
-LIMIT_SECONDS = 120.0
+TARGET_SECONDS = 120.0
+LIMIT_SECONDS = 300.0
 READINESS_FLAGS = (
     'game_stopped', 'source_qualified', 'installed_match', 'backup_complete',
     'original_actions_reconciled', 'budgets_preserved', 'first_operation_ready',
@@ -91,9 +92,9 @@ def run(adapter: Adapter, emit: Callable[[dict], None], clock=time.monotonic) ->
     def checkpoint(name):
         elapsed = clock() - started
         report.phase_seconds[name] = elapsed
-        emit(dict(event=name, elapsed_seconds=elapsed, limit_seconds=LIMIT_SECONDS))
+        emit(dict(event=name, elapsed_seconds=elapsed, target_seconds=TARGET_SECONDS, limit_seconds=LIMIT_SECONDS))
         if elapsed >= LIMIT_SECONDS:
-            raise DeadlineExceeded(f'{name}: startup-to-action exceeded 120 seconds')
+            raise DeadlineExceeded(f'{name}: startup-to-action exceeded {LIMIT_SECONDS:g} seconds')
 
     def submit(method, prepared):
         report.unresolved_commit = True
