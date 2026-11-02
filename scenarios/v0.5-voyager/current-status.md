@@ -2,6 +2,12 @@
 
 This is the only current snapshot. 以下当前计划/成果优先；下方旧截点保留为历史证据。最后更新：2026-11-03。
 
+**2026-11-03已有移动事实分析与同截点物理标量已补充，未新增实机。** 进一步复用foundation-v2私有观测：原10m提案实际地表目标弦距9.7606m；原unknown后实际位移12.8443m、距目标3.0968m，位置半径从200.4375到200.5502，目标原生grid-snap半径200.2000；公共玩家physics实际fixedDeltaTime=**0.125秒**、autoSimulation/autoSyncTransforms=true、事后groundSphereHit/cachedWalkGrounded=true。仅是已有事实，不能把post-Pause地面命中当原停止截点命中，也不能据此修改游戏速度/物理时钟、认定根因或续发停止tick。完整紧凑分析在v2/native-move-fact-analysis.private.json。
+
+源码继续正常线性提交推送**5a343f9813bef788c0193e7b7712ddcd60c74770**，在d49原始停止失败DTO中追加Time.fixedDeltaTime、controller.velocity.sqrMagnitude及可观测rigid.velocity.sqrMagnitude；均是该原决策点标量复制，不是额外物理推进/干预。35相关检查及Native零警告错误通过。d49准确CI41542562560现已成功；[准确CI41543141569](https://github.com/Arcueid77/Spherewright/actions/runs/41543141569)运行中。**Lab锁/磁盘仍e48，5a/d49均未安装，游戏仍关闭**；最新1750备份/LastExit121202004/Primary121201952、112742已耗/103258剩余/54000返航全不变，原0adf仍unknown。没有新的外星建筑或冷启动实机验收。
+
+紧接可执行步骤：准确5a CI成功后，必要时同源开发输入/冷安装并准备一次真正不同于原0adf的有界动作，捕获原pre-player失败截点；不要盲重放旧目标，不为每个补丁生成发行双包。只有证据证明哪一项停止条件/时序失败后才改执行规则；优先判断同一最终已付601之后的物理停稳是否缺少原预算内观测，而非默认加大13tick尾部或8tick接触缺口。若只是新的任务以较短分段到达可执行落点，也须fresh Native证明并保留旧unknown，绝不能拿失败位移当已成功移动/5分钟实操。全线外星施工与帆/火箭目标仍完整保留，电塔增量仍待所有者决定。
+
 **2026-11-03移动停止首个原生失败截点已补源码，尚未安装或重跑。** 聚焦只读研究准确29151的PlayerController及PlayerMove_Walk（产品`.local/local-move-native-29151/`，不上Git）确认原生自身也使用position+normal*.15、radius*.35、mask15873同一CheckSphere，不能先归因为产品查询参数错误。现有Observer在Native501 Physics返回后、601 Player之前检查；停止最终允许的failure601仍可能在Pause后完成，因此“pre-player未严格停稳、后来暂停读到Walk0”存在时序可能性，但**尚无足够事实认定是根因，不能直接延长8tick接触缺口/13tick停止界限或放松地面证明**。
 
 产品新提交推送**d49b1452a1bba4bfbdbafce8e6901304621cf504**仅增观测：在原接触丢失停止耗尽的同一决策点，复用已查询GroundSphereHit及已读实际/帧模式、速度、RTS/手动尾部、core、垂直速度、订单、arm/deadline等复制值生成NativeFirstFailure；标明stage original_move_stop_pre_player，后续post-player停稳/Pause/序列化/Resume均not_reached，不额外Physics、不增加原生tick/尾部、不改原OutcomeUnknown。ActionResult回读深拷贝，不用事后Walk0覆盖原截点。5项新增诊断检查及30项现有GroundGap策略共35通过；准确Native构建零警告错误，双语指南同步。[准确CI41542562560](https://github.com/Arcueid77/Spherewright/actions/runs/41542562560)运行中。**主线d49为观测源码，Lab锁及实装仍e48；未生成发行包、未安装d49、未新开游戏**。
