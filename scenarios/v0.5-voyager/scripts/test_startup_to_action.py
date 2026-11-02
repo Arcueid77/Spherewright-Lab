@@ -34,6 +34,30 @@ class Fixture:
 
 
 class StartupGateTests(unittest.TestCase):
+    def test_retryable_read_timeout_is_observed_again_without_restarting(self):
+        clock = Clock(); calls = []
+        def probe():
+            calls.append('read')
+            if len(calls) == 1: raise TimeoutError('read-only timeout')
+            return 'fresh-state'
+        def sleep(seconds): clock.now += seconds
+        self.assertEqual('fresh-state', gate.retry_read_only(probe, 120, lambda e: isinstance(e, TimeoutError), clock, sleep))
+        self.assertEqual(['read', 'read'], calls)
+    def test_read_observation_does_not_renew_the_deadline(self):
+        clock = Clock(); clock.now = 119.9
+        def probe(): raise TimeoutError()
+        def sleep(seconds): clock.now += seconds
+        with self.assertRaises(gate.DeadlineExceeded):
+            gate.retry_read_only(probe, 120, lambda e: isinstance(e, TimeoutError), clock, sleep)
+        self.assertEqual(120, clock.now)
+    def test_cleanup_failure_keeps_original_failure_and_report(self):
+        f = Fixture(); f.ready_seconds = 116
+        def fail_cleanup(): raise RuntimeError('menu read pending')
+        f.cleanup_known_state = fail_cleanup; r = f.run()
+        self.assertEqual('cleanup_required', r.outcome)
+        self.assertIn('120 seconds', r.failure)
+        self.assertEqual('menu read pending', r.cleanup_failure)
+        self.assertNotIn('commit_resume', f.calls)
     def test_slow_offline_work_precedes_launch_and_real_progress_finishes_in_budget(self):
         f = Fixture(); r = f.run()
         self.assertTrue(r.passed); self.assertEqual(85, r.startup_seconds)

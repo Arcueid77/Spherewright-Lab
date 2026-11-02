@@ -25,6 +25,24 @@ class CommitRejected(RuntimeError):
     """Only an authoritative pre-acceptance Native refusal may use this type."""
 
 
+def retry_read_only(probe, deadline, is_transient, clock=time.monotonic, sleep=time.sleep):
+    """Retry only a caller-designated READ, within the original startup clock.
+
+    A read timeout is not a terminal game result. Never wrap a commit in this
+    helper; accepted actions keep their original handle and are not resubmitted.
+    """
+    while clock() < deadline:
+        try:
+            return probe()
+        except Exception as error:
+            if not is_transient(error):
+                raise
+        remaining = deadline - clock()
+        if remaining > 0:
+            sleep(min(.25, remaining))
+    raise DeadlineExceeded('Read-only readiness observation exceeded the original startup budget')
+
+
 class Adapter(Protocol):
     def offline_preflight(self) -> dict: ...
     def launch_once(self, deadline: float): ...
@@ -49,6 +67,7 @@ class StartupReport:
     first_action_id: str | None = None
     failure: str | None = None
     unresolved_commit: bool = False
+    cleanup_failure: str | None = None
 
 
 def run(adapter: Adapter, emit: Callable[[dict], None], clock=time.monotonic) -> StartupReport:
@@ -130,5 +149,10 @@ def run(adapter: Adapter, emit: Callable[[dict], None], clock=time.monotonic) ->
             report.startup_seconds = clock() - started
         emit(asdict(report))
         if launched and not report.unresolved_commit:
-            adapter.cleanup_known_state()
+            try:
+                adapter.cleanup_known_state()
+            except Exception as cleanup_error:
+                report.cleanup_failure = str(cleanup_error)
+                report.outcome = 'cleanup_required'
+                emit(asdict(report))
         return report
