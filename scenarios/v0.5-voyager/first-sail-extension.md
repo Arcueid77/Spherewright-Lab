@@ -1,6 +1,10 @@
 # 0.5 first sail and rocket extension / 0.5 首帆与首枚火箭扩展方案
 
-## Current recovery before construction / 当前施工前恢复（2026-11-03）
+## Current construction entry / 当前施工入口（2026-11-03）
+
+6e68已真实从最新Caph LastExit无损恢复并形成新的completed_health来源，旧失败出航不改。旧站2的电路板Demand槽已真实配置；尚无自动多料到货、新外星建筑或当地制造验收。正常保存关闭后Primary/LastExit均121201181，1736项完整备份通过。累计111919、剩104081tick，继续保留54000返航。启动到首笔配置289.829秒，通过300秒门。先在关游戏状态下细化独立主电网、材料缓冲及当地首帆全线的分段布局/连接，再按原已批准上限执行。
+
+### Preserved failed landing recovery / 保留的失败落地恢复阶段
 
 当前已到Caph402但原出航0125因落地补能交接失败而terminal recovery_required；LastExit121200886完整保全，不重放航行、不退回旧Primary121194676。累计111624/216000，剩104376tick，返航54000不变。物料108燃料及板2随身；外星新施工仍零。源端先完成无损失败落地恢复及已建旧站完整证明后，再按原批准首帆上限执行当地刷新/布局/电网/制造/真实发射。恢复研发现状详见current-status；源码/只读捕获通过不等于已恢复或已施工。
 
