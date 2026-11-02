@@ -2,6 +2,18 @@
 
 This is the only current snapshot. 以下当前计划/成果优先；下方旧截点保留为历史证据。最后更新：2026-11-03。
 
+**2026-11-03 a78已准确CI、采用、冷安装并实机；移动墙钟缺口已有成功证据，新的真实离地失败仍保留unknown。** 产品main/Lab固定依赖/磁盘均为 **a78db781122bf29735ba1cd4d77a0b18ae96e5cc**，[准确CI41545262426](https://github.com/Arcueid77/Spherewright/actions/runs/41545262426)成功，112合同+5158Core+461MCP=5731检查。干净工作区Native构建零警告错误，两种MCP形态74工具/1资源、同源载荷及双语指南检查通过。开发输入`.local/v0.5-voyager/move-wall-source-a78db781-20261103-v1/`，manifest **E1FFED701B5C3639511C240C23646E96849E3CA0991DF5AA6C302857BDD9D270**、cohort **B9D36B58053228A21026EDD608F83E4ACD141F01F9B40935C35A1438DCD81E24**；一次冷安装回执成功，未生成发行双包，不重放安装。
+
+真实执行分别保留`.local/v0.5-voyager/caph-power-foundation-20261103-v5/`和`...-v6/`。两次新进程均经三个调用方Job独立生命周期核验，启动至首笔Move完成分别 **278.891秒、272.907秒**，均小于300秒（120秒优化目标未达）；其中原生预加载分别约267/262秒，非菜单中开发等候。v5共24笔Move成功，随后原动作a68f52d9-96a3-40e7-bbeb-274f7fc23fd4以ground_contact_gap_ended明确失败，严格停稳已证；正常保存和退出成功，Primary=LastExit121202971、1764文件完整备份。v5整包仍failed，不能以早先startup成功事件改写整包结论。
+
+v6共10笔Move成功，随后新动作 **f89e31e3-b58b-46e7-abfe-7adb99cbdf25** started121203376、unknown121203400。原始nativeFirstFailure首次谓词strict_ground_sphere=false，actual/frame Walk=false，speed2.7969m/s、vertical2.7967m/s，RTS/手动尾部全零；stop arm121203388、deadlineTick121203401、fixedDelta0.125。与旧墙钟截点的ground=true/RTS残速不同，本次确实离地，不得据此继续加墙钟或放松地面门。执行器停止，原unknown不重放。随后独立公开只读复核：同owned402、paused/quarantined、tick/core稳定、Drift/speed0；公开核销与preserve-save准备仍明确拒绝，均未commit。仅按standing正常OS关闭一次，由Native LastExit保全；不能称受控Save成功。
+
+**当前保存边界：LastExit121203400，Primary121203001，必须选不早于121203400的新鲜公开恢复方案。** v6/after-normal-close-complete-backup/manifest.private.json完整校验 **1770文件/四Native角色**；preservation-summary通过。累计已耗 **114138/216000，剩101862 tick，返航54000**，历史失败全部计费，无退款或新增时间。游戏/MCP已关闭。新外星建筑仍零、8燃料冷启动尚无实际验收；母星成果、旧站/旧矿及历史300运输不冒充本轮制造。
+
+接下来先定位新离地落点及原生Drift/停稳合同，复用原SDK与分段施工输入，不重放旧动作；技术就绪后从最新LastExit恢复，建立矿机1/聚变1/电塔1的独立小电网、正常插入8燃料并证明当地1011产出。额外5电塔提案仍无所有者答复，原4塔上限不变；首帆/首火箭完整当地建设、物理连接、保存续建续运、真实发射抵达及最终同源双包交审目标不变。
+
+以下是此前截点，不覆盖以上当前事实。
+
 **2026-11-03原始失败截点已实机取得，证实墙钟期限先于原13tick预算耗尽；a78修复已推送未安装。** 产品/锁/磁盘当前5a343f98（准确CI41543141569成功，112+5151+461=5724）。干净工作区及两MCP开发形态74工具/1资源/载荷/指南验证、官方脚本采用及一次冷安装均成功；输入在`.local/v0.5-voyager/move-stop-source-5a343f98-20261103-v1/`，manifest **611B8C314E7C166E107128C15358BCF8D306B1B8A72CCA1F2FA183064BD6FA67**、cohort **BA1A2BBEB6A950C1E8FC891573BDCD5949CDA0691D74582D28A54FBEB37D167A**。该安装意图/回执不可重放，1750原备份保留。
 
 新独立4m任务见`.local/v0.5-voyager/caph-power-foundation-20261103-v3/`，不是原0adf目标重放。恢复成功，新Move **6679fa7e-8f32-4ba8-9b62-6a4511c16711** accepted，started121202067、terminal unknown121202082，startup报告reconciliation_required/284.078秒，不算实操通过。**决定性nativeFirstFailure**：ground=true、actual/frame Walk=true；firstFailedPredicate=strict_speed_at_rest，speed1.5060m/s、walk/drift rts squared1.94147、订单已空；停止arm121202075、deadlineTick121202088，失败仅在arm+7tick，尚余6tick。fixedDelta0.124278s，墙钟约1秒已到。不能再把问题泛称为地面没命中或延长游戏tick需求：本截点明确是1秒墙钟过早截止使真实RTS尾部尚未归零。原6679和0adf仍unknown，不回写成功。
