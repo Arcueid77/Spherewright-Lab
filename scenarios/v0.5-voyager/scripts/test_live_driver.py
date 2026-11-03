@@ -115,6 +115,10 @@ class LiveDriverTests(unittest.TestCase):
   a.commit=forbidden;s=dict(role='native-only',prepareTool='spherewright_prepare_build',arguments=dict(buildingItemId=2001))
   self.assertTrue(a.native_operation(s,commit_requested=False)['prepared'])
   with self.assertRaisesRegex(RuntimeError,'operation_family_not_allowed'):a.native_operation(s)
+ def test_native_object_candidate_keeps_its_explicit_sdk_yaw_in_the_exact_build_call(self):
+  a=Factory.__new__(Factory);a.state=lambda:None;a.layout=lambda x:x;calls=[];a.build=lambda role,args,limit:calls.append(args)
+  a.step(dict(kind='build-object',role='oriented-device',itemId=2311,positions=[dict(x=1,y=200,z=1,preferredYaw=90.)]))
+  self.assertEqual(90.,calls[0]['preferredYaw']);self.assertEqual(2311,calls[0]['buildingItemId'])
  def test_native_recovery_required_paused_landing_keeps_healthy_session_without_inventing_quarantine(self):
   s=dict(sessionId='same',gameTick=3,localPlanetId=7,gameLoaded=True,ownedBySpherewright=True,writesAllowed=True,writeQuarantineActionId=None,flightCheckpointId='native-current')
   p=dict(position=dict(x=1,y=2,z=3),coreEnergy=33120896,nativeLocalControlEnergy=dict(blockers=['native_paused_not_execution_ready']))

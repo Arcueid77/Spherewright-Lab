@@ -125,7 +125,9 @@ class Factory(Live):
    last=None
    for position in s['positions']:
     point=self.layout(position)
-    try:return self.build(role,dict(buildingItemId=s['itemId'],**dict(zip(('preferredPositionX','preferredPositionY','preferredPositionZ'),[point[k] for k in 'xyz']))),1)
+    args=dict(buildingItemId=s['itemId'],**dict(zip(('preferredPositionX','preferredPositionY','preferredPositionZ'),[point[k] for k in 'xyz'])))
+    if 'preferredYaw' in point:args['preferredYaw']=point['preferredYaw']
+    try:return self.build(role,args,1)
     except ToolRefused as e:
      if e.error.get('code') not in ('BUILD_LOCATION_INVALID','BUILD_CONNECTION_INVALID'):raise
      last=e
