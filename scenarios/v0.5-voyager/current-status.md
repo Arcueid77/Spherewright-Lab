@@ -2,6 +2,10 @@
 
 This is the only current snapshot. 以下当前计划/成果优先；下方旧截点保留为历史证据。最后更新：2026-11-03。
 
+**2026-11-03最终56c6已实际冷安装，尚未开游戏验收。** 唯一安装意图和回执见`surface-recovery-source-56c6db18-20261103-v1/cold-installation-20261103-v1/`：官方事务committed、一次成功，无unknown；Plugin5/MCP224文件逐项复核，准确源码与Lab锁均56c6，manifest DB54B36D37ADCC2EA6D13ED91C6F805D223A1DBF80DDBA141CB8EC6E183B7FDF。同源两个MCP形态74工具/1资源检查通过。完整1770保护文件、四Native角色及LastExit121203400/Primary121203001安装前后不变，游戏/MCP均关闭；安装不等于加载模块或恢复/施工通过。
+
+正在冻结新恢复及原额度三对象施工包；有界回撤目标来自旧公开成功Walk的真实接地点，距当前保存位置12.53m，仅是规划候选，仍需新Native9点干燥落点/当前地形和成本证明。启动后核对实际模块及新恢复原action，不重放旧unknown。电塔新增5已批准但尚未制造/运输，新建筑仍零；114138已耗/101862剩余/54000返航不变。下方“尚未安装”是较早截点。
+
 **2026-11-03首帆额外5塔已获明确批准；最终源码准确CI成功并已由官方脚本采用，尚未安装。** 电力感应塔上限**9**，新增最多5须正常制造或运入；其他施工上限、216000累计tick和54000返航均不变，见[增量授权](first-sail-extension.md)。当前已建新塔仍零，不把批准计作库存或建设。
 
 产品main/Lab依赖已是**56c6db183766d078f95f5a0df585fe51686ddb92**，[准确CI41552835360](https://github.com/Arcueid77/Spherewright/actions/runs/41552835360)成功，112合同+5191Core+469MCP=**5772**。干净工作区Native Release构建零警告错误，两个MCP形态74工具/1资源/嵌入及打包指南/同源载荷均通过；工件manifest **DB54B36D37ADCC2EA6D13ED91C6F805D223A1DBF80DDBA141CB8EC6E183B7FDF**、cohort **210E7E7E07990DD4D2A1DBB3CDFBB709B7118E4DD76AC2F7B45B015D89FCDA4F**。输入在`.local/v0.5-voyager/surface-recovery-source-56c6db18-20261103-v1/`。资格模板的输出摘要残留旧5731，原回执及载荷/元数据证明保留，以qualification-corrected.private.json和准确CI日志更正为5772，不改历史记录。
