@@ -3,11 +3,11 @@
 更新：2026-11-04。唯一当前摘要；[本轮前固定历史](https://github.com/Arcueid77/Spherewright-Lab/blob/edd229f/scenarios/v0.5-voyager/current-status.md)。原Voyager三门保留，不重跑。
 
 - **授权：** [所有者恢复授权](../../operations/standing-authority.md#current-owner-grant-2026-11-03--当前所有者授权)覆盖首帆、首火箭、保存恢复续建续运及最终双包交审。自主设置足够的有限tick/等待/窗口/调用预算，旧216000tick、1小时、900/1200秒上限不再阻断；实耗不退款重置。54000返航及能源/翘曲器下限、物料范围、Native门、原动作/unknown、备份隐私保留。启动首实操300秒。仅真范围增量、降储备、损失/回退、另一世界、破坏性Git及正式发布另决。
-- **源码/实装：** 固定依赖/磁盘`d4e34771749d80d5e854fec73a6ce7ef18970a24`，[准确CI](https://github.com/Arcueid77/Spherewright/actions/runs/41689666462)及真实SDK/Native构建/同源资格已过，一次必要冷安装committed。此源已加载且健康恢复/首实操280.3秒已证；`continuous-extension-20261104-v4`保留开发证明，无发行包。完整接地响应脱敏/生产事实组合/Store跨层回放已过。原489失败保留。Lab子模块只读。
-- **最新完整保存：** LastExit **121254275** / Primary **121252278**（后者为新普通Save成功）；禁止回退旧Primary。游戏/MCP已停，**1886文件/四Native完整备份**：`continuous-extension-20261104-v4/unknown-iron-normal-preservation/after-normal-close-complete-backup/manifest.private.json`。正常Native退出，无强杀；旧菜单7055…unknown保留。
-- **实际账目：** 累计 **165013tick**，不退款。additional1080000/原Journey107547/有效1187547；调用端累计上限1296000/有限12小时，返航54000及能源/翘曲器下限不变。首帆已付矿机1/2、聚变1/1、塔4/9、化工1/1、仓3/3、炉1/1、MkII3/3、带19/120、分拣12/24；实体18—62保留，无重复扣料。
+- **源码/实装：** 固定依赖/磁盘`d4e34771749d80d5e854fec73a6ce7ef18970a24`，[准确CI](https://github.com/Arcueid77/Spherewright/actions/runs/41689666462)及真实SDK/Native构建/同源资格已过，一次必要冷安装committed。此源已加载且健康恢复/首实操280.3秒已证；`continuous-extension-20261104-v4`保留开发证明，无发行包。完整接地响应脱敏/生产事实组合/Store跨层回放已过。原489失败保留。新候选`a6921b700071c63e07b0c53f44b8fc4604b6220c`完成任务剩余/单次返航预算分配、原Store/NativeFlightStart回放及Native构建；[准确CI](https://github.com/Arcueid77/Spherewright/actions/runs/41698932640)待完成，未安装。Lab子模块只读。
+- **最新完整保存：** LastExit **121257594** / Primary **121257096**（后者为新普通Save成功）；禁止回退旧Primary。游戏/MCP已停，**1894文件/四Native完整备份**：`continuous-extension-20261104-v5/normal-cold-preservation-before-return-budget-fix/after-normal-close-complete-backup/manifest.private.json`。正常Native退出，无强杀；旧菜单7055…unknown保留。
+- **实际账目：** 累计 **168332tick**，不退款。additional1080000/原Journey107547/有效1187547；调用端累计上限1296000/有限12小时，返航54000及能源/翘曲器下限不变。首帆已付矿机1/2、聚变1/1、塔4/9、化工1/1、仓3/3、炉1/1、MkII3/3、带19/120、分拣12/24；实体18—62保留，无重复扣料。
 - **实际变化/首错：** d4e恢复原已付MkII43并追加独立Native尾程idle证书，原b311…unknown控制/3→2扣料逐字段未改。44—62配方/电塔/仓/装配机/直连与短桥真实建成。当地石墨烯4曾入仓，现已正常送入帆机；当地石矿12入仓41。准确49分拣器网0未取料，其余50—52/59—62网2真实供电；只需再补1塔（既批9内）。正常长段移动/铜矿1采集已证（节点-1、背包+1）。铁9原采集99a3…为unknown，原首错缺细分；暂停后ground=false/cast0.341772m，背包无铁，不改旧结果。已正常保全。
-- **下一动作：** `continuous-extension-20261104-v5`复用同合格源码/实装（无新冷装），最新1886备份/有限fresh表面恢复及首笔正常退行已备。离线路由审计：远端手作不在当前准入，采集走动仍连续接地；后续先走到矿前再fresh采集。合并必要母星科研/辅料供给与缺塔正常备料，再回Caph补49供电→玻璃/棱镜/合并器/4帆制造发射。原99a3…隔离不重放。火箭整链BOM/必要一次准确范围增量及最终双包继续；不正式发布。
+- **下一动作：** v5真实fresh表面恢复及正常退行成功，启动298.016秒；原铁99a3…仍unknown未改未重放。返航未接受：原生预检将任务剩余1127722误作单次航程，触发旧108000门，未耗翘曲器。a692新模型保留实际任务剩余，原54000单段分配/全局账目/安全下限不变；`continuous-extension-20261104-v6`已备1894最新保护和实机前资格。准确CI→一次同源冷装→正常母星科研/辅料与缺塔备齐→回Caph补49电→玻璃/棱镜/合并器/4帆及发射；火箭整链BOM/一次准确范围增量和最终双包继续。不正式发布。
 
 | 验收成果 | 当前真实证据 / 尚缺 |
 | --- | --- |

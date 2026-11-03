@@ -19,6 +19,11 @@ def main():
             ('spherewright_prepare_configure_building',dict(ctx,entityId=23,recipeId=0,mode='storage-capacity',storageOperation='filter-empty-or-matching',filterItemId=1123,expectedFactoryStateHash=h)),
             ('spherewright_prepare_configure_building',dict(ctx,entityId=30,recipeId=0,mode='dyson-minimal-receiving-node',expectedFactoryStateHash=h)),
             ('spherewright_prepare_configure_building',dict(ctx,entityId=0,recipeId=0,mode='enable-mecha-construction-drones',expectedFactoryStateHash=h)),
+            ('spherewright_prepare_save',dict(ctx,expectedRevision=1)),
+            ('spherewright_prepare_handcraft',dict(ctx,recipeId=8,count=1,expectedPlayerStateHash=h)),
+            ('spherewright_prepare_harvest',dict(ctx,resourceKind='vein',nodeId=1,requestedYieldCount=1,expectedResourceStateHash=h,expectedPlayerStateHash=h)),
+            ('spherewright_preview_voyager_route',dict(ctx,destinationPlanetId=104,expectedPlayerStateHash=h,expectedCatalogStateHash=h,maximumFlightGameTicks=108000,returnReserveGameTicks=54000)),
+            ('spherewright_prepare_voyager_flight',dict(ctx,expectedRouteStateHash=h,expectedPlayerStateHash=h)),
             ('spherewright_prepare_resume_owned_game',dict(resumeToken='synthetic-offline-token',recoveryMode='authorize_remote_primary_recovery',minimumRecoveryGameTick=100,expectedRecoveryGameTick=100,
                 recoveryDeadlineUtc=(dt.datetime.now(dt.timezone.utc)+dt.timedelta(hours=3)).isoformat(),recoveryScope='continue_original_finite_task',maximumChargeGameTicks=18000,maximumChargeWallSeconds=300,
                 additionalVoyagerGameTicks=432000,surfaceRecoveryTargetX=1.,surfaceRecoveryTargetY=199.,surfaceRecoveryTargetZ=1.))]
