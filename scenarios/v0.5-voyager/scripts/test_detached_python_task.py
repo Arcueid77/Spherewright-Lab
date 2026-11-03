@@ -85,7 +85,7 @@ class AdmissionTests(unittest.TestCase):
     def test_expired_unknown_zone_or_extended_deadline_cannot_start(self):
         now = dt.datetime.now(dt.timezone.utc)
         values = [(now-dt.timedelta(seconds=1)).isoformat(),
-                  (now+dt.timedelta(seconds=1201)).isoformat(),
+                  (now+dt.timedelta(seconds=task.MAXIMUM_START_HORIZON_SECONDS+1)).isoformat(),
                   now.replace(tzinfo=None).isoformat()]
         with mock.patch.object(task.subprocess, 'Popen') as spawn:
             for value in values:

@@ -23,7 +23,9 @@ sys.dont_write_bytecode = True
 BREAKAWAY_OK = 0x800
 SILENT_BREAKAWAY_OK = 0x1000
 CREATE_BREAKAWAY_FROM_JOB = 0x01000000
-MAXIMUM_START_HORIZON_SECONDS = 1200
+# Caller capacity only; the immutable target config still owns its actual
+# finite work/RPC budget. The current owner grant supersedes the old1200 cap.
+MAXIMUM_START_HORIZON_SECONDS = 86460
 
 
 def digest(path: Path) -> str:
