@@ -9,6 +9,15 @@ from flight_observers import observe_sails,observe_rocket
 def distance(a,b): return math.dist([a[k] for k in 'xyz'],[b[k] for k in 'xyz'])
 def count(player,item): return sum(r['count'] for r in player['inventory'] if r['itemId']==item)
 
+def resolve_refs(x,values):
+ if isinstance(x,Mapping) and set(x)=={'ref'}:
+  value=values
+  for key in x['ref'].split('.'):value=value[int(key)] if isinstance(value,(list,tuple)) else value[key]
+  return value
+ if isinstance(x,Mapping):return {k:resolve_refs(v,values) for k,v in x.items()}
+ if isinstance(x,(list,tuple)):return [resolve_refs(v,values) for v in x]
+ return x
+
 class Factory(Live):
  def __init__(self,runtime):
   super().__init__(runtime);self.refs=dict(runtime.config['existingEntities']);self.used={int(k):v for k,v in runtime.config.get('materialUsedAtHandoff',{}).items()}
@@ -110,7 +119,8 @@ class Factory(Live):
    self.refs[role]=ids;self.runtime.put(role+'-adopted-paid.private.json',dict(build=value,entities=entities,noNewCreate=True,noNewDebit=True));return
   if kind=='read':
    need(is_read_tool(s['tool']),'read_step_cannot_submit')
-   value=self.call(s['tool'],self.read_args(s['tool'],s.get('arguments',{})));self.runtime.put(role+'-read.private.json',value);return value
+   args=resolve_refs(s.get('arguments',{}),dict(context=self.ctx,refs=self.refs))
+   value=self.call(s['tool'],self.read_args(s['tool'],args));self.runtime.put(role+'-read.private.json',value);return value
   if kind=='build-object':
    last=None
    for position in s['positions']:
@@ -207,16 +217,8 @@ class Factory(Live):
   prepare=s['prepareTool']
   if not commit_requested:allowed.add('spherewright_prepare_build')
   need(prepare in allowed,'operation_family_not_allowed')
-  values=dict(context=dict(self.ctx))
-  def select(path):
-   x=values
-   for key in path.split('.'):x=x[int(key)] if isinstance(x,(list,tuple)) else x[key]
-   return x
-  def resolve(x):
-   if isinstance(x,Mapping) and set(x)=={'ref'}:return select(x['ref'])
-   if isinstance(x,Mapping):return {k:resolve(v) for k,v in x.items()}
-   if isinstance(x,(list,tuple)):return [resolve(v) for v in x]
-   return x
+  values=dict(context=dict(self.ctx),refs=getattr(self,'refs',{}))
+  def resolve(x):return resolve_refs(x,values)
   def check(tool,args):
    schema=self.schemas[tool];need(set(args)<=set(schema['properties']) and set(schema.get('required',[]))<=set(args),'actual_sdk_argument_contract_mismatch')
   for query in s.get('reads',[]):
