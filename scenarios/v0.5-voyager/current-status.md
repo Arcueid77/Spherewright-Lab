@@ -2,6 +2,8 @@
 
 This is the only current snapshot. 以下当前计划/成果优先；下方旧截点保留为历史证据。最后更新：2026-11-03。
 
+**2026-11-03具体首失败比较项诊断0e69已准确CI、采用及一次冷安装，未新加载。** 当前产品main/Lab锁/磁盘均 **0e69ee1b87f04d51cb6318fd4a1154efebca9dfb**，[准确CI41555567633](https://github.com/Arcueid77/Spherewright/actions/runs/41555567633)成功5772检查；干净Native Release零警告错误，两MCP形态74工具/1资源和同源指南/载荷通过。新开发输入`.local/v0.5-voyager/surface-binding-source-0e69ee1b-20261103-v1/`，manifest **049167DEB1BA355E79CD0FD323208404B289BEE24D255EF032EEFD69717EE31F**、cohort **FAE8BE65D7EEC1E6A35D754DFAC45760259846B14BE6DD783BD66EB992359012**；安装事务committed，原意图和回执不重放。1774完整保护及四Native来源安装前后未变，LastExit121203401/Primary121203001、114139已耗/101861剩余/54000返航不变。游戏/MCP关闭，下一包v8只沿新鲜公开恢复及原有限工作目标；原747失败与三个Move unknown不改判。
+
 **2026-11-03新有界恢复首轮实机在第一501绑定门拒绝，未发出移动；正常退出保全，无回退。** 实际加载56c6模块及进程独立生命周期检查通过，新进程36804在73.563秒完成preload准备；新resume **74782c17-300b-4b29-abfe-2b087218005e**以已知action_failed终止，startup整包cleanup_required/78.703秒，不能计作实操启动成功。原始截点tick121203401：`surface_exact_source_scene=false`，而实际模式/费用/订单、当前原生地形支撑、9点干燥落点缓冲均true；nativeOrderAccepted=false，strict idle=false。没有新Move、没有新施工或材料扣除。保护证据`.local/v0.5-voyager/caph-power-foundation-20261103-v7/`，不得重放该resume或旧unknown。
 
 独立公开只读核对同owned402/paused/quarantined、原resume已知失败、tick/core稳定、Drift/speed0；因没有新健康接管不能伪称受控Save成功。按standing仅一次正常OS关闭，由Native LastExit保全。**最新LastExit121203401、Primary121203001，1774文件四Native角色完整备份**在v7/after-normal-close-complete-backup；累计**114139/216000，剩101861、返航54000**，本轮唯一实际tick已计，无退款。额外5塔已批准（总9）但物品未制造/运入，新外星建筑仍零。
