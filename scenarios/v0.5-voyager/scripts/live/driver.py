@@ -6,7 +6,8 @@ from geometry_request import complete_geometry_arrays
 from evidence import need,read,sha
 from mcp_client import Client
 
-class AcceptedActionFailure(RuntimeError): pass
+class AcceptedActionFailure(RuntimeError):
+ def __init__(self,message,receipt=None):self.receipt=receipt;super().__init__(message)
 
 class ToolRefused(RuntimeError):
     def __init__(self, tool, error):
@@ -170,7 +171,7 @@ class Live:
 
  def successful_original(self,handle):
   r=self.wait_original(handle)
-  if not r.get('succeeded'):raise AcceptedActionFailure('original_action_failed_no_replay:'+handle)
+  if not r.get('succeeded'):raise AcceptedActionFailure('original_action_failed_no_replay:'+handle,r)
   return r
 
  def player(self):return self.call('spherewright_get_player_state',self.ctx)
@@ -193,8 +194,8 @@ class Live:
   return self.entity(entity_id)
 
  def prepare_first_work(self,loaded,deadline):
-  work=self.runtime.config['firstOperation'];e=self.entity(work['entityId']);self.first_before=e
-  mode=work.get('mode','production')
+  work=self.runtime.config['firstOperation'];mode=work.get('mode','production')
+  e=self.player() if mode=='enable-mecha-construction-drones' else self.entity(work['entityId']);self.first_before=e
   if mode=='production':need(e['recipeId']!=work['recipeId'],'first_recipe_already_applied_no_delta')
   args=dict(self.ctx,entityId=work['entityId'],recipeId=work.get('recipeId',0),mode=mode,expectedFactoryStateHash=e['stateHash'])
   if mode=='storage-capacity':args.update(storageOperation=work['storageOperation'],filterItemId=work.get('filterItemId',0))
@@ -203,8 +204,11 @@ class Live:
   return dict(action_kind='configure-building',tool='spherewright_commit_configure_building',prepared=q)
  def commit_first_work_once(self,w):return self.commit('first-work',w['tool'],dict(self.ctx,planToken=w['prepared']['planToken'],idempotencyKey=str(uuid.uuid4())))
  def verify_progress(self,w,r):
-  c=self.runtime.config['firstOperation'];e=self.entity(c['entityId'])
-  if c.get('mode','production')=='storage-capacity':
+  c=self.runtime.config['firstOperation'];mode=c.get('mode','production')
+  e=self.player() if mode=='enable-mecha-construction-drones' else self.entity(c['entityId'])
+  if mode=='enable-mecha-construction-drones':
+   ok=r['succeeded'] and self.first_before['constructionDrones']['enabled'] is False and e['constructionDrones']['enabled'] is True
+  elif mode=='storage-capacity':
    before=self.first_before.get('storageConfiguration') or {};after=e.get('storageConfiguration') or {}
    filters=after.get('gridFilterItemIds') or []
    ok=r['succeeded'] and bool(r.get('storageConfigurationReadback')) and bool(filters)

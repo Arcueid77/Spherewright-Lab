@@ -181,6 +181,19 @@ class Factory(Live):
    try:self.execute_plan(plan['steps'],f'continuation-{sequence:03d}')
    except (ToolRefused,ValueError,RuntimeError) as error:
     self.runtime.put(f'continuation-{sequence:03d}-failure.private.json',dict(error=str(error),activeOriginalAction=self.active))
-    if self.active is not None or isinstance(error,AcceptedActionFailure):raise
+    if self.active is not None:raise
+    if isinstance(error,AcceptedActionFailure):
+     if not self.can_await_after_known_move(error):raise
+     self.runtime.put(f'continuation-{sequence:03d}-known-failed-idle.private.json',dict(originalActionId=error.receipt['actionId'],
+      originalFailureRetained=True,healthyIdleReadbackProved=True,nextPlanMustFreshPrepare=True,noAutomaticReplay=True))
    sequence+=1
   if self.c is not None:self.cleanup_known_state()
+
+ def can_await_after_known_move(self,error):
+  r=error.receipt or {}
+  if r.get('state')!='action_failed' or r.get('actionKind') not in ('move','harvest') or not r.get('terminal') or self.active is not None:return False
+  s=self.call('spherewright_get_session_state',{})
+  if not (s.get('gameLoaded') and s.get('ownedBySpherewright') and s.get('writesAllowed') and s.get('sessionId')==self.ctx['sessionId']):return False
+  p=self.player();physics=p.get('nativePhysics') or {};ground=physics.get('groundContact') or {};velocity=physics.get('velocity') or {}
+  return (p.get('movementState')=='Walk' and p.get('speed',float('inf'))<=.1 and ground.get('checkSphereHit') is True
+   and all(velocity.get(k)==0 for k in 'xyz') and p.get('handcraftQueue')==[] and (p.get('constructionDrones') or {}).get('working')==0)

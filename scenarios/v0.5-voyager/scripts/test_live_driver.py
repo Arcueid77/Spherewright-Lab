@@ -3,10 +3,20 @@ from pathlib import Path
 import sys,unittest,tempfile,json,subprocess
 sys.path.insert(0,str(Path(__file__).resolve().parent/'live'))
 from contracts import powered_consumers_share_network
-from driver import Live,ToolRefused
+from driver import Live,ToolRefused,AcceptedActionFailure
+from factory import Factory
 from runtime import freeze
 
 class LiveDriverTests(unittest.TestCase):
+ def test_known_failed_move_keeps_healthy_idle_writer_but_unknown_cannot_do_so(self):
+  a=Factory.__new__(Factory);a.active=None;a.ctx=dict(sessionId='same')
+  a.call=lambda *_:dict(gameLoaded=True,ownedBySpherewright=True,writesAllowed=True,sessionId='same')
+  a.player=lambda:dict(movementState='Walk',speed=0,nativePhysics=dict(groundContact=dict(checkSphereHit=True),velocity=dict(x=0,y=0,z=0)),handcraftQueue=[],constructionDrones=dict(working=0))
+  result=dict(actionId='original',actionKind='move',state='action_failed',terminal=True)
+  self.assertTrue(a.can_await_after_known_move(AcceptedActionFailure('known',result)))
+  result['state']='outcome_unknown';self.assertFalse(a.can_await_after_known_move(AcceptedActionFailure('unknown',result)))
+  result['state']='action_failed';a.player=lambda:dict(movementState='Drift',speed=1)
+  self.assertFalse(a.can_await_after_known_move(AcceptedActionFailure('moving',result)))
  def test_actual_detached_runpy_entry_resolves_shared_modules_outside_its_directory(self):
   script=Path(__file__).resolve().parent/'live/run.py'
   with tempfile.TemporaryDirectory() as folder:
