@@ -16,7 +16,8 @@ def main():
  need(prior['normalEof'] and prior['processExitCode']==0,'original_caller_not_closed')
  terminal=read(origin/f'terminal-{action_id}.private.json')
  need(terminal['terminal'] and terminal['state'] in ('action_failed','outcome_unknown') and not terminal['succeeded'],'not_a_failed_accepted_action')
- runtime=Runtime(config,config_sha,output);runtime.cohort();a=Live(runtime);a.pid=read(origin/'process-observed.private.json')['Id']
+ runtime=Runtime(config,config_sha,output);runtime.cohort();a=Live(runtime)
+ game_origin=Path(runtime.config.get('liveSessionOrigin',str(origin)));a.pid=read(game_origin/'process-observed.private.json')['Id']
  a.c=Client(Path(runtime.config['pluginDestination'])/'Spherewright.Mcp.exe',runtime.output/'client',maximum=30,seconds=120)
  a.c.initialize();sessions=[];players=[]
  try:

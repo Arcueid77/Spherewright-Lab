@@ -3,7 +3,7 @@ import math,time,uuid
 from collections.abc import Mapping
 from driver import Live,ToolRefused,AcceptedActionFailure
 from evidence import need,read,sha
-from contracts import powered_consumers_share_network
+from contracts import powered_consumers_share_network,validate_steps,is_read_tool
 
 def distance(a,b): return math.dist([a[k] for k in 'xyz'],[b[k] for k in 'xyz'])
 def count(player,item): return sum(r['count'] for r in player['inventory'] if r['itemId']==item)
@@ -11,6 +11,12 @@ def count(player,item): return sum(r['count'] for r in player['inventory'] if r[
 class Factory(Live):
  def __init__(self,runtime):
   super().__init__(runtime);self.refs=dict(runtime.config['existingEntities']);self.used={int(k):v for k,v in runtime.config.get('materialUsedAtHandoff',{}).items()}
+
+ def read_args(self,tool,args):
+  schema=self.schemas[tool];automatic={k:v for k,v in self.ctx.items() if k in schema['properties']}
+  values=dict(automatic,**args)
+  need(set(values)<=set(schema['properties']) and set(schema.get('required',[]))<=set(values),'actual_sdk_read_argument_contract_mismatch')
+  return values
 
  def prepare_build(self,args):
   start=time.monotonic();c=self.runtime.config
@@ -71,8 +77,8 @@ class Factory(Live):
    entities=[self.entity(i) for i in ids];need(all(e['itemId']==s['itemId'] for e in entities),'paid_entity_type_changed')
    self.refs[role]=ids;self.runtime.put(role+'-adopted-paid.private.json',dict(build=value,entities=entities,noNewCreate=True,noNewDebit=True));return
   if kind=='read':
-   need(s['tool'].startswith(('spherewright_get_','spherewright_inspect_','spherewright_list_')),'read_step_cannot_submit')
-   value=self.call(s['tool'],dict(self.ctx,**s.get('arguments',{})));self.runtime.put(role+'-read.private.json',value);return value
+   need(is_read_tool(s['tool']),'read_step_cannot_submit')
+   value=self.call(s['tool'],self.read_args(s['tool'],s.get('arguments',{})));self.runtime.put(role+'-read.private.json',value);return value
   if kind=='build-object':
    last=None
    for position in s['positions']:
@@ -132,8 +138,13 @@ class Factory(Live):
    power=self.call('spherewright_get_power_summary',self.ctx);self.runtime.put(role+'-proof.private.json',dict(entities=entities,power=power));return
   if kind=='dump':
    for query in s['queries']:
-    self.runtime.put(role+'-'+query['name']+'.private.json',self.call(query['tool'],dict(self.ctx,**query.get('arguments',{}))))
+    self.runtime.put(role+'-'+query['name']+'.private.json',self.call(query['tool'],self.read_args(query['tool'],query.get('arguments',{}))))
    return
+  if kind=='handoff-caller':
+   need(self.active is None,'unsettled_action_prevents_caller_handoff');state=self.state()
+   closed=self.c.close();closed['priorRpcCount']=getattr(self,'prior_rpc_count',0);self.runtime.put('client-close.private.json',closed);self.c=None
+   self.runtime.put('caller-handoff.private.json',dict(callerStopped=True,noActiveGameAction=True,gameProcessRetained=True,
+    priorRpcCount=closed['priorRpcCount'],requestCount=closed['requestCount'],gameTick=state['gameTick'],noSave=True,noLoad=True,noLaunch=True));return
   if kind=='save-close':self.cleanup_known_state();return
   raise ValueError('unsupported_immutable_step:'+kind)
 
@@ -141,7 +152,7 @@ class Factory(Live):
   allowed={'spherewright_prepare_move','spherewright_prepare_harvest','spherewright_prepare_transfer',
    'spherewright_prepare_configure_building','spherewright_prepare_select_research','spherewright_prepare_handcraft',
    'spherewright_prepare_refuel','spherewright_prepare_supply_mecha_warpers','spherewright_prepare_voyager_flight',
-   'spherewright_prepare_save_owned_game'}
+   'spherewright_prepare_save'}
   prepare=s['prepareTool'];need(prepare in allowed,'operation_family_not_allowed')
   values=dict(context=dict(self.ctx))
   def select(path):
@@ -156,8 +167,8 @@ class Factory(Live):
   def check(tool,args):
    schema=self.schemas[tool];need(set(args)<=set(schema['properties']) and set(schema.get('required',[]))<=set(args),'actual_sdk_argument_contract_mismatch')
   for query in s.get('reads',[]):
-   need(query['tool'].startswith(('spherewright_get_','spherewright_inspect_','spherewright_list_')),'read_dependency_cannot_submit')
-   name=query['name'];args=dict(self.ctx,**resolve(query.get('arguments',{})));check(query['tool'],args)
+   need(is_read_tool(query['tool']),'read_dependency_cannot_submit')
+   name=query['name'];args=self.read_args(query['tool'],resolve(query.get('arguments',{})));check(query['tool'],args)
    values[name]=self.call(query['tool'],args);self.runtime.put(s['role']+'-'+name+'-before.private.json',values[name])
   args=dict(self.ctx,**resolve(s['arguments']));check(prepare,args);q=self.call(prepare,args)
   need(q['prepared'] and q['commitAllowedNow'] and not q['commitBlockers'],'native_operation_not_prepared')
@@ -177,16 +188,17 @@ class Factory(Live):
 
  def continue_prepared_work(self,result):
   try:self.execute_plan(self.runtime.config['initialSteps'],'initial')
-  except (ToolRefused,ValueError,RuntimeError) as error:
+  except (ToolRefused,ValueError,RuntimeError,LookupError,TypeError) as error:
    self.runtime.put('initial-plan-failure.private.json',dict(error=str(error),activeOriginalAction=self.active))
    if self.active is not None or isinstance(error,AcceptedActionFailure):raise
   self.await_next_plan()
 
  def execute_plan(self,steps,label):
+  validate_steps(steps)
   for s in steps:
    self.step(s)
    if self.c is None:
-    self.runtime.put(label+'-complete.private.json',dict(refs=self.refs,materialUsed=self.used,normalSavedAndClosed=True));return
+    self.runtime.put(label+'-complete.private.json',dict(refs=self.refs,materialUsed=self.used,normalSavedAndClosed=self.cleanup_entered,callerHandoffOnly=not self.cleanup_entered));return
   self.runtime.put(label+'-complete.private.json',dict(refs=self.refs,materialUsed=self.used,session=self.call('spherewright_get_session_state',{})))
 
  def await_next_plan(self):
@@ -199,7 +211,7 @@ class Factory(Live):
    envelope=read(inbox);need(sha(envelope['path'])==envelope['sha256'],'next_plan_changed')
    plan=read(envelope['path'])
    try:self.execute_plan(plan['steps'],f'continuation-{sequence:03d}')
-   except (ToolRefused,ValueError,RuntimeError) as error:
+   except (ToolRefused,ValueError,RuntimeError,LookupError,TypeError) as error:
     self.runtime.put(f'continuation-{sequence:03d}-failure.private.json',dict(error=str(error),activeOriginalAction=self.active))
     if self.active is not None:raise
     if isinstance(error,AcceptedActionFailure):

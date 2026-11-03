@@ -2,12 +2,32 @@
 from pathlib import Path
 import sys,unittest,tempfile,json,subprocess
 sys.path.insert(0,str(Path(__file__).resolve().parent/'live'))
-from contracts import powered_consumers_share_network,paused_failed_cut
+from contracts import powered_consumers_share_network,paused_failed_cut,validate_steps
 from driver import Live,ToolRefused,AcceptedActionFailure
 from factory import Factory
 from runtime import freeze
 
 class LiveDriverTests(unittest.TestCase):
+ def test_first_real_move_requires_actual_delta_grounded_walk_and_zero_native_velocity(self):
+  a=Live(None);a.runtime=type('Evidence',(),dict(config=dict(firstOperation=dict(kind='move')),put=lambda *_:None))()
+  a.first_before=dict(position=dict(x=0,y=200,z=0));p=dict(position=dict(x=2,y=200,z=0),movementState='Walk',speed=0,nativePhysics=dict(groundContact=dict(checkSphereHit=True),velocity=dict(x=0,y=0,z=0)))
+  a.player=lambda:p;result=dict(succeeded=True,actionId='original')
+  self.assertTrue(a.verify_progress({},result));p['nativePhysics']['groundContact']['checkSphereHit']=False
+  self.assertFalse(a.verify_progress({},result))
+ def test_actual_global_read_does_not_receive_planet_context_and_explicit_unknowns_reject(self):
+  a=Factory.__new__(Factory);a.ctx=dict(sessionId='same',planetId=7)
+  a.schemas={'spherewright_get_session_state':dict(properties={},required=[]),'spherewright_get_gameplay_journal':dict(properties=dict(sessionId={}),required=['sessionId'])}
+  self.assertEqual({},a.read_args('spherewright_get_session_state',{}))
+  self.assertEqual(dict(sessionId='same'),a.read_args('spherewright_get_gameplay_journal',{}))
+  with self.assertRaises(RuntimeError):a.read_args('spherewright_get_session_state',dict(planetId=7))
+ def test_captured_invalid_dump_shape_rejects_the_entire_plan_before_any_game_step(self):
+  a=Factory.__new__(Factory);called=[];a.step=lambda s:called.append(s)
+  with self.assertRaisesRegex(ValueError,'immutable_plan_shape_invalid:dump'):
+   a.execute_plan([dict(kind='build-object',role='already-planned',itemId=2101,positions=[]),dict(kind='dump',role='captured-caller-error',entities=[])],'test')
+  self.assertEqual([],called)
+  validate_steps([dict(kind='dump',role='fixed',queries=[dict(name='player',tool='spherewright_get_player_state')])])
+  with self.assertRaisesRegex(ValueError,'immutable_plan_shape_invalid:prove-network'):
+   validate_steps([dict(kind='prove-network',role='captured-second-error',entities=['consumer'])])
  def test_actual_failed_session_and_player_shapes_prove_pause_without_invented_fields(self):
   s=dict(sessionId='same',gameTick=3,gameLoaded=True,ownedBySpherewright=True,writesAllowed=False,writeQuarantineActionId='original')
   p=dict(position=dict(x=1,y=2,z=3),coreEnergy=1600000000,nativeLocalControlEnergy=dict(blockers=['native_paused_not_execution_ready']))

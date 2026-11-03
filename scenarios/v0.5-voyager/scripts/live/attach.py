@@ -18,6 +18,7 @@ def main():
     origin=Path(c.get('liveSessionOrigin',str(prior)))
     prepared=read(origin/'fresh-resume-plan.private.json');deadline=dt.datetime.fromisoformat(prepared['effectiveRecoveryDeadlineUtc'].replace('Z','+00:00'))
     prior_count=old.get('priorRpcCount',0)+old['requestCount']
+    a.prior_rpc_count=prior_count
     seconds=(deadline-dt.datetime.now(dt.timezone.utc)).total_seconds();remaining=c['maximumRpc']-prior_count
     need(seconds>60 and remaining>0,'original_finite_caller_allowance_ended');r.cohort()
     a.c=Client(Path(c['pluginDestination'])/'Spherewright.Mcp.exe',r.output/'client',maximum=remaining,seconds=seconds,
@@ -38,6 +39,7 @@ def main():
             if a.active is not None:raise
         a.await_next_plan()
     finally:
-        if a.c is not None:r.put('client-close.private.json',a.c.close())
+        if a.c is not None:
+            closed=a.c.close();closed['priorRpcCount']=prior_count;r.put('client-close.private.json',closed)
 
 if __name__=='__main__':main()
