@@ -2,6 +2,7 @@
 from pathlib import Path
 import sys,json,datetime as dt
 sys.dont_write_bytecode=True
+sys.path.insert(0,str(Path(__file__).resolve().parent))
 sys.path.insert(0,str(Path(__file__).resolve().parent.parent))
 import startup_to_action as gate
 from runtime import Runtime

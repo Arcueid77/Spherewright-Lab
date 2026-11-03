@@ -34,6 +34,17 @@ class Fixture:
 
 
 class StartupGateTests(unittest.TestCase):
+    def test_later_unknown_preserves_successful_startup_and_blocks_competing_cleanup(self):
+        f = Fixture()
+        def later_unknown(result):
+            f.active = 'original-later-action'
+            raise RuntimeError('retained unknown build')
+        f.continue_prepared_work = later_unknown
+        r=f.run()
+        self.assertTrue(r.passed)
+        self.assertEqual('continuation_reconciliation_required',r.outcome)
+        self.assertEqual('retained unknown build',r.continuation_failure)
+        self.assertNotIn('cleanup',f.calls)
     def test_retryable_read_timeout_is_observed_again_without_restarting(self):
         clock = Clock(); calls = []
         def probe():

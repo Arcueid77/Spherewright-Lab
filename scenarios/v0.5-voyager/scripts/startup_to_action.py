@@ -69,6 +69,7 @@ class StartupReport:
     failure: str | None = None
     unresolved_commit: bool = False
     cleanup_failure: str | None = None
+    continuation_failure: str | None = None
 
 
 def run(adapter: Adapter, emit: Callable[[dict], None], clock=time.monotonic) -> StartupReport:
@@ -143,9 +144,13 @@ def run(adapter: Adapter, emit: Callable[[dict], None], clock=time.monotonic) ->
         adapter.continue_prepared_work(result)
         return report
     except Exception as error:
-        report.passed = False
-        report.outcome = 'reconciliation_required' if report.unresolved_commit else 'startup_failed'
-        report.failure = str(error)
+        if report.passed:
+            report.continuation_failure = str(error)
+            report.unresolved_commit = bool(getattr(adapter, 'active', None))
+            report.outcome = 'continuation_reconciliation_required' if report.unresolved_commit else 'continuation_failed'
+        else:
+            report.outcome = 'reconciliation_required' if report.unresolved_commit else 'startup_failed'
+            report.failure = str(error)
         if report.startup_seconds is None:
             report.startup_seconds = clock() - started
         emit(asdict(report))
