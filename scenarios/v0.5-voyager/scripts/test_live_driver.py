@@ -98,6 +98,23 @@ class LiveDriverTests(unittest.TestCase):
   a.step(dict(kind='build-belt-to-device',role='input',starts=[dict(x=1,y=200,z=1)],destination='station',maximumNewBelts=4))
   self.assertEqual('native-endpoint',calls[0][0]['expectedDestinationStateHash']);self.assertEqual(9,calls[0][0]['destinationObjectId'])
   self.assertNotIn('sourceObjectId',calls[0][0]);self.assertEqual(4,calls[0][1])
+ def test_accepted_unknown_build_holds_material_budget_without_reclassifying_it_as_actual_consumption(self):
+  a=Factory.__new__(Factory);a.runtime=type('Evidence',(),dict(config=dict(materialCeilings={'2001':1}),put=lambda *_:None))()
+  a.ctx=dict(sessionId='same',planetId=7);a.used={};a.prepare_build=lambda args:(dict(prepared=True,commitAllowedNow=True,commitBlockers=[],itemBudget=[dict(itemId=2001,count=1)],planToken='one'),{})
+  a.commit=lambda *_:'accepted-original'
+  def unknown(_):raise AcceptedActionFailure('original unknown',dict(state='outcome_unknown'))
+  a.successful_original=unknown
+  with self.assertRaises(AcceptedActionFailure):a.build('original',dict(buildingItemId=2001),1)
+  self.assertEqual({},a.used);self.assertEqual(dict(itemId=2001,count=1),a.material_holds['accepted-original'])
+  with self.assertRaisesRegex(RuntimeError,'material_ceiling_exhausted'):a.build('not-a-replay',dict(buildingItemId=2001),1)
+ def test_readonly_preflight_cannot_fall_through_to_a_game_commit_or_bypass_build_material_accounting(self):
+  a=Factory.__new__(Factory);a.ctx=dict(sessionId='same',planetId=7);a.runtime=type('Evidence',(),dict(put=lambda *_:None))()
+  a.schemas={'spherewright_prepare_build':dict(properties=dict(sessionId={},planetId={},buildingItemId={}),required=[])}
+  a.call=lambda *_:dict(prepared=True,commitAllowedNow=True,commitBlockers=[])
+  def forbidden(*_):raise AssertionError('a preflight must not commit')
+  a.commit=forbidden;s=dict(role='native-only',prepareTool='spherewright_prepare_build',arguments=dict(buildingItemId=2001))
+  self.assertTrue(a.native_operation(s,commit_requested=False)['prepared'])
+  with self.assertRaisesRegex(RuntimeError,'operation_family_not_allowed'):a.native_operation(s)
  def test_native_recovery_required_paused_landing_keeps_healthy_session_without_inventing_quarantine(self):
   s=dict(sessionId='same',gameTick=3,localPlanetId=7,gameLoaded=True,ownedBySpherewright=True,writesAllowed=True,writeQuarantineActionId=None,flightCheckpointId='native-current')
   p=dict(position=dict(x=1,y=2,z=3),coreEnergy=33120896,nativeLocalControlEnergy=dict(blockers=['native_paused_not_execution_ready']))

@@ -11,6 +11,8 @@ def main():
         _,tools,_,_=c.initialize();schemas={t['name']:t['inputSchema'] for t in tools}
         ctx=dict(sessionId='synthetic-offline-session',planetId=402);h='sha256:'+'a'*64
         cases=[
+            ('spherewright_prepare_transfer',dict(ctx,direction='player-to-storage',storageEntityId=1,itemId=1301,count=2,expectedPlayerStateHash=h,expectedStorageStateHash=h)),
+            ('spherewright_prepare_transfer',dict(ctx,direction='production-reset-to-player',storageEntityId=1,itemId=0,count=0,expectedPlayerStateHash=h,expectedStorageStateHash=h)),
             ('spherewright_prepare_build',dict(ctx,buildingItemId=2101,expectedPlayerStateHash=h,preferredPositionX=1.,preferredPositionY=199.,preferredPositionZ=1.)),
             ('spherewright_prepare_build',dict(ctx,buildingItemId=2001,expectedPlayerStateHash=h,sourceObjectId=18,expectedSourceStateHash=h,pathEndX=1.,pathEndY=199.,pathEndZ=1.)),
             ('spherewright_prepare_build',dict(ctx,buildingItemId=2011,expectedPlayerStateHash=h,sourceObjectId=18,destinationObjectId=21,expectedSourceStateHash=h,expectedDestinationStateHash=h,initialSorterFilterItemId=1011)),
@@ -37,7 +39,9 @@ def main():
             r,bad=c.call(tool,args);code=(r.get('error') or {}).get('code')
             need(code in ('BRIDGE_UNAVAILABLE','BRIDGE_NOT_READY'),'sdk_arguments_not_admitted:'+tool+':'+str(code))
             proof.append(dict(tool=tool,argumentsAdmitted=True,bridgeUnavailableAsExpected=True))
-        put(out/'result.private.json',dict(passed=True,cases=proof,gameLaunches=0,gameCommits=0))
+        r,bad=c.call('spherewright_prepare_transfer',dict(ctx,direction='Production-Reset-To-Player',storageEntityId=1,itemId=0,count=0,expectedPlayerStateHash=h,expectedStorageStateHash=h))
+        need(bad and (r.get('error') or {}).get('code')=='INVALID_REQUEST','actual_sdk_transfer_case_contract_changed')
+        put(out/'result.private.json',dict(passed=True,cases=proof,exactEnumCaseRejected=True,gameLaunches=0,gameCommits=0))
     finally:put(out/'client-close.private.json',c.close())
 
 if __name__=='__main__':main()

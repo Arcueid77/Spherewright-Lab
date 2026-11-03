@@ -63,11 +63,13 @@ def paused_failed_cut(first_session, second_session, first_player, second_player
 
 def validate_steps(steps):
     required={
-        'operation':{'prepareTool','arguments'},'adopt-paid-build':{'buildId','expectedObjects','itemId'},
+        'operation':{'prepareTool','arguments'},'prepare-only':{'prepareTool','arguments'},'adopt-paid-build':{'buildId','expectedObjects','itemId'},
         'read':{'tool'},'dump':{'queries'},'build-object':{'itemId','positions'},
         'build-belt':{'source','ends','maximumNewBelts'},'build-free-belt':{'candidates','maximumNewBelts'},'build-belt-to-device':{'starts','destination','maximumNewBelts'},
         'build-sorter':{'source','destination','filterItemId'},'configure':{'entity'},
-        'wait-buffer':{'entity','itemId','minimumCount','maximumSeconds'},'wait-player-still':{'maximumSeconds'},'prove-network':{'entities','networkId'},'save-close':set(),'handoff-caller':set()}
+        'wait-buffer':{'entity','itemId','minimumCount','maximumSeconds'},'wait-player-still':{'maximumSeconds'},'prove-network':{'entities','networkId'},'save-close':set(),'handoff-caller':set(),
+        'observe-sail-conversion':{'entity','count','orbitId','maximumSeconds','baselinePath','baselineSha256'},
+        'observe-rocket-arrival':{'entity','layerId','nodeId','maximumSeconds','baselinePath','baselineSha256'}}
     for step in steps:
         kind=step.get('kind')
         if kind not in required or not ({'kind','role'}|required[kind])<=set(step):
@@ -102,7 +104,7 @@ def validate_native_calls(steps,schemas):
         if kind=='read':call(step['tool'],step.get('arguments',{}))
         elif kind=='dump':
             for query in step['queries']:call(query['tool'],query.get('arguments',{}))
-        elif kind=='operation':
+        elif kind in ('operation','prepare-only'):
             for query in step.get('reads',[]):call(query['tool'],query.get('arguments',{}))
             call(step['prepareTool'],step['arguments'])
 

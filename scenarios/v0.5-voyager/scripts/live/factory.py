@@ -4,6 +4,7 @@ from collections.abc import Mapping
 from driver import Live,ToolRefused,AcceptedActionFailure
 from evidence import need,read,sha
 from contracts import powered_consumers_share_network,validate_steps,is_read_tool,validate_native_calls,strict_native_player_idle
+from flight_observers import observe_sails,observe_rocket
 
 def distance(a,b): return math.dist([a[k] for k in 'xyz'],[b[k] for k in 'xyz'])
 def count(player,item): return sum(r['count'] for r in player['inventory'] if r['itemId']==item)
@@ -11,6 +12,7 @@ def count(player,item): return sum(r['count'] for r in player['inventory'] if r[
 class Factory(Live):
  def __init__(self,runtime):
   super().__init__(runtime);self.refs=dict(runtime.config['existingEntities']);self.used={int(k):v for k,v in runtime.config.get('materialUsedAtHandoff',{}).items()}
+  self.material_holds=dict(runtime.config.get('materialReservationsAtHandoff',{}))
 
  def read_args(self,tool,args):
   schema=self.schemas[tool];automatic={k:v for k,v in self.ctx.items() if k in schema['properties']}
@@ -32,16 +34,23 @@ class Factory(Live):
     refusals+=1;time.sleep(min(30,2**min(refusals,5)))
 
  def build(self,role,args,maximum):
-  item=args['buildingItemId'];remaining=self.runtime.config['materialCeilings'].get(str(item),0)-self.used.get(item,0)
+  self.material_holds=getattr(self,'material_holds',{})
+  item=args['buildingItemId'];held=sum(x['count'] for x in self.material_holds.values() if x['itemId']==item)
+  remaining=self.runtime.config['materialCeilings'].get(str(item),0)-self.used.get(item,0)-held
   need(remaining>0,'material_ceiling_exhausted')
   q,before=self.prepare_build(args);budget=q['itemBudget']
   need(q['prepared'] and q['commitAllowedNow'] and not q['commitBlockers'] and len(budget)==1
     and budget[0]['itemId']==item and 1<=budget[0]['count']<=min(maximum,remaining),'exact_build_material_plan_unproved')
   self.runtime.put(role+'-plan.private.json',q)
-  r=self.successful_original(self.commit(role,'spherewright_commit_build',dict(self.ctx,planToken=q['planToken'],idempotencyKey=str(uuid.uuid4()))))
+  original=self.commit(role,'spherewright_commit_build',dict(self.ctx,planToken=q['planToken'],idempotencyKey=str(uuid.uuid4())))
+  self.material_holds[original]=dict(itemId=item,count=budget[0]['count'])
+  self.runtime.put(role+'-original-material-hold.private.json',dict(originalActionId=original,heldBudget=self.material_holds[original],actualConsumptionNotYetProved=True))
+  r=self.successful_original(original)
   # Once accepted, charge this original amount even if a later caller check
   # fails. A post-check must not silently restore a material allowance.
   self.used[item]=self.used.get(item,0)+budget[0]['count']
+  self.material_holds.pop(original)
+  self.runtime.put(role+'-native-success-material-account.private.json',dict(originalActionId=original,actualConsumedBudget=budget[0],materialUsed=self.used,materialReservations=self.material_holds))
   control=r.get('constructionControl') or {};ids=[o['entityId'] for o in r.get('blueprintObjects') or [] if o.get('entityId')]
   if not control and self.ctx['planetId']!=self.runtime.config['planetId']:
    # Ordinary home construction uses positive targetObjectIds and Native
@@ -82,6 +91,9 @@ class Factory(Live):
  def step(self,s):
   role=s['role'];kind=s['kind'];self.state()
   if kind=='operation':return self.native_operation(s)
+  if kind=='prepare-only':return self.native_operation(s,commit_requested=False)
+  if kind=='observe-sail-conversion':return observe_sails(self,s)
+  if kind=='observe-rocket-arrival':return observe_rocket(self,s)
   if kind=='adopt-paid-build':
    value=self.call('spherewright_get_blueprint_builds',dict(self.ctx,buildId=s['buildId']))
    rows=value.get('builds') or [];need(len(rows)==1 and rows[0]['buildId']==s['buildId'],'exact_paid_build_missing')
@@ -89,6 +101,12 @@ class Factory(Live):
    ids=[o['entityId'] for o in objects if o.get('state')=='completed' and o.get('entityId')]
    need(len(ids)==s['expectedObjects'] and len(set(ids))==len(ids),'paid_build_not_yet_native_completed')
    entities=[self.entity(i) for i in ids];need(all(e['itemId']==s['itemId'] for e in entities),'paid_entity_type_changed')
+   action=rows[0].get('actionId');held=self.material_holds.get(action)
+   if held is not None:
+    need(held['itemId']==s['itemId'] and held['count']==len(ids)
+      and all(o.get('inventoryBefore') is not None and o.get('inventoryAfter')==o['inventoryBefore']-len(ids)
+       and o.get('beforeInventoryHash') and o.get('afterInventoryHash') for o in objects),'original_reserved_material_debit_unproved')
+    self.used[s['itemId']]=self.used.get(s['itemId'],0)+held['count'];self.material_holds.pop(action)
    self.refs[role]=ids;self.runtime.put(role+'-adopted-paid.private.json',dict(build=value,entities=entities,noNewCreate=True,noNewDebit=True));return
   if kind=='read':
    need(is_read_tool(s['tool']),'read_step_cannot_submit')
@@ -176,16 +194,19 @@ class Factory(Live):
    need(self.active is None,'unsettled_action_prevents_caller_handoff');state=self.state()
    closed=self.c.close();closed['priorRpcCount']=getattr(self,'prior_rpc_count',0);self.runtime.put('client-close.private.json',closed);self.c=None
    self.runtime.put('caller-handoff.private.json',dict(callerStopped=True,noActiveGameAction=True,gameProcessRetained=True,
-    priorRpcCount=closed['priorRpcCount'],requestCount=closed['requestCount'],gameTick=state['gameTick'],noSave=True,noLoad=True,noLaunch=True));return
+     priorRpcCount=closed['priorRpcCount'],requestCount=closed['requestCount'],gameTick=state['gameTick'],noSave=True,noLoad=True,noLaunch=True,
+     materialUsed=self.used,materialReservations=self.material_holds));return
   if kind=='save-close':self.cleanup_known_state();return
   raise ValueError('unsupported_immutable_step:'+kind)
 
- def native_operation(self,s):
+ def native_operation(self,s,commit_requested=True):
   allowed={'spherewright_prepare_move','spherewright_prepare_harvest','spherewright_prepare_transfer',
    'spherewright_prepare_configure_building','spherewright_prepare_select_research','spherewright_prepare_handcraft',
    'spherewright_prepare_refuel','spherewright_prepare_supply_mecha_warpers','spherewright_prepare_voyager_flight',
    'spherewright_prepare_save'}
-  prepare=s['prepareTool'];need(prepare in allowed,'operation_family_not_allowed')
+  prepare=s['prepareTool']
+  if not commit_requested:allowed.add('spherewright_prepare_build')
+  need(prepare in allowed,'operation_family_not_allowed')
   values=dict(context=dict(self.ctx))
   def select(path):
    x=values
@@ -205,6 +226,8 @@ class Factory(Live):
   args=dict(self.ctx,**resolve(s['arguments']));check(prepare,args);q=self.call(prepare,args)
   need(q['prepared'] and q['commitAllowedNow'] and not q['commitBlockers'],'native_operation_not_prepared')
   self.runtime.put(s['role']+'-plan.private.json',q)
+  if not commit_requested:
+   self.runtime.put(s['role']+'-prepare-only.private.json',dict(noCommit=True,noGameActionAccepted=True,notAcceptanceEvidence=True));return q
   commit=prepare.replace('_prepare_','_commit_',1)
   commit_args=dict(planToken=q['planToken'],idempotencyKey=str(uuid.uuid4()))
   for key,value in self.ctx.items():
@@ -221,9 +244,13 @@ class Factory(Live):
  def continue_prepared_work(self,result):
   try:self.execute_plan(self.runtime.config['initialSteps'],'initial')
   except (ToolRefused,ValueError,RuntimeError,LookupError,TypeError) as error:
-   self.runtime.put('initial-plan-failure.private.json',dict(error=str(error),activeOriginalAction=self.active))
+   self.record_plan_failure('initial-plan-failure.private.json',error)
    if self.active is not None or isinstance(error,AcceptedActionFailure):raise
   self.await_next_plan()
+
+ def record_plan_failure(self,name,error):
+  native=(getattr(error,'error',None) or getattr(error,'receipt',None) or {}).get('nativeFirstFailure')
+  self.runtime.put(name,dict(error=str(error),activeOriginalAction=self.active,materialUsed=self.used,materialReservations=self.material_holds,nativeFirstFailure=native))
 
  def execute_plan(self,steps,label):
   validate_steps(steps)
@@ -231,8 +258,8 @@ class Factory(Live):
   for s in steps:
    self.step(s)
    if self.c is None:
-    self.runtime.put(label+'-complete.private.json',dict(refs=self.refs,materialUsed=self.used,normalSavedAndClosed=self.cleanup_entered,callerHandoffOnly=not self.cleanup_entered));return
-  self.runtime.put(label+'-complete.private.json',dict(refs=self.refs,materialUsed=self.used,session=self.call('spherewright_get_session_state',{})))
+    self.runtime.put(label+'-complete.private.json',dict(refs=self.refs,materialUsed=self.used,materialReservations=self.material_holds,normalSavedAndClosed=self.cleanup_entered,callerHandoffOnly=not self.cleanup_entered));return
+  self.runtime.put(label+'-complete.private.json',dict(refs=self.refs,materialUsed=self.used,materialReservations=self.material_holds,session=self.call('spherewright_get_session_state',{})))
 
  def await_next_plan(self):
   sequence=1
@@ -245,7 +272,7 @@ class Factory(Live):
    plan=read(envelope['path'])
    try:self.execute_plan(plan['steps'],f'continuation-{sequence:03d}')
    except (ToolRefused,ValueError,RuntimeError,LookupError,TypeError) as error:
-    self.runtime.put(f'continuation-{sequence:03d}-failure.private.json',dict(error=str(error),activeOriginalAction=self.active))
+    self.record_plan_failure(f'continuation-{sequence:03d}-failure.private.json',error)
     if self.active is not None:raise
     if isinstance(error,AcceptedActionFailure):
      if not self.can_await_after_known_move(error):raise

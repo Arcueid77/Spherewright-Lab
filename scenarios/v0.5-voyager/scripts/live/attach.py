@@ -45,7 +45,7 @@ def main():
             noLoad=True,noSave=True,noLaunch=True,noTickRefund=True,sourceSha=c['sourceSha']))
         try:a.execute_plan(c['initialSteps'],'attached-initial')
         except Exception as error:
-            r.put('attached-initial-failure.private.json',dict(error=str(error),activeOriginalAction=a.active))
+            a.record_plan_failure('attached-initial-failure.private.json',error)
             if a.active is not None:raise
         a.await_next_plan()
     finally:
