@@ -62,11 +62,19 @@ class LiveDriverTests(unittest.TestCase):
  def test_actual_failed_landing_admission_is_distinct_from_completed_saved_landing_and_pins_original(self):
   c=dict(recoveryMode='authorize_failed_landing_last_exit',failedLandingActionId='original',sourceTick=3,additionalVoyagerGameTicks=0)
   p=dict(failedLandingRecoveryAuthorizationUsed=True,remotePrimaryRecoveryAuthorizationUsed=False,completedSavedLandingAdmissionUsed=False,
-    priorActionTerminalFailureAttested=True,priorActionTerminalCompletionAttested=False,originalFailedFlightActionId='original',savedLandingAccountingAnchorGameTick=3,additionalVoyagerGameTicks=0)
+    priorActionTerminalFailureAttested=True,priorActionTerminalCompletionAttested=False,originalFailedFlightActionId='original',savedLandingAccountingAnchorGameTick=3,additionalVoyagerGameTicks=0,discardedUnstoredProgressGameTicks=None,exactEmbeddedIdentityVerified=True)
   self.assertTrue(resume_admission_echo(c,p))
   self.assertFalse(resume_admission_echo(c,dict(p,originalFailedFlightActionId='another')))
   self.assertFalse(resume_admission_echo(c,dict(p,completedSavedLandingAdmissionUsed=True)))
   self.assertFalse(resume_admission_echo(c,dict(p,additionalVoyagerGameTicks=1)))
+  self.assertFalse(resume_admission_echo(c,dict(p,exactEmbeddedIdentityVerified=False)))
+  self.assertFalse(resume_admission_echo(c,dict(p,discardedUnstoredProgressGameTicks=1)))
+  self.assertFalse(resume_admission_echo(dict(c,recoveryMode='authorize_remote_primary_recovery'),dict(p,remotePrimaryRecoveryAuthorizationUsed=True,completedSavedLandingAdmissionUsed=True)))
+ def test_captured_native_failed_landing_nullable_field_uses_its_actual_mode_contract(self):
+  p=json.loads((Path(__file__).parent/'fixtures/captured-failed-landing-prepared.json').read_text())
+  c=dict(recoveryMode=p['recoveryMode'],failedLandingActionId=p['originalFailedFlightActionId'],sourceTick=3,additionalVoyagerGameTicks=0)
+  self.assertIsNone(p['discardedUnstoredProgressGameTicks']);self.assertTrue(resume_admission_echo(c,p))
+  p['failedLandingRecoveryAuthorizationUsed']=False;self.assertFalse(resume_admission_echo(c,p))
  def test_native_recovery_required_paused_landing_keeps_healthy_session_without_inventing_quarantine(self):
   s=dict(sessionId='same',gameTick=3,localPlanetId=7,gameLoaded=True,ownedBySpherewright=True,writesAllowed=True,writeQuarantineActionId=None,flightCheckpointId='native-current')
   p=dict(position=dict(x=1,y=2,z=3),coreEnergy=33120896,nativeLocalControlEnergy=dict(blockers=['native_paused_not_execution_ready']))

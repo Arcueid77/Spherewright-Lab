@@ -126,7 +126,7 @@ class Live:
     and [b['code'] for b in p['commitBlockers']]==['USER_CONFIRMATION_REQUIRED'],'unexpected_resume_blockers')
   need(resume_admission_echo(c,p)
     and p['expectedPlanetId']==c['planetId'] and p['candidateGameTick']==p['minimumGameTick']==c['sourceTick']
-    and p['discardedUnstoredProgressGameTicks']==0 and p['additionalVoyagerGameTicks']==c['additionalVoyagerGameTicks']
+    and p['additionalVoyagerGameTicks']==c['additionalVoyagerGameTicks']
     and p['originalJourneyMaximumGameTicks']==c['originalJourneyMaximumGameTicks']
     and p['effectiveJourneyMaximumGameTicks']==c['originalJourneyMaximumGameTicks']+c['additionalVoyagerGameTicks'],
     'exact_no_loss_source_or_budget_echo_changed')

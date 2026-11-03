@@ -1,0 +1,17 @@
+{
+  "prepared": true,
+  "recoveryMode": "authorize_failed_landing_last_exit",
+  "remotePrimaryRecoveryAuthorizationUsed": false,
+  "failedLandingRecoveryAuthorizationUsed": true,
+  "completedSavedLandingAdmissionUsed": false,
+  "priorActionTerminalFailureAttested": true,
+  "priorActionTerminalCompletionAttested": false,
+  "savedLandingAccountingAnchorGameTick": 3,
+  "additionalVoyagerGameTicks": 0,
+  "discardedUnstoredProgressGameTicks": null,
+  "originalJourneyMaximumGameTicks": 108000,
+  "effectiveJourneyMaximumGameTicks": 108000,
+  "exactEmbeddedIdentityVerified": true,
+  "originalFailedFlightActionId": "synthetic-original",
+  "scope": "Captured Native prepared response; credentials, identities, coordinates and absolute ticks removed."
+}

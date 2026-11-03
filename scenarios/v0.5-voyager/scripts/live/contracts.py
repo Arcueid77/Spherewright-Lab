@@ -20,8 +20,13 @@ def resume_admission_echo(config,plan):
             and plan.get('originalFailedFlightActionId')==config.get('failedLandingActionId')
             and bool(config.get('failedLandingActionId'))
             and plan.get('savedLandingAccountingAnchorGameTick')==config['sourceTick']
+            # Failed-landing mode selects the exact fixed LastExit directly;
+            # discarded-primary-progress is not applicable, not a missing zero.
+            and plan.get('discardedUnstoredProgressGameTicks') is None
+            and plan.get('exactEmbeddedIdentityVerified') is True
             and plan.get('additionalVoyagerGameTicks')==0 and config['additionalVoyagerGameTicks']==0)
-    return plan.get('remotePrimaryRecoveryAuthorizationUsed') is True and plan.get('completedSavedLandingAdmissionUsed') is True
+    return (plan.get('remotePrimaryRecoveryAuthorizationUsed') is True and plan.get('completedSavedLandingAdmissionUsed') is True
+        and plan.get('discardedUnstoredProgressGameTicks')==0)
 
 
 def powered_consumers_share_network(entities, network_id):
