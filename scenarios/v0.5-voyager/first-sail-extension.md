@@ -1,5 +1,7 @@
 # 0.5 first sail and rocket extension / 0.5 首帆与首枚火箭扩展方案
 
+当前优先适用[所有者恢复与有限预算授权](../../operations/standing-authority.md#current-owner-grant-2026-11-03--当前所有者授权)。旧暂停及tick/窗口/调用流程上限已被取代；实耗、物料上限和Native储备保留。实时事实只见[current-status](current-status.md)：首帆4已真实制造、消耗、发射并转换；电塔上限9已批准。下方旧状态是历史记录，不重新启用旧限制。 / Apply the resumed owner grant first; historical stop/budget notes below are not current authority. Live facts use the single snapshot.
+
 ## Current preserved construction entry / 当前保全施工入口（2026-11-03）
 
 冷启动燃料公开接口e48已准确CI/冷安装。旧Caph站已有电路板slot1及燃料slot2 Demand；实际多料到货仍未证明。必要短走原action0adf因原生接触停止尾部未证明而unknown，禁止重放/自动Resume，已正常退出保存LastExit121202004并完成1750项完整备份；Primary121201952较旧不得加载。累计112742、剩103258tick，返航54000不变；新增外星建筑仍零。下一技术动作先诊断接触/保全缺口，原整体目标和已批准施工上限保留。电塔上限4→9的增量询问尚未收到批准。

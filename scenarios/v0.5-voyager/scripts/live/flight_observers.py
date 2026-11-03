@@ -6,6 +6,7 @@ from evidence import need,read,sha
 class SailConversionTrace:
  def __init__(self,initial,count,orbit):
   self.count=count;self.orbit=orbit;self.flight_seen=False;self.converted=False;self.star=initial['starId'];self.base=initial['activeSailCount']
+  self.last_ammo=count;self.last_arrived=0
   self.base_orbit=self.target(initial)['sailCount']
   self.check(initial)
   need(initial['sailCount']==count and initial['inFlightSailCount']==0,'exact_isolated_sail_ammo_baseline_required')
@@ -19,8 +20,15 @@ class SailConversionTrace:
  def observe(self,s):
   self.check(s);ammo=s['sailCount'];flying=s['inFlightSailCount'];arrived=s['activeSailCount']-self.base
   need(s['orbitId']==self.orbit and s['runtimeOrbitId']==self.orbit and not s['automaticOrbitSelection'],'native_sail_target_orbit_changed')
-  need(min(ammo,flying,arrived)>=0 and ammo+flying+arrived==self.count,'isolated_native_sail_mass_balance_changed')
-  self.flight_seen |= flying>0 and ammo<self.count
+  # Native AddSolarSail runs at t>=maxt; state then becomes0 and its visual
+  # SailBullet stays allocated until t>maxt+0.7s. The published pool count
+  # therefore includes converted trails, not only unconverted ballistics.
+  launched=self.count-ammo;pending=launched-arrived;trailing=flying-pending
+  need(min(ammo,flying,arrived,pending,trailing)>=0 and ammo<=self.last_ammo and arrived>=self.last_arrived
+   and flying<=launched and trailing<=arrived,'isolated_native_sail_lifecycle_balance_changed')
+  need(self.target(s)['sailCount']-self.base_orbit==arrived,'native_orbit_sail_conversion_count_changed')
+  self.last_ammo=ammo;self.last_arrived=arrived
+  self.flight_seen |= pending>0 and flying>0 and ammo<self.count
   self.converted |= arrived>0 and ammo<self.count
   return (self.flight_seen and self.converted and ammo==0 and flying==0 and arrived==self.count
    and self.target(s)['sailCount']-self.base_orbit==self.count)

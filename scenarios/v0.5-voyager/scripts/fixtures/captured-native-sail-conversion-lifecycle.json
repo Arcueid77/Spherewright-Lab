@@ -1,0 +1,238 @@
+{
+  "scope": "Actual public Native observations; save/session/entity identities, coordinates, ticks and hashes removed. Star ordinal replaced; quantities and lifecycle order retained.",
+  "nativeAssemblySha256": "EF314425DADE51F529F184F07BE136CD3C2660A6A81515603C7226FBE7AB1D8C",
+  "initial": {
+    "nativeBindingVerified": true,
+    "starId": 1,
+    "sailCount": 4,
+    "orbitId": 1,
+    "runtimeOrbitId": 1,
+    "automaticOrbitSelection": false,
+    "firedAnimationActive": false,
+    "swarmAvailable": true,
+    "orbitCoverageComplete": true,
+    "activeSailCount": 0,
+    "inFlightSailCount": 0,
+    "starEjectorCount": 1,
+    "starEjectorCoverageComplete": true,
+    "orbits": [
+      {
+        "orbitId": 1,
+        "enabled": true,
+        "radius": 9200,
+        "rotation": {
+          "x": 0,
+          "y": 0,
+          "z": 0,
+          "w": 1
+        },
+        "sailCount": 0
+      }
+    ]
+  },
+  "samples": [
+    {
+      "nativeBindingVerified": true,
+      "starId": 1,
+      "sailCount": 4,
+      "orbitId": 1,
+      "runtimeOrbitId": 1,
+      "automaticOrbitSelection": false,
+      "firedAnimationActive": false,
+      "swarmAvailable": true,
+      "orbitCoverageComplete": true,
+      "activeSailCount": 0,
+      "inFlightSailCount": 0,
+      "starEjectorCount": 1,
+      "starEjectorCoverageComplete": true,
+      "orbits": [
+        {
+          "orbitId": 1,
+          "enabled": true,
+          "radius": 9200,
+          "rotation": {
+            "x": 0,
+            "y": 0,
+            "z": 0,
+            "w": 1
+          },
+          "sailCount": 0
+        }
+      ]
+    },
+    {
+      "nativeBindingVerified": true,
+      "starId": 1,
+      "sailCount": 3,
+      "orbitId": 1,
+      "runtimeOrbitId": 1,
+      "automaticOrbitSelection": false,
+      "firedAnimationActive": true,
+      "swarmAvailable": true,
+      "orbitCoverageComplete": true,
+      "activeSailCount": 0,
+      "inFlightSailCount": 1,
+      "starEjectorCount": 1,
+      "starEjectorCoverageComplete": true,
+      "orbits": [
+        {
+          "orbitId": 1,
+          "enabled": true,
+          "radius": 9200,
+          "rotation": {
+            "x": 0,
+            "y": 0,
+            "z": 0,
+            "w": 1
+          },
+          "sailCount": 0
+        }
+      ]
+    },
+    {
+      "nativeBindingVerified": true,
+      "starId": 1,
+      "sailCount": 2,
+      "orbitId": 1,
+      "runtimeOrbitId": 1,
+      "automaticOrbitSelection": false,
+      "firedAnimationActive": true,
+      "swarmAvailable": true,
+      "orbitCoverageComplete": true,
+      "activeSailCount": 0,
+      "inFlightSailCount": 2,
+      "starEjectorCount": 1,
+      "starEjectorCoverageComplete": true,
+      "orbits": [
+        {
+          "orbitId": 1,
+          "enabled": true,
+          "radius": 9200,
+          "rotation": {
+            "x": 0,
+            "y": 0,
+            "z": 0,
+            "w": 1
+          },
+          "sailCount": 0
+        }
+      ]
+    },
+    {
+      "nativeBindingVerified": true,
+      "starId": 1,
+      "sailCount": 1,
+      "orbitId": 1,
+      "runtimeOrbitId": 1,
+      "automaticOrbitSelection": false,
+      "firedAnimationActive": true,
+      "swarmAvailable": true,
+      "orbitCoverageComplete": true,
+      "activeSailCount": 0,
+      "inFlightSailCount": 3,
+      "starEjectorCount": 1,
+      "starEjectorCoverageComplete": true,
+      "orbits": [
+        {
+          "orbitId": 1,
+          "enabled": true,
+          "radius": 9200,
+          "rotation": {
+            "x": 0,
+            "y": 0,
+            "z": 0,
+            "w": 1
+          },
+          "sailCount": 0
+        }
+      ]
+    },
+    {
+      "nativeBindingVerified": true,
+      "starId": 1,
+      "sailCount": 1,
+      "orbitId": 1,
+      "runtimeOrbitId": 1,
+      "automaticOrbitSelection": false,
+      "firedAnimationActive": true,
+      "swarmAvailable": true,
+      "orbitCoverageComplete": true,
+      "activeSailCount": 1,
+      "inFlightSailCount": 3,
+      "starEjectorCount": 1,
+      "starEjectorCoverageComplete": true,
+      "orbits": [
+        {
+          "orbitId": 1,
+          "enabled": true,
+          "radius": 9200,
+          "rotation": {
+            "x": 0,
+            "y": 0,
+            "z": 0,
+            "w": 1
+          },
+          "sailCount": 1
+        }
+      ]
+    },
+    {
+      "nativeBindingVerified": true,
+      "starId": 1,
+      "sailCount": 0,
+      "orbitId": 1,
+      "runtimeOrbitId": 1,
+      "automaticOrbitSelection": false,
+      "firedAnimationActive": false,
+      "swarmAvailable": true,
+      "orbitCoverageComplete": true,
+      "activeSailCount": 4,
+      "inFlightSailCount": 1,
+      "starEjectorCount": 1,
+      "starEjectorCoverageComplete": true,
+      "orbits": [
+        {
+          "orbitId": 1,
+          "enabled": true,
+          "radius": 9200,
+          "rotation": {
+            "x": 0,
+            "y": 0,
+            "z": 0,
+            "w": 1
+          },
+          "sailCount": 4
+        }
+      ]
+    },
+    {
+      "nativeBindingVerified": true,
+      "starId": 1,
+      "sailCount": 0,
+      "orbitId": 1,
+      "runtimeOrbitId": 1,
+      "automaticOrbitSelection": false,
+      "firedAnimationActive": false,
+      "swarmAvailable": true,
+      "orbitCoverageComplete": true,
+      "activeSailCount": 4,
+      "inFlightSailCount": 0,
+      "starEjectorCount": 1,
+      "starEjectorCoverageComplete": true,
+      "orbits": [
+        {
+          "orbitId": 1,
+          "enabled": true,
+          "radius": 9200,
+          "rotation": {
+            "x": 0,
+            "y": 0,
+            "z": 0,
+            "w": 1
+          },
+          "sailCount": 4
+        }
+      ]
+    }
+  ]
+}

@@ -25,8 +25,16 @@ def resume_admission_echo(config,plan):
             and plan.get('discardedUnstoredProgressGameTicks') is None
             and plan.get('exactEmbeddedIdentityVerified') is True
             and plan.get('additionalVoyagerGameTicks')==0 and config['additionalVoyagerGameTicks']==0)
-    return (plan.get('remotePrimaryRecoveryAuthorizationUsed') is True and plan.get('completedSavedLandingAdmissionUsed') is True
-        and plan.get('discardedUnstoredProgressGameTicks')==0)
+    if plan.get('remotePrimaryRecoveryAuthorizationUsed') is not True or plan.get('discardedUnstoredProgressGameTicks')!=0:
+        return False
+    if plan.get('completedSavedLandingAdmissionUsed') is True:
+        # A separately completed admission of an old failed outbound.
+        return bool(plan.get('originalFailedFlightActionId')) and plan.get('successfulFlightWitnessRetiredAtGameTick') is None
+    # An ordinary successful Native landing has no failed-flight identity or
+    # saved-failed-landing accounting anchor. Native MCP validates its own
+    # successful checkpoint witness and the exact no-loss source before echoing.
+    return (plan.get('completedSavedLandingAdmissionUsed') is False and not plan.get('originalFailedFlightActionId')
+        and plan.get('savedLandingAccountingAnchorGameTick') is None and plan.get('failedLandingRecoveryAuthorizationUsed') is False)
 
 
 def powered_consumers_share_network(entities, network_id):

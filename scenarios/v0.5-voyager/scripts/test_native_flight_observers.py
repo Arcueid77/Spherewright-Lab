@@ -1,4 +1,4 @@
-import copy,sys,unittest
+import copy,sys,unittest,json
 from pathlib import Path
 sys.path.insert(0,str(Path(__file__).parent/'live'))
 from flight_observers import SailConversionTrace,RocketArrivalTrace
@@ -22,6 +22,16 @@ class NativeFlightTraceTests(unittest.TestCase):
   t=SailConversionTrace(sail(4,0,0),4,1)
   self.assertFalse(t.observe(sail(3,1,0)));self.assertFalse(t.observe(sail(0,3,1)))
   self.assertTrue(t.observe(sail(0,0,4)))
+ def test_native_arrived_sail_can_overlap_its_unrecycled_visual_trail_without_creating_an_extra_item(self):
+  t=SailConversionTrace(sail(4,0,0),4,1)
+  self.assertFalse(t.observe(sail(1,3,0)));self.assertFalse(t.observe(sail(1,3,1)))
+  self.assertFalse(t.observe(sail(0,1,4)));self.assertTrue(t.observe(sail(0,0,4)))
+ def test_actual_captured_launch_conversion_and_visual_recycle_sequence_closes_without_replaying_native_actions(self):
+  f=json.loads((Path(__file__).parent/'fixtures/captured-native-sail-conversion-lifecycle.json').read_text())
+  self.assertTrue(any(s['sailCount']+s['inFlightSailCount']+s['activeSailCount']>4 for s in f['samples']))
+  t=SailConversionTrace(f['initial'],4,1);done=False
+  for s in f['samples']:done=t.observe(s)
+  self.assertTrue(done)
  def test_configuration_animation_or_final_count_without_observed_flight_is_not_a_launch(self):
   t=SailConversionTrace(sail(4,0,0),4,1);final=sail(0,0,4);final['firedAnimationActive']=True
   self.assertFalse(t.observe(final))

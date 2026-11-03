@@ -75,6 +75,14 @@ class LiveDriverTests(unittest.TestCase):
   c=dict(recoveryMode=p['recoveryMode'],failedLandingActionId=p['originalFailedFlightActionId'],sourceTick=3,additionalVoyagerGameTicks=0)
   self.assertIsNone(p['discardedUnstoredProgressGameTicks']);self.assertTrue(resume_admission_echo(c,p))
   p['failedLandingRecoveryAuthorizationUsed']=False;self.assertFalse(resume_admission_echo(c,p))
+ def test_successful_native_saved_landing_has_no_failed_action_or_failed_accounting_anchor(self):
+  c=dict(recoveryMode='authorize_remote_primary_recovery')
+  p=dict(remotePrimaryRecoveryAuthorizationUsed=True,discardedUnstoredProgressGameTicks=0,completedSavedLandingAdmissionUsed=False,
+    originalFailedFlightActionId='',savedLandingAccountingAnchorGameTick=None,failedLandingRecoveryAuthorizationUsed=False,successfulFlightWitnessRetiredAtGameTick=10)
+  self.assertTrue(resume_admission_echo(c,p));self.assertFalse(resume_admission_echo(c,dict(p,originalFailedFlightActionId='unmatched-failure')))
+  self.assertFalse(resume_admission_echo(c,dict(p,savedLandingAccountingAnchorGameTick=3)))
+  self.assertFalse(resume_admission_echo(c,dict(p,discardedUnstoredProgressGameTicks=1)))
+  self.assertTrue(resume_admission_echo(c,dict(p,completedSavedLandingAdmissionUsed=True,originalFailedFlightActionId='original-failure',successfulFlightWitnessRetiredAtGameTick=None)))
  def test_actual_sdk_metadata_rejects_captured_wrong_tool_before_any_plan_execution(self):
   schemas=json.loads((Path(__file__).parent/'fixtures/captured-sdk-plan-schemas.json').read_text())
   with self.assertRaisesRegex(ValueError,'actual_sdk_unknown_tool'):
