@@ -2,6 +2,12 @@
 
 This is the only current snapshot. 以下当前计划/成果优先；下方旧截点保留为历史证据。最后更新：2026-11-03。
 
+**2026-11-03首帆额外5塔已获明确批准；最终源码准确CI成功并已由官方脚本采用，尚未安装。** 电力感应塔上限**9**，新增最多5须正常制造或运入；其他施工上限、216000累计tick和54000返航均不变，见[增量授权](first-sail-extension.md)。当前已建新塔仍零，不把批准计作库存或建设。
+
+产品main/Lab依赖已是**56c6db183766d078f95f5a0df585fe51686ddb92**，[准确CI41552835360](https://github.com/Arcueid77/Spherewright/actions/runs/41552835360)成功，112合同+5191Core+469MCP=**5772**。干净工作区Native Release构建零警告错误，两个MCP形态74工具/1资源/嵌入及打包指南/同源载荷均通过；工件manifest **DB54B36D37ADCC2EA6D13ED91C6F805D223A1DBF80DDBA141CB8EC6E183B7FDF**、cohort **210E7E7E07990DD4D2A1DBB3CDFBB709B7118E4DD76AC2F7B45B015D89FCDA4F**。输入在`.local/v0.5-voyager/surface-recovery-source-56c6db18-20261103-v1/`。资格模板的输出摘要残留旧5731，原回执及载荷/元数据证明保留，以qualification-corrected.private.json和准确CI日志更正为5772，不改历史记录。
+
+**磁盘仍a78，当前尚无本版本安装意图或回执。** 先核对1770完整保护、准确最新LastExit121203400和安装输入后，执行一次同源冷安装；之后才可新开有限窗口实操。其余保存边界、114138已耗/101862剩余、返航54000及未知原动作均不变。下方“待最终CI/4塔待答复”是更早截点。
+
 **2026-11-03已完成普通Drift过渡与新有界地表恢复源码，正在等最终准确CI；实装仍a78。** 产品main **56c6db183766d078f95f5a0df585fe51686ddb92**，Lab锁及磁盘仍 **a78db781122bf29735ba1cd4d77a0b18ae96e5cc**。普通活动Move修复914711cb的[准确CI41549305885](https://github.com/Arcueid77/Spherewright/actions/runs/41549305885)成功：原8tick接触缺口不变，只有fresh原生Drift模式允许同一原工作窗内最多64工作tick，适配准确Native DetermineDrift离开水面后需要48tick才能转回Walk；实际/帧接地Walk及零尾部才清gap，13tick停止尾部和原资源/返航边界不变。
 
 最新有界恢复功能由21af9f48正常提交推送，fc82586f仅去尾部空行，两者准确CI均成功；最终56c6db18进一步将本功能墙钟上限收紧到**20秒**，为原生预加载约267秒及随后实际作业保留五分钟启动余量，等待其准确CI后才可采用。公开`prepare_resume_owned_game`新增可选`surfaceRecoveryTargetX/Y/Z`，仅显式remote-primary、零新增tick且已完成独立保存落地准入的来源可用；新目标和600工作tick/20秒硬限绑定确认摘要。新resume任务仅用正常OrderNode.MoveTo/Player.Order，在新鲜2秒初始Drift绑定、真实151/501、准确world/actor/scene/订单、当前原生地形支撑、3.5m干燥落点缓冲、每下一601+13tick资金及原时间/返航储备下，尝试1–16m新目标，位移上限24m。失败Pause隔离，普通写入仍须严格停稳后才能接管；旧f89/6679/0adf未知均不重放、不改判。
