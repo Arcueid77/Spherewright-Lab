@@ -2,6 +2,8 @@
 
 This is the only current snapshot. 以下当前计划/成果优先；下方旧截点保留为历史证据。最后更新：2026-11-03。
 
+**2026-11-03缩放输入绑定修复88ba已准确CI、采用及一次冷安装，准备v10实机。** 当前main/依赖/磁盘均88baf8beb5c0964d0ad70db8b23c77918f14a387；[准确CI41602521869](https://github.com/Arcueid77/Spherewright/actions/runs/41602521869)成功5780。两MCP形态74工具/1资源、同源指南及载荷通过，manifestE2539E7B654CB847D1B3529A6D3246AD1D518728B980534A55EEBB5266465CBC，cohort548D5B83AF54FB53308791598724261052FC6FC919305DEFC9B3B5FC85F69981；输入surface-scale-source-88baf8be-20261103-v1。一次安装事务committed无unknown；1782保护文件和LastExit121203404/Primary121203001未变，114142已耗/101858剩余/54000返航不变。尚不算恢复、施工或制造实机成功。
+
 **2026-11-03 v9的151路由已实际接通，随后原生旋转触发派生lossyScale逐位误拒；88ba源码已修。** v9新resume **d3c089d2-4b72-466b-ad79-a9c5d904a980**在tick121203404以已知action_failed终止，原始首项**surface151_scale_changed**，阶段surface_recovery_native151；first151/501已走过，下一151才因旋转派生scale比较拒绝，原生速度0.78486/垂直0.70634。没有完成恢复或新施工。startup整包cleanup_required/116.5秒，不能称实操通过。暂停/恢复聊天间游戏进程已退出，退出发起者未观察；只以新鲜完整Native文件证明**LastExit121203404 / Primary121203001**，不冒称代理受控Save或正常关闭成功。1782文件四Native完整备份在v9/after-normal-close-complete-backup；累计**114142已耗 /101858剩余 /54000返航**，新增2tick计费，无退款。旧动作结论均保留。
 
 产品**88baf8beb5c0964d0ad70db8b23c77918f14a387**已提交推送：新地表恢复复用已有NativeContactTransformBinding，冻结准确localScale输入与完整父链，排除非均匀祖先/重挂/无效姿态；不以正常旋转造成的lossyScale分解舍入微变判断改尺寸，不采用宽泛容差。47相关回归及Native零警告错误通过，等待准确CI；**依赖/磁盘仍3bc，88ba未安装。** 所有原生生命周期、当前位置/费用/模式/支撑/返航检查和最终严格接地零尾部均保留。新增电塔最多5（总9）已批准但尚未取得新物品，新外星建筑仍零，首帆/火箭和保存续建续运目标不变。
