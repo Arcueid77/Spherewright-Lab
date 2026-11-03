@@ -2,6 +2,8 @@
 
 This is the only current snapshot. 以下当前计划/成果优先；下方旧截点保留为历史证据。最后更新：2026-11-03。
 
+**2026-11-03有支撑的Walk过渡699a已准确CI、采用及一次实际冷安装，准备v11。** 当前main/锁/磁盘均699a8a4fb41fa43216c0a8944e92dc4652817894；[准确CI41604619435](https://github.com/Arcueid77/Spherewright/actions/runs/41604619435)成功112+5204+469=5785。两MCP形态74工具/1资源、同源指南与载荷核对通过，cohort3335E5BCA1DA7808A999FB3EF0C912CCA290130ED9C86CD0F069038ACFE1F69F；开发输入surface-walk-source-699a8a4f-20261103-v1。唯一安装事务committed，无unknown；三个临界检查保留1786保护文件及LastExit121203454/Primary121203001不变，114192已耗/101808剩余/54000返航不变。尚未声明恢复或施工成功。
+
 **2026-11-03 v10已实际发出并执行恢复移动约3.8m，未完成接管；699a补齐有支撑的Walk接地过渡。** 新resume **d1e118d0-ca13-41b4-81f7-ffc4bb663920**在121203454已知失败，源121203404，共50实际tick；公开`resumeSurfaceRecoveryMove.nativeOrderAccepted=true`、位移3.7838m、completed=false。原始151/501绑定、当前地形和9点落点均true；原始拒绝为native_modes_costs_order=false、条件每tickP未发布。随后独立公开只读复核同owned402、paused/quarantined、Walk0、sphere=false、准确当前mesh支撑cast0.6066m、tick/core稳定。该数据与Native Drift计时后转为暂未接地Walk一致；原切点未记录更细mode blocker，不把事后快照冒充原始原因。
 
 产品**699a8a4fb41fa43216c0a8944e92dc4652817894**已正常提交推送：只有Native守卫最后的sole ground-contact miss，且当前准确自有地形支撑、全部其他模式/费用/订单/14P/原窗/返航证明通过，才继续同一有界恢复；最终接管仍须无该blocker的接地Walk/零尾部。新来源可为静止未接地Walk或Drift（普通已接地Walk继续走旧链）；新增记录各模式/环境/成本/订单首项。5项回归证明落地前不能报成功、缺支撑/资金/其他模式仍拒绝；合计98相关检查、Native零警告错误。初次推送短暂DNS失败后正常重推并核对远端准确SHA一致，不改网络或用户配置。等待准确CI；**锁/磁盘仍88ba，699a未安装。**

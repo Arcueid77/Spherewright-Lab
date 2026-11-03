@@ -5,7 +5,7 @@
   "spherewright": {
     "repository": "Arcueid77/Spherewright",
     "submodulePath": "deps/Spherewright",
-    "sourceSha": "88baf8beb5c0964d0ad70db8b23c77918f14a387",
+    "sourceSha": "699a8a4fb41fa43216c0a8944e92dc4652817894",
     "releaseTag": null,
     "productVersion": "0.5.0"
   },
@@ -21,7 +21,7 @@
     "targetVersion": "0.5.0"
   },
   "installed": {
-    "sourceSha": "88baf8beb5c0964d0ad70db8b23c77918f14a387",
+    "sourceSha": "699a8a4fb41fa43216c0a8944e92dc4652817894",
     "productVersion": "0.5.0",
     "releaseTag": null,
     "native": {
@@ -37,7 +37,7 @@
     "runtimeState": "not_running",
     "developmentArtifact": {
       "kind": "plugin_mcp_directory",
-      "manifestSha256": "E2539E7B654CB847D1B3529A6D3246AD1D518728B980534A55EEBB5266465CBC",
+      "manifestSha256": "2317101A6F9CD267E8F6AD31E898759A176E5DD4B9D73B604E1569EF1329A16E",
       "pluginFiles": 5,
       "mcpFiles": 224
     }
