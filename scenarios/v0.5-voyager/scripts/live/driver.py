@@ -152,7 +152,12 @@ class Live:
    need(self.wait_original(h)['succeeded'],'original_save_menu_failed')
    s=self.call('spherewright_get_session_state',{})
   need(not s['gameLoaded'],'native_menu_unproved');self.c.close();self.c=None
+  self.normal_close_current_process()
+
+ def normal_close_current_process(self):
+  need(self.c is None,'mcp_must_close_before_native_exit')
   p=self.process();need(p is not None and p['Id']==self.pid,'original_process_changed')
+  need(Path(p['Path']).resolve()==(Path(self.runtime.config['dspRoot'])/'DSPGAME.exe').resolve(),'original_process_path_changed')
   self.runtime.put('normal-close-intent.private.json',dict(processId=self.pid,forceKill=False,maximumRequests=1))
   r=subprocess.run(['powershell.exe','-NoProfile','-NonInteractive','-Command',
     f"$p=Get-Process -Id {self.pid} -ErrorAction Stop;if(-not $p.CloseMainWindow()){{throw 'Normal close refused'}}"],capture_output=True,timeout=10)

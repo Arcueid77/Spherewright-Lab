@@ -2,12 +2,20 @@
 from pathlib import Path
 import sys,unittest,tempfile,json,subprocess
 sys.path.insert(0,str(Path(__file__).resolve().parent/'live'))
-from contracts import powered_consumers_share_network
+from contracts import powered_consumers_share_network,paused_failed_cut
 from driver import Live,ToolRefused,AcceptedActionFailure
 from factory import Factory
 from runtime import freeze
 
 class LiveDriverTests(unittest.TestCase):
+ def test_actual_failed_session_and_player_shapes_prove_pause_without_invented_fields(self):
+  s=dict(sessionId='same',gameTick=3,gameLoaded=True,ownedBySpherewright=True,writesAllowed=False,writeQuarantineActionId='original')
+  p=dict(position=dict(x=1,y=2,z=3),coreEnergy=1600000000,nativeLocalControlEnergy=dict(blockers=['native_paused_not_execution_ready']))
+  self.assertTrue(paused_failed_cut(s,s,p,p,'original'))
+  self.assertFalse(paused_failed_cut(s,dict(s,gameTick=4),p,p,'original'))
+  self.assertFalse(paused_failed_cut(s,s,p,dict(p,coreEnergy=1599999999),'original'))
+  self.assertFalse(paused_failed_cut(s,s,p,dict(p,nativeLocalControlEnergy=dict(blockers=[])),'original'))
+  self.assertFalse(paused_failed_cut(s,s,p,p,'other'))
  def test_frozen_operation_resolves_nested_hash_references_to_json_scalars(self):
   a=Factory.__new__(Factory);a.ctx=dict(sessionId='same',planetId=7)
   a.runtime=type('Evidence',(),dict(put=lambda *_:None))()
