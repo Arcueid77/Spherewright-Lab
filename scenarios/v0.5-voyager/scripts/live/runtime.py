@@ -32,6 +32,7 @@ class Runtime:
 
     def protected_paths(self):
         c=self.config; paths={Path(p).resolve() for p in c['savePaths'].values()}
+        paths.update(self.native_paths().values())
         paths.update(Path(p).resolve() for p in c['protectedExtraFiles'])
         for root in map(Path, c['durableRoots']):
             for pattern in ('owned-world-resume*.json','owned-world-reauthorization-attempt-*.json',
@@ -60,9 +61,27 @@ class Runtime:
                 p=root/r['relativePath'];need(p.stat().st_size==r['bytes'] and sha(p)==r['sha256'],'installed_bytes_changed')
         return index
 
+    def native_paths(self):
+        c=self.config;paths={k:Path(p).resolve() for k,p in c['savePaths'].items()}
+        primary=paths['primary'];identity=primary.stem;version=read(c['labSourceLock'])['native']['version']
+        candidates=set()
+        for root in map(Path,c['durableRoots']):
+            ticket=root/'flight-checkpoint.json'
+            if not ticket.exists():continue
+            value=read(ticket);name=value.get('checkpointSaveName')
+            need(value.get('ownedSaveName')==identity and value.get('gameVersion')==version,'current_checkpoint_identity_changed')
+            need(isinstance(name,str) and name.startswith('Spherewright_PreFlight_') and Path(name).name==name
+                 and not any(ch in name for ch in '/\\:'),'current_checkpoint_name_unproved')
+            target=(primary.parent/(name+'.dsv')).resolve()
+            need(target.parent==primary.parent and target.is_file(),'current_checkpoint_save_missing')
+            candidates.add(target)
+        need(len(candidates)<=1,'multiple_current_native_checkpoints')
+        if candidates:paths['currentCheckpoint']=next(iter(candidates))
+        return paths
+
     def native_proofs(self):
         c=self.config; identity=Path(c['savePaths']['primary']).stem
-        return {role:native_file_proof(p,identity) for role,p in c['savePaths'].items()}
+        return {role:native_file_proof(p,identity) for role,p in self.native_paths().items()}
 
     def verify_backup(self):
         c=self.config; m=read(c['backupManifest'])

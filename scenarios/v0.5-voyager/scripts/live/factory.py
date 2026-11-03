@@ -43,11 +43,25 @@ class Factory(Live):
   # fails. A post-check must not silently restore a material allowance.
   self.used[item]=self.used.get(item,0)+budget[0]['count']
   control=r.get('constructionControl') or {};ids=[o['entityId'] for o in r.get('blueprintObjects') or [] if o.get('entityId')]
-  need(control.get('physicalIdleVerified') and control.get('exactBindingVerified') and control.get('wholeBatchDebitSharedByObjectReceipts')
-    and len(ids)==budget[0]['count'] and len(set(ids))==len(ids) and count(self.player(),item)==count(before,item)-len(ids),
-    'completed_build_postcheck_needs_original_reconciliation')
+  if not control and self.ctx['planetId']!=self.runtime.config['planetId']:
+   # Ordinary home construction uses positive targetObjectIds and Native
+   # topology completion, not the remote structured-control DTO branch.
+   ids=r.get('targetObjectIds') or []
+   need(len(ids)==budget[0]['count'] and len(set(ids))==len(ids) and all(type(i)is int and i>0 for i in ids)
+    and sum(d['delta'] for d in r.get('itemDeltas',[]) if d['itemId']==item)==-len(ids),'ordinary_build_original_debit_or_entities_unproved')
+   end=time.monotonic()+self.runtime.config['maximumFundingWaitSeconds']
+   while True:
+    self.state();p=self.player();d=p.get('constructionDrones') or {}
+    if d.get('working')==0 and d.get('idle')==d.get('total') and d.get('pendingBuildTargets')==0 and d.get('pendingRepairTargets')==0:break
+    need(time.monotonic()<end,'ordinary_build_native_drone_idle_still_unproved');time.sleep(.5)
+   need(count(p,item)==count(before,item)-len(ids),'ordinary_build_package_delta_needs_original_reconciliation')
+   self.runtime.put(role+'-ordinary-native-idle.private.json',dict(originalActionId=r['actionId'],player=p,controlNotApplicable=True))
+  else:
+   need(control.get('physicalIdleVerified') and control.get('exactBindingVerified') and control.get('wholeBatchDebitSharedByObjectReceipts')
+     and len(ids)==budget[0]['count'] and len(set(ids))==len(ids) and count(self.player(),item)==count(before,item)-len(ids),
+     'completed_build_postcheck_needs_original_reconciliation')
   result=[self.entity(i) for i in ids];need(all(e['itemId']==item for e in result),'completed_entity_type_changed')
-  self.refs[role]=ids;self.runtime.put(role+'-entities.private.json',dict(entities=result,originalActionId=r['actionId'],buildId=r['blueprintBuildId'],debit=budget[0]['count']))
+  self.refs[role]=ids;self.runtime.put(role+'-entities.private.json',dict(entities=result,originalActionId=r['actionId'],buildId=r.get('blueprintBuildId'),debit=budget[0]['count']))
   return result
 
  def object_id(self,ref):

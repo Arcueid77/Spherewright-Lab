@@ -5,9 +5,32 @@ sys.path.insert(0,str(Path(__file__).resolve().parent/'live'))
 from contracts import powered_consumers_share_network,paused_failed_cut,validate_steps
 from driver import Live,ToolRefused,AcceptedActionFailure
 from factory import Factory
-from runtime import freeze
+from runtime import freeze,Runtime
 
 class LiveDriverTests(unittest.TestCase):
+ def test_ordinary_home_build_uses_its_real_result_branch_and_never_refunds_a_postcheck_failure(self):
+  for delta,valid in [(-2,True),(-1,False)]:
+   a=Factory.__new__(Factory);a.ctx=dict(planetId=104);a.used={};a.refs={}
+   a.runtime=type('Evidence',(),dict(config=dict(planetId=402,materialCeilings={'2001':4},maximumFundingWaitSeconds=1),put=lambda *_:None))()
+   a.prepare_build=lambda _: (dict(prepared=True,commitAllowedNow=True,commitBlockers=[],planToken='synthetic',itemBudget=[dict(itemId=2001,count=2)]),dict(inventory=[dict(itemId=2001,count=3)]))
+   a.commit=lambda *_:'original';a.successful_original=lambda _:dict(actionId='original',targetObjectIds=[100,101],itemDeltas=[dict(itemId=2001,delta=delta)])
+   a.state=lambda:None;a.player=lambda:dict(inventory=[dict(itemId=2001,count=1)],constructionDrones=dict(working=0,idle=3,total=3,pendingBuildTargets=0,pendingRepairTargets=0))
+   a.entity=lambda i:dict(objectId=i,itemId=2001)
+   if valid:
+    a.build('home-feed',dict(buildingItemId=2001),2);self.assertEqual([100,101],a.refs['home-feed'])
+   else:
+    with self.assertRaisesRegex(RuntimeError,'ordinary_build_original_debit_or_entities_unproved'):a.build('home-feed',dict(buildingItemId=2001),2)
+   self.assertEqual(2,a.used[2001])
+ def test_current_native_checkpoint_follows_owned_ticket_without_dropping_historical_roles(self):
+  with tempfile.TemporaryDirectory() as folder:
+   root=Path(folder);durable=root/'durable';durable.mkdir();primary=root/'Spherewright_owned.dsv';primary.write_bytes(b'synthetic')
+   current=root/'Spherewright_PreFlight_synthetic-new.dsv';current.write_bytes(b'synthetic');old=root/'Spherewright_PreFlight_synthetic-old.dsv';old.write_bytes(b'synthetic')
+   lock=root/'lock.json';lock.write_text(json.dumps(dict(native=dict(version='synthetic-native'))))
+   ticket=durable/'flight-checkpoint.json';ticket.write_text(json.dumps(dict(ownedSaveName=primary.stem,gameVersion='synthetic-native',checkpointSaveName=current.stem)))
+   r=Runtime.__new__(Runtime);r.config=dict(savePaths=dict(primary=str(primary),currentCheckpoint=str(old)),durableRoots=[str(durable)],labSourceLock=str(lock))
+   self.assertEqual(current,r.native_paths()['currentCheckpoint']);self.assertEqual(str(old),r.config['savePaths']['currentCheckpoint'])
+   ticket.write_text(json.dumps(dict(ownedSaveName='foreign-owned',gameVersion='synthetic-native',checkpointSaveName=current.stem)))
+   with self.assertRaisesRegex(RuntimeError,'current_checkpoint_identity_changed'):r.native_paths()
  def test_first_real_move_requires_actual_delta_grounded_walk_and_zero_native_velocity(self):
   a=Live(None);a.runtime=type('Evidence',(),dict(config=dict(firstOperation=dict(kind='move')),put=lambda *_:None))()
   a.first_before=dict(position=dict(x=0,y=200,z=0));p=dict(position=dict(x=2,y=200,z=0),movementState='Walk',speed=0,nativePhysics=dict(groundContact=dict(checkSphereHit=True),velocity=dict(x=0,y=0,z=0)))
