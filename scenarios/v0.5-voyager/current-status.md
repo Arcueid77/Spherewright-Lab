@@ -2,6 +2,12 @@
 
 This is the only current snapshot. 以下当前计划/成果优先；下方旧截点保留为历史证据。最后更新：2026-11-03。
 
+**2026-11-03 v10已实际发出并执行恢复移动约3.8m，未完成接管；699a补齐有支撑的Walk接地过渡。** 新resume **d1e118d0-ca13-41b4-81f7-ffc4bb663920**在121203454已知失败，源121203404，共50实际tick；公开`resumeSurfaceRecoveryMove.nativeOrderAccepted=true`、位移3.7838m、completed=false。原始151/501绑定、当前地形和9点落点均true；原始拒绝为native_modes_costs_order=false、条件每tickP未发布。随后独立公开只读复核同owned402、paused/quarantined、Walk0、sphere=false、准确当前mesh支撑cast0.6066m、tick/core稳定。该数据与Native Drift计时后转为暂未接地Walk一致；原切点未记录更细mode blocker，不把事后快照冒充原始原因。
+
+产品**699a8a4fb41fa43216c0a8944e92dc4652817894**已正常提交推送：只有Native守卫最后的sole ground-contact miss，且当前准确自有地形支撑、全部其他模式/费用/订单/14P/原窗/返航证明通过，才继续同一有界恢复；最终接管仍须无该blocker的接地Walk/零尾部。新来源可为静止未接地Walk或Drift（普通已接地Walk继续走旧链）；新增记录各模式/环境/成本/订单首项。5项回归证明落地前不能报成功、缺支撑/资金/其他模式仍拒绝；合计98相关检查、Native零警告错误。初次推送短暂DNS失败后正常重推并核对远端准确SHA一致，不改网络或用户配置。等待准确CI；**锁/磁盘仍88ba，699a未安装。**
+
+对同owned冻结世界按standing仅一次正常OS关闭，原生退出档完整保全；不是受控Save成功。最新**LastExit121203454 / Primary121203001，1786保护文件/四Native完整备份**在v10/after-normal-close-complete-backup。累计**114192已耗 /101808剩余 /54000返航**，50tick全计，无退款。原resume保持失败，新建筑及制造验收仍零；9塔批准和全0.5目标不变。
+
 **2026-11-03缩放输入绑定修复88ba已准确CI、采用及一次冷安装，准备v10实机。** 当前main/依赖/磁盘均88baf8beb5c0964d0ad70db8b23c77918f14a387；[准确CI41602521869](https://github.com/Arcueid77/Spherewright/actions/runs/41602521869)成功5780。两MCP形态74工具/1资源、同源指南及载荷通过，manifestE2539E7B654CB847D1B3529A6D3246AD1D518728B980534A55EEBB5266465CBC，cohort548D5B83AF54FB53308791598724261052FC6FC919305DEFC9B3B5FC85F69981；输入surface-scale-source-88baf8be-20261103-v1。一次安装事务committed无unknown；1782保护文件和LastExit121203404/Primary121203001未变，114142已耗/101858剩余/54000返航不变。尚不算恢复、施工或制造实机成功。
 
 **2026-11-03 v9的151路由已实际接通，随后原生旋转触发派生lossyScale逐位误拒；88ba源码已修。** v9新resume **d3c089d2-4b72-466b-ad79-a9c5d904a980**在tick121203404以已知action_failed终止，原始首项**surface151_scale_changed**，阶段surface_recovery_native151；first151/501已走过，下一151才因旋转派生scale比较拒绝，原生速度0.78486/垂直0.70634。没有完成恢复或新施工。startup整包cleanup_required/116.5秒，不能称实操通过。暂停/恢复聊天间游戏进程已退出，退出发起者未观察；只以新鲜完整Native文件证明**LastExit121203404 / Primary121203001**，不冒称代理受控Save或正常关闭成功。1782文件四Native完整备份在v9/after-normal-close-complete-backup；累计**114142已耗 /101858剩余 /54000返航**，新增2tick计费，无退款。旧动作结论均保留。
