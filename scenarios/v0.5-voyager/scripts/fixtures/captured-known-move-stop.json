@@ -1,0 +1,46 @@
+{
+  "scope": "Original failure and a later public Native idle observation; identities, positions and ticks removed. The original failure remains failed.",
+  "original": {
+    "actionKind": "move",
+    "state": "action_failed",
+    "terminal": true,
+    "succeeded": false,
+    "message": "The original Move's finite ground-contact gap ended; stop its exact order. Native grounded Walk and zero RTS tail are physically verified; retain the failed Move."
+  },
+  "player": {
+    "movementState": "Walk",
+    "speed": 0,
+    "nativePhysics": {
+      "velocity": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "walkRtsVelocity": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "driftRtsVelocity": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "walkManualVelocity": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "driftManualVelocity": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "currentOrderPresent": false,
+      "queuedOrderCount": 0,
+      "groundContact": {
+        "checkSphereHit": true
+      }
+    }
+  }
+}

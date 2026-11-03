@@ -3,7 +3,7 @@ import math,time,uuid
 from collections.abc import Mapping
 from driver import Live,ToolRefused,AcceptedActionFailure
 from evidence import need,read,sha
-from contracts import powered_consumers_share_network,validate_steps,is_read_tool
+from contracts import powered_consumers_share_network,validate_steps,is_read_tool,validate_native_calls,strict_native_player_idle
 
 def distance(a,b): return math.dist([a[k] for k in 'xyz'],[b[k] for k in 'xyz'])
 def count(player,item): return sum(r['count'] for r in player['inventory'] if r['itemId']==item)
@@ -19,7 +19,7 @@ class Factory(Live):
   return values
 
  def prepare_build(self,args):
-  start=time.monotonic();c=self.runtime.config
+  start=time.monotonic();c=self.runtime.config;refusals=0
   while True:
    self.state();p=self.player();args=dict(args,**self.ctx,expectedPlayerStateHash=p['stateHash'])
    try:q=self.call('spherewright_prepare_build',args);return q,p
@@ -29,7 +29,7 @@ class Factory(Live):
     need(time.monotonic()-start<c['maximumFundingWaitSeconds'],'finite_funding_wait_exhausted')
     # Read-only observation decides when to fresh prepare. No estimated energy
     # threshold is ever substituted for the Native prepare above.
-    time.sleep(2)
+    refusals+=1;time.sleep(min(30,2**min(refusals,5)))
 
  def build(self,role,args,maximum):
   item=args['buildingItemId'];remaining=self.runtime.config['materialCeilings'].get(str(item),0)-self.used.get(item,0)
@@ -123,6 +123,16 @@ class Factory(Live):
      if err.error.get('code') not in ('BUILD_LOCATION_INVALID','BUILD_CONNECTION_INVALID'):raise
      last=err
    raise last or RuntimeError('no_free_belt_candidate')
+  if kind=='build-belt-to-device':
+   destination=self.object_id(s['destination']);last=None
+   for start in s['starts']:
+    target=self.entity(destination);point=self.layout(start)
+    try:return self.build(role,dict(buildingItemId=2001,destinationObjectId=destination,expectedDestinationStateHash=target['endpointStateHash'],
+      **dict(zip(('preferredPositionX','preferredPositionY','preferredPositionZ'),[point[k] for k in 'xyz'])),maxNewBelts=s['maximumNewBelts']),s['maximumNewBelts'])
+    except ToolRefused as error:
+     if error.error.get('code') not in ('BUILD_LOCATION_INVALID','BUILD_CONNECTION_INVALID'):raise
+     last=error
+   raise last or RuntimeError('no_native_device_input_path_candidate')
   if kind=='build-sorter':
    dest=self.object_id(s['destination']);sources=self.refs[s['source']] if isinstance(s['source'],str) else [s['source']]
    if not isinstance(sources,(list,tuple)):sources=[sources]
@@ -150,7 +160,7 @@ class Factory(Live):
    end=time.monotonic()+s['maximumSeconds']
    while time.monotonic()<end:
     self.state();p=self.player();physics=p.get('nativePhysics') or {};velocity=physics.get('velocity') or {};ground=physics.get('groundContact') or {}
-    if p['movementState']=='Walk' and p['speed']<=.1 and ground.get('checkSphereHit') is True and all(velocity.get(k)==0 for k in 'xyz'):
+    if strict_native_player_idle(p):
      self.runtime.put(role+'-physical-still.private.json',p);return p
     time.sleep(.5)
    raise RuntimeError('finite_grounded_physical_still_wait_exhausted')
@@ -217,6 +227,7 @@ class Factory(Live):
 
  def execute_plan(self,steps,label):
   validate_steps(steps)
+  validate_native_calls(steps,self.schemas)
   for s in steps:
    self.step(s)
    if self.c is None:
@@ -249,5 +260,4 @@ class Factory(Live):
   s=self.call('spherewright_get_session_state',{})
   if not (s.get('gameLoaded') and s.get('ownedBySpherewright') and s.get('writesAllowed') and s.get('sessionId')==self.ctx['sessionId']):return False
   p=self.player();physics=p.get('nativePhysics') or {};ground=physics.get('groundContact') or {};velocity=physics.get('velocity') or {}
-  return (p.get('movementState')=='Walk' and p.get('speed',float('inf'))<=.1 and ground.get('checkSphereHit') is True
-   and all(velocity.get(k)==0 for k in 'xyz') and p.get('handcraftQueue')==[] and (p.get('constructionDrones') or {}).get('working')==0)
+  return (strict_native_player_idle(p) and p.get('handcraftQueue')==[] and (p.get('constructionDrones') or {}).get('working')==0)

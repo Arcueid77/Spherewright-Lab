@@ -7,12 +7,13 @@ from evidence import read,sha,need
 from runtime import Runtime
 from factory import Factory
 from mcp_client import Client
+from contracts import strict_native_player_idle,validate_steps,validate_native_calls
 
 def main():
     config,config_sha,previous,output=sys.argv[1:];prior=Path(previous)
     r=Runtime(config,config_sha,output);a=Factory(r);c=r.config
     if (prior/'client-close.private.json').exists():
-        old=read(prior/'client-close.private.json');need(old['stdoutEofObserved'] and old['stderrEofObserved'],'old_caller_not_closed')
+        old=read(prior/'client-close.private.json');need(old['normalEof'] and old['processExitCode']==0 and old['readerThreadsStopped'],'old_caller_not_closed')
     else:
         old=read(prior/'caller-handoff.private.json');need(old['callerStopped'] and old['noActiveGameAction'] and old['gameProcessRetained'],'old_caller_handoff_unproved')
     origin=Path(c.get('liveSessionOrigin',str(prior)))
@@ -25,6 +26,7 @@ def main():
         total_stdout_limit=c.get('maximumStdoutBytes',64*1024*1024),total_stderr_limit=c.get('maximumStderrBytes',1024*1024))
     try:
         _,tools,_,_=a.c.initialize();a.schemas={t['name']:t['inputSchema'] for t in tools}
+        validate_steps(c['initialSteps']);validate_native_calls(c['initialSteps'],a.schemas)
         original=read(origin/'loaded-session.private.json');s=a.call('spherewright_get_session_state',{})
         expected_planet=c.get('attachmentPlanetId',original['localPlanetId'])
         if expected_planet!=original['localPlanetId']:
@@ -36,6 +38,7 @@ def main():
         need(s['gameLoaded'] and s['ownedBySpherewright'] and s['writesAllowed'] and s['sessionId']==original['sessionId']
             and s['localPlanetId']==expected_planet,'exact_healthy_live_session_changed')
         a.ctx=dict(sessionId=s['sessionId'],planetId=s['localPlanetId']);a.pid=read(origin/'process-observed.private.json')['Id'];a.loaded=True
+        need(strict_native_player_idle(a.player()),'current_native_idle_or_rts_observation_unproved')
         process=a.process();need(process is not None and process['Id']==a.pid,'original_live_process_changed')
         r.put('attached-existing-session.private.json',dict(passed=True,sessionId=s['sessionId'],gameProcessId=a.pid,
             gameTick=s['gameTick'],priorRpcCount=prior_count,remainingRpc=remaining,originalDeadlineUtc=deadline.isoformat(),

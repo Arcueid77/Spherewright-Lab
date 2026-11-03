@@ -5,7 +5,7 @@ import startup_to_action as G
 from geometry_request import complete_geometry_arrays
 from evidence import need,read,sha,json_value
 from mcp_client import Client
-from contracts import resume_admission_echo
+from contracts import resume_admission_echo,validate_steps,validate_native_calls,strict_native_player_idle
 
 class AcceptedActionFailure(RuntimeError):
  def __init__(self,message,receipt=None):self.receipt=receipt;super().__init__(message)
@@ -41,6 +41,7 @@ class Live:
   self.c=Client(Path(c['pluginDestination'])/'Spherewright.Mcp.exe',s.output/'client',maximum=c['maximumRpc'],seconds=c['maximumWallSeconds'],
     total_stdout_limit=c.get('maximumStdoutBytes',64*1024*1024),total_stderr_limit=c.get('maximumStderrBytes',1024*1024))
   _,tools,_,_=self.c.initialize();self.schemas={t['name']:t['inputSchema'] for t in tools}
+  validate_steps(c['initialSteps']);validate_native_calls(c['initialSteps'],self.schemas)
   self.steam=subprocess.check_output(['powershell.exe','-NoProfile','-NonInteractive','-Command',"(Get-ItemProperty -LiteralPath 'HKCU:/Software/Valve/Steam' -Name SteamExe).SteamExe"],text=True,timeout=10).strip()
   need(Path(self.steam).is_file(),'steam_missing')
   proof={key:True for key in G.READINESS_FLAGS};proof.update(sourceSha=c['sourceSha'],completeBackupFiles=len(m['rows']),knownFloor=c['sourceTick'])
@@ -224,7 +225,7 @@ class Live:
   if c.get('kind')=='move':
    e=self.player();ground=(e.get('nativePhysics') or {}).get('groundContact') or {};velocity=(e.get('nativePhysics') or {}).get('velocity') or {}
    moved=math.dist([self.first_before['position'][k] for k in 'xyz'],[e['position'][k] for k in 'xyz'])
-   ok=r['succeeded'] and moved>1 and e['movementState']=='Walk' and e['speed']<=.1 and ground.get('checkSphereHit') is True and all(velocity.get(k)==0 for k in 'xyz')
+   ok=r['succeeded'] and moved>1 and strict_native_player_idle(e)
    self.runtime.put('actual-progress.private.json',dict(verified=ok,actionId=r['actionId'],before=self.first_before,after=e));return ok
   e=self.player() if mode=='enable-mecha-construction-drones' else self.entity(c['entityId'])
   if mode=='enable-mecha-construction-drones':

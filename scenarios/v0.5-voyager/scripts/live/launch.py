@@ -8,15 +8,23 @@ import detached_python_task as launcher
 from evidence import sha,read,need,put
 
 def main():
-    config,config_sha,output=sys.argv[1:];c=read(config);out=Path(output)
+    attaching=sys.argv[1]=='--attach'
+    if attaching:previous,config,config_sha,output=sys.argv[2:]
+    else:config,config_sha,output=sys.argv[1:]
+    c=read(config);out=Path(output)
     need(sha(config)==config_sha.upper() and not out.exists(),'config_changed_or_prior_run_exists')
     worker=out.parent/(out.name+'-worker')
     inputs=[Path(config),*ROOT.glob('*.py'),ROOT.parent/'startup_to_action.py',ROOT.parent/'geometry_request.py']
     deadline=dt.datetime.now(dt.timezone.utc)+dt.timedelta(seconds=c['maximumWallSeconds']+60)
-    result=launcher.launch_once(ROOT/'run.py',sha(ROOT/'run.py'),[config,config_sha,output],worker,deadline.isoformat(),
+    entry=ROOT/('attach.py' if attaching else 'run.py')
+    arguments=[config,config_sha,previous,output] if attaching else [config,config_sha,output]
+    if attaching:inputs.extend(Path(previous)/name for name in ('caller-handoff.private.json','client-close.private.json') if (Path(previous)/name).exists())
+    result=launcher.launch_once(entry,sha(entry),arguments,worker,deadline.isoformat(),
         transport='same_user_wmi',expected_inputs=[dict(path=str(p),bytes=p.stat().st_size,sha256=sha(p)) for p in inputs])
     end=time.monotonic()+300
     while time.monotonic()<end:
+        if attaching and (out/'attached-existing-session.private.json').exists():
+            print('One replacement caller attached to the original healthy game; no Load/Save/relaunch.',flush=True);return
         if (out/'process-observed.private.json').exists():
             audit=subprocess.run([sys.executable,str(ROOT/'audit-lifetime.py'),str(out)],capture_output=True,text=True,timeout=45)
             put(out/'lifetime-audit-process.private.json',dict(exitCode=audit.returncode))

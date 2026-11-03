@@ -1,0 +1,79 @@
+{
+  "spherewright_get_player_state": {
+    "type": "object",
+    "properties": {
+      "sessionId": {
+        "description": "Current session ID returned by spherewright_get_session_state.",
+        "type": "string"
+      },
+      "planetId": {
+        "description": "Current local planet ID returned by spherewright_get_session_state.",
+        "type": "integer"
+      }
+    },
+    "required": [
+      "sessionId",
+      "planetId"
+    ]
+  },
+  "spherewright_get_power_summary": {
+    "type": "object",
+    "properties": {
+      "sessionId": {
+        "description": "Current session ID returned by spherewright_get_session_state.",
+        "type": "string"
+      },
+      "planetId": {
+        "description": "Current local planet ID returned by spherewright_get_session_state.",
+        "type": "integer"
+      }
+    },
+    "required": [
+      "sessionId",
+      "planetId"
+    ]
+  },
+  "spherewright_prepare_move": {
+    "type": "object",
+    "properties": {
+      "sessionId": {
+        "type": "string"
+      },
+      "planetId": {
+        "type": "integer"
+      },
+      "targetX": {
+        "type": "number"
+      },
+      "targetY": {
+        "type": "number"
+      },
+      "targetZ": {
+        "type": "number"
+      },
+      "expectedPlayerStateHash": {
+        "type": "string"
+      },
+      "arrivalTolerance": {
+        "type": "number",
+        "default": 1.5
+      },
+      "stateHashVersion": {
+        "type": "integer",
+        "default": 1
+      },
+      "allowPassiveDrift": {
+        "type": "boolean",
+        "default": false
+      }
+    },
+    "required": [
+      "sessionId",
+      "planetId",
+      "targetX",
+      "targetY",
+      "targetZ",
+      "expectedPlayerStateHash"
+    ]
+  }
+}

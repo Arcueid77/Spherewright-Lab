@@ -34,6 +34,15 @@ def powered_consumers_share_network(entities, network_id):
     return bool(consumers) and all(consumer_network(e)==network_id for e in consumers)
 
 
+def strict_native_player_idle(player):
+    physics=player.get('nativePhysics') or {};ground=physics.get('groundContact') or {}
+    vectors=('velocity','walkRtsVelocity','driftRtsVelocity','walkManualVelocity','driftManualVelocity')
+    return (player.get('movementState')=='Walk' and player.get('speed',float('inf'))<=.1
+        and ground.get('checkSphereHit') is True and physics.get('currentOrderPresent') is False
+        and physics.get('queuedOrderCount')==0
+        and all(isinstance(physics.get(key),Mapping) and all(physics[key].get(axis)==0 for axis in 'xyz') for key in vectors))
+
+
 def paused_failed_cut(first_session, second_session, first_player, second_player, action_id,terminal=None):
     # SessionState has no isPaused and PlayerState exposes coreEnergy, not
     # energy. Use the actual public paused-cost blocker and stable cut.
@@ -56,7 +65,7 @@ def validate_steps(steps):
     required={
         'operation':{'prepareTool','arguments'},'adopt-paid-build':{'buildId','expectedObjects','itemId'},
         'read':{'tool'},'dump':{'queries'},'build-object':{'itemId','positions'},
-        'build-belt':{'source','ends','maximumNewBelts'},'build-free-belt':{'candidates','maximumNewBelts'},
+        'build-belt':{'source','ends','maximumNewBelts'},'build-free-belt':{'candidates','maximumNewBelts'},'build-belt-to-device':{'starts','destination','maximumNewBelts'},
         'build-sorter':{'source','destination','filterItemId'},'configure':{'entity'},
         'wait-buffer':{'entity','itemId','minimumCount','maximumSeconds'},'wait-player-still':{'maximumSeconds'},'prove-network':{'entities','networkId'},'save-close':set(),'handoff-caller':set()}
     for step in steps:
@@ -66,4 +75,34 @@ def validate_steps(steps):
         if kind=='dump' and any(not {'name','tool'}<=set(q) for q in step['queries']):
             raise ValueError('immutable_dump_query_shape_invalid')
 
+
+from collections.abc import Mapping
+
+
+def validate_native_calls(steps,schemas):
+    """Compile literal call shapes against the actual MCP tools/list response."""
+    def call(tool,args):
+        schema=schemas.get(tool)
+        if schema is None:raise ValueError('actual_sdk_unknown_tool:'+str(tool))
+        properties=schema['properties'];keys=set(args)|({'sessionId','planetId'}&set(properties))
+        if set(args)-set(properties) or not set(schema.get('required',[]))<=keys:
+            raise ValueError('actual_sdk_argument_shape:'+tool)
+        for key,value in args.items():
+            if isinstance(value,Mapping) and set(value)=={'ref'}:continue
+            spec=properties[key];types=spec.get('type',[]);types=[types] if isinstance(types,str) else types
+            if value is None:
+                if types and 'null' not in types:raise ValueError('actual_sdk_nonnullable:'+key)
+                continue
+            matches={'string':isinstance(value,str),'integer':type(value)is int,'number':type(value)in(int,float),
+                'boolean':type(value)is bool,'array':isinstance(value,(list,tuple)),'object':isinstance(value,Mapping)}
+            if types and not any(matches.get(kind,False) for kind in types):raise ValueError('actual_sdk_type:'+key)
+            if 'enum' in spec and value not in spec['enum']:raise ValueError('actual_sdk_enum:'+key)
+    for step in steps:
+        kind=step['kind']
+        if kind=='read':call(step['tool'],step.get('arguments',{}))
+        elif kind=='dump':
+            for query in step['queries']:call(query['tool'],query.get('arguments',{}))
+        elif kind=='operation':
+            for query in step.get('reads',[]):call(query['tool'],query.get('arguments',{}))
+            call(step['prepareTool'],step['arguments'])
 

@@ -2,7 +2,7 @@
 from pathlib import Path
 import sys,unittest,tempfile,json,subprocess
 sys.path.insert(0,str(Path(__file__).resolve().parent/'live'))
-from contracts import powered_consumers_share_network,paused_failed_cut,validate_steps,resume_admission_echo
+from contracts import powered_consumers_share_network,paused_failed_cut,validate_steps,resume_admission_echo,validate_native_calls,strict_native_player_idle
 from driver import Live,ToolRefused,AcceptedActionFailure
 from factory import Factory
 from runtime import freeze,Runtime
@@ -33,7 +33,7 @@ class LiveDriverTests(unittest.TestCase):
    with self.assertRaisesRegex(RuntimeError,'current_checkpoint_identity_changed'):r.native_paths()
  def test_first_real_move_requires_actual_delta_grounded_walk_and_zero_native_velocity(self):
   a=Live(None);a.runtime=type('Evidence',(),dict(config=dict(firstOperation=dict(kind='move')),put=lambda *_:None))()
-  a.first_before=dict(position=dict(x=0,y=200,z=0));p=dict(position=dict(x=2,y=200,z=0),movementState='Walk',speed=0,nativePhysics=dict(groundContact=dict(checkSphereHit=True),velocity=dict(x=0,y=0,z=0)))
+  a.first_before=dict(position=dict(x=0,y=200,z=0));p=dict(position=dict(x=2,y=200,z=0),movementState='Walk',speed=0,nativePhysics=dict(groundContact=dict(checkSphereHit=True),currentOrderPresent=False,queuedOrderCount=0,**{k:dict(x=0,y=0,z=0) for k in ('velocity','walkRtsVelocity','driftRtsVelocity','walkManualVelocity','driftManualVelocity')}))
   a.player=lambda:p;result=dict(succeeded=True,actionId='original')
   self.assertTrue(a.verify_progress({},result));p['nativePhysics']['groundContact']['checkSphereHit']=False
   self.assertFalse(a.verify_progress({},result))
@@ -75,6 +75,29 @@ class LiveDriverTests(unittest.TestCase):
   c=dict(recoveryMode=p['recoveryMode'],failedLandingActionId=p['originalFailedFlightActionId'],sourceTick=3,additionalVoyagerGameTicks=0)
   self.assertIsNone(p['discardedUnstoredProgressGameTicks']);self.assertTrue(resume_admission_echo(c,p))
   p['failedLandingRecoveryAuthorizationUsed']=False;self.assertFalse(resume_admission_echo(c,p))
+ def test_actual_sdk_metadata_rejects_captured_wrong_tool_before_any_plan_execution(self):
+  schemas=json.loads((Path(__file__).parent/'fixtures/captured-sdk-plan-schemas.json').read_text())
+  with self.assertRaisesRegex(ValueError,'actual_sdk_unknown_tool'):
+   validate_native_calls([dict(kind='read',role='captured-invalid',tool='spherewright_get_power_networks')],schemas)
+  validate_native_calls([dict(kind='read',role='real-api',tool='spherewright_get_power_summary')],schemas)
+  args=dict(targetX=1.,targetY=200.,targetZ=1.,expectedPlayerStateHash=dict(ref='p.stateHash'))
+  validate_native_calls([dict(kind='operation',role='real-move',prepareTool='spherewright_prepare_move',arguments=args)],schemas)
+  with self.assertRaisesRegex(ValueError,'actual_sdk_argument_shape'):
+   validate_native_calls([dict(kind='operation',role='missing-required',prepareTool='spherewright_prepare_move',arguments={})],schemas)
+  with self.assertRaisesRegex(ValueError,'actual_sdk_nonnullable'):
+   validate_native_calls([dict(kind='operation',role='null-coordinate',prepareTool='spherewright_prepare_move',arguments=dict(args,targetX=None))],schemas)
+ def test_captured_native_idle_observation_never_substitutes_body_zero_for_zero_rts_and_no_order(self):
+  sample=json.loads((Path(__file__).parent/'fixtures/captured-known-move-stop.json').read_text());p=sample['player']
+  self.assertEqual('action_failed',sample['original']['state']);self.assertFalse(sample['original']['succeeded'])
+  self.assertTrue(strict_native_player_idle(p));p['nativePhysics']['walkRtsVelocity']['x']=.01;self.assertFalse(strict_native_player_idle(p))
+  p['nativePhysics']['walkRtsVelocity']['x']=0;p['nativePhysics']['currentOrderPresent']=True;self.assertFalse(strict_native_player_idle(p))
+  p['nativePhysics']['currentOrderPresent']=False;del p['nativePhysics']['driftManualVelocity'];self.assertFalse(strict_native_player_idle(p))
+ def test_free_belt_input_binds_actual_native_device_endpoint_and_finite_exact_material_limit(self):
+  a=Factory.__new__(Factory);a.refs={'station':9};a.state=lambda:None;a.entity=lambda _:dict(endpointStateHash='native-endpoint')
+  a.layout=lambda x:x;calls=[];a.build=lambda role,args,limit:calls.append((args,limit))
+  a.step(dict(kind='build-belt-to-device',role='input',starts=[dict(x=1,y=200,z=1)],destination='station',maximumNewBelts=4))
+  self.assertEqual('native-endpoint',calls[0][0]['expectedDestinationStateHash']);self.assertEqual(9,calls[0][0]['destinationObjectId'])
+  self.assertNotIn('sourceObjectId',calls[0][0]);self.assertEqual(4,calls[0][1])
  def test_native_recovery_required_paused_landing_keeps_healthy_session_without_inventing_quarantine(self):
   s=dict(sessionId='same',gameTick=3,localPlanetId=7,gameLoaded=True,ownedBySpherewright=True,writesAllowed=True,writeQuarantineActionId=None,flightCheckpointId='native-current')
   p=dict(position=dict(x=1,y=2,z=3),coreEnergy=33120896,nativeLocalControlEnergy=dict(blockers=['native_paused_not_execution_ready']))
@@ -100,7 +123,7 @@ class LiveDriverTests(unittest.TestCase):
  def test_known_failed_move_keeps_healthy_idle_writer_but_unknown_cannot_do_so(self):
   a=Factory.__new__(Factory);a.active=None;a.ctx=dict(sessionId='same')
   a.call=lambda *_:dict(gameLoaded=True,ownedBySpherewright=True,writesAllowed=True,sessionId='same')
-  a.player=lambda:dict(movementState='Walk',speed=0,nativePhysics=dict(groundContact=dict(checkSphereHit=True),velocity=dict(x=0,y=0,z=0)),handcraftQueue=[],constructionDrones=dict(working=0))
+  a.player=lambda:dict(movementState='Walk',speed=0,nativePhysics=dict(groundContact=dict(checkSphereHit=True),currentOrderPresent=False,queuedOrderCount=0,**{k:dict(x=0,y=0,z=0) for k in ('velocity','walkRtsVelocity','driftRtsVelocity','walkManualVelocity','driftManualVelocity')}),handcraftQueue=[],constructionDrones=dict(working=0))
   result=dict(actionId='original',actionKind='move',state='action_failed',terminal=True)
   self.assertTrue(a.can_await_after_known_move(AcceptedActionFailure('known',result)))
   result['state']='outcome_unknown';self.assertFalse(a.can_await_after_known_move(AcceptedActionFailure('unknown',result)))
