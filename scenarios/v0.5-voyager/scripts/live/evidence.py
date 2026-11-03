@@ -1,6 +1,7 @@
 """Append-only private evidence and read-only exact Native file proof."""
 from pathlib import Path
 import pathlib,datetime as dt,hashlib,importlib.util,json,os,struct
+from collections.abc import Mapping
 NATIVE='0.10.35.29151'
 def need(ok,why):
     if not ok: raise RuntimeError(why)
@@ -13,7 +14,11 @@ def sha(p):
     return h.hexdigest().upper()
 def put(p,x):
     with Path(p).open('x',encoding='utf-8') as f:
-        json.dump(x,f,ensure_ascii=False,indent=2,allow_nan=False);f.flush();os.fsync(f.fileno())
+        json.dump(json_value(x),f,ensure_ascii=False,indent=2,allow_nan=False);f.flush();os.fsync(f.fileno())
+def json_value(x):
+    if isinstance(x,Mapping):return {k:json_value(v) for k,v in x.items()}
+    if isinstance(x,(list,tuple)):return [json_value(v) for v in x]
+    return x
 def module(name,p):
     spec=importlib.util.spec_from_file_location(name,p);m=importlib.util.module_from_spec(spec);spec.loader.exec_module(m);return m
 

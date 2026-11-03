@@ -1,5 +1,6 @@
 """Finite native factory steps; configurations contain IDs/layouts and material ceilings."""
 import math,time,uuid
+from collections.abc import Mapping
 from driver import Live,ToolRefused,AcceptedActionFailure
 from evidence import need,read,sha
 from contracts import powered_consumers_share_network
@@ -9,7 +10,7 @@ def count(player,item): return sum(r['count'] for r in player['inventory'] if r[
 
 class Factory(Live):
  def __init__(self,runtime):
-  super().__init__(runtime);self.refs=dict(runtime.config['existingEntities']);self.used={}
+  super().__init__(runtime);self.refs=dict(runtime.config['existingEntities']);self.used={int(k):v for k,v in runtime.config.get('materialUsedAtHandoff',{}).items()}
 
  def prepare_build(self,args):
   start=time.monotonic();c=self.runtime.config
@@ -18,7 +19,7 @@ class Factory(Live):
    try:q=self.call('spherewright_prepare_build',args);return q,p
    except ToolRefused as e:
     first=e.error.get('nativeFirstFailure') or {}
-    if self.active is not None or first.get('code')!='native_drone_core_or_return_funding_unproved':raise
+    if self.active is not None or first.get('code') not in ('native_drone_core_or_return_funding_unproved','native_construction_anchor_not_settled'):raise
     need(time.monotonic()-start<c['maximumFundingWaitSeconds'],'finite_funding_wait_exhausted')
     # Read-only observation decides when to fresh prepare. No estimated energy
     # threshold is ever substituted for the Native prepare above.
@@ -61,6 +62,14 @@ class Factory(Live):
  def step(self,s):
   role=s['role'];kind=s['kind'];self.state()
   if kind=='operation':return self.native_operation(s)
+  if kind=='adopt-paid-build':
+   value=self.call('spherewright_get_blueprint_builds',dict(self.ctx,buildId=s['buildId']))
+   rows=value.get('builds') or [];need(len(rows)==1 and rows[0]['buildId']==s['buildId'],'exact_paid_build_missing')
+   objects=rows[0].get('objects') or []
+   ids=[o['entityId'] for o in objects if o.get('state')=='completed' and o.get('entityId')]
+   need(len(ids)==s['expectedObjects'] and len(set(ids))==len(ids),'paid_build_not_yet_native_completed')
+   entities=[self.entity(i) for i in ids];need(all(e['itemId']==s['itemId'] for e in entities),'paid_entity_type_changed')
+   self.refs[role]=ids;self.runtime.put(role+'-adopted-paid.private.json',dict(build=value,entities=entities,noNewCreate=True,noNewDebit=True));return
   if kind=='read':
    need(s['tool'].startswith(('spherewright_get_','spherewright_inspect_','spherewright_list_')),'read_step_cannot_submit')
    value=self.call(s['tool'],dict(self.ctx,**s.get('arguments',{})));self.runtime.put(role+'-read.private.json',value);return value
@@ -83,6 +92,17 @@ class Factory(Live):
      if err.error.get('code') not in ('BUILD_LOCATION_INVALID','BUILD_CONNECTION_INVALID'):raise
      last=err
    raise last or RuntimeError('no_belt_candidate')
+  if kind=='build-free-belt':
+   last=None
+   for candidate in s['candidates']:
+    start=self.layout(candidate['start']);end=self.layout(candidate['end'])
+    args=dict(buildingItemId=2001,preferredPositionX=start['x'],preferredPositionY=start['y'],preferredPositionZ=start['z'],
+      pathEndX=end['x'],pathEndY=end['y'],pathEndZ=end['z'])
+    try:return self.build(role,args,s['maximumNewBelts'])
+    except ToolRefused as err:
+     if err.error.get('code') not in ('BUILD_LOCATION_INVALID','BUILD_CONNECTION_INVALID'):raise
+     last=err
+   raise last or RuntimeError('no_free_belt_candidate')
   if kind=='build-sorter':
    dest=self.object_id(s['destination']);sources=self.refs[s['source']] if isinstance(s['source'],str) else [s['source']]
    if not isinstance(sources,(list,tuple)):sources=[sources]
@@ -129,8 +149,8 @@ class Factory(Live):
    for key in path.split('.'):x=x[int(key)] if isinstance(x,(list,tuple)) else x[key]
    return x
   def resolve(x):
-   if isinstance(x,dict) and set(x)=={'ref'}:return select(x['ref'])
-   if isinstance(x,dict):return {k:resolve(v) for k,v in x.items()}
+   if isinstance(x,Mapping) and set(x)=={'ref'}:return select(x['ref'])
+   if isinstance(x,Mapping):return {k:resolve(v) for k,v in x.items()}
    if isinstance(x,(list,tuple)):return [resolve(v) for v in x]
    return x
   def check(tool,args):

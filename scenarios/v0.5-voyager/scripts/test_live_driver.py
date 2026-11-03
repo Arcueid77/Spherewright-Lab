@@ -8,6 +8,20 @@ from factory import Factory
 from runtime import freeze
 
 class LiveDriverTests(unittest.TestCase):
+ def test_frozen_operation_resolves_nested_hash_references_to_json_scalars(self):
+  a=Factory.__new__(Factory);a.ctx=dict(sessionId='same',planetId=7)
+  a.runtime=type('Evidence',(),dict(put=lambda *_:None))()
+  a.schemas={
+   'spherewright_get_player_state':dict(properties=dict(sessionId={},planetId={}),required=['sessionId','planetId']),
+   'spherewright_prepare_move':dict(properties={k:{} for k in ('sessionId','planetId','targetX','targetY','targetZ','expectedPlayerStateHash')},required=[]),
+   'spherewright_commit_move':dict(properties={k:{} for k in ('sessionId','planetId','planToken','idempotencyKey')},required=[])}
+  observed=[]
+  def call(tool,args):
+   observed.append((tool,args));json.dumps(args)
+   return dict(stateHash='fresh') if tool=='spherewright_get_player_state' else dict(prepared=True,commitAllowedNow=True,commitBlockers=[],planToken='one')
+  a.call=call;a.commit=lambda *_:'original';a.successful_original=lambda _:dict(succeeded=True)
+  s=freeze(dict(role='move',prepareTool='spherewright_prepare_move',reads=[dict(name='p',tool='spherewright_get_player_state',arguments={})],arguments=dict(targetX=1,targetY=2,targetZ=3,expectedPlayerStateHash=dict(ref='p.stateHash'))))
+  a.native_operation(s);self.assertEqual('fresh',observed[-1][1]['expectedPlayerStateHash'])
  def test_known_failed_move_keeps_healthy_idle_writer_but_unknown_cannot_do_so(self):
   a=Factory.__new__(Factory);a.active=None;a.ctx=dict(sessionId='same')
   a.call=lambda *_:dict(gameLoaded=True,ownedBySpherewright=True,writesAllowed=True,sessionId='same')

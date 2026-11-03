@@ -3,7 +3,7 @@ from pathlib import Path
 import datetime as dt,json,math,re,subprocess,time,uuid
 import startup_to_action as G
 from geometry_request import complete_geometry_arrays
-from evidence import need,read,sha
+from evidence import need,read,sha,json_value
 from mcp_client import Client
 
 class AcceptedActionFailure(RuntimeError):
@@ -17,6 +17,7 @@ class Live:
  def __init__(self,runtime):
   self.runtime=runtime;self.c=None;self.seq=0;self.ctx=None;self.pid=None;self.loaded=False;self.cleanup_entered=False;self.active=None
  def call(self,name,args):
+  args=json_value(args)
   if name=='spherewright_inspect_factory_entity' and args.get('geometry') is not None: args=dict(args,geometry=complete_geometry_arrays(args['geometry']))
   self.seq+=1;self.runtime.put(f'request-{self.seq:05d}.private.json',dict(tool=name,arguments=args))
   r,bad=self.c.call(name,args);self.runtime.put(f'response-{self.seq:05d}.private.json',dict(response=r,toolError=bad))
