@@ -3,7 +3,7 @@
 更新：2026-11-03；唯一当前摘要。历史：[恢复本轮前固定截点](https://github.com/Arcueid77/Spherewright-Lab/blob/edd229f/scenarios/v0.5-voyager/current-status.md)。原三门已验收，保留不重跑。
 
 - **授权/执行：** 所有者本轮明确恢复首帆、首火箭、正常保存恢复续建续运和最终同源双包交审。适用[2026-11-03新授权](../../operations/standing-authority.md#current-owner-grant-2026-11-03--当前所有者授权)：自主设置足够的有限阶段tick、自然等待、实机窗口与调用预算，历史216000tick/1小时/900或1200秒不再阻断；累计实耗不退款不重置。保留54000tick返航及能源/翘曲器下限、建筑物料范围、Native门、原动作/unknown、备份隐私。300秒启动首实操门保留。仅真正范围增量/降低储备/进度损失/另一世界/破坏性Git/正式发布另决。
-- **源码/实装：** 产品独立检出、Lab固定依赖及磁盘均`a1967e32d883a927d2b0befb92b2c26371a82bb6`；[准确CI](https://github.com/Arcueid77/Spherewright/actions/runs/41624620543)成功。游戏/MCP已停；当前尚无新源码实机资格。Lab子模块只读，当前执行者独占游戏writer及Git维护。
+- **源码/实装：** 产品/固定依赖/磁盘同源`e9d5ee55d21278bb9e0c93e7e70cbadcc79a10b5`，[准确CI](https://github.com/Arcueid77/Spherewright/actions/runs/41662652369)成功；完整接触状态模型/真实脱敏失败回放、有限预算公开合同、共享驱动与真实SDK已离线核验。一次实际冷安装事务committed，无unknown；路径别名只读同目录/逐文件证明后沿原逻辑路径安装，原归档不改。完整1850保护及最新档未变；游戏尚未打开。开发输入`continuous-extension-20261103-v2`，无发行归档。Lab子模块只读，本执行者独占writer/Git。
 - **最新完整保存：** LastExit **121229552**，Primary **121229525**；禁止加载较旧Primary回退。保护目录`caph-graphene-line-20261103-v3/after-normal-close-complete-backup/manifest.private.json`，1850文件/四Native角色；原终态和正常Native退出保全回执保留，不能称上次受控主档Save成功。
 - **真实累计：** **140290tick已耗**；旧216000额度下余额75710仅历史会计参考，返航54000不变。新阶段有限额度将通过fresh公开Native方案登记，未登记前不篡改原额度。已付首帆：矿机1/2、聚变1/1、塔2/9、化工1/1；仓/新线带/分拣尚零。实体18—22复用，不重复创建扣料。
 - **首错：** 原resume已知失败`surface_recovery_surface_unproved`，首谓词`surface_support_exact_current_foot_owners`；原始同次足部2命中，额外layer11/非trigger/非ocean/sphere，Native ground=true但严格停稳=false。此前a196/同组件候选已失败；本轮停止逐点试补丁，完整状态模型与真实回放审计先行，原失败永不改写。
