@@ -2,6 +2,10 @@
 
 This is the only current snapshot. 以下当前计划/成果优先；下方旧截点保留为历史证据。最后更新：2026-11-03。
 
+**2026-11-03所有者要求停止、保存并退出：已保全停机，0.5暂停。** 未再推进施工。v3原resume已核销为已知失败，独立公开复核同owned402、Native暂停/隔离、tick/core稳定，无未终态writer；公开save-menu准备因当前未严格接地/空闲合同拒绝，未commit，不能称受控普通主档Save成功。按所有者本次指令仅一次正常CloseMainWindow，由游戏Native SaveAsLastExit保存并退出，未强杀；进程已停止，四Native文件完整身份/版本/字节证明通过。
+
+最新**LastExit121229552 / Primary121229525**，不得加载较旧Primary回退。**1850文件/四Native完整备份**见`caph-graphene-line-20261103-v3/after-normal-close-complete-backup/manifest.private.json`（实际数量以preservation-summary为准），停机意图、原action、公开准备拒绝与正常退出回执在v3/owner-stop-20261103-v1。累计**140290已耗/75710剩余/54000返航**，新增2tick计费，无退款。已建18矿机/19塔/20聚变/21化工/22塔均保留；当地可燃冰已有产出，仓/带/分拣、石墨烯/太阳帆/火箭尚未完成，不重复创建已付料建筑。当前main/依赖/磁盘仍a196。后续必须所有者恢复目标后才继续；本轮只保全与交接。
+
 **2026-11-03支撑边界a196已准确CI、采用和一次实际冷安装，准备石墨烯v3继续。** 当前main/锁/磁盘均a1967e32d883a927d2b0befb92b2c26371a82bb6；[准确CI41624620543](https://github.com/Arcueid77/Spherewright/actions/runs/41624620543)成功112+5212+469=5793。两MCP形态74工具/1资源、同源载荷/指南通过，manifest92395A5F43C74DBD86D402DE0496958E647865D9250A27B6F925ABDAECB9F057、cohortF20D1274F9D4EAA5830B0F8E7FC67B54F589F347E59544185090EF86DFC1A27F；开发输入surface-support-source-a1967e32-20261103-v1。唯一安装事务committed无unknown；1846完整保护与LastExit121229550/Primary121229525未变，140288已耗/75712剩余/54000返航不变。复用所有18–22已建对象，后续仅仓/带/分拣待建，仍无石墨烯实际制造证明。
 
 **2026-11-03当地化工厂21及新塔22已建，仓位碰撞未扣料；下一支撑边界修复a196待准确CI。** `caph-graphene-line-20261103-v1`恢复及Move成功，首实操86.343秒，在原首帆额度内真实建成**化工厂21（2309）/电塔22（2201）**，各1件原生扣料及准确buildId/物理尾部回执成功。仓库位置被native collider以与21碰撞拒绝，尚未建仓或任何该线带/分拣，不重建21/22。已正常Save/退出并1834后续1842文件保全到Primary=LastExit121229525，累计140263。下一候选仓移至矿机局部(-4,+8)，带尾移至(+6,+1)等有界候选，均待fresh原生布局验证。
