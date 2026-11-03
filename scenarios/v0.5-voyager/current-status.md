@@ -2,6 +2,14 @@
 
 This is the only current snapshot. 以下当前计划/成果优先；下方旧截点保留为历史证据。最后更新：2026-11-03。
 
+**2026-11-03已完成普通Drift过渡与新有界地表恢复源码，正在等最终准确CI；实装仍a78。** 产品main **56c6db183766d078f95f5a0df585fe51686ddb92**，Lab锁及磁盘仍 **a78db781122bf29735ba1cd4d77a0b18ae96e5cc**。普通活动Move修复914711cb的[准确CI41549305885](https://github.com/Arcueid77/Spherewright/actions/runs/41549305885)成功：原8tick接触缺口不变，只有fresh原生Drift模式允许同一原工作窗内最多64工作tick，适配准确Native DetermineDrift离开水面后需要48tick才能转回Walk；实际/帧接地Walk及零尾部才清gap，13tick停止尾部和原资源/返航边界不变。
+
+最新有界恢复功能由21af9f48正常提交推送，fc82586f仅去尾部空行，两者准确CI均成功；最终56c6db18进一步将本功能墙钟上限收紧到**20秒**，为原生预加载约267秒及随后实际作业保留五分钟启动余量，等待其准确CI后才可采用。公开`prepare_resume_owned_game`新增可选`surfaceRecoveryTargetX/Y/Z`，仅显式remote-primary、零新增tick且已完成独立保存落地准入的来源可用；新目标和600工作tick/20秒硬限绑定确认摘要。新resume任务仅用正常OrderNode.MoveTo/Player.Order，在新鲜2秒初始Drift绑定、真实151/501、准确world/actor/scene/订单、当前原生地形支撑、3.5m干燥落点缓冲、每下一601+13tick资金及原时间/返航储备下，尝试1–16m新目标，位移上限24m。失败Pause隔离，普通写入仍须严格停稳后才能接管；旧f89/6679/0adf未知均不重放、不改判。
+
+本地142相关Core、23MCP、8合同检查通过，完整solution/Native构建零警告错误；最终20秒收紧另复核24新Core与8新MCP及Native构建通过。实际生产计划构造器已测目标摘要绑定和输入深拷贝，MCP缺坐标/变目标/放大回声/较窄原上限均拒绝；新只读`nativePhysics.resumeSurfaceRecoveryMove`复制新resume动作的原生作业事实。**这些仍是源码/离线证据，尚未安装或恢复实机，不能算外星建设。** 设计与后续准备在`.local/v0.5-voyager/caph-surface-recovery-20261103-v1/`。
+
+最新保全边界及预算全不变：**LastExit121203400 / Primary121203001，1770文件四角色完整备份，114138已耗 /101862剩余 /54000返航**；游戏/MCP关闭，新外星建筑零，首帆/火箭/保存续建续运/最终双包目标未收缩。下一步复用合格开发工具，仅在最终准确CI、同源安装和完整保护就绪后，以新鲜公开方案固定最新LastExit、选择不同于旧unknown的有界干燥回撤落点，恢复后继续原额度矿机1/聚变1/电塔1、8燃料冷启动及当地1011产出。额外5塔仍无答复，不当作批准；原4塔/17主体/24分拣/120带及原tick上限全部保留。
+
 **2026-11-03 a78已准确CI、采用、冷安装并实机；移动墙钟缺口已有成功证据，新的真实离地失败仍保留unknown。** 产品main/Lab固定依赖/磁盘均为 **a78db781122bf29735ba1cd4d77a0b18ae96e5cc**，[准确CI41545262426](https://github.com/Arcueid77/Spherewright/actions/runs/41545262426)成功，112合同+5158Core+461MCP=5731检查。干净工作区Native构建零警告错误，两种MCP形态74工具/1资源、同源载荷及双语指南检查通过。开发输入`.local/v0.5-voyager/move-wall-source-a78db781-20261103-v1/`，manifest **E1FFED701B5C3639511C240C23646E96849E3CA0991DF5AA6C302857BDD9D270**、cohort **B9D36B58053228A21026EDD608F83E4ACD141F01F9B40935C35A1438DCD81E24**；一次冷安装回执成功，未生成发行双包，不重放安装。
 
 真实执行分别保留`.local/v0.5-voyager/caph-power-foundation-20261103-v5/`和`...-v6/`。两次新进程均经三个调用方Job独立生命周期核验，启动至首笔Move完成分别 **278.891秒、272.907秒**，均小于300秒（120秒优化目标未达）；其中原生预加载分别约267/262秒，非菜单中开发等候。v5共24笔Move成功，随后原动作a68f52d9-96a3-40e7-bbeb-274f7fc23fd4以ground_contact_gap_ended明确失败，严格停稳已证；正常保存和退出成功，Primary=LastExit121202971、1764文件完整备份。v5整包仍failed，不能以早先startup成功事件改写整包结论。
