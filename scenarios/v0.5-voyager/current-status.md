@@ -2,6 +2,12 @@
 
 This is the only current snapshot. 以下当前计划/成果优先；下方旧截点保留为历史证据。最后更新：2026-11-03。
 
+**2026-11-03新有界恢复首轮实机在第一501绑定门拒绝，未发出移动；正常退出保全，无回退。** 实际加载56c6模块及进程独立生命周期检查通过，新进程36804在73.563秒完成preload准备；新resume **74782c17-300b-4b29-abfe-2b087218005e**以已知action_failed终止，startup整包cleanup_required/78.703秒，不能计作实操启动成功。原始截点tick121203401：`surface_exact_source_scene=false`，而实际模式/费用/订单、当前原生地形支撑、9点干燥落点缓冲均true；nativeOrderAccepted=false，strict idle=false。没有新Move、没有新施工或材料扣除。保护证据`.local/v0.5-voyager/caph-power-foundation-20261103-v7/`，不得重放该resume或旧unknown。
+
+独立公开只读核对同owned402/paused/quarantined、原resume已知失败、tick/core稳定、Drift/speed0；因没有新健康接管不能伪称受控Save成功。按standing仅一次正常OS关闭，由Native LastExit保全。**最新LastExit121203401、Primary121203001，1774文件四Native角色完整备份**在v7/after-normal-close-complete-backup；累计**114139/216000，剩101861、返航54000**，本轮唯一实际tick已计，无退款。额外5塔已批准（总9）但物品未制造/运入，新外星建筑仍零。
+
+首次绑定门的聚合false尚不能证明具体原因。产品main新提交 **0e69ee1b87f04d51cb6318fd4a1154efebca9dfb**仅在原判断点保留首个runtime或first-physics玩家比较项，原生顺序/字段比较/预算及拒绝行为不变，不以事后暂停值猜原因；双语指南同步。24相关Core通过、Native零警告错误，已正常提交推送，等待准确CI及必要同源安装。**Lab依赖/磁盘仍56c6；0e69未采用安装。** 下轮只允许经过新鲜来源/参数/完整保护和准确模块核对的独立恢复任务，原747保持失败；诊断明确后再改确证问题，不任意删除绑定门或放宽费用/返航边界。
+
 **2026-11-03最终56c6已实际冷安装，尚未开游戏验收。** 唯一安装意图和回执见`surface-recovery-source-56c6db18-20261103-v1/cold-installation-20261103-v1/`：官方事务committed、一次成功，无unknown；Plugin5/MCP224文件逐项复核，准确源码与Lab锁均56c6，manifest DB54B36D37ADCC2EA6D13ED91C6F805D223A1DBF80DDBA141CB8EC6E183B7FDF。同源两个MCP形态74工具/1资源检查通过。完整1770保护文件、四Native角色及LastExit121203400/Primary121203001安装前后不变，游戏/MCP均关闭；安装不等于加载模块或恢复/施工通过。
 
 正在冻结新恢复及原额度三对象施工包；有界回撤目标来自旧公开成功Walk的真实接地点，距当前保存位置12.53m，仅是规划候选，仍需新Native9点干燥落点/当前地形和成本证明。启动后核对实际模块及新恢复原action，不重放旧unknown。电塔新增5已批准但尚未制造/运输，新建筑仍零；114138已耗/101862剩余/54000返航不变。下方“尚未安装”是较早截点。
