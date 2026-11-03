@@ -156,7 +156,7 @@ class Live:
    h=self.commit('normal-save-menu','spherewright_commit_return_to_main_menu',dict(self.ctx,planToken=q['planToken'],idempotencyKey=str(uuid.uuid4())))
    need(self.wait_original(h)['succeeded'],'original_save_menu_failed')
    s=self.call('spherewright_get_session_state',{})
-  need(not s['gameLoaded'],'native_menu_unproved');self.c.close();self.c=None
+  need(not s['gameLoaded'],'native_menu_unproved');self.runtime.put('client-close.private.json',self.c.close());self.c=None
   self.normal_close_current_process()
 
  def normal_close_current_process(self):
