@@ -15,7 +15,7 @@ def main():
  origin=Path(original_output);prior=read(origin/'client-close.private.json')
  need(prior['normalEof'] and prior['processExitCode']==0,'original_caller_not_closed')
  terminal=read(origin/f'terminal-{action_id}.private.json')
- need(terminal['terminal'] and terminal['state'] in ('action_failed','outcome_unknown') and not terminal['succeeded'],'not_a_failed_accepted_action')
+ need(terminal['terminal'] and terminal['state'] in ('action_failed','outcome_unknown','recovery_required') and not terminal['succeeded'],'not_a_failed_accepted_action')
  runtime=Runtime(config,config_sha,output);runtime.cohort();a=Live(runtime)
  game_origin=Path(runtime.config.get('liveSessionOrigin',str(origin)));a.pid=read(game_origin/'process-observed.private.json')['Id']
  a.c=Client(Path(runtime.config['pluginDestination'])/'Spherewright.Mcp.exe',runtime.output/'client',maximum=30,seconds=120)
@@ -27,7 +27,7 @@ def main():
    runtime.put(f'session-{i}.private.json',s);runtime.put(f'player-{i}.private.json',p);sessions.append(s);players.append(p);time.sleep(.5)
  finally:
   runtime.put('client-close.private.json',a.c.close());a.c=None
- need(paused_failed_cut(*sessions,*players,action_id),'failed_paused_cut_unproved')
+ need(paused_failed_cut(*sessions,*players,action_id,terminal),'failed_paused_cut_unproved')
  runtime.put('paused-cut-verified.private.json',dict(passed=True,originalActionId=action_id,gameTick=sessions[1]['gameTick'],physicalIdleNotAssumed=True,noReplay=True))
  a.normal_close_current_process()
 

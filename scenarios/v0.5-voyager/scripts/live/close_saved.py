@@ -16,6 +16,7 @@ def main():
  saves=[read(p) for p in origin.glob('terminal-*.private.json')]
  need(any(x.get('actionKind')=='save' and x.get('succeeded') and x.get('terminal')
      and x.get('completedAtGameTick',-1)>=r.config['sourceTick'] for x in saves),'current_normal_save_unproved')
- a=Live(r);a.pid=read(origin/'process-observed.private.json')['Id'];a.normal_close_current_process()
+ game_origin=Path(r.config.get('liveSessionOrigin',str(origin)))
+ a=Live(r);a.pid=read(game_origin/'process-observed.private.json')['Id'];a.normal_close_current_process()
 
 if __name__=='__main__':main()

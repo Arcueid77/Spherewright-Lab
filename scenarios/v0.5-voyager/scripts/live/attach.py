@@ -26,8 +26,15 @@ def main():
     try:
         _,tools,_,_=a.c.initialize();a.schemas={t['name']:t['inputSchema'] for t in tools}
         original=read(origin/'loaded-session.private.json');s=a.call('spherewright_get_session_state',{})
+        expected_planet=c.get('attachmentPlanetId',original['localPlanetId'])
+        if expected_planet!=original['localPlanetId']:
+            proof=c['completedPlanetTransition'];need(sha(proof['path'])==proof['sha256'],'original_arrival_receipt_changed')
+            arrival=read(proof['path']);native=arrival.get('voyagerFlightReadback') or {}
+            need(arrival['terminal'] and arrival['succeeded'] and arrival['sessionId']==original['sessionId']
+                and native.get('actualPlanetId')==expected_planet and native.get('nativeExitObserved') is True
+                and expected_planet in c['authorizedPlanetIds'],'completed_native_planet_transition_unproved')
         need(s['gameLoaded'] and s['ownedBySpherewright'] and s['writesAllowed'] and s['sessionId']==original['sessionId']
-            and s['localPlanetId']==original['localPlanetId'],'exact_healthy_live_session_changed')
+            and s['localPlanetId']==expected_planet,'exact_healthy_live_session_changed')
         a.ctx=dict(sessionId=s['sessionId'],planetId=s['localPlanetId']);a.pid=read(origin/'process-observed.private.json')['Id'];a.loaded=True
         process=a.process();need(process is not None and process['Id']==a.pid,'original_live_process_changed')
         r.put('attached-existing-session.private.json',dict(passed=True,sessionId=s['sessionId'],gameProcessId=a.pid,

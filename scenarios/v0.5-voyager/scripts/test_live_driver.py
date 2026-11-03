@@ -2,7 +2,7 @@
 from pathlib import Path
 import sys,unittest,tempfile,json,subprocess
 sys.path.insert(0,str(Path(__file__).resolve().parent/'live'))
-from contracts import powered_consumers_share_network,paused_failed_cut,validate_steps
+from contracts import powered_consumers_share_network,paused_failed_cut,validate_steps,resume_admission_echo
 from driver import Live,ToolRefused,AcceptedActionFailure
 from factory import Factory
 from runtime import freeze,Runtime
@@ -59,6 +59,22 @@ class LiveDriverTests(unittest.TestCase):
   self.assertFalse(paused_failed_cut(s,s,p,dict(p,coreEnergy=1599999999),'original'))
   self.assertFalse(paused_failed_cut(s,s,p,dict(p,nativeLocalControlEnergy=dict(blockers=[])),'original'))
   self.assertFalse(paused_failed_cut(s,s,p,p,'other'))
+ def test_actual_failed_landing_admission_is_distinct_from_completed_saved_landing_and_pins_original(self):
+  c=dict(recoveryMode='authorize_failed_landing_last_exit',failedLandingActionId='original',sourceTick=3,additionalVoyagerGameTicks=0)
+  p=dict(failedLandingRecoveryAuthorizationUsed=True,remotePrimaryRecoveryAuthorizationUsed=False,completedSavedLandingAdmissionUsed=False,
+    priorActionTerminalFailureAttested=True,priorActionTerminalCompletionAttested=False,originalFailedFlightActionId='original',savedLandingAccountingAnchorGameTick=3,additionalVoyagerGameTicks=0)
+  self.assertTrue(resume_admission_echo(c,p))
+  self.assertFalse(resume_admission_echo(c,dict(p,originalFailedFlightActionId='another')))
+  self.assertFalse(resume_admission_echo(c,dict(p,completedSavedLandingAdmissionUsed=True)))
+  self.assertFalse(resume_admission_echo(c,dict(p,additionalVoyagerGameTicks=1)))
+ def test_native_recovery_required_paused_landing_keeps_healthy_session_without_inventing_quarantine(self):
+  s=dict(sessionId='same',gameTick=3,localPlanetId=7,gameLoaded=True,ownedBySpherewright=True,writesAllowed=True,writeQuarantineActionId=None,flightCheckpointId='native-current')
+  p=dict(position=dict(x=1,y=2,z=3),coreEnergy=33120896,nativeLocalControlEnergy=dict(blockers=['native_paused_not_execution_ready']))
+  t=dict(actionId='original',actionKind='interplanetary-flight',state='recovery_required',recoveryRequired=True,flightCheckpointId='native-current',voyagerFlightReadback=dict(bindingVerified=True,nativeExitObserved=True,actualPlanetId=7))
+  self.assertTrue(paused_failed_cut(s,s,p,p,'original',t))
+  self.assertFalse(paused_failed_cut(s,s,p,p,'original'))
+  self.assertFalse(paused_failed_cut(s,dict(s,flightCheckpointId='another'),p,p,'original',t))
+  self.assertFalse(paused_failed_cut(s,s,p,p,'original',dict(t,voyagerFlightReadback=dict(bindingVerified=True,nativeExitObserved=False,actualPlanetId=7))))
  def test_frozen_operation_resolves_nested_hash_references_to_json_scalars(self):
   a=Factory.__new__(Factory);a.ctx=dict(sessionId='same',planetId=7)
   a.runtime=type('Evidence',(),dict(put=lambda *_:None))()

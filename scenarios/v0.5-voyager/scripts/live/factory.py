@@ -146,6 +146,14 @@ class Factory(Live):
      self.runtime.put(role+'-proof.private.json',e);return e
     time.sleep(.5)
    raise RuntimeError('finite_product_wait_exhausted')
+  if kind=='wait-player-still':
+   end=time.monotonic()+s['maximumSeconds']
+   while time.monotonic()<end:
+    self.state();p=self.player();physics=p.get('nativePhysics') or {};velocity=physics.get('velocity') or {};ground=physics.get('groundContact') or {}
+    if p['movementState']=='Walk' and p['speed']<=.1 and ground.get('checkSphereHit') is True and all(velocity.get(k)==0 for k in 'xyz'):
+     self.runtime.put(role+'-physical-still.private.json',p);return p
+    time.sleep(.5)
+   raise RuntimeError('finite_grounded_physical_still_wait_exhausted')
   if kind=='prove-network':
    entities=[self.entity(self.object_id(ref)) for ref in s['entities']]
    need(powered_consumers_share_network(entities,s['networkId']),'consumer_network_unproved')

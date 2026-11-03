@@ -5,6 +5,7 @@ import startup_to_action as G
 from geometry_request import complete_geometry_arrays
 from evidence import need,read,sha,json_value
 from mcp_client import Client
+from contracts import resume_admission_echo
 
 class AcceptedActionFailure(RuntimeError):
  def __init__(self,message,receipt=None):self.receipt=receipt;super().__init__(message)
@@ -34,6 +35,9 @@ class Live:
    need(sha(original['path'])==original['sha256'] and receipt['terminal'] and receipt['state']!='outcome_unknown',
      'current_original_action_not_reconciled')
   need(c['firstOperationReady'] and c['originalActionsReconciled'],'offline_not_ready')
+  if c.get('recoveryMode')=='authorize_failed_landing_last_exit':
+   need(c['additionalVoyagerGameTicks']==0 and c.get('surfaceRecoveryTarget') is None
+     and bool(c.get('failedLandingActionId')),'failed_landing_config_shape_invalid')
   self.c=Client(Path(c['pluginDestination'])/'Spherewright.Mcp.exe',s.output/'client',maximum=c['maximumRpc'],seconds=c['maximumWallSeconds'],
     total_stdout_limit=c.get('maximumStdoutBytes',64*1024*1024),total_stderr_limit=c.get('maximumStderrBytes',1024*1024))
   _,tools,_,_=self.c.initialize();self.schemas={t['name']:t['inputSchema'] for t in tools}
@@ -107,11 +111,12 @@ class Live:
 
  def prepare_resume(self,ready,deadline):
   c=self.runtime.config;now=dt.datetime.now(dt.timezone.utc)
-  args=dict(resumeToken=ready['session']['restartResumeToken'],recoveryMode='authorize_remote_primary_recovery',
+  args=dict(resumeToken=ready['session']['restartResumeToken'],recoveryMode=c.get('recoveryMode','authorize_remote_primary_recovery'),
    minimumRecoveryGameTick=c['sourceTick'],expectedRecoveryGameTick=c['sourceTick'],
    recoveryDeadlineUtc=(now+dt.timedelta(seconds=c['recoveryWindowSeconds'])).isoformat(),
    recoveryScope='continue_original_finite_task',maximumChargeGameTicks=18000,maximumChargeWallSeconds=300,
    additionalVoyagerGameTicks=c['additionalVoyagerGameTicks'])
+  if args['recoveryMode']=='authorize_failed_landing_last_exit':args['priorActionKnownTerminalFailed']=True
   target=c.get('surfaceRecoveryTarget')
   if target is not None:
    args.update(dict(zip(('surfaceRecoveryTargetX','surfaceRecoveryTargetY','surfaceRecoveryTargetZ'),(target[k] for k in 'xyz'))))
@@ -119,7 +124,7 @@ class Live:
     lambda e:any(k in str(e) for k in ('BRIDGE_NOT_READY','BRIDGE_UNAVAILABLE','REQUEST_TIMEOUT')))
   need(p['prepared'] and p['userConfirmationRequired'] and not p['commitAllowedNow']
     and [b['code'] for b in p['commitBlockers']]==['USER_CONFIRMATION_REQUIRED'],'unexpected_resume_blockers')
-  need(p['remotePrimaryRecoveryAuthorizationUsed'] and p['completedSavedLandingAdmissionUsed']
+  need(resume_admission_echo(c,p)
     and p['expectedPlanetId']==c['planetId'] and p['candidateGameTick']==p['minimumGameTick']==c['sourceTick']
     and p['discardedUnstoredProgressGameTicks']==0 and p['additionalVoyagerGameTicks']==c['additionalVoyagerGameTicks']
     and p['originalJourneyMaximumGameTicks']==c['originalJourneyMaximumGameTicks']
