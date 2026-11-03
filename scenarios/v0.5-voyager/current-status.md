@@ -2,6 +2,10 @@
 
 This is the only current snapshot. 以下当前计划/成果优先；下方旧截点保留为历史证据。最后更新：2026-11-03。
 
+**2026-11-03 v9的151路由已实际接通，随后原生旋转触发派生lossyScale逐位误拒；88ba源码已修。** v9新resume **d3c089d2-4b72-466b-ad79-a9c5d904a980**在tick121203404以已知action_failed终止，原始首项**surface151_scale_changed**，阶段surface_recovery_native151；first151/501已走过，下一151才因旋转派生scale比较拒绝，原生速度0.78486/垂直0.70634。没有完成恢复或新施工。startup整包cleanup_required/116.5秒，不能称实操通过。暂停/恢复聊天间游戏进程已退出，退出发起者未观察；只以新鲜完整Native文件证明**LastExit121203404 / Primary121203001**，不冒称代理受控Save或正常关闭成功。1782文件四Native完整备份在v9/after-normal-close-complete-backup；累计**114142已耗 /101858剩余 /54000返航**，新增2tick计费，无退款。旧动作结论均保留。
+
+产品**88baf8beb5c0964d0ad70db8b23c77918f14a387**已提交推送：新地表恢复复用已有NativeContactTransformBinding，冻结准确localScale输入与完整父链，排除非均匀祖先/重挂/无效姿态；不以正常旋转造成的lossyScale分解舍入微变判断改尺寸，不采用宽泛容差。47相关回归及Native零警告错误通过，等待准确CI；**依赖/磁盘仍3bc，88ba未安装。** 所有原生生命周期、当前位置/费用/模式/支撑/返航检查和最终严格接地零尾部均保留。新增电塔最多5（总9）已批准但尚未取得新物品，新外星建筑仍零，首帆/火箭和保存续建续运目标不变。
+
 **2026-11-03 151路由修复3bc已准确CI、采用和一次实际冷安装。** 当前main/依赖/磁盘均3bc934afbda1283cd964f25b3ede5efd44f14d53；[准确CI41557388839](https://github.com/Arcueid77/Spherewright/actions/runs/41557388839)成功112+5199+469=5780。两MCP形态74工具/1资源及同源载荷/指南通过，manifest68A2200227124618EF8A648F2FE6CFF7455F65F6C8C297DFF06CECF9F78E31CE；开发输入surface-universe-source-3bc934af-20261103-v1，唯一安装事务committed，无unknown，不重放。安装三个临界核验保留1778保护文件与LastExit121203402/Primary121203001。正在执行v9前置SDK核对后直接实机；尚无新的恢复或施工结果。114140已耗/101860剩余/54000返航及9塔上限不变。
 
 **2026-11-03已定位并修复151分发遗漏；源码3bc待准确CI，实装0e69。** v8实机53.563秒prepare就绪，新resume **12321468-fa29-486b-bf42-3baf1826a788**在tick121203402已知失败；原始准确首项 **surface_first_physics_player_native_universe_position_unpinned**。runtime绑定、当前地形、9点落点和费用/模式/订单仍true，nativeOrderAccepted=false。真实Host已收到151，但GameSessionTracker入口只路由FirstFrame.Armed的旧流程，新SurfaceRecoveryPending未armed旧锁而被提前跳过，因此它没有收到151来锁存宇宙坐标。不是物理支撑、费用或末段时长不足；不应放松坐标锁存或伪造旧首帧证明。
