@@ -34,7 +34,7 @@ class Live:
   need(c['firstOperationReady'] and c['originalActionsReconciled'],'offline_not_ready')
   self.c=Client(Path(c['pluginDestination'])/'Spherewright.Mcp.exe',s.output/'client',maximum=c['maximumRpc'],seconds=c['maximumWallSeconds'],
     total_stdout_limit=c.get('maximumStdoutBytes',64*1024*1024),total_stderr_limit=c.get('maximumStderrBytes',1024*1024))
-  self.c.initialize()
+  _,tools,_,_=self.c.initialize();self.schemas={t['name']:t['inputSchema'] for t in tools}
   self.steam=subprocess.check_output(['powershell.exe','-NoProfile','-NonInteractive','-Command',"(Get-ItemProperty -LiteralPath 'HKCU:/Software/Valve/Steam' -Name SteamExe).SteamExe"],text=True,timeout=10).strip()
   need(Path(self.steam).is_file(),'steam_missing')
   proof={key:True for key in G.READINESS_FLAGS};proof.update(sourceSha=c['sourceSha'],completeBackupFiles=len(m['rows']),knownFloor=c['sourceTick'])
@@ -177,7 +177,8 @@ class Live:
  def entity(self,i):return self.call('spherewright_inspect_factory_entity',dict(self.ctx,objectId=i))
  def state(self):
   c=self.runtime.config;s=self.call('spherewright_get_session_state',{})
-  need(s['gameLoaded'] and s['ownedBySpherewright'] and s['writesAllowed'] and s['localPlanetId']==c['planetId'],'owned_world_health_changed')
+  need(s['gameLoaded'] and s['ownedBySpherewright'] and s['writesAllowed']
+    and s['localPlanetId']==self.ctx['planetId'] and s['localPlanetId'] in c.get('authorizedPlanetIds',[c['planetId']]),'owned_world_health_changed')
   spent=c['spentGameTicks']+s['gameTick']-c['sourceTick']
   need(spent+c['returnReserveGameTicks']+c['cleanupReserveGameTicks']<c['maximumCumulativeGameTicks'],'finite_stage_work_reserve_reached')
   return s

@@ -17,7 +17,7 @@ class Runtime:
         self.config = freeze(read(config_path))
         if output is None:
             self.output=None;return
-        self.output = Path(output)
+        self.output = Path(output).resolve()
         need(not self.output.exists(), 'run_output_already_exists_no_replay')
         self.output.mkdir(parents=True)
         put(self.output/'run-config-reference.private.json', dict(path=str(config_path), sha256=config_sha))
@@ -79,7 +79,7 @@ class Runtime:
     def backup_after_normal_close(self, name='after-normal-close-complete-backup'):
         self.stopped(); c=self.config; prior=read(c['backupManifest'])
         cache={Path(r['originalPath']).resolve():r for r in prior['rows']}
-        dest=self.output/name;dest.mkdir(exist_ok=False); rows=[]
+        dest=(self.output/name).resolve();dest.mkdir(exist_ok=False); rows=[]
         paths=self.protected_paths(); proofs=self.native_proofs()
         need(max(proofs[k]['gameTick'] for k in ('primary','lastExit'))>=c['sourceTick'],'progress_loss_refused')
         for i,p in enumerate(sorted(paths,key=lambda p:str(p).casefold())):

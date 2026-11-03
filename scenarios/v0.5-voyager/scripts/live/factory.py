@@ -60,6 +60,10 @@ class Factory(Live):
 
  def step(self,s):
   role=s['role'];kind=s['kind'];self.state()
+  if kind=='operation':return self.native_operation(s)
+  if kind=='read':
+   need(s['tool'].startswith(('spherewright_get_','spherewright_inspect_','spherewright_list_')),'read_step_cannot_submit')
+   value=self.call(s['tool'],dict(self.ctx,**s.get('arguments',{})));self.runtime.put(role+'-read.private.json',value);return value
   if kind=='build-object':
    last=None
    for position in s['positions']:
@@ -112,6 +116,44 @@ class Factory(Live):
    return
   if kind=='save-close':self.cleanup_known_state();return
   raise ValueError('unsupported_immutable_step:'+kind)
+
+ def native_operation(self,s):
+  allowed={'spherewright_prepare_move','spherewright_prepare_harvest','spherewright_prepare_transfer',
+   'spherewright_prepare_configure_building','spherewright_prepare_select_research','spherewright_prepare_handcraft',
+   'spherewright_prepare_refuel','spherewright_prepare_supply_mecha_warpers','spherewright_prepare_voyager_flight',
+   'spherewright_prepare_save_owned_game'}
+  prepare=s['prepareTool'];need(prepare in allowed,'operation_family_not_allowed')
+  values=dict(context=dict(self.ctx))
+  def select(path):
+   x=values
+   for key in path.split('.'):x=x[int(key)] if isinstance(x,(list,tuple)) else x[key]
+   return x
+  def resolve(x):
+   if isinstance(x,dict) and set(x)=={'ref'}:return select(x['ref'])
+   if isinstance(x,dict):return {k:resolve(v) for k,v in x.items()}
+   if isinstance(x,(list,tuple)):return [resolve(v) for v in x]
+   return x
+  def check(tool,args):
+   schema=self.schemas[tool];need(set(args)<=set(schema['properties']) and set(schema.get('required',[]))<=set(args),'actual_sdk_argument_contract_mismatch')
+  for query in s.get('reads',[]):
+   need(query['tool'].startswith(('spherewright_get_','spherewright_inspect_','spherewright_list_')),'read_dependency_cannot_submit')
+   name=query['name'];args=dict(self.ctx,**resolve(query.get('arguments',{})));check(query['tool'],args)
+   values[name]=self.call(query['tool'],args);self.runtime.put(s['role']+'-'+name+'-before.private.json',values[name])
+  args=dict(self.ctx,**resolve(s['arguments']));check(prepare,args);q=self.call(prepare,args)
+  need(q['prepared'] and q['commitAllowedNow'] and not q['commitBlockers'],'native_operation_not_prepared')
+  self.runtime.put(s['role']+'-plan.private.json',q)
+  commit=prepare.replace('_prepare_','_commit_',1)
+  commit_args=dict(planToken=q['planToken'],idempotencyKey=str(uuid.uuid4()))
+  for key,value in self.ctx.items():
+   if key in self.schemas[commit]['properties']:commit_args[key]=value
+  commit_args.update(resolve(s.get('commitArguments',{})));check(commit,commit_args)
+  r=self.successful_original(self.commit(s['role'],commit,commit_args))
+  if prepare=='spherewright_prepare_voyager_flight':
+   current=self.call('spherewright_get_session_state',{})
+   need(current['sessionId']==self.ctx['sessionId'] and current['ownedBySpherewright']
+    and current['localPlanetId'] in self.runtime.config.get('authorizedPlanetIds',[self.runtime.config['planetId']]),'flight_context_changed')
+   self.ctx=dict(sessionId=current['sessionId'],planetId=current['localPlanetId'])
+  return r
 
  def continue_prepared_work(self,result):
   try:self.execute_plan(self.runtime.config['initialSteps'],'initial')
