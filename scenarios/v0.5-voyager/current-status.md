@@ -2,6 +2,12 @@
 
 This is the only current snapshot. 以下当前计划/成果优先；下方旧截点保留为历史证据。最后更新：2026-11-03。
 
+**2026-11-03已定位并修复151分发遗漏；源码3bc待准确CI，实装0e69。** v8实机53.563秒prepare就绪，新resume **12321468-fa29-486b-bf42-3baf1826a788**在tick121203402已知失败；原始准确首项 **surface_first_physics_player_native_universe_position_unpinned**。runtime绑定、当前地形、9点落点和费用/模式/订单仍true，nativeOrderAccepted=false。真实Host已收到151，但GameSessionTracker入口只路由FirstFrame.Armed的旧流程，新SurfaceRecoveryPending未armed旧锁而被提前跳过，因此它没有收到151来锁存宇宙坐标。不是物理支撑、费用或末段时长不足；不应放松坐标锁存或伪造旧首帧证明。
+
+产品**3bc934afbda1283cd964f25b3ede5efd44f14d53**正常提交推送：将生产151入口独立链接测试，使pending地表恢复即使旧锁未armed也接收每个真实151；普通旧首帧/接触与退休顺序不变，来源/失败仍拒绝。补8项实际生产入口回归，合计500受影响回归通过、Native零警告错误；151本身也保留首个实际runtime/玩家/地形失败项，不在事后补猜。等待准确CI后才采用/冷装。**锁和磁盘仍0e69，3bc未安装。**
+
+本轮仍未发出新Move或施工，新建筑零。独立公开只读复核同owned402、paused/quarantined、Drift0、tick/core稳定；按standing一次正常OS关闭保全，不冒称普通受控Save成功。最新**LastExit121203402、Primary121203001，1778文件四Native完整备份**在v8/after-normal-close-complete-backup。累计**114140已耗/101860剩余/54000返航**，本轮1tick计入，无退款。两个新resume保持失败，三个旧Move保持unknown，新增5塔已批准但尚未有物品/施工成果。下方0e69待加载是旧截点。
+
 **2026-11-03具体首失败比较项诊断0e69已准确CI、采用及一次冷安装，未新加载。** 当前产品main/Lab锁/磁盘均 **0e69ee1b87f04d51cb6318fd4a1154efebca9dfb**，[准确CI41555567633](https://github.com/Arcueid77/Spherewright/actions/runs/41555567633)成功5772检查；干净Native Release零警告错误，两MCP形态74工具/1资源和同源指南/载荷通过。新开发输入`.local/v0.5-voyager/surface-binding-source-0e69ee1b-20261103-v1/`，manifest **049167DEB1BA355E79CD0FD323208404B289BEE24D255EF032EEFD69717EE31F**、cohort **FAE8BE65D7EEC1E6A35D754DFAC45760259846B14BE6DD783BD66EB992359012**；安装事务committed，原意图和回执不重放。1774完整保护及四Native来源安装前后未变，LastExit121203401/Primary121203001、114139已耗/101861剩余/54000返航不变。游戏/MCP关闭，下一包v8只沿新鲜公开恢复及原有限工作目标；原747失败与三个Move unknown不改判。
 
 **2026-11-03新有界恢复首轮实机在第一501绑定门拒绝，未发出移动；正常退出保全，无回退。** 实际加载56c6模块及进程独立生命周期检查通过，新进程36804在73.563秒完成preload准备；新resume **74782c17-300b-4b29-abfe-2b087218005e**以已知action_failed终止，startup整包cleanup_required/78.703秒，不能计作实操启动成功。原始截点tick121203401：`surface_exact_source_scene=false`，而实际模式/费用/订单、当前原生地形支撑、9点干燥落点缓冲均true；nativeOrderAccepted=false，strict idle=false。没有新Move、没有新施工或材料扣除。保护证据`.local/v0.5-voyager/caph-power-foundation-20261103-v7/`，不得重放该resume或旧unknown。
