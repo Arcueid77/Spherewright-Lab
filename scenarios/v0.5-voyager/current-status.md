@@ -2,6 +2,8 @@
 
 This is the only current snapshot. 以下当前计划/成果优先；下方旧截点保留为历史证据。最后更新：2026-11-03。
 
+**2026-11-03 151路由修复3bc已准确CI、采用和一次实际冷安装。** 当前main/依赖/磁盘均3bc934afbda1283cd964f25b3ede5efd44f14d53；[准确CI41557388839](https://github.com/Arcueid77/Spherewright/actions/runs/41557388839)成功112+5199+469=5780。两MCP形态74工具/1资源及同源载荷/指南通过，manifest68A2200227124618EF8A648F2FE6CFF7455F65F6C8C297DFF06CECF9F78E31CE；开发输入surface-universe-source-3bc934af-20261103-v1，唯一安装事务committed，无unknown，不重放。安装三个临界核验保留1778保护文件与LastExit121203402/Primary121203001。正在执行v9前置SDK核对后直接实机；尚无新的恢复或施工结果。114140已耗/101860剩余/54000返航及9塔上限不变。
+
 **2026-11-03已定位并修复151分发遗漏；源码3bc待准确CI，实装0e69。** v8实机53.563秒prepare就绪，新resume **12321468-fa29-486b-bf42-3baf1826a788**在tick121203402已知失败；原始准确首项 **surface_first_physics_player_native_universe_position_unpinned**。runtime绑定、当前地形、9点落点和费用/模式/订单仍true，nativeOrderAccepted=false。真实Host已收到151，但GameSessionTracker入口只路由FirstFrame.Armed的旧流程，新SurfaceRecoveryPending未armed旧锁而被提前跳过，因此它没有收到151来锁存宇宙坐标。不是物理支撑、费用或末段时长不足；不应放松坐标锁存或伪造旧首帧证明。
 
 产品**3bc934afbda1283cd964f25b3ede5efd44f14d53**正常提交推送：将生产151入口独立链接测试，使pending地表恢复即使旧锁未armed也接收每个真实151；普通旧首帧/接触与退休顺序不变，来源/失败仍拒绝。补8项实际生产入口回归，合计500受影响回归通过、Native零警告错误；151本身也保留首个实际runtime/玩家/地形失败项，不在事后补猜。等待准确CI后才采用/冷装。**锁和磁盘仍0e69，3bc未安装。**
