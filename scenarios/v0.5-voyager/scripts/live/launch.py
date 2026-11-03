@@ -1,0 +1,29 @@
+"""Detach one writer, prove OS lifetime separation, then return its progress path."""
+from pathlib import Path
+import sys,datetime as dt,time,subprocess
+sys.dont_write_bytecode=True
+ROOT=Path(__file__).resolve().parent
+sys.path.insert(0,str(ROOT.parent))
+import detached_python_task as launcher
+from evidence import sha,read,need,put
+
+def main():
+    config,config_sha,output=sys.argv[1:];c=read(config);out=Path(output)
+    need(sha(config)==config_sha.upper() and not out.exists(),'config_changed_or_prior_run_exists')
+    worker=out.parent/(out.name+'-worker')
+    inputs=[Path(config),*ROOT.glob('*.py'),ROOT.parent/'startup_to_action.py',ROOT.parent/'geometry_request.py']
+    deadline=dt.datetime.now(dt.timezone.utc)+dt.timedelta(seconds=c['maximumWallSeconds']+60)
+    result=launcher.launch_once(ROOT/'run.py',sha(ROOT/'run.py'),[config,config_sha,output],worker,deadline.isoformat(),
+        transport='same_user_wmi',expected_inputs=[dict(path=str(p),bytes=p.stat().st_size,sha256=sha(p)) for p in inputs])
+    end=time.monotonic()+300
+    while time.monotonic()<end:
+        if (out/'process-observed.private.json').exists():
+            audit=subprocess.run([sys.executable,str(ROOT/'audit-lifetime.py'),str(out)],capture_output=True,text=True,timeout=45)
+            put(out/'lifetime-audit-process.private.json',dict(exitCode=audit.returncode))
+            need(audit.returncode==0,'actual_lifetime_audit_failed_no_relaunch')
+            print('One writer launched; actual game lifetime separation verified.',flush=True);return
+        if (worker/'worker-failure.private.json').exists():raise RuntimeError('original_writer_failed_before_game_process_no_replay')
+        time.sleep(.25)
+    raise RuntimeError('original_launch_pending_no_relaunch')
+
+if __name__=='__main__':main()

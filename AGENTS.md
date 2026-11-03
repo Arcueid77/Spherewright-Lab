@@ -1,5 +1,7 @@
 # Spherewright-Lab working rules
 
+- Current owner precedence (2026-11-03): the [resumed extension grant](operations/standing-authority.md#current-owner-grant-2026-11-03--当前所有者授权) supersedes the prior pause and historical tick/window/caller ceilings below. Choose sufficient finite stage budgets, preserve cumulative spending, Native gates, material ceilings and reserves; retain the 300-second startup gate. / 当前先适用所有者2026-11-03恢复目标及有限工作预算授权，旧暂停和流程上限不再阻断；保留累计实耗、Native门、物料范围、储备及300秒启动门。
+
 Engineering reference: [0.5 development lessons](operations/lessons/v0.5-voyager-2026-10-29.md). It records recurring pitfalls and adds no approval gate or execution authority. / 工程参考：[0.5经验复盘](operations/lessons/v0.5-voyager-2026-10-29.md)，记录重复陷阱，不新增审批门或执行权限。
 
 - Start Agent work at this repository root. Read `source-lock.json`, `operations/active-handoff.md`, and the active [Voyager snapshot](scenarios/v0.5-voyager/current-status.md). `operations/current-status.md` is a manifest-protected historical import: reference it only for historical proof and never overwrite it. Do not load whole historical ledgers into model context.

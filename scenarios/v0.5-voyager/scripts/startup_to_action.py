@@ -149,7 +149,8 @@ def run(adapter: Adapter, emit: Callable[[dict], None], clock=time.monotonic) ->
         if report.startup_seconds is None:
             report.startup_seconds = clock() - started
         emit(asdict(report))
-        if launched and not report.unresolved_commit:
+        preserve = getattr(adapter, 'failure_requires_preservation', lambda _error: True)(error)
+        if launched and not report.unresolved_commit and preserve:
             try:
                 adapter.cleanup_known_state()
             except Exception as cleanup_error:
