@@ -3,11 +3,11 @@
 更新：2026-11-04。唯一当前摘要；[本轮前固定历史](https://github.com/Arcueid77/Spherewright-Lab/blob/edd229f/scenarios/v0.5-voyager/current-status.md)。原Voyager三门保留，不重跑。
 
 - **授权：** [所有者恢复授权](../../operations/standing-authority.md#current-owner-grant-2026-11-03--当前所有者授权)覆盖首帆、首火箭、保存恢复续建续运及最终双包交审。自主设置足够的有限tick/等待/窗口/调用预算，旧216000tick、1小时、900/1200秒上限不再阻断；实耗不退款重置。54000返航及能源/翘曲器下限、物料范围、Native门、原动作/unknown、备份隐私保留。启动首实操300秒。仅真范围增量、降储备、损失/回退、另一世界、破坏性Git及正式发布另决。
-- **源码/实装：** 固定依赖/磁盘`489ff6346b9c5c58e10f8b0fe4d1027d04881c58`，[准确CI](https://github.com/Arcueid77/Spherewright/actions/runs/41686205784)与真实SDK/一次同源冷装committed已核。此源已加载，恢复未获健康接管。独立产品新候选`d4e34771749d80d5e854fec73a6ce7ef18970a24`完成真实接地响应脱敏/生产组合/Store跨层回放、Native无警告构建；[准确CI](https://github.com/Arcueid77/Spherewright/actions/runs/41689666462)待完成，未安装。开发输入`continuous-extension-20261104-v4`；无发行包，Lab子模块只读。
+- **源码/实装：** 固定依赖/磁盘`d4e34771749d80d5e854fec73a6ce7ef18970a24`，[准确CI](https://github.com/Arcueid77/Spherewright/actions/runs/41689666462)及真实SDK/Native构建/同源资格已过，一次必要冷安装committed。此源尚未加载；`continuous-extension-20261104-v4`保留开发证明，无发行包。完整接地响应脱敏/生产事实组合/Store跨层回放已过。旧489恢复未获健康接管，原失败保留。Lab子模块只读。
 - **最新完整保存：** LastExit **121244155** / Primary **121233749**；禁止回退Primary。游戏/MCP已停，**1878文件/四Native完整备份**：`continuous-extension-20261104-v3/failed-pending-recovery-preserved/after-normal-close-complete-backup/manifest.private.json`。正常Native退出保全，无强杀；旧普通Save121233706已证，菜单7055…仍unknown。
 - **实际账目：** 累计 **154893tick**，最新3tick全部计费；已确认additional1080000/原Journey107547/有效1187547，调用端累计上限1296000/有限12小时，返航54000不变。首帆已付矿机1/2、聚变1/1、塔2/9、化工1/1、仓2/3、炉1/1、MkII1/3、带13/120、分拣4/24；实体18—43保留，无重复扣料。
 - **实际变化/首错：** 357表面恢复及零目标施工开关已成功，启动首实操274.328秒；当地采石12（背包0→12/矿脉-12），可燃冰→石墨烯首批2入仓23，桥/过滤分拣/网2真实服务。仓41、炉42建成。MkII原b311…/build d8d4…扣1件3→2，原unknown控制不变；489的3tick中原预建体已自然转**实体43 completed**，原无人机stage4，尚缺物理idle证书。恢复ec54…在第三tick以contact_idle_facts_missing暂停；原始独立cast间隙0.233828m，151中31→9，cadence0.125/下落2.270525m/s。详细原件留保护目录。
-- **下一动作：** d4e候选统一载入地形有限沉降包络/真实cadence墙钟/Walk脚球高度/零尾部及同次捕获首错；准确资格→一次必要同源冷装→最新LastExit恢复并核原控制未改/无新扣料→采用真实43/41/42，接通玻璃/棱镜/合并器/4帆制造发射。跨星辅料、科研、火箭完整BOM/预检及必要一次准确范围增量同步推进；功能全闭后最终双包，正式发布未授权。
+- **下一动作：** d4e候选统一载入地形有限沉降包络/真实cadence墙钟/Walk脚球高度/零尾部及同次捕获首错；已完成准确资格/同源冷装→最新LastExit恢复并核原控制未改/无新扣料→采用真实43/41/42，接通玻璃/棱镜/合并器/4帆制造发射。跨星辅料、科研、火箭完整BOM/预检及必要一次准确范围增量同步推进；功能全闭后最终双包，正式发布未授权。
 
 | 验收成果 | 当前真实证据 / 尚缺 |
 | --- | --- |
