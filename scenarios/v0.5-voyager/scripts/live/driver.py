@@ -32,7 +32,8 @@ class Live:
    need(sha(original['path'])==original['sha256'] and receipt['terminal'] and receipt['state']!='outcome_unknown',
      'current_original_action_not_reconciled')
   need(c['firstOperationReady'] and c['originalActionsReconciled'],'offline_not_ready')
-  self.c=Client(Path(c['pluginDestination'])/'Spherewright.Mcp.exe',s.output/'client',maximum=c['maximumRpc'],seconds=c['maximumWallSeconds'])
+  self.c=Client(Path(c['pluginDestination'])/'Spherewright.Mcp.exe',s.output/'client',maximum=c['maximumRpc'],seconds=c['maximumWallSeconds'],
+    total_stdout_limit=c.get('maximumStdoutBytes',64*1024*1024),total_stderr_limit=c.get('maximumStderrBytes',1024*1024))
   self.c.initialize()
   self.steam=subprocess.check_output(['powershell.exe','-NoProfile','-NonInteractive','-Command',"(Get-ItemProperty -LiteralPath 'HKCU:/Software/Valve/Steam' -Name SteamExe).SteamExe"],text=True,timeout=10).strip()
   need(Path(self.steam).is_file(),'steam_missing')
@@ -192,12 +193,21 @@ class Live:
 
  def prepare_first_work(self,loaded,deadline):
   work=self.runtime.config['firstOperation'];e=self.entity(work['entityId']);self.first_before=e
-  need(e['recipeId']!=work['recipeId'],'first_recipe_already_applied_no_delta')
-  q=self.call('spherewright_prepare_configure_building',dict(self.ctx,entityId=work['entityId'],recipeId=work['recipeId'],mode='production',expectedFactoryStateHash=e['stateHash']))
+  mode=work.get('mode','production')
+  if mode=='production':need(e['recipeId']!=work['recipeId'],'first_recipe_already_applied_no_delta')
+  args=dict(self.ctx,entityId=work['entityId'],recipeId=work.get('recipeId',0),mode=mode,expectedFactoryStateHash=e['stateHash'])
+  if mode=='storage-capacity':args.update(storageOperation=work['storageOperation'],filterItemId=work.get('filterItemId',0))
+  q=self.call('spherewright_prepare_configure_building',args)
   need(q['prepared'] and q['commitAllowedNow'] and not q['commitBlockers'],'first_operation_not_prepared')
   return dict(action_kind='configure-building',tool='spherewright_commit_configure_building',prepared=q)
  def commit_first_work_once(self,w):return self.commit('first-work',w['tool'],dict(self.ctx,planToken=w['prepared']['planToken'],idempotencyKey=str(uuid.uuid4())))
  def verify_progress(self,w,r):
-  c=self.runtime.config['firstOperation'];e=self.entity(c['entityId']);ok=r['succeeded'] and e['recipeId']==c['recipeId'] and self.first_before['recipeId']!=e['recipeId']
+  c=self.runtime.config['firstOperation'];e=self.entity(c['entityId'])
+  if c.get('mode','production')=='storage-capacity':
+   before=self.first_before.get('storageConfiguration') or {};after=e.get('storageConfiguration') or {}
+   filters=after.get('gridFilterItemIds') or []
+   ok=r['succeeded'] and bool(r.get('storageConfigurationReadback')) and bool(filters)
+   ok=ok and all(x==c['filterItemId'] for x in filters) and before!=after
+  else:ok=r['succeeded'] and e['recipeId']==c['recipeId'] and self.first_before['recipeId']!=e['recipeId']
   self.runtime.put('actual-progress.private.json',dict(verified=ok,actionId=r['actionId'],before=self.first_before,after=e))
   return ok

@@ -14,6 +14,8 @@ URI = 'spherewright://agent/playbooks/opening-movement-v1'
 MAX_STDOUT_BYTES = 64 * 1024 * 1024
 MAX_LINE_BYTES = 1024 * 1024
 MAX_STDERR_BYTES = 1024 * 1024
+MAX_CONFIGURED_STDOUT_BYTES = 1024 * 1024 * 1024
+MAX_CONFIGURED_STDERR_BYTES = 64 * 1024 * 1024
 
 
 class McpClientError(RuntimeError):
@@ -24,19 +26,22 @@ class McpClientError(RuntimeError):
 
 class Client:
     def __init__(self, executable, directory, maximum=8, seconds=120,
-                 total_stdout_limit=MAX_STDOUT_BYTES):
+                 total_stdout_limit=MAX_STDOUT_BYTES,total_stderr_limit=MAX_STDERR_BYTES):
         if isinstance(maximum, bool) or not isinstance(maximum, int) or maximum < 1:
             raise ValueError('maximum must be a finite positive request count')
         if isinstance(seconds, bool) or not isinstance(seconds, (int, float)) or not math.isfinite(seconds) or seconds <= 0:
             raise ValueError('seconds must be finite and positive')
         if (isinstance(total_stdout_limit, bool) or not isinstance(total_stdout_limit, int)
-                or not 1 <= total_stdout_limit <= MAX_STDOUT_BYTES):
-            raise ValueError('total_stdout_limit must be an integer from 1 through 64 MiB')
+                or not 1 <= total_stdout_limit <= MAX_CONFIGURED_STDOUT_BYTES):
+            raise ValueError('total_stdout_limit must be a finite integer through 1 GiB')
+        if isinstance(total_stderr_limit,bool) or not isinstance(total_stderr_limit,int) or not 1<=total_stderr_limit<=MAX_CONFIGURED_STDERR_BYTES:
+            raise ValueError('total_stderr_limit must be a finite integer through 64 MiB')
         self.directory = pathlib.Path(directory)
         self.directory.mkdir(exist_ok=True)
         self.maximum, self.count = maximum, 0
         self.deadline = time.monotonic() + seconds
         self.total_stdout_limit = total_stdout_limit
+        self.total_stderr_limit = total_stderr_limit
         self.lines, self.faults = queue.Queue(), []
         self.stderr = bytearray()
         self.lock = threading.RLock()
@@ -142,7 +147,7 @@ class Client:
                     self.stderr_received_bytes += len(data)
                     self.error_raw.write(data)
                     self._flush(self.error_raw)
-                if self.stderr_received_bytes > MAX_STDERR_BYTES:
+                if self.stderr_received_bytes > self.total_stderr_limit:
                     self._fault('stderr_total_limit', 'Bounded stderr capture limit exceeded.')
                     return
         except Exception as error:
@@ -243,7 +248,7 @@ class Client:
         elif exit_code != 0:
             self._fault('mcp_exit_nonzero', 'Owned MCP exit code: %s' % exit_code)
         self.evidence = dict(schemaVersion=1, requestCount=self.count, maximumRequests=self.maximum,
-                totalStdoutLimitBytes=self.total_stdout_limit, lineLimitBytes=MAX_LINE_BYTES,
+                totalStdoutLimitBytes=self.total_stdout_limit,totalStderrLimitBytes=self.total_stderr_limit,lineLimitBytes=MAX_LINE_BYTES,
                 stdoutReceivedBytes=self.stdout_received_bytes, stdoutAcceptedBytes=self.stdout_accepted_bytes,
                 stdoutFrames=self.stdout_frames, stderrReceivedBytes=self.stderr_received_bytes,
                 stdoutEofObserved=self.stdout_eof_observed, stderrEofObserved=self.stderr_eof_observed,

@@ -16,6 +16,8 @@ def main():
             ('spherewright_prepare_build',dict(ctx,buildingItemId=2011,expectedPlayerStateHash=h,sourceObjectId=18,destinationObjectId=21,expectedSourceStateHash=h,expectedDestinationStateHash=h,initialSorterFilterItemId=1011)),
             ('spherewright_prepare_configure_building',dict(ctx,entityId=21,recipeId=32,mode='production',expectedFactoryStateHash=h)),
             ('spherewright_prepare_configure_building',dict(ctx,entityId=25,recipeId=0,mode='sorter-filter',filterItemId=1301,expectedFactoryStateHash=h)),
+            ('spherewright_prepare_configure_building',dict(ctx,entityId=23,recipeId=0,mode='storage-capacity',storageOperation='filter-empty-or-matching',filterItemId=1123,expectedFactoryStateHash=h)),
+            ('spherewright_prepare_configure_building',dict(ctx,entityId=30,recipeId=0,mode='dyson-minimal-receiving-node',expectedFactoryStateHash=h)),
             ('spherewright_prepare_resume_owned_game',dict(resumeToken='synthetic-offline-token',recoveryMode='authorize_remote_primary_recovery',minimumRecoveryGameTick=100,expectedRecoveryGameTick=100,
                 recoveryDeadlineUtc=(dt.datetime.now(dt.timezone.utc)+dt.timedelta(hours=3)).isoformat(),recoveryScope='continue_original_finite_task',maximumChargeGameTicks=18000,maximumChargeWallSeconds=300,
                 additionalVoyagerGameTicks=432000,surfaceRecoveryTargetX=1.,surfaceRecoveryTargetY=199.,surfaceRecoveryTargetZ=1.))]

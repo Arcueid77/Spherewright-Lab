@@ -123,6 +123,8 @@ class Factory(Live):
  def execute_plan(self,steps,label):
   for s in steps:
    self.step(s)
+   if self.c is None:
+    self.runtime.put(label+'-complete.private.json',dict(refs=self.refs,materialUsed=self.used,normalSavedAndClosed=True));return
   self.runtime.put(label+'-complete.private.json',dict(refs=self.refs,materialUsed=self.used,session=self.call('spherewright_get_session_state',{})))
 
  def await_next_plan(self):
