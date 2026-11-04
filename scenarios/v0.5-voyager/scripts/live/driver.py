@@ -206,6 +206,10 @@ class Live:
   e=self.entity(entity_id)
   args=dict(self.ctx,entityId=entity_id,recipeId=recipe_id,mode=mode,
     expectedFactoryStateHash=e['configurationStateHash'] if mode=='sorter-filter' else e['stateHash'])
+  if mode=='research':
+   t=self.call('spherewright_get_progression_state',self.ctx)
+   need(recipe_id==0 and t['currentTechId']>0,'research_requires_current_matrix_technology')
+   args['techId']=t['currentTechId'];self.runtime.put(role+'-current-tech-before.private.json',t)
   if mode=='sorter-filter':args['filterItemId']=filter_item
   q=self.call('spherewright_prepare_configure_building',args)
   need(q['prepared'] and q['commitAllowedNow'] and not q['commitBlockers'],'configuration_not_prepared')
@@ -222,6 +226,10 @@ class Live:
   e=self.player() if mode in ('enable-mecha-construction-drones','disable-mecha-research-auto-supply','enable-mecha-research-auto-supply') else self.entity(work['entityId']);self.first_before=e
   if mode=='production':need(e['recipeId']!=work['recipeId'],'first_recipe_already_applied_no_delta')
   args=dict(self.ctx,entityId=work['entityId'],recipeId=work.get('recipeId',0),mode=mode,expectedFactoryStateHash=e['stateHash'])
+  if mode=='research':
+   t=self.call('spherewright_get_progression_state',self.ctx)
+   need(args['recipeId']==0 and t['currentTechId']>0,'first_research_requires_current_matrix_technology')
+   args['techId']=t['currentTechId']
   if mode=='storage-capacity':args.update(storageOperation=work['storageOperation'],filterItemId=work.get('filterItemId',0))
   q=self.call('spherewright_prepare_configure_building',args)
   need(q['prepared'] and q['commitAllowedNow'] and not q['commitBlockers'],'first_operation_not_prepared')

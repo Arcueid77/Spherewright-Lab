@@ -9,6 +9,19 @@ from factory import Factory
 from runtime import freeze,Runtime
 
 class LiveDriverTests(unittest.TestCase):
+ def test_research_configuration_binds_fresh_current_tech_separately_from_recipe(self):
+  a=Live.__new__(Live);a.ctx=dict(sessionId='same',planetId=104)
+  a.runtime=type('Evidence',(),dict(put=lambda *_:None))();a.entity=lambda _:dict(stateHash='native-full-hash')
+  args_seen=[]
+  def call(name,args):
+   if name=='spherewright_get_progression_state':return dict(currentTechId=1303)
+   args_seen.append(args)
+   if args.get('mode')=='research' and args.get('techId')!=1303:raise ToolRefused(name,dict(code='INVALID_TECHNOLOGY'))
+   return dict(prepared=True,commitAllowedNow=True,commitBlockers=[],planToken='synthetic')
+  a.call=call;a.commit=lambda *_:'original';a.successful_original=lambda _:dict(succeeded=True)
+  a.configure('fresh-research',7,0,'research')
+  self.assertEqual(1303,args_seen[0]['techId']);self.assertEqual(0,args_seen[0]['recipeId'])
+
  def test_production_short_crossing_checks_fresh_terminal_evidence_before_commit(self):
   sample=json.loads((Path(__file__).parent/'fixtures/captured-observed-short-crossing.json').read_text())
   player=json.loads((Path(__file__).parent/'fixtures/captured-known-move-stop.json').read_text())['player'];player['coreEnergy']=1600000000
