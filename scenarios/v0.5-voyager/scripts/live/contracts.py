@@ -72,6 +72,26 @@ def strict_native_player_idle(player):
         and all(isinstance(physics.get(key),Mapping) and all(physics[key].get(axis)==0 for axis in 'xyz') for key in vectors))
 
 
+def fully_observed_dry_surface(prepared):
+    """Advisory terrain admission only; a dry preview never proves route clearance."""
+    import math
+    surface=prepared.get('surfacePreview') or {}
+    samples=surface.get('samples') or []
+    arc=surface.get('arcLengthMetres')
+    if not (surface.get('state')=='observed' and surface.get('reasonCode') is None
+            and surface.get('shoreRisk')=='not_detected'
+            and surface.get('unknownSampleCount')==0 and surface.get('shoreRiskSampleCount')==0
+            and type(arc) in (int,float) and math.isfinite(arc) and 0<=arc<=64
+            and 2<=len(samples)<=65):return False
+    for sample in samples:
+        if sample.get('groundHit') is not True or sample.get('shoreRisk')!='not_detected':return False
+        if sample.get('waterHit') is False:continue  # no water: depth is N/A
+        depth=sample.get('groundBelowWaterMetres')
+        if (sample.get('waterHit') is not True or type(depth) not in (int,float)
+                or not math.isfinite(depth) or depth>=0):return False
+    return True
+
+
 def paused_failed_cut(first_session, second_session, first_player, second_player, action_id,terminal=None):
     # SessionState has no isPaused and PlayerState exposes coreEnergy, not
     # energy. Use the actual public paused-cost blocker and stable cut.

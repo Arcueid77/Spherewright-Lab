@@ -1,7 +1,10 @@
 from evidence import need,put,read,sha
+from lifetime_contract import qualifies as qualify,terminating_groups
 from pathlib import Path
 import os,sys,json,subprocess,datetime as dt
 D=Path(sys.argv[1]).resolve()
+E=Path(sys.argv[2]).resolve() if len(sys.argv)>2 else D
+E.mkdir(parents=True,exist_ok=True)
 import ctypes
 from ctypes import wintypes as w
 K=ctypes.WinDLL('kernel32',use_last_error=True);N=ctypes.WinDLL('ntdll')
@@ -82,27 +85,16 @@ try:
     finally:
         for h in handles.values():
             if h:K.CloseHandle(h)
-    put(D/'job-memberships.raw.private.json',dict(capturedAtUtc=dt.datetime.now(dt.timezone.utc).isoformat(),
+    put(E/'job-memberships.raw.private.json',dict(capturedAtUtc=dt.datetime.now(dt.timezone.utc).isoformat(),
         gameProcessId=gamepid,steamProcessId=steampid,callerProcessId=os.getpid(),callerAncestry=ancestry,
         callerAncestryProcesses=[byid[p]for p in ancestry],handleCount=count,jobTypeIndex=jobtype,queriedJobs=rows,
         refusedQueries=refused,queryOnlyJobAccess=4,gameMemoryReads=0,jobAssignments=0,jobLimitChanges=0,processTerminations=0))
 finally:K.CloseHandle(probe)
 
 import copy
-raw=read(D/'job-memberships.raw.private.json')
-def qualify(r):
-    relevant=[j for j in r['queriedJobs']if j['killOnClose'] and (j['memberships'].get('caller') is True
-        or any(value is True for name,value in j['memberships'].items()if name.startswith('codex-')))]
-    # Stop at the application which actually owns the outer cleanup jobs.
-    # Its OS service/session ancestors do not exit with this application.
-    ownerpids={j['ownerPid']for j in relevant}
-    owner_indices=[r['callerAncestry'].index(pid)for pid in ownerpids if pid in r['callerAncestry']]
-    if not owner_indices:return False
-    callerowners=set(r['callerAncestry'][:max(owner_indices)+1])|ownerpids
-    if not relevant or any(q['ownerPid']in callerowners for q in r['refusedQueries']):return False
-    return all(j['memberships'].get('game') is False and j['memberships'].get('steam') is False for j in relevant)
+raw=read(E/'job-memberships.raw.private.json')
 need(qualify(raw),'Actual Game/Steam separation from observed caller cleanup groups is unproved.')
-relevant=[j for j in raw['queriedJobs']if j['killOnClose'] and j['memberships'].get('caller') is True]
+relevant=terminating_groups(raw)
 need(len(relevant)>=3 and {8192,10240,15360}.issubset({j['limitFlags']for j in relevant}),
     'All three current caller/application terminating groups must be observed, not just the nearest command group.')
 bad=copy.deepcopy(raw)
@@ -115,7 +107,7 @@ missing=copy.deepcopy(raw);missing['refusedQueries'].append(dict(ownerPid=raw['c
 need(not qualify(missing),'An unexamined caller-owned group must be rejected.')
 put(D/'game-lifetime-qualification.private.json',dict(passed=True,gameProcessId=raw['gameProcessId'],steamProcessId=raw['steamProcessId'],
     outsideObservedCallerTerminatingJobs=True,completeCallerOwnedJobQueries=True,callerCleanupGroups=len(relevant),
-    callerCleanupLimitFlags=sorted(j['limitFlags']for j in relevant),rawSha256=sha(D/'job-memberships.raw.private.json'),
+    callerCleanupLimitFlags=sorted(j['limitFlags']for j in relevant),rawSha256=sha(E/'job-memberships.raw.private.json'),rawEvidencePath=str(E/'job-memberships.raw.private.json'),
     systemWideOtherJobQueriesUnknown=len(raw['refusedQueries']),allSystemJobsExamined=False,
     anyJobMembershipAloneIsNotCallerCleanup=True,negativeCallerMembershipRejected=True,negativeUnknownRejected=True,
     negativeUnexaminedCallerJobRejected=True,actualGameRestarted=False,gameCalls=0,

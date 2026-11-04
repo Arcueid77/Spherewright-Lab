@@ -3,7 +3,7 @@ import math,time,uuid
 from collections.abc import Mapping
 from driver import Live,ToolRefused,AcceptedActionFailure
 from evidence import need,read,sha
-from contracts import powered_consumers_share_network,validate_steps,is_read_tool,validate_native_calls,strict_native_player_idle
+from contracts import powered_consumers_share_network,validate_steps,is_read_tool,validate_native_calls,strict_native_player_idle,fully_observed_dry_surface
 from flight_observers import observe_sails,observe_rocket
 
 def distance(a,b): return math.dist([a[k] for k in 'xyz'],[b[k] for k in 'xyz'])
@@ -239,6 +239,8 @@ class Factory(Live):
   args=dict(self.ctx,**resolve(s['arguments']));check(prepare,args);q=self.call(prepare,args)
   need(q['prepared'] and q['commitAllowedNow'] and not q['commitBlockers'],'native_operation_not_prepared')
   self.runtime.put(s['role']+'-plan.private.json',q)
+  if s.get('requireFullyObservedDrySurface'):
+   need(prepare=='spherewright_prepare_move' and fully_observed_dry_surface(q),'fresh_move_dry_surface_advisory_unproved_no_commit')
   if not commit_requested:
    self.runtime.put(s['role']+'-prepare-only.private.json',dict(noCommit=True,noGameActionAccepted=True,notAcceptanceEvidence=True));return q
   commit=prepare.replace('_prepare_','_commit_',1)

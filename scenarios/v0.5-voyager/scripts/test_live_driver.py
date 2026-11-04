@@ -1,13 +1,43 @@
 """Caller regressions: actual DTO shape, unaccepted refusals and original-action ownership."""
 from pathlib import Path
+import copy
 import sys,unittest,tempfile,json,subprocess
 sys.path.insert(0,str(Path(__file__).resolve().parent/'live'))
-from contracts import ordinary_owned_resume_echo,powered_consumers_share_network,paused_failed_cut,validate_steps,resume_admission_echo,validate_native_calls,strict_native_player_idle
+from contracts import ordinary_owned_resume_echo,powered_consumers_share_network,paused_failed_cut,validate_steps,resume_admission_echo,validate_native_calls,strict_native_player_idle,fully_observed_dry_surface
 from driver import Live,ToolRefused,AcceptedActionFailure
 from factory import Factory
 from runtime import freeze,Runtime
 
 class LiveDriverTests(unittest.TestCase):
+ def test_captured_dry_preview_can_still_end_in_a_real_stalled_move(self):
+  sample=json.loads((Path(__file__).parent/'fixtures/captured-dry-preview-stalled-walk.json').read_text())
+  self.assertTrue(fully_observed_dry_surface(sample))
+  self.assertFalse(sample['originalOutcome']['succeeded'])
+  self.assertTrue(sample['originalOutcome']['doNotRetrySameTarget'])
+  for field,value in [('state','partial'),('unknownSampleCount',1),('shoreRisk','detected'),('arcLengthMetres',65)]:
+   bad=copy.deepcopy(sample);bad['surfacePreview'][field]=value
+   self.assertFalse(fully_observed_dry_surface(bad))
+  for field,value in [('groundHit',False),('waterHit',None),('groundBelowWaterMetres',None),('groundBelowWaterMetres',0)]:
+   bad=copy.deepcopy(sample);bad['surfacePreview']['samples'][0][field]=value
+   self.assertFalse(fully_observed_dry_surface(bad))
+  dry=copy.deepcopy(sample)
+  for row in dry['surfacePreview']['samples']:row.update(waterHit=False,groundBelowWaterMetres=None)
+  self.assertTrue(fully_observed_dry_surface(dry))
+
+ def test_opted_in_production_move_rejects_unknown_terrain_before_commit(self):
+  sample=json.loads((Path(__file__).parent/'fixtures/captured-dry-preview-stalled-walk.json').read_text())
+  q=dict(sample,prepared=True,commitAllowedNow=True,commitBlockers=[],planToken='synthetic')
+  a=Factory.__new__(Factory);a.ctx=dict(sessionId='same',planetId=7);a.refs={}
+  a.schemas=json.loads((Path(__file__).parent/'fixtures/captured-sdk-plan-schemas.json').read_text())
+  events=[];a.runtime=type('Evidence',(),dict(put=lambda _,name,value:events.append(name)))()
+  a.call=lambda *_:q;a.commit=lambda *_:self.fail('terrain rejection must never accept an action')
+  step=dict(kind='prepare-only',role='actual-advisory',prepareTool='spherewright_prepare_move',requireFullyObservedDrySurface=True,
+    arguments=dict(targetX=1.,targetY=200.,targetZ=1.,expectedPlayerStateHash='synthetic'))
+  self.assertIs(q,a.native_operation(step,commit_requested=False))
+  q['surfacePreview']['samples'][0]['waterHit']=None
+  with self.assertRaisesRegex(RuntimeError,'fresh_move_dry_surface_advisory_unproved_no_commit'):
+   a.native_operation(step,commit_requested=True)
+
  def test_native_elevated_free_span_forwards_observed_layers_without_changing_material_writer(self):
   a=Factory.__new__(Factory);a.state=lambda:None;a.layout=lambda p:p
   calls=[];a.build=lambda role,args,maximum:calls.append((role,args,maximum))

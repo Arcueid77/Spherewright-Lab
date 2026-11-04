@@ -1,0 +1,506 @@
+{
+  "redaction": "Actual advisory sample fields; synthetic positions/tick; this move subsequently stalled at a solid obstacle.",
+  "surfacePreview": {
+    "state": "observed",
+    "reasonCode": null,
+    "evidenceScope": "downward_samples_not_route_clearance",
+    "capturedAtGameTick": 100,
+    "arcLengthMetres": 38.410082016030685,
+    "maximumSampleSpacingMetres": 1,
+    "maximumArcMetres": 64,
+    "waterItemId": 1000,
+    "raycastCount": 80,
+    "unknownSampleCount": 0,
+    "shoreRiskSampleCount": 0,
+    "shoreRisk": "not_detected",
+    "samples": [
+      {
+        "position": {
+          "x": 200.2,
+          "y": 0.0,
+          "z": 0
+        },
+        "groundHit": true,
+        "waterHit": true,
+        "groundAltitudeMetres": 0.1964111328125,
+        "groundBelowWaterMetres": -0.19641590118408203,
+        "shoreRisk": "not_detected"
+      },
+      {
+        "position": {
+          "x": 200.19757748591792,
+          "y": 0.9848699253647374,
+          "z": 0
+        },
+        "groundHit": true,
+        "waterHit": true,
+        "groundAltitudeMetres": 0.1980133056640625,
+        "groundBelowWaterMetres": -0.19800853729248047,
+        "shoreRisk": "not_detected"
+      },
+      {
+        "position": {
+          "x": 200.19031000229882,
+          "y": 1.9697160159516203,
+          "z": 0
+        },
+        "groundHit": true,
+        "waterHit": true,
+        "groundAltitudeMetres": 0.19732666015625,
+        "groundBelowWaterMetres": -0.1973247528076172,
+        "shoreRisk": "not_detected"
+      },
+      {
+        "position": {
+          "x": 200.1781977250226,
+          "y": 2.954514437559619,
+          "z": 0
+        },
+        "groundHit": true,
+        "waterHit": true,
+        "groundAltitudeMetres": 0.1982421875,
+        "groundBelowWaterMetres": -0.1982440948486328,
+        "shoreRisk": "not_detected"
+      },
+      {
+        "position": {
+          "x": 200.1612409472178,
+          "y": 3.9392413571413374,
+          "z": 0
+        },
+        "groundHit": true,
+        "waterHit": true,
+        "groundAltitudeMetres": 0.1976165771484375,
+        "groundBelowWaterMetres": -0.19764137268066406,
+        "shoreRisk": "not_detected"
+      },
+      {
+        "position": {
+          "x": 200.13944007925434,
+          "y": 4.923872943379795,
+          "z": 0
+        },
+        "groundHit": true,
+        "waterHit": true,
+        "groundAltitudeMetres": 0.198577880859375,
+        "groundBelowWaterMetres": -0.19855785369873047,
+        "shoreRisk": "not_detected"
+      },
+      {
+        "position": {
+          "x": 200.11279564873377,
+          "y": 5.908385367265169,
+          "z": 0
+        },
+        "groundHit": true,
+        "waterHit": true,
+        "groundAltitudeMetres": 0.19732666015625,
+        "groundBelowWaterMetres": -0.19732952117919922,
+        "shoreRisk": "not_detected"
+      },
+      {
+        "position": {
+          "x": 200.0813083004763,
+          "y": 6.892754802671478,
+          "z": 0
+        },
+        "groundHit": true,
+        "waterHit": true,
+        "groundAltitudeMetres": 0.198333740234375,
+        "groundBelowWaterMetres": -0.1983175277709961,
+        "shoreRisk": "not_detected"
+      },
+      {
+        "position": {
+          "x": 200.04497879650538,
+          "y": 7.876957426933191,
+          "z": 0
+        },
+        "groundHit": true,
+        "waterHit": true,
+        "groundAltitudeMetres": 0.1970672607421875,
+        "groundBelowWaterMetres": -0.19705963134765625,
+        "shoreRisk": "not_detected"
+      },
+      {
+        "position": {
+          "x": 200.0038080160291,
+          "y": 8.860969421421775,
+          "z": 0
+        },
+        "groundHit": true,
+        "waterHit": true,
+        "groundAltitudeMetres": 0.1974029541015625,
+        "groundBelowWaterMetres": -0.19740962982177734,
+        "shoreRisk": "not_detected"
+      },
+      {
+        "position": {
+          "x": 199.9577969554191,
+          "y": 9.844766972122104,
+          "z": 0
+        },
+        "groundHit": true,
+        "waterHit": true,
+        "groundAltitudeMetres": 0.197265625,
+        "groundBelowWaterMetres": -0.19725799560546875,
+        "shoreRisk": "not_detected"
+      },
+      {
+        "position": {
+          "x": 199.90694672818626,
+          "y": 10.828326270208796,
+          "z": 0
+        },
+        "groundHit": true,
+        "waterHit": true,
+        "groundAltitudeMetres": 0.1969451904296875,
+        "groundBelowWaterMetres": -0.1969461441040039,
+        "shoreRisk": "not_detected"
+      },
+      {
+        "position": {
+          "x": 199.8512585649539,
+          "y": 11.811623512622413,
+          "z": 0
+        },
+        "groundHit": true,
+        "waterHit": true,
+        "groundAltitudeMetres": 0.198028564453125,
+        "groundBelowWaterMetres": -0.19804000854492188,
+        "shoreRisk": "not_detected"
+      },
+      {
+        "position": {
+          "x": 199.7907338134279,
+          "y": 12.794634902645507,
+          "z": 0
+        },
+        "groundHit": true,
+        "waterHit": true,
+        "groundAltitudeMetres": 0.197021484375,
+        "groundBelowWaterMetres": -0.1970195770263672,
+        "shoreRisk": "not_detected"
+      },
+      {
+        "position": {
+          "x": 199.7253739383641,
+          "y": 13.777336650478526,
+          "z": 0
+        },
+        "groundHit": true,
+        "waterHit": true,
+        "groundAltitudeMetres": 0.1991424560546875,
+        "groundBelowWaterMetres": -0.19913864135742188,
+        "shoreRisk": "not_detected"
+      },
+      {
+        "position": {
+          "x": 199.65518052153297,
+          "y": 14.759704973815548,
+          "z": 0
+        },
+        "groundHit": true,
+        "waterHit": true,
+        "groundAltitudeMetres": 0.1973114013671875,
+        "groundBelowWaterMetres": -0.19730377197265625,
+        "shoreRisk": "not_detected"
+      },
+      {
+        "position": {
+          "x": 199.5801552616811,
+          "y": 15.741716098419838,
+          "z": 0
+        },
+        "groundHit": true,
+        "waterHit": true,
+        "groundAltitudeMetres": 0.198486328125,
+        "groundBelowWaterMetres": -0.1984853744506836,
+        "shoreRisk": "not_detected"
+      },
+      {
+        "position": {
+          "x": 199.5002999744904,
+          "y": 16.723346258699213,
+          "z": 0
+        },
+        "groundHit": true,
+        "waterHit": true,
+        "groundAltitudeMetres": 0.1970672607421875,
+        "groundBelowWaterMetres": -0.19707202911376953,
+        "shoreRisk": "not_detected"
+      },
+      {
+        "position": {
+          "x": 199.41561659253375,
+          "y": 17.704571698281168,
+          "z": 0
+        },
+        "groundHit": true,
+        "waterHit": true,
+        "groundAltitudeMetres": 0.197906494140625,
+        "groundBelowWaterMetres": -0.1979074478149414,
+        "shoreRisk": "not_detected"
+      },
+      {
+        "position": {
+          "x": 199.32610716522862,
+          "y": 18.68536867058784,
+          "z": 0
+        },
+        "groundHit": true,
+        "waterHit": true,
+        "groundAltitudeMetres": 0.1976318359375,
+        "groundBelowWaterMetres": -0.19762611389160156,
+        "shoreRisk": "not_detected"
+      },
+      {
+        "position": {
+          "x": 199.23177385878734,
+          "y": 19.665713439410666,
+          "z": 0
+        },
+        "groundHit": true,
+        "waterHit": true,
+        "groundAltitudeMetres": 0.197662353515625,
+        "groundBelowWaterMetres": -0.19765472412109375,
+        "shoreRisk": "not_detected"
+      },
+      {
+        "position": {
+          "x": 199.13261895616455,
+          "y": 20.645582279484824,
+          "z": 0
+        },
+        "groundHit": true,
+        "waterHit": true,
+        "groundAltitudeMetres": 0.1972503662109375,
+        "groundBelowWaterMetres": -0.1972503662109375,
+        "shoreRisk": "not_detected"
+      },
+      {
+        "position": {
+          "x": 199.02864485700204,
+          "y": 21.624951477063433,
+          "z": 0
+        },
+        "groundHit": true,
+        "waterHit": true,
+        "groundAltitudeMetres": 0.1983184814453125,
+        "groundBelowWaterMetres": -0.19832611083984375,
+        "shoreRisk": "not_detected"
+      },
+      {
+        "position": {
+          "x": 198.9198540775708,
+          "y": 22.60379733049142,
+          "z": 0
+        },
+        "groundHit": true,
+        "waterHit": true,
+        "groundAltitudeMetres": 0.1973114013671875,
+        "groundBelowWaterMetres": -0.19731998443603516,
+        "shoreRisk": "not_detected"
+      },
+      {
+        "position": {
+          "x": 198.80624925070993,
+          "y": 23.582096150779133,
+          "z": 0
+        },
+        "groundHit": true,
+        "waterHit": true,
+        "groundAltitudeMetres": 0.1985626220703125,
+        "groundBelowWaterMetres": -0.19855785369873047,
+        "shoreRisk": "not_detected"
+      },
+      {
+        "position": {
+          "x": 198.68783312576298,
+          "y": 24.55982426217564,
+          "z": 0
+        },
+        "groundHit": true,
+        "waterHit": true,
+        "groundAltitudeMetres": 0.1967926025390625,
+        "groundBelowWaterMetres": -0.19680309295654297,
+        "shoreRisk": "not_detected"
+      },
+      {
+        "position": {
+          "x": 198.56460856851155,
+          "y": 25.536958002741684,
+          "z": 0
+        },
+        "groundHit": true,
+        "waterHit": true,
+        "groundAltitudeMetres": 0.1971893310546875,
+        "groundBelowWaterMetres": -0.1971883773803711,
+        "shoreRisk": "not_detected"
+      },
+      {
+        "position": {
+          "x": 198.43657856110562,
+          "y": 26.513473724922374,
+          "z": 0
+        },
+        "groundHit": true,
+        "waterHit": true,
+        "groundAltitudeMetres": 0.1974029541015625,
+        "groundBelowWaterMetres": -0.19739532470703125,
+        "shoreRisk": "not_detected"
+      },
+      {
+        "position": {
+          "x": 198.3037462019918,
+          "y": 27.489347796119414,
+          "z": 0
+        },
+        "groundHit": true,
+        "waterHit": true,
+        "groundAltitudeMetres": 0.1968536376953125,
+        "groundBelowWaterMetres": -0.19685745239257812,
+        "shoreRisk": "not_detected"
+      },
+      {
+        "position": {
+          "x": 198.16611470583803,
+          "y": 28.464556599263066,
+          "z": 0
+        },
+        "groundHit": true,
+        "waterHit": true,
+        "groundAltitudeMetres": 0.1984405517578125,
+        "groundBelowWaterMetres": -0.1984539031982422,
+        "shoreRisk": "not_detected"
+      },
+      {
+        "position": {
+          "x": 198.0236874034558,
+          "y": 29.43907653338373,
+          "z": 0
+        },
+        "groundHit": true,
+        "waterHit": true,
+        "groundAltitudeMetres": 0.19744873046875,
+        "groundBelowWaterMetres": -0.1974325180053711,
+        "shoreRisk": "not_detected"
+      },
+      {
+        "position": {
+          "x": 197.87646774171972,
+          "y": 30.412884014183064,
+          "z": 0
+        },
+        "groundHit": true,
+        "waterHit": true,
+        "groundAltitudeMetres": 0.1976470947265625,
+        "groundBelowWaterMetres": -0.19765186309814453,
+        "shoreRisk": "not_detected"
+      },
+      {
+        "position": {
+          "x": 197.724459283484,
+          "y": 31.385955474604767,
+          "z": 0
+        },
+        "groundHit": true,
+        "waterHit": true,
+        "groundAltitudeMetres": 0.1974945068359375,
+        "groundBelowWaterMetres": -0.19748878479003906,
+        "shoreRisk": "not_detected"
+      },
+      {
+        "position": {
+          "x": 197.5676657074962,
+          "y": 32.35826736540492,
+          "z": 0
+        },
+        "groundHit": true,
+        "waterHit": true,
+        "groundAltitudeMetres": 0.1973724365234375,
+        "groundBelowWaterMetres": -0.1973714828491211,
+        "shoreRisk": "not_detected"
+      },
+      {
+        "position": {
+          "x": 197.4060908083082,
+          "y": 33.32979615572192,
+          "z": 0
+        },
+        "groundHit": true,
+        "waterHit": true,
+        "groundAltitudeMetres": 0.1969451904296875,
+        "groundBelowWaterMetres": -0.19693470001220703,
+        "shoreRisk": "not_detected"
+      },
+      {
+        "position": {
+          "x": 197.23973849618443,
+          "y": 34.30051833364591,
+          "z": 0
+        },
+        "groundHit": true,
+        "waterHit": true,
+        "groundAltitudeMetres": 0.19854736328125,
+        "groundBelowWaterMetres": -0.1985626220703125,
+        "shoreRisk": "not_detected"
+      },
+      {
+        "position": {
+          "x": 197.0686127970072,
+          "y": 35.270410406787825,
+          "z": 0
+        },
+        "groundHit": true,
+        "waterHit": true,
+        "groundAltitudeMetres": 0.197113037109375,
+        "groundBelowWaterMetres": -0.1971149444580078,
+        "shoreRisk": "not_detected"
+      },
+      {
+        "position": {
+          "x": 196.89271785217926,
+          "y": 36.23944890284791,
+          "z": 0
+        },
+        "groundHit": true,
+        "waterHit": true,
+        "groundAltitudeMetres": 0.19891357421875,
+        "groundBelowWaterMetres": -0.19890403747558594,
+        "shoreRisk": "not_detected"
+      },
+      {
+        "position": {
+          "x": 196.7120579185236,
+          "y": 37.207610370183794,
+          "z": 0
+        },
+        "groundHit": true,
+        "waterHit": true,
+        "groundAltitudeMetres": 0.19671630859375,
+        "groundBelowWaterMetres": -0.1967182159423828,
+        "shoreRisk": "not_detected"
+      },
+      {
+        "position": {
+          "x": 196.52663736818042,
+          "y": 38.174871378377986,
+          "z": 0
+        },
+        "groundHit": true,
+        "waterHit": true,
+        "groundAltitudeMetres": 0.1972198486328125,
+        "groundBelowWaterMetres": -0.19722461700439453,
+        "shoreRisk": "not_detected"
+      }
+    ]
+  },
+  "originalOutcome": {
+    "state": "action_failed",
+    "succeeded": false,
+    "failureKind": "position_stalled",
+    "stalledGameTicks": 180,
+    "doNotRetrySameTarget": true
+  }
+}

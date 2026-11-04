@@ -34,7 +34,7 @@
     },
     "evidence": "scenarios/v0.5-voyager/current-status.md",
     "verification": "disk_verified",
-    "runtimeState": "not_running",
+    "runtimeState": "running_verified",
     "developmentArtifact": {
       "kind": "plugin_mcp_directory",
       "manifestSha256": "451F298AA4CCCCE3E535AA68270B921D0E57B7E18AE3F9C2108A50194EC42526",

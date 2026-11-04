@@ -33,7 +33,9 @@ def main():
             print('One replacement caller attached to the original healthy game; no Load/Save/relaunch.',flush=True);return
         if (out/'process-observed.private.json').exists():
             audit=subprocess.run([sys.executable,str(ROOT/'audit-lifetime.py'),str(out)],capture_output=True,text=True,timeout=45)
-            put(out/'lifetime-audit-process.private.json',dict(exitCode=audit.returncode))
+            put(out/'lifetime-audit-process.private.json',dict(exitCode=audit.returncode,
+                stdout=audit.stdout[:65536],stderr=audit.stderr[:65536],
+                outputTruncated=len(audit.stdout)>65536 or len(audit.stderr)>65536))
             need(audit.returncode==0,'actual_lifetime_audit_failed_no_relaunch')
             print('One writer launched; actual game lifetime separation verified.',flush=True);return
         if (worker/'worker-failure.private.json').exists():raise RuntimeError('original_writer_failed_before_game_process_no_replay')
