@@ -218,6 +218,7 @@ class LiveDriverTests(unittest.TestCase):
   a.step(dict(kind='build-belt-to-device',role='input',starts=[dict(x=1,y=200,z=1)],destination='station',maximumNewBelts=4))
   self.assertEqual('native-endpoint',calls[0][0]['expectedDestinationStateHash']);self.assertEqual(9,calls[0][0]['destinationObjectId'])
   self.assertNotIn('sourceObjectId',calls[0][0]);self.assertEqual(4,calls[0][1])
+  self.assertNotIn('maxNewBelts',calls[0][0])
  def test_accepted_unknown_build_holds_material_budget_without_reclassifying_it_as_actual_consumption(self):
   a=Factory.__new__(Factory);a.runtime=type('Evidence',(),dict(config=dict(materialCeilings={'2001':1}),put=lambda *_:None))()
   a.ctx=dict(sessionId='same',planetId=7);a.used={};a.prepare_build=lambda args:(dict(prepared=True,commitAllowedNow=True,commitBlockers=[],itemBudget=[dict(itemId=2001,count=1)],planToken='one'),{})
