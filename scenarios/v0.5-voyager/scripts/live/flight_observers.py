@@ -1,5 +1,5 @@
 """Copied Native counters only; no simulation, manufacture, firing or replay."""
-import time
+import time,math
 from evidence import need,read,sha
 
 
@@ -38,7 +38,9 @@ class RocketArrivalTrace:
  def __init__(self,initial,planet,layer,node):
   self.planet=planet;self.layer=layer;self.node=node;self.star=initial['starId'];self.rocket=None;self.last_progress=None
   self.check(initial);self.base=self.target(initial)['structurePoints'];self.initial_ammo=initial['rocketCount']
-  need(self.base==0 and initial['inFlightRocketCount']==0,'pristine_native_rocket_target_baseline_required')
+  need(self.base==0 and initial['inFlightRocketCount']==0 and self.initial_ammo in(0,1)
+   and self.target(initial)['orderedStructurePoints']==0,'pristine_native_rocket_target_baseline_required')
+  self.ammo_loaded=self.initial_ammo==1;self.ammo_spent=False;self.last_ammo=self.initial_ammo
  def target(self,s):
   matches=[n for n in s['nodes'] if n['layerId']==self.layer and n['nodeId']==self.node]
   need(len(matches)==1,'exact_native_rocket_receiving_node_missing');return matches[0]
@@ -48,11 +50,20 @@ class RocketArrivalTrace:
  def observe(self,s):
   self.check(s);n=self.target(s);need(0<=n['structurePoints']-self.base<=1 and 0<=s['rocketCount']<=1,'more_than_one_native_rocket_or_point_observed')
   need(type(s['inFlightRocketCount'])is int and 0<=s['inFlightRocketCount']<=1 and len(s['rockets'])==s['inFlightRocketCount'],'native_rocket_pool_count_unproved')
+  if s['rocketCount']==1:
+   need(not self.ammo_spent and self.rocket is None and not s['rockets'],'native_rocket_ammo_refilled_after_launch')
+   self.ammo_loaded=True
+  if self.last_ammo==1 and s['rocketCount']==0:self.ammo_spent=True
+  self.last_ammo=s['rocketCount']
   for r in s['rockets']:
    need(r['sourcePlanetId']==self.planet and r['targetLayerId']==self.layer and r['targetNodeId']==self.node,'rocket_source_or_target_changed')
    need(self.rocket in (None,r['rocketId']),'second_native_rocket_observed');self.rocket=r['rocketId']
-   progress=r['nativeFlightProgress'];need(self.last_progress is None or progress>=self.last_progress,'native_rocket_flight_regressed');self.last_progress=progress
-  return self.rocket is not None and s['rocketCount']==0 and s['inFlightRocketCount']==0 and n['structurePoints']==self.base+1 and n['orderedStructurePoints']==0
+   # DSP29151 t starts at-1, uses altitude during ascent, then zero in
+   # cruise and distance to the moving receiving node during approach.
+   # It is a native phase/distance value, not cumulative flight progress.
+   progress=r['nativeFlightProgress'];need(type(progress)in(int,float) and math.isfinite(progress)
+    and -1<=progress<=1,'native_rocket_phase_value_unavailable');self.last_progress=progress
+  return self.ammo_loaded and self.ammo_spent and self.rocket is not None and s['rocketCount']==0 and s['inFlightRocketCount']==0 and n['structurePoints']==self.base+1 and n['orderedStructurePoints']==0
 
 
 def baseline(executor,step,entity):
@@ -81,5 +92,5 @@ def observe_rocket(executor,step):
   executor.state();e=executor.entity(entity);sample+=1;executor.runtime.put(step['role']+f'-native-{sample:05d}.private.json',e)
   if trace.observe(e.get('silo') or {}):
    executor.runtime.put(step['role']+'-proof.private.json',dict(passed=True,rocketId=trace.rocket,nativeFlightObserved=True,exactNativeStructurePointAdded=1,final=e));return
-  time.sleep(1)
+  time.sleep(.25)
  raise RuntimeError('finite_native_rocket_observation_window_ended_no_replay')

@@ -45,9 +45,16 @@ class NativeFlightTraceTests(unittest.TestCase):
  def test_unobserved_flight_or_already_delivered_node_cannot_count_as_new_arrival(self):
   t=RocketArrivalTrace(rocket(),1,1,1);self.assertFalse(t.observe(rocket(points=1)))
   with self.assertRaises(RuntimeError):RocketArrivalTrace(rocket(points=1),1,1,1)
- def test_wrong_source_second_rocket_and_regressed_native_progress_do_not_pass(self):
+ def test_native_launch_cruise_and_moving_node_approach_are_not_a_monotone_percentage(self):
+  t=RocketArrivalTrace(rocket(),1,1,1);t.observe(rocket(ammo=1))
+  for value in[-1,-.7,0,.1,.8,.75,.95]:self.assertFalse(t.observe(rocket(progress=value)))
+  self.assertTrue(t.observe(rocket(points=1)))
+ def test_missing_ammo_boundary_cannot_claim_exact_consumption(self):
   t=RocketArrivalTrace(rocket(),1,1,1);t.observe(rocket(progress=.7))
-  for bad in [rocket(progress=.6),dict(rocket(progress=.8),starSiloCount=2)]:
+  self.assertFalse(t.observe(rocket(points=1)))
+ def test_wrong_source_second_rocket_refill_and_nonfinite_phase_do_not_pass(self):
+  t=RocketArrivalTrace(rocket(),1,1,1);t.observe(rocket(ammo=1));t.observe(rocket(progress=.7))
+  for bad in [rocket(ammo=1),rocket(progress=float('nan')),dict(rocket(progress=.8),starSiloCount=2)]:
    with self.assertRaises(RuntimeError):t.observe(bad)
   bad=rocket(progress=.8);bad['rockets'][0]['sourcePlanetId']=2
   with self.assertRaises(RuntimeError):t.observe(bad)

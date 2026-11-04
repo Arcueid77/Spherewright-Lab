@@ -40,4 +40,6 @@ After normal1141→1303→1522 research, preflight the local silo, power, precis
 
 Create the bounded Native receiving node in the pristine default layer using the powered empty silo. Capture the unique source/node baseline before releasing the one locally manufactured rocket. Require ammo1→0, real flight and arrival, no remaining in-flight rocket and node structure points+1. A valid1/30 receiving node is not a completed30/30 node. Preserve launch provenance and the exact original action; no injection or replay.
 
+The installed Native29151 `DysonRocket.t` starts at-1, uses ascent altitude, then zero during cruise and distance to the moving node during approach. It is not a monotone percentage. The observer retains those values, requires the actual ammo1→0 boundary and unique bound rocket/arrival, and samples every0.25s. Native-source lifecycle tests cover negative ascent, cruise and decreasing approach values; they are offline contract evidence, not a live rocket claim.
+
 Only after supply, save/recovery, local manufacture, launch/arrival and receiver acceptance close may the same qualified source form the final manual/Thunderstore review pair. No tag, Release or upload.

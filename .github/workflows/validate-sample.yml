@@ -45,6 +45,8 @@ jobs:
           python ./scenarios/v0.5-voyager/scripts/test_live_driver.py
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
           python ./scenarios/v0.5-voyager/scripts/test_lifetime_contract.py
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          python ./scenarios/v0.5-voyager/scripts/test_native_flight_observers.py
       - name: Exercise fail-closed verifiers in the disposable CI checkout
         shell: pwsh
         run: ./scripts/test-verifiers.ps1 -FixtureRoot $pwd.Path -AllowFixtureMutation
