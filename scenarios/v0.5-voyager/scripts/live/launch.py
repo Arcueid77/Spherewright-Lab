@@ -11,6 +11,10 @@ def main():
     attaching=sys.argv[1]=='--attach'
     if attaching:previous,config,config_sha,output=sys.argv[2:]
     else:config,config_sha,output=sys.argv[1:]
+    # The detached worker deliberately starts beside its entry point. Freeze
+    # caller paths before crossing that working-directory boundary.
+    config=str(Path(config).resolve());output=str(Path(output).resolve())
+    if attaching:previous=str(Path(previous).resolve())
     c=read(config);out=Path(output)
     need(sha(config)==config_sha.upper() and not out.exists(),'config_changed_or_prior_run_exists')
     worker=out.parent/(out.name+'-worker')
