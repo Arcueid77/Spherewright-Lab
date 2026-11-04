@@ -37,6 +37,27 @@ def resume_admission_echo(config,plan):
         and plan.get('savedLandingAccountingAnchorGameTick') is None and plan.get('failedLandingRecoveryAuthorizationUsed') is False)
 
 
+def ordinary_owned_resume_echo(config,plan):
+    """Ordinary home resume has different nullable/confirmation fields from remote recovery."""
+    mode=config.get('recoveryMode');verified=mode=='verified_newer_lastexit'
+    if mode not in ('default','verified_newer_lastexit'):return False
+    common=(plan.get('recoveryMode')==mode and plan.get('expectedPlanetId')==config['planetId']
+        and plan.get('sourceGameVersion')==plan.get('targetGameVersion')==config['expectedNativeVersion']
+        and plan.get('userConfirmationRequired') is False and plan.get('commitAllowedNow') is True
+        and plan.get('commitBlockers')==[] and plan.get('additionalVoyagerGameTicks')==0
+        and plan.get('originalJourneyMaximumGameTicks') is None and plan.get('effectiveJourneyMaximumGameTicks') is None
+        and all(plan.get(k) is False for k in ('remotePrimaryRecoveryAuthorizationUsed','failedLandingRecoveryAuthorizationUsed',
+            'completedSavedLandingAdmissionUsed','opensSavedWorldOnly','previousAutomationRemainsStopped','newChargingProhibited')))
+    if not common:return False
+    if verified:
+        return (plan.get('candidateGameTick')==plan.get('minimumGameTick')==config['sourceTick']
+            and plan.get('exactEmbeddedIdentityVerified') is True and plan.get('recoveryEvidenceVersion')==1)
+    return (config.get('sourceRole')=='primary' and plan.get('candidateGameTick') is None
+        and plan.get('exactEmbeddedIdentityVerified') is False
+        and plan.get('minimumGameTick')==config['ticketMinimumGameTick']<=config['sourceTick']
+        and plan.get('recoveryEvidenceVersion')==0)
+
+
 def powered_consumers_share_network(entities, network_id):
     consumers=[e for e in entities if e.get('componentKind') != 'power-node']
     return bool(consumers) and all(consumer_network(e)==network_id for e in consumers)

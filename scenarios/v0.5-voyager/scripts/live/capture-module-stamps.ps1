@@ -1,7 +1,7 @@
-param([Parameter(Mandatory)][string]$OutputRoot)
+param([Parameter(Mandatory)][string]$OutputRoot,[ValidatePattern("^[a-z0-9-]+$")][string]$ChecksName="development-checks-qualified")
 $ErrorActionPreference='Stop'
 $x=Get-Content -LiteralPath (Join-Path $OutputRoot 'deployment-inputs.private.json') -Raw|ConvertFrom-Json
-$cohort=Get-Content -LiteralPath (Join-Path $OutputRoot 'development-checks-qualified/cohort-index.private.json') -Raw|ConvertFrom-Json
+$cohort=Get-Content -LiteralPath (Join-Path (Join-Path $OutputRoot $ChecksName) 'cohort-index.private.json') -Raw|ConvertFrom-Json
 function Stamp([string]$Path,[string]$Relative){
  $stream=[IO.File]::OpenRead($Path);$pe=[Reflection.PortableExecutable.PEReader]::new($stream)
  try{
@@ -18,7 +18,7 @@ foreach($row in @($cohort.files|Where-Object {$_.role -ceq 'plugin' -and $_.rela
 }
 $native=@($x.nativeReferences|Where-Object {[IO.Path]::GetFileName($_.path) -ceq 'Assembly-CSharp.dll'})[0]
 $result=@{passed=$true;sourceSha=$x.sourceSha;modules=$rows;native=(Stamp $native.path 'Assembly-CSharp.dll')}
-$path=Join-Path $OutputRoot 'development-checks-qualified/revision-stamps.private.json'
+$path=Join-Path (Join-Path $OutputRoot $ChecksName) 'revision-stamps.private.json'
 $stream=[IO.File]::Open($path,[IO.FileMode]::CreateNew)
 try{$writer=[IO.StreamWriter]::new($stream,[Text.UTF8Encoding]::new($false));try{$writer.Write(($result|ConvertTo-Json -Depth 8))}finally{$writer.Dispose()}}finally{$stream.Dispose()}
 @{passed=$true;sourceSha=$x.sourceSha;pluginModules=$rows.Count}|ConvertTo-Json -Compress

@@ -61,7 +61,9 @@ class Factory(Live):
   self.material_holds.pop(original)
   self.runtime.put(role+'-native-success-material-account.private.json',dict(originalActionId=original,actualConsumedBudget=budget[0],materialUsed=self.used,materialReservations=self.material_holds))
   control=r.get('constructionControl') or {};ids=[o['entityId'] for o in r.get('blueprintObjects') or [] if o.get('entityId')]
-  if not control and self.ctx['planetId']!=self.runtime.config['planetId']:
+  ordinary=self.runtime.config.get('ordinaryConstructionPlanetIds')
+  ordinary_here=self.ctx['planetId'] in ordinary if ordinary is not None else self.ctx['planetId']!=self.runtime.config['planetId']
+  if not control and ordinary_here:
    # Ordinary home construction uses positive targetObjectIds and Native
    # topology completion, not the remote structured-control DTO branch.
    ids=r.get('targetObjectIds') or []
@@ -179,12 +181,14 @@ class Factory(Live):
   if kind=='configure':
    return self.configure(role,self.object_id(s['entity']),s.get('recipeId',0),s.get('mode','production'),s.get('filterItemId',0))
   if kind=='wait-buffer':
+   interval=s.get('pollSeconds',2)
+   need(type(interval) in (int,float) and .25<=interval<=30,'bounded_product_poll_interval_required')
    end=time.monotonic()+s['maximumSeconds']
    while time.monotonic()<end:
     self.state();e=self.entity(self.object_id(s['entity']))
     if sum(b['count'] for b in e['buffers'] if b['itemId']==s['itemId'])>=s['minimumCount']:
      self.runtime.put(role+'-proof.private.json',e);return e
-    time.sleep(.5)
+    time.sleep(interval)
    raise RuntimeError('finite_product_wait_exhausted')
   if kind=='wait-player-still':
    end=time.monotonic()+s['maximumSeconds']

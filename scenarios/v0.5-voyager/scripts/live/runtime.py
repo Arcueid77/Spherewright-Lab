@@ -91,8 +91,13 @@ class Runtime:
             p=Path(r['originalPath']);need(p.stat().st_size==r['bytes'] and sha(p)==r['sha256']
                 and sha(r['backupPath'])==r['sha256'],'protected_or_backup_bytes_changed')
         proofs=self.native_proofs();need(proofs==m['latest'],'native_progress_changed')
-        need(proofs['lastExit']['gameTick']==c['sourceTick'] and proofs['primary']['gameTick']<=c['sourceTick'],
+        role=c.get('sourceRole','lastExit')
+        need(role in ('primary','lastExit') and proofs[role]['gameTick']==c['sourceTick']
+             and max(proofs[k]['gameTick'] for k in ('primary','lastExit'))==c['sourceTick'],
              'latest_no_loss_source_not_covered')
+        if c.get('recoveryProfile')=='ordinary-owned-home':
+            need((role=='primary' and c['recoveryMode']=='default') or (role=='lastExit' and c['recoveryMode']=='verified_newer_lastexit'
+                 and proofs['primary']['gameTick']<c['sourceTick']),'ordinary_home_source_mode_mismatch')
         return m
 
     def backup_after_normal_close(self, name='after-normal-close-complete-backup'):

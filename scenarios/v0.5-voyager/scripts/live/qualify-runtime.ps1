@@ -1,11 +1,11 @@
-param([Parameter(Mandatory)][string]$SourceRoot,[Parameter(Mandatory)][string]$SourceSha,[Parameter(Mandatory)][string]$OutputRoot,[Parameter(Mandatory)][string]$SdkHostPath)
+param([Parameter(Mandatory)][string]$SourceRoot,[Parameter(Mandatory)][string]$SourceSha,[Parameter(Mandatory)][string]$OutputRoot,[Parameter(Mandatory)][string]$SdkHostPath,[ValidatePattern("^[a-z0-9-]+$")][string]$ChecksName="development-checks-qualified")
 $ErrorActionPreference='Stop'
 Set-StrictMode -Version Latest
 $revision=$SourceSha
 $repo=$SourceRoot
 $runtime=Join-Path $OutputRoot 'runtime-qualified/Spherewright-0.5.0'
 $single=Join-Path $OutputRoot 'singlefile-qualified/Spherewright.Mcp.exe'
-$checks=Join-Path $OutputRoot 'development-checks-qualified'
+$checks=Join-Path $OutputRoot $ChecksName
 function Require($value,[string]$reason){if(-not$value){throw $reason}}
 function Hash([string]$path){(Get-FileHash -LiteralPath $path -Algorithm SHA256).Hash}
 function Proof([string]$path,$value){

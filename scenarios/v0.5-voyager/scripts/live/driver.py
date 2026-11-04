@@ -5,7 +5,7 @@ import startup_to_action as G
 from geometry_request import complete_geometry_arrays
 from evidence import need,read,sha,json_value
 from mcp_client import Client
-from contracts import resume_admission_echo,validate_steps,validate_native_calls,strict_native_player_idle
+from contracts import ordinary_owned_resume_echo,resume_admission_echo,validate_steps,validate_native_calls,strict_native_player_idle
 
 class AcceptedActionFailure(RuntimeError):
  def __init__(self,message,receipt=None):self.receipt=receipt;super().__init__(message)
@@ -112,6 +112,13 @@ class Live:
 
  def prepare_resume(self,ready,deadline):
   c=self.runtime.config;now=dt.datetime.now(dt.timezone.utc)
+  if c.get('recoveryProfile')=='ordinary-owned-home':
+   args=dict(resumeToken=ready['session']['restartResumeToken'],recoveryMode=c['recoveryMode'])
+   if c['recoveryMode']=='verified_newer_lastexit':args.update(minimumRecoveryGameTick=c['sourceTick'],expectedRecoveryGameTick=c['sourceTick'])
+   p=G.retry_read_only(lambda:self.call('spherewright_prepare_resume_owned_game',args),deadline,
+     lambda e:any(k in str(e) for k in ('BRIDGE_NOT_READY','BRIDGE_UNAVAILABLE','REQUEST_TIMEOUT')))
+   need(p.get('prepared') and ordinary_owned_resume_echo(c,p),'ordinary_home_source_or_nullable_echo_changed')
+   self.runtime.put('fresh-resume-plan.private.json',p);return p
   args=dict(resumeToken=ready['session']['restartResumeToken'],recoveryMode=c.get('recoveryMode','authorize_remote_primary_recovery'),
    minimumRecoveryGameTick=c['sourceTick'],expectedRecoveryGameTick=c['sourceTick'],
    recoveryDeadlineUtc=(now+dt.timedelta(seconds=c['recoveryWindowSeconds'])).isoformat(),
@@ -138,7 +145,7 @@ class Live:
 
  def commit_resume_once(self,p):
   return self.commit('resume','spherewright_commit_resume_owned_game',dict(planToken=p['planToken'],
-    idempotencyKey=str(uuid.uuid4()),userConfirmedInConversation=True,confirmationDigest=p['confirmationDigest']))
+    idempotencyKey=str(uuid.uuid4()),userConfirmedInConversation=p['userConfirmationRequired'],confirmationDigest=p['confirmationDigest']))
 
  def verify_loaded(self,result,deadline):
   c=self.runtime.config;s=self.call('spherewright_get_session_state',{})
@@ -212,7 +219,7 @@ class Live:
    args=dict(self.ctx,targetX=target['x'],targetY=target['y'],targetZ=target['z'],arrivalTolerance=1.5,expectedPlayerStateHash=p['stateHash'])
    q=self.call('spherewright_prepare_move',args);need(q['prepared'] and q['commitAllowedNow'] and not q['commitBlockers'],'first_move_not_prepared')
    return dict(action_kind='move',tool='spherewright_commit_move',prepared=q)
-  e=self.player() if mode=='enable-mecha-construction-drones' else self.entity(work['entityId']);self.first_before=e
+  e=self.player() if mode in ('enable-mecha-construction-drones','disable-mecha-research-auto-supply','enable-mecha-research-auto-supply') else self.entity(work['entityId']);self.first_before=e
   if mode=='production':need(e['recipeId']!=work['recipeId'],'first_recipe_already_applied_no_delta')
   args=dict(self.ctx,entityId=work['entityId'],recipeId=work.get('recipeId',0),mode=mode,expectedFactoryStateHash=e['stateHash'])
   if mode=='storage-capacity':args.update(storageOperation=work['storageOperation'],filterItemId=work.get('filterItemId',0))
@@ -227,9 +234,12 @@ class Live:
    moved=math.dist([self.first_before['position'][k] for k in 'xyz'],[e['position'][k] for k in 'xyz'])
    ok=r['succeeded'] and moved>1 and strict_native_player_idle(e)
    self.runtime.put('actual-progress.private.json',dict(verified=ok,actionId=r['actionId'],before=self.first_before,after=e));return ok
-  e=self.player() if mode=='enable-mecha-construction-drones' else self.entity(c['entityId'])
+  e=self.player() if mode in ('enable-mecha-construction-drones','disable-mecha-research-auto-supply','enable-mecha-research-auto-supply') else self.entity(c['entityId'])
   if mode=='enable-mecha-construction-drones':
    ok=r['succeeded'] and self.first_before['constructionDrones']['enabled'] is False and e['constructionDrones']['enabled'] is True
+  elif mode in ('disable-mecha-research-auto-supply','enable-mecha-research-auto-supply'):
+   desired=mode=='enable-mecha-research-auto-supply'
+   ok=r['succeeded'] and self.first_before['autoManageResearchItems'] is not desired and e['autoManageResearchItems'] is desired and not e['mechaResearchItemBuffer']
   elif mode=='storage-capacity':
    before=self.first_before.get('storageConfiguration') or {};after=e.get('storageConfiguration') or {}
    filters=after.get('gridFilterItemIds') or []

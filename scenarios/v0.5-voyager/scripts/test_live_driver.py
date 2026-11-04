@@ -2,16 +2,34 @@
 from pathlib import Path
 import sys,unittest,tempfile,json,subprocess
 sys.path.insert(0,str(Path(__file__).resolve().parent/'live'))
-from contracts import powered_consumers_share_network,paused_failed_cut,validate_steps,resume_admission_echo,validate_native_calls,strict_native_player_idle
+from contracts import ordinary_owned_resume_echo,powered_consumers_share_network,paused_failed_cut,validate_steps,resume_admission_echo,validate_native_calls,strict_native_player_idle
 from driver import Live,ToolRefused,AcceptedActionFailure
 from factory import Factory
 from runtime import freeze,Runtime
 
 class LiveDriverTests(unittest.TestCase):
+ def test_ordinary_home_resume_uses_native_null_candidate_and_no_confirmation_profile(self):
+  c=dict(recoveryMode='default',sourceRole='primary',planetId=101,sourceTick=200,ticketMinimumGameTick=198,expectedNativeVersion='synthetic-version')
+  p=dict(recoveryMode='default',expectedPlanetId=101,sourceGameVersion='synthetic-version',targetGameVersion='synthetic-version',
+    userConfirmationRequired=False,commitAllowedNow=True,commitBlockers=[],additionalVoyagerGameTicks=0,
+    originalJourneyMaximumGameTicks=None,effectiveJourneyMaximumGameTicks=None,
+    candidateGameTick=None,minimumGameTick=198,exactEmbeddedIdentityVerified=False,recoveryEvidenceVersion=0,
+    **{k:False for k in ('remotePrimaryRecoveryAuthorizationUsed','failedLandingRecoveryAuthorizationUsed',
+      'completedSavedLandingAdmissionUsed','opensSavedWorldOnly','previousAutomationRemainsStopped','newChargingProhibited')})
+  self.assertTrue(ordinary_owned_resume_echo(c,p))
+  for key,value in [('candidateGameTick',0),('minimumGameTick',197),('userConfirmationRequired',True),
+      ('sourceGameVersion','other-version'),('opensSavedWorldOnly',True),('originalJourneyMaximumGameTicks',0)]:
+   with self.subTest(key=key):self.assertFalse(ordinary_owned_resume_echo(c,dict(p,**{key:value})))
+  verified=dict(c,recoveryMode='verified_newer_lastexit',sourceRole='lastExit')
+  p.update(recoveryMode='verified_newer_lastexit',candidateGameTick=200,minimumGameTick=200,
+    exactEmbeddedIdentityVerified=True,recoveryEvidenceVersion=1)
+  self.assertTrue(ordinary_owned_resume_echo(verified,p))
+  p['candidateGameTick']=199;self.assertFalse(ordinary_owned_resume_echo(verified,p))
+
  def test_ordinary_home_build_uses_its_real_result_branch_and_never_refunds_a_postcheck_failure(self):
   for delta,valid in [(-2,True),(-1,False)]:
    a=Factory.__new__(Factory);a.ctx=dict(planetId=104);a.used={};a.refs={}
-   a.runtime=type('Evidence',(),dict(config=dict(planetId=402,materialCeilings={'2001':4},maximumFundingWaitSeconds=1),put=lambda *_:None))()
+   a.runtime=type('Evidence',(),dict(config=dict(planetId=104,ordinaryConstructionPlanetIds=[104],materialCeilings={'2001':4},maximumFundingWaitSeconds=1),put=lambda *_:None))()
    a.prepare_build=lambda _: (dict(prepared=True,commitAllowedNow=True,commitBlockers=[],planToken='synthetic',itemBudget=[dict(itemId=2001,count=2)]),dict(inventory=[dict(itemId=2001,count=3)]))
    a.commit=lambda *_:'original';a.successful_original=lambda _:dict(actionId='original',targetObjectIds=[100,101],itemDeltas=[dict(itemId=2001,delta=delta)])
    a.state=lambda:None;a.player=lambda:dict(inventory=[dict(itemId=2001,count=1)],constructionDrones=dict(working=0,idle=3,total=3,pendingBuildTargets=0,pendingRepairTargets=0))
