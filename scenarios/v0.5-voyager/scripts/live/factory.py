@@ -3,7 +3,7 @@ import math,time,uuid
 from collections.abc import Mapping
 from driver import Live,ToolRefused,AcceptedActionFailure
 from evidence import need,read,sha
-from contracts import powered_consumers_share_network,validate_steps,is_read_tool,validate_native_calls,strict_native_player_idle,fully_observed_dry_surface
+from contracts import powered_consumers_share_network,validate_steps,is_read_tool,validate_native_calls,strict_native_player_idle,fully_observed_dry_surface,observed_short_crossing_dry_landing
 from flight_observers import observe_sails,observe_rocket
 
 def distance(a,b): return math.dist([a[k] for k in 'xyz'],[b[k] for k in 'xyz'])
@@ -199,7 +199,7 @@ class Factory(Live):
    end=time.monotonic()+s['maximumSeconds']
    while time.monotonic()<end:
     self.state();p=self.player();physics=p.get('nativePhysics') or {};velocity=physics.get('velocity') or {};ground=physics.get('groundContact') or {}
-    if strict_native_player_idle(p):
+    if strict_native_player_idle(p) and p.get('coreEnergy',0)>=s.get('minimumCoreEnergy',0):
      self.runtime.put(role+'-physical-still.private.json',p);return p
     time.sleep(.5)
    raise RuntimeError('finite_grounded_physical_still_wait_exhausted')
@@ -241,6 +241,9 @@ class Factory(Live):
   self.runtime.put(s['role']+'-plan.private.json',q)
   if s.get('requireFullyObservedDrySurface'):
    need(prepare=='spherewright_prepare_move' and fully_observed_dry_surface(q),'fresh_move_dry_surface_advisory_unproved_no_commit')
+  if s.get('requireObservedShortCrossingDryLanding'):
+   need(prepare=='spherewright_prepare_move' and self.ctx['planetId'] in self.runtime.config.get('ordinaryConstructionPlanetIds',[])
+    and observed_short_crossing_dry_landing(q,args,values.get('p',{})),'fresh_short_crossing_dry_landing_unproved_no_commit')
   if not commit_requested:
    self.runtime.put(s['role']+'-prepare-only.private.json',dict(noCommit=True,noGameActionAccepted=True,notAcceptanceEvidence=True));return q
   commit=prepare.replace('_prepare_','_commit_',1)

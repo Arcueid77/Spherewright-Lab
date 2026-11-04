@@ -3,12 +3,44 @@ from pathlib import Path
 import copy
 import sys,unittest,tempfile,json,subprocess
 sys.path.insert(0,str(Path(__file__).resolve().parent/'live'))
-from contracts import ordinary_owned_resume_echo,powered_consumers_share_network,paused_failed_cut,validate_steps,resume_admission_echo,validate_native_calls,strict_native_player_idle,fully_observed_dry_surface
+from contracts import ordinary_owned_resume_echo,powered_consumers_share_network,paused_failed_cut,validate_steps,resume_admission_echo,validate_native_calls,strict_native_player_idle,fully_observed_dry_surface,observed_short_crossing_dry_landing
 from driver import Live,ToolRefused,AcceptedActionFailure
 from factory import Factory
 from runtime import freeze,Runtime
 
 class LiveDriverTests(unittest.TestCase):
+ def test_production_short_crossing_checks_fresh_terminal_evidence_before_commit(self):
+  sample=json.loads((Path(__file__).parent/'fixtures/captured-observed-short-crossing.json').read_text())
+  player=json.loads((Path(__file__).parent/'fixtures/captured-known-move-stop.json').read_text())['player'];player['coreEnergy']=1600000000
+  end=sample['surfacePreview']['samples'][-1]['position'];args=dict(arrivalTolerance=1.5,expectedPlayerStateHash='synthetic',**{'target'+k.upper():end[k]*1.001 for k in'xyz'})
+  q=dict(sample,prepared=True,commitAllowedNow=True,commitBlockers=[],planToken='synthetic')
+  a=Factory.__new__(Factory);a.ctx=dict(sessionId='same',planetId=104);a.refs={}
+  a.schemas=json.loads((Path(__file__).parent/'fixtures/captured-sdk-plan-schemas.json').read_text())
+  a.runtime=type('Evidence',(),dict(config=dict(ordinaryConstructionPlanetIds=[104]),put=lambda *_:None))()
+  a.call=lambda name,_:player if name=='spherewright_get_player_state' else q
+  a.commit=lambda *_:self.fail('invalid fresh landing evidence cannot accept a Move')
+  step=dict(kind='prepare-only',role='reviewed',prepareTool='spherewright_prepare_move',arguments=args,
+    reads=[dict(name='p',tool='spherewright_get_player_state')],requireObservedShortCrossingDryLanding=True)
+  self.assertIs(q,a.native_operation(step,commit_requested=False))
+  q['surfacePreview']['samples'][-1]['shoreRisk']='detected'
+  with self.assertRaisesRegex(RuntimeError,'fresh_short_crossing_dry_landing_unproved_no_commit'):a.native_operation(step)
+
+ def test_real_short_crossing_requires_complete_observation_and_sufficient_dry_terminal_suffix(self):
+  sample=json.loads((Path(__file__).parent/'fixtures/captured-observed-short-crossing.json').read_text())
+  player=json.loads((Path(__file__).parent/'fixtures/captured-known-move-stop.json').read_text())['player'];player['coreEnergy']=1600000000
+  end=sample['surfacePreview']['samples'][-1]['position'];args=dict(arrivalTolerance=1.5,**{'target'+k.upper():end[k]*1.001 for k in 'xyz'})
+  self.assertFalse(fully_observed_dry_surface(sample))
+  self.assertTrue(observed_short_crossing_dry_landing(sample,args,player))
+  for bad in [dict(args,arrivalTolerance=.5),dict(args,targetX=400)]:self.assertFalse(observed_short_crossing_dry_landing(sample,bad,player))
+  self.assertFalse(observed_short_crossing_dry_landing(sample,args,dict(player,coreEnergy=1279999999)))
+  for field,value in [('state','partial'),('unknownSampleCount',1),('arcLengthMetres',64)]:
+   bad=copy.deepcopy(sample);bad['surfacePreview'][field]=value;self.assertFalse(observed_short_crossing_dry_landing(bad,args,player))
+  for field,value in [('groundHit',False),('waterHit',False),('groundBelowWaterMetres',None),('groundBelowWaterMetres',.1)]:
+   bad=copy.deepcopy(sample);bad['surfacePreview']['samples'][-1][field]=value;self.assertFalse(observed_short_crossing_dry_landing(bad,args,player))
+  move=dict(kind='operation',role='crossing',prepareTool='spherewright_prepare_move',arguments=args,requireObservedShortCrossingDryLanding=True)
+  with self.assertRaisesRegex(ValueError,'short_crossing_requires_immediate_strict_stop'):validate_steps([move])
+  validate_steps([move,dict(kind='wait-player-still',role='native-stop',maximumSeconds=45,minimumCoreEnergy=1280000000)])
+
  def test_existing_evidence_role_rejects_whole_plan_before_any_game_step(self):
   with tempfile.TemporaryDirectory() as folder:
    root=Path(folder);(root/'used-p-before.private.json').write_text('{}')

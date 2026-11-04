@@ -92,6 +92,32 @@ def fully_observed_dry_surface(prepared):
     return True
 
 
+def observed_short_crossing_dry_landing(prepared,arguments,player):
+    """Published short-crossing contract, not blanket dry-ground admission."""
+    import math
+    if arguments.get('arrivalTolerance')!=1.5 or not strict_native_player_idle(player):return False
+    if player.get('coreEnergy',0)<1280000000:return False
+    surface=prepared.get('surfacePreview') or {};samples=surface.get('samples') or [];arc=surface.get('arcLengthMetres')
+    if not (surface.get('state')=='observed' and surface.get('unknownSampleCount')==0
+            and type(arc) in (int,float) and math.isfinite(arc) and 0<arc<=64 and 2<=len(samples)<=65):return False
+    spacing=arc/(len(samples)-1)
+    if spacing>1+1e-6:return False
+    for row in samples:
+        depth=row.get('groundBelowWaterMetres')
+        if (row.get('groundHit') is not True or row.get('waterHit') is not True
+                or type(depth) not in(int,float) or not math.isfinite(depth)):return False
+    tail=0
+    for row in reversed(samples):
+        if row['groundBelowWaterMetres']<=-.1 and row.get('shoreRisk')=='not_detected':tail+=1
+        else:break
+    if (tail-1)*spacing<max(4,2*arguments['arrivalTolerance']+1):return False
+    target=[arguments.get('target'+k.upper()) for k in 'xyz'];end=(samples[-1].get('position') or {})
+    if any(type(x)not in(int,float) or not math.isfinite(x)for x in target):return False
+    if any(type(end.get(k))not in(int,float) or not math.isfinite(end[k])for k in'xyz'):return False
+    mismatch=abs(math.sqrt(sum(x*x for x in target))-math.sqrt(sum(end[k]**2 for k in'xyz')))
+    return arguments['arrivalTolerance']>mismatch+.25
+
+
 def paused_failed_cut(first_session, second_session, first_player, second_player, action_id,terminal=None):
     # SessionState has no isPaused and PlayerState exposes coreEnergy, not
     # energy. Use the actual public paused-cost blocker and stable cut.
@@ -119,12 +145,17 @@ def validate_steps(steps):
         'wait-buffer':{'entity','itemId','minimumCount','maximumSeconds'},'wait-player-still':{'maximumSeconds'},'prove-network':{'entities','networkId'},'save-close':set(),'handoff-caller':set(),
         'observe-sail-conversion':{'entity','count','orbitId','maximumSeconds','baselinePath','baselineSha256'},
         'observe-rocket-arrival':{'entity','layerId','nodeId','maximumSeconds','baselinePath','baselineSha256'}}
-    for step in steps:
+    for index,step in enumerate(steps):
         kind=step.get('kind')
         if kind not in required or not ({'kind','role'}|required[kind])<=set(step):
             raise ValueError('immutable_plan_shape_invalid:'+str(kind))
         if kind=='dump' and any(not {'name','tool'}<=set(q) for q in step['queries']):
             raise ValueError('immutable_dump_query_shape_invalid')
+        if kind=='operation' and step.get('requireObservedShortCrossingDryLanding'):
+            stop=steps[index+1] if index+1<len(steps) else {}
+            if (step.get('prepareTool')!='spherewright_prepare_move' or stop.get('kind')!='wait-player-still'
+                    or stop.get('minimumCoreEnergy',0)<1280000000):
+                raise ValueError('short_crossing_requires_immediate_strict_stop_and_energy_readback')
 
 
 from collections.abc import Mapping
