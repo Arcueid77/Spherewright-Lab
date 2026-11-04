@@ -4,11 +4,56 @@ import copy
 import sys,unittest,tempfile,json,subprocess
 sys.path.insert(0,str(Path(__file__).resolve().parent/'live'))
 from contracts import ordinary_owned_resume_echo,powered_consumers_share_network,paused_failed_cut,validate_steps,resume_admission_echo,validate_native_calls,strict_native_player_idle,fully_observed_dry_surface,observed_short_crossing_dry_landing
-from driver import Live,ToolRefused,AcceptedActionFailure
+from driver import Live,ToolRefused,AcceptedActionFailure,NativePreacceptanceRefusal
 from factory import Factory
 from runtime import freeze,Runtime
 
 class LiveDriverTests(unittest.TestCase):
+ def test_only_explicit_unaccepted_stale_reprepares_with_new_evidence_role(self):
+  from unittest.mock import patch
+  a=Factory.__new__(Factory);a.active=None;seen=[];health=[];receipts=[]
+  a.runtime=type('Evidence',(),dict(put=lambda _,name,value:receipts.append((name,value))))()
+  a.state=lambda:health.append(True)
+  def once(step,commit_requested):
+   seen.append(step['role'])
+   if len(seen)==1:
+    captured=json.loads((Path(__file__).parent/'fixtures/captured-unaccepted-transfer-stale.json').read_text())
+    raise NativePreacceptanceRefusal(captured['tool'],captured['error'])
+   return dict(terminal=True,state='succeeded',actionId='new-original')
+  a.native_operation_once=once
+  with patch('factory.time.sleep'):r=a.native_operation(dict(role='dose',freshStaleMaximumSeconds=5))
+  self.assertEqual(['dose','dose-fresh-01'],seen);self.assertEqual([True],health)
+  self.assertFalse(receipts[0][1]['actionAccepted']);self.assertEqual('new-original',r['actionId'])
+
+ def test_captured_transfer_refusal_has_no_accepted_handle(self):
+  captured=json.loads((Path(__file__).parent/'fixtures/captured-unaccepted-transfer-stale.json').read_text())
+  a=Live.__new__(Live);a.active=None;a.runtime=type('Evidence',(),dict(put=lambda *_:None))()
+  def call(*_):raise ToolRefused(captured['tool'],captured['error'])
+  a.call=call
+  with self.assertRaises(NativePreacceptanceRefusal) as result:a.commit('original',captured['tool'],dict(planToken='synthetic',idempotencyKey='synthetic'))
+  self.assertIsNone(a.active);self.assertEqual('STALE_STATE',result.exception.error['code'])
+
+ def test_unknown_or_accepted_failure_never_reprepares(self):
+  for error,active in [(ToolRefused('commit',dict(code='REQUEST_TIMEOUT')),'unresolved_submission:dose'),
+    (NativePreacceptanceRefusal('commit',dict(code='STALE_STATE')),'original-accepted'),
+    (AcceptedActionFailure('terminal failed',dict(actionId='original',terminal=True)),None)]:
+   a=Factory.__new__(Factory);a.active=active;calls=[]
+   def once(*_):calls.append(True);raise error
+   a.native_operation_once=once
+   with self.assertRaises(type(error)):a.native_operation(dict(role='dose',freshStaleMaximumSeconds=5))
+   self.assertEqual([True],calls)
+
+ def test_dependent_plan_requires_actual_complete_receipt(self):
+  with tempfile.TemporaryDirectory() as folder:
+   a=Factory.__new__(Factory);a.runtime=type('Evidence',(),dict(output=Path(folder)))()
+   (Path(folder)/'continuation-003-failure.private.json').write_text('{}')
+   with self.assertRaisesRegex(RuntimeError,'plan_predecessor_did_not_complete'):
+    a.require_completed_predecessor(4,dict(requiresCompletedPlanSequence=3))
+   (Path(folder)/'continuation-003-complete.private.json').write_text('{}')
+   a.require_completed_predecessor(4,dict(requiresCompletedPlanSequence=3))
+   with self.assertRaisesRegex(RuntimeError,'invalid_plan_predecessor'):
+    a.require_completed_predecessor(4,dict(requiresCompletedPlanSequence=4))
+
  def test_long_evidence_path_rejects_complete_packet_before_any_game_step(self):
   with tempfile.TemporaryDirectory() as folder:
    a=Factory.__new__(Factory);a.schemas={'spherewright_get_session_state':dict(properties={},required=[])}

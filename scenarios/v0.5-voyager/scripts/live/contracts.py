@@ -149,6 +149,10 @@ def validate_steps(steps):
         kind=step.get('kind')
         if kind not in required or not ({'kind','role'}|required[kind])<=set(step):
             raise ValueError('immutable_plan_shape_invalid:'+str(kind))
+        if 'freshStaleMaximumSeconds' in step:
+            seconds=step['freshStaleMaximumSeconds']
+            if kind not in ('operation','prepare-only') or type(seconds) not in(int,float) or not 0<=seconds<=60:
+                raise ValueError('finite_fresh_stale_allowance_required')
         if kind=='dump' and any(not {'name','tool'}<=set(q) for q in step['queries']):
             raise ValueError('immutable_dump_query_shape_invalid')
         if kind=='operation' and step.get('requireObservedShortCrossingDryLanding'):

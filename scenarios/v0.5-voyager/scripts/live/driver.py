@@ -10,6 +10,11 @@ from contracts import ordinary_owned_resume_echo,resume_admission_echo,validate_
 class AcceptedActionFailure(RuntimeError):
  def __init__(self,message,receipt=None):self.receipt=receipt;super().__init__(message)
 
+class NativePreacceptanceRefusal(G.CommitRejected):
+ def __init__(self,tool,error):
+  self.tool=tool;self.error=error
+  super().__init__('authoritative_preacceptance_refusal:'+str(error.get('code')))
+
 class ToolRefused(RuntimeError):
     def __init__(self, tool, error):
         self.tool=tool; self.error=error or {}; super().__init__(tool+':'+str(self.error.get('code')))
@@ -94,7 +99,7 @@ class Live:
   try: accepted=self.call(tool,args)
   except ToolRefused as e:
    if e.error.get('code') in ('STALE_STATE','INVALID_REQUEST','USER_CONFIRMATION_REQUIRED','WRITES_DISABLED'):
-    self.active=None;raise G.CommitRejected('authoritative_preacceptance_refusal:'+str(e.error.get('code')))
+    self.active=None;raise NativePreacceptanceRefusal(tool,e.error)
    raise
   self.runtime.put(role+'-accepted.private.json',accepted)
   need(bool(accepted.get('actionId')),'accepted_action_handle_missing')

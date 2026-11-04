@@ -1,7 +1,7 @@
 """Finite native factory steps; configurations contain IDs/layouts and material ceilings."""
 import math,time,uuid
 from collections.abc import Mapping
-from driver import Live,ToolRefused,AcceptedActionFailure
+from driver import Live,ToolRefused,AcceptedActionFailure,NativePreacceptanceRefusal
 from evidence import need,read,sha
 from contracts import powered_consumers_share_network,validate_steps,is_read_tool,validate_native_calls,strict_native_player_idle,fully_observed_dry_surface,observed_short_crossing_dry_landing
 from flight_observers import observe_sails,observe_rocket
@@ -221,6 +221,23 @@ class Factory(Live):
   raise ValueError('unsupported_immutable_step:'+kind)
 
  def native_operation(self,s,commit_requested=True):
+  seconds=s.get('freshStaleMaximumSeconds',0)
+  need(type(seconds) in(int,float) and 0<=seconds<=60,'finite_fresh_stale_allowance_required')
+  end=time.monotonic()+seconds;attempt=0
+  while True:
+   step=dict(s)
+   if attempt:step['role']=s['role']+f'-fresh-{attempt:02d}'
+   try:return self.native_operation_once(step,commit_requested)
+   except (ToolRefused,NativePreacceptanceRefusal) as error:
+    # Only an explicit Native STALE_STATE before acceptance permits a NEW
+    # prepare. Transport errors, missing handles and accepted failures never do.
+    if self.active is not None or error.error.get('code')!='STALE_STATE' or seconds==0:raise
+    self.runtime.put(step['role']+'-unaccepted-stale.private.json',dict(tool=error.tool,error=error.error,
+     actionAccepted=False,originalIntentRetained=True,newPrepareRequired=True))
+    if attempt>=15 or time.monotonic()>=end:raise
+    self.state();time.sleep(.1);attempt+=1
+
+ def native_operation_once(self,s,commit_requested=True):
   allowed={'spherewright_prepare_move','spherewright_prepare_harvest','spherewright_prepare_transfer',
    'spherewright_prepare_configure_building','spherewright_prepare_select_research','spherewright_prepare_handcraft',
    'spherewright_prepare_logistics_station_fleet_transfer',
@@ -276,13 +293,19 @@ class Factory(Live):
   validate_native_calls(steps,self.schemas)
   roles=[s['role'] for s in steps]
   need(len(roles)==len(set(roles)),'immutable_plan_duplicate_roles')
+  for step in steps:
+   if step.get('freshStaleMaximumSeconds',0):
+    need(not any(role.startswith(step['role']+'-fresh-') for role in roles),
+     'immutable_plan_fresh_attempt_role_collision')
   output=getattr(getattr(self,'runtime',None),'output',None)
   if output is not None:
    names=[p.name for p in output.iterdir()]
-   for role in roles:
+   for step in steps:
+    role=step['role']
     # Keep per-step receipts usable on Windows hosts without long-path
     # opt-in. Reject the complete packet before its first world operation.
-    need(len(str(output/(role+'-native-success-material-account.private.json')))<=259,
+    suffix='-fresh-15-native-success-material-account.private.json' if step.get('freshStaleMaximumSeconds',0) else '-native-success-material-account.private.json'
+    need(len(str(output/(role+suffix)))<=259,
      'immutable_plan_evidence_path_too_long_use_short_unique_roles:'+role)
     need(not any(name.startswith(role+'-') for name in names),'immutable_plan_role_previously_used:'+role)
   for s in steps:
@@ -300,7 +323,9 @@ class Factory(Live):
    if not inbox.exists():time.sleep(.5);continue
    envelope=read(inbox);need(sha(envelope['path'])==envelope['sha256'],'next_plan_changed')
    plan=read(envelope['path'])
-   try:self.execute_plan(plan['steps'],f'continuation-{sequence:03d}')
+   try:
+    self.require_completed_predecessor(sequence,envelope)
+    self.execute_plan(plan['steps'],f'continuation-{sequence:03d}')
    except (ToolRefused,ValueError,RuntimeError,LookupError,TypeError,OSError) as error:
     self.record_plan_failure(f'continuation-{sequence:03d}-failure.private.json',error)
     if self.active is not None:raise
@@ -310,6 +335,13 @@ class Factory(Live):
       originalFailureRetained=True,healthyIdleReadbackProved=True,nextPlanMustFreshPrepare=True,noAutomaticReplay=True))
    sequence+=1
   if self.c is not None:self.cleanup_known_state()
+
+ def require_completed_predecessor(self,sequence,envelope):
+  predecessor=envelope.get('requiresCompletedPlanSequence')
+  if predecessor is None:return
+  need(type(predecessor)is int and 1<=predecessor<sequence,'invalid_plan_predecessor')
+  path=self.runtime.output/f'continuation-{predecessor:03d}-complete.private.json'
+  need(path.is_file(),'plan_predecessor_did_not_complete_no_world_steps')
 
  def can_await_after_known_move(self,error):
   r=error.receipt or {}

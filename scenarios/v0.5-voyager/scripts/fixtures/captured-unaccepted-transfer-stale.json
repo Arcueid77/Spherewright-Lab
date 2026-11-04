@@ -1,0 +1,12 @@
+{
+  "tool": "spherewright_commit_transfer",
+  "error": {
+    "code": "STALE_STATE",
+    "message": "Player inventory or storage contents changed after transfer preparation.",
+    "retryable": true,
+    "recovery": "Inspect current state and prepare a fresh action.",
+    "nativeFirstFailure": null
+  },
+  "toolError": true,
+  "actionAccepted": false
+}
