@@ -36,7 +36,10 @@ def main():
             put(out/'lifetime-audit-process.private.json',dict(exitCode=audit.returncode,
                 stdout=audit.stdout[:65536],stderr=audit.stderr[:65536],
                 outputTruncated=len(audit.stdout)>65536 or len(audit.stderr)>65536))
-            need(audit.returncode==0,'actual_lifetime_audit_failed_no_relaunch')
+            if audit.returncode!=0:
+                put(out/'startup-readiness-abort.private.json',dict(reason='actual_lifetime_audit_failed',
+                    originalAuditPreserved=True,noRelaunch=True))
+                raise RuntimeError('actual_lifetime_audit_failed_original_writer_preserves_unopened_world_no_relaunch')
             print('One writer launched; actual game lifetime separation verified.',flush=True);return
         if (worker/'worker-failure.private.json').exists():raise RuntimeError('original_writer_failed_before_game_process_no_replay')
         time.sleep(.25)

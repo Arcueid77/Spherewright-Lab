@@ -1,0 +1,50 @@
+{
+  "basis": "sanitized actual membership shapes; ownership graph and identifiers are supplied synthetically in tests",
+  "cases": [
+    {
+      "name": "three-group-host",
+      "rows": [
+        {
+          "limitFlags": 15360,
+          "callerMember": false,
+          "applicationMember": true,
+          "gameMember": false,
+          "steamMember": false
+        },
+        {
+          "limitFlags": 8192,
+          "callerMember": false,
+          "applicationMember": true,
+          "gameMember": false,
+          "steamMember": false
+        },
+        {
+          "limitFlags": 10240,
+          "callerMember": true,
+          "applicationMember": false,
+          "gameMember": false,
+          "steamMember": false
+        }
+      ]
+    },
+    {
+      "name": "two-group-host",
+      "rows": [
+        {
+          "limitFlags": 15360,
+          "callerMember": false,
+          "applicationMember": true,
+          "gameMember": false,
+          "steamMember": false
+        },
+        {
+          "limitFlags": 10240,
+          "callerMember": true,
+          "applicationMember": false,
+          "gameMember": false,
+          "steamMember": false
+        }
+      ]
+    }
+  ]
+}

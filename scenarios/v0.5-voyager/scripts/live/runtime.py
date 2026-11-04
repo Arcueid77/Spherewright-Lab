@@ -1,7 +1,7 @@
 """One immutable private run config; no imports from historical execution packets."""
 from pathlib import Path
 from types import MappingProxyType
-import datetime as dt, json, shutil, subprocess
+import datetime as dt, json, shutil, subprocess,uuid
 from evidence import need, read, sha, put, native_file_proof
 
 
@@ -60,6 +60,24 @@ class Runtime:
             for r in rows:
                 p=root/r['relativePath'];need(p.stat().st_size==r['bytes'] and sha(p)==r['sha256'],'installed_bytes_changed')
         return index
+
+    def verify_revision_stamps(self):
+        c=self.config;stamps=read(c['revisionStamps'])
+        need(stamps.get('passed') is True and stamps.get('sourceSha')==c['sourceSha'],'revision_stamp_source_changed_before_launch')
+        expected={'Spherewright.Bridge.Core','Spherewright.Contracts','Spherewright.Plugin'}
+        rows=stamps.get('modules',[])
+        need(len(rows)==3 and {row['assemblyName'] for row in rows}==expected,'revision_stamp_module_set_changed')
+        for row in rows:
+            need(isinstance(row.get('moduleVersionId'),str) and uuid.UUID(row['moduleVersionId']).int!=0,'revision_stamp_mvid_missing')
+            need(row.get('informationalVersion')=='0.5.0+'+c['sourceSha']
+                 and row.get('sha256')==sha(Path(c['pluginDestination'])/(row['assemblyName']+'.dll')),
+                 'revision_stamp_module_bytes_changed_before_launch')
+        native=stamps.get('native',{})
+        need(isinstance(native.get('moduleVersionId'),str) and uuid.UUID(native['moduleVersionId']).int!=0,'revision_stamp_native_mvid_missing')
+        need(native.get('assemblyName')=='Assembly-CSharp' and native.get('sha256')==c['nativeAssemblySha256']
+             and native.get('sha256')==sha(Path(c['dspRoot'])/'DSPGAME_Data/Managed/Assembly-CSharp.dll'),
+             'revision_stamp_native_changed_before_launch')
+        return stamps
 
     def native_paths(self):
         c=self.config;paths={k:Path(p).resolve() for k,p in c['savePaths'].items()}

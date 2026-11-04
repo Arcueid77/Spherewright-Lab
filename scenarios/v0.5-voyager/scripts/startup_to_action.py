@@ -21,6 +21,9 @@ ACTUAL_WORK_KINDS = frozenset(('move', 'transfer', 'handcraft', 'build', 'config
 class DeadlineExceeded(RuntimeError):
     pass
 
+class StartupReadinessFailure(RuntimeError):
+    """An observed pre-recovery failure; preserve and close the unopened world."""
+
 
 class CommitRejected(RuntimeError):
     """Only an authoritative pre-acceptance Native refusal may use this type."""

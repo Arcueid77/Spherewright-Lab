@@ -34,7 +34,7 @@ class Live:
   if bad or not r.get('success'): raise ToolRefused(name,r.get('error'))
   return r.get('result',r.get('status'))
  def offline_preflight(self):
-  s=self.runtime;c=s.config;s.stopped();s.cohort();m=s.verify_backup()
+  s=self.runtime;c=s.config;s.stopped();s.cohort();s.verify_revision_stamps();m=s.verify_backup()
   for ref in c['qualifiedInputs']:
    need(sha(ref['path'])==ref['sha256'],'qualified_input_changed')
   q=read(c['qualificationPath']);sdk=read(c['sdkQualificationPath'])
@@ -63,13 +63,21 @@ class Live:
   p=subprocess.Popen([self.steam,'-applaunch','1366540'],stdin=subprocess.DEVNULL,stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL,startupinfo=si,creationflags=0x200,close_fds=True)
   self.runtime.put('steam-proxy.private.json',dict(processId=p.pid));return p.pid
  def process(self):
-  raw=subprocess.check_output(['powershell.exe','-NoProfile','-NonInteractive','-Command',"@(Get-Process DSPGAME -ErrorAction SilentlyContinue)|Select-Object Id,Path,Responding,@{N='startedUtc';E={$_.StartTime.ToUniversalTime().ToString('O')}}|ConvertTo-Json -Compress"],text=True,timeout=10).strip()
+  raw=subprocess.check_output(['powershell.exe','-NoProfile','-NonInteractive','-Command',"@(Get-Process DSPGAME -ErrorAction SilentlyContinue)|Select-Object Id,Path,Responding,@{N='startedUtc';E={$_.StartTime.ToUniversalTime().ToString('O')}},@{N='createdFileTime';E={$_.StartTime.ToFileTimeUtc()}}|ConvertTo-Json -Compress"],text=True,timeout=10).strip()
   rows=json.loads(raw)if raw else []
   if isinstance(rows,dict):rows=[rows]
   need(len(rows)<=1,'multiple_game_processes')
   return rows[0]if rows else None
  def wait_ready(self,process,deadline):
+  try:return self.wait_ready_proved(process,deadline)
+  except (G.DeadlineExceeded,G.StartupReadinessFailure):raise
+  except Exception as error:
+   raise G.StartupReadinessFailure('Pre-recovery readiness failed: '+str(error)) from error
+
+ def wait_ready_proved(self,process,deadline):
   while time.monotonic()<deadline:
+   if (self.runtime.output/'startup-readiness-abort.private.json').exists():
+    raise G.StartupReadinessFailure('Observed startup readiness audit failed before recovery; preserve the original capture.')
    p=self.process()
    if p:
     need(Path(p['Path']).resolve()==(Path(self.runtime.config['dspRoot'])/'DSPGAME.exe').resolve(),'game_path_changed')
@@ -167,6 +175,8 @@ class Live:
  def cleanup_known_state(self):
   need(not self.cleanup_entered and self.active is None,'original_cleanup_or_action_unsettled')
   self.cleanup_entered=True;s=self.call('spherewright_get_session_state',{})
+  if getattr(self,'preserve_unloaded_startup_only',False):
+   need(not s['gameLoaded'],'pre_recovery_failure_cannot_save_or_exit_an_already_loaded_world')
   if s['gameLoaded']:
    need(s['ownedBySpherewright'] and s['writesAllowed'],'unsafe_cleanup_world')
    self.ctx=dict(sessionId=s['sessionId'],planetId=s['localPlanetId'])
@@ -198,6 +208,9 @@ class Live:
  def failure_requires_preservation(self,error):
   # Local validation and unaccepted prepare errors do not imply world damage.
   # The still-resident writer may inspect and fresh-prepare a corrected plan.
+  if isinstance(error,G.StartupReadinessFailure):
+   self.preserve_unloaded_startup_only=True
+   return not self.loaded
   return isinstance(error,(AcceptedActionFailure,G.DeadlineExceeded))
 
  def successful_original(self,handle):

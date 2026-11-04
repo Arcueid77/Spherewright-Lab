@@ -9,6 +9,27 @@ from factory import Factory,resolve_refs
 from runtime import freeze,Runtime
 
 class LiveDriverTests(unittest.TestCase):
+ def test_old_module_stamp_refuses_offline_before_game_or_file_loading(self):
+  with tempfile.TemporaryDirectory() as folder:
+   p=Path(folder)/'stamps.json';p.write_text(json.dumps(dict(passed=True,sourceSha='old')))
+   r=Runtime.__new__(Runtime);r.config=dict(sourceSha='new',revisionStamps=str(p))
+   with self.assertRaisesRegex(RuntimeError,'revision_stamp_source_changed_before_launch'):r.verify_revision_stamps()
+
+ def test_failed_pre_recovery_audit_stops_wait_and_preserves_without_another_launch(self):
+  import time,startup_to_action as gate
+  with tempfile.TemporaryDirectory() as folder:
+   (Path(folder)/'startup-readiness-abort.private.json').write_text('{}')
+   a=Live(None);a.runtime=type('Evidence',(),dict(output=Path(folder)))()
+   a.process=lambda:self.fail('aborted readiness cannot continue launching or recovering')
+   with self.assertRaises(gate.StartupReadinessFailure):a.wait_ready(None,time.monotonic()+10)
+   self.assertTrue(a.failure_requires_preservation(gate.StartupReadinessFailure()))
+   a.loaded=True;self.assertFalse(a.failure_requires_preservation(gate.StartupReadinessFailure()))
+
+ def test_pre_recovery_failure_never_automatically_saves_an_unexpected_loaded_world(self):
+  a=Live(None);a.runtime=type('Evidence',(),dict(config={}))();a.preserve_unloaded_startup_only=True
+  a.call=lambda *_:dict(gameLoaded=True,ownedBySpherewright=True,writesAllowed=True)
+  with self.assertRaisesRegex(RuntimeError,'cannot_save_or_exit_an_already_loaded_world'):a.cleanup_known_state()
+
  def test_captured_route_hash_is_route_specific_and_not_generic_state_hash(self):
   route=json.loads((Path(__file__).parent/'fixtures/captured-voyager-route-disabled-auto-supply.json').read_text())
   self.assertFalse(route['budgetSufficient']);self.assertEqual(2,route['availableWarpers']);self.assertEqual(3,route['requiredWarpers'])
