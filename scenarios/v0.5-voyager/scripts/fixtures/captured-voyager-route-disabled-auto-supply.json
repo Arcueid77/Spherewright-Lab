@@ -1,0 +1,15 @@
+{
+  "budgetSufficient": false,
+  "autoReplenishWarper": false,
+  "nativeWarperCount": 2,
+  "packageWarperCount": 40,
+  "availableWarpers": 2,
+  "requiredWarpers": 3,
+  "blockers": [
+    {
+      "code": "warper_reserve_insufficient",
+      "message": "Real native warp-storage items plus proved native auto-replenishment must cover both leg entries and the declared extra reserve."
+    }
+  ],
+  "routeStateHash": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+}

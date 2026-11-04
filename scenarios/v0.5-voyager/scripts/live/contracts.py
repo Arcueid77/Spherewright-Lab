@@ -3,6 +3,17 @@
 def is_read_tool(name):
     return name.startswith(('spherewright_get_','spherewright_inspect_','spherewright_list_')) or name=='spherewright_preview_voyager_route'
 
+def native_warper_auto_supply_enabled(result):
+    detail=result.get('mechaWarperAutoSupplyReadback') or {}
+    return (result.get('terminal') is True and result.get('succeeded') is True
+        and result.get('actionKind')=='configure-building'
+        and detail.get('enabledBefore') is False and detail.get('enabledAfter') is True
+        and detail.get('readbackComplete') is True and detail.get('packageContentsPreserved') is True
+        and detail.get('conservationVerified') is True
+        and all(type(detail.get(k+'Before'))is int and detail[k+'Before']>=0
+            and type(detail.get(k+'After'))is int and detail[k+'After']==detail[k+'Before']
+            for k in ('packageCount','packageInc','chamberCount','chamberInc')))
+
 def consumer_network(entity):
     if entity.get('componentKind') == 'power-node':
         return None  # not applicable: membership needs complete power topology

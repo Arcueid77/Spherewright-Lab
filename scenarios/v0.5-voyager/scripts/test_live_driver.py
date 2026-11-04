@@ -3,12 +3,48 @@ from pathlib import Path
 import copy
 import sys,unittest,tempfile,json,subprocess
 sys.path.insert(0,str(Path(__file__).resolve().parent/'live'))
-from contracts import ordinary_owned_resume_echo,powered_consumers_share_network,paused_failed_cut,validate_steps,resume_admission_echo,validate_native_calls,strict_native_player_idle,fully_observed_dry_surface,observed_short_crossing_dry_landing
+from contracts import ordinary_owned_resume_echo,powered_consumers_share_network,paused_failed_cut,validate_steps,resume_admission_echo,validate_native_calls,strict_native_player_idle,fully_observed_dry_surface,observed_short_crossing_dry_landing,native_warper_auto_supply_enabled
 from driver import Live,ToolRefused,AcceptedActionFailure,NativePreacceptanceRefusal
-from factory import Factory
+from factory import Factory,resolve_refs
 from runtime import freeze,Runtime
 
 class LiveDriverTests(unittest.TestCase):
+ def test_captured_route_hash_is_route_specific_and_not_generic_state_hash(self):
+  route=json.loads((Path(__file__).parent/'fixtures/captured-voyager-route-disabled-auto-supply.json').read_text())
+  self.assertFalse(route['budgetSufficient']);self.assertEqual(2,route['availableWarpers']);self.assertEqual(3,route['requiredWarpers'])
+  self.assertEqual(route['routeStateHash'],resolve_refs(dict(ref='route.routeStateHash'),dict(route=route)))
+  with self.assertRaises(KeyError):resolve_refs(dict(ref='route.stateHash'),dict(route=route))
+
+ def test_warper_setting_requires_complete_exact_zero_transfer_readback(self):
+  detail=dict(enabledBefore=False,enabledAfter=True,readbackComplete=True,packageContentsPreserved=True,conservationVerified=True,
+   packageCountBefore=40,packageCountAfter=40,packageIncBefore=0,packageIncAfter=0,
+   chamberCountBefore=2,chamberCountAfter=2,chamberIncBefore=0,chamberIncAfter=0)
+  result=dict(terminal=True,succeeded=True,actionKind='configure-building',mechaWarperAutoSupplyReadback=detail)
+  self.assertTrue(native_warper_auto_supply_enabled(result))
+  for field,value in [('enabledAfter',None),('enabledBefore',True),('chamberCountAfter',20),('packageCountAfter',20),('packageContentsPreserved',False),('conservationVerified',False)]:
+   changed=copy.deepcopy(result);changed['mechaWarperAutoSupplyReadback'][field]=value
+   self.assertFalse(native_warper_auto_supply_enabled(changed),field)
+  result['terminal']=False;self.assertFalse(native_warper_auto_supply_enabled(result))
+
+ def test_warper_first_operation_uses_player_and_requires_nullable_cohort_echo(self):
+  a=Live.__new__(Live);a.ctx=dict(sessionId='synthetic',planetId=104)
+  a.runtime=type('Evidence',(),dict(config=dict(firstOperation=dict(entityId=0,recipeId=0,mode='enable-mecha-warper-auto-supply'))))()
+  a.player=lambda:dict(stateHash='fresh-player-hash');a.entity=lambda _:self.fail('player setting cannot inspect entity0')
+  args=[];plan=dict(prepared=True,commitAllowedNow=True,commitBlockers=[],planToken='synthetic')
+  a.call=lambda name,value:args.append(value) or plan
+  with self.assertRaisesRegex(RuntimeError,'cohort_echo_missing_no_commit'):a.prepare_first_work({},0)
+  plan['plannedMechaWarperAutoSupplyEnabled']=True;a.prepare_first_work({},0)
+  self.assertEqual('fresh-player-hash',args[-1]['expectedFactoryStateHash'])
+
+ def test_normal_close_keeps_prior_caller_rpc_spending(self):
+  a=Live.__new__(Live);a.active=None;a.cleanup_entered=False;a.prior_rpc_count=30;records={}
+  a.runtime=type('Evidence',(),dict(config={},put=lambda _,name,value:records.update({name:value})))()
+  a.call=lambda *_:dict(gameLoaded=False)
+  a.c=type('Client',(),dict(close=lambda _:dict(requestCount=7,normalEof=True,processExitCode=0)))()
+  a.normal_close_current_process=lambda:None;a.cleanup_known_state()
+  self.assertEqual(30,records['client-close.private.json']['priorRpcCount']);self.assertEqual(7,records['client-close.private.json']['requestCount'])
+  self.assertIsNone(a.c)
+
  def test_only_explicit_unaccepted_stale_reprepares_with_new_evidence_role(self):
   from unittest.mock import patch
   a=Factory.__new__(Factory);a.active=None;seen=[];health=[];receipts=[]

@@ -5,7 +5,10 @@ import startup_to_action as G
 from geometry_request import complete_geometry_arrays
 from evidence import need,read,sha,json_value
 from mcp_client import Client
-from contracts import ordinary_owned_resume_echo,resume_admission_echo,validate_steps,validate_native_calls,strict_native_player_idle
+from contracts import ordinary_owned_resume_echo,resume_admission_echo,validate_steps,validate_native_calls,strict_native_player_idle,native_warper_auto_supply_enabled
+
+PLAYER_SETTING_MODES=('enable-mecha-construction-drones','disable-mecha-research-auto-supply',
+ 'enable-mecha-research-auto-supply','enable-mecha-warper-auto-supply')
 
 class AcceptedActionFailure(RuntimeError):
  def __init__(self,message,receipt=None):self.receipt=receipt;super().__init__(message)
@@ -22,6 +25,7 @@ class ToolRefused(RuntimeError):
 class Live:
  def __init__(self,runtime):
   self.runtime=runtime;self.c=None;self.seq=0;self.ctx=None;self.pid=None;self.loaded=False;self.cleanup_entered=False;self.active=None
+  self.prior_rpc_count=getattr(runtime,'config',{}).get('priorRpcCount',0)
  def call(self,name,args):
   args=json_value(args)
   if name=='spherewright_inspect_factory_entity' and args.get('geometry') is not None: args=dict(args,geometry=complete_geometry_arrays(args['geometry']))
@@ -43,7 +47,8 @@ class Live:
   if c.get('recoveryMode')=='authorize_failed_landing_last_exit':
    need(c['additionalVoyagerGameTicks']==0 and c.get('surfaceRecoveryTarget') is None
      and bool(c.get('failedLandingActionId')),'failed_landing_config_shape_invalid')
-  self.c=Client(Path(c['pluginDestination'])/'Spherewright.Mcp.exe',s.output/'client',maximum=c['maximumRpc'],seconds=c['maximumWallSeconds'],
+  need(type(self.prior_rpc_count)is int and 0<=self.prior_rpc_count<c['maximumRpc'],'actual_prior_rpc_allowance_ended')
+  self.c=Client(Path(c['pluginDestination'])/'Spherewright.Mcp.exe',s.output/'client',maximum=c['maximumRpc']-self.prior_rpc_count,seconds=c['maximumWallSeconds'],
     total_stdout_limit=c.get('maximumStdoutBytes',64*1024*1024),total_stderr_limit=c.get('maximumStderrBytes',1024*1024))
   _,tools,_,_=self.c.initialize();self.schemas={t['name']:t['inputSchema'] for t in tools}
   validate_steps(c['initialSteps']);validate_native_calls(c['initialSteps'],self.schemas)
@@ -169,7 +174,9 @@ class Live:
    h=self.commit('normal-save-menu','spherewright_commit_return_to_main_menu',dict(self.ctx,planToken=q['planToken'],idempotencyKey=str(uuid.uuid4())))
    need(self.wait_original(h)['succeeded'],'original_save_menu_failed')
    s=self.call('spherewright_get_session_state',{})
-  need(not s['gameLoaded'],'native_menu_unproved');self.runtime.put('client-close.private.json',self.c.close());self.c=None
+  need(not s['gameLoaded'],'native_menu_unproved')
+  closed=self.c.close();closed['priorRpcCount']=getattr(self,'prior_rpc_count',0)
+  self.runtime.put('client-close.private.json',closed);self.c=None
   self.normal_close_current_process()
 
  def normal_close_current_process(self):
@@ -212,7 +219,7 @@ class Live:
    q=self.prepare_sorter_filter_when_ready(role,entity_id,filter_item)
    self.successful_original(self.commit(role,'spherewright_commit_configure_building',dict(self.ctx,planToken=q['planToken'],idempotencyKey=str(uuid.uuid4()))))
    return self.entity(entity_id)
-  e=self.entity(entity_id)
+  e=self.player() if mode in PLAYER_SETTING_MODES else self.entity(entity_id)
   args=dict(self.ctx,entityId=entity_id,recipeId=recipe_id,mode=mode,
     expectedFactoryStateHash=e['configurationStateHash'] if mode=='sorter-filter' else e['stateHash'])
   if mode=='research':
@@ -222,8 +229,10 @@ class Live:
   if mode=='sorter-filter':args['filterItemId']=filter_item
   q=self.call('spherewright_prepare_configure_building',args)
   need(q['prepared'] and q['commitAllowedNow'] and not q['commitBlockers'],'configuration_not_prepared')
-  self.successful_original(self.commit(role,'spherewright_commit_configure_building',dict(self.ctx,planToken=q['planToken'],idempotencyKey=str(uuid.uuid4()))))
-  return self.entity(entity_id)
+  if mode=='enable-mecha-warper-auto-supply':need(q.get('plannedMechaWarperAutoSupplyEnabled') is True,'warper_setting_cohort_echo_missing_no_commit')
+  result=self.successful_original(self.commit(role,'spherewright_commit_configure_building',dict(self.ctx,planToken=q['planToken'],idempotencyKey=str(uuid.uuid4()))))
+  if mode=='enable-mecha-warper-auto-supply':need(native_warper_auto_supply_enabled(result),'original_warper_setting_readback_unproved_no_replay')
+  return self.player() if mode in PLAYER_SETTING_MODES else self.entity(entity_id)
 
  def prepare_sorter_filter_when_ready(self,role,entity_id,filter_item):
   end=time.monotonic()+self.runtime.config.get('maximumConfigurationReadinessSeconds',60);attempt=0
@@ -255,7 +264,7 @@ class Live:
    args=dict(self.ctx,targetX=target['x'],targetY=target['y'],targetZ=target['z'],arrivalTolerance=1.5,expectedPlayerStateHash=p['stateHash'])
    q=self.call('spherewright_prepare_move',args);need(q['prepared'] and q['commitAllowedNow'] and not q['commitBlockers'],'first_move_not_prepared')
    return dict(action_kind='move',tool='spherewright_commit_move',prepared=q)
-  e=self.player() if mode in ('enable-mecha-construction-drones','disable-mecha-research-auto-supply','enable-mecha-research-auto-supply') else self.entity(work['entityId']);self.first_before=e
+  e=self.player() if mode in PLAYER_SETTING_MODES else self.entity(work['entityId']);self.first_before=e
   if mode=='production':need(e['recipeId']!=work['recipeId'],'first_recipe_already_applied_no_delta')
   args=dict(self.ctx,entityId=work['entityId'],recipeId=work.get('recipeId',0),mode=mode,expectedFactoryStateHash=e['stateHash'])
   if mode=='research':
@@ -265,6 +274,7 @@ class Live:
   if mode=='storage-capacity':args.update(storageOperation=work['storageOperation'],filterItemId=work.get('filterItemId',0))
   q=self.call('spherewright_prepare_configure_building',args)
   need(q['prepared'] and q['commitAllowedNow'] and not q['commitBlockers'],'first_operation_not_prepared')
+  if mode=='enable-mecha-warper-auto-supply':need(q.get('plannedMechaWarperAutoSupplyEnabled') is True,'first_warper_setting_cohort_echo_missing_no_commit')
   return dict(action_kind='configure-building',tool='spherewright_commit_configure_building',prepared=q)
  def commit_first_work_once(self,w):return self.commit('first-work',w['tool'],dict(self.ctx,planToken=w['prepared']['planToken'],idempotencyKey=str(uuid.uuid4())))
  def verify_progress(self,w,r):
@@ -274,9 +284,10 @@ class Live:
    moved=math.dist([self.first_before['position'][k] for k in 'xyz'],[e['position'][k] for k in 'xyz'])
    ok=r['succeeded'] and moved>1 and strict_native_player_idle(e)
    self.runtime.put('actual-progress.private.json',dict(verified=ok,actionId=r['actionId'],before=self.first_before,after=e));return ok
-  e=self.player() if mode in ('enable-mecha-construction-drones','disable-mecha-research-auto-supply','enable-mecha-research-auto-supply') else self.entity(c['entityId'])
+  e=self.player() if mode in PLAYER_SETTING_MODES else self.entity(c['entityId'])
   if mode=='enable-mecha-construction-drones':
    ok=r['succeeded'] and self.first_before['constructionDrones']['enabled'] is False and e['constructionDrones']['enabled'] is True
+  elif mode=='enable-mecha-warper-auto-supply':ok=native_warper_auto_supply_enabled(r)
   elif mode in ('disable-mecha-research-auto-supply','enable-mecha-research-auto-supply'):
    desired=mode=='enable-mecha-research-auto-supply'
    ok=r['succeeded'] and self.first_before['autoManageResearchItems'] is not desired and e['autoManageResearchItems'] is desired and not e['mechaResearchItemBuffer']

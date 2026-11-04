@@ -34,6 +34,8 @@ def main():
             recoveryDeadlineUtc=(dt.datetime.now(dt.timezone.utc)+dt.timedelta(hours=12)).isoformat(),recoveryScope='continue_original_finite_task',maximumChargeGameTicks=18000,maximumChargeWallSeconds=300,priorActionKnownTerminalFailed=True)))
         for mode in ('disable-mecha-research-auto-supply','enable-mecha-research-auto-supply'):
             cases.append(('spherewright_prepare_configure_building',dict(ctx,entityId=0,recipeId=0,mode=mode,expectedFactoryStateHash=h)))
+        cases.append(('spherewright_prepare_configure_building',dict(ctx,entityId=0,recipeId=0,
+            mode='enable-mecha-warper-auto-supply',expectedFactoryStateHash=h)))
         cases.append(('spherewright_prepare_resume_owned_game',dict(resumeToken='synthetic-offline-token',recoveryMode='default')))
         proof=[]
         for tool,args in cases:
