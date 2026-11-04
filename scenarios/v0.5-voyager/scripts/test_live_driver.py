@@ -85,7 +85,7 @@ class LiveDriverTests(unittest.TestCase):
    lock=root/'lock.json';lock.write_text(json.dumps(dict(native=dict(version='synthetic-native'))))
    ticket=durable/'flight-checkpoint.json';ticket.write_text(json.dumps(dict(ownedSaveName=primary.stem,gameVersion='synthetic-native',checkpointSaveName=current.stem)))
    r=Runtime.__new__(Runtime);r.config=dict(savePaths=dict(primary=str(primary),currentCheckpoint=str(old)),durableRoots=[str(durable)],labSourceLock=str(lock))
-   self.assertEqual(current,r.native_paths()['currentCheckpoint']);self.assertEqual(str(old),r.config['savePaths']['currentCheckpoint'])
+   self.assertEqual(current.resolve(),r.native_paths()['currentCheckpoint']);self.assertEqual(str(old),r.config['savePaths']['currentCheckpoint'])
    ticket.write_text(json.dumps(dict(ownedSaveName='foreign-owned',gameVersion='synthetic-native',checkpointSaveName=current.stem)))
    with self.assertRaisesRegex(RuntimeError,'current_checkpoint_identity_changed'):r.native_paths()
  def test_first_real_move_requires_actual_delta_grounded_walk_and_zero_native_velocity(self):
