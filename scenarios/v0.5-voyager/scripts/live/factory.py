@@ -223,6 +223,7 @@ class Factory(Live):
  def native_operation(self,s,commit_requested=True):
   allowed={'spherewright_prepare_move','spherewright_prepare_harvest','spherewright_prepare_transfer',
    'spherewright_prepare_configure_building','spherewright_prepare_select_research','spherewright_prepare_handcraft',
+   'spherewright_prepare_logistics_station_fleet_transfer',
    'spherewright_prepare_refuel','spherewright_prepare_supply_mecha_warpers','spherewright_prepare_voyager_flight',
    'spherewright_prepare_save'}
   prepare=s['prepareTool']
