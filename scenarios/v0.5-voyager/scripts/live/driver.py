@@ -203,6 +203,10 @@ class Live:
   need(spent+c['returnReserveGameTicks']+c['cleanupReserveGameTicks']<c['maximumCumulativeGameTicks'],'finite_stage_work_reserve_reached')
   return s
  def configure(self,role,entity_id,recipe_id,mode='production',filter_item=0):
+  if mode=='sorter-filter':
+   q=self.prepare_sorter_filter_when_ready(role,entity_id,filter_item)
+   self.successful_original(self.commit(role,'spherewright_commit_configure_building',dict(self.ctx,planToken=q['planToken'],idempotencyKey=str(uuid.uuid4()))))
+   return self.entity(entity_id)
   e=self.entity(entity_id)
   args=dict(self.ctx,entityId=entity_id,recipeId=recipe_id,mode=mode,
     expectedFactoryStateHash=e['configurationStateHash'] if mode=='sorter-filter' else e['stateHash'])
@@ -215,6 +219,29 @@ class Live:
   need(q['prepared'] and q['commitAllowedNow'] and not q['commitBlockers'],'configuration_not_prepared')
   self.successful_original(self.commit(role,'spherewright_commit_configure_building',dict(self.ctx,planToken=q['planToken'],idempotencyKey=str(uuid.uuid4()))))
   return self.entity(entity_id)
+
+ def prepare_sorter_filter_when_ready(self,role,entity_id,filter_item):
+  end=time.monotonic()+self.runtime.config.get('maximumConfigurationReadinessSeconds',60);attempt=0
+  while time.monotonic()<end:
+   self.state();e=self.entity(entity_id);attempt+=1
+   need(e['itemId'] in(2011,2012) and e.get('pickTargetObjectId',0)>0 and e.get('insertTargetObjectId',0)>0,
+    'sorter_readiness_requires_exact_connected_ordinary_sorter')
+   need((e.get('filterItemId') or 0)!=filter_item,'sorter_filter_already_applied_no_new_action')
+   held=any(b.get('count',0)>0 for b in e.get('buffers',[]))
+   self.runtime.put(role+f'-readiness-{attempt:04d}.private.json',e)
+   if not held or e.get('inserterStage')=='Inserting':
+    try:
+     q=self.call('spherewright_prepare_configure_building',dict(self.ctx,entityId=entity_id,recipeId=0,
+      mode='sorter-filter',filterItemId=filter_item,expectedFactoryStateHash=e['configurationStateHash']))
+    except ToolRefused as error:
+     if getattr(self,'active',None) is not None or error.error.get('code') not in('ACTION_REJECTED','STALE_STATE'):raise
+    else:
+     need(q['prepared'] and q['commitAllowedNow'] and not q['commitBlockers'],'sorter_configuration_not_native_prepared')
+     return q
+   # Readiness only schedules a fresh Native prepare; it never substitutes
+   # a local stage judgment for admission or clears/redelivers held cargo.
+   time.sleep(.07+.03*(attempt%5))
+  raise RuntimeError('finite_sorter_phase_readiness_ended_no_action_or_cargo_replay')
 
  def prepare_first_work(self,loaded,deadline):
   work=self.runtime.config['firstOperation'];mode=work.get('mode','production')

@@ -9,6 +9,23 @@ from factory import Factory
 from runtime import freeze,Runtime
 
 class LiveDriverTests(unittest.TestCase):
+ def test_actual_returning_to_sending_race_waits_then_fresh_prepares_without_clearing_cargo(self):
+  from unittest.mock import patch
+  a=Live.__new__(Live);a.ctx=dict(sessionId='same',planetId=104);a.active=None;a.state=lambda:None
+  a.runtime=type('Evidence',(),dict(config={},put=lambda *_:None))()
+  base=dict(itemId=2011,pickTargetObjectId=1,insertTargetObjectId=2,filterItemId=None)
+  samples=iter([dict(base,inserterStage='Returning',buffers=[],configurationStateHash='returning'),
+   dict(base,inserterStage='Sending',buffers=[dict(itemId=1106,count=1)],configurationStateHash='sending'),
+   dict(base,inserterStage='Inserting',buffers=[dict(itemId=1106,count=1)],configurationStateHash='inserting')])
+  a.entity=lambda _:next(samples);calls=[]
+  def prepare(name,args):
+   calls.append(args)
+   if len(calls)==1:raise ToolRefused(name,dict(code='ACTION_REJECTED'))
+   return dict(prepared=True,commitAllowedNow=True,commitBlockers=[],planToken='native-fresh')
+  a.call=prepare
+  with patch('driver.time.sleep'):q=a.prepare_sorter_filter_when_ready('volatile',7,1201)
+  self.assertEqual('native-fresh',q['planToken']);self.assertEqual(['returning','inserting'],[c['expectedFactoryStateHash']for c in calls])
+
  def test_research_configuration_binds_fresh_current_tech_separately_from_recipe(self):
   a=Live.__new__(Live);a.ctx=dict(sessionId='same',planetId=104)
   a.runtime=type('Evidence',(),dict(put=lambda *_:None))();a.entity=lambda _:dict(stateHash='native-full-hash')
