@@ -29,7 +29,10 @@ def main():
  finally:observer.close()
  command=f"$m=Get-CimInstance Win32_Process -Filter 'ProcessId={mcp_pid}';if($m.Name -ne 'Spherewright.Mcp.exe'){{throw 'MCP identity'}};$p=Get-CimInstance Win32_Process -Filter ('ProcessId='+$m.ParentProcessId);$p|Select-Object Name,ProcessId,CommandLine|ConvertTo-Json -Compress"
  owner=json.loads(subprocess.check_output(['powershell.exe','-NoProfile','-Command',command],text=True))
- need(owner['Name'].lower()=='python.exe' and 'run.py' in owner['CommandLine'] and str(prior).lower() in owner['CommandLine'].lower(),'exact_owned_caller_identity_unproved')
+ control=prior.parent/(prior.name+'-worker')/'intent.private.json';intent=read(control)
+ need(owner['Name'].lower()=='python.exe' and str(control).lower() in owner['CommandLine'].lower()
+      and sha(control) in owner['CommandLine'].upper() and Path(intent['script']).name=='run.py'
+      and Path(intent['arguments'][-1]).resolve()==prior,'exact_owned_caller_identity_unproved')
  r.put('caller-only-retirement-intent.private.json',dict(caller=owner,mcpProcessId=mcp_pid,gameTermination=False))
  subprocess.run(['powershell.exe','-NoProfile','-Command',f"Stop-Process -Id {owner['ProcessId']} -ErrorAction Stop"],check=True)
  # Closing the sole pipe owner lets the MCP exit on EOF; do not kill its child.
