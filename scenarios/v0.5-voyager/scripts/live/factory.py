@@ -258,7 +258,7 @@ class Factory(Live):
 
  def continue_prepared_work(self,result):
   try:self.execute_plan(self.runtime.config['initialSteps'],'initial')
-  except (ToolRefused,ValueError,RuntimeError,LookupError,TypeError) as error:
+  except (ToolRefused,ValueError,RuntimeError,LookupError,TypeError,OSError) as error:
    self.record_plan_failure('initial-plan-failure.private.json',error)
    if self.active is not None or isinstance(error,AcceptedActionFailure):raise
   self.await_next_plan()
@@ -270,6 +270,13 @@ class Factory(Live):
  def execute_plan(self,steps,label):
   validate_steps(steps)
   validate_native_calls(steps,self.schemas)
+  roles=[s['role'] for s in steps]
+  need(len(roles)==len(set(roles)),'immutable_plan_duplicate_roles')
+  output=getattr(getattr(self,'runtime',None),'output',None)
+  if output is not None:
+   names=[p.name for p in output.iterdir()]
+   for role in roles:
+    need(not any(name.startswith(role+'-') for name in names),'immutable_plan_role_previously_used:'+role)
   for s in steps:
    self.step(s)
    if self.c is None:
@@ -286,7 +293,7 @@ class Factory(Live):
    envelope=read(inbox);need(sha(envelope['path'])==envelope['sha256'],'next_plan_changed')
    plan=read(envelope['path'])
    try:self.execute_plan(plan['steps'],f'continuation-{sequence:03d}')
-   except (ToolRefused,ValueError,RuntimeError,LookupError,TypeError) as error:
+   except (ToolRefused,ValueError,RuntimeError,LookupError,TypeError,OSError) as error:
     self.record_plan_failure(f'continuation-{sequence:03d}-failure.private.json',error)
     if self.active is not None:raise
     if isinstance(error,AcceptedActionFailure):

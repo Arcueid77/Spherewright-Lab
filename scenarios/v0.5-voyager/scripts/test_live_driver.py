@@ -9,6 +9,16 @@ from factory import Factory
 from runtime import freeze,Runtime
 
 class LiveDriverTests(unittest.TestCase):
+ def test_existing_evidence_role_rejects_whole_plan_before_any_game_step(self):
+  with tempfile.TemporaryDirectory() as folder:
+   root=Path(folder);(root/'used-p-before.private.json').write_text('{}')
+   a=Factory.__new__(Factory);a.schemas={'spherewright_get_session_state':dict(properties={},required=[])}
+   a.runtime=type('Evidence',(),dict(output=root))();called=[];a.step=lambda s:called.append(s)
+   steps=[dict(kind='read',role='fresh',tool='spherewright_get_session_state'),dict(kind='read',role='used',tool='spherewright_get_session_state')]
+   with self.assertRaisesRegex(RuntimeError,'immutable_plan_role_previously_used:used'):a.execute_plan(steps,'next')
+   self.assertEqual([],called)
+   self.assertEqual('{}',(root/'used-p-before.private.json').read_text())
+
  def test_captured_dry_preview_can_still_end_in_a_real_stalled_move(self):
   sample=json.loads((Path(__file__).parent/'fixtures/captured-dry-preview-stalled-walk.json').read_text())
   self.assertTrue(fully_observed_dry_surface(sample))
