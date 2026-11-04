@@ -24,18 +24,22 @@ class McpClientError(RuntimeError):
         super().__init__('%s: %s' % (fault_type, message))
 
 
+def validate_limits(maximum,seconds,total_stdout_limit=MAX_STDOUT_BYTES,total_stderr_limit=MAX_STDERR_BYTES):
+    if isinstance(maximum, bool) or not isinstance(maximum, int) or maximum < 1:
+        raise ValueError('maximum must be a finite positive request count')
+    if isinstance(seconds, bool) or not isinstance(seconds, (int, float)) or not math.isfinite(seconds) or seconds <= 0:
+        raise ValueError('seconds must be finite and positive')
+    if (isinstance(total_stdout_limit, bool) or not isinstance(total_stdout_limit, int)
+            or not 1 <= total_stdout_limit <= MAX_CONFIGURED_STDOUT_BYTES):
+        raise ValueError('total_stdout_limit must be a finite integer through 1 GiB')
+    if isinstance(total_stderr_limit,bool) or not isinstance(total_stderr_limit,int) or not 1<=total_stderr_limit<=MAX_CONFIGURED_STDERR_BYTES:
+        raise ValueError('total_stderr_limit must be a finite integer through 64 MiB')
+
+
 class Client:
     def __init__(self, executable, directory, maximum=8, seconds=120,
                  total_stdout_limit=MAX_STDOUT_BYTES,total_stderr_limit=MAX_STDERR_BYTES):
-        if isinstance(maximum, bool) or not isinstance(maximum, int) or maximum < 1:
-            raise ValueError('maximum must be a finite positive request count')
-        if isinstance(seconds, bool) or not isinstance(seconds, (int, float)) or not math.isfinite(seconds) or seconds <= 0:
-            raise ValueError('seconds must be finite and positive')
-        if (isinstance(total_stdout_limit, bool) or not isinstance(total_stdout_limit, int)
-                or not 1 <= total_stdout_limit <= MAX_CONFIGURED_STDOUT_BYTES):
-            raise ValueError('total_stdout_limit must be a finite integer through 1 GiB')
-        if isinstance(total_stderr_limit,bool) or not isinstance(total_stderr_limit,int) or not 1<=total_stderr_limit<=MAX_CONFIGURED_STDERR_BYTES:
-            raise ValueError('total_stderr_limit must be a finite integer through 64 MiB')
+        validate_limits(maximum,seconds,total_stdout_limit,total_stderr_limit)
         self.directory = pathlib.Path(directory)
         self.directory.mkdir(exist_ok=True)
         self.maximum, self.count = maximum, 0

@@ -6,6 +6,7 @@ ROOT=Path(__file__).resolve().parent
 sys.path.insert(0,str(ROOT.parent))
 import detached_python_task as launcher
 from evidence import sha,read,need,put
+from mcp_client import validate_limits,MAX_STDOUT_BYTES,MAX_STDERR_BYTES
 
 def main():
     attaching=sys.argv[1]=='--attach'
@@ -16,6 +17,7 @@ def main():
     config=str(Path(config).resolve());output=str(Path(output).resolve())
     if attaching:previous=str(Path(previous).resolve())
     c=read(config);out=Path(output)
+    validate_limits(c['maximumRpc'],c['maximumWallSeconds'],c.get('maximumStdoutBytes',MAX_STDOUT_BYTES),c.get('maximumStderrBytes',MAX_STDERR_BYTES))
     need(sha(config)==config_sha.upper() and not out.exists(),'config_changed_or_prior_run_exists')
     worker=out.parent/(out.name+'-worker')
     inputs=[Path(config),*ROOT.glob('*.py'),ROOT.parent/'startup_to_action.py',ROOT.parent/'geometry_request.py']
