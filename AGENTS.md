@@ -1,5 +1,7 @@
 # Spherewright-Lab working rules
 
+- Latest owner instruction (2026-11-04): execution is paused and the game is normally closed. Apply the [current pause](operations/standing-authority.md#current-owner-pause-2026-11-04--当前所有者暂停) before the older resumed grant; do not restart gameplay until the owner resumes. / 最新所有者要求暂停并关闭游戏，晚点继续；新暂停优先，未经继续指令不重开游戏。
+
 - Current owner precedence (2026-11-03): the [resumed extension grant](operations/standing-authority.md#current-owner-grant-2026-11-03--当前所有者授权) supersedes the prior pause and historical tick/window/caller ceilings below. Choose sufficient finite stage budgets, preserve cumulative spending, Native gates, material ceilings and reserves; retain the 300-second startup gate. / 当前先适用所有者2026-11-03恢复目标及有限工作预算授权，旧暂停和流程上限不再阻断；保留累计实耗、Native门、物料范围、储备及300秒启动门。
 
 Engineering reference: [0.5 development lessons](operations/lessons/v0.5-voyager-2026-10-29.md). It records recurring pitfalls and adds no approval gate or execution authority. / 工程参考：[0.5经验复盘](operations/lessons/v0.5-voyager-2026-10-29.md)，记录重复陷阱，不新增审批门或执行权限。

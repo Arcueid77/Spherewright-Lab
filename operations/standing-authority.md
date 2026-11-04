@@ -1,5 +1,12 @@
 # Voyager standing execution authority / Voyager 持续执行授权
 
+## Current owner pause, 2026-11-04 / 当前所有者暂停
+
+The owner explicitly requested stopping and closing the game, with continuation later. Execution is paused; do not reopen or advance the game until the owner resumes. The finite-budget grant below remains recorded for that later continuation and does not override this newer pause. Preserve the latest complete saved boundary and unknown-action receipts.
+
+所有者明确要求先停下、关闭游戏，晚点继续。当前执行已暂停；再次收到继续指令前，不重开或推进游戏。下文有限预算授权保留供后续续接，不覆盖此次更新的暂停指令。保留最新完整保存边界及unknown原回执。
+
+
 ## Current owner grant, 2026-11-03 / 当前所有者授权
 
 The owner's direct instruction on 2026-11-03 resumes the paused first-sail/first-rocket extension through real offworld manufacture, launch/arrival, normal save/recovery continuation and the final same-source manual/Thunderstore review pair. It takes precedence over older procedural budgets below and in historical snapshots. The designated executor may choose sufficient finite stage budgets for actual game ticks, natural research/manufacturing/construction/transport waits, live-window duration and RPC/caller time. Historical 216000 ticks, one-hour windows and 900/1200-second caller limits are no longer execution or approval ceilings. Normal saves, exits, recovery, commits and installations require no repeated approval. All actual spending remains cumulative; no refund, reset or historical accounting change. Fresh Native plans must accurately represent each new finite allowance; never edit consumed credentials, saves or Journal.

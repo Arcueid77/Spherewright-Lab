@@ -138,8 +138,11 @@ class Factory(Live):
    source=self.object_id(s['source']);last=None
    for end in s['ends']:
     point=self.layout(end);e=self.entity(source)
-    try:return self.build(role,dict(buildingItemId=2001,sourceObjectId=source,expectedSourceStateHash=e['endpointStateHash'],
-      **dict(zip(('pathEndX','pathEndY','pathEndZ'),[point[k] for k in 'xyz']))),s['maximumNewBelts'])
+    args=dict(buildingItemId=2001,sourceObjectId=source,expectedSourceStateHash=e['endpointStateHash'],
+      **dict(zip(('pathEndX','pathEndY','pathEndZ'),[point[k] for k in 'xyz'])))
+    for key in ('beltPathMode','beltStartAltitudeLevel','beltEndAltitudeLevel'):
+     if key in s:args[key]=s[key]
+    try:return self.build(role,args,s['maximumNewBelts'])
     except ToolRefused as err:
      if err.error.get('code') not in ('BUILD_LOCATION_INVALID','BUILD_CONNECTION_INVALID'):raise
      last=err
@@ -150,6 +153,8 @@ class Factory(Live):
     start=self.layout(candidate['start']);end=self.layout(candidate['end'])
     args=dict(buildingItemId=2001,preferredPositionX=start['x'],preferredPositionY=start['y'],preferredPositionZ=start['z'],
       pathEndX=end['x'],pathEndY=end['y'],pathEndZ=end['z'])
+    for key in ('beltPathMode','beltStartAltitudeLevel','beltEndAltitudeLevel'):
+     if key in candidate:args[key]=candidate[key]
     try:return self.build(role,args,s['maximumNewBelts'])
     except ToolRefused as err:
      if err.error.get('code') not in ('BUILD_LOCATION_INVALID','BUILD_CONNECTION_INVALID'):raise

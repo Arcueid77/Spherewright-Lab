@@ -1,5 +1,7 @@
 # Active handoff / 活动交接
 
+**Paused by owner, 2026-11-04.** Game normally closed; use the latest saved boundary in the [current snapshot](../scenarios/v0.5-voyager/current-status.md). The [new pause](standing-authority.md#current-owner-pause-2026-11-04--当前所有者暂停) takes precedence over the older resumed grant. / **所有者已要求暂停，游戏已正常关闭；晚点收到继续指令后再续接。**
+
 Current precedence: the owner's [2026-11-03 resumed extension and finite-budget grant](standing-authority.md#current-owner-grant-2026-11-03--当前所有者授权) supersedes the prior pause and historical tick/window/caller ceilings. Retain cumulative spending, material ceilings, Native gates and reserves. / 当前先适用2026-11-03恢复目标与有限预算新授权；旧暂停及流程性tick/窗口/调用期限不再阻断执行，累计实耗、物料上限、Native门及储备保留。
 
 First apply the owner's 2026-10-27 [standing execution authority](standing-authority.md). It supersedes older per-SHA and ordinary Save/exit/recovery-count approval requests, including the saved-miner proposal; technical checks and actual resource limits remain required. / 先适用所有者2026-10-27[持续执行授权](standing-authority.md)：旧逐SHA、保存/退出/恢复次数待批不再阻塞，当前矿机修复可继续；技术门及实际资源预算仍须满足。

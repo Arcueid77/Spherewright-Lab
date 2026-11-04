@@ -1,5 +1,6 @@
 """Replace only a stopped caller; continue the exact healthy live session without Load/Save."""
 from pathlib import Path
+import json
 import sys,datetime as dt,time
 ROOT=Path(__file__).resolve().parent
 sys.path.insert(0,str(ROOT));sys.path.insert(0,str(ROOT.parent));sys.dont_write_bytecode=True
@@ -17,7 +18,13 @@ def main():
     else:
         old=read(prior/'caller-handoff.private.json');need(old['callerStopped'] and old['noActiveGameAction'] and old['gameProcessRetained'],'old_caller_handoff_unproved')
     origin=Path(c.get('liveSessionOrigin',str(prior)))
-    prepared=read(origin/'fresh-resume-plan.private.json');deadline=dt.datetime.fromisoformat(prepared['effectiveRecoveryDeadlineUtc'].replace('Z','+00:00'))
+    prepared=read(origin/'fresh-resume-plan.private.json')
+    if c.get('recoveryProfile')=='ordinary-owned-home':
+        need(prepared['recoveryMode']==c['recoveryMode'] and prepared.get('effectiveRecoveryDeadlineUtc') is None,'ordinary_home_native_deadline_not_applicable')
+        events=[json.loads(line) for line in (origin/'timings.private.jsonl').read_text(encoding='utf-8').splitlines()]
+        dispatched=[e for e in events if e.get('event')=='launch_dispatched'];need(len(dispatched)==1,'original_launch_clock_unproved')
+        deadline=dt.datetime.fromisoformat(dispatched[0]['atUtc'].replace('Z','+00:00'))+dt.timedelta(seconds=c['maximumWallSeconds'])
+    else:deadline=dt.datetime.fromisoformat(prepared['effectiveRecoveryDeadlineUtc'].replace('Z','+00:00'))
     prior_count=old.get('priorRpcCount',0)+old['requestCount']
     a.prior_rpc_count=prior_count
     seconds=(deadline-dt.datetime.now(dt.timezone.utc)).total_seconds();remaining=c['maximumRpc']-prior_count
@@ -42,7 +49,7 @@ def main():
         process=a.process();need(process is not None and process['Id']==a.pid,'original_live_process_changed')
         r.put('attached-existing-session.private.json',dict(passed=True,sessionId=s['sessionId'],gameProcessId=a.pid,
             gameTick=s['gameTick'],priorRpcCount=prior_count,remainingRpc=remaining,originalDeadlineUtc=deadline.isoformat(),
-            noLoad=True,noSave=True,noLaunch=True,noTickRefund=True,sourceSha=c['sourceSha']))
+            noLoad=True,noSave=True,noLaunch=True,noTickRefund=True,noStartupClockReset=True,sourceSha=c['sourceSha']))
         try:a.execute_plan(c['initialSteps'],'attached-initial')
         except Exception as error:
             a.record_plan_failure('attached-initial-failure.private.json',error)

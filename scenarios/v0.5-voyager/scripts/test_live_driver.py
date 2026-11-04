@@ -8,6 +8,15 @@ from factory import Factory
 from runtime import freeze,Runtime
 
 class LiveDriverTests(unittest.TestCase):
+ def test_native_elevated_free_span_forwards_observed_layers_without_changing_material_writer(self):
+  a=Factory.__new__(Factory);a.state=lambda:None;a.layout=lambda p:p
+  calls=[];a.build=lambda role,args,maximum:calls.append((role,args,maximum))
+  a.step(dict(kind='build-free-belt',role='native-observed',maximumNewBelts=13,candidates=[dict(
+    start=dict(x=1.,y=200.,z=1.),end=dict(x=2.,y=200.,z=2.),beltPathMode='native_elevated_grid',
+    beltStartAltitudeLevel=1,beltEndAltitudeLevel=1)]))
+  self.assertEqual(1,len(calls));self.assertEqual(13,calls[0][2]);self.assertEqual('native_elevated_grid',calls[0][1]['beltPathMode'])
+  self.assertEqual((1,1),(calls[0][1]['beltStartAltitudeLevel'],calls[0][1]['beltEndAltitudeLevel']))
+
  def test_ordinary_home_resume_uses_native_null_candidate_and_no_confirmation_profile(self):
   c=dict(recoveryMode='default',sourceRole='primary',planetId=101,sourceTick=200,ticketMinimumGameTick=198,expectedNativeVersion='synthetic-version')
   p=dict(recoveryMode='default',expectedPlanetId=101,sourceGameVersion='synthetic-version',targetGameVersion='synthetic-version',
