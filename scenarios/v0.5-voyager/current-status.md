@@ -1,8 +1,8 @@
 # Voyager active snapshot / 0.5 活动快照
 
-2026-11-04；**所有者要求暂停，游戏已正常关闭，晚点继续；当前不重开游戏。** [固定历史](https://github.com/Arcueid77/Spherewright-Lab/blob/7394fb0/scenarios/v0.5-voyager/current-status.md)。原三门保留，不重跑。
+2026-11-04；**所有者明确要求“继续”，暂停已撤销；核验正常关停边界后续接。** [暂停固定历史](https://github.com/Arcueid77/Spherewright-Lab/blob/e0e45d0/scenarios/v0.5-voyager/current-status.md)。原三门保留，不重跑。
 
-- **授权/暂停：** [最新暂停](../../operations/standing-authority.md#current-owner-pause-2026-11-04--当前所有者暂停)优先；[有限预算授权](../../operations/standing-authority.md#current-owner-grant-2026-11-03--当前所有者授权)供之后明确续接，旧流程上限不自动复活。实耗不退款重置；54000返航、能源/翘曲器下限、物料范围、Native门、原动作/unknown、完整保护及隐私保留。真正范围增量、降储备、损失/回退、另一世界、破坏性Git和正式发布另决。
+- **授权：** [最新续接](../../operations/standing-authority.md#current-owner-resumption-2026-11-04--当前所有者续接)已撤销暂停，沿用[有限预算授权](../../operations/standing-authority.md#current-owner-grant-2026-11-03--当前所有者授权)，旧流程上限不自动复活。实耗不退款重置；54000返航、能源/翘曲器下限、物料范围、Native门、原动作/unknown、完整保护及隐私保留。真正范围增量、降储备、损失/回退、另一世界、破坏性Git和正式发布另决。
 - **源码/实装：** 固定依赖及实装 **868542c1fbb63317281e85880e1892761925f2d3**；[准确CI](https://github.com/Arcueid77/Spherewright/actions/runs/41743611716)、Native构建、真实SDK、同源冷装及实机模块已证。无发行包。普通母星恢复确实完成；本窗首实操门未过：283.1秒恢复后，开关prepare因背包未来科研输入拒绝，失败原报保留。之后同一健康世界存回完整黄矩阵，空点缓冲下正常关闭背包科研自动供料；没有重置启动钟或冒称通过。
 - **最新完整保存：** 母星104 **Primary/LastExit 121386258**；**1933文件**完整保护：`continuous-extension-20261104-v11/owner-pause-normal-menu-os-close-and-complete-backup/after-normal-close-complete-backup/manifest.private.json`。停止前正常Save成功；主菜单返回原a303…因确认超时仍为unknown，未重放/改写。随后独立只读证实gameLoaded=false，正常OS关窗已证，无强杀。续接先核销该原回执与最新Native恢复条件。
 - **累计/物料：** 实耗 **296996 tick**，54000返航不变；后续继续累计。原选定有限23小时/累计tick上限1296000不构成当前自动续跑。已付矿1/2、聚变1/1、塔5/9、化工1/1、仓3/3、炉1/1、MkII3/3、带**39/120**、分拣**15/24**、弹射器1/1。母星新高架带13段及线圈供料分拣6695已实际扣料建成，后者网3服务1。机甲翘曲器2；包余60，正常存800至母星仓30，未降低安全下限。

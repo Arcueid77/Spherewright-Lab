@@ -1,6 +1,12 @@
 # Voyager standing execution authority / Voyager 持续执行授权
 
-## Current owner pause, 2026-11-04 / 当前所有者暂停
+## Current owner resumption, 2026-11-04 / 当前所有者续接
+
+The owner explicitly said “继续” after normal shutdown, revoking the pause below. Resume the complete extension under the 2026-11-03 finite-budget grant, autonomously within its unchanged material, Native and reserve boundaries. Start from the freshly verified latest complete saved boundary; retain cumulative spending and original unknown receipts without replay. This adds no construction/material increment or publication authority.
+
+所有者在正常关停后明确要求“继续”，撤销下节暂停。依2026-11-03有限预算授权自主续接完整扩展目标，建筑物料范围、Native门及储备不变。先核验最新完整保存边界，继续累计实际消耗，保留全部unknown原回执且不重放；本次续接不增加建筑物料范围或正式发布授权。
+
+## Historical owner pause, 2026-11-04 / 历史所有者暂停
 
 The owner explicitly requested stopping and closing the game, with continuation later. Execution is paused; do not reopen or advance the game until the owner resumes. The finite-budget grant below remains recorded for that later continuation and does not override this newer pause. Preserve the latest complete saved boundary and unknown-action receipts.
 
