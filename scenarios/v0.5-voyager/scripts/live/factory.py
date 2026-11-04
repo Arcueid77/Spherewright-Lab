@@ -280,6 +280,10 @@ class Factory(Live):
   if output is not None:
    names=[p.name for p in output.iterdir()]
    for role in roles:
+    # Keep per-step receipts usable on Windows hosts without long-path
+    # opt-in. Reject the complete packet before its first world operation.
+    need(len(str(output/(role+'-native-success-material-account.private.json')))<=259,
+     'immutable_plan_evidence_path_too_long_use_short_unique_roles:'+role)
     need(not any(name.startswith(role+'-') for name in names),'immutable_plan_role_previously_used:'+role)
   for s in steps:
    self.step(s)

@@ -9,6 +9,14 @@ from factory import Factory
 from runtime import freeze,Runtime
 
 class LiveDriverTests(unittest.TestCase):
+ def test_long_evidence_path_rejects_complete_packet_before_any_game_step(self):
+  with tempfile.TemporaryDirectory() as folder:
+   a=Factory.__new__(Factory);a.schemas={'spherewright_get_session_state':dict(properties={},required=[])}
+   a.runtime=type('Evidence',(),dict(output=Path(folder)))();seen=[];a.step=lambda s:seen.append(s)
+   steps=[dict(kind='read',role='short',tool='spherewright_get_session_state'),dict(kind='read',role='x'*260,tool='spherewright_get_session_state')]
+   with self.assertRaisesRegex(RuntimeError,'immutable_plan_evidence_path_too_long'):a.execute_plan(steps,'new')
+   self.assertEqual([],seen)
+
  def test_actual_returning_to_sending_race_waits_then_fresh_prepares_without_clearing_cargo(self):
   from unittest.mock import patch
   a=Live.__new__(Live);a.ctx=dict(sessionId='same',planetId=104);a.active=None;a.state=lambda:None
