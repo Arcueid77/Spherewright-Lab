@@ -1,6 +1,6 @@
 # One consolidated rocket increment / 首枚火箭一次性增量
 
-**Awaiting owner decision; not authority to consume/build.** This supplements the approved first-sail envelope solely for the minimum local rocket and its receiving structure. Normal research continues under existing authority.
+**Approved by owner, 2026-11-05:** explicit reply “批准这项完整增量（不含正式发布）”. This exact consolidated scope may now be normally consumed/built under the unchanged Native and reserve gates. This supplements the approved first-sail envelope solely for the minimum local rocket and its receiving structure. Normal research continues under existing authority.
 
 ## Exact proposed scope
 

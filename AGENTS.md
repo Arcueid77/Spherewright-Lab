@@ -1,5 +1,7 @@
 # Spherewright-Lab working rules
 
+- Owner2026-11-05 explicitly approved the [complete consolidated rocket increment](scenarios/v0.5-voyager/rocket-scope-increment.md), excluding formal publication. Apply that exact BOM and one-silo/local-manufacture/receiving-node scope under the unchanged Native and reserve gates; do not re-request this same increment. / 所有者已明确批准首火箭整项准确增量（不含正式发布）；按固定BOM、1井、当地制造及最小接收点执行，原生门和储备不变，不再重复请批同项增量。
+
 - Latest owner instruction (2026-11-04): the owner explicitly said “继续”, resuming execution after normal shutdown. Apply the [current resumption](operations/standing-authority.md#current-owner-resumption-2026-11-04--当前所有者续接); preserve the paused save boundary and original unknown action without replay. / 所有者明确要求继续，撤销先前暂停；按现行有限预算授权续接，保留暂停保存边界及unknown原件，不重放。
 
 - Current owner precedence (2026-11-03): the [resumed extension grant](operations/standing-authority.md#current-owner-grant-2026-11-03--当前所有者授权) supersedes the prior pause and historical tick/window/caller ceilings below. Choose sufficient finite stage budgets, preserve cumulative spending, Native gates, material ceilings and reserves; retain the 300-second startup gate. / 当前先适用所有者2026-11-03恢复目标及有限工作预算授权，旧暂停和流程上限不再阻断；保留累计实耗、Native门、物料范围、储备及300秒启动门。

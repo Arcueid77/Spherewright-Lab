@@ -1,6 +1,6 @@
 """Replay real station DTOs through the production arrival observer."""
 from pathlib import Path
-import copy,json,sys,tempfile,unittest
+import json,sys,tempfile,unittest
 from unittest.mock import patch
 sys.path.insert(0,str(Path(__file__).parent/'live'))
 from contracts import observed_item_count
@@ -18,11 +18,13 @@ class StationArrivalTests(unittest.TestCase):
   self.assertEqual(100,e['logisticsStation']['storageSlots'][1]['remoteOrder'])
   self.assertEqual(0,observed_item_count(e,1301))
   self.assertEqual(100,observed_item_count(e,1013))
+  delivered=json.loads((Path(__file__).parent/'fixtures/captured-station-support-arrived.json').read_text(encoding='utf-8'))
+  self.assertEqual(0,observed_item_count(e,1802))
+  self.assertEqual(100,observed_item_count(delivered,1301))
+  self.assertEqual(100,observed_item_count(delivered,1802))
 
  def test_production_wait_replays_inflight_to_physical_arrival(self):
-  before=self.captured();after=copy.deepcopy(before)
-  # Explicit modeled delivery transition, based on the captured in-flight DTO.
-  slot=after['logisticsStation']['storageSlots'][1];slot.update(count=100,remoteOrder=0)
+  before=self.captured();after=json.loads((Path(__file__).parent/'fixtures/captured-station-board-arrived.json').read_text(encoding='utf-8'))
   values=iter([before,after]);saved=[];health=[]
   a=Factory.__new__(Factory);a.ctx={'planetId':7};a.refs={};a.state=lambda:health.append(True)
   a.entity=lambda _:next(values)

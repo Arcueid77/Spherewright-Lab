@@ -1,5 +1,7 @@
 # Active handoff / 活动交接
 
+**Owner2026-11-05 approved the complete rocket increment, excluding formal publication.** Follow the [recorded exact approval](standing-authority.md#current-rocket-increment-approval-2026-11-05--当前火箭整项增量批准) and fixed BOM; no repeated request for this same scope. / **所有者已批准火箭整项准确增量（不含正式发布），同范围不再重复请批。**
+
 **Resumed by owner, 2026-11-04.** The explicit “继续” revokes the prior pause. Apply the [current resumption](standing-authority.md#current-owner-resumption-2026-11-04--当前所有者续接), starting from the freshly verified saved boundary in the [current snapshot](../scenarios/v0.5-voyager/current-status.md). / **所有者明确要求继续，先前暂停已撤销；核验正常关停保存边界后自主续接。**
 
 Current precedence: the owner's [2026-11-03 resumed extension and finite-budget grant](standing-authority.md#current-owner-grant-2026-11-03--当前所有者授权) supersedes the prior pause and historical tick/window/caller ceilings. Retain cumulative spending, material ceilings, Native gates and reserves. / 当前先适用2026-11-03恢复目标与有限预算新授权；旧暂停及流程性tick/窗口/调用期限不再阻断执行，累计实耗、物料上限、Native门及储备保留。

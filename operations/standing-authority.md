@@ -1,5 +1,11 @@
 # Voyager standing execution authority / Voyager 持续执行授权
 
+## Current rocket increment approval, 2026-11-05 / 当前火箭整项增量批准
+
+The owner explicitly approved the complete consolidated [rocket increment](../scenarios/v0.5-voyager/rocket-scope-increment.md) via the decision reply “批准这项完整增量（不含正式发布）”. Execute exactly its single silo, local forward manufacture, minimum Native receiving node and listed complete material ceilings; intermediate products are included, not counted again. Existing building limits, cumulative spending,54000 return reserve, energy/warper floors, Native gates and publication exclusion remain unchanged. No further per-step approval for this same increment is required.
+
+所有者明确答复“批准这项完整增量（不含正式发布）”，批准已集中列明的1座2312发射井、当地6帆/24纳米管/6框架/2组件/1火箭、最小原生接收节点及[准确整链耗料表](../scenarios/v0.5-voyager/rocket-scope-increment.md)。中间料已计入，不重复计料；已有建筑上限、累计实耗、54000返航及能源/翘曲器下限、Native门、隐私和正式发布排除不变。同一增量内不再逐项请批。
+
 ## Current owner resumption, 2026-11-04 / 当前所有者续接
 
 The owner explicitly said “继续” after normal shutdown, revoking the pause below. Resume the complete extension under the 2026-11-03 finite-budget grant, autonomously within its unchanged material, Native and reserve boundaries. Start from the freshly verified latest complete saved boundary; retain cumulative spending and original unknown receipts without replay. This adds no construction/material increment or publication authority.
