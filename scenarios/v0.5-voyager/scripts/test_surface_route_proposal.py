@@ -1,8 +1,16 @@
 import math
 import unittest
-from surface_route_proposal import Projection,route
+from surface_route_proposal import Projection,route,spherical_candidates
 
 class RouteProposalTests(unittest.TestCase):
+    def test_global_hemisphere_approach_keeps_radius_and_never_claims_native_clearance(self):
+        rows=spherical_candidates((0,0,200),(0,150,-132.2875656))
+        self.assertEqual(7,len(rows))
+        for row in rows:
+            self.assertAlmostEqual(200,math.sqrt(sum(v*v for v in row['position'])))
+            self.assertLessEqual(row['arcMetres'],40)
+            self.assertFalse(row['executable']);self.assertFalse(row['nativePathClearance']);self.assertFalse(row['terrainVerified'])
+        self.assertLess(rows[0]['goalDistance'],math.dist((0,0,200),(0,150,-132.2875656)))
     def test_short_detour_ends_in_interaction_region(self):
         r=route((90,0),[(8,-8,18,8)],goal_radius=55)
         self.assertFalse(r['executable']);self.assertFalse(r['nativePathClearance'])

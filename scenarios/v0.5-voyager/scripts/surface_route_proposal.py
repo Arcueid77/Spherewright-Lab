@@ -15,6 +15,28 @@ def unit(a):
 def cross(a,b): return (a[1]*b[2]-a[2]*b[1],a[2]*b[0]-a[0]*b[2],a[0]*b[1]-a[1]*b[0])
 
 
+def spherical_candidates(start,goal,maximum_arc=40,goal_radius=60,angles=(0,-.25,.25,-.5,.5,-.75,.75)):
+    """Finite geometry-only proposals. Every candidate needs fresh Native proof."""
+    if len(start)!=3 or len(goal)!=3 or any(not math.isfinite(v) for v in (*start,*goal)):
+        raise ValueError('finite local surface vectors required')
+    if not 1<=maximum_arc<=60 or not 1<=goal_radius<=80 or len(angles)>12:
+        raise ValueError('bounded local candidate envelope required')
+    radius=math.sqrt(dot(start,start));normal=unit(start);dest=unit(goal)
+    cosine=max(-1,min(1,dot(normal,dest)));angle=math.acos(cosine)
+    if math.dist(start,goal)<=goal_radius:return []
+    if abs(math.sin(angle))<1e-8:raise ValueError('ambiguous antipodal direction')
+    forward=unit(tuple(dest[i]-normal[i]*cosine for i in range(3)));side=cross(normal,forward)
+    remaining=max(0,angle*radius-2*radius*math.asin(min(1,goal_radius/(2*radius))))
+    arc=min(maximum_arc,remaining);theta=arc/radius;result=[]
+    for heading in angles:
+        if not math.isfinite(heading) or abs(heading)>math.pi/2:raise ValueError('bounded finite heading required')
+        direction=tuple(forward[i]*math.cos(heading)+side[i]*math.sin(heading) for i in range(3))
+        position=tuple(radius*(normal[i]*math.cos(theta)+direction[i]*math.sin(theta)) for i in range(3))
+        result.append(dict(position=position,arcMetres=arc,headingRadians=heading,goalDistance=math.dist(position,goal),
+                           executable=False,nativePathClearance=False,terrainVerified=False))
+    return result
+
+
 class Projection:
     def __init__(self,start):
         self.radius=math.sqrt(dot(start,start));self.normal=unit(start)
