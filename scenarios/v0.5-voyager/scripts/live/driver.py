@@ -5,7 +5,7 @@ import startup_to_action as G
 from geometry_request import complete_geometry_arrays
 from evidence import need,read,sha,json_value
 from mcp_client import Client
-from saved_space import exact_last_exit_echo,paused_space_source,exact_ui_supply
+from saved_space import exact_last_exit_echo,paused_space_source,exact_ui_supply,saved_identity_token
 from contracts import ordinary_owned_resume_echo,resume_admission_echo,validate_steps,validate_native_calls,strict_native_player_idle,native_warper_auto_supply_enabled
 
 PLAYER_SETTING_MODES=('enable-mecha-construction-drones','disable-mecha-research-auto-supply',
@@ -101,7 +101,7 @@ class Live:
        if not(self.runtime.output/'loaded-modules.private.json').exists():self.runtime.put('loaded-modules.private.json',dict(passed=True,sourceSha=self.runtime.config['sourceSha'],processId=self.pid,modules=observed))
        try:
         s=G.retry_read_only(lambda:self.call('spherewright_get_session_state',{}),deadline,lambda e:any(k in str(e)for k in ('REQUEST_TIMEOUT','BRIDGE_NOT_READY','BRIDGE_UNAVAILABLE')))
-        if not s['gameLoaded']and s.get('restartResumeAvailable'):
+        if not s['gameLoaded']and saved_identity_token(self.runtime.config,s):
          return dict(session=s)
        except RuntimeError as e:
         if not any(k in str(e)for k in ('REQUEST_TIMEOUT','BRIDGE_NOT_READY','BRIDGE_UNAVAILABLE')):raise
@@ -132,11 +132,15 @@ class Live:
  def prepare_resume(self,ready,deadline):
   c=self.runtime.config;now=dt.datetime.now(dt.timezone.utc)
   if c.get('recoveryProfile')=='exact-paused-space':
-   args=dict(resumeToken=ready['session']['restartResumeToken'],recoveryMode='open_saved_last_exit',
+   args=dict(resumeToken=saved_identity_token(c,ready['session']),recoveryMode='open_saved_last_exit',
     minimumRecoveryGameTick=c['sourceTick'],expectedRecoveryGameTick=c['sourceTick'])
    p=G.retry_read_only(lambda:self.call('spherewright_prepare_resume_owned_game',args),deadline,
     lambda e:any(k in str(e) for k in ('BRIDGE_NOT_READY','BRIDGE_UNAVAILABLE','REQUEST_TIMEOUT')))
    need(exact_last_exit_echo(c,p),'exact_paused_space_source_echo_changed')
+   identity=self.call('spherewright_get_session_state',{})
+   need(not identity['gameLoaded'] and identity.get('restartResumeAvailable') is True
+    and bool(identity.get('restartResumeToken')),'prepared_saved_data_identity_hint_unproved')
+   self.runtime.put('fresh-saved-data-identity.private.json',identity)
    self.runtime.put('fresh-resume-plan.private.json',p);return p
   if c.get('recoveryProfile')=='ordinary-owned-home':
    args=dict(resumeToken=ready['session']['restartResumeToken'],recoveryMode=c['recoveryMode'])

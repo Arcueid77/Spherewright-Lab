@@ -4,7 +4,7 @@ import copy,sys,unittest
 sys.path.insert(0,str(Path(__file__).parent/'live'))
 from driver import Live
 from factory import Factory
-from saved_space import exact_last_exit_echo,paused_space_source,exact_ui_supply
+from saved_space import exact_last_exit_echo,paused_space_source,exact_ui_supply,saved_identity_token
 from startup_to_action import ACTUAL_WORK_KINDS
 
 
@@ -45,14 +45,22 @@ class SavedSpaceDriverTests(unittest.TestCase):
 
  def test_prepare_open_uses_exact_tick_without_charging_or_old_task_grant(self):
   a=self.adapter();calls=[]
-  a.call=lambda name,args:calls.append((name,args)) or self.plan
+  a.call=lambda name,args:calls.append((name,args)) or (dict(gameLoaded=False,restartResumeAvailable=True,
+   restartResumeToken='synthetic-new-data-only') if name=='spherewright_get_session_state' else self.plan)
   import time
-  a.prepare_resume(dict(session=dict(restartResumeToken='synthetic-token')),time.monotonic()+5)
+  a.prepare_resume(dict(session=dict(restartResumeAvailable=True,restartResumeToken='synthetic-token')),time.monotonic()+5)
   args=calls[0][1]
   self.assertEqual({'resumeToken','recoveryMode','minimumRecoveryGameTick','expectedRecoveryGameTick'},set(args))
   self.assertEqual(1000,args['expectedRecoveryGameTick'])
   changed=dict(self.plan,opensExactLastExitOnly=None)
   self.assertFalse(exact_last_exit_echo(self.config,changed))
+
+ def test_consumed_identity_is_only_a_data_open_input_and_cannot_restore_an_execution_hint(self):
+  c=dict(self.config,consumedSavedIdentityToken='synthetic-consumed-identity')
+  self.assertEqual('synthetic-consumed-identity',saved_identity_token(c,dict(restartResumeAvailable=False)))
+  self.assertEqual('fresh',saved_identity_token(c,dict(restartResumeAvailable=True,restartResumeToken='fresh')))
+  for mode in ('default','authorize_remote_primary_recovery'):
+   self.assertIsNone(saved_identity_token(dict(c,recoveryMode=mode),dict(restartResumeAvailable=False)))
 
  def test_first_work_requires_explicit_ui_echo_before_any_commit(self):
   a=self.adapter();a.ctx=dict(sessionId='synthetic',planetId=0);calls=[]

@@ -2,6 +2,14 @@
 import math
 
 
+def saved_identity_token(config, session):
+    if session.get('restartResumeAvailable') is True and session.get('restartResumeToken'):
+        return session['restartResumeToken']
+    if config.get('recoveryProfile') == 'exact-paused-space' and config.get('recoveryMode') == 'open_saved_last_exit':
+        return config.get('consumedSavedIdentityToken') or None
+    return None
+
+
 def exact_last_exit_echo(config, plan):
     return (config.get('recoveryMode') == 'open_saved_last_exit'
         and plan.get('recoveryMode') == 'open_saved_last_exit'
