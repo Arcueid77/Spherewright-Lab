@@ -5,6 +5,57 @@ Fresh public terrain/Move checks and actual terminal progress remain required.
 """
 import heapq
 import math
+import itertools
+
+
+class WaypointNetwork:
+    """Coarse geometric cost map; point observations never qualify its edges.
+
+    Unlike a heading ring, a connected map can propose a necessary detour away
+    from the destination. Callers still fresh-prepare every actual movement.
+    No game client, action, timing, energy or clearance authority is present.
+    """
+    def __init__(self, points, goal, maximum_step=55, goal_radius=58):
+        def finite_vector(value):
+            return len(value)==3 and all(type(x) in (int,float) and math.isfinite(x) for x in value)
+        if (not 0<len(points)<=8192 or not finite_vector(goal)
+                or any(not finite_vector(p) for p in points)
+                or not 1<=maximum_step<=60 or not 1<=goal_radius<=80):
+            raise ValueError('bounded finite waypoint network required')
+        self.points=tuple(tuple(p) for p in points)
+        self.maximum_step=maximum_step
+        self.grid={}
+        for i,p in enumerate(self.points):
+            self.grid.setdefault(self.cell(p),[]).append(i)
+        self.cost={i:0 for i,p in enumerate(self.points) if math.dist(p,goal)<goal_radius}
+        queue=[(0,i) for i in self.cost];heapq.heapify(queue)
+        while queue:
+            cost,i=heapq.heappop(queue)
+            if cost!=self.cost[i]:continue
+            for j,distance in self.nearby(self.points[i]):
+                proposal=cost+distance
+                if proposal>=self.cost.get(j,math.inf):continue
+                self.cost[j]=proposal;heapq.heappush(queue,(proposal,j))
+
+    def cell(self,point):
+        return tuple(math.floor(x/self.maximum_step) for x in point)
+
+    def nearby(self,point):
+        cell=self.cell(point)
+        for delta in itertools.product((-1,0,1),repeat=3):
+            for i in self.grid.get(tuple(cell[k]+delta[k] for k in range(3)),()):
+                distance=math.dist(point,self.points[i])
+                if distance<=self.maximum_step:yield i,distance
+
+    def candidates(self,start,minimum_step=12,maximum_candidates=12):
+        if (len(start)!=3 or any(type(x) not in (int,float) or not math.isfinite(x) for x in start)
+                or not 0<minimum_step<=self.maximum_step or not 1<=maximum_candidates<=64):
+            raise ValueError('bounded finite waypoint selection required')
+        ranked=sorted((distance+self.cost[i],i) for i,distance in self.nearby(start)
+                      if distance>=minimum_step and i in self.cost)
+        return [dict(position=self.points[i],index=i,remainingGeometricCost=self.cost[i],
+                     executable=False,nativePathClearance=False,terrainVerified=False)
+                for _,i in ranked[:maximum_candidates]]
 
 
 def dot(a,b): return sum(x*y for x,y in zip(a,b))

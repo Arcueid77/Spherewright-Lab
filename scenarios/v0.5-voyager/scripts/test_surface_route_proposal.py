@@ -1,8 +1,25 @@
 import math
 import unittest
-from surface_route_proposal import Projection,route,spherical_candidates
+from surface_route_proposal import Projection,route,spherical_candidates,WaypointNetwork
 
 class RouteProposalTests(unittest.TestCase):
+    def test_coarse_network_can_first_move_away_from_goal_without_claiming_clearance(self):
+        start=(0,0,200);goal=(10,0,200)
+        network=WaypointNetwork([(0,4,200),(5,4,200),(10,4,200),goal],goal,maximum_step=5.1,goal_radius=1)
+        rows=network.candidates(start,minimum_step=1)
+        self.assertEqual((0,4,200),rows[0]['position'])
+        self.assertGreater(math.dist(rows[0]['position'],goal),math.dist(start,goal))
+        self.assertEqual(14,rows[0]['remainingGeometricCost'])
+        self.assertFalse(rows[0]['executable']);self.assertFalse(rows[0]['nativePathClearance']);self.assertFalse(rows[0]['terrainVerified'])
+    def test_disconnected_observations_do_not_invent_a_corridor(self):
+        network=WaypointNetwork([(0,0,200),(20,0,200)],(20,0,200),maximum_step=5,goal_radius=1)
+        self.assertEqual([],network.candidates((0,0,200),minimum_step=1))
+    def test_waypoint_requests_remain_finite_and_bounded(self):
+        with self.assertRaises(ValueError):WaypointNetwork([(float('nan'),0,200)],(0,0,200))
+        with self.assertRaises(ValueError):WaypointNetwork([(0,0,200)]*8193,(0,0,200))
+        with self.assertRaises(ValueError):WaypointNetwork([(0,0,200)],(0,0,200),maximum_step=65)
+        network=WaypointNetwork([(0,0,200)],(0,0,200))
+        with self.assertRaises(ValueError):network.candidates((0,float('inf'),200))
     def test_global_hemisphere_approach_keeps_radius_and_never_claims_native_clearance(self):
         rows=spherical_candidates((0,0,200),(0,150,-132.2875656))
         self.assertEqual(7,len(rows))
