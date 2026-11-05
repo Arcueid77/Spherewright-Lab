@@ -285,6 +285,15 @@ class Factory(Live):
 
  def continue_prepared_work(self,result):
   try:
+   if self.runtime.config['firstOperation'].get('kind')=='refuel':
+    work=self.runtime.config['firstOperation'];amount=work['count'];item=work['itemId']
+    before=result.get('beforeTargetAmount');after=result.get('afterTargetAmount')
+    need(result.get('terminal') is True and result.get('succeeded') is True
+     and sum(d['delta'] for d in result.get('itemDeltas',[]) if d['itemId']==item)==-amount
+     and type(before)is int and type(after)is int and before>=0 and after-before==amount,
+     'original_first_refuel_conservation_unproved_no_replay')
+    self.runtime.put('first-refuel-native-conservation.private.json',dict(passed=True,original=result,
+     exactPackageDebit=amount,exactChamberIncrease=amount,noReplay=True))
    if self.runtime.config['firstOperation'].get('kind')=='saved-home-return':
     terminal=result if result.get('terminal') else self.successful_original(self.active)
     need(terminal.get('succeeded') is True,'original_saved_home_return_failed_no_replay')

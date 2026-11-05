@@ -9,6 +9,15 @@ from factory import Factory,resolve_refs
 from runtime import freeze,Runtime
 
 class LiveDriverTests(unittest.TestCase):
+ def test_first_refuel_is_a_fresh_prepare_not_an_automatic_resubmit(self):
+  a=Live(None);a.runtime=type('Config',(),dict(config=dict(firstOperation=dict(kind='refuel',itemId=1802,count=20))))()
+  a.ctx=dict(sessionId='synthetic-owned',planetId=1);a.player=lambda:dict(stateHash='fresh-player')
+  calls=[]
+  def call(tool,args):
+   calls.append((tool,args));return dict(prepared=True,commitAllowedNow=True,commitBlockers=[],planToken='not-committed')
+  a.call=call;work=a.prepare_first_work({},0)
+  self.assertEqual('spherewright_commit_refuel',work['tool'])
+  self.assertEqual([('spherewright_prepare_refuel',dict(a.ctx,itemId=1802,count=20,expectedPlayerStateHash='fresh-player'))],calls)
  def test_packet_preflight_and_execution_share_duplicate_receipt_admission_before_effects(self):
   steps=[dict(kind='wait-buffer',role='product',entity=7,itemId=1127,minimumCount=20,maximumSeconds=60),
    dict(kind='dump',role='product',queries=[])]

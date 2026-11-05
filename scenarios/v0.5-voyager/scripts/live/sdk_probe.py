@@ -11,6 +11,7 @@ def main():
         _,tools,_,_=c.initialize();schemas={t['name']:t['inputSchema'] for t in tools}
         ctx=dict(sessionId='synthetic-offline-session',planetId=402);h='sha256:'+'a'*64
         cases=[
+            ('spherewright_prepare_refuel',dict(ctx,itemId=1802,count=20,expectedPlayerStateHash=h)),
             ('spherewright_prepare_transfer',dict(ctx,direction='player-to-storage',storageEntityId=1,itemId=1301,count=2,expectedPlayerStateHash=h,expectedStorageStateHash=h)),
             ('spherewright_prepare_transfer',dict(ctx,direction='production-reset-to-player',storageEntityId=1,itemId=0,count=0,expectedPlayerStateHash=h,expectedStorageStateHash=h)),
             ('spherewright_prepare_build',dict(ctx,buildingItemId=2101,expectedPlayerStateHash=h,preferredPositionX=1.,preferredPositionY=199.,preferredPositionZ=1.)),

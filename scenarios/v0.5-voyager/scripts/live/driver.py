@@ -299,6 +299,11 @@ class Live:
 
  def prepare_first_work(self,loaded,deadline):
   work=self.runtime.config['firstOperation'];mode=work.get('mode','production')
+  if work.get('kind')=='refuel':
+   p=self.player();self.first_before=p
+   q=self.call('spherewright_prepare_refuel',dict(self.ctx,itemId=work['itemId'],count=work['count'],expectedPlayerStateHash=p['stateHash']))
+   need(q['prepared'] and q['commitAllowedNow'] and not q['commitBlockers'],'first_refuel_not_prepared')
+   return dict(action_kind='refuel',tool='spherewright_commit_refuel',prepared=q)
   if work.get('kind')=='saved-home-return':
    p=self.player();self.first_before=p;t=p['spaceTransit']
    q=self.call('spherewright_prepare_interplanetary_flight',dict(self.ctx,destinationPlanetId=t['originalHomePlanetId'],
