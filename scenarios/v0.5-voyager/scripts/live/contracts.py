@@ -14,8 +14,12 @@ def quarantined_paid_original_accounted(config,reference,receipt,preservation):
             and o.get('beforeInventoryHash') and o.get('afterInventoryHash') for o in objects)
         and preservation.get('passed') is True and preservation.get('originalUnknownRetained') is True
         and preservation.get('noReplay') is True and preservation.get('noResume') is True
-        and preservation.get('currentLastExit')==config.get('sourceTick')
-        and type(failure.get('capturedAtGameTick'))is int and config['sourceTick']>=failure['capturedAtGameTick'])
+        # This is the frozen ORIGINAL stop receipt. Later normally saved
+        # progress may advance its floor; Runtime separately verifies the full
+        # exact current-source backup before any new Native owned recovery.
+        and type(preservation.get('currentLastExit'))is int and type(config.get('sourceTick'))is int
+        and type(failure.get('capturedAtGameTick'))is int
+        and failure['capturedAtGameTick']<=preservation['currentLastExit']<=config['sourceTick'])
 
 def is_read_tool(name):
     return name.startswith(('spherewright_get_','spherewright_inspect_','spherewright_list_')) or name=='spherewright_preview_voyager_route'

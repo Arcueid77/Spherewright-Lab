@@ -19,6 +19,9 @@ class LiveDriverTests(unittest.TestCase):
    itemDeltas=[dict(itemId=2001,delta=-2)],nativeFirstFailure=dict(capturedAtGameTick=900))
   saved=dict(passed=True,originalUnknownRetained=True,noReplay=True,noResume=True,currentLastExit=900)
   self.assertTrue(quarantined_paid_original_accounted(c,reference,receipt,saved))
+  successor=dict(c,sourceTick=950)
+  self.assertTrue(quarantined_paid_original_accounted(successor,reference,receipt,saved))
+  self.assertFalse(quarantined_paid_original_accounted(c,reference,receipt,dict(saved,currentLastExit=901)))
   for target,key,value in [('config','sourceRole','primary'),('saved','currentLastExit',899),('receipt','itemDeltas',[]),
     ('control','dispatchDisabled',False)]:
    config=copy.deepcopy(c);r=copy.deepcopy(receipt);p=copy.deepcopy(saved)
