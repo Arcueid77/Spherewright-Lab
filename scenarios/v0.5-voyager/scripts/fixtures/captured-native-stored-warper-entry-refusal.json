@@ -1,0 +1,22 @@
+{
+  "basis": "sanitized actual public preview and terminal mismatch; all identifiers omitted",
+  "preview": {
+    "budgetSufficient": true,
+    "autoReplenishWarper": true,
+    "nativeWarperCount": 2,
+    "packageWarperCount": 20,
+    "availableWarpers": 22,
+    "requiredWarpers": 3,
+    "returnReserveGameTicks": 54000
+  },
+  "original": {
+    "state": "recovery_required",
+    "terminal": true,
+    "succeeded": false,
+    "failureReason": "Real native warpers must cover this leg, remaining return entries and declared extras; package items are not reserved here.",
+    "nativeWarpersConsumed": 0,
+    "entryAttempted": false,
+    "nativeExitObserved": true,
+    "actualPlanetId": null
+  }
+}
