@@ -9,6 +9,18 @@ from factory import Factory,resolve_refs
 from runtime import freeze,Runtime
 
 class LiveDriverTests(unittest.TestCase):
+ def test_partial_plan_handoff_requires_its_last_settled_world_step_and_an_explicit_wait(self):
+  from handoff_blocked_buffer import blocked_suffix
+  steps=[dict(kind='operation',role='chips'),dict(kind='dump',role='chip-proof'),
+   dict(kind='wait-buffer',role='product',entity=7,itemId=1127,minimumCount=20),
+   dict(kind='operation',role='take-back'),dict(kind='operation',role='silo')]
+  wait,suffix=blocked_suffix(steps,'product','chips')
+  self.assertEqual(20,wait['minimumCount']);self.assertEqual(['take-back','silo'],suffix)
+  with self.assertRaisesRegex(RuntimeError,'exact_last_settled_prefix'):blocked_suffix(steps,'product','older-action')
+  invalid=copy.deepcopy(steps);invalid[2]['kind']='operation'
+  with self.assertRaisesRegex(RuntimeError,'explicit_positive_native_buffer'):blocked_suffix(invalid,'product','chips')
+  invalid=copy.deepcopy(steps);invalid[2]['entity']='unresolved-reference'
+  with self.assertRaisesRegex(RuntimeError,'explicit_positive_native_buffer'):blocked_suffix(invalid,'product','chips')
  def test_old_module_stamp_refuses_offline_before_game_or_file_loading(self):
   with tempfile.TemporaryDirectory() as folder:
    p=Path(folder)/'stamps.json';p.write_text(json.dumps(dict(passed=True,sourceSha='old')))
