@@ -1,20 +1,12 @@
 # Voyager active snapshot / 0.5 活动快照
 
-2026-11-06：06ba已闭合显式地面恢复/近矿移动；原启动调用端接回保留失败原件，无重启/时钟重置，250.813秒首实操。新采铁矿6准确到包，铜路线9个Move均completed；随后idle守卫暂停，后读接地/速度/RTS0，不清隔离。已正常退出：**LastExit124198797、Primary124191099较旧，2090项全备份，累计3109535tick；游戏/MCP停。** 铜未采；火箭1/井103/节点1(0/30)/进料保全，待2电塔及首发/抵达/最终恢复/双包。
+2026-11-06：Caph II当地首枚火箭已正常制造、发射并真实抵达；原生弹药1→0、唯一飞行1→0、节点1结构点0→1且订单归零。06ba正常保存冷恢复后节点/空弹药/电网保持，62.453秒真实恢复产线操作；再次正常退出，**最新LastExit124256601、2108项完整保护备份、累计3167339tick**。游戏/MCP停。
 
-- **授权：** [现行授权](../../operations/standing-authority.md)及[火箭准确增量](rocket-scope-increment.md)有效，不再重复请批。累计实耗、54000返航、能源/翘曲器下限、Native门、单writer/维护者、物料守恒及unknown隔离保留；不正式发布。
-- **源码/实装：** 选择 **06ba214792a610d9c3d25191f4c3c28473796361**，[准确SHA CI成功](https://github.com/Arcueid77/Spherewright/actions/runs/42119468399)。318相关地形/支撑/接触/窗口验证、完整本地及Native构建、同源SDK/PE/指南资格/冷安装通过；**独立当前地形射线的实机支持仍未证**。363新窗口续建/制造、843冷恢复及此前成果保留；不生成双包。
-- **最新完整边界：** **LastExit124198797，Primary124191099较旧，2090项，累计3109535tick**；游戏/MCP停。副本`cold-terrain-ray-06ba2147/idle-normal-close/after-normal-close-complete-backup/`。public暂停Save只prepare被拒、未commit，随后正常窗口退出覆盖最新tick。旧caller按完整read及全部已接受终态/新鲜idle切面退休，仅停止Python/MCP，未强杀游戏。原未知零产矿与后来新采铁6分别计账，9个Move不重放。
-- **实耗/范围：** 累计上限3888000/返航54000不变；矿1/2、聚变1/1、塔6/9、化工1/1、仓3/3、炉1/1、MkII3/3、带96/120、分拣24/24、弹射器1/1、井1/1。原24纳米管/合金6/硅6→框架6；帆6/处理器6→组件2；组件2/燃料4/芯片2→火箭1。新电塔仍0，计划按2026-11-03已批正常制造/运输的9塔范围补2塔（6铁矿/1铜矿→4铁/2磁铁/1铜→2线圈→2塔），不重算火箭BOM、不提高上限。另2旧带尾G/氢副产物/原首帆4保留。
-- **首错/修复：** 原C接地失效根因未断言，旧unknown与11扣料不改。[完整生命周期审计](cold-paid-recovery-lifecycle-audit.md)已闭合843冷恢复；363修正独立新窗口误用旧锚点导致的预检费用拒绝，普通续接仍保留旧锚点，当前16米/费用/储备/接地门均不降低。
-- **当前/下一动作：** 复用06ba，从最新LastExit fresh owned恢复并走到铜点旁；近距离停稳后新采铜1。远端handcraft commit明确未接受，改用既有炉42、仓41/45、机43/46生产4铁/2磁铁/1铜→2线圈→2塔，仍在已批9塔范围。再唯一火箭输出/真实飞行/SP+1/普通保存恢复及最终双包，不正式发布。
+- **范围与授权：** [现行持续授权](../../operations/standing-authority.md)、[首帆扩展](first-sail-extension.md)及[准确火箭增量](rocket-scope-increment.md)有效；不正式发布。原三项Voyager验收见[固定基线交审](../../releases/v0.5.0/review-delivery.md)，本轮不重放。
+- **整链真实结果：** 当地冰40→石墨烯40/氢20；石18→玻璃9→棱镜6→合并器3→组件用帆6；钛矿24/硅矿12→钛12/硅6；纳米管24/合金6/硅6→框架6；框架6/帆6/处理器6→组件2；组件2/燃料4/量子芯片2→火箭1。原首帆4的发射/云转换，以及跨星板/燃料各100真实到货及保存恢复保持已证，不重算。本轮6铁矿/1铜矿→4铁/2磁铁/1铜→2线圈→2塔，正常制造和施工后井103实际入网2；只创建1个最小接收点，不批量扩建。
+- **当前源/安装：** `d3b7ac897bb44d62c8a7ed54c51a55ff2b8de7b0`，[准确产品CI42126914241成功](https://github.com/Arcueid77/Spherewright/actions/runs/42126914241)。仅修正中英文火箭研究链接；资源URI不变，内嵌/包指南字节随链接同步更新。1536相关回归、Native/solution构建、31资源回归、324篇双语文档检查、同源SDK/PE资格、官方原子安装及磁盘字节核验通过；**d3冷恢复尚待本次唯一启动验证**。06ba支持与接触能力的真实验收保留，独立地形射线具体分支仍不冒称已被实机遥测单独证明。
+- **完整保全：** `final-rocket-recovery-06ba2147/live/after-normal-close-complete-backup/`，LastExit124256601，2108项；新安装前再次逐项核验。原C未知及11扣料、原零产矿unknown均原件隔离，后来的有界续建/铁6/铜1另立成功回执；不改旧终态、不重复扣料。
+- **真实预算：** 累计3167339/3888000tick，保留54000返航及3000清理储备。矿1/2、聚变1/1、塔8/9、化工1/1、仓3/3、炉1/1、MkII3/3、带96/120、分拣24/24、弹射器1/1、井1/1。2旧带尾石墨烯、氢副产物与全部未用物料保全。
+- **当前下一步：** 新源冷恢复只恢复空炉普通配方并读回节点1结构点/空弹药/产线/电网；不再制造、供料或发射。两份新档案已生成、严格中英文链接及74工具/内嵌一致性通过，233项程序载荷与已装合格同源字节相同；最终归档与交审指针待该冷恢复和普通保存闭合。第一对06ba候选因研究链接缺失被拒，原件保留、不交审。
 
-| 验收 | 当前真实状态 |
-| --- | --- |
-| 外星扣料/建成/连接/供电 | 已证；已付43恢复续建无重复扣料，复用当地实体；后续正常补8聚变燃料及供电已证 |
-| 当地原料→目标制造整链 | 已证；冰→石墨烯、石→玻璃→棱镜→合并器→帆4 |
-| 首帆精确消耗/弹道/云转换 | 已闭；弹药4→0、最终弹道池0/轨道+4，恢复保持 |
-| 跨星辅料真实到货 | 已闭：板/燃料源各100→0、Caph各0→100 |
-| 保存恢复后续建/续运 | 已证：续建/首帆保持；同船/货100保存恢复后真实续行并到货 |
-| 科研/接收结构/当地首火箭 | 1141/1303/1522正常解锁；母星芯片12/井1制造与保存已证；接收点/当地首火箭未闭 |
-| 最终同源手动/Thunderstore交审双包 | 全功能闭合后生成；尚未形成，不正式发布 |
+English: the first locally manufactured Caph rocket actually arrived and added exactly one Native structure point. A normal cold recovery retained it and restored manufacturing configuration. Product d3b7ac89 changes only the two bilingual research links; the embedded resource URI stays stable while its bytes update. Exact CI/build/SDK/disk installation are verified. The next guarded result is this source's cold continuation and normal preservation, followed by the final same-source review pair; no tag, Release or upload is authorized.
