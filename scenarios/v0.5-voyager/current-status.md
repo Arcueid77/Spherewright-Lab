@@ -1,13 +1,13 @@
 # Voyager active snapshot / 0.5 活动快照
 
-2026-11-05：母星火箭设备/辅料已正常制造完毕：芯片12、奇异物质20、透镜20、井1及其全部中间料均有真实原终态核销；专用铁40耗尽、未用余料完整取回，旧设备设置已恢复。Primary123757596正常保存已证。当前同一健康窗口已接受携井1/Q2/合金6/处理器6返Caph的原生出航，处于翘曲途中；到场先做全线现状/余料和供料隔离预检。当地首火箭、接收点及最终双包尚未闭合。
+2026-11-05：母星完整火箭BOM正常制造/逐原终态核销/保存已闭，井1/Q2/合金6/处理器6随身。新出航真实抵达Caph402，但落地补能于remote_resume_charge_original_budget_unproved终止；原动作recovery_required，不重发。Native暂停后已正常关闭并完成2016项全备份：最新LastExit123765850，Primary123757596较旧不得加载；累计2676588tick。游戏/MCP均关闭，下一步离线审查完整预算/接地/恢复状态模型；当地火箭、接收点及双包未闭。
 
 - **授权：** [现行授权](../../operations/standing-authority.md)及[火箭准确增量](rocket-scope-increment.md)有效，不再重复请批。累计实耗、54000返航、能源/翘曲器下限、Native门、单writer/维护者、物料守恒及unknown隔离保留；不正式发布。
 - **源码/实装：** 选择 **775a29650bbb0f40a316782107a013007597f23d**，[准确产品CI成功](https://github.com/Arcueid77/Spherewright/actions/runs/41988290863)，原生构建、真实SDK/PE/同源开发目录资格已过。新增精确Native站内取料与显式有限新出航墙钟，未生成双包。磁盘已同源冷安装为775a2965，实际PE及内外进程全量/进度核验均过；已实测正常恢复、需求槽收束及站内板3/燃料100精确取出；首火箭尚未闭合。
-- **最新完整边界：** **Primary/LastExit123624637**一致，**2006项**完整备份通过，累计 **2535375 tick**，保留约1.449GJ已充能源及原隔离。公开preserveQuarantinedProgress正常保存、正常退出已证；该旧边界未自动Resume/重放或加载旧档，不把冻结当严格physical idle；其后新授权恢复/返航成功，正常母星Primary保存123643905已证。最新外部全量副本仍只覆盖624637旧隔离边界，不冒充覆盖新Primary/RAM。保护回执：`cold-return-b55d3a19/native-quarantine-normal-preservation/`。
+- **最新完整边界：** **LastExit123765850**为本次Caph失败落地的最新完整保全，**Primary123757596**是较旧母星保存，不得加载回退；**2016项**全量副本通过，累计**2676588 tick**，游戏/MCP均关闭。原flight terminal及checkpoint绑定、两次稳定Native暂停切面均已核，不冒充physical idle，不自动Resume或重放；保护目录`cold-cargo-775a2965/caph-landing-budget-normal-preservation/after-normal-close-complete-backup/`。旧624637/2006副本及全部历史账保留。
 - **实耗/范围：** 有限累计上限3888000；已付矿1/2、聚变1/1、塔6/9、化工1/1、仓3/3、炉1/1、MkII3/3、带48/120、分拣21/24、弹射器1/1；新批井0/1。旧13段高架不退款。新Caph出航确切消耗1枚翘曲器；当前返航后续消耗以原动作实测回执为准。母星板/燃料各100→0，Caph各0→100、在途订单归0；原帆4制造/弹药4→0/弹道→云及恢复保持成果不重跑。
-- **首错/修复：** 调用器仍选一小时恢复窗，Native `remote_idle_return_wall_reserve_insufficient` 正常暂停/隔离；旧成功出航/恢复及失败原件不改。恢复接口已有24小时有限上限，下一次明确选12小时；新出航另有600..86400秒显式有限参数，不增tick/物料/能源，不改旧时钟。站点buffers为空须读storageSlots；新取料通过Native TakeItem/AddItemStacked及同tick完整守恒。嵌套调用计数按原派发日志追加纠正，不重写旧账。
-- **当前/下一动作：** 母星直接配方的全部真实itemDeltas已逐一对照固定Native目录核销；对撞机实际输出20、整链铁余0、零工作进度后由Native UI完整取回奇异物质20/余氘6/容器4。透镜20及井1正常完成，旧配方104/原出口过滤恢复，新供铁源已门控，Primary123757596保存。实际随身井1/Q2/合金6/处理器6/板3/燃料100，forge空、科研自动补料关闭；截点123757604累计2668342tick，当前航行后实耗继续加计。新出航保留Native108000往返及54000返航，显式12h墙钟；已接受原动作，不重发，当前翘曲中。唯一writer输出为`cold-cargo-775a2965/live-mother-rocket-continued/`；旧调用器全部accepted结算后同窗交接，全部侧向观察RPC已继承。到场先读全厂/原料/地形/功率，隔离矿源和弹射器后按有限单配方包完成当地6帆/24纳米管/6框架/2组件/1火箭及最小接收点，验真实发射/飞行/抵达后才出双包。母星原件：`actual-mother-complete-direct-bom-closed.private.json`、`actual-mother-rocket-cargo-closed.private.json`；旧截点见[f8d67a3](https://github.com/Arcueid77/Spherewright-Lab/tree/f8d67a3)。
+- **首错/修复：** 最新真实失败为新出航落地补能的`remote_resume_charge_original_budget_unproved`；高层未给单项nativeFirstFailure，不能直接断言具体谓词或删除检查。`VoyagerRecoveryWindowPolicy.ChargeBudgetBlocker`涵盖绑定、Native闲置、锚点、工作/尾部、时钟新鲜度/截止绑定、已装能源及返航底线。完整审查旧恢复→母星正常保存/返航闭合→新出航→151/501/601补能的事实传递，特别核旧恢复上下文与新Journey是否混用；该项仍是假设，未定根因。脱敏真实失败经生产入口/跨层回放，再集中修复、准确CI/采用/同源冷安装，无需审批绕过。
+- **当前/下一动作：** 母星全部直接配方的真实itemDeltas已核目录；对撞机实出20/铁余0/零工作后Native完整取回20奇异物质及余氘6/容器4，透镜20/井1完成，原配方104/出口已恢复、新源已门控。随身井1/Q2/合金6/处理器6/板3/燃料100，forge空。当前新航行已真实warp1669tick并到402，但stopping阶段原生暂停，原终态与checkpoint保留；正常关闭前两次切面稳定，LastExit最新全备份已证，无游戏进度回退。先离线审计上述完整状态模型和真实回放，再对同一最新Caph边界做fresh公开无损恢复；不得重飞或加载母星旧Primary。当地有限配方制造、最小接收点、首火箭真实发射/飞行/抵达及最终同源双包仍全部继续。原件在`cold-cargo-775a2965/`；[固定母星完成截点0ed0a96](https://github.com/Arcueid77/Spherewright-Lab/tree/0ed0a96)。
 
 | 验收 | 当前真实状态 |
 | --- | --- |
