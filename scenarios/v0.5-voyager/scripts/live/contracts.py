@@ -21,6 +21,27 @@ def quarantined_paid_original_accounted(config,reference,receipt,preservation):
         and type(failure.get('capturedAtGameTick'))is int
         and failure['capturedAtGameTick']<=preservation['currentLastExit']<=config['sourceTick'])
 
+def quarantined_harvest_no_effect_accounted(config,reference,receipt,cut,session,preservation):
+    action=reference.get('actionId');tick=cut.get('observedGameTick')
+    return (config.get('recoveryMode')=='authorize_remote_primary_recovery' and config.get('sourceRole')=='lastExit'
+        and receipt.get('actionId')==action and receipt.get('actionKind')=='harvest'
+        and receipt.get('terminal') is True and receipt.get('state')=='outcome_unknown'
+        and receipt.get('targetObjectId')==reference.get('nodeId')==cut.get('nodeId')
+        and reference.get('itemId')==cut.get('itemId') and type(receipt.get('requestedCount'))is int and receipt['requestedCount']>0
+        and cut.get('originalActionId')==action and cut.get('noReplay') is True and cut.get('noResume') is True
+        and type(cut.get('beforeNodeAmount'))is int and cut['beforeNodeAmount']>0
+        and receipt.get('beforeTargetAmount')==cut['beforeNodeAmount']==cut.get('afterNodeAmount')
+        and type(cut.get('beforePackageCount'))is int and cut['beforePackageCount']>=0
+        and cut['beforePackageCount']==cut.get('afterPackageCount') and cut.get('nodeDecrease')==cut.get('packageIncrease')==0
+        and type(tick)is int and type(receipt.get('completedAtGameTick'))is int and tick>=receipt['completedAtGameTick']
+        and session.get('sessionId')==receipt.get('sessionId') and session.get('gameLoaded') is True
+        and session.get('ownedBySpherewright') is True and session.get('writesAllowed') is False
+        and session.get('writeQuarantineActionId')==action and session.get('gameTick')==tick
+        and preservation.get('passed') is True and preservation.get('originalUnknownRetained') is True
+        and preservation.get('noReplay') is True and preservation.get('noResume') is True
+        and type(preservation.get('currentLastExit'))is int and type(config.get('sourceTick'))is int
+        and tick<=preservation['currentLastExit']<=config['sourceTick'])
+
 def is_read_tool(name):
     return name.startswith(('spherewright_get_','spherewright_inspect_','spherewright_list_')) or name=='spherewright_preview_voyager_route'
 

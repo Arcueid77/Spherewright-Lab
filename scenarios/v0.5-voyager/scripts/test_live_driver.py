@@ -9,6 +9,21 @@ from factory import Factory,resolve_refs
 from runtime import freeze,Runtime
 
 class LiveDriverTests(unittest.TestCase):
+ def test_frozen_harvest_zero_effect_is_separate_from_physical_idle_and_never_replayed(self):
+  from contracts import quarantined_harvest_no_effect_accounted as valid
+  config=dict(recoveryMode='authorize_remote_primary_recovery',sourceRole='lastExit',sourceTick=902)
+  ref=dict(actionId='old-unknown',nodeId=7,itemId=1001)
+  r=dict(actionId='old-unknown',actionKind='harvest',terminal=True,state='outcome_unknown',targetObjectId=7,
+   requestedCount=6,beforeTargetAmount=500,completedAtGameTick=900,sessionId='old-session')
+  cut=dict(originalActionId='old-unknown',nodeId=7,itemId=1001,noReplay=True,noResume=True,
+   beforeNodeAmount=500,afterNodeAmount=500,beforePackageCount=0,afterPackageCount=0,nodeDecrease=0,packageIncrease=0,observedGameTick=901)
+  session=dict(sessionId='old-session',gameLoaded=True,ownedBySpherewright=True,writesAllowed=False,writeQuarantineActionId='old-unknown',gameTick=901)
+  preserve=dict(passed=True,originalUnknownRetained=True,noReplay=True,noResume=True,currentLastExit=902)
+  self.assertTrue(valid(config,ref,r,cut,session,preserve))
+  for target,key,value in [('cut','afterNodeAmount',499),('cut','afterPackageCount',1),('cut','nodeDecrease',1),
+   ('session','writesAllowed',True),('session','gameTick',902),('preserve','currentLastExit',900),('receipt','state','action_failed')]:
+   rc,cc,sc,pc=map(copy.deepcopy,(r,cut,session,preserve));{'receipt':rc,'cut':cc,'session':sc,'preserve':pc}[target][key]=value
+   self.assertFalse(valid(config,ref,rc,cc,sc,pc))
  def test_unknown_physical_stop_only_allows_independent_saved_source_after_exact_paid_create_accounting(self):
   from contracts import quarantined_paid_original_accounted
   c=dict(recoveryMode='authorize_remote_primary_recovery',sourceRole='lastExit',sourceTick=900)

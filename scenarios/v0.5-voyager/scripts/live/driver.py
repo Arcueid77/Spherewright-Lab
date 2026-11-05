@@ -6,7 +6,7 @@ from geometry_request import complete_geometry_arrays
 from evidence import need,read,sha,json_value
 from mcp_client import Client
 from saved_space import exact_last_exit_echo,paused_space_source,exact_ui_supply,saved_identity_token
-from contracts import ordinary_owned_resume_echo,resume_admission_echo,validate_steps,validate_native_calls,strict_native_player_idle,native_warper_auto_supply_enabled,quarantined_paid_original_accounted
+from contracts import ordinary_owned_resume_echo,resume_admission_echo,validate_steps,validate_native_calls,strict_native_player_idle,native_warper_auto_supply_enabled,quarantined_paid_original_accounted,quarantined_harvest_no_effect_accounted
 
 PLAYER_SETTING_MODES=('enable-mecha-construction-drones','disable-mecha-research-auto-supply',
  'enable-mecha-research-auto-supply','enable-mecha-warper-auto-supply')
@@ -48,6 +48,11 @@ class Live:
    need(sha(original['path'])==original['sha256'] and sha(original['preservationPath'])==original['preservationSha256']
     and quarantined_paid_original_accounted(c,original,read(original['path']),read(original['preservationPath'])),
     'unknown_original_must_remain_isolated_with_known_paid_create_and_complete_saved_source')
+  for original in c.get('quarantinedLocalHarvestOriginals',[]):
+   for path_key,hash_key in [('path','sha256'),('cutPath','cutSha256'),('sessionPath','sessionSha256'),('preservationPath','preservationSha256')]:
+    need(sha(original[path_key])==original[hash_key],'frozen_harvest_original_evidence_changed')
+   need(quarantined_harvest_no_effect_accounted(c,original,read(original['path']),read(original['cutPath']),read(original['sessionPath']),read(original['preservationPath'])),
+    'unknown_harvest_requires_exact_zero_mutation_cut_and_latest_complete_preservation_no_replay')
   need(c['firstOperationReady'] and c['originalActionsReconciled'],'offline_not_ready')
   if c.get('recoveryMode')=='authorize_failed_landing_last_exit':
    need(c['additionalVoyagerGameTicks']==0 and c.get('surfaceRecoveryTarget') is None
