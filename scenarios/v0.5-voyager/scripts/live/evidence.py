@@ -11,6 +11,12 @@ def read(p): return json.loads(Path(p).read_text(encoding='utf-8-sig'))
 def actual_prior_rpc_count(prior,closed):
     """Carry nested caller counts from their original attachment receipt."""
     base=closed.get('priorRpcCount',0)
+    source=Path(prior)/'run-config-reference.private.json'
+    if 'priorRpcCount' not in closed and source.exists():
+        reference=read(source)
+        need(sha(reference['path'])==reference['sha256'].upper(),'original_caller_config_changed')
+        config=read(reference['path']);base=config.get('priorRpcCount',0)
+        need(closed['maximumRequests']==config['maximumRpc']-base,'original_caller_allowance_mismatch')
     proof=Path(prior)/'attached-existing-session.private.json'
     if proof.exists():
         attached=read(proof);observed=attached['priorRpcCount']

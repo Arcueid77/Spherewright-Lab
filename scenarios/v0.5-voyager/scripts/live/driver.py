@@ -300,10 +300,25 @@ class Live:
  def prepare_first_work(self,loaded,deadline):
   work=self.runtime.config['firstOperation'];mode=work.get('mode','production')
   if work.get('kind')=='refuel':
-   p=self.player();self.first_before=p
-   q=self.call('spherewright_prepare_refuel',dict(self.ctx,itemId=work['itemId'],count=work['count'],expectedPlayerStateHash=p['stateHash']))
-   need(q['prepared'] and q['commitAllowedNow'] and not q['commitBlockers'],'first_refuel_not_prepared')
-   return dict(action_kind='refuel',tool='spherewright_commit_refuel',prepared=q)
+   amount=work['count']
+   for attempt in range(3):
+    if attempt:need(time.monotonic()<deadline,'first_refuel_discovery_exceeded_original_startup_deadline')
+    p=self.player();self.first_before=p
+    try:q=self.call('spherewright_prepare_refuel',dict(self.ctx,itemId=work['itemId'],count=amount,expectedPlayerStateHash=p['stateHash']))
+    except ToolRefused as error:
+     # This documented Native refusal is an exact capacity disclosure, not
+     # an accepted action. Never infer a quantity from unrelated failures.
+     match=re.fullmatch(r"DSP's native one-stack fuel transfer will move exactly ([1-9][0-9]*) item\(s\) into grid ([0-9]+); the requested count was ([1-9][0-9]*)\.",error.error.get('message',''))
+     if not(work.get('useNativeExactCount') is True and self.active is None and error.error.get('code')=='INVALID_REQUEST'
+       and error.error.get('retryable') is True and match and int(match[3])==amount
+       and 1<=int(match[1])<=work['count'] and int(match[1])!=amount):raise
+     self.runtime.put(f'first-refuel-unaccepted-count-{attempt}.private.json',dict(error=error.error,actionAccepted=False,
+       maximumCount=work['count'],nextFreshCount=int(match[1]),noReplay=True))
+     amount=int(match[1]);continue
+    need(q['prepared'] and q['commitAllowedNow'] and not q['commitBlockers'],'first_refuel_not_prepared')
+    self.first_refuel_count=amount
+    return dict(action_kind='refuel',tool='spherewright_commit_refuel',prepared=q,actualCount=amount)
+   raise RuntimeError('first_refuel_exact_count_discovery_ended_without_acceptance')
   if work.get('kind')=='saved-home-return':
    p=self.player();self.first_before=p;t=p['spaceTransit']
    q=self.call('spherewright_prepare_interplanetary_flight',dict(self.ctx,destinationPlanetId=t['originalHomePlanetId'],
@@ -364,6 +379,13 @@ class Live:
   raise G.DeadlineExceeded('No original paid Native control effect before startup deadline; reconcile original without replay')
  def verify_progress(self,w,r):
   c=self.runtime.config['firstOperation'];mode=c.get('mode','production')
+  if c.get('kind')=='refuel':
+   amount=w.get('actualCount',c['count']);before=r.get('beforeTargetAmount');after=r.get('afterTargetAmount')
+   ok=(type(amount)is int and 1<=amount<=c['count'] and r.get('terminal') is True and r.get('succeeded') is True
+    and r.get('actionKind')=='refuel' and type(before)is int and type(after)is int and before>=0 and after-before==amount
+    and sum(d['delta'] for d in r.get('itemDeltas',[]) if d['itemId']==c['itemId'])==-amount)
+   self.runtime.put('actual-progress.private.json',dict(verified=ok,actionId=r['actionId'],exactNativeTransferCount=amount,
+    before=self.first_before,after=self.player(),originalSameTickReceipt=r,noReplay=True));return ok
   if c.get('kind')=='saved-home-return':
    ok=G.paid_native_home_effect(r)
    self.runtime.put('actual-progress.private.json',dict(verified=ok,actionId=r['actionId'],nativeFirstEffect=r.get('nativeHomeReturnFirstEffect'),

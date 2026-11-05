@@ -20,6 +20,7 @@ def main():
         runtime.put('startup-report.private.json',gate.asdict(report))
     finally:
         if adapter.c is not None:
-            runtime.put('client-close.private.json',adapter.c.close())
+            closed=adapter.c.close();closed['priorRpcCount']=adapter.prior_rpc_count
+            runtime.put('client-close.private.json',closed)
 
 if __name__=='__main__':main()

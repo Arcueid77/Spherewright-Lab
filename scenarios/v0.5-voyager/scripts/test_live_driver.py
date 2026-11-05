@@ -9,6 +9,54 @@ from factory import Factory,resolve_refs
 from runtime import freeze,Runtime
 
 class LiveDriverTests(unittest.TestCase):
+ def test_captured_native_partial_fuel_capacity_fresh_prepares_and_proves_the_exact_original_transfer(self):
+  import time
+  records={};a=Factory.__new__(Factory);a.ctx=dict(sessionId='synthetic-owned',planetId=402);a.active=None
+  config=dict(firstOperation=dict(kind='refuel',itemId=1802,count=20,useNativeExactCount=True),initialSteps=[])
+  a.runtime=type('Runtime',(),dict(config=config,put=lambda _,name,value:records.__setitem__(name,value)))()
+  observations=iter([dict(stateHash='first',inventory=[dict(itemId=1802,count=100)]),
+   dict(stateHash='fresh',inventory=[dict(itemId=1802,count=100)]),
+   dict(stateHash='after',inventory=[dict(itemId=1802,count=88)],fuelStorage=[dict(itemId=1802,count=89)])])
+  a.player=lambda:next(observations);calls=[]
+  def call(tool,args):
+   calls.append((tool,args))
+   if len(calls)==1:raise ToolRefused(tool,dict(code='INVALID_REQUEST',retryable=True,
+    message="DSP's native one-stack fuel transfer will move exactly 12 item(s) into grid 2; the requested count was 20."))
+   return dict(prepared=True,commitAllowedNow=True,commitBlockers=[],planToken='fresh-count-bound-plan')
+  a.call=call;work=a.prepare_first_work({},time.monotonic()+30)
+  self.assertEqual([(20,'first'),(12,'fresh')],[(x[1]['count'],x[1]['expectedPlayerStateHash']) for x in calls])
+  result=dict(actionId='original-only',actionKind='refuel',terminal=True,succeeded=True,beforeTargetAmount=78,afterTargetAmount=90,
+   itemDeltas=[dict(itemId=1802,delta=-12)])
+  self.assertTrue(a.verify_progress(work,result))
+  self.assertEqual(12,records['actual-progress.private.json']['exactNativeTransferCount'])
+  a.execute_plan=lambda *_:None;a.await_next_plan=lambda:None;a.continue_prepared_work(result)
+  self.assertEqual(12,records['first-refuel-native-conservation.private.json']['exactPackageDebit'])
+ def test_native_refuel_disclosure_cannot_increase_the_immutable_fuel_ceiling(self):
+  import time
+  a=Live(None);a.runtime=type('Config',(),dict(config=dict(firstOperation=dict(kind='refuel',itemId=1802,count=20,useNativeExactCount=True))))()
+  a.ctx={};a.active=None;a.player=lambda:dict(stateHash='fresh')
+  def refused(tool,args):raise ToolRefused(tool,dict(code='INVALID_REQUEST',retryable=True,
+   message="DSP's native one-stack fuel transfer will move exactly 30 item(s) into grid 3; the requested count was 20."))
+  a.call=refused
+  with self.assertRaises(ToolRefused):a.prepare_first_work({},time.monotonic()+30)
+ def test_legacy_closed_caller_inherits_its_hash_bound_actual_rpc_baseline(self):
+  from evidence import actual_prior_rpc_count,sha
+  with tempfile.TemporaryDirectory() as folder:
+   prior=Path(folder);config=prior/'inputs.private.json'
+   config.write_text(json.dumps(dict(priorRpcCount=49092,maximumRpc=200000)),encoding='utf-8')
+   (prior/'run-config-reference.private.json').write_text(json.dumps(dict(path=str(config),sha256=sha(config))),encoding='utf-8')
+   closed=dict(requestCount=98,maximumRequests=150908)
+   self.assertEqual(49190,actual_prior_rpc_count(prior,closed))
+   config.write_text(json.dumps(dict(priorRpcCount=0,maximumRpc=200000)),encoding='utf-8')
+   with self.assertRaisesRegex(RuntimeError,'original_caller_config_changed'):actual_prior_rpc_count(prior,closed)
+ def test_legacy_closed_caller_rejects_a_different_original_finite_allowance(self):
+  from evidence import actual_prior_rpc_count,sha
+  with tempfile.TemporaryDirectory() as folder:
+   prior=Path(folder);config=prior/'inputs.private.json'
+   config.write_text(json.dumps(dict(priorRpcCount=49092,maximumRpc=200000)),encoding='utf-8')
+   (prior/'run-config-reference.private.json').write_text(json.dumps(dict(path=str(config),sha256=sha(config))),encoding='utf-8')
+   with self.assertRaisesRegex(RuntimeError,'original_caller_allowance_mismatch'):
+    actual_prior_rpc_count(prior,dict(requestCount=98,maximumRequests=200000))
  def test_first_refuel_is_a_fresh_prepare_not_an_automatic_resubmit(self):
   a=Live(None);a.runtime=type('Config',(),dict(config=dict(firstOperation=dict(kind='refuel',itemId=1802,count=20))))()
   a.ctx=dict(sessionId='synthetic-owned',planetId=1);a.player=lambda:dict(stateHash='fresh-player')

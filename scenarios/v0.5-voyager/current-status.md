@@ -1,13 +1,13 @@
 # Voyager active snapshot / 0.5 活动快照
 
-2026-11-06：续接已核最新完整边界及唯一writer；9eaca完成恢复落盘全链审计、精确拒绝诊断、准确CI/同源冷安装，游戏仍关闭。保留c79健康接管失败及约326秒启动失败，不改写为通过；LastExit123766112、Primary123757596较旧不得加载，累计2676850tick，2020项全备份重新核对。下一次受保护恢复先做原正常装燃料，再续当地火箭；当地首火箭/接收点/双包未闭。
+2026-11-06：9eaca已真实完成Caph健康接管及正常重存；启动约109秒在首装燃料prepare被拒，要求20而原生准确容量12，未接受该动作。300秒后仅正常保存关闭，失败不改名为通过；Primary/LastExit均123786558，累计2697296tick，2028项完整备份。共享调用器已修准确数量发现、完整燃料结果核验及原调用计数继承；复用已合格安装准备续跑。当地首火箭/接收点/双包未闭。
 
 - **授权：** [现行授权](../../operations/standing-authority.md)及[火箭准确增量](rocket-scope-increment.md)有效，不再重复请批。累计实耗、54000返航、能源/翘曲器下限、Native门、单writer/维护者、物料守恒及unknown隔离保留；不正式发布。
 - **源码/实装：** 选择 **9eaca0763801cf6fad3ac19a76c499685422c51f**，[准确SHA CI成功](https://github.com/Arcueid77/Spherewright/actions/runs/42066979826)。保留c79不可变Journey作用域修复；新增完成阶段精确绑定谓词、Store拒绝及tick/储备/期限观察，未放宽门。生产协调器/Store回放、Native编译、SDK/PE及同源目录/单文件资格通过；**磁盘已同源冷安装9eaca**，官方事务仅提交一次，安装后实际PE/MVID及完整备份通过；实机新恢复仍待证明，不生成双包。
-- **最新完整边界：** **LastExit123766112**为新失败恢复的最新完整保全，**Primary123757596**较旧不得加载回退；**2020项**全量副本通过，累计**2676850 tick**，游戏/MCP均关闭。原航行和新resume均已known terminal failed，绝不重放；原生暂停稳定切面仅作保全，不冒充idle。副本：`cold-scope-c79b5aa6/failed-resume-normal-preservation/after-normal-close-complete-backup/`。此前765850/2016项副本与旧账完整保留。
+- **最新完整边界：** **Primary/LastExit均123786558**；**2028项**完整副本通过，累计**2697296 tick**，游戏/MCP均关闭。9eaca新resume原句柄terminal completed，原航行及c79失败保留不重放。首燃料prepare拒绝没有commit/扣料；随后通过同一健康世界正常保存回菜单并关闭，无重载。副本：`cold-admission-9eaca076/healthy-startup-preservation/after-normal-close-complete-backup/`，此前全部副本与旧账保留。
 - **实耗/范围：** 有限累计上限3888000；已付矿1/2、聚变1/1、塔6/9、化工1/1、仓3/3、炉1/1、MkII3/3、带48/120、分拣21/24、弹射器1/1；新批井0/1。旧13段高架不退款。新Caph出航确切消耗1枚翘曲器；当前返航后续消耗以原动作实测回执为准。母星板/燃料各100→0，Caph各0→100、在途订单归0；原帆4制造/弹药4→0/弹道→云及恢复保持成果不重跑。
-- **首错/修复：** 旧恢复进度扣账污染新Journey的根因已由c79修复：生产tracker/Store及真实低核心回放通过，原借窗/改额/倒账仍拒绝。实机新resume到健康接管落盘处失败：`failed_landing_healthy_admission_persistence_unproved`，generic firstFailure未带当次Native细分；当前durable run为failed_health、spent7908/anchor123766112、LastLanded=null。先完整审查CompleteRemoteResumeAdmission→释放租约→TryFinishFailedLandingAdmission→Store验证/原子落盘与失败保全，补足真实回放和精确拒绝因子；不删检查、不先断言I/O或某个谓词，不再连续开候选逐点试。
-- **当前/下一动作：** [完整审计](recovery-completion-audit.md)已覆盖启动、源文件租约、接管、Store、重存及失败保全。c79的45.44→285.84秒确为原生原型/模型预加载拒绝等待，未绕过；旧失败内因仍未观察，不断言I/O或某谓词。9eaca沿同一最新Caph准备新鲜恢复及正常装燃料20；既有井1/Q2/合金6/处理器6/板3/燃料100保全。随后当地有限配方、最小接收点、真实首火箭及最终双包继续。新原件`cold-admission-9eaca076/`，旧原件`cold-scope-c79b5aa6/`；历史见[c0ef05c](https://github.com/Arcueid77/Spherewright-Lab/tree/c0ef05c)。
+- **首错/修复：** c79旧落盘首错仍无精确内因，不断言已找到根因；9eaca在完整审计和精确诊断后同一最新保存无损接管成功，形成真实completed_health/新LastLanded。新首错为未接受的燃料数量拒绝；调用器按该明确Native容量披露在原20上限内fresh prepare，绝不重试accepted/unknown，补齐成功回执同tick扣料/入仓核验和旧cold-caller缺失计数继承，53项调用器回归通过。
+- **当前/下一动作：** [完整审计](recovery-completion-audit.md)保留旧首错/原生预加载事实。`caph-rocket-9eaca076/`采用最新健康保存及新鲜有限工作额度，累计上限3888000/返航54000不变；首操作按原生准确数量且最多20装燃料，继而隔离矿源/弹射器、刷新整线库存再做当地有限配方、最小接收点和首火箭。既有井1/Q2/合金6/处理器6/板3/燃料100保全。旧原件`cold-admission-9eaca076/`和`cold-scope-c79b5aa6/`保留；历史见[11637cd](https://github.com/Arcueid77/Spherewright-Lab/tree/11637cd)。
 
 | 验收 | 当前真实状态 |
 | --- | --- |

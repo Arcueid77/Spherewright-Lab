@@ -286,7 +286,7 @@ class Factory(Live):
  def continue_prepared_work(self,result):
   try:
    if self.runtime.config['firstOperation'].get('kind')=='refuel':
-    work=self.runtime.config['firstOperation'];amount=work['count'];item=work['itemId']
+    work=self.runtime.config['firstOperation'];amount=getattr(self,'first_refuel_count',work['count']);item=work['itemId']
     before=result.get('beforeTargetAmount');after=result.get('afterTargetAmount')
     need(result.get('terminal') is True and result.get('succeeded') is True
      and sum(d['delta'] for d in result.get('itemDeltas',[]) if d['itemId']==item)==-amount
