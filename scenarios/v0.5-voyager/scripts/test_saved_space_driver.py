@@ -16,7 +16,7 @@ class SavedSpaceDriverTests(unittest.TestCase):
    writeHealth='quarantined',writeQuarantineActionId='synthetic-open',localPlanetId=None,gameTick=1000,
    writeBlockers=[dict(code='WRITE_SUBSYSTEM_QUARANTINED')])
   self.player=dict(planetId=0,isOnPlanet=False,stateHash='fresh',movementState='Sail',
-   spaceTransit=dict(speed=0,nativePaused=True,warping=False,warpCommand=False,warpState=0))
+   spaceTransit=dict(speed=7.807988126320179,nativePaused=True,frozenSavedPoseVerified=True,warping=False,warpCommand=False,warpState=0))
   self.plan=dict(recoveryMode='open_saved_last_exit',candidateGameTick=1000,minimumGameTick=1000,
    sourceGameVersion='synthetic-version',targetGameVersion='synthetic-version',exactEmbeddedIdentityVerified=True,
    opensExactLastExitOnly=True,opensSavedWorldOnly=True,previousAutomationRemainsStopped=True,
@@ -39,7 +39,7 @@ class SavedSpaceDriverTests(unittest.TestCase):
    self.assertFalse(paused_space_source(self.config,changed,self.player,'synthetic-open'))
   changed=dict(self.session,writeBlockers=self.session['writeBlockers']+[dict(code='OTHER')])
   self.assertFalse(paused_space_source(self.config,changed,self.player,'synthetic-open'))
-  for key,value in [('nativePaused',False),('speed',float('nan')),('warpState',None)]:
+  for key,value in [('nativePaused',False),('frozenSavedPoseVerified',False),('speed',float('nan')),('warpState',None)]:
    changed=copy.deepcopy(self.player);changed['spaceTransit'][key]=value
    self.assertFalse(paused_space_source(self.config,self.session,changed,'synthetic-open'))
 
@@ -77,11 +77,13 @@ class SavedSpaceDriverTests(unittest.TestCase):
  def test_supply_counts_and_inc_must_conserve_at_native_call_boundary(self):
   r=dict(terminal=True,succeeded=True,actionKind='supply_mecha_warpers',mechaWarperSupplyReadback=dict(requestedCount=18,actualStored=18,
    evidenceScope='synchronous_native_ui_partial_warper_chamber_topup',autoReplenishWarperBefore=True,autoReplenishWarperAfter=True,
+   frozenSpacePoseBefore='native-frozen-pose',frozenSpacePoseAfter='native-frozen-pose',spaceMomentumPreserved=True,
    packageCountBefore=20,packageCountAfter=2,chamberCountBefore=2,chamberCountAfter=20,
    packageIncBefore=0,packageIncAfter=0,chamberIncBefore=0,chamberIncAfter=0,
    readbackComplete=True,conservationVerified=True))
   self.assertTrue(exact_ui_supply(r,18))
-  for key,value in [('actualStored',17),('chamberCountAfter',None),('packageCountAfter',1),('chamberIncAfter',1)]:
+  for key,value in [('actualStored',17),('chamberCountAfter',None),('packageCountAfter',1),('chamberIncAfter',1),
+   ('spaceMomentumPreserved',None),('frozenSpacePoseAfter','changed')]:
    changed=copy.deepcopy(r);changed['mechaWarperSupplyReadback'][key]=value
    self.assertFalse(exact_ui_supply(changed,18))
 

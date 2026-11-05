@@ -34,9 +34,10 @@ def paused_space_source(config, session, player, open_action):
         and session.get('localPlanetId') is None and session.get('gameTick') == config['sourceTick']
         and player.get('planetId') == 0 and player.get('isOnPlanet') is False
         and player.get('movementState') == 'Sail' and transit.get('nativePaused') is True
+        and transit.get('frozenSavedPoseVerified') is True
         and transit.get('warping') is False and transit.get('warpCommand') is False
         and transit.get('warpState') == 0 and type(speed) in (int, float)
-        and math.isfinite(speed) and 0 <= speed <= .5)
+        and math.isfinite(speed) and speed >= 0)
 
 
 def exact_ui_supply(result, count):
@@ -47,6 +48,9 @@ def exact_ui_supply(result, count):
         and result.get('terminal') is True and result.get('succeeded') is True
         and result.get('actionKind') == 'supply_mecha_warpers'
         and r.get('evidenceScope') == 'synchronous_native_ui_partial_warper_chamber_topup'
+        and r.get('spaceMomentumPreserved') is True
+        and isinstance(r.get('frozenSpacePoseBefore'), str) and bool(r['frozenSpacePoseBefore'])
+        and r.get('frozenSpacePoseAfter') == r['frozenSpacePoseBefore']
         and all(type(r.get(k)) is int and r[k] >= 0 for k in keys)
         and r.get('requestedCount') == r.get('actualStored') == count
         and r['packageCountBefore'] - r['packageCountAfter'] == count
