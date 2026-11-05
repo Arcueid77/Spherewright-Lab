@@ -284,7 +284,16 @@ class Factory(Live):
   return r
 
  def continue_prepared_work(self,result):
-  try:self.execute_plan(self.runtime.config['initialSteps'],'initial')
+  try:
+   if self.runtime.config['firstOperation'].get('kind')=='saved-home-return':
+    terminal=result if result.get('terminal') else self.successful_original(self.active)
+    need(terminal.get('succeeded') is True,'original_saved_home_return_failed_no_replay')
+    s=self.call('spherewright_get_session_state',{})
+    need(s['ownedBySpherewright'] and s['writesAllowed'] and s['sessionId']==self.ctx['sessionId']
+     and s['localPlanetId'] in self.runtime.config['authorizedPlanetIds'],'saved_home_return_healthy_save_unproved')
+    self.ctx=dict(sessionId=s['sessionId'],planetId=s['localPlanetId'])
+    self.runtime.put('first-home-return-complete.private.json',dict(original=terminal,session=s))
+   self.execute_plan(self.runtime.config['initialSteps'],'initial')
   except (ToolRefused,ValueError,RuntimeError,LookupError,TypeError,OSError) as error:
    self.record_plan_failure('initial-plan-failure.private.json',error)
    if self.active is not None or isinstance(error,AcceptedActionFailure):raise

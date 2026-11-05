@@ -181,7 +181,7 @@ class Live:
   c=self.runtime.config;s=self.call('spherewright_get_session_state',{})
   if c.get('recoveryProfile')=='exact-paused-space':
    need(result['succeeded'],'exact_space_open_original_failed')
-   self.ctx=dict(sessionId=s['sessionId'],planetId=0)
+   self.ctx=dict(sessionId=s['sessionId'],planetId=c['planetId'])
    p=self.player()
    need(paused_space_source(c,s,p,result['actionId']),'exact_paused_space_source_unproved')
    self.space_open_action=result['actionId']
@@ -296,6 +296,17 @@ class Live:
 
  def prepare_first_work(self,loaded,deadline):
   work=self.runtime.config['firstOperation'];mode=work.get('mode','production')
+  if work.get('kind')=='saved-home-return':
+   p=self.player();self.first_before=p;t=p['spaceTransit']
+   q=self.call('spherewright_prepare_interplanetary_flight',dict(self.ctx,destinationPlanetId=t['originalHomePlanetId'],
+    expectedPlayerStateHash=p['stateHash'],expectedStarSystemStateHash=t['returnHomeStateHash'],minimumCoreEnergyRatio=.8,
+    stoppedSpaceReturnMaximumGameTicks=work['maximumGameTicks'],stoppedSpaceReturnMaximumWallSeconds=work['maximumWallSeconds'],
+    savedHomeReturnPredecessorActionId=work['predecessorActionId'],priorHomeReturnKnownTerminalFailed=True))
+   need(q['prepared'] and q['commitAllowedNow'] and not q['commitBlockers']
+    and q.get('plannedStoppedSpaceHomeReturn') is True
+    and q.get('plannedSavedHomeReturnPredecessorActionId')==work['predecessorActionId'],'saved_home_return_scope_echo_unproved')
+   self.runtime.put('first-work-plan.private.json',q)
+   return dict(action_kind='interplanetary-flight',tool='spherewright_commit_interplanetary_flight',prepared=q)
   if work.get('kind')=='supply-mecha-warpers':
    need(self.runtime.config.get('recoveryProfile')=='exact-paused-space' and self.ctx['planetId']==0,
     'first_space_supply_requires_exact_paused_source')
@@ -323,8 +334,22 @@ class Live:
   if mode=='enable-mecha-warper-auto-supply':need(q.get('plannedMechaWarperAutoSupplyEnabled') is True,'first_warper_setting_cohort_echo_missing_no_commit')
   return dict(action_kind='configure-building',tool='spherewright_commit_configure_building',prepared=q)
  def commit_first_work_once(self,w):return self.commit('first-work',w['tool'],dict(self.ctx,planToken=w['prepared']['planToken'],idempotencyKey=str(uuid.uuid4())))
+ def wait_first_effect(self,handle,work,deadline):
+  if work['action_kind']!='interplanetary-flight':return self.wait_original(handle)
+  while time.monotonic()<min(deadline,self.c.deadline):
+   r=self.call('spherewright_get_action_result',dict(actionId=handle))
+   if r['terminal'] or G.paid_native_home_effect(r):
+    self.runtime.put('first-native-effect.private.json',r)
+    if r['terminal'] and r['state']!='outcome_unknown':self.active=None
+    return r
+   time.sleep(.1)
+  raise G.DeadlineExceeded('No original paid Native control effect before startup deadline; reconcile original without replay')
  def verify_progress(self,w,r):
   c=self.runtime.config['firstOperation'];mode=c.get('mode','production')
+  if c.get('kind')=='saved-home-return':
+   ok=G.paid_native_home_effect(r)
+   self.runtime.put('actual-progress.private.json',dict(verified=ok,actionId=r['actionId'],nativeFirstEffect=r.get('nativeHomeReturnFirstEffect'),
+    terminalLandingProved=r.get('terminal') is True and r.get('succeeded') is True));return ok
   if c.get('kind')=='supply-mecha-warpers':
    e=self.player();s=self.call('spherewright_get_session_state',{})
    source=read(self.runtime.output/'loaded-session.private.json')

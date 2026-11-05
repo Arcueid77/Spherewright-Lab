@@ -31,8 +31,8 @@ def paused_space_source(config, session, player, open_action):
         and session.get('writesAllowed') is False and session.get('writeHealth') == 'quarantined'
         and session.get('writeQuarantineActionId') == open_action
         and len(blockers) == 1 and blockers[0].get('code') == 'WRITE_SUBSYSTEM_QUARANTINED'
-        and session.get('localPlanetId') is None and session.get('gameTick') == config['sourceTick']
-        and player.get('planetId') == 0 and player.get('isOnPlanet') is False
+        and session.get('localPlanetId') == (config['planetId'] or None) and session.get('gameTick') == config['sourceTick']
+        and player.get('planetId') == config['planetId'] and player.get('isOnPlanet') is (config['planetId']>0)
         and player.get('movementState') == 'Sail' and transit.get('nativePaused') is True
         and transit.get('frozenSavedPoseVerified') is True
         and transit.get('warping') is False and transit.get('warpCommand') is False

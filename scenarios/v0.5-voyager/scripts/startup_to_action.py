@@ -6,7 +6,7 @@ offline work before launch. An accepted action is reconciled even after expiry.
 from __future__ import annotations
 
 from dataclasses import asdict, dataclass, field
-import time
+import time, math
 from typing import Callable, Protocol
 
 TARGET_SECONDS = 120.0
@@ -15,7 +15,21 @@ READINESS_FLAGS = (
     'game_stopped', 'source_qualified', 'installed_match', 'backup_complete',
     'original_actions_reconciled', 'budgets_preserved', 'first_operation_ready',
 )
-ACTUAL_WORK_KINDS = frozenset(('move', 'transfer', 'handcraft', 'build', 'configure-building', 'harvest', 'select-research', 'supply_mecha_warpers'))
+ACTUAL_WORK_KINDS = frozenset(('move', 'transfer', 'handcraft', 'build', 'configure-building', 'harvest', 'select-research', 'supply_mecha_warpers', 'interplanetary-flight'))
+
+
+def paid_native_home_effect(result):
+    p=result.get('nativeHomeReturnFirstEffect') or {}
+    fields=('coreBefore','coreAfter','nativeThrustDebitJoules','velocityBeforeX','velocityBeforeY','velocityBeforeZ',
+            'velocityAfterX','velocityAfterY','velocityAfterZ','positionBeforeX','positionBeforeY','positionBeforeZ',
+            'positionAfterX','positionAfterY','positionAfterZ')
+    return (result.get('actionKind')=='interplanetary-flight' and result.get('state') in ('waiting_for_game','executing','completed')
+        and p.get('evidenceScope') in ('synchronous_paid_native_home_return_control','paid_native_home_return_player_tick')
+        and p.get('nativeBindingVerified') is True and p.get('paidControlObserved') is True
+        and all(type(p.get(k)) in (int,float) and math.isfinite(p[k]) for k in fields)
+        and p['coreBefore']>=0 and p['coreAfter']>=0 and p['nativeThrustDebitJoules']>0
+        and (any(p['velocityBefore'+k]!=p['velocityAfter'+k] for k in 'XYZ')
+            or any(p['positionBefore'+k]!=p['positionAfter'+k] for k in 'XYZ')))
 
 
 class DeadlineExceeded(RuntimeError):
@@ -100,14 +114,20 @@ def run(adapter: Adapter, emit: Callable[[dict], None], clock=time.monotonic) ->
         if elapsed >= LIMIT_SECONDS:
             raise DeadlineExceeded(f'{name}: startup-to-action exceeded {LIMIT_SECONDS:g} seconds')
 
-    def submit(method, prepared):
+    def submit(method, prepared, first_effect=False):
         report.unresolved_commit = True
         try:
             handle = method(prepared)
         except CommitRejected:
             report.unresolved_commit = False
             raise
-        result = adapter.wait_original(handle)
+        result = adapter.wait_first_effect(handle, prepared, deadline) if first_effect and hasattr(adapter,'wait_first_effect') else adapter.wait_original(handle)
+        if first_effect and prepared.get('action_kind')=='interplanetary-flight' and result.get('terminal') is not True:
+            if result.get('actionId')!=handle or not paid_native_home_effect(result):
+                raise RuntimeError('No paid original Native home-return effect; keep the pending handle for reconciliation.')
+            # Actual paid motion has begun; completion remains owned by the same
+            # writer. Startup success is never relabelled terminal landing.
+            return result
         if result.get('terminal') is not True or result.get('state') == 'outcome_unknown':
             raise RuntimeError('Original accepted action needs reconciliation; no replay or competing cleanup.')
         report.unresolved_commit = False
@@ -133,7 +153,7 @@ def run(adapter: Adapter, emit: Callable[[dict], None], clock=time.monotonic) ->
         if work.get('action_kind') not in ACTUAL_WORK_KINDS:
             raise RuntimeError('First work must be a prepared real operation, not a read, Load, Save or heartbeat.')
         checkpoint('first_work_prepared')
-        result = submit(adapter.commit_first_work_once, work)
+        result = submit(adapter.commit_first_work_once, work, first_effect=True)
         if not adapter.verify_progress(work, result):
             raise RuntimeError('No actual progress proven by the original action and fresh state delta.')
         checkpoint('first_actual_work_completed')
@@ -145,6 +165,7 @@ def run(adapter: Adapter, emit: Callable[[dict], None], clock=time.monotonic) ->
         # No return to planning at the menu: continue the already prepared
         # executor immediately. A validation-only adapter preserves and closes.
         adapter.continue_prepared_work(result)
+        report.unresolved_commit = bool(getattr(adapter,'active',None))
         return report
     except Exception as error:
         if report.passed:

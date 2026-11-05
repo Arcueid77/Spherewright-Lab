@@ -44,6 +44,10 @@ def main():
         cases.append(('spherewright_prepare_interplanetary_flight',dict(sessionId=ctx['sessionId'],planetId=0,
             destinationPlanetId=101,expectedPlayerStateHash=h,expectedStarSystemStateHash=h,minimumCoreEnergyRatio=.8,
             stoppedSpaceReturnMaximumGameTicks=54000,stoppedSpaceReturnMaximumWallSeconds=14400)))
+        cases.append(('spherewright_prepare_interplanetary_flight',dict(sessionId=ctx['sessionId'],planetId=101,
+            destinationPlanetId=101,expectedPlayerStateHash=h,expectedStarSystemStateHash=h,minimumCoreEnergyRatio=.8,
+            stoppedSpaceReturnMaximumGameTicks=51899,stoppedSpaceReturnMaximumWallSeconds=14400,
+            savedHomeReturnPredecessorActionId='11111111-1111-4111-8111-111111111111',priorHomeReturnKnownTerminalFailed=True)))
         proof=[]
         for tool,args in cases:
             schema=schemas[tool];need(set(schema.get('required',[]))<=set(args),'sdk_required_field_missing')

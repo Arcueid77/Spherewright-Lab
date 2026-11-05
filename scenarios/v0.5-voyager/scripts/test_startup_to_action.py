@@ -34,6 +34,30 @@ class Fixture:
 
 
 class StartupGateTests(unittest.TestCase):
+    def test_paid_native_control_starts_work_while_the_same_macro_remains_pending(self):
+        f=Fixture();f.work_kind='interplanetary-flight'
+        effect=dict(actionId='work',actionKind='interplanetary-flight',terminal=False,succeeded=False,state='waiting_for_game',
+         nativeHomeReturnFirstEffect=dict(evidenceScope='synchronous_paid_native_home_return_control',nativeBindingVerified=True,
+          paidControlObserved=True,coreBefore=10000000,coreAfter=9990000,nativeThrustDebitJoules=10000,
+          positionBeforeX=0,positionBeforeY=0,positionBeforeZ=0,positionAfterX=0,positionAfterY=0,positionAfterZ=0,
+          velocityBeforeX=0,velocityBeforeY=0,velocityBeforeZ=7.8,velocityAfterX=1,velocityAfterY=0,velocityAfterZ=7.8))
+        def observe_effect(*_):
+            f.active='work';return effect
+        f.wait_first_effect=observe_effect
+        def continue_original(r):
+            self.assertFalse(r['terminal']);f.calls.append('wait_same_original_to_terminal')
+        f.continue_prepared_work=continue_original
+        result=f.run();self.assertTrue(result.passed);self.assertTrue(result.unresolved_commit)
+        self.assertIn('wait_same_original_to_terminal',f.calls)
+        effect['nativeHomeReturnFirstEffect']['nativeThrustDebitJoules']=0
+        self.assertFalse(gate.paid_native_home_effect(effect))
+
+    def test_pending_acceptance_without_native_effect_never_passes_startup(self):
+        f=Fixture();f.work_kind='interplanetary-flight'
+        f.wait_first_effect=lambda *_:dict(actionId='work',actionKind='interplanetary-flight',terminal=False,state='waiting_for_game')
+        result=f.run();self.assertFalse(result.passed);self.assertTrue(result.unresolved_commit)
+        self.assertNotIn('continue',f.calls);self.assertNotIn('cleanup',f.calls)
+
     def test_later_unknown_preserves_successful_startup_and_blocks_competing_cleanup(self):
         f = Fixture()
         def later_unknown(result):

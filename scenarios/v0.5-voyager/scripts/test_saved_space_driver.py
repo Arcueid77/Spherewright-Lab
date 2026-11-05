@@ -11,7 +11,7 @@ from startup_to_action import ACTUAL_WORK_KINDS
 class SavedSpaceDriverTests(unittest.TestCase):
  def setUp(self):
   self.config=dict(recoveryProfile='exact-paused-space',recoveryMode='open_saved_last_exit',
-   sourceTick=1000,expectedNativeVersion='synthetic-version',firstOperation=dict(kind='supply-mecha-warpers',count=18))
+   sourceTick=1000,planetId=0,expectedNativeVersion='synthetic-version',firstOperation=dict(kind='supply-mecha-warpers',count=18))
   self.session=dict(sessionId='synthetic',gameLoaded=True,ownedBySpherewright=True,writesAllowed=False,
    writeHealth='quarantined',writeQuarantineActionId='synthetic-open',localPlanetId=None,gameTick=1000,
    writeBlockers=[dict(code='WRITE_SUBSYSTEM_QUARANTINED')])
@@ -61,6 +61,31 @@ class SavedSpaceDriverTests(unittest.TestCase):
   self.assertEqual('fresh',saved_identity_token(c,dict(restartResumeAvailable=True,restartResumeToken='fresh')))
   for mode in ('default','authorize_remote_primary_recovery'):
    self.assertIsNone(saved_identity_token(dict(c,recoveryMode=mode),dict(restartResumeAvailable=False)))
+
+ def test_resident_factory_does_not_turn_sail_into_walk_or_generic_healthy_access(self):
+  c=dict(self.config,planetId=101);s=dict(self.session,localPlanetId=101)
+  p=copy.deepcopy(self.player);p.update(planetId=101,isOnPlanet=True)
+  self.assertTrue(paused_space_source(c,s,p,'synthetic-open'))
+  p['movementState']='Walk';self.assertFalse(paused_space_source(c,s,p,'synthetic-open'))
+  p['movementState']='Sail';s['localPlanetId']=102
+  self.assertFalse(paused_space_source(c,s,p,'synthetic-open'))
+
+ def test_saved_home_first_work_uses_parent_and_remaining_scope_without_resupplying_full_chamber(self):
+  a=self.adapter();a.ctx=dict(sessionId='synthetic',planetId=101)
+  a.runtime.config=dict(self.config,planetId=101,firstOperation=dict(kind='saved-home-return',
+   predecessorActionId='old-failed',maximumGameTicks=51899,maximumWallSeconds=14400))
+  p=copy.deepcopy(self.player);p['spaceTransit'].update(originalHomePlanetId=101,returnHomeStateHash='fresh-home-anchor')
+  a.player=lambda:p;calls=[]
+  plan=dict(prepared=True,commitAllowedNow=True,commitBlockers=[],planToken='new-plan',plannedStoppedSpaceHomeReturn=True,
+   plannedSavedHomeReturnPredecessorActionId='old-failed')
+  a.call=lambda name,args:calls.append((name,args)) or plan
+  work=a.prepare_first_work(None,None)
+  self.assertEqual('interplanetary-flight',work['action_kind'])
+  self.assertEqual('spherewright_prepare_interplanetary_flight',calls[0][0])
+  self.assertEqual(51899,calls[0][1]['stoppedSpaceReturnMaximumGameTicks'])
+  self.assertTrue(calls[0][1]['priorHomeReturnKnownTerminalFailed'])
+  plan['plannedSavedHomeReturnPredecessorActionId']=None
+  with self.assertRaisesRegex(RuntimeError,'saved_home_return_scope_echo_unproved'):a.prepare_first_work(None,None)
 
  def test_first_work_requires_explicit_ui_echo_before_any_commit(self):
   a=self.adapter();a.ctx=dict(sessionId='synthetic',planetId=0);calls=[]
