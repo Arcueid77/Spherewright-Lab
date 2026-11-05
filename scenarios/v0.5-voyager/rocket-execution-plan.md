@@ -10,6 +10,18 @@ Planning record; authority and live facts remain in [standing authority](../../o
 4. Reuse the board bridge for staged frame/component ingredients and the graphene bridge for the rocket's finite fuel/chip batches. Prevent mixed-belt head blocking: gate inputs before changing phases, observe complete cargo paths, and retain every surplus/byproduct. Do not fill a bridge with surplus graphene before its later ingredient phase.
 5. Reuse the paid ejector ground bridge for the rocket after changing its source filter; its old ejector endpoint remains filtered for sails. Candidate new local connections are nanotube inputs, frame ingredients and bridge→silo:3 sorters, subject to exact Native port checks. Existing paid elevated mother-world belts remain preserved; they are not recreated or refunded.
 
+## Finite local feed refinement before restoring power
+
+The captured geometry is a proposal input, not current Native attachment approval. Fresh-read the complete local buffers, whole cargo paths and held inserter items before fuel insertion. Gate the miner-to-fire-ice bridge and the sail-to-ejector feed first. Preserve any held item and fractional machine work; do not reset an unfinished recipe to obtain an empty baseline.
+
+Reuse the graphene warehouse as a finite ingredient buffer. The existing fire-ice bridge passes close to that warehouse: preflight one new warehouse-to-bridge sorter, with the original mineral source gated, and reuse the bridge's existing chemical-plant input. Drain and account its original fire ice before adding a bounded remainder; include carried, buffered and held ore in the40-input ceiling. Recover and reserve the sails' graphene before the nanotube phase. Feed nanotubes in single-recipe packets of3 graphene and1 titanium, twelve times, yielding24 nanotubes. A packet must clear the shared path before changing item filters; keep every hydrogen/byproduct and surplus.
+
+For the frame stage, preflight an extension from the **downstream end** of the board bridge toward the frame assembler and one input sorter. A proposed fork at an occupied belt output is not a route. Supply4 nanotubes,1 alloy and1 silicon per frame, six times. The original component input remains gated during frame feeding. Later component ingredients use the original bridge pickup; admit one item only after its pickup is empty/ready and the prior item is actually delivered, so cargo cannot pass into the unused extension and become stranded.
+
+The third proposed new local sorter supplies the silo from the reused rocket/ejector bridge. Extend that bridge within the remaining belt envelope if placement requires it; leave the ejector's sail filter isolated. These three local sorters, the two mother iron sorters and the prior19 consume the unchanged24-sorter ceiling exactly. This is a preflight plan: no unsupported port, capacity, completed construction or local manufacture is claimed.
+
+当地重新供电前先核机器、整条带路及手持料，并隔离矿源与弹射器；不清除在制进度。拟复用石墨烯仓和已有可燃冰桥，精确扣除原料后分批供料：每次3石墨烯+1钛制2纳米管，共12次；每次4纳米管+1合金+1硅制1框架，共6次。板桥应从下游端延伸，不能假设占用中的输出端可分叉；后续中途取料按单件、空手就绪及真实送达衔接。当地3个拟新增分拣器加母星2个及旧19个恰为24上限，仍须逐连接fresh Native预检，未预检通过不施工。
+
 ## Complete nonresearch quantities
 
 | Location / use | Exact requirement |
