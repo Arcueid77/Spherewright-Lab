@@ -4,7 +4,7 @@ import json
 import sys,datetime as dt,time
 ROOT=Path(__file__).resolve().parent
 sys.path.insert(0,str(ROOT));sys.path.insert(0,str(ROOT.parent));sys.dont_write_bytecode=True
-from evidence import read,sha,need
+from evidence import read,sha,need,actual_prior_rpc_count
 from runtime import Runtime
 from factory import Factory
 from mcp_client import Client
@@ -25,7 +25,11 @@ def main():
         dispatched=[e for e in events if e.get('event')=='launch_dispatched'];need(len(dispatched)==1,'original_launch_clock_unproved')
         deadline=dt.datetime.fromisoformat(dispatched[0]['atUtc'].replace('Z','+00:00'))+dt.timedelta(seconds=c['maximumWallSeconds'])
     else:deadline=dt.datetime.fromisoformat(prepared['effectiveRecoveryDeadlineUtc'].replace('Z','+00:00'))
-    prior_count=old.get('priorRpcCount',0)+old['requestCount']
+    prior_count=actual_prior_rpc_count(prior,old)
+    if prior_count!=old.get('priorRpcCount',0)+old['requestCount']:
+        r.put('inherited-rpc-accounting-correction.private.json',dict(originalHandoffRetained=True,
+            correctedActualPriorRpcCount=prior_count,sourceAttachment=str(prior/'attached-existing-session.private.json'),
+            noRefund=True,noNativeJournalEdit=True))
     a.prior_rpc_count=prior_count
     seconds=(deadline-dt.datetime.now(dt.timezone.utc)).total_seconds();remaining=c['maximumRpc']-prior_count
     need(seconds>60 and remaining>0,'original_finite_caller_allowance_ended');r.cohort()

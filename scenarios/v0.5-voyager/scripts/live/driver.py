@@ -329,6 +329,16 @@ class Live:
    need(args['recipeId']==0 and t['currentTechId']>0,'first_research_requires_current_matrix_technology')
    args['techId']=t['currentTechId']
   if mode=='storage-capacity':args.update(storageOperation=work['storageOperation'],filterItemId=work.get('filterItemId',0))
+  if mode=='logistics-station-storage':
+   station=e.get('logisticsStation') or {};slots=station.get('storageSlots') or []
+   wanted=next((row for row in slots if row['index']==work['stationStorageIndex']),None)
+   need(wanted is not None and wanted['itemId']==work['stationItemId']
+        and wanted['localLogic'].lower()==work.get('beforeStationLocalLogic','none')
+        and wanted['remoteLogic'].lower()==work['beforeStationRemoteLogic'],
+        'first_station_configuration_baseline_changed_no_replay')
+   args.update({key:work[key] for key in ('stationStorageIndex','stationItemId','stationMaximumCount',
+       'stationLocalLogic','stationRemoteLogic')})
+   args['expectedStationConfigurationStateHash']=station['configurationStateHash']
   q=self.call('spherewright_prepare_configure_building',args)
   need(q['prepared'] and q['commitAllowedNow'] and not q['commitBlockers'],'first_operation_not_prepared')
   if mode=='enable-mecha-warper-auto-supply':need(q.get('plannedMechaWarperAutoSupplyEnabled') is True,'first_warper_setting_cohort_echo_missing_no_commit')
@@ -373,6 +383,14 @@ class Live:
    filters=after.get('gridFilterItemIds') or []
    ok=r['succeeded'] and bool(r.get('storageConfigurationReadback')) and bool(filters)
    ok=ok and all(x==c['filterItemId'] for x in filters) and before!=after
+  elif mode=='logistics-station-storage':
+   before=self.first_before.get('logisticsStation') or {};after=e.get('logisticsStation') or {}
+   old=next((x for x in before.get('storageSlots',[]) if x['index']==c['stationStorageIndex']),{})
+   new=next((x for x in after.get('storageSlots',[]) if x['index']==c['stationStorageIndex']),{})
+   ok=r['succeeded'] and before.get('configurationStateHash')!=after.get('configurationStateHash')
+   ok=ok and new.get('itemId')==c['stationItemId'] and new.get('maximumCount')==c['stationMaximumCount']
+   ok=ok and new.get('localLogic','').lower()==c['stationLocalLogic'] and new.get('remoteLogic','').lower()==c['stationRemoteLogic']
+   ok=ok and old.get('itemId')==new.get('itemId') and old.get('count')==new.get('count') and old.get('inc')==new.get('inc')
   else:ok=r['succeeded'] and e['recipeId']==c['recipeId'] and self.first_before['recipeId']!=e['recipeId']
   self.runtime.put('actual-progress.private.json',dict(verified=ok,actionId=r['actionId'],before=self.first_before,after=e))
   return ok

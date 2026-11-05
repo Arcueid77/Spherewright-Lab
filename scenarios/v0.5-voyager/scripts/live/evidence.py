@@ -7,6 +7,19 @@ def need(ok,why):
     if not ok: raise RuntimeError(why)
 require=need
 def read(p): return json.loads(Path(p).read_text(encoding='utf-8-sig'))
+
+def actual_prior_rpc_count(prior,closed):
+    """Carry nested caller counts from their original attachment receipt."""
+    base=closed.get('priorRpcCount',0)
+    proof=Path(prior)/'attached-existing-session.private.json'
+    if proof.exists():
+        attached=read(proof);observed=attached['priorRpcCount']
+        need(attached['passed'] and attached['noStartupClockReset'] and observed>=base,
+             'attached_prior_rpc_accounting_unproved')
+        base=observed
+    count=closed['requestCount']
+    need(type(base)is int and base>=0 and type(count)is int and count>=0,'actual_rpc_counts_invalid')
+    return base+count
 def sha(p):
     h=hashlib.sha256()
     with Path(p).open('rb') as f:
