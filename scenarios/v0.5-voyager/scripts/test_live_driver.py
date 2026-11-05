@@ -222,6 +222,7 @@ class LiveDriverTests(unittest.TestCase):
 
  def test_native_elevated_free_span_forwards_observed_layers_without_changing_material_writer(self):
   a=Factory.__new__(Factory);a.state=lambda:None;a.layout=lambda p:p
+  a.ctx=dict(sessionId='synthetic',planetId=101)
   calls=[];a.build=lambda role,args,maximum:calls.append((role,args,maximum))
   a.step(dict(kind='build-free-belt',role='native-observed',maximumNewBelts=13,candidates=[dict(
     start=dict(x=1.,y=200.,z=1.),end=dict(x=2.,y=200.,z=2.),beltPathMode='native_elevated_grid',
@@ -341,6 +342,7 @@ class LiveDriverTests(unittest.TestCase):
   p['nativePhysics']['currentOrderPresent']=False;del p['nativePhysics']['driftManualVelocity'];self.assertFalse(strict_native_player_idle(p))
  def test_free_belt_input_binds_actual_native_device_endpoint_and_finite_exact_material_limit(self):
   a=Factory.__new__(Factory);a.refs={'station':9};a.state=lambda:None;a.entity=lambda _:dict(endpointStateHash='native-endpoint')
+  a.ctx=dict(sessionId='synthetic',planetId=101)
   a.layout=lambda x:x;calls=[];a.build=lambda role,args,limit:calls.append((args,limit))
   a.step(dict(kind='build-belt-to-device',role='input',starts=[dict(x=1,y=200,z=1)],destination='station',maximumNewBelts=4))
   self.assertEqual('native-endpoint',calls[0][0]['expectedDestinationStateHash']);self.assertEqual(9,calls[0][0]['destinationObjectId'])
@@ -365,6 +367,7 @@ class LiveDriverTests(unittest.TestCase):
   with self.assertRaisesRegex(RuntimeError,'operation_family_not_allowed'):a.native_operation(s)
  def test_native_object_candidate_keeps_its_explicit_sdk_yaw_in_the_exact_build_call(self):
   a=Factory.__new__(Factory);a.state=lambda:None;a.layout=lambda x:x;calls=[];a.build=lambda role,args,limit:calls.append(args)
+  a.ctx=dict(sessionId='synthetic',planetId=101)
   a.step(dict(kind='build-object',role='oriented-device',itemId=2311,positions=[dict(x=1,y=200,z=1,preferredYaw=90.)]))
   self.assertEqual(90.,calls[0]['preferredYaw']);self.assertEqual(2311,calls[0]['buildingItemId'])
  def test_native_recovery_required_paused_landing_keeps_healthy_session_without_inventing_quarantine(self):

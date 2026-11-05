@@ -25,10 +25,24 @@ try:
     a.c.initialize();s=a.call('spherewright_get_session_state',{});current=a.call('spherewright_get_action_result',dict(actionId=action_id))
     r.put('actual-current-session.private.json',s);r.put('actual-original-terminal.private.json',current)
     v=current.get('voyagerFlightReadback') or {}
-    need(s['gameLoaded'] and s['ownedBySpherewright'] and s['sessionId']==original['sessionId']
-        and s['localPlanetId'] is None,'same_owned_space_world_unproved')
-    need(current['terminal'] and current['state']=='recovery_required' and not current['succeeded']
-        and v.get('bindingVerified') is True and v.get('nativeExitObserved') is True
+    need(s['gameLoaded'] and s['ownedBySpherewright'] and s['sessionId']==original['sessionId'],
+        'same_owned_world_unproved')
+    need(current['terminal'] and current['state']=='recovery_required' and not current['succeeded'],
+        'current_original_known_failure_unproved')
+    if r.config.get('stoppedSpaceHomeReturnRole'):
+        role=r.config['stoppedSpaceHomeReturnRole']
+        plan=read(origin/(role+'-plan.private.json'));accepted=read(origin/(role+'-accepted.private.json'))
+        need(plan.get('plannedStoppedSpaceHomeReturn') is True and accepted['actionId']==action_id,
+            'exact_native_home_return_plan_or_original_handle_changed')
+        p=a.call('spherewright_get_player_state',dict(sessionId=s['sessionId'],planetId=s['localPlanetId'] or 0))
+        later=a.call('spherewright_get_session_state',{})
+        paused=(p.get('spaceTransit') or {}).get('nativePaused') is True or \
+            'native_paused_not_execution_ready' in (p.get('nativeLocalControlEnergy') or {}).get('blockers',[])
+        need(paused and later['sessionId']==s['sessionId'] and later['gameTick']==s['gameTick']
+            and later['localPlanetId']==s['localPlanetId'],'same_native_paused_return_failure_cut_unproved')
+        r.put('actual-native-paused-player.private.json',p)
+    else:
+        need(s['localPlanetId'] is None and v.get('bindingVerified') is True and v.get('nativeExitObserved') is True
         and v.get('nativeWarpState')==0 and v.get('nativeWarpCommand') is False
         and v.get('entryAttempted') is False and v.get('nativeWarpersConsumed')==0
         and v.get('actualPlanetId') is None and v.get('actualStarId')==v.get('originStarId'),

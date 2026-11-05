@@ -100,6 +100,10 @@ class Factory(Live):
   return dict(zip('xyz',[x*length/m for x in q]))
 
  def step(self,s):
+  if self.ctx['planetId']==0:
+   need(s['kind'] in ('read','dump') or s['kind'] in ('operation','prepare-only')
+    and s.get('prepareTool')=='spherewright_prepare_interplanetary_flight',
+    'paused_space_plan_only_reads_or_exact_home_return')
   role=s['role'];kind=s['kind'];self.state()
   if kind=='operation':return self.native_operation(s)
   if kind=='prepare-only':return self.native_operation(s,commit_requested=False)
@@ -242,7 +246,7 @@ class Factory(Live):
    'spherewright_prepare_configure_building','spherewright_prepare_select_research','spherewright_prepare_handcraft',
    'spherewright_prepare_logistics_station_fleet_transfer',
    'spherewright_prepare_refuel','spherewright_prepare_supply_mecha_warpers','spherewright_prepare_voyager_flight',
-   'spherewright_prepare_save'}
+   'spherewright_prepare_save','spherewright_prepare_interplanetary_flight'}
   prepare=s['prepareTool']
   if not commit_requested:allowed.add('spherewright_prepare_build')
   need(prepare in allowed,'operation_family_not_allowed')
@@ -256,6 +260,8 @@ class Factory(Live):
    values[name]=self.call(query['tool'],args);self.runtime.put(s['role']+'-'+name+'-before.private.json',values[name])
   args=dict(self.ctx,**resolve(s['arguments']));check(prepare,args);q=self.call(prepare,args)
   need(q['prepared'] and q['commitAllowedNow'] and not q['commitBlockers'],'native_operation_not_prepared')
+  if prepare=='spherewright_prepare_interplanetary_flight' and self.ctx['planetId']==0:
+   need(q.get('plannedStoppedSpaceHomeReturn') is True,'exact_space_home_return_echo_missing_no_commit')
   self.runtime.put(s['role']+'-plan.private.json',q)
   if s.get('requireFullyObservedDrySurface'):
    need(prepare=='spherewright_prepare_move' and fully_observed_dry_surface(q),'fresh_move_dry_surface_advisory_unproved_no_commit')
@@ -270,9 +276,9 @@ class Factory(Live):
    if key in self.schemas[commit]['properties']:commit_args[key]=value
   commit_args.update(resolve(s.get('commitArguments',{})));check(commit,commit_args)
   r=self.successful_original(self.commit(s['role'],commit,commit_args))
-  if prepare=='spherewright_prepare_voyager_flight':
+  if prepare in ('spherewright_prepare_voyager_flight','spherewright_prepare_interplanetary_flight'):
    current=self.call('spherewright_get_session_state',{})
-   need(current['sessionId']==self.ctx['sessionId'] and current['ownedBySpherewright']
+   need(current['sessionId']==self.ctx['sessionId'] and current['ownedBySpherewright'] and current['writesAllowed']
     and current['localPlanetId'] in self.runtime.config.get('authorizedPlanetIds',[self.runtime.config['planetId']]),'flight_context_changed')
    self.ctx=dict(sessionId=current['sessionId'],planetId=current['localPlanetId'])
   return r

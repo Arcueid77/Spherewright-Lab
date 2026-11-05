@@ -5,6 +5,7 @@ import startup_to_action as G
 from geometry_request import complete_geometry_arrays
 from evidence import need,read,sha,json_value
 from mcp_client import Client
+from saved_space import exact_last_exit_echo,paused_space_source,exact_ui_supply
 from contracts import ordinary_owned_resume_echo,resume_admission_echo,validate_steps,validate_native_calls,strict_native_player_idle,native_warper_auto_supply_enabled
 
 PLAYER_SETTING_MODES=('enable-mecha-construction-drones','disable-mecha-research-auto-supply',
@@ -130,6 +131,13 @@ class Live:
 
  def prepare_resume(self,ready,deadline):
   c=self.runtime.config;now=dt.datetime.now(dt.timezone.utc)
+  if c.get('recoveryProfile')=='exact-paused-space':
+   args=dict(resumeToken=ready['session']['restartResumeToken'],recoveryMode='open_saved_last_exit',
+    minimumRecoveryGameTick=c['sourceTick'],expectedRecoveryGameTick=c['sourceTick'])
+   p=G.retry_read_only(lambda:self.call('spherewright_prepare_resume_owned_game',args),deadline,
+    lambda e:any(k in str(e) for k in ('BRIDGE_NOT_READY','BRIDGE_UNAVAILABLE','REQUEST_TIMEOUT')))
+   need(exact_last_exit_echo(c,p),'exact_paused_space_source_echo_changed')
+   self.runtime.put('fresh-resume-plan.private.json',p);return p
   if c.get('recoveryProfile')=='ordinary-owned-home':
    args=dict(resumeToken=ready['session']['restartResumeToken'],recoveryMode=c['recoveryMode'])
    if c['recoveryMode']=='verified_newer_lastexit':args.update(minimumRecoveryGameTick=c['sourceTick'],expectedRecoveryGameTick=c['sourceTick'])
@@ -167,6 +175,14 @@ class Live:
 
  def verify_loaded(self,result,deadline):
   c=self.runtime.config;s=self.call('spherewright_get_session_state',{})
+  if c.get('recoveryProfile')=='exact-paused-space':
+   need(result['succeeded'],'exact_space_open_original_failed')
+   self.ctx=dict(sessionId=s['sessionId'],planetId=0)
+   p=self.player()
+   need(paused_space_source(c,s,p,result['actionId']),'exact_paused_space_source_unproved')
+   self.space_open_action=result['actionId']
+   self.loaded=True;self.runtime.put('loaded-session.private.json',s)
+   self.runtime.put('loaded-space-player.private.json',p);return s
   need(result['succeeded'] and s['gameLoaded'] and s['ownedBySpherewright'] and s['writesAllowed']
     and s['localPlanetId']==c['planetId'] and s['gameTick']>=c['sourceTick'],'owned_admission_unproved')
   self.loaded=True;self.ctx=dict(sessionId=s['sessionId'],planetId=c['planetId']);self.runtime.put('loaded-session.private.json',s)
@@ -222,7 +238,11 @@ class Live:
  def entity(self,i):return self.call('spherewright_inspect_factory_entity',dict(self.ctx,objectId=i))
  def state(self):
   c=self.runtime.config;s=self.call('spherewright_get_session_state',{})
-  need(s['gameLoaded'] and s['ownedBySpherewright'] and s['writesAllowed']
+  if c.get('recoveryProfile')=='exact-paused-space' and self.ctx['planetId']==0:
+   need(s['sessionId']==self.ctx['sessionId'] and paused_space_source(c,s,self.player(),self.space_open_action),
+    'exact_paused_source_changed_no_generic_write_admission')
+  else:
+   need(s['gameLoaded'] and s['ownedBySpherewright'] and s['writesAllowed']
     and s['localPlanetId']==self.ctx['planetId'] and s['localPlanetId'] in c.get('authorizedPlanetIds',[c['planetId']]),'owned_world_health_changed')
   spent=c['spentGameTicks']+s['gameTick']-c['sourceTick']
   need(spent+c['returnReserveGameTicks']+c['cleanupReserveGameTicks']<c['maximumCumulativeGameTicks'],'finite_stage_work_reserve_reached')
@@ -272,6 +292,15 @@ class Live:
 
  def prepare_first_work(self,loaded,deadline):
   work=self.runtime.config['firstOperation'];mode=work.get('mode','production')
+  if work.get('kind')=='supply-mecha-warpers':
+   need(self.runtime.config.get('recoveryProfile')=='exact-paused-space' and self.ctx['planetId']==0,
+    'first_space_supply_requires_exact_paused_source')
+   self.first_before=self.player()
+   q=self.call('spherewright_prepare_supply_mecha_warpers',dict(self.ctx,count=work['count'],uiTopUp=True,
+    expectedPlayerStateHash=self.first_before['stateHash']))
+   need(q['prepared'] and q['commitAllowedNow'] and not q['commitBlockers']
+    and q.get('plannedMechaWarperUiTopUp') is True,'first_native_ui_supply_unproved')
+   return dict(action_kind='supply_mecha_warpers',tool='spherewright_commit_supply_mecha_warpers',prepared=q)
   if work.get('kind')=='move':
    p=self.player();self.first_before=p;target=work['target']
    args=dict(self.ctx,targetX=target['x'],targetY=target['y'],targetZ=target['z'],arrivalTolerance=1.5,expectedPlayerStateHash=p['stateHash'])
@@ -292,6 +321,12 @@ class Live:
  def commit_first_work_once(self,w):return self.commit('first-work',w['tool'],dict(self.ctx,planToken=w['prepared']['planToken'],idempotencyKey=str(uuid.uuid4())))
  def verify_progress(self,w,r):
   c=self.runtime.config['firstOperation'];mode=c.get('mode','production')
+  if c.get('kind')=='supply-mecha-warpers':
+   e=self.player();s=self.call('spherewright_get_session_state',{})
+   source=read(self.runtime.output/'loaded-session.private.json')
+   ok=exact_ui_supply(r,c['count']) and paused_space_source(self.runtime.config,s,e,source['writeQuarantineActionId'])
+   self.runtime.put('actual-progress.private.json',dict(verified=ok,actionId=r['actionId'],before=self.first_before,after=e,
+    nativeSupply=r.get('mechaWarperSupplyReadback')));return ok
   if c.get('kind')=='move':
    e=self.player();ground=(e.get('nativePhysics') or {}).get('groundContact') or {};velocity=(e.get('nativePhysics') or {}).get('velocity') or {}
    moved=math.dist([self.first_before['position'][k] for k in 'xyz'],[e['position'][k] for k in 'xyz'])

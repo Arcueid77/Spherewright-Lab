@@ -30,7 +30,7 @@ def main():
   s=a.call('spherewright_get_session_state',{});origin=Path(r.config['liveSessionOrigin']);original=read(origin/'loaded-session.private.json')
   need(s['gameLoaded'] and s['ownedBySpherewright'] and s['sessionId']==original['sessionId']
    and s['localPlanetId']==r.config.get('attachmentPlanetId',r.config['planetId']),'read_only_owned_session_changed')
-  ctx=dict(sessionId=s['sessionId'],planetId=s['localPlanetId'])
+  ctx=dict(sessionId=s['sessionId'],planetId=s['localPlanetId'] if s['localPlanetId'] is not None else 0)
   for sample in range(samples):
    for q in queries:
     props=a.schemas[q['tool']]['properties'];args={k:v for k,v in ctx.items() if k in props};args.update(q.get('arguments',{}))

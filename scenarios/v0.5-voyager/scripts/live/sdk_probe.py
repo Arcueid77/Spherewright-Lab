@@ -6,7 +6,7 @@ from mcp_client import Client
 
 def main():
     executable,output=sys.argv[1:];out=Path(output);out.mkdir(exist_ok=False)
-    c=Client(executable,out/'client',maximum=32,seconds=60)
+    c=Client(executable,out/'client',maximum=48,seconds=60)
     try:
         _,tools,_,_=c.initialize();schemas={t['name']:t['inputSchema'] for t in tools}
         ctx=dict(sessionId='synthetic-offline-session',planetId=402);h='sha256:'+'a'*64
@@ -37,6 +37,13 @@ def main():
         cases.append(('spherewright_prepare_configure_building',dict(ctx,entityId=0,recipeId=0,
             mode='enable-mecha-warper-auto-supply',expectedFactoryStateHash=h)))
         cases.append(('spherewright_prepare_resume_owned_game',dict(resumeToken='synthetic-offline-token',recoveryMode='default')))
+        cases.append(('spherewright_prepare_resume_owned_game',dict(resumeToken='synthetic-offline-token',
+            recoveryMode='open_saved_last_exit',minimumRecoveryGameTick=100,expectedRecoveryGameTick=100)))
+        cases.append(('spherewright_prepare_supply_mecha_warpers',dict(sessionId=ctx['sessionId'],planetId=0,
+            count=18,uiTopUp=True,expectedPlayerStateHash=h)))
+        cases.append(('spherewright_prepare_interplanetary_flight',dict(sessionId=ctx['sessionId'],planetId=0,
+            destinationPlanetId=101,expectedPlayerStateHash=h,expectedStarSystemStateHash=h,minimumCoreEnergyRatio=.8,
+            stoppedSpaceReturnMaximumGameTicks=54000,stoppedSpaceReturnMaximumWallSeconds=14400)))
         proof=[]
         for tool,args in cases:
             schema=schemas[tool];need(set(schema.get('required',[]))<=set(args),'sdk_required_field_missing')

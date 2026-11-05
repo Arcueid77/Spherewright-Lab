@@ -36,7 +36,8 @@ class Runtime:
         paths.update(Path(p).resolve() for p in c['protectedExtraFiles'])
         for root in map(Path, c['durableRoots']):
             for pattern in ('owned-world-resume*.json','owned-world-reauthorization-attempt-*.json',
-                            'flight-checkpoint.json','voyager-journey.json','voyager-return-source-*.json'):
+                            'flight-checkpoint.json','voyager-journey.json','voyager-return-source-*.json',
+                            'stopped-space-return-*.json'):
                 paths.update(p.resolve() for p in root.glob(pattern))
             paths.update(p.resolve() for p in (root/'journals').glob('*.json'))
             for folder in ('foundry','overseer','governor'):
