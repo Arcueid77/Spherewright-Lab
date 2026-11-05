@@ -9,6 +9,13 @@ from factory import Factory,resolve_refs
 from runtime import freeze,Runtime
 
 class LiveDriverTests(unittest.TestCase):
+ def test_unpublished_startup_process_path_waits_inside_original_deadline_without_identity_or_write(self):
+  import driver
+  from unittest.mock import patch
+  a=Factory.__new__(Factory);a.runtime=type('Runtime',(),dict(output=Path('/nonexistent-startup-probe')))();a.process=lambda:dict(Id=7,Path=None)
+  with patch.object(driver.time,'monotonic',side_effect=[0,2]),patch.object(driver.time,'sleep') as slept:
+   with self.assertRaises(driver.G.DeadlineExceeded):a.wait_ready_proved(None,1)
+   slept.assert_called_once_with(.25)
  def test_frozen_harvest_zero_effect_is_separate_from_physical_idle_and_never_replayed(self):
   from contracts import quarantined_harvest_no_effect_accounted as valid
   config=dict(recoveryMode='authorize_remote_primary_recovery',sourceRole='lastExit',sourceTick=902)

@@ -89,6 +89,11 @@ class Live:
    if (self.runtime.output/'startup-readiness-abort.private.json').exists():
     raise G.StartupReadinessFailure('Observed startup readiness audit failed before recovery; preserve the original capture.')
    p=self.process()
+   if p and not isinstance(p.get('Path'),str):
+    # Steam can publish the original process before Windows exposes its path.
+    # This is not identity proof or an absent process; await metadata inside
+    # the same original deadline, without another launch or any Native write.
+    time.sleep(.25);continue
    if p:
     need(Path(p['Path']).resolve()==(Path(self.runtime.config['dspRoot'])/'DSPGAME.exe').resolve(),'game_path_changed')
     need(dt.datetime.fromisoformat(p['startedUtc'])>=self.dispatch_utc-dt.timedelta(seconds=1),'prior_game_process')
