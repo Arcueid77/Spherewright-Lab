@@ -303,7 +303,7 @@ class Factory(Live):
   native=(getattr(error,'error',None) or getattr(error,'receipt',None) or {}).get('nativeFirstFailure')
   self.runtime.put(name,dict(error=str(error),activeOriginalAction=self.active,materialUsed=self.used,materialReservations=self.material_holds,nativeFirstFailure=native))
 
- def execute_plan(self,steps,label):
+ def validate_plan(self,steps):
   validate_steps(steps)
   validate_native_calls(steps,self.schemas)
   roles=[s['role'] for s in steps]
@@ -314,7 +314,7 @@ class Factory(Live):
      'immutable_plan_fresh_attempt_role_collision')
   output=getattr(getattr(self,'runtime',None),'output',None)
   if output is not None:
-   names=[p.name for p in output.iterdir()]
+   names=[p.name for p in output.iterdir()] if output.exists() else []
    for step in steps:
     role=step['role']
     # Keep per-step receipts usable on Windows hosts without long-path
@@ -323,6 +323,8 @@ class Factory(Live):
     need(len(str(output/(role+suffix)))<=259,
      'immutable_plan_evidence_path_too_long_use_short_unique_roles:'+role)
     need(not any(name.startswith(role+'-') for name in names),'immutable_plan_role_previously_used:'+role)
+ def execute_plan(self,steps,label):
+  self.validate_plan(steps)
   for s in steps:
    self.step(s)
    if self.c is None:

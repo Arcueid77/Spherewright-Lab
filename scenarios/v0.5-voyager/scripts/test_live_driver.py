@@ -9,6 +9,16 @@ from factory import Factory,resolve_refs
 from runtime import freeze,Runtime
 
 class LiveDriverTests(unittest.TestCase):
+ def test_packet_preflight_and_execution_share_duplicate_receipt_admission_before_effects(self):
+  steps=[dict(kind='wait-buffer',role='product',entity=7,itemId=1127,minimumCount=20,maximumSeconds=60),
+   dict(kind='dump',role='product',queries=[])]
+  # Structural validation alone admitted this real caller error; packet
+  # preflight must use precisely the production admission before publishing.
+  validate_steps(steps)
+  a=Factory.__new__(Factory);a.schemas={};a.runtime=None
+  a.step=lambda *_:self.fail('rejected packet cannot reach a world step')
+  with self.assertRaisesRegex(RuntimeError,'immutable_plan_duplicate_roles'):a.validate_plan(steps)
+  with self.assertRaisesRegex(RuntimeError,'immutable_plan_duplicate_roles'):a.execute_plan(steps,'packet')
  def test_partial_plan_handoff_requires_its_last_settled_world_step_and_an_explicit_wait(self):
   from handoff_blocked_buffer import blocked_suffix
   steps=[dict(kind='operation',role='chips'),dict(kind='dump',role='chip-proof'),
