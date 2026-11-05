@@ -3,11 +3,11 @@
 2026-11-06：A2/B7已建成；原C已付11、1建成/10待建，unknown不重放。1bef恢复在连接证明前失败，未实操/再次扣料且tick不变。已正常关闭，**最新LastExit124056326、Primary124045174较旧不得加载，2054项全备份、累计2967064tick。** 当地6帆/24纳米管/硅6及辅料保全。2b65768候选补全冷加载碰撞体重登记与完整已付现场的新会话绑定；209相关验证/Native构建过，准确CI待收集。框架/组件/火箭/接收点/双包未闭。
 
 - **授权：** [现行授权](../../operations/standing-authority.md)及[火箭准确增量](rocket-scope-increment.md)有效，不再重复请批。累计实耗、54000返航、能源/翘曲器下限、Native门、单writer/维护者、物料守恒及unknown隔离保留；不正式发布。
-- **源码/实装：** 选择 **1befda24eb726f145ef2ac0d830f10bb5ea0a09b**，[准确SHA CI成功](https://github.com/Arcueid77/Spherewright/actions/runs/42098252914)。已付部分停止/追加窗口/持久Store/旧JSON与hash/新会话及篡改/保存现场相关验证、Native编译、安装后SDK/PE/指南及同源资格通过；**1bef磁盘冷安装已证，实机恢复/新窗口未证**。f80e的A/B两批空源延伸及ea678的正常补燃料/制造成果保留；不生成双包。
+- **源码/实装：** 选择 **2b65768eaf69241534c2f8ebd74e86d00c5b3ce2**，[准确SHA CI成功](https://github.com/Arcueid77/Spherewright/actions/runs/42102041022)。209相关Store/完整现场/冷源绑定验证、Native编译、同源构建/SDK/PE/指南及资格通过；**2b磁盘冷安装已证，实机恢复/新窗口未证**。1bef在77.843秒失败的原恢复回执保留；f80e的A/B空源延伸及ea678制造成果保留；不生成双包。
 - **最新完整边界：** **LastExit124056326，Primary124045174较旧，2054项完整副本，累计2967064tick**；游戏/MCP均停。保全6帆、24纳米管、Si6、合金6、处理器6、Q2、原井1，及第三段1建成/10待建的全部已付现场。副本`cold-paid-stop-1befda24/mapping-failure-preservation/after-normal-close-complete-backup/`；原C动作`e4a0…`仍terminal unknown，不能重放、改钥匙或加载旧Primary回退。
 - **实耗/范围：** 累计上限3888000/返航54000不变；矿1/2、聚变1/1、塔6/9、化工1/1、仓3/3、炉1/1、MkII3/3、已付带68/120（含C11已知扣料，不退款）、分拣22/24、弹射器1/1、新井0/1。新A2/B7已建，C1已建/10待建；8聚变燃料不重投。冰40→石墨烯40/氢20；当地石18及板3/G3→6组件帆；当地钛12/G36→纳米管24、当地硅6，均已保全。另2旧带尾G及母星支援/原首帆4成果保留。
 - **首错/修复：** f80e[空带尾延伸](empty-belt-tail-audit.md)已两批实机闭合。当前C于124056326在`construction_mode_remote_idle_ground_contact_unproved`停，首次零位移/零速/零RTS、cachedGrounded=true；后读ground=false、无人机3仍返回，未冒充闲置或断言根因。[已付待建恢复审计](paid-pending-recovery-audit.md)识别旧冷恢复只封全建成尾部；1bef独立追加部分待建stop证据，保留原unknown控制及11扣料/预建，不Create。相关验证与准确CI及同源安装已过；实机恢复/新窗口待证。
-- **当前/下一动作：** 收齐1bef准确CI/同源资格后统一采用冷安装，从最新LastExit124056326作新鲜无损owned恢复，独立证明准确1建成/10待建映射、禁派遣原生工厂pass和物理闲置。首实操可给空仓45设置纳米管过滤；再在实际地形/接地证明下远离C线移动，fresh prepare同一`buildId=4b528276…`、`allowNewPaidConstructionWindow=true`新有限窗口，只续已有10待建、不Create/扣料。完成后作D及框架输入、6帧/2组件/火箭/接收点/抵达/双包；旧unknown和全部原件留在`cold-empty-source-f80e5666/`。
+- **当前/下一动作：** 2b准确CI/同源冷安装已证，先完成外部启动前核验，再从最新LastExit124056326作新鲜无损owned恢复，独立证明准确1建成/10待建映射、完整已付当前现场/冷源绑定、禁派遣原生工厂pass和物理闲置。首实操给空仓45设置纳米管过滤；再在实际地形/接地证明下远离C线移动，fresh prepare同一`buildId=4b528276…`、`allowNewPaidConstructionWindow=true`新有限窗口，只续已有10待建、不Create/扣料。完成后作D及框架输入、6帧/2组件/火箭/接收点/抵达/双包；旧unknown和所有失败回执保持隔离。
 
 | 验收 | 当前真实状态 |
 | --- | --- |
