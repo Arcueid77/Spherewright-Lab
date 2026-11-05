@@ -21,7 +21,7 @@
     "targetVersion": "0.5.0"
   },
   "installed": {
-    "sourceSha": "76977f23d54b859169a1f1b9926dce3ade461b8a",
+    "sourceSha": "523c93091634c9a3a96e4485382344664f6102db",
     "productVersion": "0.5.0",
     "releaseTag": null,
     "native": {
@@ -37,7 +37,7 @@
     "runtimeState": "not_running",
     "developmentArtifact": {
       "kind": "plugin_mcp_directory",
-      "manifestSha256": "05353862997B0737C32D04A83F6E4052710051F782CA4D9D8DC49D8DD7857113",
+      "manifestSha256": "7B7FCC3151A0B34807348F9EED82604539119AFDDCE37B0E2A31EAD158CE27C0",
       "pluginFiles": 5,
       "mcpFiles": 224
     }
