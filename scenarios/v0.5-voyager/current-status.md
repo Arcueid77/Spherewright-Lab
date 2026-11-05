@@ -3,7 +3,7 @@
 2026-11-05；持续执行授权有效，游戏/MCP正常关闭。原Voyager三门及首帆成果保留，不重跑。[此前完整边界](https://github.com/Arcueid77/Spherewright-Lab/blob/3a75245/scenarios/v0.5-voyager/current-status.md)。
 
 - **授权：** [当前续接及有限预算](../../operations/standing-authority.md)有效；实际消耗继续累计，保留54000返航、能源/翘曲器下限、物料守恒、Native门、唯一writer/维护者、原动作和unknown隔离。范围增量、降储备、损失/回退、另一世界、破坏性Git及正式发布另决。
-- **源码/实装：** 已选 **61d761ac0d7684d84629a61f61b1e7dc6d55b336**，[准确产品CI成功](https://github.com/Arcueid77/Spherewright/actions/runs/41949777258)。干净独立检出完成原生构建、相关生产入口/真实SDK回归、同源开发目录及模块身份资格；尚未冷安装，磁盘仍为ee3ceec1。未生成最终发行双包。
+- **源码/实装：** 已选 **61d761ac0d7684d84629a61f61b1e7dc6d55b336**，[准确产品CI成功](https://github.com/Arcueid77/Spherewright/actions/runs/41949777258)。干净独立检出完成原生构建、相关生产入口/真实SDK回归、同源开发目录及模块身份资格；同源冷安装已完成并逐文件/PE模块核验，磁盘为61d761ac；尚未加载实测。未生成最终发行双包。
 - **最新完整保存：** 原出航a3fb…在原恒星太空、跃迁前terminal recovery_required；未尝试/消耗翘曲器，原件不重放。正常OS关闭无损保全 **LastExit123569741、1965文件完整备份**，保护路径`cold-warp-ee3ceec1/known-stopped-space-normal-preservation/after-normal-close-complete-backup/manifest.private.json`。Primary123562192及checkpoint123564527较旧，禁止加载冒充恢复；未改存档/票据/Journal。
 - **累计/范围：** 实际累计 **2480479 tick**，当前有限累计上限3888000、返航54000不变。已付矿1/2、聚变1/1、塔5/9、化工1/1、仓3/3、炉1/1、MkII3/3、带42/120、分拣19/24、弹射器1/1；旧13段高架保留不退款。机甲舱2/背包20，自动补给已真实启用；原站板100/燃料100、最低载荷1%及补入翘曲器已证，Caph实到未闭。
 - **首错/整批修复：** 原预览计包后有效22/要求3，实际跃迁门只接受舱2，原动作正常停止。新源码统一prepare/commit/进入的舱内现物储备门；新增正常UI部分补舱、精确LastExit暂停打开、太空只读与同恒星原母星有限返航。复用原生付费控制和能源包络，落地先证接触/零尾部再暂停复核，正常完整保存及新凭据后核销Journey。已知失败、旧时钟及储备不改；这些仍是源码资格，未宣称实机返航成功。
