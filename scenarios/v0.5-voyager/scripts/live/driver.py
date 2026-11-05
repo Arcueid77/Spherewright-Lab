@@ -120,13 +120,16 @@ class Live:
   self.active=accepted['actionId'];return self.active
 
  def wait_original(self,handle):
+  interval=getattr(self.runtime,'config',{}).get('actionPollSeconds',.5)
+  need(type(interval) in(int,float) and math.isfinite(interval) and .25<=interval<=30,
+   'bounded_original_action_poll_interval_required')
   while time.monotonic()<self.c.deadline:
    r=self.call('spherewright_get_action_result',dict(actionId=handle))
    if r['terminal']:
     self.runtime.put('terminal-'+handle+'.private.json',r)
     if r['state']!='outcome_unknown':self.active=None
     return r
-   time.sleep(.5)
+   time.sleep(interval)
   raise RuntimeError('original_action_pending_no_replay')
 
  def prepare_resume(self,ready,deadline):

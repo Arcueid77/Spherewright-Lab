@@ -427,5 +427,24 @@ class LiveDriverTests(unittest.TestCase):
   a.runtime=type('Evidence',(),dict(put=lambda *_:None))()
   a.call=lambda *args:dict(terminal=True,state='outcome_unknown',succeeded=False)
   a.wait_original('original');self.assertEqual('original',a.active)
+ def test_bounded_slow_poll_keeps_same_real_native_waiting_to_terminal_handle(self):
+  from unittest.mock import patch
+  a=Live(None);a.active='original';a.c=type('Client',(),dict(deadline=float('inf')))()
+  a.runtime=type('Evidence',(),dict(config=dict(actionPollSeconds=2),put=lambda *_:None))()
+  # Actual Native handcraft DTO transitions; no all-true admission substitute.
+  results=iter([dict(actionId='original',actionKind='handcraft',state='waiting_for_game',terminal=False,succeeded=False),
+                dict(actionId='original',actionKind='handcraft',state='completed',terminal=True,succeeded=True)])
+  calls=[]
+  def call(tool,args):calls.append((tool,args));return next(results)
+  a.call=call
+  with patch('driver.time.sleep') as sleep:
+   result=a.wait_original('original');sleep.assert_called_once_with(2)
+  self.assertTrue(result['succeeded']);self.assertIsNone(a.active)
+  self.assertEqual([('spherewright_get_action_result',dict(actionId='original'))]*2,calls)
+ def test_nonfinite_or_unbounded_poll_interval_refuses_before_rpc(self):
+  for interval in (True,0,-1,float('nan'),float('inf'),31,'2'):
+   a=Live(None);a.runtime=type('Evidence',(),dict(config=dict(actionPollSeconds=interval)))()
+   a.call=lambda *_:self.fail('invalid poll policy must not dispatch')
+   with self.assertRaisesRegex(RuntimeError,'bounded_original_action_poll_interval_required'):a.wait_original('original')
 
 if __name__=='__main__':unittest.main()
