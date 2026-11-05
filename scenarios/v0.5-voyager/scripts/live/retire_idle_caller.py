@@ -5,13 +5,29 @@ sys.path.insert(0,str(Path(__file__).resolve().parent))
 from runtime import Runtime
 from evidence import read,sha,need
 from mcp_client import Client
-from contracts import strict_native_player_idle
+from contracts import strict_native_player_idle,is_read_tool
+
+def validate_read_wait(prior,sequence):
+ need(sequence>0,'read_wait_sequence_required')
+ envelope=read(prior/f'next-plan-{sequence:03d}.private.json')
+ need(sha(envelope['path'])==envelope['sha256'],'read_wait_plan_changed')
+ steps=read(envelope['path'])['steps']
+ need(steps and all(s['kind'] in ('read','dump','wait-buffer','wait-player-still') for s in steps)
+      and any(s['kind']=='wait-buffer' for s in steps),'only_read_wait_plan_may_be_retired')
+ need(all(is_read_tool(s['tool']) if s['kind']=='read' else
+          all(is_read_tool(q['tool']) for q in s['queries']) if s['kind']=='dump' else True
+          for s in steps),'write_tool_prevents_read_wait_retirement')
+ need(not any(int(p.name.split('-')[2].split('.')[0])>sequence for p in prior.glob('next-plan-*.private.json')),
+      'future_plan_prevents_read_wait_retirement')
+ need((prior/'initial-complete.private.json').exists(),'initial_operations_not_complete')
 
 def main():
- config,digest,prior,mcp_pid,output=sys.argv[1:];prior=Path(prior).resolve();mcp_pid=int(mcp_pid)
+ config,digest,prior,mcp_pid,output=sys.argv[1:6];prior=Path(prior).resolve();mcp_pid=int(mcp_pid)
  r=Runtime(config,digest,output);r.cohort();c=r.config
  need(not (prior/'caller-handoff.private.json').exists() and not (prior/'client-close.private.json').exists(),'prior_already_closed')
- need(not (prior/'next-plan-017.private.json').exists(),'pending_plan_prevents_retirement')
+ if len(sys.argv)>6:
+  validate_read_wait(prior,int(sys.argv[6]))
+ else:need(not (prior/'next-plan-017.private.json').exists(),'pending_plan_prevents_retirement')
  for p in prior.glob('*-accepted.private.json'):
   accepted=read(p);action=accepted.get('actionId')
   if action:
@@ -43,7 +59,7 @@ def main():
  else:raise RuntimeError('old_mcp_exit_unproved_no_replacement')
  logs=[json.loads(line) for line in (prior/'client/rpc.jsonl').read_text(encoding='utf-8').splitlines()]
  from evidence import put
- put(prior/'caller-handoff.private.json',dict(callerStopped=True,noActiveGameAction=True,gameProcessRetained=True,requestCount=max(x['request']['id'] for x in logs),priorRpcCount=0,noSave=True,noLoad=True,noLaunch=True,externalIdleCallerRetirement=True,nativeIdleEvidence=str(r.output/'native-idle-before-retirement.private.json')))
+ put(prior/'caller-handoff.private.json',dict(callerStopped=True,noActiveGameAction=True,gameProcessRetained=True,requestCount=max(x['request']['id'] for x in logs),priorRpcCount=c.get('priorRpcCount',0),noSave=True,noLoad=True,noLaunch=True,externalIdleCallerRetirement=True,nativeIdleEvidence=str(r.output/'native-idle-before-retirement.private.json')))
  r.put('caller-only-retirement-complete.private.json',dict(passed=True,gameTerminated=False,originalActionsNotReplayed=True,oldMcpExitedAfterPipeOwnerStopped=True))
 
 if __name__=='__main__':main()

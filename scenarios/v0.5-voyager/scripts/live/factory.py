@@ -3,7 +3,7 @@ import math,time,uuid
 from collections.abc import Mapping
 from driver import Live,ToolRefused,AcceptedActionFailure,NativePreacceptanceRefusal
 from evidence import need,read,sha
-from contracts import powered_consumers_share_network,validate_steps,is_read_tool,validate_native_calls,strict_native_player_idle,fully_observed_dry_surface,observed_short_crossing_dry_landing
+from contracts import powered_consumers_share_network,validate_steps,is_read_tool,validate_native_calls,strict_native_player_idle,fully_observed_dry_surface,observed_short_crossing_dry_landing,observed_item_count
 from flight_observers import observe_sails,observe_rocket
 
 def distance(a,b): return math.dist([a[k] for k in 'xyz'],[b[k] for k in 'xyz'])
@@ -195,7 +195,7 @@ class Factory(Live):
    end=time.monotonic()+s['maximumSeconds']
    while time.monotonic()<end:
     self.state();e=self.entity(self.object_id(s['entity']))
-    if sum(b['count'] for b in e['buffers'] if b['itemId']==s['itemId'])>=s['minimumCount']:
+    if observed_item_count(e,s['itemId'])>=s['minimumCount']:
      self.runtime.put(role+'-proof.private.json',e);return e
     time.sleep(interval)
    raise RuntimeError('finite_product_wait_exhausted')

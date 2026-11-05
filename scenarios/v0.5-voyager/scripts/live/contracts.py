@@ -20,6 +20,24 @@ def consumer_network(entity):
     return entity.get('powerNetworkId')
 
 
+def observed_item_count(entity,item_id):
+    """Physical stock only; station orders and demand metadata are not cargo."""
+    if entity.get('componentKind')=='station':
+        station=entity.get('logisticsStation') or {}
+        if station.get('entityId')!=entity.get('objectId'):
+            raise ValueError('station_stock_binding_unproved')
+        rows=station.get('storageSlots')
+        if not isinstance(rows,list):raise ValueError('station_stock_slots_unobserved')
+    else:rows=entity['buffers']
+    total=0
+    for row in rows:
+        if row['itemId']!=item_id:continue
+        count=row['count']
+        if type(count)is not int or count<0:raise ValueError('physical_item_count_invalid')
+        total+=count
+    return total
+
+
 def resume_admission_echo(config,plan):
     failed=config.get('recoveryMode')=='authorize_failed_landing_last_exit'
     if failed:
