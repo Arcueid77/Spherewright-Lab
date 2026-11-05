@@ -34,6 +34,11 @@ class Fixture:
 
 
 class StartupGateTests(unittest.TestCase):
+    def test_normal_refuel_passes_only_after_original_success_and_verified_delta(self):
+        f=Fixture();f.work_kind='refuel'
+        result=f.run();self.assertTrue(result.passed);self.assertIn('commit_work',f.calls);self.assertIn('continue',f.calls)
+        f=Fixture();f.work_kind='refuel';f.delta=False
+        result=f.run();self.assertFalse(result.passed);self.assertNotIn('continue',f.calls)
     def test_paid_native_control_starts_work_while_the_same_macro_remains_pending(self):
         f=Fixture();f.work_kind='interplanetary-flight'
         effect=dict(actionId='work',actionKind='interplanetary-flight',terminal=False,succeeded=False,state='waiting_for_game',

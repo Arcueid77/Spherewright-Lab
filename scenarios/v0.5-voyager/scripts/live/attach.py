@@ -9,6 +9,7 @@ from runtime import Runtime
 from factory import Factory
 from mcp_client import Client
 from contracts import strict_native_player_idle,validate_steps,validate_native_calls
+import startup_to_action as gate
 
 def main():
     config,config_sha,previous,output=sys.argv[1:];prior=Path(previous)
@@ -54,6 +55,24 @@ def main():
         r.put('attached-existing-session.private.json',dict(passed=True,sessionId=s['sessionId'],gameProcessId=a.pid,
             gameTick=s['gameTick'],priorRpcCount=prior_count,remainingRpc=remaining,originalDeadlineUtc=deadline.isoformat(),
             noLoad=True,noSave=True,noLaunch=True,noTickRefund=True,noStartupClockReset=True,sourceSha=c['sourceSha']))
+        if c.get('continueRefusedStartup') is True:
+            report=read(origin/'startup-report.private.json')
+            need(prior==origin and not report['passed'] and not report['unresolved_commit']
+                and report.get('first_action_id') is None and not (origin/'first-work-accepted.private.json').exists(),
+                'only_unaccepted_first_work_may_continue_original_startup')
+            launch=read(origin/'launch-intent.private.json')
+            elapsed=(dt.datetime.now(dt.timezone.utc)-dt.datetime.fromisoformat(launch['startedAtUtc'])).total_seconds()
+            need(0<=elapsed<gate.LIMIT_SECONDS,'original_startup_expired_preservation_only')
+            started=time.monotonic()-elapsed;work=a.prepare_first_work(s,started+gate.LIMIT_SECONDS)
+            need(work.get('action_kind') in gate.ACTUAL_WORK_KINDS and time.monotonic()<started+gate.LIMIT_SECONDS,
+                'original_startup_first_work_no_longer_admitted')
+            result=a.successful_original(a.commit_first_work_once(work));verified=a.verify_progress(work,result)
+            elapsed=time.monotonic()-started
+            r.put('corrected-startup-first-work.private.json',dict(verified=verified,original=result,elapsedFromOriginalLaunchSeconds=elapsed,
+                withinOriginal300Seconds=elapsed<gate.LIMIT_SECONDS,originalStartupFailureRetained=True,noStartupClockReset=True))
+            if not verified or elapsed>=gate.LIMIT_SECONDS:
+                a.cleanup_known_state();raise RuntimeError('corrected_original_first_work_not_within_startup_gate')
+            a.continue_prepared_work(result);return
         try:a.execute_plan(c['initialSteps'],'attached-initial')
         except Exception as error:
             a.record_plan_failure('attached-initial-failure.private.json',error)

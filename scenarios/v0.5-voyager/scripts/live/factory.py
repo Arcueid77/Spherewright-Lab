@@ -285,6 +285,14 @@ class Factory(Live):
 
  def continue_prepared_work(self,result):
   try:
+   if self.runtime.config['firstOperation'].get('kind')=='generator-fuel':
+    work=self.runtime.config['firstOperation'];amount=work['count'];item=work['itemId']
+    need(result.get('terminal') is True and result.get('succeeded') is True
+     and result.get('actionKind')=='transfer' and result.get('beforeTargetAmount')==0 and result.get('afterTargetAmount')==amount
+     and sum(d['delta'] for d in result.get('itemDeltas',[]) if d['itemId']==item)==-amount,
+     'original_first_generator_fuel_conservation_unproved_no_replay')
+    self.runtime.put('first-generator-fuel-native-conservation.private.json',dict(passed=True,original=result,
+     exactPackageDebit=amount,exactGeneratorBufferIncrease=amount,noReplay=True))
    if self.runtime.config['firstOperation'].get('kind')=='refuel':
     work=self.runtime.config['firstOperation'];amount=getattr(self,'first_refuel_count',work['count']);item=work['itemId']
     before=result.get('beforeTargetAmount');after=result.get('afterTargetAmount')

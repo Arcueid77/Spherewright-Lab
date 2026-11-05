@@ -15,7 +15,7 @@ READINESS_FLAGS = (
     'game_stopped', 'source_qualified', 'installed_match', 'backup_complete',
     'original_actions_reconciled', 'budgets_preserved', 'first_operation_ready',
 )
-ACTUAL_WORK_KINDS = frozenset(('move', 'transfer', 'handcraft', 'build', 'configure-building', 'harvest', 'select-research', 'supply_mecha_warpers', 'interplanetary-flight'))
+ACTUAL_WORK_KINDS = frozenset(('move', 'transfer', 'refuel', 'handcraft', 'build', 'configure-building', 'harvest', 'select-research', 'supply_mecha_warpers', 'interplanetary-flight'))
 
 
 def paid_native_home_effect(result):

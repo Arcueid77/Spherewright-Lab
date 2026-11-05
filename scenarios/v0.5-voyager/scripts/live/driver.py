@@ -299,6 +299,16 @@ class Live:
 
  def prepare_first_work(self,loaded,deadline):
   work=self.runtime.config['firstOperation'];mode=work.get('mode','production')
+  if work.get('kind')=='generator-fuel':
+   p=self.player();e=self.entity(work['entityId']);self.first_before=dict(player=p,generator=e)
+   q=self.call('spherewright_prepare_transfer',dict(self.ctx,direction='player-to-generator-fuel',storageEntityId=work['entityId'],
+    itemId=work['itemId'],count=work['count'],expectedPlayerStateHash=p['stateHash'],expectedStorageStateHash=e['stateHash']))
+   native=q.get('generatorColdStartFuel') or {}
+   need(q['prepared'] and q['commitAllowedNow'] and not q['commitBlockers'] and native.get('evidenceVersion')==1
+    and native.get('entityId')==work['entityId'] and native.get('itemId')==work['itemId'] and native.get('count')==work['count']
+    and native.get('emptyUnlitGenerator') is True and native.get('nativeOperation')=='PlanetFactory.InsertInto',
+    'first_generator_fuel_native_identity_or_count_echo_unproved')
+   return dict(action_kind='transfer',tool='spherewright_commit_transfer',prepared=q,actualCount=work['count'])
   if work.get('kind')=='refuel':
    amount=work['count']
    for attempt in range(3):
@@ -379,13 +389,15 @@ class Live:
   raise G.DeadlineExceeded('No original paid Native control effect before startup deadline; reconcile original without replay')
  def verify_progress(self,w,r):
   c=self.runtime.config['firstOperation'];mode=c.get('mode','production')
-  if c.get('kind')=='refuel':
+  if c.get('kind') in ('refuel','generator-fuel'):
    amount=w.get('actualCount',c['count']);before=r.get('beforeTargetAmount');after=r.get('afterTargetAmount')
    ok=(type(amount)is int and 1<=amount<=c['count'] and r.get('terminal') is True and r.get('succeeded') is True
-    and r.get('actionKind')=='refuel' and type(before)is int and type(after)is int and before>=0 and after-before==amount
+    and r.get('actionKind')==('refuel' if c['kind']=='refuel' else 'transfer') and type(before)is int and type(after)is int and before>=0 and after-before==amount
     and sum(d['delta'] for d in r.get('itemDeltas',[]) if d['itemId']==c['itemId'])==-amount)
-   self.runtime.put('actual-progress.private.json',dict(verified=ok,actionId=r['actionId'],exactNativeTransferCount=amount,
-    before=self.first_before,after=self.player(),originalSameTickReceipt=r,noReplay=True));return ok
+   proof=dict(verified=ok,actionId=r['actionId'],exactNativeTransferCount=amount,
+    before=self.first_before,after=self.player(),originalSameTickReceipt=r,noReplay=True)
+   if c['kind']=='generator-fuel':proof['generatorAfter']=self.entity(c['entityId'])
+   self.runtime.put('actual-progress.private.json',proof);return ok
   if c.get('kind')=='saved-home-return':
    ok=G.paid_native_home_effect(r)
    self.runtime.put('actual-progress.private.json',dict(verified=ok,actionId=r['actionId'],nativeFirstEffect=r.get('nativeHomeReturnFirstEffect'),

@@ -9,6 +9,46 @@ from factory import Factory,resolve_refs
 from runtime import freeze,Runtime
 
 class LiveDriverTests(unittest.TestCase):
+ def test_generator_first_work_preserves_native_source_family_echo_and_same_tick_debit(self):
+  records={};calls=[];a=Factory.__new__(Factory);a.ctx=dict(sessionId='synthetic-owned',planetId=402);a.active=None
+  config=dict(firstOperation=dict(kind='generator-fuel',entityId=20,itemId=1802,count=8),initialSteps=[])
+  a.runtime=type('Runtime',(),dict(config=config,put=lambda _,name,value:records.__setitem__(name,value)))()
+  a.player=lambda:dict(stateHash='player',inventory=[dict(itemId=1802,count=85)])
+  a.entity=lambda _:dict(stateHash='generator',fuelPowerState=dict(loadedFuelItemId=1802,loadedFuelEnergyJoules=0))
+  def call(tool,args):
+   calls.append((tool,args));return dict(prepared=True,commitAllowedNow=True,commitBlockers=[],planToken='bound-fuel',
+    generatorColdStartFuel=dict(evidenceVersion=1,entityId=20,itemId=1802,count=8,emptyUnlitGenerator=True,nativeOperation='PlanetFactory.InsertInto'))
+  a.call=call;work=a.prepare_first_work({},0)
+  self.assertEqual('transfer',work['action_kind']);self.assertEqual('spherewright_commit_transfer',work['tool'])
+  self.assertEqual('player-to-generator-fuel',calls[0][1]['direction']);self.assertEqual('generator',calls[0][1]['expectedStorageStateHash'])
+  result=dict(actionId='original-generator-fuel',actionKind='transfer',terminal=True,succeeded=True,beforeTargetAmount=0,afterTargetAmount=8,
+   itemDeltas=[dict(itemId=1802,delta=-8)])
+  self.assertTrue(a.verify_progress(work,result));a.execute_plan=lambda *_:None;a.await_next_plan=lambda:None
+  a.continue_prepared_work(result);self.assertTrue(records['first-generator-fuel-native-conservation.private.json']['passed'])
+  result['afterTargetAmount']=9;self.assertFalse(a.verify_progress(work,result))
+ def test_normal_refuel_crosses_real_startup_dispatch_readback_and_factory_continuation(self):
+  import startup_to_action as gate
+  records={};a=Factory.__new__(Factory);a.ctx=dict(sessionId='synthetic-owned',planetId=402);a.active=None
+  config=dict(firstOperation=dict(kind='refuel',itemId=1802,count=20,useNativeExactCount=True),initialSteps=[])
+  a.runtime=type('Runtime',(),dict(config=config,put=lambda _,name,value:records.__setitem__(name,value)))()
+  a.offline_preflight=lambda:{k:True for k in gate.READINESS_FLAGS};a.launch_once=lambda _:1
+  a.wait_ready=lambda *_:{};a.prepare_resume=lambda *_:'fresh-resume';a.commit_resume_once=lambda _:'original-resume'
+  a.verify_loaded=lambda *_:{};a.player=lambda:dict(stateHash='fresh',inventory=[dict(itemId=1802,count=100)])
+  terminal=dict(actionId='original-fuel',actionKind='refuel',terminal=True,state='completed',succeeded=True,
+   beforeTargetAmount=75,afterTargetAmount=90,itemDeltas=[dict(itemId=1802,delta=-15)])
+  a.wait_original=lambda handle:dict(actionId=handle,terminal=True,state='completed',succeeded=True) if handle=='original-resume' else terminal
+  def call(tool,args):
+   if tool=='spherewright_prepare_refuel':
+    if args['count']==20:raise ToolRefused(tool,dict(code='INVALID_REQUEST',retryable=True,
+     message="DSP's native one-stack fuel transfer will move exactly 15 item(s) into grid 2; the requested count was 20."))
+    self.assertEqual(15,args['count']);return dict(prepared=True,commitAllowedNow=True,commitBlockers=[],planToken='bound-fuel-plan')
+   self.assertEqual('spherewright_commit_refuel',tool);return dict(actionId='original-fuel',accepted=True)
+  a.call=call;a.execute_plan=lambda *_:records.__setitem__('prepared-work-executed',True)
+  a.await_next_plan=lambda:None;a.cleanup_known_state=lambda:self.fail('successful native work cannot trigger cleanup')
+  result=gate.run(a,lambda _:None)
+  self.assertTrue(result.passed,result.failure);self.assertEqual('original-fuel',result.first_action_id)
+  self.assertTrue(records['prepared-work-executed']);self.assertTrue(records['actual-progress.private.json']['verified'])
+  self.assertEqual(15,records['first-refuel-native-conservation.private.json']['exactPackageDebit'])
  def test_captured_native_partial_fuel_capacity_fresh_prepares_and_proves_the_exact_original_transfer(self):
   import time
   records={};a=Factory.__new__(Factory);a.ctx=dict(sessionId='synthetic-owned',planetId=402);a.active=None
