@@ -1,5 +1,7 @@
 # Active handoff / 活动交接
 
+**2026-11-06：首帆/首火箭扩展已完成并交审，游戏已正常保存退出。** 下一步为所有者审核；当前事实、最终保护边界与双包只见[唯一活动快照](../scenarios/v0.5-voyager/current-status.md)。不重复制造/发射或据旧续跑措辞再次开游戏，不正式发布。 / **The extension is review-ready and normally saved/exited.** Follow the current snapshot for evidence and next steps; do not replay accepted work or infer a publication grant.
+
 **Owner2026-11-05 approved the complete rocket increment, excluding formal publication.** Follow the [recorded exact approval](standing-authority.md#current-rocket-increment-approval-2026-11-05--当前火箭整项增量批准) and fixed BOM; no repeated request for this same scope. / **所有者已批准火箭整项准确增量（不含正式发布），同范围不再重复请批。**
 
 **Resumed by owner, 2026-11-04.** The explicit “继续” revokes the prior pause. Apply the [current resumption](standing-authority.md#current-owner-resumption-2026-11-04--当前所有者续接), starting from the freshly verified saved boundary in the [current snapshot](../scenarios/v0.5-voyager/current-status.md). / **所有者明确要求继续，先前暂停已撤销；核验正常关停保存边界后自主续接。**

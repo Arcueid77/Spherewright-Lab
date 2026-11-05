@@ -1,0 +1,134 @@
+{
+  "schemaVersion": 1,
+  "version": "0.5.0",
+  "scope": "first-sail-and-first-rocket-expansion",
+  "status": "review_ready",
+  "formalPublication": false,
+  "sourceSha": "d3b7ac897bb44d62c8a7ed54c51a55ff2b8de7b0",
+  "nativeVersion": "0.10.35.29151",
+  "nativeAssemblySha256": "EF314425DADE51F529F184F07BE136CD3C2660A6A81515603C7226FBE7AB1D8C",
+  "productCi": {
+    "runId": 42126914241,
+    "conclusion": "success"
+  },
+  "historicalOriginalVoyagerAcceptance": {
+    "allThreePassed": true,
+    "scopeRetained": true,
+    "evidence": "releases/v0.5.0/manifests/review-evidence.json"
+  },
+  "functional": {
+    "localSailsLaunchedAndConverted": 4,
+    "additionalLocalComponentSails": 6,
+    "interstellarAuxiliaryArrivals": {
+      "circuitBoards": 100,
+      "fuelRods": 100
+    },
+    "localNanotubes": 24,
+    "localFrames": 6,
+    "localComponents": 2,
+    "localRocketsMade": 1,
+    "rocketAmmoObserved": [
+      1,
+      0
+    ],
+    "matchingNativeRocketFlightObserved": true,
+    "receivingNodeStructurePoints": [
+      0,
+      1
+    ],
+    "finalInFlightRockets": 0,
+    "finalOrderedStructurePoints": 0,
+    "normalPowerTowersMadeAndBuilt": 2,
+    "finalTowerCount": 8,
+    "towerCeiling": 9,
+    "finalSourcePostSaveActualContinuationPassed": true,
+    "startupToActualWorkSeconds": 72.89000000001397,
+    "normalSaveRecoveryAfterRocketPassed": true
+  },
+  "preservation": {
+    "primaryGameTick": 124257444,
+    "lastExitGameTick": 124257444,
+    "completeBackupFiles": 2116,
+    "cumulativeGameTicks": 3168182,
+    "maximumCumulativeGameTicks": 3888000,
+    "returnReserveGameTicks": 54000,
+    "cleanupReserveGameTicks": 3000,
+    "gameStopped": true,
+    "mcpNormalEof": true,
+    "historicalUnknownOriginalsRetained": true
+  },
+  "packages": {
+    "manual": {
+      "file": "Spherewright-0.5.0-win-x64.zip",
+      "sha256": "323BD75C9F5495CAFF3A9A1CC85F2F6F662650CEBF8307742D807BF65FDE5851",
+      "size": 37481211
+    },
+    "thunderstore": {
+      "file": "Spherewright-0.5.0-thunderstore.zip",
+      "sha256": "E0BDBD2141CCFEBFD1F74F0A453BDF0A964BD92DC591574C4C9E400D616DD577",
+      "size": 33200755
+    }
+  },
+  "verification": {
+    "relatedRegressions": 1536,
+    "guideResourceRegressions": 31,
+    "tools": 74,
+    "resources": 1,
+    "englishEmbeddedGuideBytesMatch": true,
+    "bilingualPackageGuidesAndLinksPass": true,
+    "payloadEntries": 233,
+    "packagePayloadsEqualQualifiedInstalledBytes": true,
+    "exactProtectedValueAndCredentialHits": 0,
+    "managedProductCodeViewAbsent": true,
+    "nativeSdkHostClassifiedSeparately": true,
+    "separateFullColdInstallRecoveryPerDistributionLayout": false,
+    "completeGameEvidenceScope": "coherent same-source installed combined development cohort; package payload equivalence plus normal cold recovery",
+    "ciCanInspectProtectedRawEvidence": false
+  },
+  "protectedLocalProofs": [
+    {
+      "kind": "nativeRocketArrival",
+      "sha256": "51E5D95705C91F1E0604C1F8F2BBE9391F194CD9550E3FEB25E87B76081923FC"
+    },
+    {
+      "kind": "normalPowerTowerManufacture",
+      "sha256": "0D9B4BD4F50E2DB553618801CBEDFAE2B095151AFFBDDAA8EDCB73E5A48D03B3"
+    },
+    {
+      "kind": "finalSourceLoadedModules",
+      "sha256": "2EF6B5EC06DF35CCAB7E27995EA1E903A69A51E1B14E585885506D2A13FC2FA7"
+    },
+    {
+      "kind": "finalSourceRetainedNode",
+      "sha256": "7B961C2DE96FDAC063B14127176D3B8B197B4CA778FB8128DFE16C69364F2F80"
+    },
+    {
+      "kind": "finalSourceActualWork",
+      "sha256": "8E7125EB77010DB40D02B6696A292D5A2C0D1C81A43E26F852D2560A7DE4070C"
+    },
+    {
+      "kind": "startupGate",
+      "sha256": "3C9C07D1F51386D87845F1F7FCAE8304F8998C1C4BD345F41E905DF24A57B918"
+    },
+    {
+      "kind": "normalPreservation",
+      "sha256": "A883484E1EECD58EFDA5496854CA95FD9D586FB164F8871F8F9FCAD79940EE79"
+    },
+    {
+      "kind": "completeBackup",
+      "sha256": "FA80F413C06CF7D19F8EA97EBFA1687980D0EEBE49F2C38D634F6F03B47BA3A2"
+    },
+    {
+      "kind": "pairPayloadAndPrivacy",
+      "sha256": "A8ABB62D1A43B8A61A2C5697B1BFDDD642D5F96A3D1025304E90A47E2A8EA333"
+    },
+    {
+      "kind": "manualPackageCheck",
+      "sha256": "CB45AFCBB0349DA0F2C3DFB106F0A3AD6626573ADE57553A1F74E3CA65C3832D"
+    },
+    {
+      "kind": "thunderstorePackageCheck",
+      "sha256": "7B78B47043A7FBF26A7DAFF8FAB1EE69D66DDD468DCD0294D8B67C0100EA9A5F"
+    }
+  ]
+}
