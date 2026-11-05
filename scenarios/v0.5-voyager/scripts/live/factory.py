@@ -246,7 +246,7 @@ class Factory(Live):
    'spherewright_prepare_configure_building','spherewright_prepare_select_research','spherewright_prepare_handcraft',
    'spherewright_prepare_logistics_station_fleet_transfer',
    'spherewright_prepare_refuel','spherewright_prepare_supply_mecha_warpers','spherewright_prepare_voyager_flight',
-   'spherewright_prepare_save','spherewright_prepare_interplanetary_flight'}
+   'spherewright_prepare_save','spherewright_prepare_interplanetary_flight','spherewright_prepare_blueprint_build'}
   prepare=s['prepareTool']
   if not commit_requested:allowed.add('spherewright_prepare_build')
   need(prepare in allowed,'operation_family_not_allowed')
@@ -258,8 +258,15 @@ class Factory(Live):
    need(is_read_tool(query['tool']),'read_dependency_cannot_submit')
    name=query['name'];args=self.read_args(query['tool'],resolve(query.get('arguments',{})));check(query['tool'],args)
    values[name]=self.call(query['tool'],args);self.runtime.put(s['role']+'-'+name+'-before.private.json',values[name])
-  args=dict(self.ctx,**resolve(s['arguments']));check(prepare,args);q=self.call(prepare,args)
+  args=dict(self.ctx,**resolve(s['arguments']));check(prepare,args)
+  if prepare=='spherewright_prepare_blueprint_build':
+   need(bool(args.get('resumeBuildId')) and not args.get('blueprintCode') and args.get('site') is None
+    and args.get('allowNewPaidConstructionWindow') is True,'shared_driver_paid_resume_only_no_new_blueprint')
+  q=self.call(prepare,args)
   need(q['prepared'] and q['commitAllowedNow'] and not q['commitBlockers'],'native_operation_not_prepared')
+  if prepare=='spherewright_prepare_blueprint_build':
+   need(q.get('plannedPaidConstructionReadmission') is True
+    and (q.get('blueprintBuild') or {}).get('buildId')==args['resumeBuildId'],'exact_paid_resume_native_echo_missing_no_commit')
   if prepare=='spherewright_prepare_interplanetary_flight' and self.ctx['planetId']==0:
    need(q.get('plannedStoppedSpaceHomeReturn') is True,'exact_space_home_return_echo_missing_no_commit')
   self.runtime.put(s['role']+'-plan.private.json',q)
@@ -276,6 +283,11 @@ class Factory(Live):
    if key in self.schemas[commit]['properties']:commit_args[key]=value
   commit_args.update(resolve(s.get('commitArguments',{})));check(commit,commit_args)
   r=self.successful_original(self.commit(s['role'],commit,commit_args))
+  if prepare=='spherewright_prepare_blueprint_build':
+   need(r.get('blueprintBuildId')==args['resumeBuildId']
+    and not any(x.get('delta',0)<0 and x.get('itemId') in (2001,2011,2101,2201,2312) for x in r.get('itemDeltas',[]))
+    and (r.get('constructionControl') or {}).get('physicalIdleVerified') is True,
+    'paid_resume_must_keep_original_build_and_prove_no_new_building_debit')
   if prepare in ('spherewright_prepare_voyager_flight','spherewright_prepare_interplanetary_flight'):
    current=self.call('spherewright_get_session_state',{})
    need(current['sessionId']==self.ctx['sessionId'] and current['ownedBySpherewright'] and current['writesAllowed']

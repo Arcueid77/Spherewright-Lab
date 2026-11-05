@@ -12,6 +12,8 @@ def main():
         ctx=dict(sessionId='synthetic-offline-session',planetId=402);h='sha256:'+'a'*64
         cases=[
             ('spherewright_prepare_refuel',dict(ctx,itemId=1802,count=20,expectedPlayerStateHash=h)),
+            ('spherewright_prepare_blueprint_build',dict(ctx,expectedStateHash=h,expectedPlayerStateHash=h,
+                resumeBuildId='11111111-1111-4111-8111-111111111111',maximumObjectsToSubmit=11,allowNewPaidConstructionWindow=True)),
             ('spherewright_prepare_transfer',dict(ctx,direction='player-to-generator-fuel',storageEntityId=20,itemId=1802,count=8,expectedPlayerStateHash=h,expectedStorageStateHash=h)),
             ('spherewright_prepare_transfer',dict(ctx,direction='player-to-storage',storageEntityId=1,itemId=1301,count=2,expectedPlayerStateHash=h,expectedStorageStateHash=h)),
             ('spherewright_prepare_transfer',dict(ctx,direction='production-reset-to-player',storageEntityId=1,itemId=0,count=0,expectedPlayerStateHash=h,expectedStorageStateHash=h)),

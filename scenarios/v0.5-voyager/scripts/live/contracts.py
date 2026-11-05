@@ -1,5 +1,22 @@
 """Interpret public DTO variants without inventing missing evidence."""
 
+def quarantined_paid_original_accounted(config,reference,receipt,preservation):
+    count=reference.get('paidObjectCount');item=reference.get('itemId');objects=receipt.get('blueprintObjects') or []
+    control=receipt.get('constructionControl') or {};failure=receipt.get('nativeFirstFailure') or {}
+    return (config.get('recoveryMode')=='authorize_remote_primary_recovery' and config.get('sourceRole')=='lastExit'
+        and receipt.get('actionId')==reference.get('actionId') and receipt.get('terminal') is True
+        and receipt.get('state')=='outcome_unknown' and control.get('executionKind')=='structured_native'
+        and control.get('dispatchDisabled') is True and control.get('wholeBatchDebitSharedByObjectReceipts') is True
+        and type(count)is int and 1<=count<=12 and len(objects)==count
+        and sum(x.get('delta',0) for x in receipt.get('itemDeltas',[]) if x.get('itemId')==item)==-count
+        and all(type(o.get('inventoryBefore'))is int and o['inventoryBefore']>=count
+            and o.get('inventoryAfter')==o['inventoryBefore']-count and o.get('prebuildId',0)>0
+            and o.get('beforeInventoryHash') and o.get('afterInventoryHash') for o in objects)
+        and preservation.get('passed') is True and preservation.get('originalUnknownRetained') is True
+        and preservation.get('noReplay') is True and preservation.get('noResume') is True
+        and preservation.get('currentLastExit')==config.get('sourceTick')
+        and type(failure.get('capturedAtGameTick'))is int and config['sourceTick']>=failure['capturedAtGameTick'])
+
 def is_read_tool(name):
     return name.startswith(('spherewright_get_','spherewright_inspect_','spherewright_list_')) or name=='spherewright_preview_voyager_route'
 

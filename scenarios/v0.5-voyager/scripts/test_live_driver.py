@@ -9,6 +9,40 @@ from factory import Factory,resolve_refs
 from runtime import freeze,Runtime
 
 class LiveDriverTests(unittest.TestCase):
+ def test_unknown_physical_stop_only_allows_independent_saved_source_after_exact_paid_create_accounting(self):
+  from contracts import quarantined_paid_original_accounted
+  c=dict(recoveryMode='authorize_remote_primary_recovery',sourceRole='lastExit',sourceTick=900)
+  reference=dict(actionId='original-unknown',paidObjectCount=2,itemId=2001)
+  receipt=dict(actionId='original-unknown',terminal=True,state='outcome_unknown',
+   constructionControl=dict(executionKind='structured_native',dispatchDisabled=True,wholeBatchDebitSharedByObjectReceipts=True),
+   blueprintObjects=[dict(prebuildId=i,inventoryBefore=12,inventoryAfter=10,beforeInventoryHash='before',afterInventoryHash='after') for i in (1,2)],
+   itemDeltas=[dict(itemId=2001,delta=-2)],nativeFirstFailure=dict(capturedAtGameTick=900))
+  saved=dict(passed=True,originalUnknownRetained=True,noReplay=True,noResume=True,currentLastExit=900)
+  self.assertTrue(quarantined_paid_original_accounted(c,reference,receipt,saved))
+  for target,key,value in [('config','sourceRole','primary'),('saved','currentLastExit',899),('receipt','itemDeltas',[]),
+    ('control','dispatchDisabled',False)]:
+   config=copy.deepcopy(c);r=copy.deepcopy(receipt);p=copy.deepcopy(saved)
+   {'config':config,'saved':p,'receipt':r,'control':r['constructionControl']}[target][key]=value
+   self.assertFalse(quarantined_paid_original_accounted(config,reference,r,p))
+ def test_generic_blueprint_operation_only_accepts_exact_paid_readmission_echo(self):
+  a=Factory.__new__(Factory);a.ctx=dict(sessionId='synthetic',planetId=402);a.refs={};records={};calls=[]
+  a.runtime=type('Runtime',(),dict(put=lambda _,name,value:records.__setitem__(name,value)))()
+  fields={'sessionId':{},'planetId':{},'resumeBuildId':{},'expectedStateHash':{},'expectedPlayerStateHash':{},'allowNewPaidConstructionWindow':{}}
+  a.schemas={'spherewright_prepare_blueprint_build':dict(properties=fields,required=list(fields)),
+   'spherewright_commit_blueprint_build':dict(properties=dict(sessionId={},planetId={},planToken={},idempotencyKey={}))}
+  build='11111111-1111-4111-8111-111111111111'
+  step=dict(role='resume-paid',prepareTool='spherewright_prepare_blueprint_build',arguments=dict(resumeBuildId=build,
+   expectedStateHash='fresh-progress',expectedPlayerStateHash='fresh-player',allowNewPaidConstructionWindow=True))
+  def call(tool,args):
+   calls.append(tool);return dict(prepared=True,commitAllowedNow=True,commitBlockers=[],planToken='fresh-paid',
+    plannedPaidConstructionReadmission=True,blueprintBuild=dict(buildId=build))
+  a.call=call;a.commit=lambda *_:'same-paid-only'
+  a.successful_original=lambda _:dict(blueprintBuildId=build,itemDeltas=[],constructionControl=dict(physicalIdleVerified=True))
+  self.assertEqual(build,a.native_operation_once(step)['blueprintBuildId']);self.assertEqual(['spherewright_prepare_blueprint_build'],calls)
+  wrong=copy.deepcopy(step);wrong['arguments']['resumeBuildId']=''
+  with self.assertRaisesRegex(RuntimeError,'paid_resume_only'):a.native_operation_once(wrong)
+  a.call=lambda *_:dict(prepared=True,commitAllowedNow=True,commitBlockers=[],plannedPaidConstructionReadmission=False)
+  with self.assertRaisesRegex(RuntimeError,'native_echo_missing'):a.native_operation_once(step)
  def test_generator_first_work_preserves_native_source_family_echo_and_same_tick_debit(self):
   records={};calls=[];a=Factory.__new__(Factory);a.ctx=dict(sessionId='synthetic-owned',planetId=402);a.active=None
   config=dict(firstOperation=dict(kind='generator-fuel',entityId=20,itemId=1802,count=8),initialSteps=[])
