@@ -52,6 +52,12 @@ def main():
             destinationPlanetId=101,expectedPlayerStateHash=h,expectedStarSystemStateHash=h,minimumCoreEnergyRatio=.8,
             stoppedSpaceReturnMaximumGameTicks=51899,stoppedSpaceReturnMaximumWallSeconds=14400,
             savedHomeReturnPredecessorActionId='11111111-1111-4111-8111-111111111111',priorHomeReturnKnownTerminalFailed=True)))
+        cases.extend([
+            ('spherewright_prepare_build', dict(ctx, buildingItemId=2101, stackOnObjectId=1,
+                expectedStackStateHash=h, preferredModelIndex=51, expectedPlayerStateHash=h)),
+            ('spherewright_prepare_move', dict(ctx, targetX=1., targetY=199., targetZ=1.,
+                previewWalkingRoute=True, expectedPlayerStateHash=h)),
+        ])
         proof=[]
         for tool,args in cases:
             schema=schemas[tool];need(set(schema.get('required',[]))<=set(args),'sdk_required_field_missing')

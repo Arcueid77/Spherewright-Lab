@@ -1,5 +1,9 @@
 # Voyager standing execution authority / Voyager 持续执行授权
 
+## Current stacking/navigation task, 2026-11-08 / 当前叠放与步行任务
+
+The owner required every Native-stackable building/model/host combination, requested a verification workflow, asked to reuse the current save and then explicitly said “做下吧”. This authorizes the implementation, relevant tests/CI, coherent cold installation and current-owned-save validation described in the [new validation plan](../scenarios/v0.5-stacking-navigation/validation-plan.md). Git integration follows the owner's explicit linear-main instruction. The first live survey uses only bounded ordinary movement and read-only public observations within the conserved current limits. Existing material ceilings and actual reserve floors remain; derive and decide any concrete test increment through the recorded exact consolidated BOM/Native-preflight process before consumption. / 所有者要求全部原生可叠放建筑/模型/宿主组合、设计验证流程并复用当前存档，随后明确“做下吧”，授权新验证计划内的实现、相关测试/CI、同源冷安装与当前owned存档验证。Git依所有者要求线性进入main。首次实机调查仅在保留实际限额内正常有界移动及公开只读观察；已有物料上限及真实安全下限保留，实际测试增量先按既定准确集中BOM/原生预检流程决定，再消费。
+
 ## Current rocket increment approval, 2026-11-05 / 当前火箭整项增量批准
 
 The owner explicitly approved the complete consolidated [rocket increment](../scenarios/v0.5-voyager/rocket-scope-increment.md) via the decision reply “批准这项完整增量（不含正式发布）”. Execute exactly its single silo, local forward manufacture, minimum Native receiving node and listed complete material ceilings; intermediate products are included, not counted again. Existing building limits, cumulative spending,54000 return reserve, energy/warper floors, Native gates and publication exclusion remain unchanged. No further per-step approval for this same increment is required.

@@ -9,6 +9,85 @@ from factory import Factory,resolve_refs
 from runtime import freeze,Runtime
 
 class LiveDriverTests(unittest.TestCase):
+ def test_tokenless_walking_preview_never_enters_commit_path(self):
+  adapter = Factory.__new__(Factory)
+  adapter.ctx = dict(sessionId='synthetic-session', planetId=104)
+  adapter.refs = {}
+  adapter.runtime = type('Runtime', (), dict(put=lambda self, name, value: None))()
+  adapter.schemas = {'spherewright_prepare_move': dict(properties=dict(sessionId={}, planetId={}, previewWalkingRoute={}), required=[])}
+  calls = []
+  adapter.call = lambda name, arguments: calls.append(name) or dict(prepared=True, commitAllowedNow=False, planToken='',
+   walkingRoutePreview=dict(evidenceVersion=1, executable=False, geometry=dict(sessionId='synthetic-session', planetId=104)))
+  def forbidden(*args): raise AssertionError('read-only preview cannot commit')
+  adapter.commit = forbidden
+  step = dict(role='walking-preview', prepareTool='spherewright_prepare_move', arguments=dict(previewWalkingRoute=True))
+  result = adapter.native_operation_once(step, commit_requested=False)
+  self.assertFalse(result['commitAllowedNow'])
+  self.assertEqual(calls, ['spherewright_prepare_move'])
+  with self.assertRaisesRegex(RuntimeError, 'requires_prepare_only'):
+   adapter.native_operation_once(step, commit_requested=True)
+  self.assertEqual(calls, ['spherewright_prepare_move'])
+  adapter.call = lambda *args: dict(prepared=True, commitAllowedNow=True, planToken='legacy-token')
+  with self.assertRaisesRegex(RuntimeError, 'tokenless_walking_preview_echo_required'):
+   adapter.native_operation_once(step, commit_requested=False)
+
+ def test_stack_step_uses_fresh_hash_and_charges_exactly_one_original_item(self):
+  adapter, calls, _ = self.stack_adapter()
+  adapter.step(dict(kind='build-stack', role='stack-one', itemId=2101, anchor='base', modelIndex=51))
+  self.assertEqual(adapter.used[2101], 2)
+  self.assertEqual(len(calls), 1)
+  self.assertEqual(calls[0]['stackOnObjectId'], 7)
+  self.assertEqual(calls[0]['expectedStackStateHash'], 'sha256:current-stack')
+  self.assertEqual(calls[0]['preferredModelIndex'], 51)
+  self.assertEqual(adapter.material_holds, {})
+  with self.assertRaisesRegex(RuntimeError, 'material_ceiling_exhausted'):
+   adapter.step(dict(kind='build-stack', role='stack-two', itemId=2101, anchor='base', modelIndex=51))
+  self.assertEqual(len(calls), 1)
+
+ def test_stack_model_postcheck_failure_retains_actual_material_charge(self):
+  adapter, calls, _ = self.stack_adapter(model=52)
+  with self.assertRaisesRegex(RuntimeError, 'completed_native_model_needs_original_reconciliation'):
+   adapter.step(dict(kind='build-stack', role='stack-one', itemId=2101, anchor='base', modelIndex=51))
+  self.assertEqual(adapter.used[2101], 2)
+  self.assertEqual(len(calls), 1)
+
+ def test_incomplete_stack_stops_before_native_prepare(self):
+  adapter, calls, anchor = self.stack_adapter()
+  anchor['stack']['complete'] = False
+  with self.assertRaisesRegex(RuntimeError, 'fresh_complete_stack_anchor_required'):
+   adapter.step(dict(kind='build-stack', role='stack-one', itemId=2101, anchor='base', modelIndex=51))
+  self.assertEqual(calls, [])
+  self.assertEqual(adapter.used[2101], 1)
+
+ @staticmethod
+ def stack_adapter(model=51):
+  adapter = Factory.__new__(Factory)
+  adapter.ctx = dict(sessionId='synthetic-session', planetId=104)
+  adapter.refs = {'base': [7]}
+  adapter.used = {2101: 1}
+  adapter.material_holds = {}
+  adapter.active = None
+  adapter.state = lambda: None
+  config = dict(materialCeilings={'2101': 2}, ordinaryConstructionPlanetIds=[104], planetId=402,
+   maximumFundingWaitSeconds=1)
+  adapter.runtime = type('Runtime', (), dict(config=config, put=lambda self, name, value: None))()
+  anchor = dict(objectId=7, itemId=2101, stack=dict(state='observed', complete=True,
+   stateHash='sha256:current-stack', topObjectId=7, layers=[dict(objectId=7)]))
+  adapter.entity = lambda entity: anchor if entity == 7 else dict(objectId=8, itemId=2101, modelIndex=model)
+  calls = []
+  def prepare(arguments):
+   calls.append(copy.deepcopy(arguments))
+   return dict(prepared=True, commitAllowedNow=True, commitBlockers=[], itemBudget=[dict(itemId=2101, count=1)],
+    planToken='synthetic-plan'), dict(inventory=[dict(itemId=2101, count=2)])
+  adapter.prepare_build = prepare
+  adapter.commit = lambda role, tool, arguments: 'synthetic-original'
+  adapter.successful_original = lambda action: dict(actionId=action, targetObjectIds=[8],
+   itemDeltas=[dict(itemId=2101, delta=-1)], stackConstructionReadback=dict(state='observed', complete=True,
+    topObjectId=8, layers=[dict(objectId=7), dict(objectId=8)]))
+  adapter.player = lambda: dict(inventory=[dict(itemId=2101, count=1)], constructionDrones=dict(
+   working=0, idle=3, total=3, pendingBuildTargets=0, pendingRepairTargets=0))
+  return adapter, calls, anchor
+
  def test_unpublished_startup_process_path_waits_inside_original_deadline_without_identity_or_write(self):
   import driver
   from unittest.mock import patch

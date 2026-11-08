@@ -1,5 +1,7 @@
 # Active handoff / 活动交接
 
+**2026-11-08：所有者明确要求实施全部原生叠放与步行诊断/短路线预览，并在当前存档验证。** 先按[新验证计划](../scenarios/v0.5-stacking-navigation/validation-plan.md)完成源码/安装/备份/首实操包资格，再做零新增施工额度的目录调查；当前任务事实见[叠放/步行活动快照](../scenarios/v0.5-stacking-navigation/current-status.md)，既有火箭验收保留[Voyager快照](../scenarios/v0.5-voyager/current-status.md)。 / **The owner authorized the stacking/navigation implementation and current-save validation.** Qualify the complete source/install/backup/first-work packet before the initial zero-construction survey.
+
 **2026-11-06：首帆/首火箭扩展已完成并交审，游戏已正常保存退出。** 下一步为所有者审核；当前事实、最终保护边界与双包只见[唯一活动快照](../scenarios/v0.5-voyager/current-status.md)。不重复制造/发射或据旧续跑措辞再次开游戏，不正式发布。 / **The extension is review-ready and normally saved/exited.** Follow the current snapshot for evidence and next steps; do not replay accepted work or infer a publication grant.
 
 **Owner2026-11-05 approved the complete rocket increment, excluding formal publication.** Follow the [recorded exact approval](standing-authority.md#current-rocket-increment-approval-2026-11-05--当前火箭整项增量批准) and fixed BOM; no repeated request for this same scope. / **所有者已批准火箭整项准确增量（不含正式发布），同范围不再重复请批。**

@@ -81,6 +81,14 @@ class Factory(Live):
      and len(ids)==budget[0]['count'] and len(set(ids))==len(ids) and count(self.player(),item)==count(before,item)-len(ids),
      'completed_build_postcheck_needs_original_reconciliation')
   result=[self.entity(i) for i in ids];need(all(e['itemId']==item for e in result),'completed_entity_type_changed')
+  if 'preferredModelIndex' in args:
+   need(all(entity.get('modelIndex') == args['preferredModelIndex'] for entity in result),
+    'completed_native_model_needs_original_reconciliation')
+  if 'stackOnObjectId' in args:
+   stack = r.get('stackConstructionReadback') or {}
+   need(stack.get('complete') is True and stack.get('state') == 'observed'
+    and stack.get('topObjectId') in ids and len(stack.get('layers') or []) >= 2,
+    'completed_stack_needs_original_reconciliation')
   self.refs[role]=ids;self.runtime.put(role+'-entities.private.json',dict(entities=result,originalActionId=r['actionId'],buildId=r.get('blueprintBuildId'),debit=budget[0]['count']))
   return result
 
@@ -133,11 +141,23 @@ class Factory(Live):
     point=self.layout(position)
     args=dict(buildingItemId=s['itemId'],**dict(zip(('preferredPositionX','preferredPositionY','preferredPositionZ'),[point[k] for k in 'xyz'])))
     if 'preferredYaw' in point:args['preferredYaw']=point['preferredYaw']
+    if 'modelIndex' in s:args['preferredModelIndex']=s['modelIndex']
     try:return self.build(role,args,1)
     except ToolRefused as e:
      if e.error.get('code') not in ('BUILD_LOCATION_INVALID','BUILD_CONNECTION_INVALID'):raise
      last=e
    raise last or RuntimeError('no_layout_candidate')
+  if kind == 'build-stack':
+   anchor_id = self.object_id(s['anchor'])
+   anchor = self.entity(anchor_id)
+   stack = anchor.get('stack') or {}
+   need(stack.get('state') == 'observed' and stack.get('complete') is True
+    and bool(stack.get('stateHash')), 'fresh_complete_stack_anchor_required')
+   arguments = dict(buildingItemId=s['itemId'], stackOnObjectId=anchor_id,
+    expectedStackStateHash=stack['stateHash'])
+   if 'modelIndex' in s:
+    arguments['preferredModelIndex'] = s['modelIndex']
+   return self.build(role, arguments, 1)
   if kind=='build-belt':
    source=self.object_id(s['source']);last=None
    for end in s['ends']:
@@ -259,10 +279,23 @@ class Factory(Live):
    name=query['name'];args=self.read_args(query['tool'],resolve(query.get('arguments',{})));check(query['tool'],args)
    values[name]=self.call(query['tool'],args);self.runtime.put(s['role']+'-'+name+'-before.private.json',values[name])
   args=dict(self.ctx,**resolve(s['arguments']));check(prepare,args)
+  walking_preview = prepare == 'spherewright_prepare_move' and args.get('previewWalkingRoute') is True
+  need(not walking_preview or not commit_requested, 'walking_preview_requires_prepare_only')
   if prepare=='spherewright_prepare_blueprint_build':
    need(bool(args.get('resumeBuildId')) and not args.get('blueprintCode') and args.get('site') is None
     and args.get('allowNewPaidConstructionWindow') is True,'shared_driver_paid_resume_only_no_new_blueprint')
   q=self.call(prepare,args)
+  if walking_preview:
+   preview = q.get('walkingRoutePreview') or {}
+   geometry = preview.get('geometry') or {}
+   need(q.get('prepared') is True and q.get('commitAllowedNow') is False and not q.get('planToken')
+    and preview.get('evidenceVersion') == 1 and preview.get('executable') is False
+    and geometry.get('sessionId') == self.ctx['sessionId'] and geometry.get('planetId') == self.ctx['planetId'],
+    'tokenless_walking_preview_echo_required')
+   self.runtime.put(s['role'] + '-plan.private.json', q)
+   self.runtime.put(s['role'] + '-prepare-only.private.json', dict(noCommit=True,
+    noGameActionAccepted=True, notAcceptanceEvidence=True))
+   return q
   need(q['prepared'] and q['commitAllowedNow'] and not q['commitBlockers'],'native_operation_not_prepared')
   if prepare=='spherewright_prepare_blueprint_build':
    need(q.get('plannedPaidConstructionReadmission') is True

@@ -211,6 +211,7 @@ def validate_steps(steps):
     required={
         'operation':{'prepareTool','arguments'},'prepare-only':{'prepareTool','arguments'},'adopt-paid-build':{'buildId','expectedObjects','itemId'},
         'read':{'tool'},'dump':{'queries'},'build-object':{'itemId','positions'},
+        'build-stack':{'itemId','anchor'},
         'build-belt':{'source','ends','maximumNewBelts'},'build-free-belt':{'candidates','maximumNewBelts'},'build-belt-to-device':{'starts','destination','maximumNewBelts'},
         'build-sorter':{'source','destination','filterItemId'},'configure':{'entity'},
         'wait-buffer':{'entity','itemId','minimumCount','maximumSeconds'},'wait-player-still':{'maximumSeconds'},'prove-network':{'entities','networkId'},'save-close':set(),'handoff-caller':set(),
@@ -220,6 +221,13 @@ def validate_steps(steps):
         kind=step.get('kind')
         if kind not in required or not ({'kind','role'}|required[kind])<=set(step):
             raise ValueError('immutable_plan_shape_invalid:'+str(kind))
+        if kind == 'build-stack':
+            anchor = step['anchor']
+            if type(step['itemId']) is not int or step['itemId'] <= 0 or not (
+                    type(anchor) is int and anchor > 0 or isinstance(anchor, str) and bool(anchor)):
+                raise ValueError('immutable_stack_identity_invalid')
+        if 'modelIndex' in step and (type(step['modelIndex']) is not int or step['modelIndex'] <= 0):
+            raise ValueError('immutable_native_model_invalid')
         if 'freshStaleMaximumSeconds' in step:
             seconds=step['freshStaleMaximumSeconds']
             if kind not in ('operation','prepare-only') or type(seconds) not in(int,float) or not 0<=seconds<=60:
@@ -256,7 +264,16 @@ def validate_native_calls(steps,schemas):
             if 'enum' in spec and value not in spec['enum']:raise ValueError('actual_sdk_enum:'+key)
     for step in steps:
         kind=step['kind']
-        if kind=='read':call(step['tool'],step.get('arguments',{}))
+        if kind == 'build-stack':
+            arguments = dict(buildingItemId=step['itemId'], expectedPlayerStateHash='schema-placeholder',
+                stackOnObjectId=1, expectedStackStateHash='schema-placeholder')
+            if 'modelIndex' in step:
+                arguments['preferredModelIndex'] = step['modelIndex']
+            call('spherewright_prepare_build', arguments)
+        elif kind == 'build-object' and 'modelIndex' in step:
+            call('spherewright_prepare_build', dict(buildingItemId=step['itemId'],
+                expectedPlayerStateHash='schema-placeholder', preferredModelIndex=step['modelIndex']))
+        elif kind=='read':call(step['tool'],step.get('arguments',{}))
         elif kind=='dump':
             for query in step['queries']:call(query['tool'],query.get('arguments',{}))
         elif kind in ('operation','prepare-only'):
