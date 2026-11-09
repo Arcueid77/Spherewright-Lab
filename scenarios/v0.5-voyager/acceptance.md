@@ -1,6 +1,12 @@
 # Original Voyager acceptance / 原 0.5 验收
 
-## Current installed/runtime pointer / 当前实装运行指针：3289RPC / 106accepted
+## Current review summary / 当前交审摘要
+
+The original three Voyager clauses are closed in the [fixed baseline review](../../releases/v0.5.0/review-delivery.md). The first-sail/carrier-rocket extension is also review-ready: the 2026-11-06 record proves local manufacture, four sails launched into the swarm, one carrier rocket arrival with one added Native structure point, auxiliary delivery and normal save/cold continuation on `d3b7ac897bb44d62c8a7ed54c51a55ff2b8de7b0`. See the [fixed expansion review](../../releases/v0.5.0/expansion-review-delivery-2026-11-06.md). No formal 0.5 tag, Release or upload is implied.
+
+原三项 Voyager 条款及首帆/首枚火箭扩展均已在各自记录范围内闭合并交审，旧双包与证据不改。下方“2/3”“Gate 2 open”和早期“下一目标”均为历史截点，不再代表当前验收状态，也不授权重放已闭合工作。
+
+## Historical installed/runtime pointer / 历史实装运行指针：3289RPC / 106accepted
 
 | Boundary | Verified scope |
 | --- | --- |

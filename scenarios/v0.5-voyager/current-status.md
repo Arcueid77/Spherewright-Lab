@@ -1,5 +1,7 @@
 # Voyager active snapshot / 0.5 活动快照
 
+**Reading order / 阅读顺序：** This is the Voyager baseline/extension evidence snapshot. For the current nine-model stacking/navigation task, use its [active snapshot](../v0.5-stacking-navigation/current-status.md) and the root [source lock](../../source-lock.json). Earlier Voyager sections retain their historical source/session scopes and are not replay instructions. / 本页保留 Voyager 基线及扩展证据；当前九模型叠放/步行任务看其活动快照和根锁，较早 Voyager 段落不作为重放指令。
+
 **2026-11-06：0.5首帆/首火箭扩展已闭合并形成最终交审双包，不正式发布。** 当地4帆真实发射/云转换、当地首枚火箭制造/发射/抵达、跨星辅料各100实际到货、正常保存冷恢复均已证。最终源码`d3b7ac897bb44d62c8a7ed54c51a55ff2b8de7b0`；游戏和MCP均正常退出。详见[本轮交审记录](../../releases/v0.5.0/expansion-review-delivery-2026-11-06.md)及[公开复核清单](../../releases/v0.5.0/manifests/expansion-review-evidence-2026-11-06.json)。
 
 - **真实发射/恢复：** 唯一井/最小节点，弹药1→0，匹配来源/目标的真实飞行，节点结构点0→1，最终订单与在途均0。06ba抵达后正常冷恢复保全；最终d3再次冷恢复，72.890秒内真实恢复空炉配方，节点1结构点、空弹药、产线及电网保持。未再造/发射火箭。

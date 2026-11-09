@@ -1,5 +1,7 @@
 # Active handoff / 活动交接
 
+**Reading order / 阅读顺序：** Read the newest section first and verify the root [source lock](../source-lock.json). The current task uses the [stacking/navigation snapshot](../scenarios/v0.5-stacking-navigation/current-status.md); the [Voyager snapshot](../scenarios/v0.5-voyager/current-status.md) preserves its completed baseline/extension review. Older handoffs are not standing execution authority. / 先读顶部最新交接并核对根锁；当前任务看叠放/步行快照，Voyager 快照保留已完成交审，旧交接不是持续执行授权。
+
 **2026-11-09。所有者批准用料后移除了自演化研究站，当前为其余9模型。** 按[最新范围](standing-authority.md#current-nine-model-scope-2026-11-09--当前九模型范围)和[活动快照](../scenarios/v0.5-stacking-navigation/current-status.md)从最新完整保存边界连续执行。 / **The owner removed the self-evolution lab after approving the materials.** Continue the other9 models from the latest complete saved boundary.
 
 **2026-11-08：所有者明确要求实施全部原生叠放与步行诊断/短路线预览，并在当前存档验证。** 先按[新验证计划](../scenarios/v0.5-stacking-navigation/validation-plan.md)完成源码/安装/备份/首实操包资格，再做零新增施工额度的目录调查；当前任务事实见[叠放/步行活动快照](../scenarios/v0.5-stacking-navigation/current-status.md)，既有火箭验收保留[Voyager快照](../scenarios/v0.5-voyager/current-status.md)。 / **The owner authorized the stacking/navigation implementation and current-save validation.** Qualify the complete source/install/backup/first-work packet before the initial zero-construction survey.
