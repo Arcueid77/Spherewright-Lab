@@ -30,11 +30,11 @@ Owner2026-11-08 requested implementation and validation in the current owned sav
 
 CI/source checks, installed bytes, public SDK admission, actual Native execution and package-layout acceptance are separate result fields. Final delivery archives follow functional closure, with each requested layout receiving its own stated installation/recovery check. / CI/源码、实装字节、SDK准入、真实原生执行与包布局验收分别记账；功能闭合后形成最终交付档案，逐请求布局记录各自安装/恢复检查。
 
-## Next material decision / 下一集中用料决定
+## Approved full material increment / 已批完整用料增量
 
-This proposal is pending owner approval. The current construction increment remains zero. Native fresh preparation, original-action reconciliation and existing cumulative time/return/energy/warper floors apply to every later case. Existing carried items can satisfy the following total test consumption ceilings. / 本提案待所有者批准，当前新增施工额度仍为0。后续每例沿用新鲜原生准备、原动作核销、累计时间和返航/能源/翘曲器下限。下表是测试施工总消耗上限，已有背包建筑可计入满足。
+Owner2026-11-09 explicitly selected “批准完整10模型方案及科研用料”. The owner then removed the self-evolution lab after the peaceful-world finding. The current9-model column below applies. Native fresh preparation, original-action reconciliation and cumulative time/return/energy/warper floors apply to every case. Existing carried items can satisfy the total test consumption ceilings. / 所有者2026-11-09明确选择“批准完整10模型方案及科研用料”，随后所有者因和平世界条件移除自演化研究站，以下当前9模型列适用。每例沿用新鲜原生准备、原动作核销、累计时间和返航/能源/翘曲器下限。已有背包建筑可计入满足测试总消耗上限。
 
-| Building / 建筑 | Unlocked matrix / 已解锁矩阵 | Full matrix / 完整矩阵 |
+| Building / 建筑 | Unlocked matrix / 已解锁矩阵 | Current9-model matrix / 当前9模型矩阵 |
 | --- | --- | --- |
 | Splitter / 分流器 | 16 | 16 |
 | Small storage / 小仓库 | 6 | 6 |
@@ -42,15 +42,15 @@ This proposal is pending owner approval. The current construction increment rema
 | Tank / 储液罐 | 3 | 3 |
 | Automatic piler / 自动集装机 | 4 | 4 |
 | Spraycoater / 喷涂机 | 0 | 4 |
-| Matrix lab / 矩阵研究站 | 5 | 3 |
-| Self-evolution lab / 自演化研究站 | 0 | 2 |
+| Matrix lab / 矩阵研究站 | 5 | 5 |
+| Self-evolution lab / 自演化研究站 | 0 | 0 |
 | Battle base / 战场分析基站 | 0 | 1 |
 | Total / 合计 | 38 | 44 |
 
 Both options additionally reserve at most 100 basic belts, 24 basic sorters and 4 Tesla towers for finite flow/power cases. The observed backpack contains 25 belts and 1 tank. Reuse existing warehouses and eligible completed distributor attachments. Missing or capped attachment hosts remain explicit pending cases until their real dependency is established. Test spending remains in cumulative accounting. / 两案另预留至多100条基础传送带、24台基础分拣器和4座电力感应塔用于有限流转/供电测试。实读背包已有25条传送带和1个储液罐。复用已有仓库及合格已建成配送器，缺失或已满层挂件宿主在真实依赖明确前保留待验。测试消耗计入累计账。
 
-The 16 splitters cover all nine directed style pairs using bounded trails plus all three splitter-style→small-storage edges. Existing storage roots, independent large storage, tanks and labs cover self-stacking/caps/selectors. The unlocked option covers 8 stackable model rows and 17 directed model pairs. The full option adds spraycoaters, the large-storage/battle-base host and both lab-grade cross directions, covering 10 rows and 22 directed pairs. / 16台分流器以有限分段塔覆盖9个样式有向组合及3条分流器样式→小仓库边。已有储仓根、独立大仓库、液罐和研究站覆盖自身叠放、上限及选择器。已解锁案覆盖8个可叠放模型行、17条模型有向边。完整案增加喷涂机、大仓库/基站宿主及研究站等级双向混叠，覆盖10行、22条有向边。
+The 16 splitters cover all nine directed style pairs using bounded trails plus all three splitter-style→small-storage edges. Existing storage roots, independent large storage, tanks and labs cover self-stacking/caps/selectors. The unlocked option covers 8 stackable model rows and 17 directed model pairs. The current option adds spraycoaters and the large-storage/battle-base host, covering9 rows and19 directed pairs. / 16台分流器以有限分段塔覆盖9个样式有向组合及3条分流器样式→小仓库边。已有储仓根、独立大仓库、液罐和研究站覆盖自身叠放、上限及选择器。已解锁案覆盖8个可叠放模型行、17条模型有向边。当前案增加喷涂机、大仓库/基站宿主，覆盖9行、19条有向边。
 
-The full option also requires normal research 1151/1801/1826/1901. Fresh Native progression reports 320 blue matrices and 800 Dark Fog matrices for that prerequisite closure. Crafting 2 self-evolution labs additionally consumes 2 matrix labs, 40 Dark Fog matrices, 20 silicon-based neurons and 8 quantum chips. Their 2 input labs are additional manufacturing inputs to the 3 normally placed labs in the table. Current observed local stock contains no Dark Fog materials. Determine actual owned-world availability before procurement or consumption. Weapon-system research also normally rewards 10 machine-gun ammo boxes, whose Native reward and mecha safety state need to be recorded. / 完整案另须正常研究1151/1801/1826/1901，新鲜原生科研读回的前置闭包为320蓝矩阵及800黑雾矩阵。制造2座自演化研究站另消耗2座普通研究站、40黑雾矩阵、20硅基神经元及8量子芯片，其2座输入研究站在表内3座普通放置量之外。当前已读本地库存无黑雾材料，先核实际owned世界可用来源，再取用或消耗。武器系统科研还正常奖励10箱机枪弹药，须记录原生奖励与机甲安全状态。
+The current option requires normal research1151/1801/1826, totaling320 blue matrices. Weapon-system research normally rewards10 machine-gun ammo boxes. The original2 upgrade-input labs now complete the ordinary5-layer tower. Self-evolution lab2902 and research1901 are owner-excluded from this run. / 当前方案正常研究1151/1801/1826，共320蓝矩阵，武器系统正常奖励10箱机枪弹药。原2座升级输入普通研究站用于完成普通5层塔。自演化研究站2902及科研1901已由所有者移出本轮。
 
 Normal manufacturing follows the observed Native recipes and full fresh item budget, preserving unused intermediates. New gameplay scope, additional missing dependencies or resource ceilings outside this table require their own concrete decision. Source/installed support and each pending live/function/recovery row retain separate status. / 正常制造依实读原生配方及新鲜完整item budget，保留未用中间件。超出本表的新玩法范围、额外缺失依赖或资源上限仍须具体决定。源码/实装支持与每项待验实机、功能、恢复状态分别记录。

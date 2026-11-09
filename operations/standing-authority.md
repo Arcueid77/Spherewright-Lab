@@ -1,5 +1,21 @@
 # Voyager standing execution authority / Voyager 持续执行授权
 
+## Current nine-model scope, 2026-11-09 / 当前九模型范围
+
+After the peaceful-world/Dark Fog finding, the owner said “那就不要这个”, removing the self-evolution lab and its Dark Fog research/material dependency from this validation run. Execute the other9 model rows and19 directed pairs. Reuse the2 already-approved ordinary labs originally allocated as upgrade inputs for the ordinary lab's5-layer test. The placed-building ceiling remains44, with5 ordinary labs and0 self-evolution labs. The selected research closure is now1151/1801/1826 and320 blue matrices, with the recorded10-ammo-box reward. The100-belt/24-sorter/4-Tesla limits apply.
+
+在和平存档/黑雾材料发现后，所有者明确说“那就不要这个”，移除本轮自演化研究站及其黑雾科研/材料依赖，继续其余9个模型和19条有向边。原批2座升级输入普通研究站用于普通塔5层验证，实际建筑总上限仍44，普通研究站5、自演化研究站0。科研闭包调整为1151/1801/1826及320蓝矩阵，记录10箱弹药正常奖励。基础带100、分拣器24、电力感应塔4的限额适用。
+
+## Full stacking increment approved, 2026-11-09 / 完整叠放增量已批准
+
+The owner answered “批准完整10模型方案及科研用料” to the exact consolidated decision in the [stacking validation plan](../scenarios/v0.5-stacking-navigation/validation-plan.md#approved-full-material-increment--已批完整用料增量). Execute its full column of44 placed test buildings, plus2 matrix labs as upgrade inputs, up to100 basic belts,24 basic sorters and4 Tesla towers. The research/manufacturing allowance includes320 blue matrices,840 Dark Fog matrices,20 silicon-based neurons and8 quantum chips. Record the normal10 machine-gun ammo-box reward from weapon-system research. This directly grants the selected material/technology increment and current-owned-save construction/function/recovery validation. Ordinary product/caller fixes, exact-source CI, linear commits, coherent installation and protected recovery continue under the existing execution workflow.
+
+所有者对准确集中提案明确答复“批准完整10模型方案及科研用料”，批准[验证计划完整列](../scenarios/v0.5-stacking-navigation/validation-plan.md#approved-full-material-increment--已批完整用料增量)的44座实际测试建筑、另2座作为升级原料的普通研究站、至多100条基础带/24分拣器/4电力感应塔，以及320蓝矩阵、840黑雾矩阵、20硅基神经元和8量子芯片的科研/制造用料。记录武器系统科研正常奖励的10箱机枪弹药。按该选定增量连续完成当前owned存档的建造、功能及保存恢复验证，沿既有执行流程处理必要产品/调用端修复、准确源码CI、线性提交、同源安装和受保护恢复。
+
+Use fresh Native admission and actual owned-world resource availability for each operation. Preserve cumulative spending, complete current-save coverage, one writer, original receipts, quarantine and the return/energy/warper floors. The full matrix remains a verification target until its individual live rows pass.
+
+每笔操作以新鲜原生准入及真实owned世界资源可用性为依据，保留累计实耗、当前完整保存覆盖、唯一writer、原回执、隔离以及返航/能源/翘曲器下限。完整矩阵逐行通过后形成对应实机验收。
+
 ## Current stacking/navigation task, 2026-11-08 / 当前叠放与步行任务
 
 The owner required every Native-stackable building/model/host combination, requested a verification workflow, asked to reuse the current save and then explicitly said “做下吧”. This authorizes the implementation, relevant tests/CI, coherent cold installation and current-owned-save validation described in the [new validation plan](../scenarios/v0.5-stacking-navigation/validation-plan.md). Git integration follows the owner's explicit linear-main instruction. The first live survey uses only bounded ordinary movement and read-only public observations within the conserved current limits. Existing material ceilings and actual reserve floors remain; derive and decide any concrete test increment through the recorded exact consolidated BOM/Native-preflight process before consumption. / 所有者要求全部原生可叠放建筑/模型/宿主组合、设计验证流程并复用当前存档，随后明确“做下吧”，授权新验证计划内的实现、相关测试/CI、同源冷安装与当前owned存档验证。Git依所有者要求线性进入main。首次实机调查仅在保留实际限额内正常有界移动及公开只读观察；已有物料上限及真实安全下限保留，实际测试增量先按既定准确集中BOM/原生预检流程决定，再消费。

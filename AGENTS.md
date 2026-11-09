@@ -1,5 +1,7 @@
 # Spherewright-Lab working rules
 
+- Owner2026-11-09 approved materials and then removed the self-evolution lab. Execute the [current9-model stacking scope](operations/standing-authority.md#current-nine-model-scope-2026-11-09--当前九模型范围) through fresh Native admission and current-owned-save validation. / 所有者批准用料后移除自演化研究站，按当前9模型范围和新鲜原生门连续完成当前owned存档验证。
+
 - Owner2026-11-05 explicitly approved the [complete consolidated rocket increment](scenarios/v0.5-voyager/rocket-scope-increment.md), excluding formal publication. Apply that exact BOM and one-silo/local-manufacture/receiving-node scope under the unchanged Native and reserve gates; do not re-request this same increment. / 所有者已明确批准首火箭整项准确增量（不含正式发布）；按固定BOM、1井、当地制造及最小接收点执行，原生门和储备不变，不再重复请批同项增量。
 
 - Latest owner instruction (2026-11-04): the owner explicitly said “继续”, resuming execution after normal shutdown. Apply the [current resumption](operations/standing-authority.md#current-owner-resumption-2026-11-04--当前所有者续接); preserve the paused save boundary and original unknown action without replay. / 所有者明确要求继续，撤销先前暂停；按现行有限预算授权续接，保留暂停保存边界及unknown原件，不重放。
