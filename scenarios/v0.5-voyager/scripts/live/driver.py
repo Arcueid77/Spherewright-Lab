@@ -433,7 +433,9 @@ class Live:
   elif mode=='enable-mecha-warper-auto-supply':ok=native_warper_auto_supply_enabled(r)
   elif mode in ('disable-mecha-research-auto-supply','enable-mecha-research-auto-supply'):
    desired=mode=='enable-mecha-research-auto-supply'
-   ok=r['succeeded'] and self.first_before['autoManageResearchItems'] is not desired and e['autoManageResearchItems'] is desired and not e['mechaResearchItemBuffer']
+   # Native proves the empty buffer in the same-tick setting receipt. A later
+   # observation may already contain points from the newly enabled research.
+   ok=r['succeeded'] and self.first_before['autoManageResearchItems'] is not desired and e['autoManageResearchItems'] is desired
   elif mode=='storage-capacity':
    before=self.first_before.get('storageConfiguration') or {};after=e.get('storageConfiguration') or {}
    filters=after.get('gridFilterItemIds') or []

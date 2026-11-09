@@ -112,7 +112,9 @@ class Factory(Live):
    need(s['kind'] in ('read','dump') or s['kind'] in ('operation','prepare-only')
     and s.get('prepareTool')=='spherewright_prepare_interplanetary_flight',
     'paused_space_plan_only_reads_or_exact_home_return')
-  role=s['role'];kind=s['kind'];self.state()
+  role=s['role'];kind=s['kind']
+  if kind=='save-close':self.cleanup_known_state();return
+  self.state()
   if kind=='operation':return self.native_operation(s)
   if kind=='prepare-only':return self.native_operation(s,commit_requested=False)
   if kind=='observe-sail-conversion':return observe_sails(self,s)
@@ -241,7 +243,6 @@ class Factory(Live):
    self.runtime.put('caller-handoff.private.json',dict(callerStopped=True,noActiveGameAction=True,gameProcessRetained=True,
      priorRpcCount=closed['priorRpcCount'],requestCount=closed['requestCount'],gameTick=state['gameTick'],noSave=True,noLoad=True,noLaunch=True,
      materialUsed=self.used,materialReservations=self.material_holds));return
-  if kind=='save-close':self.cleanup_known_state();return
   raise ValueError('unsupported_immutable_step:'+kind)
 
  def native_operation(self,s,commit_requested=True):
@@ -394,8 +395,15 @@ class Factory(Live):
   self.runtime.put(label+'-complete.private.json',dict(refs=self.refs,materialUsed=self.used,materialReservations=self.material_holds,session=self.call('spherewright_get_session_state',{})))
 
  def await_next_plan(self):
-  sequence=1
+  sequence=1;next_budget_check=time.monotonic()
   while self.c is not None and time.monotonic()<self.c.deadline-60:
+   if time.monotonic()>=next_budget_check:
+    try:self.state()
+    except RuntimeError as error:
+     if str(error)!='finite_stage_work_reserve_reached':raise
+     self.runtime.put('idle-work-budget-ended.private.json',dict(reason=str(error),noActionReplayed=True))
+     self.cleanup_known_state();return
+    next_budget_check=time.monotonic()+15
    # Each plan and its hash-bearing envelope are immutable create-once files.
    # No shell/code evaluation or second writer. Refusals keep this owner alive.
    inbox=self.runtime.output/f'next-plan-{sequence:03d}.private.json'

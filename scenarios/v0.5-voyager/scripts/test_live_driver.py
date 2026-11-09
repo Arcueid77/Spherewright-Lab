@@ -9,6 +9,37 @@ from factory import Factory,resolve_refs
 from runtime import freeze,Runtime
 
 class LiveDriverTests(unittest.TestCase):
+ def test_enabled_research_can_naturally_fill_its_buffer_after_the_successful_setting(self):
+  adapter=Live.__new__(Live)
+  adapter.runtime=type('Runtime',(),dict(config=dict(firstOperation=dict(mode='enable-mecha-research-auto-supply')),
+   put=lambda *args:None))()
+  adapter.first_before=dict(autoManageResearchItems=False,mechaResearchItemBuffer=[])
+  adapter.player=lambda:dict(autoManageResearchItems=True,mechaResearchItemBuffer=[dict(itemId=6001,pointCount=3599)])
+  self.assertTrue(adapter.verify_progress({},dict(succeeded=True,actionId='synthetic-original')))
+  self.assertFalse(adapter.verify_progress({},dict(succeeded=False,actionId='synthetic-original')))
+
+ def test_normal_save_close_remains_available_after_work_budget_ends(self):
+  adapter=Factory.__new__(Factory);adapter.ctx=dict(planetId=104)
+  def ended():raise RuntimeError('finite_stage_work_reserve_reached')
+  adapter.state=ended;calls=[];adapter.cleanup_known_state=lambda:calls.append('normal-save-close')
+  adapter.step(dict(kind='save-close',role='protect'))
+  self.assertEqual(calls,['normal-save-close'])
+  with self.assertRaisesRegex(RuntimeError,'finite_stage_work_reserve_reached'):
+   adapter.step(dict(kind='read',role='ordinary-read',tool='spherewright_get_player_state'))
+
+ def test_idle_inbox_preserves_the_world_when_work_budget_ends(self):
+  import time
+  adapter=Factory.__new__(Factory);adapter.c=type('Client',(),dict(deadline=time.monotonic()+120))()
+  events=[];adapter.runtime=type('Runtime',(),dict(put=lambda self,name,value:events.append(name)))()
+  def ended():raise RuntimeError('finite_stage_work_reserve_reached')
+  adapter.state=ended;adapter.cleanup_known_state=lambda:events.append('normal-save-close')
+  adapter.await_next_plan()
+  self.assertEqual(events,['idle-work-budget-ended.private.json','normal-save-close'])
+  def unhealthy():raise RuntimeError('owned_world_health_changed')
+  adapter.state=unhealthy
+  with self.assertRaisesRegex(RuntimeError,'owned_world_health_changed'):adapter.await_next_plan()
+  self.assertEqual(events,['idle-work-budget-ended.private.json','normal-save-close'])
+
  def test_closed_home_recovery_retains_frozen_unknowns_in_a_separate_saved_context(self):
   from contracts import owned_saved_recovery_context
   config=dict(recoveryProfile='ordinary-owned-home',recoveryMode='default',sourceRole='primary',planetId=104,
