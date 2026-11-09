@@ -7,6 +7,13 @@ def saved_identity_token(config, session):
         return session['restartResumeToken']
     if config.get('recoveryProfile') == 'exact-paused-space' and config.get('recoveryMode') == 'open_saved_last_exit':
         return config.get('consumedSavedIdentityToken') or None
+    if (config.get('recoveryProfile') == 'fresh-remote-file-access'
+        and config.get('recoveryMode') == 'authorize_remote_primary_recovery'
+        and config.get('sourceRole') == 'lastExit'
+        and type(config.get('sourceTick')) is int and config['sourceTick'] >= 0
+        and config.get('isolatedInterruptedOwnedResumes')):
+        token = config.get('consumedSavedIdentityToken')
+        return token if isinstance(token, str) and 0 < len(token) <= 256 else None
     return None
 
 

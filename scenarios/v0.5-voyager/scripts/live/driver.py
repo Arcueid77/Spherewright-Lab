@@ -166,7 +166,7 @@ class Live:
      lambda e:any(k in str(e) for k in ('BRIDGE_NOT_READY','BRIDGE_UNAVAILABLE','REQUEST_TIMEOUT')))
    need(p.get('prepared') and ordinary_owned_resume_echo(c,p),'ordinary_home_source_or_nullable_echo_changed')
    self.runtime.put('fresh-resume-plan.private.json',p);return p
-  args=dict(resumeToken=ready['session']['restartResumeToken'],recoveryMode=c.get('recoveryMode','authorize_remote_primary_recovery'),
+  args=dict(resumeToken=saved_identity_token(c,ready['session']),recoveryMode=c.get('recoveryMode','authorize_remote_primary_recovery'),
    minimumRecoveryGameTick=c['sourceTick'],expectedRecoveryGameTick=c['sourceTick'],
    recoveryDeadlineUtc=(now+dt.timedelta(seconds=c['recoveryWindowSeconds'])).isoformat(),
    recoveryScope='continue_original_finite_task',maximumChargeGameTicks=18000,maximumChargeWallSeconds=300,

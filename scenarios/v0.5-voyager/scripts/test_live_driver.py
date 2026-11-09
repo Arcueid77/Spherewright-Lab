@@ -9,6 +9,39 @@ from factory import Factory,resolve_refs
 from runtime import freeze,Runtime
 
 class LiveDriverTests(unittest.TestCase):
+ def test_consumed_remote_identity_only_enters_explicit_fresh_saved_file_profile(self):
+  from saved_space import saved_identity_token
+  config=dict(recoveryProfile='fresh-remote-file-access',recoveryMode='authorize_remote_primary_recovery',
+   sourceRole='lastExit',sourceTick=900,isolatedInterruptedOwnedResumes=[dict(isolated=True)],
+   consumedSavedIdentityToken='synthetic-consumed-identity')
+  self.assertEqual(saved_identity_token(config,{}),'synthetic-consumed-identity')
+  self.assertEqual(saved_identity_token(config,dict(restartResumeAvailable=True,restartResumeToken='current-native')),'current-native')
+  for key,value in [('recoveryProfile','default'),('recoveryMode','default'),('sourceRole','primary'),
+    ('sourceTick',None),('isolatedInterruptedOwnedResumes',[]),('consumedSavedIdentityToken',None)]:
+   self.assertIsNone(saved_identity_token(dict(config,**{key:value}),{}))
+
+ def test_fresh_remote_prepare_uses_only_the_identity_hint_and_requires_new_authorization_echo(self):
+  import time
+  adapter=Live.__new__(Live)
+  config=dict(recoveryProfile='fresh-remote-file-access',recoveryMode='authorize_remote_primary_recovery',
+   sourceRole='lastExit',sourceTick=900,isolatedInterruptedOwnedResumes=[dict(isolated=True)],
+   consumedSavedIdentityToken='synthetic-consumed-identity',recoveryWindowSeconds=60,
+   additionalVoyagerGameTicks=100,originalJourneyMaximumGameTicks=108000,planetId=402)
+  adapter.runtime=type('Runtime',(),dict(config=config,put=lambda *args:None))()
+  plan=dict(prepared=True,userConfirmationRequired=True,commitAllowedNow=False,
+   commitBlockers=[dict(code='USER_CONFIRMATION_REQUIRED')],remotePrimaryRecoveryAuthorizationUsed=True,
+   discardedUnstoredProgressGameTicks=0,completedSavedLandingAdmissionUsed=False,
+   originalFailedFlightActionId=None,savedLandingAccountingAnchorGameTick=None,failedLandingRecoveryAuthorizationUsed=False,
+   expectedPlanetId=402,candidateGameTick=900,minimumGameTick=900,additionalVoyagerGameTicks=100,
+   originalJourneyMaximumGameTicks=108000,effectiveJourneyMaximumGameTicks=108100)
+  calls=[]
+  adapter.call=lambda tool,args:calls.append((tool,args)) or plan
+  self.assertIs(adapter.prepare_resume(dict(session={}),time.monotonic()+5),plan)
+  self.assertEqual(calls[0][0],'spherewright_prepare_resume_owned_game')
+  self.assertEqual(calls[0][1]['resumeToken'],'synthetic-consumed-identity')
+  self.assertEqual(calls[0][1]['minimumRecoveryGameTick'],900)
+  self.assertEqual(len(calls),1)
+
  def test_tokenless_walking_preview_never_enters_commit_path(self):
   adapter = Factory.__new__(Factory)
   adapter.ctx = dict(sessionId='synthetic-session', planetId=104)
