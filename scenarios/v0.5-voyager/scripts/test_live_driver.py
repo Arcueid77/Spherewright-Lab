@@ -9,6 +9,15 @@ from factory import Factory,resolve_refs
 from runtime import freeze,Runtime
 
 class LiveDriverTests(unittest.TestCase):
+ def test_closed_home_recovery_retains_frozen_unknowns_in_a_separate_saved_context(self):
+  from contracts import owned_saved_recovery_context
+  config=dict(recoveryProfile='ordinary-owned-home',recoveryMode='default',sourceRole='primary',planetId=104,
+   sourceTick=950,closedJourneyHome=dict(phase='completed',homePlanetId=104,completedSaveGameTick=940))
+  self.assertTrue(owned_saved_recovery_context(config))
+  for field,value in [('phase','remote_landed'),('homePlanetId',402),('completedSaveGameTick',960),('completedSaveGameTick',None)]:
+   bad=copy.deepcopy(config);bad['closedJourneyHome'][field]=value;self.assertFalse(owned_saved_recovery_context(bad))
+  self.assertFalse(owned_saved_recovery_context(dict(config,recoveryProfile='default')))
+
  def test_consumed_remote_identity_only_enters_explicit_fresh_saved_file_profile(self):
   from saved_space import saved_identity_token
   config=dict(recoveryProfile='fresh-remote-file-access',recoveryMode='authorize_remote_primary_recovery',

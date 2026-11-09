@@ -1,9 +1,18 @@
 """Interpret public DTO variants without inventing missing evidence."""
 
+def owned_saved_recovery_context(config):
+    if config.get('recoveryMode')=='authorize_remote_primary_recovery' and config.get('sourceRole')=='lastExit':return True
+    home=config.get('closedJourneyHome') or {}
+    return (config.get('recoveryProfile')=='ordinary-owned-home'
+        and config.get('recoveryMode') in ('default','verified_newer_lastexit')
+        and config.get('sourceRole') in ('primary','lastExit') and home.get('phase')=='completed'
+        and home.get('homePlanetId')==config.get('planetId') and type(home.get('completedSaveGameTick'))is int
+        and type(config.get('sourceTick'))is int and 0<home['completedSaveGameTick']<=config['sourceTick'])
+
 def quarantined_paid_original_accounted(config,reference,receipt,preservation):
     count=reference.get('paidObjectCount');item=reference.get('itemId');objects=receipt.get('blueprintObjects') or []
     control=receipt.get('constructionControl') or {};failure=receipt.get('nativeFirstFailure') or {}
-    return (config.get('recoveryMode')=='authorize_remote_primary_recovery' and config.get('sourceRole')=='lastExit'
+    return (owned_saved_recovery_context(config)
         and receipt.get('actionId')==reference.get('actionId') and receipt.get('terminal') is True
         and receipt.get('state')=='outcome_unknown' and control.get('executionKind')=='structured_native'
         and control.get('dispatchDisabled') is True and control.get('wholeBatchDebitSharedByObjectReceipts') is True
@@ -23,7 +32,7 @@ def quarantined_paid_original_accounted(config,reference,receipt,preservation):
 
 def quarantined_harvest_no_effect_accounted(config,reference,receipt,cut,session,preservation):
     action=reference.get('actionId');tick=cut.get('observedGameTick')
-    return (config.get('recoveryMode')=='authorize_remote_primary_recovery' and config.get('sourceRole')=='lastExit'
+    return (owned_saved_recovery_context(config)
         and receipt.get('actionId')==action and receipt.get('actionKind')=='harvest'
         and receipt.get('terminal') is True and receipt.get('state')=='outcome_unknown'
         and receipt.get('targetObjectId')==reference.get('nodeId')==cut.get('nodeId')
