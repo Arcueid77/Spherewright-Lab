@@ -2,7 +2,7 @@
 
 2026-11-10。当前9模型、19有向组合已完成正向建造及正常保存冷恢复。功能矩阵仍有余项。[逐项复核数据](native-matrix-2026-11-10.json)和[验证计划](validation-plan.md)分别记录实测与范围。所有者移除了自演化研究站，既有[首帆/首火箭交审](../../releases/v0.5.0/expansion-review-delivery-2026-11-06.md)保留原来源。
 
-- 产品main、选定依赖及实装均为`28f4af96ba666998d9f82f8cd529c9a7911978ed`，新增合并提交0。[准确产品CI](https://github.com/Arcueid77/Spherewright/actions/runs/42665706154)、Native构建、1667项相关资格、SDK37请求及148项调用端回归通过。74工具/1资源、模块身份与同源目录均已核验。SourceLock为development。
+- 选定依赖及实装程序为`28f4af96ba666998d9f82f8cd529c9a7911978ed`，产品main后续文档提交为`0c2e347df7422bb992b52e5226d5a460f62d5bcb`，新增合并提交0。[准确产品CI](https://github.com/Arcueid77/Spherewright/actions/runs/42665706154)、Native构建、1667项相关资格、SDK37请求及148项调用端回归通过。74工具/1资源、模块身份与同源目录均已核验。SourceLock为development。
 - 实际新建43/44座测试建筑，包括16分流器、5小仓、5大仓、3液罐、5普通研究站、4集装机、4喷涂机及1基站。另建30/100基础带、4/24基础分拣器、4/4电塔。三种分流器的9个有向样式组合、3种托小仓组合、大小仓/液罐/研究站/集装机/喷涂机自叠及基站托大仓均通过。基站上第二层大仓被原生垂直高度限制拒绝，零提交/扣料，剩余大仓改作测试料仓。较早地点保留1座受高架带限制的分流器底座，已计入16座。
 - 冷恢复核对44个链成员，其中1个为原有小仓根、43个为本轮新建。模型、姿态、连接、配置、逐层设备状态/缓冲及7处库存样本差异0，完整背包count/inc一致。首轮启动实操74.766秒。本次首个1根补燃料准备被原生整栈4根要求拒绝，未接受；保留原记录后在同一启动时窗114.757秒内完成新鲜5米Move，未重放读档。
 - 科研1151/1801/1826已正常完成，自动研究供料已恢复原先关闭状态，点缓冲为空。武器科研正常奖励10弹箱。五层研究站均同步配方9，实际观察到2蓝矩阵及上层投入缓冲，状态跨保存恢复保持。基站仓储正常往返通过。集装机、喷涂机和研究站根层均已接入电网3，服务比例1。集装机实际堆叠、喷涂增产和液罐流转尚待闭合。
@@ -10,7 +10,7 @@
 - 最新正常关闭为Primary=LastExit125371104，2172项完整保护文件核验，Game/MCP均已正常退出并记录EOF。累计4281842/6000000tick，54000返航及3000清理储备保留，累计已计账59648调用。先前中断的owned读档原件仍未决隔离，不重放。
 - 旧仓样本曾被其原有出料线送出。40石材和5铜已通过原生完整带货/分拣器持货回收，仓内剩余样本已收回，原过滤恢复。另5铜的最终去向尚未逐件核清，同时收回1个既有持货磁铁。此前[目录、绕树实走和7项拒绝检查](https://github.com/Arcueid77/Spherewright-Lab/blob/817c1c6/scenarios/v0.5-stacking-navigation/current-status.md)保留原源码范围。当前不作为完整功能验收或发行双包闭合。
 
-English summary. All9 approved stackable model rows and19 directed pairs passed real construction and normal cold recovery on28f4af96. Exact product CI, Native build,1667 relevant qualification cases, SDK37 requests and148 caller regressions passed.43 of44 approved test buildings,30 belts,4 sorters and4 towers were placed. A second large storage above the battle base was refused by Native vertical height admission without a debit. One earlier splitter base remains within the16-unit ceiling.
+English summary. All9 approved stackable model rows and19 directed pairs passed real construction and normal cold recovery on28f4af96. The subsequent product documentation head is0c2e347d. Exact product CI, Native build,1667 relevant qualification cases, SDK37 requests and148 caller regressions passed.43 of44 approved test buildings,30 belts,4 sorters and4 towers were placed. A second large storage above the battle base was refused by Native vertical height admission without a debit. One earlier splitter base remains within the16-unit ceiling.
 
 Recovery preserved44 chain members, including one existing root, with zero model/pose/connection/configuration/device-buffer/stock-sample differences and unchanged full backpack count/inc. An unaccepted one-rod refuel request disclosed a four-rod Native transfer. A fresh Move then completed within114.757 seconds of the original launch, preserving the original clock and receipts. Research1151/1801/1826 completed normally, auto-supply returned off with an empty point buffer, and10 normal ammo boxes were rewarded. Five lab layers share recipe9. Two blue matrices and an upper-layer input buffer were observed and preserved. Base-storage round trips and powered machine roots passed. Piler cargo, spraycoater coating and tank fluid flow remain open.
 
