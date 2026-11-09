@@ -1,0 +1,162 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-11-10",
+  "sourceSha": "28f4af96ba666998d9f82f8cd529c9a7911978ed",
+  "nativeVersion": "0.10.35.29151",
+  "productCiRun": 42665706154,
+  "sourceQualificationCases": 1667,
+  "callerRegressionCases": 148,
+  "sdkRequests": 37,
+  "scope": {
+    "stackableModelRows": 9,
+    "directedPairs": [
+      [
+        38,
+        38
+      ],
+      [
+        38,
+        39
+      ],
+      [
+        38,
+        40
+      ],
+      [
+        38,
+        51
+      ],
+      [
+        39,
+        38
+      ],
+      [
+        39,
+        39
+      ],
+      [
+        39,
+        40
+      ],
+      [
+        39,
+        51
+      ],
+      [
+        40,
+        38
+      ],
+      [
+        40,
+        39
+      ],
+      [
+        40,
+        40
+      ],
+      [
+        40,
+        51
+      ],
+      [
+        51,
+        51
+      ],
+      [
+        52,
+        52
+      ],
+      [
+        70,
+        70
+      ],
+      [
+        120,
+        120
+      ],
+      [
+        121,
+        121
+      ],
+      [
+        257,
+        257
+      ],
+      [
+        453,
+        52
+      ]
+    ],
+    "selfEvolutionLabOwnerExcluded": true
+  },
+  "live": {
+    "positiveConstructionPassed": true,
+    "newTestBuildings": 43,
+    "existingChainMembers": 1,
+    "placedItems": {
+      "2020": 16,
+      "2101": 5,
+      "2102": 5,
+      "2106": 3,
+      "2901": 5,
+      "2040": 4,
+      "2313": 4,
+      "3009": 1
+    },
+    "additionalTransportItems": {
+      "2001": 30,
+      "2011": 4,
+      "2201": 4
+    },
+    "nativeHeightRefusalWithoutDebit": true,
+    "baseStorageRoundTripPassed": true,
+    "labRecipePropagatedToFiveLayers": true,
+    "observedBlueMatrixProducts": 2,
+    "pilerAndSpraycoaterRootPowerObserved": true
+  },
+  "recovery": {
+    "passed": true,
+    "members": 44,
+    "fullBackpackCountIncPreserved": true,
+    "layerStateDifferences": 0,
+    "maximumPositionDifferenceMetres": 0,
+    "maximumQuaternionComponentDifference": 0,
+    "originalLaunchToWorkSeconds": 114.75662100000045,
+    "firstRefuelRequestRejectedBeforeAcceptance": true,
+    "originalStartupClockRetained": true
+  },
+  "protectedClose": {
+    "primaryGameTick": 125371104,
+    "lastExitGameTick": 125371104,
+    "protectedFiles": 2172,
+    "cumulativeSpentGameTicks": 4281842,
+    "finiteCumulativeLimit": 6000000,
+    "returnReserveGameTicks": 54000,
+    "cleanupReserveGameTicks": 3000,
+    "accountedRpcCount": 59648,
+    "normalGameAndMcpClosed": true
+  },
+  "caveats": [
+    "Functional acceptance remains open for piler cargo, spraycoater coating and tank fluid flow.",
+    "No existing distributor was found in the complete Home factory snapshot. The positive selector case remains pending its real attachment dependency.",
+    "The first connected warehouse sample allowed40 stone and10 copper onto its existing line.40 stone and5 copper were recovered. Five copper were not individually traced to their final location. One existing held magnet was also recovered.",
+    "One splitter base remains at the earlier blocked site within the16-unit ceiling.",
+    "The interrupted owned-resume original remains isolated and was not replayed."
+  ],
+  "pendingOwnerDecision": {
+    "status": "unanswered",
+    "additionalItems": {
+      "2201": 1,
+      "2107": 1
+    },
+    "directManufacturingInputs": {
+      "1101": 10,
+      "1202": 1,
+      "1401": 4,
+      "1303": 4
+    },
+    "authorityNotInferred": true
+  },
+  "fullFunctionalAcceptance": false,
+  "formalPublication": false
+}
