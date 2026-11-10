@@ -1,12 +1,12 @@
 {
   "schemaVersion": 2,
-  "status": "provisional",
+  "status": "tagged",
   "scenario": "v0.5-voyager",
   "spherewright": {
     "repository": "Arcueid77/Spherewright",
     "submodulePath": "deps/Spherewright",
     "sourceSha": "b574c616346c4e087b433de3633e23fb12075add",
-    "releaseTag": null,
+    "releaseTag": "v0.5.0",
     "productVersion": "0.5.0"
   },
   "native": {
