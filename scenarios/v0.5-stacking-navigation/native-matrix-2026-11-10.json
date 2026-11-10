@@ -144,7 +144,7 @@
     "The interrupted owned-resume original remains isolated and was not replayed."
   ],
   "pendingOwnerDecision": {
-    "status": "unanswered",
+    "status": "approved",
     "additionalItems": {
       "2201": 1,
       "2107": 1
@@ -155,7 +155,8 @@
       "1401": 4,
       "1303": 4
     },
-    "authorityNotInferred": true
+    "authorityNotInferred": true,
+    "ownerReply": "批准配送器和补1塔"
   },
   "fullFunctionalAcceptance": false,
   "formalPublication": false,

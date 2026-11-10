@@ -1,5 +1,11 @@
 # Voyager standing execution authority / Voyager 持续执行授权
 
+## Current flow and distributor increment, 2026-11-10 / 当前流转及配送器增量
+
+The owner answered “批准配送器和补1塔” to the concrete remaining-flow decision. Add exactly1 Tesla tower2201 and1 logistics distributor2107. The current stacking task's tower ceiling is5 and its new-distributor ceiling is1. The direct manufacturing bill is10 iron ingots,1 magnetic coil,4 plasma exciters and4 processors. Missing inputs may be normally withdrawn or manufactured. Use the already-approved spare small storage for the selector-layer test. Retain all other ceilings, cumulative spending, Native proof, return/cleanup reserves and original-action isolation. Necessary product/caller completion, qualification, coherent installation and current-owned-save validation continue under the standing workflow.
+
+所有者对准确余项决定明确答复“批准配送器和补1塔”，批准新增1电力感应塔2201及1物流配送器2107。本轮电塔上限为5，配送器新增上限1。直接制造用料为10铁块、1磁线圈、4电浆激发器、4处理器，缺料正常取用或制造。选择器增层使用原批剩余1小仓。其余限额、累计实耗、Native门、返航/清理储备和原动作隔离保留，同范围产品/调用端补齐、资格、同源安装及当前存档实机验证连续执行。
+
 ## Current nine-model scope, 2026-11-09 / 当前九模型范围
 
 After the peaceful-world/Dark Fog finding, the owner said “那就不要这个”, removing the self-evolution lab and its Dark Fog research/material dependency from this validation run. Execute the other9 model rows and19 directed pairs. Reuse the2 already-approved ordinary labs originally allocated as upgrade inputs for the ordinary lab's5-layer test. The placed-building ceiling remains44, with5 ordinary labs and0 self-evolution labs. The selected research closure is now1151/1801/1826 and320 blue matrices, with the recorded10-ammo-box reward. The100-belt/24-sorter/4-Tesla limits apply.

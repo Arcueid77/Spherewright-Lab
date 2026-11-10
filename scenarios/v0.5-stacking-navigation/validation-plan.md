@@ -4,6 +4,8 @@ Owner2026-11-08 requested implementation and validation in the current owned sav
 
 ## Scope / 范围
 
+- Owner2026-11-10 approved1 additional Tesla tower and1 distributor, with direct inputs10 iron,1 coil,4 plasma exciters and4 processors. The task now allows5 towers and1 newly built distributor. The original spare small storage remains available for the selector case. / 所有者已批准新增1塔、1配送器，直接用料10铁、1线圈、4电浆、4处理器；本轮电塔上限5、配送器新增1，选择器案例使用原批剩余小仓。
+
 - Enumerate the complete Native stacking/model catalog, compatibility edges, rotation transforms, joint offsets, technology limits and storage-attachment aliases. Include storage grades, tanks, lab grades, splitter styles and supported host relations. Treat missing rows as pending. / 完整枚举原生叠放/模型目录、兼容边、朝向转换、接点偏移、科技限制和仓储挂件别名；覆盖储仓等级、液罐、研究站等级、分流器样式及宿主关系，缺项保留待验。
 - Validate creation, exact model and reciprocal layer links, one original material debit, layer-specific contents/function and normal save/recovery. / 验证建造、准确模型/双向层连接、原单次扣料、逐层内容/功能与正常保存恢复。
 - Validate movement failure observations separately from geometric route previews. Include known obstacles, compound player geometry, radius/tolerance mismatch, thin obstacles, narrow passages, scene changes and incomplete coverage. / 移动失败观察与几何路线预览分别验收，覆盖已知障碍、复合角色形状、半径/容差误差、细障碍、窄通道、场景变化及不完整覆盖。

@@ -1,5 +1,7 @@
 # Active handoff / 活动交接
 
+**2026-11-10。所有者已批准新增1电塔及1配送器，按[准确增量](standing-authority.md#current-flow-and-distributor-increment-2026-11-10--当前流转及配送器增量)连续完成剩余流转、选择器与恢复验证。** / **The owner approved one additional tower and one distributor. Continue the remaining flow, selector and recovery cases under the recorded exact increment.**
+
 **2026-11-10。9模型/19组合的正向建造和冷恢复通过，43座测试建筑及库存样本已正常保存退出。功能余项与新增用料决定见[活动快照](../scenarios/v0.5-stacking-navigation/current-status.md)。** / **The9-model/19-pair construction and cold-recovery matrix passed.43 test buildings and stock samples are normally saved and closed. Follow the current snapshot for pending function cases and the unanswered material decision.**
 
 **Reading order / 阅读顺序：** Read the newest section first and verify the root [source lock](../source-lock.json). The current task uses the [stacking/navigation snapshot](../scenarios/v0.5-stacking-navigation/current-status.md); the [Voyager snapshot](../scenarios/v0.5-voyager/current-status.md) preserves its completed baseline/extension review. Older handoffs are not standing execution authority. / 先读顶部最新交接并核对根锁；当前任务看叠放/步行快照，Voyager 快照保留已完成交审，旧交接不是持续执行授权。
