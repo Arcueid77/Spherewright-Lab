@@ -13,6 +13,7 @@ def main():
         cases=[
             ('spherewright_prepare_build',dict(ctx,buildingItemId=2107,expectedPlayerStateHash=h,stackOnObjectId=1,expectedStackStateHash=h,preferredModelIndex=371)),
             ('spherewright_prepare_transfer',dict(ctx,direction='belt-cargo-to-player',storageEntityId=1,itemId=0,count=0,expectedPlayerStateHash=h,expectedStorageStateHash=h)),
+            ('spherewright_prepare_transfer',dict(ctx,direction='player-to-belt-cargo',storageEntityId=1,itemId=1101,count=1,expectedPlayerStateHash=h,expectedStorageStateHash=h)),
             ('spherewright_prepare_refuel',dict(ctx,itemId=1802,count=20,expectedPlayerStateHash=h)),
             ('spherewright_prepare_blueprint_build',dict(ctx,expectedStateHash=h,expectedPlayerStateHash=h,
                 resumeBuildId='11111111-1111-4111-8111-111111111111',maximumObjectsToSubmit=11,allowNewPaidConstructionWindow=True)),

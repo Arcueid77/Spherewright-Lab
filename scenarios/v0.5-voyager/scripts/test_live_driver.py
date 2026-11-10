@@ -9,6 +9,25 @@ from factory import Factory,resolve_refs
 from runtime import freeze,Runtime
 
 class LiveDriverTests(unittest.TestCase):
+ def test_device_wait_requires_the_selected_complete_native_layer_and_exact_types(self):
+  from contracts import observed_stack_device_matches as matches
+  e=dict(objectId=7,stack=dict(complete=True,state='observed',selectedObjectId=7,layers=[
+   dict(objectId=8,deviceState=dict(remainingSprays=99)),dict(objectId=7,deviceState=dict(remainingSprays=12,proliferatorItemId=1141))]))
+  self.assertTrue(matches(e,dict(remainingSprays=12,proliferatorItemId=1141)))
+  self.assertFalse(matches(e,dict(remainingSprays=99)))
+  self.assertFalse(matches(e,dict(missing=0)))
+  self.assertFalse(matches(e,{}))
+  self.assertFalse(matches(e,dict(remainingSprays=True)))
+  for field,value in [('complete',False),('state','partial'),('selectedObjectId',8)]:
+   changed=copy.deepcopy(e);changed['stack'][field]=value
+   self.assertFalse(matches(changed,dict(remainingSprays=12)))
+
+ def test_device_wait_rejects_unbounded_or_ambiguous_conditions(self):
+  step=dict(kind='wait-stack-device',role='native-wait',entity=7,expected=dict(remainingSprays=12),maximumSeconds=300)
+  validate_steps([step])
+  for change in [dict(expected={}),dict(expected=dict(counter=None)),dict(maximumSeconds=901),dict(maximumSeconds=float('nan'))]:
+   with self.assertRaises(ValueError):validate_steps([dict(step,**change)])
+
  def test_frozen_paid_belts_do_not_reclassify_or_refund_the_original_unknown(self):
   from contracts import isolated_paid_belt_build_accounted as valid
   c=dict(recoveryProfile='ordinary-owned-home',recoveryMode='default',sourceRole='primary',planetId=104,

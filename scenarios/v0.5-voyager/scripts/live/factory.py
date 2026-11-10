@@ -3,7 +3,7 @@ import math,time,uuid
 from collections.abc import Mapping
 from driver import Live,ToolRefused,AcceptedActionFailure,NativePreacceptanceRefusal
 from evidence import need,read,sha
-from contracts import powered_consumers_share_network,validate_steps,is_read_tool,validate_native_calls,strict_native_player_idle,fully_observed_dry_surface,observed_short_crossing_dry_landing,observed_item_count
+from contracts import powered_consumers_share_network,validate_steps,is_read_tool,validate_native_calls,strict_native_player_idle,fully_observed_dry_surface,observed_short_crossing_dry_landing,observed_item_count,observed_stack_device_matches
 from flight_observers import observe_sails,observe_rocket
 
 def distance(a,b): return math.dist([a[k] for k in 'xyz'],[b[k] for k in 'xyz'])
@@ -223,13 +223,15 @@ class Factory(Live):
    raise last or RuntimeError('no_sorter_candidate')
   if kind=='configure':
    return self.configure(role,self.object_id(s['entity']),s.get('recipeId',0),s.get('mode','production'),s.get('filterItemId',0))
-  if kind=='wait-buffer':
+  if kind in ('wait-buffer','wait-stack-device'):
    interval=s.get('pollSeconds',2)
    need(type(interval) in (int,float) and .25<=interval<=30,'bounded_product_poll_interval_required')
    end=time.monotonic()+s['maximumSeconds']
    while time.monotonic()<end:
     self.state();e=self.entity(self.object_id(s['entity']))
-    if observed_item_count(e,s['itemId'])>=s['minimumCount']:
+    ready=(observed_stack_device_matches(e,s['expected']) if kind=='wait-stack-device'
+           else observed_item_count(e,s['itemId'])>=s['minimumCount'])
+    if ready:
      self.runtime.put(role+'-proof.private.json',e);return e
     time.sleep(interval)
    raise RuntimeError('finite_product_wait_exhausted')

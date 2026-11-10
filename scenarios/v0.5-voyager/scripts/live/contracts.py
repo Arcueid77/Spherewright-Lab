@@ -116,6 +116,17 @@ def observed_item_count(entity,item_id):
     return total
 
 
+def observed_stack_device_matches(entity, expected):
+    stack=entity.get('stack') or {}
+    if not (stack.get('complete') is True and stack.get('state')=='observed'
+            and stack.get('selectedObjectId')==entity.get('objectId')):return False
+    layers=[row for row in stack.get('layers',[]) if row.get('objectId')==entity.get('objectId')]
+    if len(layers)!=1:return False
+    state=layers[0].get('deviceState') or {}
+    return bool(expected) and all(key in state and type(state[key])is type(value)
+                                 and state[key]==value for key,value in expected.items())
+
+
 def resume_admission_echo(config,plan):
     failed=config.get('recoveryMode')=='authorize_failed_landing_last_exit'
     if failed:
@@ -256,7 +267,7 @@ def validate_steps(steps):
         'build-stack':{'itemId','anchor'},
         'build-belt':{'source','ends','maximumNewBelts'},'build-free-belt':{'candidates','maximumNewBelts'},'build-belt-to-device':{'starts','destination','maximumNewBelts'},
         'build-sorter':{'source','destination','filterItemId'},'configure':{'entity'},
-        'wait-buffer':{'entity','itemId','minimumCount','maximumSeconds'},'wait-player-still':{'maximumSeconds'},'prove-network':{'entities','networkId'},'save-close':set(),'handoff-caller':set(),
+        'wait-buffer':{'entity','itemId','minimumCount','maximumSeconds'},'wait-stack-device':{'entity','expected','maximumSeconds'},'wait-player-still':{'maximumSeconds'},'prove-network':{'entities','networkId'},'save-close':set(),'handoff-caller':set(),
         'observe-sail-conversion':{'entity','count','orbitId','maximumSeconds','baselinePath','baselineSha256'},
         'observe-rocket-arrival':{'entity','layerId','nodeId','maximumSeconds','baselinePath','baselineSha256'}}
     for index,step in enumerate(steps):
@@ -268,6 +279,13 @@ def validate_steps(steps):
             if type(step['itemId']) is not int or step['itemId'] <= 0 or not (
                     type(anchor) is int and anchor > 0 or isinstance(anchor, str) and bool(anchor)):
                 raise ValueError('immutable_stack_identity_invalid')
+        if kind=='wait-stack-device':
+            expected=step['expected'];seconds=step['maximumSeconds']
+            if (not isinstance(expected,Mapping) or not 1<=len(expected)<=16
+                    or any(not isinstance(key,str) or not 1<=len(key)<=64 or type(value)not in(int,bool,str)
+                           for key,value in expected.items())
+                    or type(seconds)not in(int,float) or not 0<seconds<=900):
+                raise ValueError('bounded_stack_device_observation_required')
         if 'modelIndex' in step and (type(step['modelIndex']) is not int or step['modelIndex'] <= 0):
             raise ValueError('immutable_native_model_invalid')
         if 'freshStaleMaximumSeconds' in step:
