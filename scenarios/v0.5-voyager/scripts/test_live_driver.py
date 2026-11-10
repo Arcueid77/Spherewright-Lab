@@ -9,6 +9,20 @@ from factory import Factory,resolve_refs
 from runtime import freeze,Runtime
 
 class LiveDriverTests(unittest.TestCase):
+ def test_first_move_waits_for_native_inertia_only_inside_its_original_deadline(self):
+  from unittest.mock import patch
+  a=Live(None);a.runtime=type('Evidence',(),dict(config=dict(firstOperation=dict(kind='move')),put=lambda *_:None))()
+  a.first_before=dict(position=dict(x=0,y=200,z=0));a.first_work_deadline=2
+  idle=dict(position=dict(x=2,y=200,z=0),movementState='Walk',speed=0,nativePhysics=dict(groundContact=dict(checkSphereHit=True),currentOrderPresent=False,queuedOrderCount=0,**{k:dict(x=0,y=0,z=0)for k in ('velocity','walkRtsVelocity','driftRtsVelocity','walkManualVelocity','driftManualVelocity')}))
+  moving=copy.deepcopy(idle);moving['speed']=4;moving['nativePhysics']['walkRtsVelocity']['x']=4
+  states=iter([moving,idle]);a.player=lambda:next(states)
+  with patch('driver.time.monotonic',return_value=1),patch('driver.time.sleep')as wait:
+   self.assertTrue(a.verify_progress({},dict(succeeded=True,actionId='synthetic-original')))
+   wait.assert_called_once()
+  a.first_work_deadline=0;a.player=lambda:idle
+  with patch('driver.time.monotonic',return_value=1):
+   self.assertFalse(a.verify_progress({},dict(succeeded=True,actionId='synthetic-original')))
+
  def test_device_wait_requires_the_selected_complete_native_layer_and_exact_types(self):
   from contracts import observed_stack_device_matches as matches
   e=dict(objectId=7,stack=dict(complete=True,state='observed',selectedObjectId=7,layers=[

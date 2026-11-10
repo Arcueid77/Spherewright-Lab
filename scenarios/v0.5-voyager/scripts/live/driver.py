@@ -317,6 +317,7 @@ class Live:
   raise RuntimeError('finite_sorter_phase_readiness_ended_no_action_or_cargo_replay')
 
  def prepare_first_work(self,loaded,deadline):
+  self.first_work_deadline=deadline
   work=self.runtime.config['firstOperation'];mode=work.get('mode','production')
   if work.get('kind')=='generator-fuel':
    p=self.player();e=self.entity(work['entityId']);self.first_before=dict(player=p,generator=e)
@@ -429,9 +430,17 @@ class Live:
     nativeSupply=r.get('mechaWarperSupplyReadback')));return ok
   if c.get('kind')=='move':
    e=self.player();ground=(e.get('nativePhysics') or {}).get('groundContact') or {};velocity=(e.get('nativePhysics') or {}).get('velocity') or {}
+   deadline=getattr(self,'first_work_deadline',None)
+   # A terminal Native order may retain RTS inertia for a few physics frames.
+   # Observe its stop within the original startup clock without another order.
+   while r['succeeded'] and deadline is not None and not strict_native_player_idle(e) and time.monotonic()<deadline:
+    time.sleep(min(.25,max(0,deadline-time.monotonic())))
+    e=self.player()
    moved=math.dist([self.first_before['position'][k] for k in 'xyz'],[e['position'][k] for k in 'xyz'])
-   ok=r['succeeded'] and moved>1 and strict_native_player_idle(e)
-   self.runtime.put('actual-progress.private.json',dict(verified=ok,actionId=r['actionId'],before=self.first_before,after=e));return ok
+   within=deadline is None or time.monotonic()<=deadline
+   ok=r['succeeded'] and moved>1 and strict_native_player_idle(e) and within
+   self.runtime.put('actual-progress.private.json',dict(verified=ok,actionId=r['actionId'],before=self.first_before,after=e,
+    movedMetres=moved,originalStartupDeadlineRespected=within));return ok
   e=self.player() if mode in PLAYER_SETTING_MODES else self.entity(c['entityId'])
   if mode=='enable-mecha-construction-drones':
    ok=r['succeeded'] and self.first_before['constructionDrones']['enabled'] is False and e['constructionDrones']['enabled'] is True
