@@ -1,0 +1,90 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-11-10",
+  "sourceSha": "19cd5eb505ffd30f4832f3bfbf0ced9ddad4a889",
+  "productCiRun": 42759702754,
+  "sourceQualificationCases": 6347,
+  "callerRegressionCases": 158,
+  "nativeVersion": "0.10.35.29151",
+  "nativeAssemblySha256": "EF314425DADE51F529F184F07BE136CD3C2660A6A81515603C7226FBE7AB1D8C",
+  "packages": {
+    "manual": {
+      "file": "Spherewright-0.5.0-win-x64.zip",
+      "sha256": "1032AA3BC38E6B55415161B3FFBF88EE4FECA1B893B476C0D34D4AD9DFFF7BC3",
+      "size": 37584351
+    },
+    "thunderstore": {
+      "file": "Spherewright-0.5.0-thunderstore.zip",
+      "sha256": "A255103BA53DE5613DE303C4A7D46F1E1A5F47083B8F5909FFA75555F07B6031",
+      "size": 33305190
+    }
+  },
+  "nativeStackableModels": 9,
+  "directedPairs": 19,
+  "recoveredMembers": 47,
+  "warehouseConfigurationCases": {
+    "distributorSelectedTop": true,
+    "largeMiddleLayer": true,
+    "standaloneLarge": true,
+    "splitterHostedSmall": true,
+    "peerInventoryPreserved": true,
+    "savedFiltersAndBansPreserved": true
+  },
+  "pilerAggregation": {
+    "singletonInputs": 22,
+    "observedOutputItems": 2,
+    "observedOutputStacks": 1,
+    "stoneBefore": 100,
+    "stoneAfter": 100,
+    "inc": 0,
+    "newConstruction": 0
+  },
+  "packageLayouts": {
+    "manual": {
+      "passed": true,
+      "sourceSha": "19cd5eb505ffd30f4832f3bfbf0ced9ddad4a889",
+      "layout": "manual",
+      "members": 47,
+      "rootObservations": 16,
+      "warehouseFiltersBansPilerModeAndStockPreserved": true,
+      "completePackageCountIncPreserved": true,
+      "originalLaunchToWorkSeconds": 278.266,
+      "actualPackagedDirectoryMcp": true
+    },
+    "thunderstore": {
+      "passed": true,
+      "sourceSha": "19cd5eb505ffd30f4832f3bfbf0ced9ddad4a889",
+      "layout": "thunderstore",
+      "members": 47,
+      "rootObservations": 16,
+      "configurationAndStockPreserved": true,
+      "completePackageCountIncPreserved": true,
+      "pilerMode": 1,
+      "pilerCachesEmpty": true,
+      "originalLaunchToWorkSeconds": 276.938,
+      "actualArchivePluginAndStandaloneMcp": true
+    }
+  },
+  "protectedClose": {
+    "primaryGameTick": 125438198,
+    "lastExitGameTick": 125438198,
+    "protectedFiles": 2208,
+    "cumulativeSpentGameTicks": 4348936,
+    "finiteCumulativeLimit": 6000000,
+    "returnReserveGameTicks": 54000,
+    "cleanupReserveGameTicks": 3000,
+    "accountedRpcCount": 65981,
+    "normalGameAndMcpClosed": true
+  },
+  "formalPublication": false,
+  "knownCaveats": [
+    "Five earlier paid raised belts and their reciprocal coater attachment survived recovery. Their original completion receipt remains isolated as unknown and the five-item cost remains charged.",
+    "The earlier interrupted owned-resume original remains isolated.",
+    "Five old sample copper were not individually traced to their final location.",
+    "The first249 startup post-check recorded RTS inertia after a successful move. The later unsupported storage-filter startup attempt was refused before acceptance. Both reports remain preserved.",
+    "Package logical/physical path mapping was audited in the application context before one committed coherent installation.",
+    "The initial curved-path reversal candidate was refused before acceptance. The corrected native input-side policy passed exact-source CI and real15-belt reversal.",
+    "The first aggregate pickup met explicit moving-cargo staleness. The original refusal was retained, and two items were collected after the observed path rear became stationary.",
+    "The manual layout switch preserved the exact previously qualified owned standalone host outside the Plugin target before the official packaged installer ran. Historical paired archives and saves remained protected."
+  ]
+}

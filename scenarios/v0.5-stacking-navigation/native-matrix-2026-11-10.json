@@ -1,12 +1,12 @@
 {
   "schemaVersion": 2,
   "date": "2026-11-10",
-  "sourceSha": "249798c0d16dce0933fba821de416ab6db72ec25",
+  "sourceSha": "19cd5eb505ffd30f4832f3bfbf0ced9ddad4a889",
   "nativeVersion": "0.10.35.29151",
-  "productCiRun": 42749186202,
-  "sourceQualificationCases": 6313,
-  "callerRegressionCases": 154,
-  "sdkRequests": 39,
+  "productCiRun": 42759702754,
+  "sourceQualificationCases": 6347,
+  "callerRegressionCases": 158,
+  "sdkRequests": 40,
   "scope": {
     "stackableModelRows": 9,
     "directedPairs": [
@@ -176,9 +176,9 @@
   "functions": {
     "nativeSingleItemPlacements": 7,
     "exactSameTickPackagePathCountIncConservation": true,
-    "pilerObservedMode": "Split",
+    "pilerObservedMode": "Pile",
     "pilerMovedAndRecoveredIron": 4,
-    "pilerAggregationTransformObserved": false,
+    "pilerAggregationTransformObserved": true,
     "coaterInputProliferator": 1,
     "coaterSpraysBefore": 12,
     "coaterSpraysAfter": 8,
@@ -193,7 +193,17 @@
     ],
     "researchAutoSupplyRestoredOff": true,
     "researchPointBufferEmpty": true,
-    "normalAmmoReward": 10
+    "normalAmmoReward": 10,
+    "pilerSingletonItemsFed": 22,
+    "pilerAggregatedItems": 2,
+    "pilerObservedCargoStacks": 1,
+    "pilerStonePackageBeforeAfter": [
+      100,
+      100
+    ],
+    "warehouseLayerConfigurationPassed": true,
+    "warehouseDistributorSelectorPassed": true,
+    "warehouseOtherLayersPreserved": true
   },
   "recovery": {
     "passed": true,
@@ -203,31 +213,59 @@
     "layerStateDifferences": 0,
     "maximumPositionDifferenceMetres": 0,
     "maximumQuaternionComponentDifference": 0,
-    "originalLaunchToWorkSeconds": 272.125,
+    "originalLaunchToWorkSeconds": 276.938,
     "strictNativePlayerStopObserved": true,
     "coaterAndFluidBuffersPreserved": true,
     "distributorIdentityConfigurationStockPoseAndLinksPreserved": true,
-    "originalStartupClockRetained": true
+    "originalStartupClockRetained": true,
+    "sourceSha": "19cd5eb505ffd30f4832f3bfbf0ced9ddad4a889",
+    "packageLayouts": {
+      "manual": {
+        "passed": true,
+        "sourceSha": "19cd5eb505ffd30f4832f3bfbf0ced9ddad4a889",
+        "layout": "manual",
+        "members": 47,
+        "rootObservations": 16,
+        "warehouseFiltersBansPilerModeAndStockPreserved": true,
+        "completePackageCountIncPreserved": true,
+        "originalLaunchToWorkSeconds": 278.266,
+        "actualPackagedDirectoryMcp": true
+      },
+      "thunderstore": {
+        "passed": true,
+        "sourceSha": "19cd5eb505ffd30f4832f3bfbf0ced9ddad4a889",
+        "layout": "thunderstore",
+        "members": 47,
+        "rootObservations": 16,
+        "configurationAndStockPreserved": true,
+        "completePackageCountIncPreserved": true,
+        "pilerMode": 1,
+        "pilerCachesEmpty": true,
+        "originalLaunchToWorkSeconds": 276.938,
+        "actualArchivePluginAndStandaloneMcp": true
+      }
+    }
   },
   "protectedClose": {
-    "primaryGameTick": 125434870,
-    "lastExitGameTick": 125434870,
-    "protectedFiles": 2192,
-    "cumulativeSpentGameTicks": 4345608,
+    "primaryGameTick": 125438198,
+    "lastExitGameTick": 125438198,
+    "protectedFiles": 2208,
+    "cumulativeSpentGameTicks": 4348936,
     "finiteCumulativeLimit": 6000000,
     "returnReserveGameTicks": 54000,
     "cleanupReserveGameTicks": 3000,
-    "accountedRpcCount": 63609,
+    "accountedRpcCount": 65981,
     "normalGameAndMcpClosed": true
   },
   "caveats": [
-    "Piler Split-direction flow and conservation were observed. The aggregation transformation remains uncovered.",
-    "Storage-capacity filtering currently accepts one unstacked ordinary small warehouse. The additional stacked-warehouse attempt was refused before a commit.",
     "Five earlier paid raised belts and their reciprocal coater attachment survived recovery. Their original completion receipt remains isolated as unknown and the five-item cost remains charged.",
     "The earlier interrupted owned-resume original remains isolated.",
     "Five old sample copper were not individually traced to their final location.",
     "The first249 startup post-check recorded RTS inertia after a successful move. The later unsupported storage-filter startup attempt was refused before acceptance. Both reports remain preserved.",
-    "Package logical/physical path mapping was audited in the application context before one committed coherent installation."
+    "Package logical/physical path mapping was audited in the application context before one committed coherent installation.",
+    "The initial curved-path reversal candidate was refused before acceptance. The corrected native input-side policy passed exact-source CI and real15-belt reversal.",
+    "The first aggregate pickup met explicit moving-cargo staleness. The original refusal was retained, and two items were collected after the observed path rear became stationary.",
+    "The manual layout switch preserved the exact previously qualified owned standalone host outside the Plugin target before the official packaged installer ran. Historical paired archives and saves remained protected."
   ],
   "ownerIncrement": {
     "status": "completed",
@@ -240,5 +278,17 @@
     "sorterCeiling": 24,
     "towerCeiling": 5,
     "newDistributorCeiling": 1
+  },
+  "reviewPackages": {
+    "manual": {
+      "file": "Spherewright-0.5.0-win-x64.zip",
+      "sha256": "1032AA3BC38E6B55415161B3FFBF88EE4FECA1B893B476C0D34D4AD9DFFF7BC3",
+      "size": 37584351
+    },
+    "thunderstore": {
+      "file": "Spherewright-0.5.0-thunderstore.zip",
+      "sha256": "A255103BA53DE5613DE303C4A7D46F1E1A5F47083B8F5909FFA75555F07B6031",
+      "size": 33305190
+    }
   }
 }

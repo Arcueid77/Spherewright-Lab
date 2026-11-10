@@ -1,5 +1,7 @@
 # Active handoff / 活动交接
 
+**2026-11-10。合堆实测、大小/叠放仓筛选和新双包均已完成，手动与Thunderstore布局分别实装冷恢复通过，游戏正常保存退出。下一步为所有者审核[本轮交审记录](../releases/v0.5.0/stacking-review-delivery-2026-11-10.md)。按[最终快照](../scenarios/v0.5-stacking-navigation/current-status.md)保全保存边界、预算及历史未决原件。** / **Aggregation, warehouse filtering and both new review packages are complete. Each layout passed actual cold acceptance and the game is normally closed. Next is owner review of this delivery record. Preserve the final snapshot, budgets and original unknowns.**
+
 **2026-11-10。所有者要求继续完成合堆实测、大小/叠放仓筛选接口及新交审双包。7e1c00b8源码、6342项回归及准确CI通过，同源安装与当前存档实测进行中。复用既有传送带及真实库存，沿用物料限额与旧未决隔离。** / **The owner requested completion of aggregation, warehouse-layer filtering and the new review pair.7e1c00b8 passed6342 source cases and exact CI. Coherent installation and current-save acceptance are in progress under the existing material ceilings and original-action isolation.**
 
 **2026-11-10。本轮补塔、配送器选择器、喷涂/液罐有限流转及47成员冷恢复已完成，游戏已正常保存退出，记录可交审。集装机合堆变换尚未覆盖。先读[最终活动快照](../scenarios/v0.5-stacking-navigation/current-status.md)，保留原未决动作和完整保存边界。** / **The approved tower, distributor selector, bounded coating/fluid cases and47-member cold recovery are reviewable and normally saved/exited. Piler aggregation remains uncovered. Read the final snapshot and preserve original unknowns and the complete saved boundary.**

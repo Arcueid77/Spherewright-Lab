@@ -1,6 +1,7 @@
 """Finite Native piler input, observed aggregation and exact stock recovery."""
 import time
 from evidence import need
+from driver import ToolRefused,NativePreacceptanceRefusal
 
 
 def observe_piler_aggregation(adapter, step):
@@ -41,13 +42,22 @@ def observe_piler_aggregation(adapter, step):
         return dict(input=incoming,output=outgoing,piler=entity,cache=cargo,held=held,player=player)
 
     def transfer(suffix,entity,direction,count):
-        receipt=adapter.native_operation(dict(kind='operation',role=role+'-'+suffix,
+        attempt=0
+        while time.monotonic()<end:
+            call=dict(kind='operation',role=role+'-'+suffix+f'-try-{attempt:02d}',
             prepareTool='spherewright_prepare_transfer',freshStaleMaximumSeconds=15,
             reads=[dict(name='e',tool='spherewright_inspect_factory_entity',arguments=dict(objectId=entity)),
                    dict(name='p',tool='spherewright_get_player_state')],
             arguments=dict(direction=direction,storageEntityId=entity,itemId=item if count else 0,count=count,
-                expectedPlayerStateHash=dict(ref='p.stateHash'),expectedStorageStateHash=dict(ref='e.stateHash'))))
-        originals.append(receipt['actionId'])
+                expectedPlayerStateHash=dict(ref='p.stateHash'),expectedStorageStateHash=dict(ref='e.stateHash')))
+            try:receipt=adapter.native_operation(call)
+            except (ToolRefused,NativePreacceptanceRefusal)as error:
+                if adapter.active is not None or error.error.get('code')!='STALE_STATE':raise
+                # The original was explicitly refused before acceptance. Cargo
+                # may still be moving; retain it and prepare afresh after a wait.
+                attempt+=1;time.sleep(.5);continue
+            originals.append(receipt['actionId']);return
+        raise RuntimeError('finite_piler_transfer_readiness_expired')
 
     baseline=stock(adapter.player());need(baseline>=limit,'piler_finite_source_stock_insufficient')
     first=observe();need(first['input']['itemCount']==first['output']['itemCount']==first['held']==0,'piler_case_requires_empty_paths_and_cache')
@@ -74,6 +84,10 @@ def observe_piler_aggregation(adapter, step):
                 beforePackageCount=baseline,afterPackageCount=baseline,inc=0,singletonPlacements=fed,
                 originalActionIds=originals,allPathsAndPilerCacheEmpty=True));return
         if value['output']['itemCount']>0:
-            pickups+=1;transfer(f'return-{pickups:02d}',output,'belt-cargo-to-player',0)
+            tail=step.get('outputTail')
+            if tail is not None:
+                rear=adapter.entity(adapter.object_id(tail)).get('beltCargo') or {}
+                if (rear.get('rearPickup') or {}).get('state')!='observed':time.sleep(.5);continue
+            pickups+=1;transfer(f'return-{pickups:02d}',adapter.object_id(tail)if tail is not None else output,'belt-cargo-to-player',0)
         else:time.sleep(.5)
     raise RuntimeError('finite_piler_stock_recovery_incomplete')

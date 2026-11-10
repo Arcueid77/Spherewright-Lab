@@ -44,6 +44,22 @@ class Adapter:
 
 
 class StackObserverTests(unittest.TestCase):
+    def test_explicit_moving_cargo_refusal_waits_then_prepares_a_new_pickup(self):
+        from unittest.mock import patch
+        from driver import NativePreacceptanceRefusal
+        adapter=Adapter();adapter.active=None;original=adapter.native_operation;refused=[]
+        def transfer(step):
+            if 'return-'in step['role']and not refused:
+                refused.append(step['role'])
+                raise NativePreacceptanceRefusal('spherewright_commit_transfer',dict(code='STALE_STATE'))
+            return original(step)
+        adapter.native_operation=transfer
+        step=dict(kind='observe-piler-aggregation',role='pile',piler=7,input=8,output=9,itemId=1108,maximumItems=8,maximumSeconds=5)
+        with patch('stack_observers.time.sleep'):observe_piler_aggregation(adapter,step)
+        self.assertEqual(len(refused),1)
+        self.assertEqual(adapter.package,100)
+        self.assertEqual(len(adapter.calls),6)
+
     def test_blocked_output_is_normally_collected_then_native_merge_is_observed_and_recovered(self):
         adapter=Adapter();step=dict(kind='observe-piler-aggregation',role='pile',piler=7,input=8,output=9,itemId=1108,maximumItems=8,maximumSeconds=5)
         validate_steps([step]);observe_piler_aggregation(adapter,step)
