@@ -1,0 +1,64 @@
+{
+  "schemaVersion": 2,
+  "status": "provisional",
+  "scenario": "v0.5-voyager",
+  "spherewright": {
+    "repository": "Arcueid77/Spherewright",
+    "submodulePath": "deps/Spherewright",
+    "sourceSha": "19cd5eb505ffd30f4832f3bfbf0ced9ddad4a889",
+    "releaseTag": null,
+    "productVersion": "0.5.0"
+  },
+  "native": {
+    "version": "0.10.35.29151",
+    "assemblySha256": "EF314425DADE51F529F184F07BE136CD3C2660A6A81515603C7226FBE7AB1D8C"
+  },
+  "packages": {
+    "manual": {
+      "file": "Spherewright-0.5.0-win-x64.zip",
+      "sha256": "1032AA3BC38E6B55415161B3FFBF88EE4FECA1B893B476C0D34D4AD9DFFF7BC3",
+      "size": 37584351
+    },
+    "thunderstore": {
+      "file": "Spherewright-0.5.0-thunderstore.zip",
+      "sha256": "A255103BA53DE5613DE303C4A7D46F1E1A5F47083B8F5909FFA75555F07B6031",
+      "size": 33305190
+    }
+  },
+  "installed": {
+    "sourceSha": "19cd5eb505ffd30f4832f3bfbf0ced9ddad4a889",
+    "productVersion": "0.5.0",
+    "releaseTag": null,
+    "native": {
+      "version": "0.10.35.29151",
+      "assemblySha256": "EF314425DADE51F529F184F07BE136CD3C2660A6A81515603C7226FBE7AB1D8C"
+    },
+    "packages": {
+      "manual": {
+        "file": "Spherewright-0.5.0-win-x64.zip",
+        "sha256": "1032AA3BC38E6B55415161B3FFBF88EE4FECA1B893B476C0D34D4AD9DFFF7BC3",
+        "size": 37584351
+      },
+      "thunderstore": {
+        "file": "Spherewright-0.5.0-thunderstore.zip",
+        "sha256": "A255103BA53DE5613DE303C4A7D46F1E1A5F47083B8F5909FFA75555F07B6031",
+        "size": 33305190
+      }
+    },
+    "evidence": "releases/v0.5.0/stacking-review-delivery-2026-11-10.md",
+    "verification": "disk_verified",
+    "runtimeState": "not_running"
+  },
+  "acceptance": {
+    "spec": "v0.4.0",
+    "evidenceManifest": "releases/v0.4.0/manifests/evidence-manifest.json",
+    "evidenceManifestSha256": "F191917B5279F2A4EA5BE3CF3A6F227801C3AB1CC42693C078531AD22CF62C50",
+    "scope": "historical_reference",
+    "sourceLock": "releases/v0.4.0/source-lock.json",
+    "sourceLockSha256": "A2537F906A058593E05E1BF155AFE6D955F6B6E5110E3B658648E4B67CAF16C7"
+  },
+  "evidenceSource": {
+    "repository": "AvaloNero/Spherewright",
+    "sourceSha": "e7d5f7d8661092b7c8089710488c448f290638be"
+  }
+}

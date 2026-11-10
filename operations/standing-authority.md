@@ -1,5 +1,11 @@
 # Voyager standing execution authority / Voyager 持续执行授权
 
+## Current publication grant, 2026-11-10 / 当前正式发布授权
+
+The owner explicitly said “那就发布，thunderstore的你直接帮我去网页上提交好了”, followed by “自己开”. This grants the0.5 formal tag, GitHub Release and submission of the matching Thunderstore archive through the existing package website under Team Arcueid_77. Complete source/package checks, publish the exact qualified source and preserve old releases. Ordinary linear commits/pushes and necessary release-description corrections continue under the standing workflow. User authentication and browser safety remain applicable. Record each platform's actual outcome separately.
+
+所有者明确要求“那就发布，thunderstore的你直接帮我去网页上提交好了”，随后要求“自己开”，已批准0.5正式标签、GitHub Release及在既有Team Arcueid_77包页面提交匹配的Thunderstore包。完成源码/包检查后发布准确合格源码，保留旧发行。必要发布说明修正及普通线性提交/推送沿用持续流程，用户认证和浏览器安全门继续适用，各平台按实际结果分别记账。
+
 ## Current flow and distributor increment, 2026-11-10 / 当前流转及配送器增量
 
 The owner answered “批准配送器和补1塔” to the concrete remaining-flow decision. Add exactly1 Tesla tower2201 and1 logistics distributor2107. The current stacking task's tower ceiling is5 and its new-distributor ceiling is1. The direct manufacturing bill is10 iron ingots,1 magnetic coil,4 plasma exciters and4 processors. Missing inputs may be normally withdrawn or manufactured. Use the already-approved spare small storage for the selector-layer test. Retain all other ceilings, cumulative spending, Native proof, return/cleanup reserves and original-action isolation. Necessary product/caller completion, qualification, coherent installation and current-owned-save validation continue under the standing workflow.
