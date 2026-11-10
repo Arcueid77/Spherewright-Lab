@@ -115,7 +115,9 @@ class Runtime:
              and max(proofs[k]['gameTick'] for k in ('primary','lastExit'))==c['sourceTick'],
              'latest_no_loss_source_not_covered')
         if c.get('recoveryProfile')=='ordinary-owned-home':
-            need((role=='primary' and c['recoveryMode']=='default') or (role=='lastExit' and c['recoveryMode']=='verified_newer_lastexit'
+            quarantined_exit=(role=='lastExit' and c['recoveryMode']=='default' and c.get('quarantinedDefaultLastExit') is True
+                              and bool(c.get('isolatedPaidBeltBuilds')) and proofs['primary']['gameTick']<c['originalQuarantineMinimumTick']<=c['sourceTick'])
+            need((role=='primary' and c['recoveryMode']=='default') or quarantined_exit or (role=='lastExit' and c['recoveryMode']=='verified_newer_lastexit'
                  and proofs['primary']['gameTick']<c['sourceTick']),'ordinary_home_source_mode_mismatch')
         return m
 

@@ -159,6 +159,12 @@ def ordinary_owned_resume_echo(config,plan):
     if verified:
         return (plan.get('candidateGameTick')==plan.get('minimumGameTick')==config['sourceTick']
             and plan.get('exactEmbeddedIdentityVerified') is True and plan.get('recoveryEvidenceVersion')==1)
+    if config.get('quarantinedDefaultLastExit') is True:
+        minimum=plan.get('minimumGameTick')
+        return (config.get('sourceRole')=='lastExit' and bool(config.get('isolatedPaidBeltBuilds'))
+            and type(minimum)is int and config['sourcePrimaryGameTick']<config['originalQuarantineMinimumTick']<=minimum<=config['sourceTick']
+            and plan.get('candidateGameTick') is None and plan.get('exactEmbeddedIdentityVerified') is False
+            and plan.get('recoveryEvidenceVersion')==0)
     return (config.get('sourceRole')=='primary' and plan.get('candidateGameTick') is None
         and plan.get('exactEmbeddedIdentityVerified') is False
         and plan.get('minimumGameTick')==config['ticketMinimumGameTick']<=config['sourceTick']

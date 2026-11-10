@@ -166,7 +166,7 @@ class Live:
    self.runtime.put('fresh-resume-plan.private.json',p);return p
   if c.get('recoveryProfile')=='ordinary-owned-home':
    args=dict(resumeToken=ready['session']['restartResumeToken'],recoveryMode=c['recoveryMode'])
-   if c['recoveryMode']=='verified_newer_lastexit':args.update(minimumRecoveryGameTick=c['sourceTick'],expectedRecoveryGameTick=c['sourceTick'])
+   if c['recoveryMode']=='verified_newer_lastexit':args.update(minimumRecoveryGameTick=c['sourceTick'],expectedRecoveryGameTick=c['sourceTick'],userConfirmedInConversation=c.get('newerLastExitConfirmed') is True)
    p=G.retry_read_only(lambda:self.call('spherewright_prepare_resume_owned_game',args),deadline,
      lambda e:any(k in str(e) for k in ('BRIDGE_NOT_READY','BRIDGE_UNAVAILABLE','REQUEST_TIMEOUT')))
    need(p.get('prepared') and ordinary_owned_resume_echo(c,p),'ordinary_home_source_or_nullable_echo_changed')

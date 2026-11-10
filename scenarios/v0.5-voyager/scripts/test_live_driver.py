@@ -617,6 +617,12 @@ class LiveDriverTests(unittest.TestCase):
   for key,value in [('candidateGameTick',0),('minimumGameTick',197),('userConfirmationRequired',True),
       ('sourceGameVersion','other-version'),('opensSavedWorldOnly',True),('originalJourneyMaximumGameTicks',0)]:
    with self.subTest(key=key):self.assertFalse(ordinary_owned_resume_echo(c,dict(p,**{key:value})))
+  quarantined=dict(c,sourceRole='lastExit',quarantinedDefaultLastExit=True,isolatedPaidBeltBuilds=[{}],
+   sourcePrimaryGameTick=190,originalQuarantineMinimumTick=195)
+  self.assertTrue(ordinary_owned_resume_echo(quarantined,p))
+  self.assertFalse(ordinary_owned_resume_echo(quarantined,dict(p,minimumGameTick=194)))
+  self.assertFalse(ordinary_owned_resume_echo(quarantined,dict(p,minimumGameTick=201)))
+  self.assertFalse(ordinary_owned_resume_echo(dict(quarantined,isolatedPaidBeltBuilds=[]),p))
   verified=dict(c,recoveryMode='verified_newer_lastexit',sourceRole='lastExit')
   p.update(recoveryMode='verified_newer_lastexit',candidateGameTick=200,minimumGameTick=200,
     exactEmbeddedIdentityVerified=True,recoveryEvidenceVersion=1)
