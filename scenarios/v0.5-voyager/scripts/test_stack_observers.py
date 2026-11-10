@@ -20,14 +20,15 @@ class Adapter:
             cachedCargo=[dict(itemId=1108,count=n,inc=0)for n in self.cache]))]))
 
     def call(self,tool,args):
-        outgoing=args['objectId']==9
-        if outgoing and self.pending:
+        if self.pending:
             self.pending=False;self.output=sum(self.cache);self.cache=[0,0];self.packed=True
-        count=self.output if outgoing else 0
-        path=dict(pathClosed=False,outputPathId=0,inputPathIds=[],pathLengthCells=30,beltObjectIds=[args['objectId']],
-            itemCount=count,cargoStackCount=(1 if self.packed and count else count),
-            items=[dict(itemId=1108,count=count,inc=0)]if count else [])
-        return dict(materialInventoryCut=dict(state='observed',cargoPaths=[path]))
+        paths=[]
+        for entity in args['materialInventoryObjectIds']:
+            count=self.output if entity==9 else 0
+            paths.append(dict(pathId=entity,pathClosed=False,outputPathId=0,inputPathIds=[],pathLengthCells=30,beltObjectIds=[entity],
+                itemCount=count,cargoStackCount=(1 if self.packed and count else count),
+                items=[dict(itemId=1108,count=count,inc=0)]if count else []))
+        value=self.entity(args['objectId']);value['materialInventoryCut']=dict(state='observed',cargoPaths=paths);return value
 
     def native_operation(self,step):
         args=step['arguments'];self.calls.append(args)

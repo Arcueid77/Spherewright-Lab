@@ -13,9 +13,8 @@ def observe_piler_aggregation(adapter, step):
         need(all(row['inc']==0 for row in rows),'piler_source_requires_zero_inc_stock')
         return sum(row['count']for row in rows)
 
-    def path(entity):
-        value=adapter.call('spherewright_inspect_factory_entity',dict(adapter.ctx,objectId=entity,materialInventoryObjectIds=[entity]))
-        cut=value.get('materialInventoryCut') or {};paths=cut.get('cargoPaths') or []
+    def path(cut,entity):
+        paths=[row for row in cut.get('cargoPaths',[])if entity in row.get('beltObjectIds',[])]
         need(cut.get('state')=='observed' and len(paths)==1,'piler_complete_path_unavailable')
         result=paths[0];rows=result.get('items') or []
         need(not result['pathClosed'] and result['outputPathId']==0 and not any(result['inputPathIds'])
@@ -25,7 +24,13 @@ def observe_piler_aggregation(adapter, step):
         return result
 
     def observe():
-        adapter.state();incoming=path(source);outgoing=path(output);entity=adapter.entity(piler)
+        adapter.state()
+        # Both paths and the piler cache come from one Native main-thread cut.
+        # Independent observations could double-count a moving packet.
+        entity=adapter.call('spherewright_inspect_factory_entity',dict(adapter.ctx,objectId=piler,
+            materialInventoryObjectIds=[source,output]))
+        cut=entity.get('materialInventoryCut') or {};incoming=path(cut,source);outgoing=path(cut,output)
+        need(incoming['pathId']!=outgoing['pathId'],'piler_input_output_path_alias')
         stack=entity.get('stack') or {};layers=[row for row in stack.get('layers',[])if row['objectId']==piler]
         need(stack.get('complete') is True and len(layers)==1,'piler_complete_layer_unavailable')
         state=layers[0].get('deviceState') or {};cargo=state.get('cachedCargo')

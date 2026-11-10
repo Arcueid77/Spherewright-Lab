@@ -1,5 +1,7 @@
 # Active handoff / 活动交接
 
+**2026-11-10。所有者要求继续完成合堆实测、大小/叠放仓筛选接口及新交审双包。7e1c00b8源码、6342项回归及准确CI通过，同源安装与当前存档实测进行中。复用既有传送带及真实库存，沿用物料限额与旧未决隔离。** / **The owner requested completion of aggregation, warehouse-layer filtering and the new review pair.7e1c00b8 passed6342 source cases and exact CI. Coherent installation and current-save acceptance are in progress under the existing material ceilings and original-action isolation.**
+
 **2026-11-10。本轮补塔、配送器选择器、喷涂/液罐有限流转及47成员冷恢复已完成，游戏已正常保存退出，记录可交审。集装机合堆变换尚未覆盖。先读[最终活动快照](../scenarios/v0.5-stacking-navigation/current-status.md)，保留原未决动作和完整保存边界。** / **The approved tower, distributor selector, bounded coating/fluid cases and47-member cold recovery are reviewable and normally saved/exited. Piler aggregation remains uncovered. Read the final snapshot and preserve original unknowns and the complete saved boundary.**
 
 **2026-11-10。所有者已批准新增1电塔及1配送器，按[准确增量](standing-authority.md#current-flow-and-distributor-increment-2026-11-10--当前流转及配送器增量)连续完成剩余流转、选择器与恢复验证。** / **The owner approved one additional tower and one distributor. Continue the remaining flow, selector and recovery cases under the recorded exact increment.**
