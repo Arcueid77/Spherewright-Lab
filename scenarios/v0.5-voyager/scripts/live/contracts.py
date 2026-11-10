@@ -269,6 +269,7 @@ def validate_steps(steps):
         'build-sorter':{'source','destination','filterItemId'},'configure':{'entity'},
         'wait-buffer':{'entity','itemId','minimumCount','maximumSeconds'},'wait-stack-device':{'entity','expected','maximumSeconds'},'wait-player-still':{'maximumSeconds'},'prove-network':{'entities','networkId'},'save-close':set(),'handoff-caller':set(),
         'observe-sail-conversion':{'entity','count','orbitId','maximumSeconds','baselinePath','baselineSha256'},
+        'observe-piler-aggregation':{'piler','input','output','itemId','maximumItems','maximumSeconds'},
         'observe-rocket-arrival':{'entity','layerId','nodeId','maximumSeconds','baselinePath','baselineSha256'}}
     for index,step in enumerate(steps):
         kind=step.get('kind')
@@ -286,6 +287,10 @@ def validate_steps(steps):
                            for key,value in expected.items())
                     or type(seconds)not in(int,float) or not 0<seconds<=900):
                 raise ValueError('bounded_stack_device_observation_required')
+        if kind=='observe-piler-aggregation' and (type(step['maximumItems'])is not int or not 2<=step['maximumItems']<=64
+                or type(step['itemId'])is not int or step['itemId']<=0
+                or type(step['maximumSeconds'])not in(int,float) or not 0<step['maximumSeconds']<=1800):
+            raise ValueError('bounded_piler_observation_required')
         if 'modelIndex' in step and (type(step['modelIndex']) is not int or step['modelIndex'] <= 0):
             raise ValueError('immutable_native_model_invalid')
         if 'freshStaleMaximumSeconds' in step:

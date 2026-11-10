@@ -34,7 +34,7 @@ def main():
     a.prior_rpc_count=prior_count
     seconds=(deadline-dt.datetime.now(dt.timezone.utc)).total_seconds();remaining=c['maximumRpc']-prior_count
     need(seconds>60 and remaining>0,'original_finite_caller_allowance_ended');r.cohort()
-    a.c=Client(Path(c['pluginDestination'])/'Spherewright.Mcp.exe',r.output/'client',maximum=remaining,seconds=seconds,
+    a.c=Client(r.mcp_executable(),r.output/'client',maximum=remaining,seconds=seconds,
         total_stdout_limit=c.get('maximumStdoutBytes',64*1024*1024),total_stderr_limit=c.get('maximumStderrBytes',1024*1024))
     try:
         _,tools,_,_=a.c.initialize();a.schemas={t['name']:t['inputSchema'] for t in tools}

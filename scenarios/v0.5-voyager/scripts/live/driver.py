@@ -63,7 +63,7 @@ class Live:
    need(c['additionalVoyagerGameTicks']==0 and c.get('surfaceRecoveryTarget') is None
      and bool(c.get('failedLandingActionId')),'failed_landing_config_shape_invalid')
   need(type(self.prior_rpc_count)is int and 0<=self.prior_rpc_count<c['maximumRpc'],'actual_prior_rpc_allowance_ended')
-  self.c=Client(Path(c['pluginDestination'])/'Spherewright.Mcp.exe',s.output/'client',maximum=c['maximumRpc']-self.prior_rpc_count,seconds=c['maximumWallSeconds'],
+  self.c=Client(s.mcp_executable(),s.output/'client',maximum=c['maximumRpc']-self.prior_rpc_count,seconds=c['maximumWallSeconds'],
     total_stdout_limit=c.get('maximumStdoutBytes',64*1024*1024),total_stderr_limit=c.get('maximumStderrBytes',1024*1024))
   _,tools,_,_=self.c.initialize();self.schemas={t['name']:t['inputSchema'] for t in tools}
   validate_steps(c['initialSteps']);validate_native_calls(c['initialSteps'],self.schemas)

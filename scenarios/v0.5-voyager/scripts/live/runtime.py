@@ -80,6 +80,17 @@ class Runtime:
              'revision_stamp_native_changed_before_launch')
         return stamps
 
+    def mcp_executable(self):
+        c=self.config
+        selected=Path(c.get('mcpExecutable',str(Path(c['pluginDestination'])/'Spherewright.Mcp.exe'))).resolve()
+        index=read(c['cohortIndex'])
+        need(index['sourceSha']==c['sourceSha'] and sha(c['cohortIndex'])==c['cohortIndexSha256'],'mcp_cohort_source_changed')
+        matches=[row for row in index['files'] if row['relativePath']=='Spherewright.Mcp.exe'
+                 and (Path(c[row['role']+'Destination'])/row['relativePath']).resolve()==selected]
+        need(len(matches)==1 and selected.is_file() and selected.stat().st_size==matches[0]['bytes']
+             and sha(selected)==matches[0]['sha256'],'mcp_executable_not_in_qualified_layout')
+        return selected
+
     def native_paths(self):
         c=self.config;paths={k:Path(p).resolve() for k,p in c['savePaths'].items()}
         primary=paths['primary'];identity=primary.stem;version=read(c['labSourceLock'])['native']['version']

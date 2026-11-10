@@ -9,6 +9,17 @@ from factory import Factory,resolve_refs
 from runtime import freeze,Runtime
 
 class LiveDriverTests(unittest.TestCase):
+ def test_layout_mcp_path_must_match_the_exact_qualified_payload(self):
+  from evidence import put,sha
+  with tempfile.TemporaryDirectory()as directory:
+   root=Path(directory);plugin=root/'plugin';mcp=root/'mcp';plugin.mkdir();mcp.mkdir()
+   executable=mcp/'Spherewright.Mcp.exe';executable.write_bytes(b'synthetic-host')
+   index=root/'cohort.private.json';put(index,dict(sourceSha='synthetic-source',files=[dict(role='mcp',relativePath=executable.name,bytes=executable.stat().st_size,sha256=sha(executable))]))
+   runtime=Runtime.__new__(Runtime);runtime.config=dict(sourceSha='synthetic-source',cohortIndex=str(index),cohortIndexSha256=sha(index),pluginDestination=str(plugin),mcpDestination=str(mcp),mcpExecutable=str(executable))
+   self.assertEqual(runtime.mcp_executable(),executable.resolve())
+   rogue=root/'unqualified.exe';rogue.write_bytes(b'synthetic-host');runtime.config['mcpExecutable']=str(rogue)
+   with self.assertRaisesRegex(RuntimeError,'not_in_qualified_layout'):runtime.mcp_executable()
+
  def test_first_move_waits_for_native_inertia_only_inside_its_original_deadline(self):
   from unittest.mock import patch
   a=Live(None);a.runtime=type('Evidence',(),dict(config=dict(firstOperation=dict(kind='move')),put=lambda *_:None))()

@@ -5,6 +5,7 @@ from driver import Live,ToolRefused,AcceptedActionFailure,NativePreacceptanceRef
 from evidence import need,read,sha
 from contracts import powered_consumers_share_network,validate_steps,is_read_tool,validate_native_calls,strict_native_player_idle,fully_observed_dry_surface,observed_short_crossing_dry_landing,observed_item_count,observed_stack_device_matches
 from flight_observers import observe_sails,observe_rocket
+from stack_observers import observe_piler_aggregation
 
 def distance(a,b): return math.dist([a[k] for k in 'xyz'],[b[k] for k in 'xyz'])
 def count(player,item): return sum(r['count'] for r in player['inventory'] if r['itemId']==item)
@@ -129,6 +130,7 @@ class Factory(Live):
   if kind=='prepare-only':return self.native_operation(s,commit_requested=False)
   if kind=='observe-sail-conversion':return observe_sails(self,s)
   if kind=='observe-rocket-arrival':return observe_rocket(self,s)
+  if kind=='observe-piler-aggregation':return observe_piler_aggregation(self,s)
   if kind=='adopt-paid-build':
    value=self.call('spherewright_get_blueprint_builds',dict(self.ctx,buildId=s['buildId']))
    rows=value.get('builds') or [];need(len(rows)==1 and rows[0]['buildId']==s['buildId'],'exact_paid_build_missing')
