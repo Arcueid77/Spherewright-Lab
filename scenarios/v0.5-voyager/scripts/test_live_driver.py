@@ -9,6 +9,24 @@ from factory import Factory,resolve_refs
 from runtime import freeze,Runtime
 
 class LiveDriverTests(unittest.TestCase):
+ def test_frozen_paid_belts_do_not_reclassify_or_refund_the_original_unknown(self):
+  from contracts import isolated_paid_belt_build_accounted as valid
+  c=dict(recoveryProfile='ordinary-owned-home',recoveryMode='default',sourceRole='primary',planetId=104,
+   sourceTick=1000,closedJourneyHome=dict(phase='completed',homePlanetId=104,completedSaveGameTick=900))
+  receipt=dict(actionId='old-unknown',actionKind='build',terminal=True,state='outcome_unknown',completedAtGameTick=950,
+   itemDeltas=[dict(itemId=2001,beforeCount=12,afterCount=10,delta=-2)])
+  plan=dict(plannedPath=[dict(x=0,y=200,z=0),dict(x=1,y=200,z=0)])
+  observation=dict(originalActionId='old-unknown',writeQuarantineActionId='old-unknown',capturedAtGameTick=960,packageCount=10,
+   entities=[dict(objectId=7,itemId=2001,position=dict(x=0,y=200,z=0)),dict(objectId=8,itemId=2001,position=dict(x=1,y=200,z=0))])
+  preservation=dict(passed=True,originalUnknownRetained=True,noReplay=True,normalExitOnly=True)
+  self.assertTrue(valid(c,receipt,plan,observation,preservation))
+  self.assertFalse(valid(c,dict(receipt,state='completed'),plan,observation,preservation))
+  self.assertFalse(valid(c,receipt,plan,dict(observation,packageCount=12),preservation))
+  bad=copy.deepcopy(observation);bad['entities'][1]['objectId']=7
+  self.assertFalse(valid(c,receipt,plan,bad,preservation))
+  bad=copy.deepcopy(observation);bad['entities'][1]['position']['x']=2
+  self.assertFalse(valid(c,receipt,plan,bad,preservation))
+
  def test_raised_belt_extension_binds_the_actual_source_position(self):
   adapter=Factory.__new__(Factory);adapter.ctx=dict(planetId=104);adapter.state=lambda:None
   adapter.object_id=lambda ref:7;adapter.layout=lambda point:point

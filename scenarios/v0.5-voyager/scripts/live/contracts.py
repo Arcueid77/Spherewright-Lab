@@ -51,6 +51,33 @@ def quarantined_harvest_no_effect_accounted(config,reference,receipt,cut,session
         and type(preservation.get('currentLastExit'))is int and type(config.get('sourceTick'))is int
         and tick<=preservation['currentLastExit']<=config['sourceTick'])
 
+def isolated_paid_belt_build_accounted(config,receipt,plan,observation,preservation):
+    """Accounts a frozen paid original without changing its unknown outcome."""
+    import math
+    deltas=receipt.get('itemDeltas') or [];points=plan.get('plannedPath') or [];entities=observation.get('entities') or []
+    count=len(points)
+    if not (owned_saved_recovery_context(config) and receipt.get('actionKind')=='build'
+            and receipt.get('terminal') is True and receipt.get('state')=='outcome_unknown'
+            and observation.get('originalActionId')==receipt.get('actionId')
+            and observation.get('writeQuarantineActionId')==receipt.get('actionId')
+            and len(deltas)==1 and deltas[0].get('itemId')==2001 and 1<=count<=64
+            and deltas[0].get('delta')==-count and deltas[0].get('beforeCount',-1)-count==deltas[0].get('afterCount')
+            and observation.get('packageCount')==deltas[0].get('afterCount')
+            and len(entities)==count and len({e.get('objectId')for e in entities})==count
+            and preservation.get('passed') is True and preservation.get('originalUnknownRetained') is True
+            and preservation.get('noReplay') is True and preservation.get('normalExitOnly') is True
+            and type(observation.get('capturedAtGameTick'))is int
+            and receipt.get('completedAtGameTick',-1)<=observation['capturedAtGameTick']
+            and observation['capturedAtGameTick']<=config.get('sourceTick',-1)):return False
+    for point,entity in zip(points,entities):
+        position=entity.get('position') or {}
+        if not (type(entity.get('objectId'))is int and entity['objectId']>0 and entity.get('itemId')==2001
+                and set(position)==set(point)=={'x','y','z'}
+                and all(type(v)in(int,float)and math.isfinite(v)for v in [*position.values(),*point.values()])
+                and math.dist([position[k]for k in 'xyz'],[point[k]for k in 'xyz'])<=.01):return False
+    return True
+
+
 def is_read_tool(name):
     return name.startswith(('spherewright_get_','spherewright_inspect_','spherewright_list_')) or name=='spherewright_preview_voyager_route'
 
