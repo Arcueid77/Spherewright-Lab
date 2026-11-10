@@ -9,6 +9,17 @@ from factory import Factory,resolve_refs
 from runtime import freeze,Runtime
 
 class LiveDriverTests(unittest.TestCase):
+ def test_raised_belt_extension_binds_the_actual_source_position(self):
+  adapter=Factory.__new__(Factory);adapter.ctx=dict(planetId=104);adapter.state=lambda:None
+  adapter.object_id=lambda ref:7;adapter.layout=lambda point:point
+  adapter.entity=lambda ref:dict(endpointStateHash='synthetic-endpoint',position=dict(x=1,y=202,z=3))
+  calls=[];adapter.build=lambda role,args,maximum:calls.append(args)
+  adapter.step(dict(kind='build-belt',role='raised',source=7,ends=[dict(x=4,y=202,z=6)],
+   maximumNewBelts=8,beltPathMode='native_elevated_grid',beltStartAltitudeLevel=1,beltEndAltitudeLevel=1))
+  self.assertEqual(calls[0]['preferredPositionY'],202)
+  self.assertEqual(calls[0]['sourceObjectId'],7)
+  self.assertEqual(calls[0]['beltEndAltitudeLevel'],1)
+
  def test_paid_distributor_readback_preserves_layers_and_binds_one_attachment(self):
   adapter,calls,_=self.stack_adapter(model=371)
   adapter.used={2107:0};adapter.runtime.config['materialCeilings']={'2107':1}

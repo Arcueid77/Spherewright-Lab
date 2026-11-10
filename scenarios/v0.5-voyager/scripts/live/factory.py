@@ -178,6 +178,8 @@ class Factory(Live):
       **dict(zip(('pathEndX','pathEndY','pathEndZ'),[point[k] for k in 'xyz'])))
     for key in ('beltPathMode','beltStartAltitudeLevel','beltEndAltitudeLevel'):
      if key in s:args[key]=s[key]
+    if s.get('beltPathMode')=='native_elevated_grid':
+     args.update(dict(zip(('preferredPositionX','preferredPositionY','preferredPositionZ'),[e['position'][k]for k in 'xyz'])))
     try:return self.build(role,args,s['maximumNewBelts'])
     except ToolRefused as err:
      if err.error.get('code') not in ('BUILD_LOCATION_INVALID','BUILD_CONNECTION_INVALID'):raise
