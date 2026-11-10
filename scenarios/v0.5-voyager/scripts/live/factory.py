@@ -86,9 +86,19 @@ class Factory(Live):
     'completed_native_model_needs_original_reconciliation')
   if 'stackOnObjectId' in args:
    stack = r.get('stackConstructionReadback') or {}
-   need(stack.get('complete') is True and stack.get('state') == 'observed'
-    and stack.get('topObjectId') in ids and len(stack.get('layers') or []) >= 2,
+   need(stack.get('complete') is True and stack.get('state') == 'observed',
     'completed_stack_needs_original_reconciliation')
+   if item==2107:
+    planned=q.get('plannedStackConstruction') or {};attachments=stack.get('attachments') or []
+    need(planned.get('inputFromSlot')==13 and planned.get('inputToSlot')==0
+     and stack.get('topObjectId')==planned.get('anchorObjectId')
+     and [layer['objectId']for layer in stack.get('layers',[])]==planned.get('existingObjectIds')
+     and len(attachments)==1 and attachments[0].get('parentObjectId')==stack.get('topObjectId')
+     and (attachments[0].get('entity') or {}).get('objectId') in ids,
+     'completed_attachment_needs_original_reconciliation')
+   else:
+    need(stack.get('topObjectId') in ids and len(stack.get('layers') or [])>=2,
+     'completed_stack_needs_original_reconciliation')
   self.refs[role]=ids;self.runtime.put(role+'-entities.private.json',dict(entities=result,originalActionId=r['actionId'],buildId=r.get('blueprintBuildId'),debit=budget[0]['count']))
   return result
 

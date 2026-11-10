@@ -9,6 +9,22 @@ from factory import Factory,resolve_refs
 from runtime import freeze,Runtime
 
 class LiveDriverTests(unittest.TestCase):
+ def test_paid_distributor_readback_preserves_layers_and_binds_one_attachment(self):
+  adapter,calls,_=self.stack_adapter(model=371)
+  adapter.used={2107:0};adapter.runtime.config['materialCeilings']={'2107':1}
+  before=dict(inventory=[dict(itemId=2107,count=1)])
+  plan=dict(prepared=True,commitAllowedNow=True,commitBlockers=[],planToken='synthetic-attachment-plan',itemBudget=[dict(itemId=2107,count=1)],
+   plannedStackConstruction=dict(inputFromSlot=13,inputToSlot=0,anchorObjectId=7,existingObjectIds=[7]))
+  adapter.prepare_build=lambda args:(plan,before)
+  adapter.successful_original=lambda action:dict(actionId=action,targetObjectIds=[8],itemDeltas=[dict(itemId=2107,delta=-1)],
+   stackConstructionReadback=dict(complete=True,state='observed',topObjectId=7,layers=[dict(objectId=7)],
+    attachments=[dict(parentObjectId=7,entity=dict(objectId=8))]))
+  adapter.entity=lambda entity:dict(objectId=entity,itemId=2107,modelIndex=371)
+  adapter.player=lambda:dict(inventory=[],constructionDrones=dict(working=0,idle=3,total=3,pendingBuildTargets=0,pendingRepairTargets=0))
+  adapter.build('attachment',dict(buildingItemId=2107,stackOnObjectId=7,preferredModelIndex=371),1)
+  self.assertEqual(adapter.used[2107],1)
+  self.assertEqual(adapter.refs['attachment'],[8])
+
  def test_enabled_research_can_naturally_fill_its_buffer_after_the_successful_setting(self):
   adapter=Live.__new__(Live)
   adapter.runtime=type('Runtime',(),dict(config=dict(firstOperation=dict(mode='enable-mecha-research-auto-supply')),
