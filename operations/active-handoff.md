@@ -1,5 +1,7 @@
 # Active handoff / 活动交接
 
+**2026-11-10。本轮补塔、配送器选择器、喷涂/液罐有限流转及47成员冷恢复已完成，游戏已正常保存退出，记录可交审。集装机合堆变换尚未覆盖。先读[最终活动快照](../scenarios/v0.5-stacking-navigation/current-status.md)，保留原未决动作和完整保存边界。** / **The approved tower, distributor selector, bounded coating/fluid cases and47-member cold recovery are reviewable and normally saved/exited. Piler aggregation remains uncovered. Read the final snapshot and preserve original unknowns and the complete saved boundary.**
+
 **2026-11-10。所有者已批准新增1电塔及1配送器，按[准确增量](standing-authority.md#current-flow-and-distributor-increment-2026-11-10--当前流转及配送器增量)连续完成剩余流转、选择器与恢复验证。** / **The owner approved one additional tower and one distributor. Continue the remaining flow, selector and recovery cases under the recorded exact increment.**
 
 **2026-11-10。9模型/19组合的正向建造和冷恢复通过，43座测试建筑及库存样本已正常保存退出。功能余项与新增用料决定见[活动快照](../scenarios/v0.5-stacking-navigation/current-status.md)。** / **The9-model/19-pair construction and cold-recovery matrix passed.43 test buildings and stock samples are normally saved and closed. Follow the current snapshot for pending function cases and the unanswered material decision.**
