@@ -228,12 +228,18 @@ def strict_native_player_idle(player,allow_passive_drift=False):
     vectors=('walkRtsVelocity','driftRtsVelocity','walkManualVelocity','driftManualVelocity')
     if not drift:vectors=('velocity',*vectors)
     velocity=physics.get('velocity') or {}
+    # Unity evaluates each Vector3 squared component in binary32. Half its
+    # smallest subnormal rounds to zero, matching the Native zero-magnitude test.
+    zero_square_maximum=2.0**-150
     return ((drift or player.get('movementState')=='Walk') and player.get('speed',float('inf'))<=.1
         and (drift or ground.get('checkSphereHit') is True) and physics.get('currentOrderPresent') is False
         and physics.get('queuedOrderCount')==0
         and (not drift or all(type(velocity.get(axis))in(int,float)for axis in 'xyz')
             and sum(velocity[axis]**2 for axis in 'xyz')<=.01)
-        and all(isinstance(physics.get(key),Mapping) and all(physics[key].get(axis)==0 for axis in 'xyz') for key in vectors))
+        and all(isinstance(physics.get(key),Mapping)
+            and all(type(physics[key].get(axis)) in (int,float)
+                and physics[key][axis]*physics[key][axis]<=zero_square_maximum
+                for axis in 'xyz') for key in vectors))
 
 
 def fully_observed_dry_surface(prepared):

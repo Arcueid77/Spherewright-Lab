@@ -929,6 +929,19 @@ class LiveDriverTests(unittest.TestCase):
   self.assertTrue(strict_native_player_idle(p));p['nativePhysics']['walkRtsVelocity']['x']=.01;self.assertFalse(strict_native_player_idle(p))
   p['nativePhysics']['walkRtsVelocity']['x']=0;p['nativePhysics']['currentOrderPresent']=True;self.assertFalse(strict_native_player_idle(p))
   p['nativePhysics']['currentOrderPresent']=False;del p['nativePhysics']['driftManualVelocity'];self.assertFalse(strict_native_player_idle(p))
+ def test_native_idle_accepts_binary32_zero_magnitude_subnormal_residue(self):
+  p=json.loads((Path(__file__).parent/'fixtures/captured-known-move-stop.json').read_text())['player']
+  for key in ('velocity','walkRtsVelocity','driftRtsVelocity','walkManualVelocity','driftManualVelocity'):
+   p['nativePhysics'][key]=dict(x=3e-45,y=-3e-45,z=3e-45)
+  self.assertTrue(strict_native_player_idle(p))
+  p['nativePhysics']['walkManualVelocity']=dict(x=2e-23,y=2e-23,z=2e-23)
+  self.assertTrue(strict_native_player_idle(p))
+ def test_native_idle_rejects_nonzero_binary32_magnitude_and_invalid_vectors(self):
+  for value in (3e-23,.000001,float('nan'),float('inf'),None,'0',False):
+   with self.subTest(value=value):
+    p=json.loads((Path(__file__).parent/'fixtures/captured-known-move-stop.json').read_text())['player']
+    p['nativePhysics']['walkManualVelocity']['x']=value
+    self.assertFalse(strict_native_player_idle(p))
  def test_free_belt_input_binds_actual_native_device_endpoint_and_finite_exact_material_limit(self):
   a=Factory.__new__(Factory);a.refs={'station':9};a.state=lambda:None;a.entity=lambda _:dict(endpointStateHash='native-endpoint')
   a.ctx=dict(sessionId='synthetic',planetId=101)

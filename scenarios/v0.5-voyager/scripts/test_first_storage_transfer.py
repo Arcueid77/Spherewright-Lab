@@ -3,9 +3,10 @@ from types import SimpleNamespace
 import copy
 import sys
 import unittest
+from unittest.mock import patch
 
 sys.path.insert(0, str(Path(__file__).parent / 'live'))
-from driver import Live
+from driver import Live, ToolRefused
 
 
 class FirstStorageTransferTests(unittest.TestCase):
@@ -34,7 +35,7 @@ class FirstStorageTransferTests(unittest.TestCase):
         for direction in ['storage-to-player', 'player-to-storage']:
             with self.subTest(direction=direction):
                 live, _, calls = self.make_driver(direction)
-                prepared = live.prepare_first_work({}, 100)
+                prepared = live.prepare_first_work({}, float('inf'))
                 self.assertEqual('transfer', prepared['action_kind'])
                 self.assertEqual('spherewright_commit_transfer', prepared['tool'])
                 self.assertEqual(1, len(calls))
@@ -50,7 +51,7 @@ class FirstStorageTransferTests(unittest.TestCase):
         for direction in ['storage-to-player', 'player-to-storage']:
             with self.subTest(direction=direction):
                 live, writes, _ = self.make_driver(direction)
-                prepared = live.prepare_first_work({}, 100)
+                prepared = live.prepare_first_work({}, float('inf'))
                 receipt = self.receipt(direction)
                 self.assertTrue(live.verify_progress(prepared, receipt))
                 self.assertTrue(writes['actual-progress.private.json']['noReplay'])
@@ -60,7 +61,7 @@ class FirstStorageTransferTests(unittest.TestCase):
         for fault in ['terminal', 'succeeded', 'kind', 'target_delta', 'player_delta', 'negative', 'missing']:
             with self.subTest(fault=fault):
                 live, _, _ = self.make_driver()
-                prepared = live.prepare_first_work({}, 100)
+                prepared = live.prepare_first_work({}, float('inf'))
                 receipt = copy.deepcopy(self.receipt())
                 if fault == 'terminal': receipt['terminal'] = False
                 if fault == 'succeeded': receipt['succeeded'] = False
@@ -76,8 +77,55 @@ class FirstStorageTransferTests(unittest.TestCase):
             with self.subTest(field=field, value=value):
                 live, _, calls = self.make_driver()
                 live.runtime.config['firstOperation'][field] = value
-                with self.assertRaises(RuntimeError): live.prepare_first_work({}, 100)
+                with self.assertRaises(RuntimeError): live.prepare_first_work({}, float('inf'))
                 self.assertEqual([], calls)
+
+    def test_unaccepted_stale_prepare_refreshes_both_observations(self):
+        live, writes, calls = self.make_driver()
+        prepare = live.call
+        observations = []
+        live.entity = lambda entity: observations.append('storage') or dict(stateHash='fresh-storage')
+        live.player = lambda: observations.append('player') or dict(stateHash='fresh-player')
+        def stale_once(tool, arguments):
+            if not observations or len(observations) == 2:
+                raise ToolRefused(tool, dict(code='STALE_STATE'))
+            return prepare(tool, arguments)
+        live.call = stale_once
+        with patch('driver.time.sleep'):
+            result = live.prepare_first_work({}, float('inf'))
+        self.assertEqual('transfer', result['action_kind'])
+        self.assertEqual(['storage', 'player', 'storage', 'player'], observations)
+        self.assertFalse(writes['first-transfer-unaccepted-stale-00.private.json']['actionAccepted'])
+        self.assertEqual(1, len(calls))
+
+    def test_other_refusals_and_accepted_actions_are_not_retried(self):
+        for code, active in [('INVENTORY_FULL', None), ('STALE_STATE', 'original-action')]:
+            with self.subTest(code=code, active=active):
+                live, writes, _ = self.make_driver()
+                live.active = active
+                with patch.object(live, 'call', side_effect=ToolRefused('prepare', dict(code=code))) as prepare:
+                    with self.assertRaises(ToolRefused):
+                        live.prepare_first_work({}, float('inf'))
+                self.assertEqual(1, prepare.call_count)
+                self.assertEqual({}, writes)
+
+    def test_original_deadline_stops_stale_retry_before_another_prepare(self):
+        live, writes, _ = self.make_driver()
+        with patch('driver.time.monotonic', side_effect=[0, 2]), patch('driver.time.sleep'):
+            with patch.object(live, 'call', side_effect=ToolRefused('prepare', dict(code='STALE_STATE'))) as prepare:
+                with self.assertRaisesRegex(RuntimeError, 'original_first_transfer_deadline_exhausted'):
+                    live.prepare_first_work({}, 1)
+        self.assertEqual(1, prepare.call_count)
+        self.assertEqual(1, len(writes))
+
+    def test_stale_prepare_has_a_finite_attempt_limit(self):
+        live, writes, _ = self.make_driver()
+        with patch('driver.time.sleep'):
+            with patch.object(live, 'call', side_effect=ToolRefused('prepare', dict(code='STALE_STATE'))) as prepare:
+                with self.assertRaises(ToolRefused):
+                    live.prepare_first_work({}, float('inf'))
+        self.assertEqual(16, prepare.call_count)
+        self.assertEqual(15, len(writes))
 
 
 if __name__ == '__main__':

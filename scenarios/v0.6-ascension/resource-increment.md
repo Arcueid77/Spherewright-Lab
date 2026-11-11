@@ -36,7 +36,9 @@ English. Native recipe18 produces one red matrix every six seconds in one labora
 
 实际已正常制造/建成1小仓，复用背包普通分拣器建成1出料器，累计既耗更新为小仓9、普通分拣器31、基础带192。570对磁线圈/电路板经原生存储投料，保存前成品仓已有341蓝矩阵，叠层原生回读证实供板通路限制生产。按同一自主授权预留2高速分拣器2012，用于现有供板和成品出料器的原生2011→2012升级。配方88一次制造2件，消耗2普通分拣器及1电动机，普通分拣器优先使用背包现货；电动机正常配方合计使用3铁块及1磁线圈（含1齿轮）。升级保留原动作、双端连接、在途货物/筛选和正常扣还账目。
 
-原600万累计游戏tick上限及既耗继续保留。当前累计4372309，剩余1627691，返航54000及清理3000储备保持。原材料/施工既耗、所有历史动作和unknown隔离继续保留。持续执行、同源维护和保存恢复按现行授权进行。正式发布按其单独所有者决定执行。
+本轮另追加2高速分拣器用于红矩阵石墨输入257及氢输入782，已按原生配方88正常制造并升级完成。准确原料为5铁、2电路板及1磁线圈，含2普通分拣器和1电动机的正常依赖制造。升级分别保留1109/1120筛选并正常退还2普通分拣器，累计施工分拣器既耗33，升级扣还单独记账。4座新增红矩阵研究站已全部原生叠放，累计研究站既耗9。新增供料1600石墨及400氢均正常取用并存入已有仓储，新增取用569蓝及390红进入科研，1手搓蓝的3600科研点数另有守恒回读，原完成判定失败保持。
+
+原600万累计游戏tick上限及既耗继续保留。最新正常保存边界126087859，当前累计4998597，剩余1001403，返航54000及清理3000储备保持。原材料/施工既耗、所有历史动作和unknown隔离继续保留。持续执行、同源维护和保存恢复按现行授权进行。正式发布按其单独所有者决定执行。
 
 ## English
 
@@ -52,4 +54,6 @@ The existing five-layer matrix stack and input lines are reused. Native observat
 
 Actual support placement completed one normally crafted warehouse and one carried ordinary sorter, updating cumulative spending to9 warehouses,31 ordinary sorters and192 belts. Normal storage supplied570 coil/board pairs. The output warehouse held341 blue matrices at save. Native stack readback identified board-supply throughput as a constraint. A justified finite increment reserves two fast sorters2012 for the existing board-input and finished-output2011→2012 upgrades. One recipe88 craft produces two units from two carried ordinary sorters and one motor. Normal motor manufacture requires three iron and one coil including its gear. Upgrade receipts retain the original action, both endpoints, live cargo/filter and debit/refund evidence.
 
-Preserve the original6000000-tick cumulative ceiling,4372309 spent ticks,1627691 remaining ticks,54000 return and3000 cleanup reserves, prior material/construction spending and historical unknown isolation. Existing standing maintenance/save/recovery authority continues. Formal publication retains its owner decision.
+This window added two further fast sorters for red graphite input257 and hydrogen input782. Normal recipe88 manufacture and both Native upgrades completed from five iron, two boards and one coil, including two ordinary sorters and one motor through normal dependency crafting. Filters1109/1120 were retained and two ordinary sorters were normally refunded. Cumulative sorter placement is33, with upgrade debit/refund separate. Four new red laboratories completed Native stacking, bringing cumulative laboratory placements to9. Normal existing-storage supply added1600 graphite and400 hydrogen.569 blue and390 red cubes were normally withdrawn for research. A further crafted blue has an exact3600-point conservation readback while retaining its original failed completion result.
+
+Preserve the original6000000-tick cumulative ceiling,4998597 spent ticks,1001403 remaining ticks,54000 return and3000 cleanup reserves at saved boundary126087859, together with prior material/construction spending and historical unknown isolation. Existing standing maintenance/save/recovery authority continues. Formal publication retains its owner decision.
