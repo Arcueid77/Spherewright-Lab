@@ -4,12 +4,21 @@ import sys
 from evidence import read,sha,need
 from runtime import Runtime
 
+def same_installation_directory(supplied, registered):
+    supplied=Path(supplied);registered=Path(registered)
+    if supplied.resolve()==registered.resolve():return True
+    try:
+        return supplied.is_dir() and registered.is_dir() and supplied.samefile(registered)
+    except OSError:
+        return False
+
 def main():
     target=read(sys.argv[1]);runtime=Runtime(target['configPath'],target['configSha256'])
     c=runtime.config;runtime.stopped();runtime.verify_backup()
     need(target['scope']=='same_owned_native_cold_installation','installation_scope_changed')
     need(read(c['labSourceLock'])['spherewright']['sourceSha']==target['sourceSha'],'selected_source_changed')
-    for key in ('dspRoot','pluginDestination','mcpDestination'):need(Path(target[key]).resolve()==Path(c[key]).resolve(),'registered_target_changed')
+    for key in ('dspRoot','pluginDestination','mcpDestination'):
+        need(same_installation_directory(target[key],c[key]),'registered_target_changed')
     need(sha(target['cohortIndexPath'])==target['cohortIndexSha256'],'qualified_cohort_changed')
     need(sha(Path(c['dspRoot'])/'DSPGAME_Data/Managed/Assembly-CSharp.dll')==c['nativeAssemblySha256'],'native_version_changed')
     runtime.stopped();print('Current exact cold-install prerequisites verified.')

@@ -1,5 +1,6 @@
 [CmdletBinding()]
 param([Parameter(Mandatory)][string]$TargetsPath,[Parameter(Mandatory)][string]$EvidenceDirectory,
+    [string]$PythonPath='python',
     [ValidatePattern('^\d+\.\d+\.\d+$')][string]$Version='0.5.0',
     [ValidateRange(1,1000)][int]$ExpectedToolCount=74)
 Set-StrictMode -Version Latest
@@ -24,8 +25,23 @@ Require ((Hash $cohort.officialTransactionScript) -ceq $cohort.officialTransacti
 $script:criticalCount=0
 function Critical{
  $script:criticalCount++
- & python $targets.verifierPath $TargetsPath *> (Join-Path $out ('critical-'+$script:criticalCount+'.private.log'))
- Require ($LASTEXITCODE -eq 0) 'Current process/progress/protected-record prerequisite failed.'
+ $start=[Diagnostics.ProcessStartInfo]::new()
+ $start.FileName=$PythonPath
+ $start.UseShellExecute=$false
+ $start.CreateNoWindow=$true
+ $start.RedirectStandardOutput=$true
+ $start.RedirectStandardError=$true
+ $start.ArgumentList.Add([string]$targets.verifierPath)
+ $start.ArgumentList.Add($TargetsPath)
+ $process=[Diagnostics.Process]::Start($start)
+ try{
+  $stdout=$process.StandardOutput.ReadToEndAsync()
+  $stderr=$process.StandardError.ReadToEndAsync()
+  Require ($process.WaitForExit(60000)) ('Read-only verifier is still pending; inspect original process '+$process.Id)
+  [IO.File]::WriteAllText((Join-Path $out ('critical-'+$script:criticalCount+'.private.log')),
+      $stdout.GetAwaiter().GetResult()+$stderr.GetAwaiter().GetResult(),[Text.UTF8Encoding]::new($false))
+  Require ($process.ExitCode -eq 0) 'Current process/progress/protected-record prerequisite failed.'
+ }finally{$process.Dispose()}
 }
 $maps=@{}
 foreach($role in @('plugin','mcp')){

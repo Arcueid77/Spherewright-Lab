@@ -10,6 +10,30 @@ from factory import Factory,resolve_refs
 from runtime import freeze,Runtime
 
 class LiveDriverTests(unittest.TestCase):
+ def test_install_alias_uses_observed_directory_identity(self):
+  from install_preflight import same_installation_directory
+  from unittest.mock import patch
+  with tempfile.TemporaryDirectory() as directory:
+   first=Path(directory)/'registered';second=Path(directory)/'package-alias'
+   first.mkdir();second.mkdir()
+   with patch.object(Path,'samefile',return_value=True) as identity:
+    self.assertTrue(same_installation_directory(second,first))
+    identity.assert_called_once_with(first)
+
+ def test_install_alias_rejects_distinct_or_missing_directories(self):
+  from install_preflight import same_installation_directory
+  with tempfile.TemporaryDirectory() as directory:
+   first=Path(directory)/'registered';second=Path(directory)/'different'
+   first.mkdir();second.mkdir()
+   self.assertFalse(same_installation_directory(second,first))
+   self.assertFalse(same_installation_directory(Path(directory)/'missing',first))
+
+ def test_install_canonical_path_retains_first_install_admission(self):
+  from install_preflight import same_installation_directory
+  with tempfile.TemporaryDirectory() as directory:
+   destination=Path(directory)/'new-destination'
+   self.assertTrue(same_installation_directory(destination,destination))
+
  def test_dismantle_operation_uses_the_existing_public_prepare_commit_and_original_result(self):
   adapter=Factory.__new__(Factory);adapter.ctx=dict(sessionId='synthetic-session',planetId=104)
   arguments=dict(objectId=12,expectedEndpointStateHash='endpoint',expectedPlayerStateHash='player')

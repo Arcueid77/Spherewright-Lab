@@ -115,3 +115,20 @@ Two normally manufactured/placed MkII machines used32 iron, four copper,16 graph
 Normal dismantle/rebuild placed2013 and recovered the original2011, preserving the earlier unsupported upgrade refusal. A further fast pair used three iron, one coil/two carried ordinary sorters. One fast unit normally upgraded6940 and recovered its old unit, with the other carried. Cumulative spending is256 belts,60 ordinary/two gradeIII sorters,12 stores, eight MkII assemblers, three smelters and15 towers under finite ceilings274/64/2/13/8/5/15.
 
 Normal redistribution moved1600 copper to562,1200 magnets to26 and1290 iron to28, with40 iron subsequently used for manufacture.200 water entered titanium-glass storage. The plane-filter machine produced10, while automatic quantum output remains pending and the original handcrafted chip is preserved. Saved boundary126798475 retains5709213 ticks/75724 requests,290787 remaining ticks including54000 return/3000 cleanup reserves.
+
+
+## 2026-11-12持续量子及首绿 / Sustained quantum and first green
+
+本轮正常重建较慢卡西米尔输入并完成供煤跨线连接，实际新增29带、3普通分拣器、4高速分拣器及1小仓。正常回收3条独立空带头后重建，保留原累计施工既耗。30新带按原配方使用30铁；另制造2高速及研究供料/透镜升级配套均保存准确原动作扣还。透镜机正常升级MkII，制造预算按现有库存复用电路板/线圈等，实际物品变化以原任务回读为准。
+
+有限累计施工上限为带304、普通分拣器64、2012分拣器4、2013分拣器2、小仓13、MkII8、炉5及塔15；既耗285/63/4/2/13/8/3/15。补200铁入6657并捕获64透镜。首批2绿使用1实际透镜及1已手搓量子，完整物理产物和后续7200科研点均已验证。1705完整解锁，1523当前尚待完整五色科研。
+
+最新边界127024506保存5935244tick及77103请求，2266项保护通过。64756剩余tick包含54000返航/3000清理，仅7756tick为工作余额。提高累计运行额度的答复仍待。2026-11-03授权已替代旧单窗一小时程序，本轮5400秒有限窗口保持原启动钟及全部累计账目。
+
+### English
+
+The slower Casimir input and coal crossings added29 belts, three ordinary/four fast sorters and one small store. Three independent empty belt heads were normally recovered/rebuilt while retaining cumulative placement spending. Thirty new belts used30 iron through the native recipe. Further fast/research-feed/lens-upgrade support retains original debit/refund receipts. Existing boards/coils were reused during normally manufacturing the lensMkII, with actual item changes bound to original task readbacks.
+
+Finite cumulative placement ceilings are304 belts,64 ordinary/four2012/two2013 sorters,13 stores, eightMkII assemblers, five smelters and15 towers, with actual spending285/63/4/2/13/8/3/15.200 iron entered6657 and64 lenses were captured. One real lens/one handcrafted quantum normally produced two green matrices, verifying both physical products and subsequent7200 research points.1705 unlocked fully, while1523 still needs complete five-color research.
+
+Saved boundary127024506 retains5935244 ticks/77103 requests and2266 verified protected files.64756 remaining ticks include54000 return/3000 cleanup, leaving7756 work ticks. The cumulative-runtime extension answer is pending. The2026-11-03 grant superseded the historical one-hour procedure, preserving the original launch clock and all spending in this5400-second window.
