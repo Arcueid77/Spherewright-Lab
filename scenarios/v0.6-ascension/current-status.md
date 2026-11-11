@@ -1,43 +1,42 @@
 # Ascension current snapshot / Ascension活动快照
 
-2026-11-12。游戏已正常保存退出，Primary及LastExit126412724，2254项完整保护通过。累计5323462/6000000tick、72193请求，剩余676538tick，返航54000及清理3000储备保留。
+2026-11-12。游戏及MCP已正常保存退出，Primary/LastExit126605389，2258项完整保护通过。累计5516127/6000000tick、73990请求，剩余483873tick，返航54000及清理3000储备保留。同源程序、实装标记及全部备份已在关停后重新核验。
 
 ## 源码与实装
 
-所选及实装 `21be561cc0b06c2452ce740983c558aea0d93afc` 已通过6546项准确回归、完整29151 Native构建、准确CI、同源安装、实装SDK46请求及当前存档实测。手搓完成复用主线原任务实现并支持合法队尾合并。调用端184项通过，覆盖原子计划发布、dump引用、资源建筑及正常拆除入口。 [准确产品CI](https://github.com/Arcueid77/Spherewright/actions/runs/43054994764)
-
-本轮71.594秒完成首笔正常石墨取用。原任务连续制造2蓝，原生读回version1、准确配方9/初始及请求次数2、剩余0、队列释放、交付缓冲0，终态成功。`inventoryProductsObserved=false`，前后背包蓝均0，科研缓存准确增加7200点。旧版1蓝失败及3600点守恒原件保持。
+所选及实装 `21be561cc0b06c2452ce740983c558aea0d93afc` 沿用6546项准确回归、Native29151构建、准确CI及实装SDK资格。本轮首笔正常取铁在57.344秒完成，随后沿同一游戏进程交接调用端，保持原一小时截止。额外完整工厂只读观察的76请求已单独核对正常EOF，并计入累计73990。 [产品CI](https://github.com/Arcueid77/Spherewright/actions/runs/43054994764)
 
 ## 当前玩法证据
 
-- 1504已正常解锁。1705保存前322200/576000哈希，1523仍待完成。研究根84增加6876/6877，两层均继承1705研究模式，形成3层，累计研究站施工15。新增2站使用24铁、8铜、8磁铁及16石矿。
-- 蓝根76保持5层，输入573/312已原生升级2012。2蓝与2高速分拣器使用5铁、4磁铁及3铜，复用2普通分拣器并正常退还升级旧件。
-- 供铁源6706已由错误板筛选1301改为铁1101，仓6657接收600铁，其中24用于研究站、18用于18条基础带。曾观察奇异物质和透镜各6/min。保存前碰撞器重氢8、单次需10，后续供料仍需核对。镜片输出仍流向原翘曲器产线。
-- 当前星球仍有84铁节点。携带矿机正常建成6878，覆盖50/55，电网3服务比1，实际矿物缓冲50。旧空矿机1496正常拆除，其ID随后被铜带原生复用，须读取新鲜类型及端点。
-- 铜矿2435至熔炉10正常建成11带及分拣器6889，保存前实际铜48/min。累计带施工203、上限214，普通分拣器34、上限48。背包有11带、1分拣器、1矿机及1小仓。
-- 新矿6878输出尚待接通。直接绑定6270超出Bridge覆盖范围，独立输入及带间桥候选由原生碰撞检查拒绝，均未接受。原6270–6273空路、6274、1507/1508/1509及熔炉1500保留，1500出料1512已改铁1101。优先以新鲜实际几何完成短连接。
-- 背包保留802黄、200紫和原燃料/翘曲器。机甲蓝7200点、黄2872800点，红0。仓6657有359铁。全部当前存档进度已正常保存。
+- 新铁矿6878通过11条新带及分拣器6901接入6269和原熔炉1500，曾观察铁30/min。铜输入6889、铁输入6901、线圈混合输入722和电路板出料714均已正常升级2012。线圈输入筛选为0，板出料筛选1301，420铁正常补入原仓28。
+- 卡西米尔制造台6902采用已解锁配方28，共享仓6903已接石墨烯/钛晶石输入及成品输出。既有氢路径188经4新带、6912/6913供料，3座新增电塔覆盖新生产区域。首件晶体已实际入仓，保存前仓内26件。
+- 玻璃熔炉6916/6917及钛化玻璃制造台6919/6920已接通两仓和9分拣器，共享电网3、服务比1。正常供入1000石矿、200水及500钛块。保存前仓6918有102钛化玻璃，末次10秒窗口玻璃30/min、钛化玻璃24/min、卡西米尔6/min。
+- 正常取出新产出的2卡西米尔和4钛化玻璃，结合2现有处理器，原生手搓2位面过滤器及首枚量子芯片。原任务均成功，保存前背包有1量子芯片。
+- 原仓114正常补入1100石墨，保存前821。1705为393436/576000哈希，1504已解锁，1523待完成。末次蓝矩阵0/min、红12/min。原仓26为满仓，磁铁0，后续优先恢复基本供料和仓容。
+- 两只2013已按原生配方制造，使用9铁、6磁铁、3铜和2携带普通分拣器，另留1线圈。当前升级入口只支持2011→2012，2013升级准备未接受，6912/6913保持2011且各持有1氢，2只2013保存在背包。共享调用端已增加可选建造itemId，后续可按新鲜原生准入选择普通拆装或2012升级。
+- 被拒的旧位置、未接受的批量取料和缓冲等待均保留。实际调整了钛化玻璃仓位置及水的分批量。600磁铁从562取出后因26仓容不足未能转入，已正常送回562，6磁铁用于分拣器制造。全部原终态和历史unknown保持隔离。
 
-## 接下来执行
+## 实际施工与下一步
 
-1. 从2254项完整保护及126412724无损恢复，先从当前角色范围内6657正常取1铁，沿原300秒启动门执行，继承最新私有保存输入中的实耗及施工数。
-2. 接通6878至铁输入/熔炉，使用实际端口及原生几何，保留原拒绝。推进铜、矩阵、重氢/奇异物质/镜片、1705/1523及缺失量子链。 [当前用料](resource-increment.md)
-3. 完成Caph II合法闭合设计、持续制造/发射/交付、接收器持续非零实际电力及保存冷恢复。功能闭合后生成最终同源双包，正式发布沿独立授权。 [实施与验收](implementation-plan.md)
+当前累计施工为基础带218/274、普通分拣器49/64、小仓12/13、MkII制造台6/6、熔炉3/5、电塔14/14、研究站15/15。背包保留2备用熔炉、1小仓、56带、6普通分拣器、2极速分拣器、1量子芯片和原科研/返航物资。升级与普通制造沿独立扣还记录核销。
+
+1. 从2258项保护及126605389边界续接。私有保存输入已更新，当前角色附近768正常取1钛块作为首操作，沿原300秒启动门执行。
+2. 恢复满仓26的混合供料。先按新鲜库存及容量将有界铜批次移入有空间的现有仓储，再补磁铁，并核对28的铁和实际蓝产量。继续按实际扣还处理氢输入速度。
+3. 推进自动位面过滤器/量子链、绿矩阵及1705/1523。候选位置合读完整工厂快照与原生网格，再由fresh prepare核碰撞和端点。使用已支持的悬停抵达、续行到陆地及实际停稳流程，按操作需要选择落地点。
+4. 继续Caph II闭合设计、持续制造/发射/交付、接收器持续实际电力及保存冷恢复，按功能结果推进最终同源双包。 [实施与验收](implementation-plan.md) · [当前用料](resource-increment.md)
 
 ## English
 
-Normal save/close preserved primary/LastExit126412724 with2254 verified files,5323462/6000000 ticks and72193 requests.676538 remain with54000 return/3000 cleanup reserves. Selected/installed21be561c passed6546 exact cases, Native29151 build, exact CI, coherent installation,46 installed-SDK requests and live acceptance.184 caller cases passed.
+Normal save/close preserved primary/LastExit126605389 with2258 verified files,5516127/6000000 ticks and73990 requests.483873 ticks remain with54000 return/3000 cleanup reserves. Stopped-process cohort, installed revision stamps and the entire backup were reverified. Selected/installed21be561c retains its6546-case qualification, Native29151 build, exact CI and installed-SDK evidence. First actual iron withdrawal took57.344 seconds. Caller handoffs retained the original one-hour deadline. The complete factory reader closed normally with76 requests included exactly once.
 
-First real graphite withdrawal took71.594 seconds. The original two-blue task completed with version1 exact task/recipe9/requested and initial count2, remaining0, queue release and delivery buffer0. Inventory observation was false, both package blue counts0 and research increase exactly7200. Preserve the earlier failed one-blue original and3600-point proof.
+Miner6878 now reaches6269 and smelter1500 through11 new belts/sorter6901, with an observed30/min iron window. Iron6901, copper6889, mixed coil input722 and board output714 all completed Native2012 upgrades. Filters are0/1301 for722/714. Existing storage28 received420 iron.
 
-1504 unlocked.1705 reached322200/576000 and1523 remains pending. Research root84 gained6876/6877, all three layers researching1705, with15 cumulative placements. Two laboratories consumed24 iron, eight copper/eight magnets and16 stone ore. Five-layer blue root76 now has normally upgraded2012 inputs573/312. Two blue/two fast sorters used five iron, four magnets and three copper, reusing two ordinary sorters and recovering old upgrade items.
+New assembler6902 runs unlocked Casimir recipe28 with shared storage6903. Existing hydrogen path188 supplies four new belts/6912/6913. Three new towers serve the production area. The first Casimir crystal entered storage, with26 stored before save. Glass smelters6916/6917 and titanium-glass assemblers6919/6920 use two stores/nine sorters on fully served network3. Normal supply transferred1000 stone ore,200 water and500 titanium. Storage6918 held102 titanium glass. The final10-second window observed30/min glass,24/min titanium glass and6/min Casimir.
 
-Input6706 changed from the wrong board1301 filter to iron1101. Storage6657 received600 iron, with24 reallocated to laboratories and18 to18 belts. A real window observed6/min each strange matter/lenses. Final collider deuterium was8 against10 per cycle, requiring further supply work. Lenses still feed the original warper line.
+Two newly produced Casimir/four titanium glass and two owned processors normally manufactured two plane filters and the first quantum chip. Original tasks succeeded and the backpack held one chip. Storage114 received1100 graphite and retained821. Technology1504 is unlocked,1705 reached393436/576000 hashes and1523 remains pending. Final blue production was0/min and red12/min. Storage26 is full with zero magnets, making input/capacity repair the next priority.
 
-There are84 local iron nodes. Normal miner6878 covers50/55, has full network3 service and50 ore. Empty old1496 was normally recovered and its ID later reused by a copper belt. Fresh type/endpoint checks remain essential. New copper2435-to-smelter10 supply placed11 belts/sorter6889, producing48/min. Cumulative belt placement203 under214 and sorter34 under48. The player retains11 belts, one sorter, one miner and one warehouse.
+Two gradeIII sorters were normally manufactured from nine iron, six magnets, three copper and two carried ordinary sorters, leaving one coil. The current upgrade entry supports2011→2012. The2013 prepare was refused before acceptance, leaving6912/6913 as2011 with one hydrogen each and both2013 carried. The shared caller now accepts an optional construction itemId. Fresh Native admission will select ordinary replacement or a2012 upgrade. Original location/transfer refusals and waits remain intact. The corrected titanium-glass row and smaller water batch passed. Of606 magnets withdrawn from562,600 could not enter full26 and were normally returned, with six used in sorter manufacture. Historical unknowns remain isolated.
 
-Miner6878 still needs its output. Direct6270 coverage was outside the Bridge subset. Independent input and belt-sorter bridge candidates failed Native collision checks before acceptance. Preserve6270–6273,6274,1507/1508/1509 and smelter1500, whose output1512 now filters iron1101. Resolve the short connection from fresh actual geometry. The package retains802 yellow,200 purple and original fuel/warpers. Mecha buffers hold7200 blue points/2872800 yellow with zero red. Storage6657 holds359 iron.
+Cumulative placements are218/274 belts,49/64 ordinary sorters,12/13 warehouses,6/6 MkII assemblers,3/5 smelters,14/14 towers and15/15 laboratories. The backpack retains two spare smelters, one warehouse,56 belts, six ordinary/two gradeIII sorters, one quantum chip and original research/return materials. Updated private inputs resume this boundary with one normal nearby768 titanium withdrawal within300 seconds. Restore storage26 capacity/magnets and storage28 iron, then continue automatic plane-filter/quantum/green production,1705/1523, Caph closed delivery, sustained receiver electricity and cold continuation. Use supported hovering arrival, onward navigation and actual land-based settling as operations require.
 
-Resume the latest full boundary with one normal nearby6657 iron withdrawal within300 seconds, inheriting fresh private spending and placement inputs. Continue iron/copper and matrix supply, deuterium/strange matter/lenses,1705/1523 and the missing quantum chain. Complete Caph II closed design, sustained manufacture/launch/delivery, actual receiver electricity and save/cold continuation. Final coherent packages follow functional closure, with independent formal-publication authority.
-
-Earlier cuts remain in fixed history. [前次快照 / Previous cut](https://github.com/Arcueid77/Spherewright-Lab/blob/0a19a188ad70cc808daf1b2f375bf601a72f63e4/scenarios/v0.6-ascension/current-status.md) · [持续授权 / Standing authority](../../operations/standing-authority.md)
+Earlier cuts remain in fixed history. [前次快照 / Previous cut](https://github.com/Arcueid77/Spherewright-Lab/blob/4cf7327402fca4f07de2d1a089c94704b5aa92bc/scenarios/v0.6-ascension/current-status.md) · [持续授权 / Standing authority](../../operations/standing-authority.md)

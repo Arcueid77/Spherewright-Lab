@@ -221,7 +221,7 @@ class Factory(Live):
    entities.sort(key=lambda e:distance(e['position'],target['position']));last=None
    for e in entities[:s.get('maximumCandidates',3)]:
     target=self.entity(dest)
-    try:return self.build(role,dict(buildingItemId=2011,sourceObjectId=e['objectId'],destinationObjectId=dest,
+    try:return self.build(role,dict(buildingItemId=s.get('itemId',2011),sourceObjectId=e['objectId'],destinationObjectId=dest,
       expectedSourceStateHash=e['endpointStateHash'],expectedDestinationStateHash=target['endpointStateHash'],initialSorterFilterItemId=s['filterItemId']),1)
     except ToolRefused as err:
      if err.error.get('code') not in ('BUILD_LOCATION_INVALID','BUILD_CONNECTION_INVALID'):raise

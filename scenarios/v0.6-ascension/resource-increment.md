@@ -77,3 +77,24 @@ The positive two-blue regression passed with original-task success, zero package
 Existing collider input storage6657 received600 iron. The prior1000 withdrawal was refused before acceptance for insufficient stock, and the actual batch is600.24 of that batch supplied research laboratories and18 normally manufactured18 belts. One carried miner became6878, with one current resource-miner placement. Empty old1496 was normally recovered without refunding cumulative placement. The22-new-belt support limit sets cumulative ceiling214. Actual copper input placed11 belts/one sorter, bringing totals203/214 and34/48.1600 existing yellow were normally withdrawn for1705, with802 still carried and798 in whole research-point equivalents at save. The unfinished iron connection retains its original refusals and remaining11 belts/one sorter.
 
 Preserve the original6000000-tick cumulative ceiling,5323462 spent ticks,676538 remaining ticks,54000 return and3000 cleanup reserves at saved boundary126412724, together with prior material/construction spending and historical unknown isolation. Existing standing maintenance/save/recovery authority continues. Formal publication retains its owner decision.
+
+
+## 2026-11-12量子生产配套 / Quantum production support
+
+本轮依据所有者合理0.6用料自主授权，先以有限配套启动缺失量子原料。正常制造3座MkII、60带、10普通分拣器及2小仓，完整原料为136铁、11铜、24石墨烯、12处理器及8石材。随后正常制造4熔炉、2塔、1小仓及10普通分拣器，使用44铁、5铜、10线圈、16电路板及12石材。另1座供电塔使用2铁和1现有线圈。4炉中2座已建，2座留在包内。
+
+实际新建3座MkII、2炉、3仓、3塔、15带和15普通分拣器，含新铁输出11带/1分拣器及量子配套4带/14分拣器。有限累计上限为带274、普通分拣器64、小仓13、MkII6、炉5及塔14，实际既耗分别218/49/12/6/3/14，其他既耗保持原记录。正常供入800石墨烯/400钛晶石、1000石矿、200水/500钛块及1100石墨。水原生堆叠20，采用分批取用及直接入仓，保留原500申请未接受记录。
+
+新产出的2卡西米尔、4钛化玻璃与2现有处理器正常制造2位面过滤器及1量子芯片。另正常制造2极速分拣器，准确原料9铁、6磁铁、3铜和2携带普通分拣器，留下1线圈。2013升级准备被现行2011→2012入口拒绝，未接受升级、未退还旧件，2件2013仍在背包。为配套取出的600额外磁铁因26容量不足已全部正常送回562。
+
+最新正常保存边界126605389，累计5516127/6000000tick、73990请求，剩余483873tick，返航54000及清理3000储备继续覆盖。额外完整工厂只读观察76请求已按其正常EOF回执计入一次。
+
+### English
+
+The owner's reasonable0.6 material-autonomy grant supplied a bounded start for the missing quantum inputs. Normal manufacture produced three MkII assemblers,60 belts,10 ordinary sorters/two stores from136 iron,11 copper,24 graphene,12 processors and eight stone bricks. A further four smelters, two towers, one store/10 sorters used44 iron, five copper,10 coils,16 boards and12 stone bricks. One additional tower used two iron/one existing coil. Two of the four smelters were placed and two remain carried.
+
+Actual new placement comprised three MkII assemblers, two smelters, three stores/three towers,15 belts and15 ordinary sorters. This includes11 belts/one sorter for iron and four belts/14 sorters for quantum support. Finite cumulative ceilings are274 belts,64 ordinary sorters,13 stores, six MkII assemblers, five smelters and14 towers, with actual spending218/49/12/6/3/14. Normal supply transferred800 graphene/400 titanium crystals,1000 stone ore,200 water/500 titanium and1100 graphite. Native water stacks hold20, using smaller transfers/direct deposits and retaining the unaccepted500 request.
+
+Two newly produced Casimir/four titanium glass and two owned processors normally made two plane filters/one quantum chip. Two gradeIII sorters were normally made from nine iron, six magnets, three copper and two carried ordinary sorters, leaving one coil. The current2011→2012 entry refused the2013 upgrade before acceptance, so no old items were refunded and both2013 remain carried.600 additional magnets could not enter full26 and were normally returned to562.
+
+Normal saved boundary126605389 preserves5516127/6000000 ticks,73990 requests,483873 remaining ticks and54000 return/3000 cleanup reserves. The complete-factory reader's76 requests are included exactly once from its normal-EOF receipt.

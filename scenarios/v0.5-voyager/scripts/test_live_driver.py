@@ -23,6 +23,26 @@ class LiveDriverTests(unittest.TestCase):
   result=adapter.native_operation_once(dict(role='recover-miner',prepareTool='spherewright_prepare_dismantle',arguments=arguments))
   self.assertEqual('spherewright_commit_dismantle',calls[0][0]);self.assertEqual('native-token',calls[0][1]['planToken'])
   self.assertEqual('original-dismantle',result['actionId'])
+ def test_sorter_build_preserves_basic_default_and_passes_selected_native_grade(self):
+  for selected_item in (None,2012,2013):
+   with self.subTest(selected_item=selected_item):
+    adapter=Factory.__new__(Factory)
+    adapter.ctx=dict(planetId=104)
+    adapter.state=lambda:None
+    adapter.entity=lambda entity:dict(objectId=entity,endpointStateHash=f'endpoint-{entity}',
+      position=dict(x=entity,y=200,z=0))
+    calls=[]
+    adapter.build=lambda role,arguments,maximum:calls.append((role,arguments,maximum)) or 'native-result'
+    step=dict(kind='build-sorter',role='selected-sorter',source=7,destination=8,filterItemId=0)
+    if selected_item is not None:
+     step['itemId']=selected_item
+    validate_steps([step])
+    self.assertEqual('native-result',adapter.step(step))
+    self.assertEqual(('selected-sorter',1),(calls[0][0],calls[0][2]))
+    self.assertEqual(dict(buildingItemId=selected_item or 2011,sourceObjectId=7,destinationObjectId=8,
+      expectedSourceStateHash='endpoint-7',expectedDestinationStateHash='endpoint-8',
+      initialSorterFilterItemId=0),calls[0][1])
+
  def test_resource_build_uses_fresh_public_node_hash_and_existing_paid_build_ledger(self):
   adapter=Factory.__new__(Factory);adapter.ctx=dict(sessionId='synthetic-session',planetId=104)
   adapter.state=lambda:None;calls=[];builds=[]
