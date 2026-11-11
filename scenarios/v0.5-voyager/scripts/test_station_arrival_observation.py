@@ -12,6 +12,37 @@ class StationArrivalTests(unittest.TestCase):
  def captured(self):
   return json.loads((Path(__file__).parent/'fixtures/captured-station-inflight-stock.json').read_text(encoding='utf-8'))
 
+ def test_stock_count_excludes_research_points_and_power_units(self):
+  entity=dict(componentKind='lab',buffers=[
+   dict(itemId=6005,count=2,countUnit='items',unitsPerItem=1),
+   dict(itemId=6005,count=7200,countUnit='research_matrix_points',unitsPerItem=3600),
+   dict(itemId=6005,count=4980,countUnit='joules_per_tick',unitsPerItem=0),
+   dict(itemId=6005,count=3600,countUnit='items',unitsPerItem=3600)])
+  self.assertEqual(2,observed_item_count(entity,6005))
+
+ def test_legacy_item_buffers_retain_native_contract_defaults(self):
+  entity=dict(componentKind='storage',buffers=[
+   dict(itemId=6005,count=2),
+   dict(itemId=6005,count=3,countUnit='items'),
+   dict(itemId=6005,count=4,unitsPerItem=1),
+   dict(itemId=6004,count=100)])
+  self.assertEqual(9,observed_item_count(entity,6005))
+
+ def test_production_wait_requires_physical_cubes_after_research_points(self):
+  points=dict(componentKind='lab',buffers=[
+   dict(itemId=6005,count=7200,countUnit='research_matrix_points',unitsPerItem=3600)])
+  cubes=dict(componentKind='lab',buffers=[
+   dict(itemId=6005,count=2,countUnit='items',unitsPerItem=1)])
+  values=iter([points,cubes]);saved=[]
+  adapter=Factory.__new__(Factory);adapter.ctx=dict(planetId=7);adapter.refs={}
+  adapter.state=lambda:None;adapter.entity=lambda _:next(values)
+  adapter.runtime=type('Evidence',(),dict(put=lambda _,name,value:saved.append((name,value))))()
+  with patch('factory.time.sleep'):
+   result=adapter.step(dict(kind='wait-buffer',role='green',entity=12,itemId=6005,
+    minimumCount=2,maximumSeconds=10,pollSeconds=1))
+  self.assertIs(cubes,result)
+  self.assertEqual([('green-proof.private.json',cubes)],saved)
+
  def test_real_order_is_not_arrival_and_machine_buffers_are_not_station_stock(self):
   e=self.captured()
   self.assertEqual([],e['buffers'])

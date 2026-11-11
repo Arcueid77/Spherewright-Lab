@@ -10,6 +10,8 @@
 4. 通过已绑定接收器、电网和预声明游戏tick区间验证持续非零实际发电，保存观察样本、材料/缓冲与功率变化。
 5. 正常保存并冷恢复，核对设计、在途/已交付进度、设备模式和持续运行状态，汇总源码、实装和玩法证据。
 
+持续接收器验证使用共享驱动的 `observe-receiver-power`。到场后依据实际组件声明接收器、恒星、电网、游戏tick跨度及最大采样间隔，正向区间从首个原生样本开始。逐样本核实际电力、原生组件和电网成员，保存零输出及所有失败切面。通过记录最小采样功率、完整跨度和最大采样间隔，冷恢复后用新声明区间复核同一保存设计及接收器。完整实机验收继续使用当前存档及累计运行额度。
+
 ## 当前观察接口
 
 设计/建造源码df32bd78已完成6455项准确回归、Native构建及对应CI。所选层观察支持 `designPreview` 的有界独立原生多对象成本计算，普通配置动作支持 `dyson-structure` 单项新鲜prepare/commit及守恒回读。外星2208接收器沿付费无人机流程核对准确组件，设计沿原单tick即时旅程预算。同源冷安装、实装SDK及完整保护核验已完成，继续已有存档正向验证。
@@ -34,3 +36,5 @@ The owner requested continued0.6 development on2026-11-11. Follow the approved A
 The first source slice exposes a bounded local-star Dyson graph and identity-bound receiver electricity through `spherewright_get_dyson_state`, plus optional factory-detail `rayReceiver`. Complete source regressions, Native build, exact-source CI and fixed Lab adoption before coherent development installation. Prepare complete backups and the first real ordinary action before launch, retaining the300-second startup gate and cumulative spending.
 
 The first on-site survey establishes the latest owned save, existing structures/devices, technology and stock. Derive a legal closed design and exact construction/manufacturing bill from current Native facts. Existing authorizations, actual remaining material ceilings, reserves, original-action reconciliation and one writer govern execution. Present a consolidated exact increment when the selected plan actually needs additional research, materials or buildings.
+
+Use the shared `observe-receiver-power` entry for sustained receiver validation. Bind the actual receiver, star and network, and predeclare the game-tick span and maximum sample gap. Its first Native cut starts the interval. Verify actual electricity, Native component and network membership in every sample, retaining zero output and failed cuts. Report minimum sampled watts, covered span and largest gap. After cold recovery, declare a new interval against the preserved design/receiver. Full live acceptance continues on the current save under cumulative runtime authority.

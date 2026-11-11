@@ -133,6 +133,9 @@ def observed_item_count(entity,item_id):
     total=0
     for row in rows:
         if row['itemId']!=item_id:continue
+        if (row.get('countUnit','items')!='items'
+                or row.get('unitsPerItem',1)!=1):
+            continue
         count=row['count']
         if type(count)is not int or count<0:raise ValueError('physical_item_count_invalid')
         total+=count
@@ -316,6 +319,7 @@ def validate_steps(steps):
         'wait-buffer':{'entity','itemId','minimumCount','maximumSeconds'},'wait-stack-device':{'entity','expected','maximumSeconds'},'wait-player-still':{'maximumSeconds'},'prove-network':{'entities','networkId'},'save-close':set(),'handoff-caller':set(),
         'observe-sail-conversion':{'entity','count','orbitId','maximumSeconds','baselinePath','baselineSha256'},
         'observe-piler-aggregation':{'piler','input','output','itemId','maximumItems','maximumSeconds'},
+        'observe-receiver-power':{'entity','starId','networkId','gameTicks','maximumSampleGapGameTicks','pollSeconds','maximumSeconds'},
         'observe-rocket-arrival':{'entity','layerId','nodeId','maximumSeconds','baselinePath','baselineSha256'}}
     for index,step in enumerate(steps):
         kind=step.get('kind')
@@ -328,6 +332,16 @@ def validate_steps(steps):
                 raise ValueError('immutable_stack_identity_invalid')
         if kind=='build-resource' and any(type(step[key])is not int or step[key]<=0 for key in ('itemId','nodeId')):
             raise ValueError('immutable_resource_build_identity_invalid')
+        if kind=='observe-receiver-power':
+            entity=step['entity']
+            if (not (type(entity) is int and entity > 0 or isinstance(entity,str) and bool(entity))
+                    or any(type(step[key]) is not int or step[key] <= 0
+                    for key in ('starId','networkId','gameTicks','maximumSampleGapGameTicks'))
+                    or step['maximumSampleGapGameTicks'] > step['gameTicks']
+                    or type(step['pollSeconds']) not in (int,float) or not .25 <= step['pollSeconds'] <= 30
+                    or type(step['maximumSeconds']) not in (int,float)
+                    or not 0 < step['maximumSeconds'] < float('inf')):
+                raise ValueError('finite_receiver_observation_declaration_required')
         if kind=='wait-stack-device':
             expected=step['expected'];seconds=step['maximumSeconds']
             if (not isinstance(expected,Mapping) or not 1<=len(expected)<=16
@@ -387,6 +401,9 @@ def validate_native_calls(steps,schemas):
             call('spherewright_prepare_build', dict(buildingItemId=step['itemId'],
                 expectedPlayerStateHash='schema-placeholder', preferredModelIndex=step['modelIndex']))
         elif kind=='read':call(step['tool'],step.get('arguments',{}))
+        elif kind=='observe-receiver-power':
+            call('spherewright_get_session_state',{})
+            call('spherewright_inspect_factory_entity',dict(objectId=1))
         elif kind=='dump':
             for query in step['queries']:call(query['tool'],query.get('arguments',{}))
         elif kind in ('operation','prepare-only'):

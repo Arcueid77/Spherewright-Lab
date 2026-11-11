@@ -46,6 +46,10 @@ jobs:
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
           python ./scenarios/v0.5-voyager/scripts/test_first_storage_transfer.py
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          python ./scenarios/v0.5-voyager/scripts/test_station_arrival_observation.py
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          python ./scenarios/v0.5-voyager/scripts/test_receiver_power_observation.py
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
           python ./scenarios/v0.5-voyager/scripts/test_plan_publication.py
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
           python ./scenarios/v0.5-voyager/scripts/test_lifetime_contract.py
