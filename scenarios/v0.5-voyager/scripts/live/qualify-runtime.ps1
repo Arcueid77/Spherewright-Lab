@@ -1,9 +1,11 @@
-param([Parameter(Mandatory)][string]$SourceRoot,[Parameter(Mandatory)][string]$SourceSha,[Parameter(Mandatory)][string]$OutputRoot,[Parameter(Mandatory)][string]$SdkHostPath,[ValidatePattern("^[a-z0-9-]+$")][string]$ChecksName="development-checks-qualified")
+param([Parameter(Mandatory)][string]$SourceRoot,[Parameter(Mandatory)][string]$SourceSha,[Parameter(Mandatory)][string]$OutputRoot,[Parameter(Mandatory)][string]$SdkHostPath,[ValidatePattern("^[a-z0-9-]+$")][string]$ChecksName="development-checks-qualified",
+ [ValidatePattern('^\d+\.\d+\.\d+$')][string]$Version='0.5.0',
+ [ValidateRange(1,1000)][int]$ExpectedToolCount=74)
 $ErrorActionPreference='Stop'
 Set-StrictMode -Version Latest
 $revision=$SourceSha
 $repo=$SourceRoot
-$runtime=Join-Path $OutputRoot 'runtime-qualified/Spherewright-0.5.0'
+$runtime=Join-Path $OutputRoot ('runtime-qualified/Spherewright-'+$Version)
 $single=Join-Path $OutputRoot 'singlefile-qualified/Spherewright.Mcp.exe'
 $checks=Join-Path $OutputRoot $ChecksName
 function Require($value,[string]$reason){if(-not$value){throw $reason}}
@@ -24,7 +26,7 @@ Proof (Join-Path $checks 'exact-ci.private.json') $ci
 Require ($ci.headSha -ceq $revision -and $ci.status -ceq 'completed' -and $ci.conclusion -ceq 'success') 'Exact CI is not successful.'
 $manifestPath=Join-Path $runtime 'manifest.json'
 $manifest=Get-Content -LiteralPath $manifestPath -Raw|ConvertFrom-Json
-Require ($manifest.sourceCommit -ceq $revision -and -not$manifest.sourceDirty -and $manifest.version -ceq '0.5.0' -and @($manifest.files).Count -eq 242) 'Development manifest differs.'
+Require ($manifest.sourceCommit -ceq $revision -and -not$manifest.sourceDirty -and $manifest.version -ceq $Version -and @($manifest.files).Count -eq 242) 'Development manifest differs.'
 foreach($row in $manifest.files){
  $path=Join-Path $runtime $row.path
  Require ((Get-Item -LiteralPath $path).Length -eq $row.size -and (Hash $path).ToLowerInvariant() -ceq $row.sha256) 'Development file changed.'
@@ -46,17 +48,17 @@ function Invoke-SpherewrightStagedMcpMetadataRequest {
 $metadataResults=@{}
 foreach($role in @('directory','standalone')){
  $executable=if($role -ceq 'directory'){Join-Path $runtime 'mcp/Spherewright.Mcp.exe'}else{$single}
- Require ([Diagnostics.FileVersionInfo]::GetVersionInfo($executable).ProductVersion -ceq ('0.5.0+'+$revision)) 'Executable source differs.'
+ Require ([Diagnostics.FileVersionInfo]::GetVersionInfo($executable).ProductVersion -ceq ($Version+'+'+$revision)) 'Executable source differs.'
  $script:metadata=@{}
- $result=Invoke-SpherewrightStagedMcpProbe -ExecutablePath $executable -ExpectedVersion '0.5.0' -ExpectedPlaybookPath (Join-Path $runtime 'AGENT-PLAYBOOK.md') -IsolationDirectory (Join-Path $checks ($role+'-isolation'))
- Require ($result.tools -eq 74 -and $result.resources -eq 1 -and $result.playbookMatches -and $result.exitCode -eq 0) 'Metadata surface differs.'
+ $result=Invoke-SpherewrightStagedMcpProbe -ExecutablePath $executable -ExpectedVersion $Version -ExpectedPlaybookPath (Join-Path $runtime 'AGENT-PLAYBOOK.md') -IsolationDirectory (Join-Path $checks ($role+'-isolation'))
+ Require ($result.tools -eq $ExpectedToolCount -and $result.resources -eq 1 -and $result.playbookMatches -and $result.exitCode -eq 0) 'Metadata surface differs.'
  Proof (Join-Path $checks ($role+'-metadata.private.json')) $script:metadata
- Assert-SpherewrightPackageSurface -Version '0.5.0' -Tools $script:metadata['tools/list'].tools -Resources $script:metadata['resources/list'].resources -PackagedPlaybook ([IO.File]::ReadAllText((Join-Path $runtime 'AGENT-PLAYBOOK.md'))) -ResourcePlaybook $script:metadata['resources/read'].contents[0].text
+ Assert-SpherewrightPackageSurface -Version $Version -Tools $script:metadata['tools/list'].tools -Resources $script:metadata['resources/list'].resources -PackagedPlaybook ([IO.File]::ReadAllText((Join-Path $runtime 'AGENT-PLAYBOOK.md'))) -ResourcePlaybook $script:metadata['resources/read'].contents[0].text
  $metadataResults[$role]=$result
 }
 $managed=@(Get-ChildItem -LiteralPath $runtime -Recurse -File|Where-Object{$_.Name -cmatch '^Spherewright\..*\.dll$'})
 Require ($managed.Count -eq 6) 'Managed product module inventory differs.'
-foreach($file in $managed){Require ([Diagnostics.FileVersionInfo]::GetVersionInfo($file.FullName).ProductVersion -ceq ('0.5.0+'+$revision)) 'Managed source differs.'}
+foreach($file in $managed){Require ([Diagnostics.FileVersionInfo]::GetVersionInfo($file.FullName).ProductVersion -ceq ($Version+'+'+$revision)) 'Managed source differs.'}
 Assert-SpherewrightNoCodeViewRecord -AssemblyPaths $managed.FullName
 function DebugRecords([string]$path){
  $stream=[IO.File]::OpenRead($path);$reader=[Reflection.PortableExecutable.PEReader]::new($stream)
@@ -82,7 +84,7 @@ foreach($role in @('plugin','mcp')){
 $files+=@{role='plugin';relativePath='Spherewright.Mcp.exe';source=$single;bytes=(Get-Item -LiteralPath $single).Length;sha256=(Hash $single)}
 Require (@($files|Where-Object role -CEQ 'plugin').Count -eq 5 -and @($files|Where-Object role -CEQ 'mcp').Count -eq 224) 'Installed cohort inventory differs.'
 $index=Join-Path $checks 'cohort-index.private.json'
-& (Join-Path $PSScriptRoot 'module-stamps.ps1') -PluginDirectory (Join-Path $runtime 'BepInEx/plugins/Spherewright') -NativeAssemblyPath (Join-Path $repo '.local/game-refs/Assembly-CSharp.dll') -SourceSha $revision -NativeAssemblySha256 (Hash (Join-Path $repo '.local/game-refs/Assembly-CSharp.dll')) -OutputPath (Join-Path $checks 'revision-stamps.private.json')
-Proof $index @{sourceSha=$revision;kind='development_installation_cohort';manualRoot=$runtime;singleFileMcp=$single;officialTransactionScript=$transaction;officialTransactionSha256=(Hash $transaction);officialProbeScript=$probe;officialProbeSha256=(Hash $probe);files=$files}
+& (Join-Path $PSScriptRoot 'module-stamps.ps1') -PluginDirectory (Join-Path $runtime 'BepInEx/plugins/Spherewright') -NativeAssemblyPath (Join-Path $repo '.local/game-refs/Assembly-CSharp.dll') -SourceSha $revision -Version $Version -NativeAssemblySha256 (Hash (Join-Path $repo '.local/game-refs/Assembly-CSharp.dll')) -OutputPath (Join-Path $checks 'revision-stamps.private.json')
+Proof $index @{sourceSha=$revision;kind='development_installation_cohort';productVersion=$Version;manualRoot=$runtime;singleFileMcp=$single;officialTransactionScript=$transaction;officialTransactionSha256=(Hash $transaction);officialProbeScript=$probe;officialProbeSha256=(Hash $probe);files=$files}
 Proof (Join-Path $checks 'qualification.private.json') @{passed=$true;sourceSha=$revision;manifestSha256=(Hash $manifestPath);cohortIndexSha256=(Hash $index);pluginFiles=5;mcpFiles=224;metadata=$metadataResults;managedCodeViewAbsent=$true;nativeHostExactSdkMatch=$true;exactCiRun=$ci.databaseId;allTestsPassed=$validation.totalPassed;gameCalls=0;installed=$false;runtimeAcceptance=$false;newDistributionArchives=0}
-@{passed=$true;sourceSha=$revision;manifestSha256=(Hash $manifestPath);cohortIndexSha256=(Hash $index);pluginFiles=5;mcpFiles=224;tools=74;resources=1;gameCalls=0;newArchives=0}|ConvertTo-Json -Compress
+@{passed=$true;sourceSha=$revision;manifestSha256=(Hash $manifestPath);cohortIndexSha256=(Hash $index);pluginFiles=5;mcpFiles=224;tools=$ExpectedToolCount;resources=1;gameCalls=0;newArchives=0}|ConvertTo-Json -Compress

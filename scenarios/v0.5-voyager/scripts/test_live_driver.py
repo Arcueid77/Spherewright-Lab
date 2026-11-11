@@ -9,6 +9,24 @@ from factory import Factory,resolve_refs
 from runtime import freeze,Runtime
 
 class LiveDriverTests(unittest.TestCase):
+ def test_revision_stamps_accept_explicit_ascension_version_and_legacy_default(self):
+  from unittest.mock import patch
+  for version,explicit in [('0.5.0',False),('0.6.0',True)]:
+   with self.subTest(version=version):
+    runtime=Runtime.__new__(Runtime)
+    runtime.config=dict(sourceSha='synthetic-source',revisionStamps='synthetic-stamps',
+        pluginDestination='synthetic-plugin',dspRoot='synthetic-game',nativeAssemblySha256='A'*64)
+    if explicit:runtime.config['productVersion']=version
+    names=['Spherewright.Bridge.Core','Spherewright.Contracts','Spherewright.Plugin']
+    stamp=lambda name:dict(assemblyName=name,moduleVersionId='11111111-1111-4111-8111-111111111111',
+        informationalVersion=version+'+synthetic-source',sha256='A'*64)
+    stamps=dict(passed=True,sourceSha='synthetic-source',modules=[stamp(name)for name in names],native=stamp('Assembly-CSharp'))
+    with patch('runtime.read',return_value=stamps),patch('runtime.sha',return_value='A'*64):
+     self.assertIs(runtime.verify_revision_stamps(),stamps)
+     stamps['modules'][0]['informationalVersion']='0.4.0+synthetic-source'
+     with self.assertRaisesRegex(RuntimeError,'revision_stamp_module_bytes_changed_before_launch'):
+      runtime.verify_revision_stamps()
+
  def test_layout_mcp_path_must_match_the_exact_qualified_payload(self):
   from evidence import put,sha
   with tempfile.TemporaryDirectory()as directory:

@@ -116,7 +116,7 @@ class Live:
       if set(observed)==set(expected):
        for name,x in observed.items():
         need(x['error']=='none'and x['moduleVersionId'].lower()==expected[name]['moduleVersionId'].lower(),'loaded_module_mismatch')
-        if name!='Assembly-CSharp':need(x['informationalVersion']=='0.5.0+'+self.runtime.config['sourceSha'],'loaded_source_mismatch')
+        if name!='Assembly-CSharp':need(x['informationalVersion']==self.runtime.config.get('productVersion','0.5.0')+'+'+self.runtime.config['sourceSha'],'loaded_source_mismatch')
        if not(self.runtime.output/'loaded-modules.private.json').exists():self.runtime.put('loaded-modules.private.json',dict(passed=True,sourceSha=self.runtime.config['sourceSha'],processId=self.pid,modules=observed))
        try:
         s=G.retry_read_only(lambda:self.call('spherewright_get_session_state',{}),deadline,lambda e:any(k in str(e)for k in ('REQUEST_TIMEOUT','BRIDGE_NOT_READY','BRIDGE_UNAVAILABLE')))

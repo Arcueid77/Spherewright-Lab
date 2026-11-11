@@ -27,3 +27,9 @@ The remaining assets are the two archive checksum sidecars, SHA256SUMS.txt and c
 The public package page showed0.4.0 on2026-11-10 under TeamArcueid_77, Libraries, Dyson Sphere Program. The existing0.5 update has not been submitted. Windows browser operations failed the current-URL safety check. Automatic approval review also rejected a browser-launch attempt with `blocked by policy`. No upload or duplicate submission was performed. [Current package page](https://thunderstore.io/c/dyson-sphere-program/p/Arcueid_77/Spherewright/)
 
 2026-11-10公共页仍显示0.4.0，Team为Arcueid_77，分类Libraries，社区Dyson Sphere Program。既有包的0.5更新尚未提交。Windows浏览器操作未通过当前网址安全核验，自动审批也以 `blocked by policy` 拒绝一次启动浏览器的尝试，当前没有上传或重复提交。[当前包页面](https://thunderstore.io/c/dyson-sphere-program/p/Arcueid_77/Spherewright/)
+
+## Public listing update, 2026-11-11 / 公共页更新
+
+The public Thunderstore package page now lists0.5.0 and displays the current release README. The official download link redirects to the0.5.0 CDN ZIP. A public download attempt returnedHTTP403, so its bytes have not yet been compared with the approved local/GitHub archive. The approved archive remains33301012 bytes with SHA-25680B795FAE8BAF7BAA9426EC66F890A4D250040BA0A15AD28B159C861C529EA33. [Thunderstore package](https://thunderstore.io/c/dyson-sphere-program/p/Arcueid_77/Spherewright/)
+
+Thunderstore公共包页现已列出0.5.0并显示当前发行README，官方下载链接转至0.5.0 CDN ZIP。公开下载尝试返回HTTP403，分发字节与已批本地/GitHub档案的比对待补齐。已批包仍为33301012字节，SHA-256为80B795FAE8BAF7BAA9426EC66F890A4D250040BA0A15AD28B159C861C529EA33。[Thunderstore页面](https://thunderstore.io/c/dyson-sphere-program/p/Arcueid_77/Spherewright/)

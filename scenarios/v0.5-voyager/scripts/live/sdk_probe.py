@@ -62,6 +62,8 @@ def main():
             ('spherewright_prepare_move', dict(ctx, targetX=1., targetY=199., targetZ=1.,
                 previewWalkingRoute=True, expectedPlayerStateHash=h)),
         ])
+        if 'spherewright_get_dyson_state' in schemas:
+            cases.append(('spherewright_get_dyson_state',dict(ctx,layerId=0,stateHashVersion=1)))
         proof=[]
         for tool,args in cases:
             schema=schemas[tool];need(set(schema.get('required',[]))<=set(args),'sdk_required_field_missing')

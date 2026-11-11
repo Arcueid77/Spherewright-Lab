@@ -1,29 +1,21 @@
 {
   "schemaVersion": 2,
-  "status": "tagged",
-  "scenario": "v0.5-voyager",
+  "status": "development",
+  "scenario": "v0.6-ascension",
   "spherewright": {
     "repository": "Arcueid77/Spherewright",
     "submodulePath": "deps/Spherewright",
-    "sourceSha": "b574c616346c4e087b433de3633e23fb12075add",
-    "releaseTag": "v0.5.0",
-    "productVersion": "0.5.0"
+    "sourceSha": "ee810a699b71db44bfe11ae1e4e71b9370f79353",
+    "releaseTag": null,
+    "productVersion": "0.6.0"
   },
   "native": {
     "version": "0.10.35.29151",
     "assemblySha256": "EF314425DADE51F529F184F07BE136CD3C2660A6A81515603C7226FBE7AB1D8C"
   },
   "packages": {
-    "manual": {
-      "file": "Spherewright-0.5.0-win-x64.zip",
-      "sha256": "D1769D93F053C002E42B53AC8B885F77A0E8DC425FC3B56B0611C50C27B3EB87",
-      "size": 37584372
-    },
-    "thunderstore": {
-      "file": "Spherewright-0.5.0-thunderstore.zip",
-      "sha256": "80B795FAE8BAF7BAA9426EC66F890A4D250040BA0A15AD28B159C861C529EA33",
-      "size": 33301012
-    }
+    "manual": null,
+    "thunderstore": null
   },
   "installed": {
     "sourceSha": "19cd5eb505ffd30f4832f3bfbf0ced9ddad4a889",
@@ -60,5 +52,8 @@
   "evidenceSource": {
     "repository": "AvaloNero/Spherewright",
     "sourceSha": "e7d5f7d8661092b7c8089710488c448f290638be"
+  },
+  "development": {
+    "targetVersion": "0.6.0"
   }
 }

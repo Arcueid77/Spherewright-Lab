@@ -1,5 +1,11 @@
 # Voyager standing execution authority / Voyager 持续执行授权
 
+## Current Ascension continuation, 2026-11-11 / 当前Ascension续接
+
+The owner explicitly requested “继续0.6的推进”. Continue the approved0.6 Ascension development scope through necessary Native research, reusable product implementation, tests, exact-source CI, linear ordinary commits/pushes and Lab adoption. The [Ascension plan](../scenarios/v0.6-ascension/implementation-plan.md) records the current sequence. Current-owned-world surveys and preparation retain the standing complete-backup, coherent-installation, startup, Native, cumulative-budget and original-action procedures. Use current Native catalogues and resource facts to derive any actual construction/research increment.
+
+所有者明确要求“继续0.6的推进”，按已批准0.6 Ascension范围连续进行必要原生研究、通用产品实现、测试、准确CI、普通线性提交/推送及Lab采用。[Ascension计划](../scenarios/v0.6-ascension/implementation-plan.md)记录实施顺序。当前owned世界调查与准备继续沿完整备份、同源安装、启动门、Native门、累计预算和原动作流程执行。实际科研/施工增量由新鲜原生目录和真实资源推导。
+
 ## Current publication grant, 2026-11-10 / 当前正式发布授权
 
 The owner explicitly said “那就发布，thunderstore的你直接帮我去网页上提交好了”, followed by “自己开”. This grants the0.5 formal tag, GitHub Release and submission of the matching Thunderstore archive through the existing package website under Team Arcueid_77. Complete source/package checks, publish the exact qualified source and preserve old releases. Ordinary linear commits/pushes and necessary release-description corrections continue under the standing workflow. User authentication and browser safety remain applicable. Record each platform's actual outcome separately.

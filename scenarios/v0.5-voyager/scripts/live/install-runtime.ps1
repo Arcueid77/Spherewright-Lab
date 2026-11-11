@@ -1,5 +1,7 @@
 [CmdletBinding()]
-param([Parameter(Mandatory)][string]$TargetsPath,[Parameter(Mandatory)][string]$EvidenceDirectory)
+param([Parameter(Mandatory)][string]$TargetsPath,[Parameter(Mandatory)][string]$EvidenceDirectory,
+    [ValidatePattern('^\d+\.\d+\.\d+$')][string]$Version='0.5.0',
+    [ValidateRange(1,1000)][int]$ExpectedToolCount=74)
 Set-StrictMode -Version Latest
 $ErrorActionPreference='Stop'
 $out=[IO.Path]::GetFullPath($EvidenceDirectory)
@@ -64,11 +66,11 @@ foreach($role in @('plugin','mcp')){
  $null=Assert-SpherewrightInstallSnapshotComplete -Root $stages[$role].payload -ExpectedFiles $maps[$role]
 }
 $verify={param($liveMcpDirectory)
- $single=Invoke-SpherewrightStagedMcpProbe -ExecutablePath (Join-Path $targets.pluginDestination 'Spherewright.Mcp.exe') -ExpectedVersion '0.5.0' -ExpectedPlaybookPath (Join-Path $cohort.manualRoot 'AGENT-PLAYBOOK.md') -IsolationDirectory (Join-Path $out 'installed-singlefile-metadata')
- Require ($single.tools -eq 74 -and $single.resources -eq 1) 'Standalone MCP metadata differs.'
+ $single=Invoke-SpherewrightStagedMcpProbe -ExecutablePath (Join-Path $targets.pluginDestination 'Spherewright.Mcp.exe') -ExpectedVersion $Version -ExpectedPlaybookPath (Join-Path $cohort.manualRoot 'AGENT-PLAYBOOK.md') -IsolationDirectory (Join-Path $out 'installed-singlefile-metadata')
+ Require ($single.tools -eq $ExpectedToolCount -and $single.resources -eq 1) 'Standalone MCP metadata differs.'
  NewProof 'installed-singlefile-metadata.private.json' $single
- $manual=Invoke-SpherewrightStagedMcpProbe -ExecutablePath (Join-Path $liveMcpDirectory 'Spherewright.Mcp.exe') -ExpectedVersion '0.5.0' -ExpectedPlaybookPath (Join-Path $cohort.manualRoot 'AGENT-PLAYBOOK.md') -IsolationDirectory (Join-Path $out 'installed-directory-metadata')
- Require ($manual.tools -eq 74 -and $manual.resources -eq 1) 'Directory MCP metadata differs.'
+ $manual=Invoke-SpherewrightStagedMcpProbe -ExecutablePath (Join-Path $liveMcpDirectory 'Spherewright.Mcp.exe') -ExpectedVersion $Version -ExpectedPlaybookPath (Join-Path $cohort.manualRoot 'AGENT-PLAYBOOK.md') -IsolationDirectory (Join-Path $out 'installed-directory-metadata')
+ Require ($manual.tools -eq $ExpectedToolCount -and $manual.resources -eq 1) 'Directory MCP metadata differs.'
  NewProof 'installed-directory-metadata.private.json' $manual
 }
 $dispatched=$false;$returned=$false;$failure=$null

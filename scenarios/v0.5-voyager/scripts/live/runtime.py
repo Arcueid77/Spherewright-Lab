@@ -70,7 +70,7 @@ class Runtime:
         need(len(rows)==3 and {row['assemblyName'] for row in rows}==expected,'revision_stamp_module_set_changed')
         for row in rows:
             need(isinstance(row.get('moduleVersionId'),str) and uuid.UUID(row['moduleVersionId']).int!=0,'revision_stamp_mvid_missing')
-            need(row.get('informationalVersion')=='0.5.0+'+c['sourceSha']
+            need(row.get('informationalVersion')==c.get('productVersion','0.5.0')+'+'+c['sourceSha']
                  and row.get('sha256')==sha(Path(c['pluginDestination'])/(row['assemblyName']+'.dll')),
                  'revision_stamp_module_bytes_changed_before_launch')
         native=stamps.get('native',{})
