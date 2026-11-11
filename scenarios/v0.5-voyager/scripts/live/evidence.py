@@ -1,6 +1,6 @@
 """Append-only private evidence and read-only exact Native file proof."""
 from pathlib import Path
-import pathlib,datetime as dt,hashlib,importlib.util,json,os,struct
+import pathlib,datetime as dt,hashlib,importlib.util,json,os,struct,tempfile,time
 from collections.abc import Mapping
 NATIVE='0.10.35.29151'
 def need(ok,why):
@@ -34,6 +34,34 @@ def sha(p):
 def put(p,x):
     with Path(p).open('x',encoding='utf-8') as f:
         json.dump(json_value(x),f,ensure_ascii=False,indent=2,allow_nan=False);f.flush();os.fsync(f.fileno())
+def put_atomic(p,x):
+    """Publish a complete create-once file while concurrent readers are active."""
+    target=Path(p)
+    data=json.dumps(json_value(x),ensure_ascii=False,indent=2,allow_nan=False).encode('utf-8')
+    descriptor,temporary=tempfile.mkstemp(prefix=target.name+'.',suffix='.publishing',dir=target.parent)
+    try:
+        with os.fdopen(descriptor,'wb') as stream:
+            stream.write(data);stream.flush();os.fsync(stream.fileno())
+        if os.name=='nt':os.rename(temporary,target)
+        else:os.link(temporary,target)
+    finally:
+        if Path(temporary).exists():Path(temporary).unlink()
+def publish_next_plan(output,sequence,plan_path,requires_completed=None):
+    need(type(sequence)is int and sequence>0,'positive_plan_sequence_required')
+    plan=Path(plan_path).resolve();read(plan)
+    envelope=dict(path=str(plan),sha256=sha(plan))
+    if requires_completed is not None:
+        need(type(requires_completed)is int and 0<requires_completed<sequence,'invalid_plan_predecessor')
+        envelope['requiresCompletedPlanSequence']=requires_completed
+    put_atomic(Path(output)/f'next-plan-{sequence:03d}.private.json',envelope)
+def read_published(p):
+    """Bound the incomplete-JSON interval of older streaming publishers."""
+    deadline=time.monotonic()+5
+    while True:
+        try:return read(p)
+        except (json.JSONDecodeError,UnicodeDecodeError):
+            if time.monotonic()>=deadline:raise
+            time.sleep(.05)
 def json_value(x):
     if isinstance(x,Mapping):return {k:json_value(v) for k,v in x.items()}
     if isinstance(x,(list,tuple)):return [json_value(v) for v in x]

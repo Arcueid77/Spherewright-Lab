@@ -38,7 +38,13 @@ English. Native recipe18 produces one red matrix every six seconds in one labora
 
 本轮另追加2高速分拣器用于红矩阵石墨输入257及氢输入782，已按原生配方88正常制造并升级完成。准确原料为5铁、2电路板及1磁线圈，含2普通分拣器和1电动机的正常依赖制造。升级分别保留1109/1120筛选并正常退还2普通分拣器，累计施工分拣器既耗33，升级扣还单独记账。4座新增红矩阵研究站已全部原生叠放，累计研究站既耗9。新增供料1600石墨及400氢均正常取用并存入已有仓储，新增取用569蓝及390红进入科研，1手搓蓝的3600科研点数另有守恒回读，原完成判定失败保持。
 
-原600万累计游戏tick上限及既耗继续保留。最新正常保存边界126087859，当前累计4998597，剩余1001403，返航54000及清理3000储备保持。原材料/施工既耗、所有历史动作和unknown隔离继续保留。持续执行、同源维护和保存恢复按现行授权进行。正式发布按其单独所有者决定执行。
+2026-11-12。本轮再正常制造4座蓝矩阵研究站并叠到原根76，累计研究站施工上限及既耗均为13。完整新增原料为48铁、16铜、16磁铁及32石矿，含原生玻璃、电路板及线圈依赖制造。正常取1000铜，984供入原箱26、16用于4站制造，1784磁铁移入562以腾出供料容量。原板机36输入979已正常由齿轮筛选改为铜1104，复用线圈机73的原铜输入722，保存前已有305蓝及1705科研69779/576000哈希。1504已正常解锁。
+
+另按直接红矩阵供料用途正常制造1小仓，消耗4铁及4石材，仓施工上限由9增至10。原生有界位置候选被拒绝，物品仍在背包，实际仓施工既耗保持9。拟用2普通分拣器沿既有48上限，当前既耗仍33、背包现货2。追加1600石墨已正常供入已有114，实际保存前1598，避免等待新仓位置而中断已有生产供料。
+
+为下一轮手搓完成回归及原76供料升级，另预留2蓝矩阵及2高速分拣器。完整原料为5铁、4磁铁及3铜，复用背包2普通分拣器，正常依赖制造会另留下1磁线圈。两次蓝矩阵执行使首件可在原任务完成前进入科研，按原任务回读核对完成、背包及7200点流转。高速分拣器按新鲜端点选择实际升级对象，累计高速支持额度由既有4增至6，施工既耗及升级扣还继续分别记账。
+
+原600万累计游戏tick上限及既耗继续保留。最新正常保存边界126289034，当前累计5199772，剩余800228，返航54000及清理3000储备保持。原材料/施工既耗、所有历史动作和unknown隔离继续保留。持续执行、同源维护和保存恢复按现行授权进行。正式发布按其单独所有者决定执行。
 
 ## English
 
@@ -56,4 +62,10 @@ Actual support placement completed one normally crafted warehouse and one carrie
 
 This window added two further fast sorters for red graphite input257 and hydrogen input782. Normal recipe88 manufacture and both Native upgrades completed from five iron, two boards and one coil, including two ordinary sorters and one motor through normal dependency crafting. Filters1109/1120 were retained and two ordinary sorters were normally refunded. Cumulative sorter placement is33, with upgrade debit/refund separate. Four new red laboratories completed Native stacking, bringing cumulative laboratory placements to9. Normal existing-storage supply added1600 graphite and400 hydrogen.569 blue and390 red cubes were normally withdrawn for research. A further crafted blue has an exact3600-point conservation readback while retaining its original failed completion result.
 
-Preserve the original6000000-tick cumulative ceiling,4998597 spent ticks,1001403 remaining ticks,54000 return and3000 cleanup reserves at saved boundary126087859, together with prior material/construction spending and historical unknown isolation. Existing standing maintenance/save/recovery authority continues. Formal publication retains its owner decision.
+On2026-11-12, four further normally manufactured blue laboratories expanded original root76 to five layers. Cumulative laboratory placement and its ceiling are13. Exact new raw use was48 iron,16 copper,16 magnets and32 stone ore, including normal glass/board/coil dependency recipes. Of1000 normally withdrawn copper,984 entered storage26 and16 made the laboratories.1784 magnets moved to562 to release input-storage capacity. Board assembler36's input979 changed from its wrong gear filter to copper1104, reusing coil assembler73's copper input722. Storage held305 blue before save and1705 reached69779/576000 hashes.1504 unlocked normally.
+
+One normally crafted warehouse for direct red supply consumed four iron/four stone bricks. Its placement ceiling increases from9 to10. Bounded Native location candidates were refused and the warehouse remains carried, preserving nine actual placements. Two proposed ordinary sorters fit the existing48 ceiling, with33 spent and two carried. Another1600 graphite entered existing warehouse114, holding1598 at save, so the existing supply continues while warehouse positioning remains pending.
+
+The next handcraft-completion regression and root76 input upgrades reserve two blue matrices and two fast sorters. Exact raw inputs are five iron, four magnets and three copper, reusing two carried ordinary sorters. Normal dependency crafting also leaves one coil. Two blue executions allow the first product to enter research before the original task ends, binding completion/inventory and7200-point observations to the original task. Fresh endpoints select actual upgrades. The cumulative fast-sorter support allowance increases from the existing four to six, preserving separate placement and upgrade debit/refund accounting.
+
+Preserve the original6000000-tick cumulative ceiling,5199772 spent ticks,800228 remaining ticks,54000 return and3000 cleanup reserves at saved boundary126289034, together with prior material/construction spending and historical unknown isolation. Existing standing maintenance/save/recovery authority continues. Formal publication retains its owner decision.

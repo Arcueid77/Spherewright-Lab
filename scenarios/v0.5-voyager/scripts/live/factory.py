@@ -2,7 +2,7 @@
 import math,time,uuid
 from collections.abc import Mapping
 from driver import Live,ToolRefused,AcceptedActionFailure,NativePreacceptanceRefusal
-from evidence import need,read,sha
+from evidence import need,read,sha,read_published
 from contracts import powered_consumers_share_network,validate_steps,is_read_tool,validate_native_calls,strict_native_player_idle,fully_observed_dry_surface,observed_short_crossing_dry_landing,observed_item_count,observed_stack_device_matches
 from flight_observers import observe_sails,observe_rocket
 from stack_observers import observe_piler_aggregation
@@ -251,7 +251,8 @@ class Factory(Live):
    power=self.call('spherewright_get_power_summary',self.ctx);self.runtime.put(role+'-proof.private.json',dict(entities=entities,power=power));return
   if kind=='dump':
    for query in s['queries']:
-    self.runtime.put(role+'-'+query['name']+'.private.json',self.call(query['tool'],self.read_args(query['tool'],query.get('arguments',{}))))
+    args=resolve_refs(query.get('arguments',{}),dict(context=self.ctx,refs=self.refs))
+    self.runtime.put(role+'-'+query['name']+'.private.json',self.call(query['tool'],self.read_args(query['tool'],args)))
    return
   if kind=='handoff-caller':
    need(self.active is None,'unsettled_action_prevents_caller_handoff');state=self.state()
@@ -425,7 +426,7 @@ class Factory(Live):
    # No shell/code evaluation or second writer. Refusals keep this owner alive.
    inbox=self.runtime.output/f'next-plan-{sequence:03d}.private.json'
    if not inbox.exists():time.sleep(.5);continue
-   envelope=read(inbox);need(sha(envelope['path'])==envelope['sha256'],'next_plan_changed')
+   envelope=read_published(inbox);need(sha(envelope['path'])==envelope['sha256'],'next_plan_changed')
    plan=read(envelope['path'])
    try:
     self.require_completed_predecessor(sequence,envelope)

@@ -2,6 +2,7 @@
 from pathlib import Path
 import copy
 import sys,unittest,tempfile,json,subprocess
+from types import SimpleNamespace
 sys.path.insert(0,str(Path(__file__).resolve().parent/'live'))
 from contracts import ordinary_owned_resume_echo,powered_consumers_share_network,paused_failed_cut,validate_steps,resume_admission_echo,validate_native_calls,strict_native_player_idle,fully_observed_dry_surface,observed_short_crossing_dry_landing,native_warper_auto_supply_enabled
 from driver import Live,ToolRefused,AcceptedActionFailure,NativePreacceptanceRefusal
@@ -9,6 +10,19 @@ from factory import Factory,resolve_refs
 from runtime import freeze,Runtime
 
 class LiveDriverTests(unittest.TestCase):
+ def test_dump_resolves_a_newly_built_entity_reference_before_the_native_read(self):
+  adapter=Factory.__new__(Factory);adapter.ctx=dict(sessionId='synthetic-session',planetId=104)
+  adapter.refs=dict(new_store=[42]);adapter.state=lambda:None
+  adapter.schemas={'spherewright_inspect_factory_entity':dict(
+   properties=dict(sessionId={},planetId={},objectId={}),required=['sessionId','planetId','objectId'])}
+  calls=[];evidence={}
+  adapter.call=lambda tool,args:calls.append((tool,args)) or dict(objectId=args['objectId'])
+  adapter.runtime=SimpleNamespace(put=lambda name,value:evidence.update({name:value}))
+  adapter.step(dict(kind='dump',role='new-store',queries=[dict(name='entity',
+   tool='spherewright_inspect_factory_entity',arguments=dict(objectId=dict(ref='refs.new_store.0')))]))
+  self.assertEqual(42,calls[0][1]['objectId'])
+  self.assertEqual('synthetic-session',calls[0][1]['sessionId'])
+  self.assertEqual(42,evidence['new-store-entity.private.json']['objectId'])
  def test_water_to_land_first_move_selects_a_fresh_observed_candidate_without_committing_others(self):
   from unittest.mock import patch
   config = dict(firstOperation=dict(kind='move', allowPassiveDrift=True, selectObservedDryLanding=True,
