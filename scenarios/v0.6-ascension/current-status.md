@@ -1,5 +1,11 @@
 # Ascension current snapshot / Ascension活动快照
 
+2026-11-11。最新生产窗口已正常保存退出，Primary=LastExit125731766，2226项完整保护核验，累计4642504/6000000tick及67833请求，返航54000/清理3000储备保留。正常存储取出200氢作为首实操在57.968秒通过，随后总氢库存补至400、正常取用200紫矩阵。两件高速分拣器正常制造并完成供板/出料2011→2012原生升级，原端点、筛选、货物和扣还保全；保存前蓝矩阵成品543。1504研究仍为3060哈希，13个完整蓝矩阵点数保留。
+
+赴石墨库存的普通步行多次遇到炼油厂/仓储实体，原生看门狗按原动作停止。已知失败原件和健康闲置回读均保留，未重放。最新角色在炼油厂行间，下一首操作包需从本轮不可变保存输入重新生成，旧200氢首操作位置已不适用。当前转入必要的普通移动脱困能力核对，先从29151原生 `PlayerMove_Walk`、`PlayerMove_Fly`、`PlayerController` 及既有0.5飞行控制路径核对正常输入/能耗/落地，按源码资格、准确CI及同源流程处理已证实缺口。继续科研/材料准备，合理用料授权保持。
+
+English. The newest production window is normally saved/closed at125731766 with2226 verified protected files,4642504/6000000 ticks and67833 requests, retaining54000 return/3000 cleanup reserves. A normal200-hydrogen withdrawal reached actual work in57.968 seconds. The backpack now holds400 hydrogen and200 normally withdrawn purple cubes. Two normally manufactured fast sorters completed Native2011→2012 board-input/output upgrades with endpoint/filter/cargo/debit-refund preservation. Blue output stock is543. Tech1504 remains at3060 hashes and13 whole blue cubes remain conserved as mecha points. Repeated refinery/storage collisions produced retained known-failed movements and healthy idle readbacks. The current saved pose needs a new first-work packet. Investigate the necessary ordinary movement escape gap against exact29151 movement/controller methods and existing0.5 flight paths, then qualify any product fix through exact CI/coherent installation. Resource autonomy remains active.
+
 2026-11-11。本轮已正常保存退出，Primary=LastExit125635020，2222项完整保护通过。累计4545758/6000000tick、67253请求，返航54000及清理3000储备保留。1504研究已上传3060/108000哈希，正常消耗17组蓝/红，另13个完整蓝矩阵点数保留在机甲缓冲。285次原生磁线圈制造产出570件，1小仓及1普通出料分拣器完成。既有5层矩阵站已通过正常双路供料生产，保存前成品仓341蓝矩阵，570对原料的剩余库存/皮带/层内缓冲均保留。
 
 一次赴石墨库存的普通移动因实体阻挡在剩余19.99m处被原生看门狗停止，原动作已知失败且健康闲置回读通过，原件保留未重放。已按确定电塔方向完成新的2.5m短避让并保持Walk/0速度。下一窗口已离线准备以“正常取出200氢”作为首实操，补齐必要调用端分支及配对原生收据回归，166项测试/实装45请求形状核验通过。按[合理配套增量](resource-increment.md#合理生产配套增量)继续供料/出料升级、红矩阵准备和三项科研。
