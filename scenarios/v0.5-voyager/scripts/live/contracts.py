@@ -31,6 +31,28 @@ def quarantined_paid_original_accounted(config,reference,receipt,preservation):
         and type(failure.get('capturedAtGameTick'))is int
         and failure['capturedAtGameTick']<=preservation['currentLastExit']<=config['sourceTick'])
 
+
+def quarantined_navigation_original_accounted(config, reference, receipt, session, preservation):
+    native = receipt.get('nativeSurfaceNavigationReadback') or {}
+    action = reference.get('actionId')
+    return (owned_saved_recovery_context(config)
+        and bool(action) and receipt.get('actionId') == action and receipt.get('actionKind') == 'move'
+        and receipt.get('terminal') is True and receipt.get('state') == 'outcome_unknown'
+        and receipt.get('succeeded') is False and native.get('evidenceVersion') == 1
+        and bool(reference.get('planBindingHash')) and native.get('planBindingHash') == reference['planBindingHash']
+        and all(native.get(key) is True for key in
+            ('nativeNavigationStarted', 'nativeFlyObserved', 'nativeArrivalObserved', 'nativeNavigationReleased'))
+        and all(item.get('delta') == 0 for item in receipt.get('itemDeltas', []))
+        and session.get('gameLoaded') is True and session.get('ownedBySpherewright') is True
+        and session.get('writesAllowed') is False and session.get('writeQuarantineActionId') == action
+        and session.get('sessionId') == receipt.get('sessionId')
+        and preservation.get('passed') is True and preservation.get('originalUnknownRetained') is True
+        and preservation.get('noReplay') is True and preservation.get('noForceKill') is True
+        and all(type(value) is int for value in (receipt.get('completedAtGameTick'), session.get('gameTick'),
+            preservation.get('currentLastExit'), config.get('sourceTick')))
+        and 0 <= receipt['completedAtGameTick'] <= session['gameTick']
+            <= preservation['currentLastExit'] <= config['sourceTick'])
+
 def quarantined_harvest_no_effect_accounted(config,reference,receipt,cut,session,preservation):
     action=reference.get('actionId');tick=cut.get('observedGameTick')
     return (owned_saved_recovery_context(config)
@@ -180,7 +202,8 @@ def ordinary_owned_resume_echo(config,plan):
             and plan.get('exactEmbeddedIdentityVerified') is True and plan.get('recoveryEvidenceVersion')==1)
     if config.get('quarantinedDefaultLastExit') is True:
         minimum=plan.get('minimumGameTick')
-        return (config.get('sourceRole')=='lastExit' and bool(config.get('isolatedPaidBeltBuilds'))
+        return (config.get('sourceRole')=='lastExit'
+            and bool(config.get('isolatedPaidBeltBuilds') or config.get('quarantinedNavigationOriginals'))
             and type(minimum)is int and config['sourcePrimaryGameTick']<config['originalQuarantineMinimumTick']<=minimum<=config['sourceTick']
             and plan.get('candidateGameTick') is None and plan.get('exactEmbeddedIdentityVerified') is False
             and plan.get('recoveryEvidenceVersion')==0)

@@ -6,6 +6,7 @@ from geometry_request import complete_geometry_arrays
 from evidence import need,read,sha,json_value
 from mcp_client import Client
 from saved_space import exact_last_exit_echo,paused_space_source,exact_ui_supply,saved_identity_token
+from contracts import quarantined_navigation_original_accounted,fully_observed_dry_surface,observed_short_crossing_dry_landing
 from contracts import ordinary_owned_resume_echo,resume_admission_echo,validate_steps,validate_native_calls,strict_native_player_idle,native_warper_auto_supply_enabled,quarantined_paid_original_accounted,quarantined_harvest_no_effect_accounted,isolated_paid_belt_build_accounted
 
 PLAYER_SETTING_MODES=('enable-mecha-construction-drones','disable-mecha-research-auto-supply',
@@ -48,6 +49,12 @@ class Live:
    need(sha(original['path'])==original['sha256'] and sha(original['preservationPath'])==original['preservationSha256']
     and quarantined_paid_original_accounted(c,original,read(original['path']),read(original['preservationPath'])),
     'unknown_original_must_remain_isolated_with_known_paid_create_and_complete_saved_source')
+  for original in c.get('quarantinedNavigationOriginals', []):
+   for key in ('receipt', 'session', 'preservation'):
+    need(sha(original[key+'Path']) == original[key+'Sha256'], 'frozen_navigation_original_changed')
+   need(quarantined_navigation_original_accounted(c, original, read(original['receiptPath']),
+       read(original['sessionPath']), read(original['preservationPath'])),
+       'unknown_navigation_requires_original_task_release_and_complete_no_loss_saved_source')
   for original in c.get('quarantinedLocalHarvestOriginals',[]):
    for path_key,hash_key in [('path','sha256'),('cutPath','cutSha256'),('sessionPath','sessionSha256'),('preservationPath','preservationSha256')]:
     need(sha(original[path_key])==original[hash_key],'frozen_harvest_original_evidence_changed')
@@ -378,13 +385,24 @@ class Live:
     and q.get('plannedMechaWarperUiTopUp') is True,'first_native_ui_supply_unproved')
    return dict(action_kind='supply_mecha_warpers',tool='spherewright_commit_supply_mecha_warpers',prepared=q)
   if work.get('kind')=='move':
-   p=self.player();self.first_before=p;target=work['target']
    tolerance=work.get('arrivalTolerance',1.5)
-   args=dict(self.ctx,targetX=target['x'],targetY=target['y'],targetZ=target['z'],arrivalTolerance=tolerance,expectedPlayerStateHash=p['stateHash'])
-   if work.get('useNativeNavigation') is True:
-    need(3<=tolerance<=5,'first_native_navigation_tolerance_invalid');args['useNativeNavigation']=True
-   q=self.call('spherewright_prepare_move',args);need(q['prepared'] and q['commitAllowedNow'] and not q['commitBlockers'],'first_move_not_prepared')
-   return dict(action_kind='move',tool='spherewright_commit_move',prepared=q)
+   targets=work.get('candidateTargets') or [work['target']]
+   need(isinstance(targets,list) and 1<=len(targets)<=16,'first_move_candidates_unbounded')
+   for index,target in enumerate(targets):
+    need(time.monotonic()<deadline,'original_first_move_deadline_exhausted')
+    p=self.player();self.first_before=p
+    args=dict(self.ctx,targetX=target['x'],targetY=target['y'],targetZ=target['z'],arrivalTolerance=tolerance,expectedPlayerStateHash=p['stateHash'])
+    if work.get('allowPassiveDrift') is True:args['allowPassiveDrift']=True
+    if work.get('useNativeNavigation') is True:
+     need(3<=tolerance<=5,'first_native_navigation_tolerance_invalid');args['useNativeNavigation']=True
+    q=self.call('spherewright_prepare_move',args)
+    need(q['prepared'] and q['commitAllowedNow'] and not q['commitBlockers'],'first_move_not_prepared')
+    if work.get('selectObservedDryLanding') is True:
+     observed=fully_observed_dry_surface(q) or observed_short_crossing_dry_landing(q,args,p)
+     self.runtime.put(f'first-move-candidate-{index:02d}.private.json',dict(arguments=args,prepared=q,dryLandingObserved=observed))
+     if not observed:continue
+    return dict(action_kind='move',tool='spherewright_commit_move',prepared=q)
+   raise RuntimeError('first_move_has_no_observed_dry_landing_candidate')
   e=self.player() if mode in PLAYER_SETTING_MODES else self.entity(work['entityId']);self.first_before=e
   if mode=='production':need(e['recipeId']!=work['recipeId'],'first_recipe_already_applied_no_delta')
   args=dict(self.ctx,entityId=work['entityId'],recipeId=work.get('recipeId',0),mode=mode,expectedFactoryStateHash=e['stateHash'])
@@ -454,18 +472,21 @@ class Live:
    deadline=getattr(self,'first_work_deadline',None)
    # A terminal Native order may retain RTS inertia for a few physics frames.
    # Observe its stop within the original startup clock without another order.
-   while r['succeeded'] and deadline is not None and not strict_native_player_idle(e) and time.monotonic()<deadline:
+   native_navigation=c.get('useNativeNavigation') is True
+   while not native_navigation and r['succeeded'] and deadline is not None and not strict_native_player_idle(e) and time.monotonic()<deadline:
     time.sleep(min(.25,max(0,deadline-time.monotonic())))
     e=self.player()
    moved=math.dist([self.first_before['position'][k] for k in 'xyz'],[e['position'][k] for k in 'xyz'])
    within=deadline is None or time.monotonic()<=deadline
-   ok=r['succeeded'] and moved>1 and strict_native_player_idle(e) and within
-   if c.get('useNativeNavigation') is True:
+   ok=r['succeeded'] and moved>1 and within
+   if native_navigation:
     native=r.get('nativeSurfaceNavigationReadback') or {}
     ok=ok and native.get('evidenceVersion')==1 and all(native.get(k)is True for k in
-     ('nativeNavigationStarted','nativeFlyObserved','nativeArrivalObserved','groundedStopVerified','nativeNavigationReleased'))
+     ('nativeNavigationStarted','nativeFlyObserved','nativeArrivalObserved','nativeNavigationReleased'))
     ok=ok and bool(native.get('planBindingHash')) and native.get('planBindingHash')==w['prepared']['expectedStateHash']
-    ok=ok and type(native.get('finalDistanceMetres'))in(int,float) and native['finalDistanceMetres']<=c['arrivalTolerance']
+    ok=ok and native.get('movementState') in ('Walk','Drift','Fly')
+    ok=ok and type(native.get('finalSurfaceDistanceMetres'))in(int,float) and 0<=native['finalSurfaceDistanceMetres']<=c['arrivalTolerance']
+   else:ok=ok and strict_native_player_idle(e)
    self.runtime.put('actual-progress.private.json',dict(verified=ok,actionId=r['actionId'],before=self.first_before,after=e,
     movedMetres=moved,originalStartupDeadlineRespected=within));return ok
   e=self.player() if mode in PLAYER_SETTING_MODES else self.entity(c['entityId'])

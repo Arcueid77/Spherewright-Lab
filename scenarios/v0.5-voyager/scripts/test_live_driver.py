@@ -9,6 +9,49 @@ from factory import Factory,resolve_refs
 from runtime import freeze,Runtime
 
 class LiveDriverTests(unittest.TestCase):
+ def test_water_to_land_first_move_selects_a_fresh_observed_candidate_without_committing_others(self):
+  from unittest.mock import patch
+  config = dict(firstOperation=dict(kind='move', allowPassiveDrift=True, selectObservedDryLanding=True,
+      candidateTargets=[dict(x=1, y=200, z=0), dict(x=2, y=200, z=0)]))
+  live = Live(None)
+  live.runtime = type('Evidence', (), dict(config=config, put=lambda *_: None))()
+  live.ctx = dict(sessionId='synthetic-session', planetId=101)
+  live.player = lambda: dict(stateHash='synthetic-player')
+  calls = []
+  def capture(tool, arguments):
+   calls.append((tool, arguments))
+   return dict(prepared=True, commitAllowedNow=True, commitBlockers=[], planToken='synthetic-' + str(len(calls)))
+  live.call = capture
+  with patch('driver.fully_observed_dry_surface', side_effect=[False, True]), \
+       patch('driver.observed_short_crossing_dry_landing', return_value=False):
+   selected = live.prepare_first_work({}, float('inf'))
+  self.assertEqual('synthetic-2', selected['prepared']['planToken'])
+  self.assertEqual(2, len(calls))
+  self.assertTrue(all(tool == 'spherewright_prepare_move' and arguments['allowPassiveDrift'] is True
+      for tool, arguments in calls))
+
+ def test_navigation_unknown_stays_isolated_after_native_exit_preserves_its_released_arrival(self):
+  from contracts import quarantined_navigation_original_accounted as valid
+  config = dict(recoveryProfile='ordinary-owned-home', recoveryMode='default', sourceRole='lastExit',
+      planetId=101, sourceTick=500, closedJourneyHome=dict(phase='completed', homePlanetId=101, completedSaveGameTick=400))
+  reference = dict(actionId='synthetic-native-navigation', planBindingHash='synthetic-plan')
+  native = dict(evidenceVersion=1, planBindingHash='synthetic-plan', **{key: True for key in
+      ('nativeNavigationStarted', 'nativeFlyObserved', 'nativeArrivalObserved', 'nativeNavigationReleased')})
+  receipt = dict(actionId=reference['actionId'], sessionId='synthetic-session', actionKind='move',
+      terminal=True, state='outcome_unknown', succeeded=False, completedAtGameTick=450,
+      nativeSurfaceNavigationReadback=native, itemDeltas=[])
+  session = dict(sessionId='synthetic-session', gameLoaded=True, ownedBySpherewright=True,
+      writesAllowed=False, writeQuarantineActionId=reference['actionId'], gameTick=460)
+  preservation = dict(passed=True, originalUnknownRetained=True, noReplay=True, noForceKill=True, currentLastExit=480)
+  self.assertTrue(valid(config, reference, receipt, session, preservation))
+  for key in ('nativeNavigationStarted', 'nativeFlyObserved', 'nativeArrivalObserved', 'nativeNavigationReleased'):
+   changed = dict(receipt, nativeSurfaceNavigationReadback=dict(native, **{key: False}))
+   self.assertFalse(valid(config, reference, changed, session, preservation))
+  self.assertFalse(valid(config, reference, dict(receipt, state='completed'), session, preservation))
+  self.assertFalse(valid(config, reference, receipt, dict(session, writeQuarantineActionId='other'), preservation))
+  self.assertFalse(valid(config, reference, receipt, session, dict(preservation, currentLastExit=459)))
+  self.assertEqual('outcome_unknown', receipt['state'])
+
  def test_first_native_navigation_forwards_the_funded_mode_and_requires_its_original_readback(self):
   config = dict(firstOperation=dict(kind='move', useNativeNavigation=True,
       arrivalTolerance=4, target=dict(x=140, y=200, z=0)))
@@ -33,18 +76,23 @@ class LiveDriverTests(unittest.TestCase):
   self.assertIs(True, calls[0][1]['useNativeNavigation'])
   self.assertEqual(4, calls[0][1]['arrivalTolerance'])
   live.player = lambda: idle
-  native = dict(evidenceVersion=1, planBindingHash='synthetic-plan', finalDistanceMetres=2,
+  native = dict(evidenceVersion=1, planBindingHash='synthetic-plan', finalDistanceMetres=15,
+      finalSurfaceDistanceMetres=2, movementState='Drift', groundedStopVerified=False,
       **{key: True for key in ('nativeNavigationStarted', 'nativeFlyObserved',
-          'nativeArrivalObserved', 'groundedStopVerified', 'nativeNavigationReleased')})
+          'nativeArrivalObserved', 'nativeNavigationReleased')})
   result = dict(succeeded=True, actionId='synthetic-original', nativeSurfaceNavigationReadback=native)
+  idle['movementState'] = 'Drift'
+  idle['speed'] = .07
+  idle['nativePhysics']['groundContact']['checkSphereHit'] = False
   self.assertTrue(live.verify_progress(work, result))
   for key in ('nativeNavigationStarted', 'nativeFlyObserved', 'nativeArrivalObserved',
-      'groundedStopVerified', 'nativeNavigationReleased'):
+      'nativeNavigationReleased'):
    with self.subTest(missing=key):
     incomplete = dict(native)
     incomplete.pop(key)
     self.assertFalse(live.verify_progress(work, dict(result, nativeSurfaceNavigationReadback=incomplete)))
-  for change in (dict(planBindingHash='other-plan'), dict(finalDistanceMetres=5), dict(evidenceVersion=2)):
+  for change in (dict(planBindingHash='other-plan'), dict(finalSurfaceDistanceMetres=5),
+      dict(movementState='Sail'), dict(evidenceVersion=2)):
    self.assertFalse(live.verify_progress(work, dict(result, nativeSurfaceNavigationReadback=dict(native, **change))))
 
  def test_expired_primary_backup_keeps_the_latest_owned_source_guard(self):
@@ -745,6 +793,7 @@ class LiveDriverTests(unittest.TestCase):
   quarantined=dict(c,sourceRole='lastExit',quarantinedDefaultLastExit=True,isolatedPaidBeltBuilds=[{}],
    sourcePrimaryGameTick=190,originalQuarantineMinimumTick=195)
   self.assertTrue(ordinary_owned_resume_echo(quarantined,p))
+  self.assertTrue(ordinary_owned_resume_echo(dict(quarantined,isolatedPaidBeltBuilds=[],quarantinedNavigationOriginals=[{}]),p))
   self.assertFalse(ordinary_owned_resume_echo(quarantined,dict(p,minimumGameTick=194)))
   self.assertFalse(ordinary_owned_resume_echo(quarantined,dict(p,minimumGameTick=201)))
   self.assertFalse(ordinary_owned_resume_echo(dict(quarantined,isolatedPaidBeltBuilds=[]),p))
