@@ -128,7 +128,7 @@ class Runtime:
         if c.get('recoveryProfile')=='ordinary-owned-home':
             quarantined_exit=(role=='lastExit' and c['recoveryMode']=='default' and c.get('quarantinedDefaultLastExit') is True
                               and bool(c.get('isolatedPaidBeltBuilds')) and proofs['primary']['gameTick']<c['originalQuarantineMinimumTick']<=c['sourceTick'])
-            need((role=='primary' and c['recoveryMode']=='default') or quarantined_exit or (role=='lastExit' and c['recoveryMode']=='verified_newer_lastexit'
+            need((role=='primary' and c['recoveryMode'] in ('default','reauthorize_expired_primary')) or quarantined_exit or (role=='lastExit' and c['recoveryMode']=='verified_newer_lastexit'
                  and proofs['primary']['gameTick']<c['sourceTick']),'ordinary_home_source_mode_mismatch')
         return m
 

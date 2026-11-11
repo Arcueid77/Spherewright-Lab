@@ -9,6 +9,31 @@ from factory import Factory,resolve_refs
 from runtime import freeze,Runtime
 
 class LiveDriverTests(unittest.TestCase):
+ def test_expired_primary_backup_keeps_the_latest_owned_source_guard(self):
+  from evidence import put,sha
+  with tempfile.TemporaryDirectory() as folder:
+   root=Path(folder);original=root/'owned-save';backup=root/'protected-copy'
+   original.write_bytes(b'synthetic-owned-save');backup.write_bytes(original.read_bytes())
+   proofs=dict(primary=dict(gameTick=200),lastExit=dict(gameTick=200))
+   manifest=root/'manifest.json';put(manifest,dict(complete=True,verified=True,nativeSaveRoles=['primary','lastExit','preflight','checkpoint'],
+       latest=proofs,rows=[dict(originalPath=str(original),backupPath=str(backup),bytes=original.stat().st_size,sha256=sha(original))]))
+   runtime=Runtime.__new__(Runtime);runtime.config=dict(backupManifest=str(manifest),sourceRole='primary',sourceTick=200,
+       recoveryProfile='ordinary-owned-home',recoveryMode='reauthorize_expired_primary')
+   runtime.protected_paths=lambda:{original.resolve()};runtime.native_proofs=lambda:proofs
+   self.assertTrue(runtime.verify_backup()['verified'])
+   runtime.config['sourceRole']='lastExit'
+   with self.assertRaisesRegex(RuntimeError,'ordinary_home_source_mode_mismatch'):runtime.verify_backup()
+   runtime.config.update(sourceRole='primary',sourceTick=199)
+   with self.assertRaisesRegex(RuntimeError,'latest_no_loss_source_not_covered'):runtime.verify_backup()
+
+ def test_expired_primary_retains_the_closed_home_unknown_accounting_context(self):
+  from contracts import owned_saved_recovery_context
+  config=dict(recoveryProfile='ordinary-owned-home',recoveryMode='reauthorize_expired_primary',sourceRole='primary',
+      planetId=101,sourceTick=200,closedJourneyHome=dict(phase='completed',homePlanetId=101,completedSaveGameTick=190))
+  self.assertTrue(owned_saved_recovery_context(config))
+  self.assertFalse(owned_saved_recovery_context(dict(config,sourceRole='lastExit')))
+  self.assertFalse(owned_saved_recovery_context(dict(config,closedJourneyHome=dict(phase='active',homePlanetId=101,completedSaveGameTick=190))))
+
  def test_revision_stamps_accept_explicit_ascension_version_and_legacy_default(self):
   from unittest.mock import patch
   for version,explicit in [('0.5.0',False),('0.6.0',True)]:

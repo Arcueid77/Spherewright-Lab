@@ -4,7 +4,8 @@ def owned_saved_recovery_context(config):
     if config.get('recoveryMode')=='authorize_remote_primary_recovery' and config.get('sourceRole')=='lastExit':return True
     home=config.get('closedJourneyHome') or {}
     return (config.get('recoveryProfile')=='ordinary-owned-home'
-        and config.get('recoveryMode') in ('default','verified_newer_lastexit')
+        and config.get('recoveryMode') in ('default','verified_newer_lastexit','reauthorize_expired_primary')
+        and (config.get('recoveryMode')!='reauthorize_expired_primary' or config.get('sourceRole')=='primary')
         and config.get('sourceRole') in ('primary','lastExit') and home.get('phase')=='completed'
         and home.get('homePlanetId')==config.get('planetId') and type(home.get('completedSaveGameTick'))is int
         and type(config.get('sourceTick'))is int and 0<home['completedSaveGameTick']<=config['sourceTick'])
