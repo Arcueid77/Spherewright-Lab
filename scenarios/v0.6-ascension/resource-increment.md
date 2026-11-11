@@ -28,6 +28,10 @@
 
 ## 合理生产配套增量
 
+2026-11-11。当前单层红矩阵站按原生配方每6秒产1件，科研总需求4200红。按自主用料授权增加4座矩阵研究站，复用现有红矩阵根站形成5层生产。直接用料为32铁块、16玻璃、16电路板、16磁线圈。玻璃按配方57正常消耗32石矿，磁线圈按配方6正常消耗16磁铁及8铜块。累计调用端矩阵站上限由5增至9，保留原已耗5；材料、制造、施工及实际科研均继续分别记账。红矩阵已从原94库存增至100，正常取出100供科研，原蓝完整点数按原生科研继续消耗。
+
+English. Native recipe18 produces one red matrix every six seconds in one laboratory against4200 authorized research demand. A justified finite increment adds four laboratories above the existing red root for a five-layer line. Direct inputs are32 iron,16 glass,16 boards and16 coils. Native recipe57 supplies glass from32 stone ore, and recipe6 supplies coils from16 magnets/eight copper. The cumulative laboratory ceiling increases from5 to9 while preserving five previously spent laboratories. Retain distinct actual material, manufacturing, placement and research accounting. Red stock increased from94 to100 and100 cubes were normally withdrawn for research, consuming the conserved blue points through the normal game path.
+
 当前已有5层矩阵站可复用，已建输入线路可重新设置筛选。原生观察确认该叠层缺少成品出料连接，单层产物缓冲会限制连续生产。按自主用料授权预留1小仓、2普通分拣器和至多8基础传送带的有限配套额度，实际施工使用新鲜原生几何及逐件物料回读。小仓直接配方为4铁块、4石材，当前已有3分拣器和4基础带优先复用。对应累计调用端建筑上限为小仓9、分拣器保留既有48、基础带200，保留原已用8/30/192及全部历史账目。调用端采用既有额度与“既耗加本项上限”中的较大值，未耗余额保持原记录。
 
 实际已正常制造/建成1小仓，复用背包普通分拣器建成1出料器，累计既耗更新为小仓9、普通分拣器31、基础带192。570对磁线圈/电路板经原生存储投料，保存前成品仓已有341蓝矩阵，叠层原生回读证实供板通路限制生产。按同一自主授权预留2高速分拣器2012，用于现有供板和成品出料器的原生2011→2012升级。配方88一次制造2件，消耗2普通分拣器及1电动机，普通分拣器优先使用背包现货；电动机正常配方合计使用3铁块及1磁线圈（含1齿轮）。升级保留原动作、双端连接、在途货物/筛选和正常扣还账目。

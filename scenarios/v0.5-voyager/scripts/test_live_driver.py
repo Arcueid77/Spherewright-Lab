@@ -14,9 +14,9 @@ class LiveDriverTests(unittest.TestCase):
   config = dict(firstOperation=dict(kind='move', allowPassiveDrift=True, selectObservedDryLanding=True,
       candidateTargets=[dict(x=1, y=200, z=0), dict(x=2, y=200, z=0)]))
   live = Live(None)
-  live.runtime = type('Evidence', (), dict(config=config, put=lambda *_: None))()
+  live.runtime = type('Evidence', (), dict(config=freeze(config), put=lambda *_: None))()
   live.ctx = dict(sessionId='synthetic-session', planetId=101)
-  live.player = lambda: dict(stateHash='synthetic-player')
+  live.player = lambda: dict(stateHash='synthetic-player',movementState='Drift')
   calls = []
   def capture(tool, arguments):
    calls.append((tool, arguments))

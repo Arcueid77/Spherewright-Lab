@@ -50,15 +50,17 @@ def main():
         need(s['gameLoaded'] and s['ownedBySpherewright'] and s['writesAllowed'] and s['sessionId']==original['sessionId']
             and s['localPlanetId']==expected_planet,'exact_healthy_live_session_changed')
         a.ctx=dict(sessionId=s['sessionId'],planetId=s['localPlanetId']);a.pid=read(origin/'process-observed.private.json')['Id'];a.loaded=True
-        need(strict_native_player_idle(a.player()),'current_native_idle_or_rts_observation_unproved')
+        passive_first=c.get('continueRefusedStartup') is True and c.get('firstOperation',{}).get('allowPassiveDrift') is True
+        need(strict_native_player_idle(a.player(),allow_passive_drift=passive_first),'current_native_idle_or_rts_observation_unproved')
         process=a.process();need(process is not None and process['Id']==a.pid,'original_live_process_changed')
         r.put('attached-existing-session.private.json',dict(passed=True,sessionId=s['sessionId'],gameProcessId=a.pid,
             gameTick=s['gameTick'],priorRpcCount=prior_count,remainingRpc=remaining,originalDeadlineUtc=deadline.isoformat(),
             noLoad=True,noSave=True,noLaunch=True,noTickRefund=True,noStartupClockReset=True,sourceSha=c['sourceSha']))
         if c.get('continueRefusedStartup') is True:
             report=read(origin/'startup-report.private.json')
-            need(prior==origin and not report['passed'] and not report['unresolved_commit']
-                and report.get('first_action_id') is None and not (origin/'first-work-accepted.private.json').exists(),
+            need(not report['passed'] and not report['unresolved_commit']
+                and report.get('first_action_id') is None and not (origin/'first-work-accepted.private.json').exists()
+                and not (prior/'first-work-accepted.private.json').exists(),
                 'only_unaccepted_first_work_may_continue_original_startup')
             launch=read(origin/'launch-intent.private.json')
             elapsed=(dt.datetime.now(dt.timezone.utc)-dt.datetime.fromisoformat(launch['startedAtUtc'])).total_seconds()

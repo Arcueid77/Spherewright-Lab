@@ -222,12 +222,17 @@ def powered_consumers_share_network(entities, network_id):
     return bool(consumers) and all(consumer_network(e)==network_id for e in consumers)
 
 
-def strict_native_player_idle(player):
+def strict_native_player_idle(player,allow_passive_drift=False):
     physics=player.get('nativePhysics') or {};ground=physics.get('groundContact') or {}
-    vectors=('velocity','walkRtsVelocity','driftRtsVelocity','walkManualVelocity','driftManualVelocity')
-    return (player.get('movementState')=='Walk' and player.get('speed',float('inf'))<=.1
-        and ground.get('checkSphereHit') is True and physics.get('currentOrderPresent') is False
+    drift=allow_passive_drift and player.get('movementState')=='Drift'
+    vectors=('walkRtsVelocity','driftRtsVelocity','walkManualVelocity','driftManualVelocity')
+    if not drift:vectors=('velocity',*vectors)
+    velocity=physics.get('velocity') or {}
+    return ((drift or player.get('movementState')=='Walk') and player.get('speed',float('inf'))<=.1
+        and (drift or ground.get('checkSphereHit') is True) and physics.get('currentOrderPresent') is False
         and physics.get('queuedOrderCount')==0
+        and (not drift or all(type(velocity.get(axis))in(int,float)for axis in 'xyz')
+            and sum(velocity[axis]**2 for axis in 'xyz')<=.01)
         and all(isinstance(physics.get(key),Mapping) and all(physics[key].get(axis)==0 for axis in 'xyz') for key in vectors))
 
 

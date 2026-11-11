@@ -387,12 +387,12 @@ class Live:
   if work.get('kind')=='move':
    tolerance=work.get('arrivalTolerance',1.5)
    targets=work.get('candidateTargets') or [work['target']]
-   need(isinstance(targets,list) and 1<=len(targets)<=16,'first_move_candidates_unbounded')
+   need(isinstance(targets,(list,tuple)) and 1<=len(targets)<=16,'first_move_candidates_unbounded')
    for index,target in enumerate(targets):
     need(time.monotonic()<deadline,'original_first_move_deadline_exhausted')
     p=self.player();self.first_before=p
     args=dict(self.ctx,targetX=target['x'],targetY=target['y'],targetZ=target['z'],arrivalTolerance=tolerance,expectedPlayerStateHash=p['stateHash'])
-    if work.get('allowPassiveDrift') is True:args['allowPassiveDrift']=True
+    if work.get('allowPassiveDrift') is True and p.get('movementState')=='Drift':args['allowPassiveDrift']=True
     if work.get('useNativeNavigation') is True:
      need(3<=tolerance<=5,'first_native_navigation_tolerance_invalid');args['useNativeNavigation']=True
     q=self.call('spherewright_prepare_move',args)
