@@ -1,56 +1,28 @@
 # Ascension current snapshot / Ascension活动快照
 
-2026-11-11。必要的同星球原生导航源码 `70fb6862b5355e0f9f50f1586c610c5fde1accd4` 已线性进入产品main，6486项准确源码回归、完整Native构建及[对应CI](https://github.com/Arcueid77/Spherewright/actions/runs/43009629159)通过。Lab固定依赖已采用。新模式沿 `PlayerNavigation.Navigate` 正常起飞、能耗、抵达和落地，绑定当前阈值、完整3600tick能源及900tick落地储备。调用端167项回归通过，并要求原方案的起飞/抵达/接地静止/释放回读。5个Plugin文件和224个MCP文件的同源开发组合资格通过。当前实装仍为df32bd78，游戏正常关闭，接下来沿2226项完整保护及125731766保存边界执行同源冷安装和当前存档正向验证。
+2026-11-11。游戏已正常保存退出，Primary=LastExit125744063，2230项完整保护通过。累计4654801/6000000游戏tick、68000请求，返航54000及清理3000储备保留。下一轮从这份完整保存边界继续。
 
-English. Native same-planet navigation source70fb6862 is on productmain and selected by Lab after6486 exact-source tests, full Native build and exact CI. It uses normal `PlayerNavigation.Navigate`, current thresholds and complete3600-tick energy funding with900 landing ticks.167 caller regressions passed and require original-plan flight/arrival/grounded-stop/release proof. The same-source development cohort qualified with5 Plugin files and224 MCP files. Installed source remainsdf32bd78 and the game is normally stopped at125731766 with2226 protected files. Continue through coherent cold installation and current-save positive acceptance.
+## 源码与实装
 
-2026-11-11。最新生产窗口已正常保存退出，Primary=LastExit125731766，2226项完整保护核验，累计4642504/6000000tick及67833请求，返航54000/清理3000储备保留。正常存储取出200氢作为首实操在57.968秒通过，随后总氢库存补至400、正常取用200紫矩阵。两件高速分拣器正常制造并完成供板/出料2011→2012原生升级，原端点、筛选、货物和扣还保全；保存前蓝矩阵成品543。1504研究仍为3060哈希，13个完整蓝矩阵点数保留。
+所选源码为 `ffff69d12a001d8af2cba13b5594cdf6d8e1815e`，已线性进入产品main。6506项准确源码回归、完整29151 Native构建及准确CI通过。同源开发组合资格通过，含5个Plugin文件、224个目录MCP文件、75工具和1资源，目录与单文件入口、内嵌指南、PE及SDK宿主核对完整。当前实装仍为70fb6862，游戏关闭，下一步执行新组合冷安装。 [准确产品CI](https://github.com/Arcueid77/Spherewright/actions/runs/43012268462)
 
-赴石墨库存的普通步行多次遇到炼油厂/仓储实体，原生看门狗按原动作停止。已知失败原件和健康闲置回读均保留，未重放。最新角色在炼油厂行间，下一首操作包需从本轮不可变保存输入重新生成，旧200氢首操作位置已不适用。当前转入必要的普通移动脱困能力核对，先从29151原生 `PlayerMove_Walk`、`PlayerMove_Fly`、`PlayerController` 及既有0.5飞行控制路径核对正常输入/能耗/落地，按源码资格、准确CI及同源流程处理已证实缺口。继续科研/材料准备，合理用料授权保持。
+70fb6862首轮原生导航prepare在提交前因能源前提拒绝，飞行动作未接受。原拒绝及原始启动计时保留。同一健康游戏通过替换已停止调用端，在原启动185.748秒内正常取用20碳纳米管作为火箭框架原料，随后正常保存退出。完整机甲13蓝矩阵点数保全，1504研究仍为3060哈希。背包另有400氢、200紫和20碳纳米管，蓝矩阵成品仓上一轮543。
 
-English. The newest production window is normally saved/closed at125731766 with2226 verified protected files,4642504/6000000 ticks and67833 requests, retaining54000 return/3000 cleanup reserves. A normal200-hydrogen withdrawal reached actual work in57.968 seconds. The backpack now holds400 hydrogen and200 normally withdrawn purple cubes. Two normally manufactured fast sorters completed Native2011→2012 board-input/output upgrades with endpoint/filter/cargo/debit-refund preservation. Blue output stock is543. Tech1504 remains at3060 hashes and13 whole blue cubes remain conserved as mecha points. Repeated refinery/storage collisions produced retained known-failed movements and healthy idle readbacks. The current saved pose needs a new first-work packet. Investigate the necessary ordinary movement escape gap against exact29151 movement/controller methods and existing0.5 flight paths, then qualify any product fix through exact CI/coherent installation. Resource autonomy remains active.
+根因是导航复用了机甲科研完全闲置前提。当前科研队列仅解锁配方，机甲保留13蓝点数，导致独立充能成本的稳定性证明失败。新源码在完整队列无属性函数/完成物品奖励的前提下计入正常机甲科研能耗，保留矩阵点数，补齐20项回归和具体拒绝前提。当前存档正向起飞、抵达及接地停稳仍待验证。
 
-2026-11-11。本轮已正常保存退出，Primary=LastExit125635020，2222项完整保护通过。累计4545758/6000000tick、67253请求，返航54000及清理3000储备保留。1504研究已上传3060/108000哈希，正常消耗17组蓝/红，另13个完整蓝矩阵点数保留在机甲缓冲。285次原生磁线圈制造产出570件，1小仓及1普通出料分拣器完成。既有5层矩阵站已通过正常双路供料生产，保存前成品仓341蓝矩阵，570对原料的剩余库存/皮带/层内缓冲均保留。
+## 接下来执行
 
-一次赴石墨库存的普通移动因实体阻挡在剩余19.99m处被原生看门狗停止，原动作已知失败且健康闲置回读通过，原件保留未重放。已按确定电塔方向完成新的2.5m短避让并保持Walk/0速度。下一窗口已离线准备以“正常取出200氢”作为首实操，补齐必要调用端分支及配对原生收据回归，166项测试/实装45请求形状核验通过。按[合理配套增量](resource-increment.md#合理生产配套增量)继续供料/出料升级、红矩阵准备和三项科研。
+1. 从最新2230项完整保护和保存边界完成同源冷安装、实装SDK及第一笔真实工作资格。沿300秒启动门验证有预算原生导航，再正常取石墨。
+2. 继续1504、1705、1523科研，优先复用现有矩阵站、原料库存及正常生产线。合理有限科研/材料/施工增量自行核算、记录并执行。当前科研上限为蓝4200、红4200、黄3600、紫2000、绿2000。 [当前用料与授权](resource-increment.md)
+3. 复用Caph II制造、弹射器和发射井，重新核对8000半径接收层及既有交付点。完成合法闭合设计、持续真实火箭/太阳帆发射、节点/框架/壳面交付、接收器持续非零实际电力，以及正常保存冷恢复后的续建续运。6°候选已完成只读成本证明，11000半径为210结构点、224细胞点，当前应力纬度0°。 [实施与验收](implementation-plan.md)
+4. 功能验收闭合后生成最终同源双包及交审证据，正式发布沿独立授权。
 
-English. Normal save/close ended at125635020 with2222 protected files,4545758/6000000 ticks and67253 requests, retaining54000 return/3000 cleanup reserves. Tech1504 has3060/108000 hashes from17 normal blue/red pairs. Thirteen whole blue cubes remain conserved as mecha research points.285 Native coil crafts produced570 units. One warehouse and one ordinary output sorter completed. The existing five-layer laboratory stack is producing through normal two-input supply, with341 blue matrices in its output warehouse at save. Remaining570-pair materials and live buffers are preserved. One movement stopped at a known obstacle and remained an original known failure with healthy idle proof. A distinct2.5m escape succeeded in Walk/zero speed. The next window prepares a normal200-hydrogen withdrawal as first actual work. Its caller/paired-receipt branch passed166 tests and45 installed SDK requests. Continue bounded feed/output upgrades, red-matrix preparation and the three research targets.
+## English
 
-2026-11-11。所有者已进一步授权“只要是合理的，自己加就行，为啥都要我来批准？”，按[当前自主用料授权](../../operations/standing-authority.md#current-ascension-resource-autonomy-2026-11-11--当前ascension用料自主授权)自行核算、记录并执行0.6合理科研/材料/施工增量。完整配方和母星库存已证绿矩阵0、配方102未解锁，新增1705前置科研蓝/红/黄各1600，当前科研上限为蓝4200、红4200、黄3600、紫2000、绿2000。
+The game is normally saved and closed at125744063 with2230 verified protected files,4654801/6000000 spent ticks and68000 requests. Return54000/cleanup3000 remain. Selected sourceffff69d1 passed6506 exact-source cases, full Native29151 build, exact CI and coherent development qualification with5 Plugin/224 MCP files,75 tools/1 resource. Installed source remains70fb6862. Continue through coherent cold installation and current-save positive flight/arrival/grounded-stop acceptance.
 
-当前游戏已从下列保存边界再次恢复，58.5秒到实操，1504射线接收研究已选定，正在母星盘点及供料准备。母星76小仓、5大仓、3物流站、12研究站及57组装类设备的有界观察已完整返回，无后续分页。原一次未接受的25m只读路线预览因超过16m接口范围被拒绝，原件保留，已按15m准备新只读候选，未形成游戏动作。
+The first70fb6862 navigation prepare was refused before an action was accepted. Its original startup clock/refusal remain preserved. A replacement caller continued the same healthy game and normally withdrew20 carbon nanotubes in185.748 seconds from the original launch, then saved/closed. Thirteen whole blue cubes remain as research points and tech1504 progress is3060 hashes. The backpack also holds400 hydrogen,200 purple and20 nanotubes. Previous blue output stock was543. The fix prices complete recipe-only queued mecha research with no attribute functions/item awards and retains its buffered matrices. It adds20 regression cases and specific cost blockers. Live positive navigation is pending.
 
-English. The owner now authorizes reasonable finite0.6 resource increments to be calculated, recorded and executed autonomously. The complete recipe/home-stock survey found zero green matrices and locked recipe102, so prerequisite1705 adds1600 each blue/red/yellow matrices. Current research ceilings are4200/4200/3600/2000/2000 blue/red/yellow/purple/green. The current game resumed from the saved boundary below and reached work in58.5 seconds. Receiver research1504 is selected. Complete bounded home observations cover76 small stores,5 large stores,3 stations,12 labs and57 assembler-kind devices. An out-of-range25m read-only walking preview was refused before any action and retained. A fresh15m candidate follows the actual16m interface limit.
+Continue research1504/1705/1523, normal production and Caph II design/launch/cell/electricity/save acceptance under the owner's reasonable-resource autonomy. Current matrix ceilings are4200/4200/3600/2000/2000 blue/red/yellow/purple/green. The11000-radius6° read-only triangle costs210 structure/224 cell points with current unlocked latitude0°. Final packages follow functional closure and formal publication retains its separate authority.
 
-2026-11-11。当前owned存档已在df32bd78实装上完成正式恢复，68.11秒到真实普通移动。原生只读6°/8°闭合三角设计均计算完整，分别为210结构点/224细胞点和270结构点/440细胞点，当前已解锁纬度0°，最低需求分别5°/7°。世界拓扑、16根/47成员和完整背包保持。游戏正常保存退出，Primary=LastExit125461571，2218项完整保护通过，累计4372309/6000000tick、66467请求，返航54000及清理3000储备保留。
-
-所有者已明确“批准整案及科研用料”，按[准确增量](resource-increment.md)连续推进两项科研、正常制造、Caph II持续发射、正向节点/框架/壳面交付及接收电力。新增额度为科研蓝2600/红2600/黄紫绿各2000、火箭至多210/帆224，以及1接收站/1电塔。当前本增量实耗0，按新鲜原生资格及既有唯一writer流程执行。
-
-English. Current-owned recovery ondf32bd78 reached real work in68.11 seconds. Complete read-only6°/8° triangle calculations require210/224 and270/440 structure/cell points with5°/7° latitude, while current latitude is0°. Topology,16 roots/47 members and the complete backpack matched. Normal save/close ended at125461571 with2218 protected files,4372309/6000000 ticks and66467 requests, retaining54000 return/3000 cleanup reserves. The owner approved the linked complete resource/research increment. Continue both technologies, normal manufacture, Caph II sustained launches, real node/frame/shell delivery and receiver power within those ceilings. This increment has spent zero materials so far.
-
-## 设计源码与实装 / Design source and installation
-
-2026-11-11。设计/建造源码 `df32bd786bcfebcbe7ef17fdec0db6d78c93dc8f`已正常线性进入产品main，6455项准确源码回归、完整Native构建及[对应CI](https://github.com/Arcueid77/Spherewright/actions/runs/42985848694)通过。Lab固定依赖已选择该源码。整设计成本预览、逐项节点/框架/壳面写入及外星接收器建造进入同源实装验证阶段。
-
-- 新源码保持75工具/1资源，真实MCP入口和内嵌指南字节匹配。`get_dyson_state.designPreview`接受至多64个请求内负数ID步骤，在独立原生几何上计算新火箭/太阳帆需求，并分别返回几何完整性与当前应力科研就绪值。
-- `prepare_configure_building(mode=dyson-structure)`绑定所选已有层设计hash、完整几何、科技、原型、对象引用及下一分配位置。单项原生调用后的回读保留原方案、计划/返回ID、调用边界、容量增量、已有进度及背包守恒。外星2208接收器沿既有付费无人机流程核对原生发电组件/模型，设计配置沿原单tick旅程即时预算。
-- 同源开发组合已通过准确CI、文件清单、PE来源、目录/单文件真实入口及公开SDK宿主匹配资格，包含5个Plugin文件和224个目录MCP文件。开发清单SHA-256为 `5842721E801658858DC9CCAEC5497D620B6C59ECD83527A9853FCAA577CF50E1`，组合索引为 `0C3F01F2F7E97C0F343D0AEA3519F0911A501ED01A3CD292861E5255AE8C6FC7`。
-- 新组合已通过一次正式冷安装事务，5个Plugin文件、224个目录MCP文件、两种入口元数据及安装后PE来源核验。实装SDK通过39个请求形状、44次实际请求且正常EOF，调用端162项回归通过。游戏正常关闭，2214项完整保护和保存边界125456574保留。下一步按已准备的有限返向普通移动包恢复当前owned主档，核对整设计原生成本、真实纬度和科研，再形成实际用料/科研准确增量决定。
-
-English. Designdf32bd78 is on productmain and selected by Lab after6455 exact-source cases, full Native build and exact CI. Bounded detached design costs, individually prepared node/frame/shell operations and finite remote receiver construction are implemented. The same-source development cohort passed file, PE, directory/singlefile entry and public-SDK qualification with75 tools/1 resource,5 Plugin files and224 directory MCP files. Its manifest/cohort hashes are recorded above. One official cold installation transaction and installed PE/byte checks passed. The actual installed SDK admitted39 request shapes over44 requests and closed normally, with162 caller cases passing. Game and MCP remain stopped at125456574 with2214 protected files. Resume through the prepared bounded reverse walk, then verify current-owned Native design costs/latitude before the consolidated actual resource/research increment.
-
-## 已装观察基础 / Installed observation foundation
-
-0.6首个戴森/接收器观察切片已完成源码资格、同源开发冷安装及当前owned存档实测，游戏正常保存退出。按[实施计划](implementation-plan.md)继续设计写入及持续发射/接收功率阶段。
-
-- 产品运行源码为 `ee810a699b71db44bfe11ae1e4e71b9370f79353`，完整Native构建、6389项回归及[准确产品CI](https://github.com/Arcueid77/Spherewright/actions/runs/42972686867)通过。实际MCP入口为75工具/1资源，内嵌指南字节匹配。
-- `spherewright_get_dyson_state`及工厂详情 `rayReceiver`已贯通认证桥接和游戏主线程捕获。结构、订单、缓冲、容量和实际发电各字段按原生来源观察，完整性缺失时汇总可空。
-- 0.6同源开发安装的5个Plugin文件、224个目录MCP文件和单文件MCP通过字节、PE、真实入口、SDK及外部进程资格。根锁选择development源码和这份已装开发组合。
-- 原恢复凭据的24小时有效期已过。首次默认恢复在93.922秒被SESSION_NOT_OWNED拒绝，加载提交前停止，原游戏正常退出并完整备份。随后使用正式 `reauthorize_expired_primary` 新鲜方案，准确候选、原生确认摘要及EvidenceVersion2核验通过，58.719秒内恢复同一owned世界并完成首笔5m普通移动。
-- 新接口在当前恒星读到已有1层、半径11000，节点/框架/壳层和接收器均0，结构及接收器覆盖完整。该结果验证了真实空状态，正向设备发电与非空拓扑仍需后续场景。
-- 16个根、47个叠放成员、逐层设备/库存/缓冲及完整背包与原保护样本保持。源码新增的可空rayReceiver字段按语义归一后比较。新增科研/建造消耗0。
-- 最终Primary=LastExit125456574，2214项完整保护文件核验。累计4367312/6000000tick，返航54000和清理3000储备保留，累计66289请求。Game/MCP均停止且正常EOF。当前完整保护及不可变续接输入位于保护本地ascension-060-20261111末轮。
-- 下一步实现确定性设计候选/成本及原生有限结构写入。现场目录显示射线接收站科技1504待研究，需600电磁矩阵及600能量矩阵。1座接收站直接用料为20钢、20高纯硅、10光子合并器、5处理器和20超级磁场环。结合既有发射现场及原生合法设计形成完整增量决定。
-- 原生目录中的首级戴森球应力系统1523需各2000蓝/红/黄/紫/绿矩阵。候选设计是否需要该科技，按当前原生纬度与合法性证明决定。原0.5[历史unknown与已验收证据](../v0.5-stacking-navigation/current-status.md)继续按其记录保全。
-
-English. Sourceee810a69 passed6389 cases, Native build, exact CI,75 tools/1 resource, coherent installation and current-owned-save continuation. Default resume was refused before loading because its24-hour credential expired. The original failed startup was preserved and normally closed. A fresh Native expired-primary authorization then reached actual ordinary movement in58.719 seconds. The observer verified one existing empty local-star layer and complete zero-receiver coverage.16 roots/47 stack members, device/stock/buffer state and the entire backpack matched. Normal save/close ended at125456574 with2214 protected files,4367312/6000000 ticks,54000 return/3000 cleanup reserve and66289 requests. Game/MCP are stopped. Continue through deterministic design/costs and bounded structural writes, then the positive sustained-power scenario using the exact research/build requirements above.
+Earlier source, installation, stacking and production cuts remain in fixed history. [前次完整快照 / Previous complete snapshot](https://github.com/Arcueid77/Spherewright-Lab/blob/8a2da8e080158c6c226906ad117919293e9eb9c1/scenarios/v0.6-ascension/current-status.md) · [持续授权 / Standing authority](../../operations/standing-authority.md)
