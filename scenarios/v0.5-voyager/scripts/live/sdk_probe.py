@@ -66,6 +66,14 @@ def main():
         ])
         if 'spherewright_get_dyson_state' in schemas:
             cases.append(('spherewright_get_dyson_state',dict(ctx,layerId=0,stateHashVersion=1)))
+            if 'designPreview' in schemas['spherewright_get_dyson_state']['properties']:
+                cases.append(('spherewright_get_dyson_state',dict(ctx,layerId=1,stateHashVersion=1,
+                    designPreview=dict(expectedDesignStateHash=h,steps=[dict(localId=-1,structure=dict(
+                        kind='node',layerId=1,localPosition=dict(x=10000.,y=0.,z=0.)))]))))
+        if 'dysonStructure' in schemas['spherewright_prepare_configure_building']['properties']:
+            cases.append(('spherewright_prepare_configure_building',dict(ctx,entityId=0,recipeId=0,
+                mode='dyson-structure',expectedFactoryStateHash=h,dysonStructure=dict(kind='node',layerId=1,
+                    localPosition=dict(x=10000.,y=0.,z=0.),previewOnly=True))))
         proof=[]
         for tool,args in cases:
             schema=schemas[tool];need(set(schema.get('required',[]))<=set(args),'sdk_required_field_missing')
