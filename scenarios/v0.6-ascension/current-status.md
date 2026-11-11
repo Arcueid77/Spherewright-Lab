@@ -1,5 +1,13 @@
 # Ascension current snapshot / Ascension活动快照
 
+2026-11-11。当前owned存档已在df32bd78实装上完成正式恢复，68.11秒到真实普通移动。原生只读6°/8°闭合三角设计均计算完整，分别为210结构点/224细胞点和270结构点/440细胞点，当前已解锁纬度0°，最低需求分别5°/7°。世界拓扑、16根/47成员和完整背包保持。游戏正常保存退出，Primary=LastExit125461571，2218项完整保护通过，累计4372309/6000000tick、66467请求，返航54000及清理3000储备保留。
+
+所有者已明确“批准整案及科研用料”，按[准确增量](resource-increment.md)连续推进两项科研、正常制造、Caph II持续发射、正向节点/框架/壳面交付及接收电力。新增额度为科研蓝2600/红2600/黄紫绿各2000、火箭至多210/帆224，以及1接收站/1电塔。当前本增量实耗0，按新鲜原生资格及既有唯一writer流程执行。
+
+English. Current-owned recovery ondf32bd78 reached real work in68.11 seconds. Complete read-only6°/8° triangle calculations require210/224 and270/440 structure/cell points with5°/7° latitude, while current latitude is0°. Topology,16 roots/47 members and the complete backpack matched. Normal save/close ended at125461571 with2218 protected files,4372309/6000000 ticks and66467 requests, retaining54000 return/3000 cleanup reserves. The owner approved the linked complete resource/research increment. Continue both technologies, normal manufacture, Caph II sustained launches, real node/frame/shell delivery and receiver power within those ceilings. This increment has spent zero materials so far.
+
+## 设计源码与实装 / Design source and installation
+
 2026-11-11。设计/建造源码 `df32bd786bcfebcbe7ef17fdec0db6d78c93dc8f`已正常线性进入产品main，6455项准确源码回归、完整Native构建及[对应CI](https://github.com/Arcueid77/Spherewright/actions/runs/42985848694)通过。Lab固定依赖已选择该源码。整设计成本预览、逐项节点/框架/壳面写入及外星接收器建造进入同源实装验证阶段。
 
 - 新源码保持75工具/1资源，真实MCP入口和内嵌指南字节匹配。`get_dyson_state.designPreview`接受至多64个请求内负数ID步骤，在独立原生几何上计算新火箭/太阳帆需求，并分别返回几何完整性与当前应力科研就绪值。

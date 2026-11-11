@@ -1,5 +1,11 @@
 # Voyager standing execution authority / Voyager 持续执行授权
 
+## Current Ascension resource increment, 2026-11-11 / 当前Ascension用料增量
+
+The owner explicitly replied “批准整案及科研用料” to the [consolidated Ascension increment](../scenarios/v0.6-ascension/resource-increment.md). Research ceilings are2600 blue,2600 red and2000 each yellow/purple/green matrices for the first stress level1523 and receiver technology1504. Launch ceilings are210 carrier rockets and224 sails. New construction covers one receiver2208 and one Tesla tower2201. Existing stock and normal recipe-based manufacture may supply actual shortages. Reuse the Caph II manufacturing/launch site and fresh-check its exact geometry/costs before bounded execution. Preserve the6000000 cumulative tick ceiling, all prior spending,54000 return and3000 cleanup reserves and original-action/unknown isolation. Do not request this unchanged increment again.
+
+所有者对[Ascension整案增量](../scenarios/v0.6-ascension/resource-increment.md)明确回复“批准整案及科研用料”。科研上限为蓝2600、红2600、黄/紫/绿各2000，用于第一档应力1523和射线接收1504。发射上限为210枚运载火箭、224片太阳帆，新建1座接收站2208及1座电塔2201，可正常取用现货或按原生配方制造不足量。复用Caph II制造/发射现场，到场后重新核对准确几何和成本，在额度内执行。保留600万累计tick上限、全部既耗、返航54000/清理3000储备及原动作/unknown隔离，同一未变增量不再重复请批。
+
 ## Current Ascension continuation, 2026-11-11 / 当前Ascension续接
 
 The owner explicitly requested “继续0.6的推进”. Continue the approved0.6 Ascension development scope through necessary Native research, reusable product implementation, tests, exact-source CI, linear ordinary commits/pushes and Lab adoption. The [Ascension plan](../scenarios/v0.6-ascension/implementation-plan.md) records the current sequence. Current-owned-world surveys and preparation retain the standing complete-backup, coherent-installation, startup, Native, cumulative-budget and original-action procedures. Use current Native catalogues and resource facts to derive any actual construction/research increment.
