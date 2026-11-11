@@ -98,3 +98,20 @@ Actual new placement comprised three MkII assemblers, two smelters, three stores
 Two newly produced Casimir/four titanium glass and two owned processors normally made two plane filters/one quantum chip. Two gradeIII sorters were normally made from nine iron, six magnets, three copper and two carried ordinary sorters, leaving one coil. The current2011→2012 entry refused the2013 upgrade before acceptance, so no old items were refunded and both2013 remain carried.600 additional magnets could not enter full26 and were normally returned to562.
 
 Normal saved boundary126605389 preserves5516127/6000000 ticks,73990 requests,483873 remaining ticks and54000 return/3000 cleanup reserves. The complete-factory reader's76 requests are included exactly once from its normal-EOF receipt.
+
+
+## 2026-11-12过滤器与量子配套 / Plane-filter and quantum support
+
+本轮正常制造并建成2台MkII，直接原料32铁、4铜、16石墨烯及8处理器，另100现有处理器供共享仓。新增制造6普通分拣器使用12铁、3铜；另1塔使用2铁及1现有线圈。新鲜原生几何选择地面、高架及下降段，实际新建38带、11普通分拣器、2只已制成2013及1塔，保留被拒的原候选和全部实际扣料。
+
+2013通过正常拆除旧2011并重建，回收原普通件，现有升级入口的原拒绝保持。另正常制造2高速分拣器使用3铁、1线圈及2携带普通件，其中1件用于6940原生升级，旧件正常退还，另1件留包。累计施工既耗为带256、普通分拣器60、2013分拣器2、小仓12、MkII8、炉3及塔15；相应有限上限为274/64/2/13/8/5/15。
+
+现有物料正常重分配1600铜至562、1200磁铁至26、1290铁至28，其中40铁又用于本轮制造。另200水正常入钛化玻璃仓。位面过滤器实际产出10，量子机出料仍待，原手搓量子1保持。最新保存边界126798475，累计5709213tick及75724请求，剩余290787tick，含54000返航及3000清理储备。
+
+### English
+
+Two normally manufactured/placed MkII machines used32 iron, four copper,16 graphene/eight processors, with another100 owned processors supplied to shared storage. Six new ordinary sorters used12 iron/three copper. One tower used two iron/one existing coil. Fresh Native geometry admitted ground, raised and downward spans. Actual new placement was38 belts,11 ordinary sorters, two already-manufactured2013 and one tower, retaining original refused candidates and actual debits.
+
+Normal dismantle/rebuild placed2013 and recovered the original2011, preserving the earlier unsupported upgrade refusal. A further fast pair used three iron, one coil/two carried ordinary sorters. One fast unit normally upgraded6940 and recovered its old unit, with the other carried. Cumulative spending is256 belts,60 ordinary/two gradeIII sorters,12 stores, eight MkII assemblers, three smelters and15 towers under finite ceilings274/64/2/13/8/5/15.
+
+Normal redistribution moved1600 copper to562,1200 magnets to26 and1290 iron to28, with40 iron subsequently used for manufacture.200 water entered titanium-glass storage. The plane-filter machine produced10, while automatic quantum output remains pending and the original handcrafted chip is preserved. Saved boundary126798475 retains5709213 ticks/75724 requests,290787 remaining ticks including54000 return/3000 cleanup reserves.
