@@ -184,9 +184,13 @@ def ordinary_owned_resume_echo(config,plan):
             and type(minimum)is int and config['sourcePrimaryGameTick']<config['originalQuarantineMinimumTick']<=minimum<=config['sourceTick']
             and plan.get('candidateGameTick') is None and plan.get('exactEmbeddedIdentityVerified') is False
             and plan.get('recoveryEvidenceVersion')==0)
+    minimum=plan.get('minimumGameTick');ticket_floor=config.get('ticketMinimumGameTick')
+    # A normal save may advance the protected Native ticket after this caller's
+    # earlier snapshot. The freshly backed-up primary remains the no-loss ceiling.
     return (config.get('sourceRole')=='primary' and plan.get('candidateGameTick') is None
         and plan.get('exactEmbeddedIdentityVerified') is False
-        and plan.get('minimumGameTick')==config['ticketMinimumGameTick']<=config['sourceTick']
+        and type(minimum)is int and type(ticket_floor)is int and type(config.get('sourceTick'))is int
+        and 0<=ticket_floor<=minimum<=config['sourceTick']
         and plan.get('recoveryEvidenceVersion')==0)
 
 

@@ -754,6 +754,22 @@ class LiveDriverTests(unittest.TestCase):
   self.assertTrue(ordinary_owned_resume_echo(verified,p))
   p['candidateGameTick']=199;self.assertFalse(ordinary_owned_resume_echo(verified,p))
 
+ def test_ordinary_primary_accepts_a_native_ticket_advanced_within_the_complete_saved_source(self):
+  config = dict(recoveryMode='default', sourceRole='primary', planetId=101, sourceTick=200,
+      ticketMinimumGameTick=198, expectedNativeVersion='synthetic-version')
+  plan = dict(recoveryMode='default', expectedPlanetId=101, sourceGameVersion='synthetic-version',
+      targetGameVersion='synthetic-version', userConfirmationRequired=False, commitAllowedNow=True,
+      commitBlockers=[], additionalVoyagerGameTicks=0, originalJourneyMaximumGameTicks=None,
+      effectiveJourneyMaximumGameTicks=None, candidateGameTick=None, minimumGameTick=200,
+      exactEmbeddedIdentityVerified=False, recoveryEvidenceVersion=0,
+      **{key: False for key in ('remotePrimaryRecoveryAuthorizationUsed', 'failedLandingRecoveryAuthorizationUsed',
+          'completedSavedLandingAdmissionUsed', 'opensSavedWorldOnly', 'previousAutomationRemainsStopped', 'newChargingProhibited')})
+  for minimum in (198, 199, 200):
+   self.assertTrue(ordinary_owned_resume_echo(config, dict(plan, minimumGameTick=minimum)))
+  for minimum in (197, 201, None, True):
+   self.assertFalse(ordinary_owned_resume_echo(config, dict(plan, minimumGameTick=minimum)))
+  self.assertEqual(198, config['ticketMinimumGameTick'])
+
  def test_expired_ordinary_primary_requires_its_exact_native_confirmed_candidate(self):
   c=dict(recoveryMode='reauthorize_expired_primary',sourceRole='primary',planetId=101,
       sourceTick=200,expectedNativeVersion='synthetic-version')
