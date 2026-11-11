@@ -309,7 +309,7 @@ def paused_failed_cut(first_session, second_session, first_player, second_player
 def validate_steps(steps):
     required={
         'operation':{'prepareTool','arguments'},'prepare-only':{'prepareTool','arguments'},'adopt-paid-build':{'buildId','expectedObjects','itemId'},
-        'read':{'tool'},'dump':{'queries'},'build-object':{'itemId','positions'},
+        'read':{'tool'},'dump':{'queries'},'build-object':{'itemId','positions'},'build-resource':{'itemId','nodeId'},
         'build-stack':{'itemId','anchor'},
         'build-belt':{'source','ends','maximumNewBelts'},'build-free-belt':{'candidates','maximumNewBelts'},'build-belt-to-device':{'starts','destination','maximumNewBelts'},
         'build-sorter':{'source','destination','filterItemId'},'configure':{'entity'},
@@ -326,6 +326,8 @@ def validate_steps(steps):
             if type(step['itemId']) is not int or step['itemId'] <= 0 or not (
                     type(anchor) is int and anchor > 0 or isinstance(anchor, str) and bool(anchor)):
                 raise ValueError('immutable_stack_identity_invalid')
+        if kind=='build-resource' and any(type(step[key])is not int or step[key]<=0 for key in ('itemId','nodeId')):
+            raise ValueError('immutable_resource_build_identity_invalid')
         if kind=='wait-stack-device':
             expected=step['expected'];seconds=step['maximumSeconds']
             if (not isinstance(expected,Mapping) or not 1<=len(expected)<=16

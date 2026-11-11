@@ -44,7 +44,11 @@ English. Native recipe18 produces one red matrix every six seconds in one labora
 
 为下一轮手搓完成回归及原76供料升级，另预留2蓝矩阵及2高速分拣器。完整原料为5铁、4磁铁及3铜，复用背包2普通分拣器，正常依赖制造会另留下1磁线圈。两次蓝矩阵执行使首件可在原任务完成前进入科研，按原任务回读核对完成、背包及7200点流转。高速分拣器按新鲜端点选择实际升级对象，累计高速支持额度由既有4增至6，施工既耗及升级扣还继续分别记账。
 
-原600万累计游戏tick上限及既耗继续保留。最新正常保存边界126289034，当前累计5199772，剩余800228，返航54000及清理3000储备保持。原材料/施工既耗、所有历史动作和unknown隔离继续保留。持续执行、同源维护和保存恢复按现行授权进行。正式发布按其单独所有者决定执行。
+当前正向回归已完成2蓝，原任务成功且背包蓝0、科研准确增加7200点。2高速输入升级完成，正常退还旧分拣器。另增加2研究层至原84，消耗24铁、8铜、8磁铁及16石矿，累计研究站施工及上限15。
+
+已有碰撞器供铁仓6657正常接收600铁，原1000申请因现货不足而未接受，实际额度采用600。其24铁分配给研究站、18铁正常制造18带，保留实际重分配账目。携带矿机正常建成1座6878，当前资源矿机施工1。旧空矿机1496正常回收，未抵扣累计施工。基础带新增有限额度为22，累计上限214，实际新建铜输入11带及1分拣器，累计带203/214、分拣器34/48。现有1600黄已正常取用供1705，保存时802在包、798为科研完整点数。未完成的新铁连接保留原拒绝及剩余11带、1分拣器。
+
+原600万累计游戏tick上限及既耗继续保留。最新正常保存边界126412724，当前累计5323462，剩余676538，返航54000及清理3000储备保持。原材料/施工既耗、所有历史动作和unknown隔离继续保留。持续执行、同源维护和保存恢复按现行授权进行。正式发布按其单独所有者决定执行。
 
 ## English
 
@@ -68,4 +72,8 @@ One normally crafted warehouse for direct red supply consumed four iron/four sto
 
 The next handcraft-completion regression and root76 input upgrades reserve two blue matrices and two fast sorters. Exact raw inputs are five iron, four magnets and three copper, reusing two carried ordinary sorters. Normal dependency crafting also leaves one coil. Two blue executions allow the first product to enter research before the original task ends, binding completion/inventory and7200-point observations to the original task. Fresh endpoints select actual upgrades. The cumulative fast-sorter support allowance increases from the existing four to six, preserving separate placement and upgrade debit/refund accounting.
 
-Preserve the original6000000-tick cumulative ceiling,5199772 spent ticks,800228 remaining ticks,54000 return and3000 cleanup reserves at saved boundary126289034, together with prior material/construction spending and historical unknown isolation. Existing standing maintenance/save/recovery authority continues. Formal publication retains its owner decision.
+The positive two-blue regression passed with original-task success, zero package blue and an exact7200 research-point increase. Both fast-input upgrades completed and recovered their old sorters. Two further research layers on84 consumed24 iron, eight copper/eight magnets and16 stone ore, bringing laboratory placement and its ceiling to15.
+
+Existing collider input storage6657 received600 iron. The prior1000 withdrawal was refused before acceptance for insufficient stock, and the actual batch is600.24 of that batch supplied research laboratories and18 normally manufactured18 belts. One carried miner became6878, with one current resource-miner placement. Empty old1496 was normally recovered without refunding cumulative placement. The22-new-belt support limit sets cumulative ceiling214. Actual copper input placed11 belts/one sorter, bringing totals203/214 and34/48.1600 existing yellow were normally withdrawn for1705, with802 still carried and798 in whole research-point equivalents at save. The unfinished iron connection retains its original refusals and remaining11 belts/one sorter.
+
+Preserve the original6000000-tick cumulative ceiling,5323462 spent ticks,676538 remaining ticks,54000 return and3000 cleanup reserves at saved boundary126412724, together with prior material/construction spending and historical unknown isolation. Existing standing maintenance/save/recovery authority continues. Formal publication retains its owner decision.

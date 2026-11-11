@@ -149,6 +149,10 @@ class Factory(Live):
    need(is_read_tool(s['tool']),'read_step_cannot_submit')
    args=resolve_refs(s.get('arguments',{}),dict(context=self.ctx,refs=self.refs))
    value=self.call(s['tool'],self.read_args(s['tool'],args));self.runtime.put(role+'-read.private.json',value);return value
+  if kind=='build-resource':
+   resource=self.call('spherewright_inspect_resource_node',dict(self.ctx,kind='vein',nodeId=s['nodeId']))
+   return self.build(role,dict(buildingItemId=s['itemId'],resourceNodeId=s['nodeId'],
+    expectedResourceStateHash=resource['stateHash']),1)
   if kind=='build-object':
    last=None
    for position in s['positions']:
@@ -281,6 +285,7 @@ class Factory(Live):
 
  def native_operation_once(self,s,commit_requested=True):
   allowed={'spherewright_prepare_move','spherewright_prepare_harvest','spherewright_prepare_transfer',
+   'spherewright_prepare_dismantle',
    'spherewright_prepare_configure_building','spherewright_prepare_select_research','spherewright_prepare_handcraft',
    'spherewright_prepare_upgrade',
    'spherewright_prepare_logistics_station_fleet_transfer',

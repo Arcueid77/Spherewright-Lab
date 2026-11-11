@@ -10,6 +10,31 @@ from factory import Factory,resolve_refs
 from runtime import freeze,Runtime
 
 class LiveDriverTests(unittest.TestCase):
+ def test_dismantle_operation_uses_the_existing_public_prepare_commit_and_original_result(self):
+  adapter=Factory.__new__(Factory);adapter.ctx=dict(sessionId='synthetic-session',planetId=104)
+  arguments=dict(objectId=12,expectedEndpointStateHash='endpoint',expectedPlayerStateHash='player')
+  adapter.schemas={
+   'spherewright_prepare_dismantle':dict(properties={k:{} for k in [*adapter.ctx,*arguments]},required=list(arguments)),
+   'spherewright_commit_dismantle':dict(properties={k:{} for k in [*adapter.ctx,'planToken','idempotencyKey']},required=['planToken','idempotencyKey'])}
+  adapter.runtime=SimpleNamespace(put=lambda *_:None);calls=[]
+  adapter.call=lambda tool,args:dict(prepared=True,commitAllowedNow=True,commitBlockers=[],planToken='native-token')
+  adapter.commit=lambda role,tool,args:calls.append((tool,args)) or 'original-dismantle'
+  adapter.successful_original=lambda handle:dict(actionId=handle,terminal=True,succeeded=True,actionKind='dismantle')
+  result=adapter.native_operation_once(dict(role='recover-miner',prepareTool='spherewright_prepare_dismantle',arguments=arguments))
+  self.assertEqual('spherewright_commit_dismantle',calls[0][0]);self.assertEqual('native-token',calls[0][1]['planToken'])
+  self.assertEqual('original-dismantle',result['actionId'])
+ def test_resource_build_uses_fresh_public_node_hash_and_existing_paid_build_ledger(self):
+  adapter=Factory.__new__(Factory);adapter.ctx=dict(sessionId='synthetic-session',planetId=104)
+  adapter.state=lambda:None;calls=[];builds=[]
+  adapter.call=lambda tool,args:calls.append((tool,args)) or dict(stateHash='fresh-resource-hash')
+  adapter.build=lambda role,args,limit:builds.append((role,args,limit)) or 'completed-native-miner'
+  step=dict(kind='build-resource',role='new-mine',itemId=2301,nodeId=55)
+  validate_steps([step]);self.assertEqual('completed-native-miner',adapter.step(step))
+  self.assertEqual('spherewright_inspect_resource_node',calls[0][0]);self.assertEqual(55,calls[0][1]['nodeId'])
+  self.assertEqual(dict(buildingItemId=2301,resourceNodeId=55,expectedResourceStateHash='fresh-resource-hash'),builds[0][1])
+  self.assertEqual(1,builds[0][2])
+  for invalid in (0,-1,True):
+   with self.assertRaises(ValueError):validate_steps([dict(step,nodeId=invalid)])
  def test_dump_resolves_a_newly_built_entity_reference_before_the_native_read(self):
   adapter=Factory.__new__(Factory);adapter.ctx=dict(sessionId='synthetic-session',planetId=104)
   adapter.refs=dict(new_store=[42]);adapter.state=lambda:None
