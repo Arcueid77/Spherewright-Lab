@@ -1,6 +1,17 @@
 # Ascension current snapshot / Ascension活动快照
 
-2026-11-11。0.6首个戴森/接收器观察切片已完成源码资格、同源开发冷安装及当前owned存档实测，游戏正常保存退出。按[实施计划](implementation-plan.md)继续设计写入及持续发射/接收功率阶段。
+2026-11-11。设计/建造源码 `df32bd786bcfebcbe7ef17fdec0db6d78c93dc8f`已正常线性进入产品main，6455项准确源码回归、完整Native构建及[对应CI](https://github.com/Arcueid77/Spherewright/actions/runs/42985848694)通过。Lab固定依赖已选择该源码。整设计成本预览、逐项节点/框架/壳面写入及外星接收器建造进入同源实装验证阶段。
+
+- 新源码保持75工具/1资源，真实MCP入口和内嵌指南字节匹配。`get_dyson_state.designPreview`接受至多64个请求内负数ID步骤，在独立原生几何上计算新火箭/太阳帆需求，并分别返回几何完整性与当前应力科研就绪值。
+- `prepare_configure_building(mode=dyson-structure)`绑定所选已有层设计hash、完整几何、科技、原型、对象引用及下一分配位置。单项原生调用后的回读保留原方案、计划/返回ID、调用边界、容量增量、已有进度及背包守恒。外星2208接收器沿既有付费无人机流程核对原生发电组件/模型，设计配置沿原单tick旅程即时预算。
+- 同源开发组合已通过准确CI、文件清单、PE来源、目录/单文件真实入口及公开SDK宿主匹配资格，包含5个Plugin文件和224个目录MCP文件。开发清单SHA-256为 `5842721E801658858DC9CCAEC5497D620B6C59ECD83527A9853FCAA577CF50E1`，组合索引为 `0C3F01F2F7E97C0F343D0AEA3519F0911A501ED01A3CD292861E5255AE8C6FC7`。
+- 当前实装仍为下面已验证的观察源码ee810a69，游戏正常关闭，保存边界125456574及完整保护保留。下一步冷安装新组合，经当前owned主档恢复核对整设计原生成本、真实纬度和科研，再形成实际用料/科研准确增量决定。
+
+English. Designdf32bd78 is on productmain and selected by Lab after6455 exact-source cases, full Native build and exact CI. Bounded detached design costs, individually prepared node/frame/shell operations and finite remote receiver construction are implemented. The same-source development cohort passed file, PE, directory/singlefile entry and public-SDK qualification with75 tools/1 resource,5 Plugin files and224 directory MCP files. Its manifest/cohort hashes are recorded above. Installation remains the previously verified observation sourceee810a69. Game and MCP are stopped at the preserved125456574 boundary. Cold-install the new cohort and verify current-owned Native design costs/latitude before the consolidated actual resource/research increment.
+
+## 已装观察基础 / Installed observation foundation
+
+0.6首个戴森/接收器观察切片已完成源码资格、同源开发冷安装及当前owned存档实测，游戏正常保存退出。按[实施计划](implementation-plan.md)继续设计写入及持续发射/接收功率阶段。
 
 - 产品运行源码为 `ee810a699b71db44bfe11ae1e4e71b9370f79353`，完整Native构建、6389项回归及[准确产品CI](https://github.com/Arcueid77/Spherewright/actions/runs/42972686867)通过。实际MCP入口为75工具/1资源，内嵌指南字节匹配。
 - `spherewright_get_dyson_state`及工厂详情 `rayReceiver`已贯通认证桥接和游戏主线程捕获。结构、订单、缓冲、容量和实际发电各字段按原生来源观察，完整性缺失时汇总可空。

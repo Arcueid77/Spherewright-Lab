@@ -12,6 +12,8 @@
 
 ## 当前观察接口
 
+设计/建造源码df32bd78已完成6455项准确回归、Native构建及对应CI。所选层观察支持 `designPreview` 的有界独立原生多对象成本计算，普通配置动作支持 `dyson-structure` 单项新鲜prepare/commit及守恒回读。外星2208接收器沿付费无人机流程核对准确组件，设计沿原单tick即时旅程预算。当前继续同源冷安装及已有存档正向验证。
+
 `spherewright_get_dyson_state`支持当前owned本地恒星及所选层，返回最多10层、256节点、512框架、128壳层、4096个壳层边界节点和256接收器。覆盖不完整时汇总值可空。工厂详情通过 `rayReceiver`提供相同接收器观察，继承既有工厂动作hash域。
 
 先完成相关源码回归、完整Native构建、准确源码CI和固定Lab采用。实机前准备同源开发安装、完整备份和第一笔真实普通操作包，继续沿300秒启动到实操门执行。实机目录调查为后续整案科研/用料提供依据。
@@ -24,6 +26,8 @@
 - 将新增科研、材料和建筑额度与当前已批剩余额度比较，对确实需要的增量形成一次准确整案决定。
 
 ## English
+
+Designdf32bd78 passed6455 cases, Native build and exact CI. Selected-layer observations now support bounded detached multi-object design costs, while normal configuration supports individually prepared Native structures and conservation readback. Finite remote receiver construction binds its exact generator/model. Design operations retain the original one-tick immediate journey budget. Continue coherent cold installation and positive current-save validation.
 
 The owner requested continued0.6 development on2026-11-11. Follow the approved Ascension scope through observation, deterministic design/cost planning, bounded Native structural writes, sustained manufacture/launch, receiver-power measurement and normal save/cold continuation. Use DSP29151 and the assembly hash above.
 
