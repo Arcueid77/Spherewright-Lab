@@ -32,6 +32,8 @@ def main():
             ('spherewright_prepare_configure_building',dict(ctx,entityId=30,recipeId=0,mode='logistics-station-delivery',stationVesselDeliveryMinimumPercent=1,expectedFactoryStateHash=h,expectedStationConfigurationStateHash=h)),
             ('spherewright_prepare_save',dict(ctx,expectedRevision=1)),
             ('spherewright_prepare_handcraft',dict(ctx,recipeId=8,count=1,expectedPlayerStateHash=h)),
+            ('spherewright_prepare_upgrade',dict(ctx,objectId=21,targetItemId=2012,expectedRecipeId=0,
+                expectedEndpointStateHash=h,expectedPlayerStateHash=h,expectedFilterItemId=1301)),
             ('spherewright_prepare_harvest',dict(ctx,resourceKind='vein',nodeId=1,requestedYieldCount=1,expectedResourceStateHash=h,expectedPlayerStateHash=h)),
             ('spherewright_preview_voyager_route',dict(ctx,destinationPlanetId=104,expectedPlayerStateHash=h,expectedCatalogStateHash=h,maximumFlightGameTicks=108000,returnReserveGameTicks=54000)),
             ('spherewright_prepare_voyager_flight',dict(ctx,expectedRouteStateHash=h,expectedPlayerStateHash=h)),

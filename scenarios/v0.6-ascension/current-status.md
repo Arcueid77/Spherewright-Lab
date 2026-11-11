@@ -1,5 +1,11 @@
 # Ascension current snapshot / Ascension活动快照
 
+2026-11-11。本轮已正常保存退出，Primary=LastExit125635020，2222项完整保护通过。累计4545758/6000000tick、67253请求，返航54000及清理3000储备保留。1504研究已上传3060/108000哈希，正常消耗17组蓝/红，另13个完整蓝矩阵点数保留在机甲缓冲。285次原生磁线圈制造产出570件，1小仓及1普通出料分拣器完成。既有5层矩阵站已通过正常双路供料生产，保存前成品仓341蓝矩阵，570对原料的剩余库存/皮带/层内缓冲均保留。
+
+一次赴石墨库存的普通移动因实体阻挡在剩余19.99m处被原生看门狗停止，原动作已知失败且健康闲置回读通过，原件保留未重放。已按确定电塔方向完成新的2.5m短避让并保持Walk/0速度。下一窗口已离线准备以“正常取出200氢”作为首实操，补齐必要调用端分支及配对原生收据回归，166项测试/实装45请求形状核验通过。按[合理配套增量](resource-increment.md#合理生产配套增量)继续供料/出料升级、红矩阵准备和三项科研。
+
+English. Normal save/close ended at125635020 with2222 protected files,4545758/6000000 ticks and67253 requests, retaining54000 return/3000 cleanup reserves. Tech1504 has3060/108000 hashes from17 normal blue/red pairs. Thirteen whole blue cubes remain conserved as mecha research points.285 Native coil crafts produced570 units. One warehouse and one ordinary output sorter completed. The existing five-layer laboratory stack is producing through normal two-input supply, with341 blue matrices in its output warehouse at save. Remaining570-pair materials and live buffers are preserved. One movement stopped at a known obstacle and remained an original known failure with healthy idle proof. A distinct2.5m escape succeeded in Walk/zero speed. The next window prepares a normal200-hydrogen withdrawal as first actual work. Its caller/paired-receipt branch passed166 tests and45 installed SDK requests. Continue bounded feed/output upgrades, red-matrix preparation and the three research targets.
+
 2026-11-11。所有者已进一步授权“只要是合理的，自己加就行，为啥都要我来批准？”，按[当前自主用料授权](../../operations/standing-authority.md#current-ascension-resource-autonomy-2026-11-11--当前ascension用料自主授权)自行核算、记录并执行0.6合理科研/材料/施工增量。完整配方和母星库存已证绿矩阵0、配方102未解锁，新增1705前置科研蓝/红/黄各1600，当前科研上限为蓝4200、红4200、黄3600、紫2000、绿2000。
 
 当前游戏已从下列保存边界再次恢复，58.5秒到实操，1504射线接收研究已选定，正在母星盘点及供料准备。母星76小仓、5大仓、3物流站、12研究站及57组装类设备的有界观察已完整返回，无后续分页。原一次未接受的25m只读路线预览因超过16m接口范围被拒绝，原件保留，已按15m准备新只读候选，未形成游戏动作。

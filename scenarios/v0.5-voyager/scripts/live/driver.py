@@ -319,6 +319,14 @@ class Live:
  def prepare_first_work(self,loaded,deadline):
   self.first_work_deadline=deadline
   work=self.runtime.config['firstOperation'];mode=work.get('mode','production')
+  if work.get('kind')=='storage-transfer':
+   need(work.get('direction') in ('storage-to-player','player-to-storage') and type(work.get('count'))is int
+    and work['count']>0 and type(work.get('itemId'))is int and work['itemId']>0,'first_storage_transfer_shape_invalid')
+   p=self.player();e=self.entity(work['entityId']);self.first_before=dict(player=p,storage=e)
+   q=self.call('spherewright_prepare_transfer',dict(self.ctx,direction=work['direction'],storageEntityId=work['entityId'],
+    itemId=work['itemId'],count=work['count'],expectedPlayerStateHash=p['stateHash'],expectedStorageStateHash=e['stateHash']))
+   need(q['prepared'] and q['commitAllowedNow'] and not q['commitBlockers'],'first_storage_transfer_not_prepared')
+   return dict(action_kind='transfer',tool='spherewright_commit_transfer',prepared=q,actualCount=work['count'])
   if work.get('kind')=='generator-fuel':
    p=self.player();e=self.entity(work['entityId']);self.first_before=dict(player=p,generator=e)
    q=self.call('spherewright_prepare_transfer',dict(self.ctx,direction='player-to-generator-fuel',storageEntityId=work['entityId'],
@@ -409,6 +417,16 @@ class Live:
   raise G.DeadlineExceeded('No original paid Native control effect before startup deadline; reconcile original without replay')
  def verify_progress(self,w,r):
   c=self.runtime.config['firstOperation'];mode=c.get('mode','production')
+  if c.get('kind')=='storage-transfer':
+   amount=w.get('actualCount');sign=1 if c['direction']=='storage-to-player' else -1
+   before=r.get('beforeTargetAmount');after=r.get('afterTargetAmount')
+   ok=(type(amount)is int and amount==c['count'] and r.get('terminal')is True and r.get('succeeded')is True
+    and r.get('actionKind')=='transfer' and type(before)is int and type(after)is int and min(before,after)>=0
+    and after-before==-sign*amount
+    and sum(d['delta']for d in r.get('itemDeltas',[])if d['itemId']==c['itemId'])==sign*amount)
+   self.runtime.put('actual-progress.private.json',dict(verified=ok,actionId=r['actionId'],exactNativeTransferCount=amount,
+    direction=c['direction'],before=self.first_before,after=self.player(),originalSameTickReceipt=r,noReplay=True))
+   return ok
   if c.get('kind') in ('refuel','generator-fuel'):
    amount=w.get('actualCount',c['count']);before=r.get('beforeTargetAmount');after=r.get('afterTargetAmount')
    ok=(type(amount)is int and 1<=amount<=c['count'] and r.get('terminal') is True and r.get('succeeded') is True

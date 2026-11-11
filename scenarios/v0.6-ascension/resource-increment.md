@@ -26,6 +26,12 @@
 
 接收站直接配方为20钢材、20高纯硅、10光子合并器、5处理器和20超级磁场环。电塔直接配方为2铁块、1磁线圈。火箭上限对应420戴森球组件、840氘核燃料棒和420量子芯片，太阳帆上限对应112石墨烯、112光子合并器。实际批次按新鲜需求及现货余额确定。
 
+## 合理生产配套增量
+
+当前已有5层矩阵站可复用，已建输入线路可重新设置筛选。原生观察确认该叠层缺少成品出料连接，单层产物缓冲会限制连续生产。按自主用料授权预留1小仓、2普通分拣器和至多8基础传送带的有限配套额度，实际施工使用新鲜原生几何及逐件物料回读。小仓直接配方为4铁块、4石材，当前已有3分拣器和4基础带优先复用。对应累计调用端建筑上限为小仓9、分拣器保留既有48、基础带200，保留原已用8/30/192及全部历史账目。调用端采用既有额度与“既耗加本项上限”中的较大值，未耗余额保持原记录。
+
+实际已正常制造/建成1小仓，复用背包普通分拣器建成1出料器，累计既耗更新为小仓9、普通分拣器31、基础带192。570对磁线圈/电路板经原生存储投料，保存前成品仓已有341蓝矩阵，叠层原生回读证实供板通路限制生产。按同一自主授权预留2高速分拣器2012，用于现有供板和成品出料器的原生2011→2012升级。配方88一次制造2件，消耗2普通分拣器及1电动机，普通分拣器优先使用背包现货；电动机正常配方合计使用3铁块及1磁线圈（含1齿轮）。升级保留原动作、双端连接、在途货物/筛选和正常扣还账目。
+
 原600万累计游戏tick上限及既耗继续保留。当前累计4372309，剩余1627691，返航54000及清理3000储备保持。原材料/施工既耗、所有历史动作和unknown隔离继续保留。持续执行、同源维护和保存恢复按现行授权进行。正式发布按其单独所有者决定执行。
 
 ## English
@@ -37,5 +43,9 @@ Reuse the Caph II manufacturing/ejector/silo site. Its historically accepted rec
 The owner subsequently authorized autonomous reasonable0.6 resource increments. The complete recipe/home-stock survey found no green matrices and locked recipe102. Its required1705 technology adds1600 each blue/red/yellow matrices, with1303/1704 already unlocked. Revised ceilings for the first stress level, receiver technology and gravity-matrix prerequisite are4200 blue,4200 red,3600 yellow,2000 purple and2000 green. Launch ceilings are210 carrier rockets and224 sails. New construction covers one receiver and one Tesla tower. Existing stock and normal recipe-based manufacture may supply actual shortages. Retain cumulative output/use accounting and original actions. The game has resumed and receiver research1504 is selected.
 
 Direct receiver inputs are20 steel,20 silicon,10 combiners,5 processors and20 super-magnetic rings. The tower needs2 iron and1 magnetic coil. The maximum rocket bill is420 Dyson components,840 deuterium rods and420 quantum chips. The maximum sail bill is112 graphene and112 combiners. Actual batches follow fresh demand and stock.
+
+The existing five-layer matrix stack and input lines are reused. Native observations show no finished-product output connection. A bounded support increment reserves one small warehouse, two ordinary sorters and up to eight basic belts under the owner's autonomy grant. Fresh Native geometry and per-object debit prove actual placement. The warehouse requires4 iron and4 stone bricks. Three carried sorters and four carried belts are reused first. Cumulative caller ceilings are9 warehouses, the existing48 sorters and200 belts while retaining prior8/30/192 spending and original records. The caller retains the larger of its existing ceiling and prior spending plus this task's placement limit.
+
+Actual support placement completed one normally crafted warehouse and one carried ordinary sorter, updating cumulative spending to9 warehouses,31 ordinary sorters and192 belts. Normal storage supplied570 coil/board pairs. The output warehouse held341 blue matrices at save. Native stack readback identified board-supply throughput as a constraint. A justified finite increment reserves two fast sorters2012 for the existing board-input and finished-output2011→2012 upgrades. One recipe88 craft produces two units from two carried ordinary sorters and one motor. Normal motor manufacture requires three iron and one coil including its gear. Upgrade receipts retain the original action, both endpoints, live cargo/filter and debit/refund evidence.
 
 Preserve the original6000000-tick cumulative ceiling,4372309 spent ticks,1627691 remaining ticks,54000 return and3000 cleanup reserves, prior material/construction spending and historical unknown isolation. Existing standing maintenance/save/recovery authority continues. Formal publication retains its owner decision.
