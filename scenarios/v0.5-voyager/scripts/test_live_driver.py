@@ -9,6 +9,44 @@ from factory import Factory,resolve_refs
 from runtime import freeze,Runtime
 
 class LiveDriverTests(unittest.TestCase):
+ def test_first_native_navigation_forwards_the_funded_mode_and_requires_its_original_readback(self):
+  config = dict(firstOperation=dict(kind='move', useNativeNavigation=True,
+      arrivalTolerance=4, target=dict(x=140, y=200, z=0)))
+  live = Live(None)
+  live.runtime = type('Evidence', (), dict(config=config, put=lambda *_: None))()
+  live.ctx = dict(sessionId='synthetic-session', planetId=101)
+  before = dict(stateHash='synthetic-player', position=dict(x=0, y=200, z=0))
+  idle = dict(position=dict(x=140, y=200, z=0), movementState='Walk', speed=0,
+      nativePhysics=dict(groundContact=dict(checkSphereHit=True), currentOrderPresent=False,
+          queuedOrderCount=0, **{key: dict(x=0, y=0, z=0) for key in
+          ('velocity', 'walkRtsVelocity', 'driftRtsVelocity', 'walkManualVelocity', 'driftManualVelocity')}))
+  prepared = dict(prepared=True, commitAllowedNow=True, commitBlockers=[],
+      expectedStateHash='synthetic-plan', planToken='synthetic-token')
+  calls = []
+  live.player = lambda: before
+  def capture(tool, arguments):
+   calls.append((tool, arguments))
+   return prepared
+  live.call = capture
+  work = live.prepare_first_work({}, float('inf'))
+  self.assertEqual('spherewright_prepare_move', calls[0][0])
+  self.assertIs(True, calls[0][1]['useNativeNavigation'])
+  self.assertEqual(4, calls[0][1]['arrivalTolerance'])
+  live.player = lambda: idle
+  native = dict(evidenceVersion=1, planBindingHash='synthetic-plan', finalDistanceMetres=2,
+      **{key: True for key in ('nativeNavigationStarted', 'nativeFlyObserved',
+          'nativeArrivalObserved', 'groundedStopVerified', 'nativeNavigationReleased')})
+  result = dict(succeeded=True, actionId='synthetic-original', nativeSurfaceNavigationReadback=native)
+  self.assertTrue(live.verify_progress(work, result))
+  for key in ('nativeNavigationStarted', 'nativeFlyObserved', 'nativeArrivalObserved',
+      'groundedStopVerified', 'nativeNavigationReleased'):
+   with self.subTest(missing=key):
+    incomplete = dict(native)
+    incomplete.pop(key)
+    self.assertFalse(live.verify_progress(work, dict(result, nativeSurfaceNavigationReadback=incomplete)))
+  for change in (dict(planBindingHash='other-plan'), dict(finalDistanceMetres=5), dict(evidenceVersion=2)):
+   self.assertFalse(live.verify_progress(work, dict(result, nativeSurfaceNavigationReadback=dict(native, **change))))
+
  def test_expired_primary_backup_keeps_the_latest_owned_source_guard(self):
   from evidence import put,sha
   with tempfile.TemporaryDirectory() as folder:

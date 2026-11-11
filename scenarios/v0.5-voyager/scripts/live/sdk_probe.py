@@ -76,6 +76,9 @@ def main():
             cases.append(('spherewright_prepare_configure_building',dict(ctx,entityId=0,recipeId=0,
                 mode='dyson-structure',expectedFactoryStateHash=h,dysonStructure=dict(kind='node',layerId=1,
                     localPosition=dict(x=10000.,y=0.,z=0.),previewOnly=True))))
+        if 'useNativeNavigation' in schemas['spherewright_prepare_move']['properties']:
+            cases.append(('spherewright_prepare_move',dict(ctx,targetX=10000.,targetY=0.,targetZ=0.,
+                expectedPlayerStateHash=h,arrivalTolerance=4.,useNativeNavigation=True)))
         proof=[]
         for tool,args in cases:
             schema=schemas[tool];need(set(schema.get('required',[]))<=set(args),'sdk_required_field_missing')

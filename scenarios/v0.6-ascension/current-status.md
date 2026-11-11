@@ -1,5 +1,9 @@
 # Ascension current snapshot / Ascension活动快照
 
+2026-11-11。必要的同星球原生导航源码 `70fb6862b5355e0f9f50f1586c610c5fde1accd4` 已线性进入产品main，6486项准确源码回归、完整Native构建及[对应CI](https://github.com/Arcueid77/Spherewright/actions/runs/43009629159)通过。Lab固定依赖已采用。新模式沿 `PlayerNavigation.Navigate` 正常起飞、能耗、抵达和落地，绑定当前阈值、完整3600tick能源及900tick落地储备。调用端167项回归通过，并要求原方案的起飞/抵达/接地静止/释放回读。5个Plugin文件和224个MCP文件的同源开发组合资格通过。当前实装仍为df32bd78，游戏正常关闭，接下来沿2226项完整保护及125731766保存边界执行同源冷安装和当前存档正向验证。
+
+English. Native same-planet navigation source70fb6862 is on productmain and selected by Lab after6486 exact-source tests, full Native build and exact CI. It uses normal `PlayerNavigation.Navigate`, current thresholds and complete3600-tick energy funding with900 landing ticks.167 caller regressions passed and require original-plan flight/arrival/grounded-stop/release proof. The same-source development cohort qualified with5 Plugin files and224 MCP files. Installed source remainsdf32bd78 and the game is normally stopped at125731766 with2226 protected files. Continue through coherent cold installation and current-save positive acceptance.
+
 2026-11-11。最新生产窗口已正常保存退出，Primary=LastExit125731766，2226项完整保护核验，累计4642504/6000000tick及67833请求，返航54000/清理3000储备保留。正常存储取出200氢作为首实操在57.968秒通过，随后总氢库存补至400、正常取用200紫矩阵。两件高速分拣器正常制造并完成供板/出料2011→2012原生升级，原端点、筛选、货物和扣还保全；保存前蓝矩阵成品543。1504研究仍为3060哈希，13个完整蓝矩阵点数保留。
 
 赴石墨库存的普通步行多次遇到炼油厂/仓储实体，原生看门狗按原动作停止。已知失败原件和健康闲置回读均保留，未重放。最新角色在炼油厂行间，下一首操作包需从本轮不可变保存输入重新生成，旧200氢首操作位置已不适用。当前转入必要的普通移动脱困能力核对，先从29151原生 `PlayerMove_Walk`、`PlayerMove_Fly`、`PlayerController` 及既有0.5飞行控制路径核对正常输入/能耗/落地，按源码资格、准确CI及同源流程处理已证实缺口。继续科研/材料准备，合理用料授权保持。

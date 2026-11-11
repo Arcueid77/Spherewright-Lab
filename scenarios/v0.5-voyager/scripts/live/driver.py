@@ -379,7 +379,10 @@ class Live:
    return dict(action_kind='supply_mecha_warpers',tool='spherewright_commit_supply_mecha_warpers',prepared=q)
   if work.get('kind')=='move':
    p=self.player();self.first_before=p;target=work['target']
-   args=dict(self.ctx,targetX=target['x'],targetY=target['y'],targetZ=target['z'],arrivalTolerance=1.5,expectedPlayerStateHash=p['stateHash'])
+   tolerance=work.get('arrivalTolerance',1.5)
+   args=dict(self.ctx,targetX=target['x'],targetY=target['y'],targetZ=target['z'],arrivalTolerance=tolerance,expectedPlayerStateHash=p['stateHash'])
+   if work.get('useNativeNavigation') is True:
+    need(3<=tolerance<=5,'first_native_navigation_tolerance_invalid');args['useNativeNavigation']=True
    q=self.call('spherewright_prepare_move',args);need(q['prepared'] and q['commitAllowedNow'] and not q['commitBlockers'],'first_move_not_prepared')
    return dict(action_kind='move',tool='spherewright_commit_move',prepared=q)
   e=self.player() if mode in PLAYER_SETTING_MODES else self.entity(work['entityId']);self.first_before=e
@@ -457,6 +460,12 @@ class Live:
    moved=math.dist([self.first_before['position'][k] for k in 'xyz'],[e['position'][k] for k in 'xyz'])
    within=deadline is None or time.monotonic()<=deadline
    ok=r['succeeded'] and moved>1 and strict_native_player_idle(e) and within
+   if c.get('useNativeNavigation') is True:
+    native=r.get('nativeSurfaceNavigationReadback') or {}
+    ok=ok and native.get('evidenceVersion')==1 and all(native.get(k)is True for k in
+     ('nativeNavigationStarted','nativeFlyObserved','nativeArrivalObserved','groundedStopVerified','nativeNavigationReleased'))
+    ok=ok and bool(native.get('planBindingHash')) and native.get('planBindingHash')==w['prepared']['expectedStateHash']
+    ok=ok and type(native.get('finalDistanceMetres'))in(int,float) and native['finalDistanceMetres']<=c['arrivalTolerance']
    self.runtime.put('actual-progress.private.json',dict(verified=ok,actionId=r['actionId'],before=self.first_before,after=e,
     movedMetres=moved,originalStartupDeadlineRespected=within));return ok
   e=self.player() if mode in PLAYER_SETTING_MODES else self.entity(c['entityId'])
