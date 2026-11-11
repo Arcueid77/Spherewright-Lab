@@ -691,6 +691,24 @@ class LiveDriverTests(unittest.TestCase):
   self.assertTrue(ordinary_owned_resume_echo(verified,p))
   p['candidateGameTick']=199;self.assertFalse(ordinary_owned_resume_echo(verified,p))
 
+ def test_expired_ordinary_primary_requires_its_exact_native_confirmed_candidate(self):
+  c=dict(recoveryMode='reauthorize_expired_primary',sourceRole='primary',planetId=101,
+      sourceTick=200,expectedNativeVersion='synthetic-version')
+  p=dict(recoveryMode=c['recoveryMode'],expectedPlanetId=101,sourceGameVersion='synthetic-version',
+      targetGameVersion='synthetic-version',userConfirmationRequired=True,commitAllowedNow=False,
+      commitBlockers=[dict(code='USER_CONFIRMATION_REQUIRED')],additionalVoyagerGameTicks=0,
+      originalJourneyMaximumGameTicks=None,effectiveJourneyMaximumGameTicks=None,
+      candidateGameTick=200,minimumGameTick=200,exactEmbeddedIdentityVerified=True,
+      recoveryEvidenceVersion=2,confirmationDigest='synthetic-native-digest',
+      **{k:False for k in ('remotePrimaryRecoveryAuthorizationUsed','failedLandingRecoveryAuthorizationUsed',
+       'completedSavedLandingAdmissionUsed','opensSavedWorldOnly','previousAutomationRemainsStopped','newChargingProhibited')})
+  self.assertTrue(ordinary_owned_resume_echo(c,p))
+  for key,value in [('candidateGameTick',199),('minimumGameTick',199),('confirmationDigest',''),
+      ('recoveryEvidenceVersion',1),('userConfirmationRequired',False),('commitAllowedNow',True),
+      ('sourceGameVersion','other-version'),('opensSavedWorldOnly',True)]:
+   with self.subTest(key=key):self.assertFalse(ordinary_owned_resume_echo(c,dict(p,**{key:value})))
+  self.assertFalse(ordinary_owned_resume_echo(dict(c,sourceRole='lastExit'),p))
+
  def test_ordinary_home_build_uses_its_real_result_branch_and_never_refunds_a_postcheck_failure(self):
   for delta,valid in [(-2,True),(-1,False)]:
    a=Factory.__new__(Factory);a.ctx=dict(planetId=104);a.used={};a.refs={}

@@ -18,28 +18,26 @@
     "thunderstore": null
   },
   "installed": {
-    "sourceSha": "19cd5eb505ffd30f4832f3bfbf0ced9ddad4a889",
-    "productVersion": "0.5.0",
+    "sourceSha": "ee810a699b71db44bfe11ae1e4e71b9370f79353",
+    "productVersion": "0.6.0",
     "releaseTag": null,
     "native": {
       "version": "0.10.35.29151",
       "assemblySha256": "EF314425DADE51F529F184F07BE136CD3C2660A6A81515603C7226FBE7AB1D8C"
     },
     "packages": {
-      "manual": {
-        "file": "Spherewright-0.5.0-win-x64.zip",
-        "sha256": "1032AA3BC38E6B55415161B3FFBF88EE4FECA1B893B476C0D34D4AD9DFFF7BC3",
-        "size": 37584351
-      },
-      "thunderstore": {
-        "file": "Spherewright-0.5.0-thunderstore.zip",
-        "sha256": "A255103BA53DE5613DE303C4A7D46F1E1A5F47083B8F5909FFA75555F07B6031",
-        "size": 33305190
-      }
+      "manual": null,
+      "thunderstore": null
     },
-    "evidence": "releases/v0.5.0/stacking-review-delivery-2026-11-10.md",
+    "evidence": "scenarios/v0.6-ascension/current-status.md",
     "verification": "disk_verified",
-    "runtimeState": "not_running"
+    "runtimeState": "not_running",
+    "developmentArtifact": {
+      "kind": "plugin_mcp_directory",
+      "manifestSha256": "CDC884AF83C4A3CB563C9AA40859C3CEEE1093A6E86C766A119A0F4D17A69E22",
+      "pluginFiles": 5,
+      "mcpFiles": 224
+    }
   },
   "acceptance": {
     "spec": "v0.4.0",

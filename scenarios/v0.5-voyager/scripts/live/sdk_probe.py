@@ -46,6 +46,8 @@ def main():
             mode='enable-mecha-warper-auto-supply',expectedFactoryStateHash=h)))
         cases.append(('spherewright_prepare_resume_owned_game',dict(resumeToken='synthetic-offline-token',recoveryMode='default')))
         cases.append(('spherewright_prepare_resume_owned_game',dict(resumeToken='synthetic-offline-token',
+            recoveryMode='reauthorize_expired_primary')))
+        cases.append(('spherewright_prepare_resume_owned_game',dict(resumeToken='synthetic-offline-token',
             recoveryMode='open_saved_last_exit',minimumRecoveryGameTick=100,expectedRecoveryGameTick=100)))
         cases.append(('spherewright_prepare_supply_mecha_warpers',dict(sessionId=ctx['sessionId'],planetId=0,
             count=18,uiTopUp=True,expectedPlayerStateHash=h)))

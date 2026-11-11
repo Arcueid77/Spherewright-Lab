@@ -158,15 +158,22 @@ def resume_admission_echo(config,plan):
 def ordinary_owned_resume_echo(config,plan):
     """Ordinary home resume has different nullable/confirmation fields from remote recovery."""
     mode=config.get('recoveryMode');verified=mode=='verified_newer_lastexit'
-    if mode not in ('default','verified_newer_lastexit'):return False
+    reauthorizing=mode=='reauthorize_expired_primary'
+    if mode not in ('default','verified_newer_lastexit','reauthorize_expired_primary'):return False
     common=(plan.get('recoveryMode')==mode and plan.get('expectedPlanetId')==config['planetId']
         and plan.get('sourceGameVersion')==plan.get('targetGameVersion')==config['expectedNativeVersion']
-        and plan.get('userConfirmationRequired') is False and plan.get('commitAllowedNow') is True
-        and plan.get('commitBlockers')==[] and plan.get('additionalVoyagerGameTicks')==0
+        and plan.get('userConfirmationRequired') is reauthorizing and plan.get('commitAllowedNow') is (not reauthorizing)
+        and [row.get('code')for row in plan.get('commitBlockers',[])]==(['USER_CONFIRMATION_REQUIRED']if reauthorizing else [])
+        and plan.get('additionalVoyagerGameTicks')==0
         and plan.get('originalJourneyMaximumGameTicks') is None and plan.get('effectiveJourneyMaximumGameTicks') is None
         and all(plan.get(k) is False for k in ('remotePrimaryRecoveryAuthorizationUsed','failedLandingRecoveryAuthorizationUsed',
             'completedSavedLandingAdmissionUsed','opensSavedWorldOnly','previousAutomationRemainsStopped','newChargingProhibited')))
     if not common:return False
+    if reauthorizing:
+        return (config.get('sourceRole')=='primary'
+            and plan.get('candidateGameTick')==plan.get('minimumGameTick')==config['sourceTick']
+            and plan.get('exactEmbeddedIdentityVerified') is True
+            and plan.get('recoveryEvidenceVersion')==2 and bool(plan.get('confirmationDigest')))
     if verified:
         return (plan.get('candidateGameTick')==plan.get('minimumGameTick')==config['sourceTick']
             and plan.get('exactEmbeddedIdentityVerified') is True and plan.get('recoveryEvidenceVersion')==1)
