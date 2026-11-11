@@ -1,5 +1,7 @@
 # Spherewright-Lab working rules
 
+- Owner2026-11-11 explicitly said “只要是合理的，自己加就行，为啥都要我来批准？”. Apply the [Ascension resource autonomy grant](operations/standing-authority.md#current-ascension-resource-autonomy-2026-11-11--当前ascension用料自主授权) before older per-material approval clauses. Within completing0.6, derive and record reasonable finite research/material/construction increments from fresh Native facts and execute them autonomously. Preserve actual spending, Native safeguards and original-action isolation. / 所有者已授权0.6合理科研、材料及施工用料增量自行核算、设定有限上限并执行，旧逐项用料请批不再适用于本范围，保留原生门、实耗及原动作隔离。
+
 - Owner2026-11-10 explicitly approved the0.5 formal tag, GitHub Release and Thunderstore website submission. Apply the [current publication grant](operations/standing-authority.md#current-publication-grant-2026-11-10--当前正式发布授权) before older publication-pending wording. / 所有者已明确批准0.5正式标签、GitHub Release及Thunderstore网页提交，先适用当前发布授权。
 
 - Owner2026-11-10 approved the [one-Tesla/one-distributor increment](operations/standing-authority.md#current-flow-and-distributor-increment-2026-11-10--当前流转及配送器增量). The current task may use5 Tesla towers and1 new distributor, retaining the remaining approved ceilings. / 所有者已批准新增1电塔、1配送器，本轮电塔上限5、配送器新增1，其余已批限额保留。

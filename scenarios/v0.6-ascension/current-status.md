@@ -1,5 +1,11 @@
 # Ascension current snapshot / Ascension活动快照
 
+2026-11-11。所有者已进一步授权“只要是合理的，自己加就行，为啥都要我来批准？”，按[当前自主用料授权](../../operations/standing-authority.md#current-ascension-resource-autonomy-2026-11-11--当前ascension用料自主授权)自行核算、记录并执行0.6合理科研/材料/施工增量。完整配方和母星库存已证绿矩阵0、配方102未解锁，新增1705前置科研蓝/红/黄各1600，当前科研上限为蓝4200、红4200、黄3600、紫2000、绿2000。
+
+当前游戏已从下列保存边界再次恢复，58.5秒到实操，1504射线接收研究已选定，正在母星盘点及供料准备。母星76小仓、5大仓、3物流站、12研究站及57组装类设备的有界观察已完整返回，无后续分页。原一次未接受的25m只读路线预览因超过16m接口范围被拒绝，原件保留，已按15m准备新只读候选，未形成游戏动作。
+
+English. The owner now authorizes reasonable finite0.6 resource increments to be calculated, recorded and executed autonomously. The complete recipe/home-stock survey found zero green matrices and locked recipe102, so prerequisite1705 adds1600 each blue/red/yellow matrices. Current research ceilings are4200/4200/3600/2000/2000 blue/red/yellow/purple/green. The current game resumed from the saved boundary below and reached work in58.5 seconds. Receiver research1504 is selected. Complete bounded home observations cover76 small stores,5 large stores,3 stations,12 labs and57 assembler-kind devices. An out-of-range25m read-only walking preview was refused before any action and retained. A fresh15m candidate follows the actual16m interface limit.
+
 2026-11-11。当前owned存档已在df32bd78实装上完成正式恢复，68.11秒到真实普通移动。原生只读6°/8°闭合三角设计均计算完整，分别为210结构点/224细胞点和270结构点/440细胞点，当前已解锁纬度0°，最低需求分别5°/7°。世界拓扑、16根/47成员和完整背包保持。游戏正常保存退出，Primary=LastExit125461571，2218项完整保护通过，累计4372309/6000000tick、66467请求，返航54000及清理3000储备保留。
 
 所有者已明确“批准整案及科研用料”，按[准确增量](resource-increment.md)连续推进两项科研、正常制造、Caph II持续发射、正向节点/框架/壳面交付及接收电力。新增额度为科研蓝2600/红2600/黄紫绿各2000、火箭至多210/帆224，以及1接收站/1电塔。当前本增量实耗0，按新鲜原生资格及既有唯一writer流程执行。

@@ -1,5 +1,11 @@
 # Voyager standing execution authority / Voyager 持续执行授权
 
+## Current Ascension resource autonomy, 2026-11-11 / 当前Ascension用料自主授权
+
+The owner responded “只要是合理的，自己加就行，为啥都要我来批准？” to the concrete missing gravity-matrix prerequisite increment. Within completing0.6, the designated executor may autonomously derive, record and execute reasonable finite research, material and construction increments needed by the approved goal. This supersedes older requirements to obtain separate conversation approval for each such increment. Use fresh Native prerequisites, recipes, stock, costs and original-action evidence, record actual spending and retain the existing no-loss, one-writer, Native and reserve safeguards. The missing1705 gravity-matrix prerequisite adds1600 each blue/red/yellow matrices. Its bounded revised research ceilings are4200 blue,4200 red,3600 yellow,2000 purple and2000 green. Existing launch/build ceilings remain the current plan until another justified bounded increment is recorded.
+
+所有者针对缺失引力矩阵前置科研的准确增量明确回复“只要是合理的，自己加就行，为啥都要我来批准？”。在完成0.6范围内，指定执行者可按新鲜原生前置、配方、库存、成本及原动作证据，自主核算、记录并执行合理且有限的科研、材料及施工增量。旧逐项用料聊天审批要求在本范围内由本授权替代。保留实际累计消耗、无损、唯一writer、原生门及储备保护。补齐1705引力矩阵科研需蓝/红/黄各1600，科研上限因此更新为蓝4200、红4200、黄3600、紫2000、绿2000。现行发射及建筑上限继续作为当前方案，后续合理必要增量按同一授权另记有限额度执行。
+
 ## Current Ascension resource increment, 2026-11-11 / 当前Ascension用料增量
 
 The owner explicitly replied “批准整案及科研用料” to the [consolidated Ascension increment](../scenarios/v0.6-ascension/resource-increment.md). Research ceilings are2600 blue,2600 red and2000 each yellow/purple/green matrices for the first stress level1523 and receiver technology1504. Launch ceilings are210 carrier rockets and224 sails. New construction covers one receiver2208 and one Tesla tower2201. Existing stock and normal recipe-based manufacture may supply actual shortages. Reuse the Caph II manufacturing/launch site and fresh-check its exact geometry/costs before bounded execution. Preserve the6000000 cumulative tick ceiling, all prior spending,54000 return and3000 cleanup reserves and original-action/unknown isolation. Do not request this unchanged increment again.

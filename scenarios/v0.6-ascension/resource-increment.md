@@ -1,6 +1,8 @@
 # Ascension resource increment / Ascension用料增量
 
-2026-11-11。所有者明确回复“批准整案及科研用料”，批准以下准确科研、发射及两座建筑额度，并允许按原生配方正常取用/制造不足量。当前游戏及MCP已正常关闭，本次增量的科研/制造/建造消耗为0。
+2026-11-11。所有者明确回复“批准整案及科研用料”，批准以下准确科研、发射及两座建筑额度，并允许按原生配方正常取用/制造不足量。整案授权时游戏及MCP正常关闭，本次增量的科研/制造/建造消耗为0。
+
+随后所有者明确“只要是合理的，自己加就行，为啥都要我来批准？”，授权0.6合理必要用料增量自行核算、记录和执行。完整配方及母星库存调查确认绿矩阵库存0、配方102仍锁定，前置科技1705须额外蓝/红/黄各1600，其前置1303/1704均已解锁。按此直接授权将科研上限更新如下。当前已恢复游戏并选定1504射线接收科研，继续原生生产和库存核对。
 
 ## 原生依据
 
@@ -14,7 +16,8 @@
 | --- | --- |
 | 第一档戴森球应力系统1523 | 蓝/红/黄/紫/绿矩阵各2000 |
 | 射线接收站科技1504 | 蓝矩阵600、红矩阵600 |
-| 两项科研合计 | 蓝2600、红2600、黄2000、紫2000、绿2000 |
+| 引力矩阵配方科技1705 | 蓝矩阵1600、红矩阵1600、黄矩阵1600 |
+| 三项科研合计 | 蓝4200、红4200、黄3600、紫2000、绿2000 |
 | 持续结构发射及交付 | 至多210枚运载火箭 |
 | 持续帆发射及壳面交付 | 至多224片太阳帆 |
 | 接收与联网 | 1座射线接收站2208、1座电力感应塔2201 |
@@ -27,11 +30,11 @@
 
 ## English
 
-The owner explicitly approved the complete increment and research materials on2026-11-11. The ceilings below and normal recipe-based withdrawal/manufacture of shortages are authorized. The game and MCP are normally closed and this increment has spent zero research/manufacturing/construction materials. Designdf32bd78 reached actual ordinary work in68.11 seconds. Current Native latitude is0°. A complete read-only seven-step6° triangle at the observed11000 radius requires210 structure points,224 cells and5° latitude. The8° alternative requires270 points,440 cells and7°. Design,16 roots/47 members and the complete backpack were preserved.
+The owner explicitly approved the complete increment and research materials on2026-11-11. The ceilings below and normal recipe-based withdrawal/manufacture of shortages are authorized. At the original grant the game/MCP were normally closed and this increment had spent zero research/manufacturing/construction materials. Designdf32bd78 reached actual ordinary work in68.11 seconds. Current Native latitude is0°. A complete read-only seven-step6° triangle at the observed11000 radius requires210 structure points,224 cells and5° latitude. The8° alternative requires270 points,440 cells and7°. Design,16 roots/47 members and the complete backpack were preserved.
 
 Reuse the Caph II manufacturing/ejector/silo site. Its historically accepted receiving layer has radius8000 and one delivered point. Fresh on-site layer/device/order/material/cost checks select actual quantities within the ceilings above.
 
-The proposed increment covers only the first stress-research level plus receiver technology, totaling2600 blue,2600 red and2000 each yellow/purple/green matrices. Launch ceilings are210 carrier rockets and224 sails. New construction covers one receiver and one Tesla tower. Existing stock and normal recipe-based manufacture may supply the actual shortages. Retain cumulative output/use accounting and original actions.
+The owner subsequently authorized autonomous reasonable0.6 resource increments. The complete recipe/home-stock survey found no green matrices and locked recipe102. Its required1705 technology adds1600 each blue/red/yellow matrices, with1303/1704 already unlocked. Revised ceilings for the first stress level, receiver technology and gravity-matrix prerequisite are4200 blue,4200 red,3600 yellow,2000 purple and2000 green. Launch ceilings are210 carrier rockets and224 sails. New construction covers one receiver and one Tesla tower. Existing stock and normal recipe-based manufacture may supply actual shortages. Retain cumulative output/use accounting and original actions. The game has resumed and receiver research1504 is selected.
 
 Direct receiver inputs are20 steel,20 silicon,10 combiners,5 processors and20 super-magnetic rings. The tower needs2 iron and1 magnetic coil. The maximum rocket bill is420 Dyson components,840 deuterium rods and420 quantum chips. The maximum sail bill is112 graphene and112 combiners. Actual batches follow fresh demand and stock.
 
