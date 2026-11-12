@@ -1,12 +1,24 @@
 # Ascension resource increment / Ascension用料增量
 
+## 2026-11-13跨线与最终供氢连接 / Crossover and final hydrogen connections
+
+原生三层跨线及分段下降已正常完工，主线157带和北入口21带均保留实际消耗。交接128216375累计已用682带，有限上限设为720带、102普通/12高速、27塔。预留2极速将其累计上限从8增至10，沿现有2高速及2普通正常制造，准确新增直接用料为9铁及5线圈，含3齿轮、3电动机、1电磁涡轮及1批高速依赖。高速和极速最终用途由新鲜原生端点及流量核对确定。
+
+新增42带及2高速资本已正常制造，准确消耗45铁、1线圈和2普通，另两批42/30带分别正常消耗42/30铁。首批含2塔资本的原始4笔完成回执为28+56+6+4合计94铁，说明中先前96铁已据此更正。所有实际施工、正常返还及旧未知原件分别保留。
+
+现有尾带直接接物流站的双端绑定准备在创建前被原生范围门拒绝，调用端已恢复受支持组合并新增提前拒绝，101项驱动回归通过。后续采用独立入站段和同高转接。主网3新鲜容量1672006J/t、实供129231J/t、比例1，916的充电上限按正常配置从60kW调至1.2MW，实际消耗继续观察。现有单列只读7请求从写方上限扣留，199993+7维持全局200000。
+
+The Native level3 crossing/stepped descent normally completed, retaining157 main belts and21 northern inlet belts. Handoff128216375 carries682 placed belts. Finite ceilings are720 belts,102 ordinary/12 fast sorters and27 towers. Reserve two gradeIII sorters to raise their ceiling8→10. Normal dependencies reuse two fast/two ordinary sorters and need exactly nine iron/five coils, including three gears/three motors/one turbine/one fast-sorter batch. Fresh Native endpoints and flow determine placement.
+
+Another42-belt/two-fast capital batch normally consumed45 iron/one coil/two ordinary sorters. Further42/30-belt batches consumed42/30 iron. Four original terminals show28+56+6+4=94 iron for the initial two-tower batch, correcting the earlier96 description. Native rejected built-source/device dual binding before creation. The caller now rejects that unsupported combination before game calls, with101 driver tests passing. Use a separate inlet/same-height transfer. Fresh network3 capacity1672006J/t, served129231J/t and ratio1 support the normal916 charging setting60kW→1.2MW, with actual draw observed separately. Retain seven separate read-only requests and a199993 writer limit under global200000.
+
 ## 2026-11-13氢运输连接 / Hydrogen logistics connections
 
 新鲜原生切面显示氢仓3064满600，6座裂解厂氢输出58至59件并停工。现有PLS916空槽2、918空槽3和916的5架闲置物流机已核对。按合理用料自主授权复用这两站，预留100基础带、6普通分拣器及2电塔，有限累计上限调整为650带、102普通和27塔，保留504/96/24既耗及其余原账。
 
-复用背包20带和1塔，正常制造84带、6普通及2塔已完成，含28齿轮依赖的准确直接用料为96铁、6电路板及2线圈。正常现有仓已补取200铁和20板。连接及站点配置继续绑定新鲜原生条件，实际转运与持续消费分别验证。
+复用背包20带和1塔，正常制造84带、6普通及2塔已完成，含28齿轮依赖的准确直接用料为94铁、6电路板及2线圈。正常现有仓已补取200铁和20板。连接及站点配置继续绑定新鲜原生条件，实际转运与持续消费分别验证。
 
-Fresh Native cuts show store3064 full at600 hydrogen and six X-rays blocked by58..59 output items. Existing916 has free slot2/five idle drones and918 has free slot3. Under resource autonomy, reuse these stations with up to100 belts/six ordinary sorters/two towers. Cumulative ceilings become650/102/27, retaining504/96/24 spent and every prior account. Normal manufacture of84 belts/six sorters/two towers completed from96 iron/six boards/two coils, including28 gears and reusing20 belts/one tower. Each connection/configuration requires fresh Native admission. Actual delivery and sustained consumption remain separate validation work.
+Fresh Native cuts show store3064 full at600 hydrogen and six X-rays blocked by58..59 output items. Existing916 has free slot2/five idle drones and918 has free slot3. Under resource autonomy, reuse these stations with up to100 belts/six ordinary sorters/two towers. Cumulative ceilings become650/102/27, retaining504/96/24 spent and every prior account. Normal manufacture of84 belts/six sorters/two towers completed from94 iron/six boards/two coils, including28 gears and reusing20 belts/one tower. Each connection/configuration requires fresh Native admission. Actual delivery and sustained consumption remain separate validation work.
 
 ## 2026-11-12并行矩阵支撑资本 / Parallel matrix-support capital
 
