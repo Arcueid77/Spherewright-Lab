@@ -1,0 +1,5 @@
+# CommandDeck blue matrix run / CommandDeck蓝糖实跑
+
+2026-11-12. Selected Spherewright source `bc41b2804d61ed4157a1d4613be313f9dcfa6c52` passed exact CI43037037354. The same-source development Plugin/MCP cohort is cold-installed and metadata-qualified with75 tools and one embedded guide. CommandDeck adds an explicit owner-side launcher using its existing task coordinator and actual DSP embedding checks. Gameplay acceptance is pending. The owner requests an embedded game viewport and prohibits Computer Use. Pi uses the existing MiniMax-M3.1-Flash configuration. A separate fresh peaceful, non-sandbox test world preserves the earlier expired-credential test world and all backups. The target is60 blue matrices per minute sustained for60 game seconds.
+
+2026-11-12。固定Spherewright源码`bc41b2804d61ed4157a1d4613be313f9dcfa6c52`通过准确CI43037037354。同源开发Plugin/MCP已冷安装，75工具及1份嵌入指南完成元数据资格。CommandDeck新增显式所有者启动入口，复用现有任务协调器并检查DSP真实嵌入关系。实机产线验收待完成。所有者要求嵌入游戏画面，禁止Computer Use。Pi沿用现有MiniMax-M3.1-Flash配置。另建和平、非沙盒测试世界，保留此前凭证已过期的测试世界和全部备份。目标为蓝糖每分钟60，连续60游戏秒。
