@@ -79,13 +79,19 @@ def main():
         if 'useNativeNavigation' in schemas['spherewright_prepare_move']['properties']:
             cases.append(('spherewright_prepare_move',dict(ctx,targetX=10000.,targetY=0.,targetZ=0.,
                 expectedPlayerStateHash=h,arrivalTolerance=4.,useNativeNavigation=True)))
+        if 'researchPaused' in schemas['spherewright_prepare_select_research']['properties']:
+            for paused in (True,False):
+                cases.append(('spherewright_prepare_select_research',dict(ctx,techId=1001,
+                    expectedSelectionStateHash=h,researchPaused=paused)))
         proof=[]
         for tool,args in cases:
             schema=schemas[tool];need(set(schema.get('required',[]))<=set(args),'sdk_required_field_missing')
             need(set(args)<=set(schema['properties']),'sdk_unknown_field')
             r,bad=c.call(tool,args);code=(r.get('error') or {}).get('code')
             need(code in ('BRIDGE_UNAVAILABLE','BRIDGE_NOT_READY'),'sdk_arguments_not_admitted:'+tool+':'+str(code))
-            proof.append(dict(tool=tool,argumentsAdmitted=True,bridgeUnavailableAsExpected=True))
+            row=dict(tool=tool,argumentsAdmitted=True,bridgeUnavailableAsExpected=True)
+            if 'researchPaused' in args:row['researchPaused']=args['researchPaused']
+            proof.append(row)
         r,bad=c.call('spherewright_prepare_transfer',dict(ctx,direction='Production-Reset-To-Player',storageEntityId=1,itemId=0,count=0,expectedPlayerStateHash=h,expectedStorageStateHash=h))
         need(bad and (r.get('error') or {}).get('code')=='INVALID_REQUEST','actual_sdk_transfer_case_contract_changed')
         put(out/'result.private.json',dict(passed=True,cases=proof,exactEnumCaseRejected=True,gameLaunches=0,gameCommits=0))

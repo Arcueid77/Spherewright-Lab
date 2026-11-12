@@ -1,6 +1,6 @@
 # Ascension current snapshot / Ascension活动快照
 
-2026-11-12。游戏已正常关闭，Primary/LastExit均为127294538，2328项完整保护文件核验通过。累计6205276tick与90993请求已合并保留。原返回主菜单动作在完整保存后进入超时未知终态，公开MCP随后两次确认世界已卸载，再正常关闭进程并备份，原未知回执保留。所选源码现为cd67d5f0，已通过6588回归、准确29151构建和CI，5 Plugin/224 MCP同源开发载荷及75工具资格通过。实装仍14c7d66c且未运行，下一步进行冷安装及科研暂停/恢复实机保全验证。
+2026-11-12。游戏已正常关闭，Primary/LastExit均为127294538，2328项完整保护文件核验通过。累计6205276tick与90993请求已合并保留。原返回主菜单动作在完整保存后进入超时未知终态，公开MCP随后两次确认世界已卸载，再正常关闭进程并备份，原未知回执保留。所选源码现为cd67d5f0，已通过6588回归、准确29151构建和CI，5 Plugin/224 MCP同源开发载荷及75工具资格通过。cd67d5f0已完成1次官方原子安装，实盘5/224字节与修订已验证，实际安装SDK通过43例，包含暂停true/恢复false。程序尚未启动，下一步进行科研暂停/恢复实机保全验证。
 
 最新完整关停保护绑定127294538及2328项文件，累计6205276/9000000tick，保留54000返航及3000清理。前一冷启动时窗已正常关闭，所有实耗、失败原件和未知动作继续保留。按所有者运行自主授权，下一次同存档源码更新使用有限48小时冷时窗，启动至真实操作继续遵守300秒硬门和120秒目标。
 
@@ -20,13 +20,13 @@
 
 ## 源码、安装与继续边界
 
-所选产品源码 `cd67d5f0a768ffc55a5cafcfab07c562c3fb3a88`，0.6.0，通过6588准确源码回归、Native构建、双语文档及准确CI。新增可选`researchPaused`，经原生PauseTechQueue/ResumeTechQueue切换，保全队列、进度、库存及分数科研点，Voyager空闲证明识别原生暂停及零随身所需物品。两种开发MCP入口的75工具/1资源与内嵌指南、SDK/PE资格通过，开发目录清单 `49F2392ACFF9249A48D475B0B4806E4E51B968384CAC0A156573833450D774DD`，5/224安装载荷索引 `0A7B98409F41D0F86542DFB7507A0C1454377C11B25874199288257B19A98E9A`。实装仍为14c7d66c、已正常关闭，新能力的安装及实机验收待续。 [产品CI](https://github.com/Arcueid77/Spherewright/actions/runs/43221110869)
+所选产品源码 `cd67d5f0a768ffc55a5cafcfab07c562c3fb3a88`，0.6.0，通过6588准确源码回归、Native构建、双语文档及准确CI。新增可选`researchPaused`，经原生PauseTechQueue/ResumeTechQueue切换，保全队列、进度、库存及分数科研点，Voyager空闲证明识别原生暂停及零随身所需物品。两种开发MCP入口的75工具/1资源与内嵌指南、SDK/PE资格通过，开发目录清单 `49F2392ACFF9249A48D475B0B4806E4E51B968384CAC0A156573833450D774DD`，5/224安装载荷索引 `0A7B98409F41D0F86542DFB7507A0C1454377C11B25874199288257B19A98E9A`。实装现为cd67d5f0，已通过1次官方原子安装、实盘及43例SDK接口准入。程序未运行，新能力实机验收待续。 [产品CI](https://github.com/Arcueid77/Spherewright/actions/runs/43221110869)
 
 调用端48小时启动容量修正7a95eb21通过206本地回归及准确CI43183645171，原24小时拒绝发生于进程创建前。本轮低速commit登记前分类和fresh间隔通过208本地回归及准确CI43195714901。 [48小时调用端CI](https://github.com/Arcueid77/Spherewright-Lab/actions/runs/43183645171) · [拒绝分类CI](https://github.com/Arcueid77/Spherewright-Lab/actions/runs/43195714901)
 
 全部运行及外部观察请求已在关停边界合并为90993，全局上限200000。当前累计施工实耗为基础带467、普通78/高速8/极速7分拣器、电塔22、油井1、风机3、精炼3，其余原账保留。普通90/高速8/极速8、基础带550及电塔23上限保持。新增两条输出桥另正常制造2个普通分拣器，仍在现行施工上限内。
 
-1. 冷安装所选cd67d5f0同源载荷，先准备完备保护与首操作包，再正常启动同owned Primary并在300秒内达到真实操作。原未知主菜单动作保持隔离及不重放。
+1. 所选cd67d5f0同源载荷已冷安装，继续准备完备保护与首操作包，再正常启动同owned Primary并在300秒内达到真实操作。原未知主菜单动作保持隔离及不重放。
 2. 实机核对科研暂停/恢复的队列、进度和矩阵点数保全，补齐三新精炼及完整矩阵供料。应力科研仍余1873份五色，新暂停能力允许保留缓存提前开展Caph II建设，后续正常恢复科研。
 3. Caph主网2实际发电0，准确站点2电量0且未接电。到场先核实燃料与拓扑、恢复实际供电。新鲜核对6度闭壳设计210结构点/224细胞点，完成当地制造、持续发射、真实交付、闭壳及接收器持续非零电力。
 4. 正常保存、完整关停保护及冷恢复后复核设计、进度、设备和持续电力，最后生成同源手动/Thunderstore交审双包。 [实施与验收](implementation-plan.md)
@@ -35,7 +35,7 @@
 
 The game normally closed with Primary/LastExit127294538 and2328 verified protected files. Preserve6205276 cumulative ticks,90993 merged RPCs, the9000000/200000 ceilings and54000/3000 reserves. The return-to-menu original remains unknown after its confirmed complete save. Subsequent public MCP reads proved the world unloaded, followed by normal application close and full backup. The next finite48-hour source-update window follows owner runtime autonomy and retains the300-second startup-to-work gate.
 
-Selected sourcecd67d5f0 passed6588 exact-source tests, Native29151 build and exactCI43221110869. Native pause/resume uses the ordinary history business methods, preserving the queue/progress/materials and fractional research points. Voyager observes a normally paused queue with no carried required inputs. Both development MCP entry points passed75-tool/one-resource, embedded-guide and SDK/PE checks. The development manifest is49F2392ACFF9249A48D475B0B4806E4E51B968384CAC0A156573833450D774DD and five Plugin/224 MCP files bind cohort index0A7B98409F41D0F86542DFB7507A0C1454377C11B25874199288257B19A98E9A. Installed14c7d66c is stopped. New-source installation and live acceptance remain pending.
+Selected sourcecd67d5f0 passed6588 exact-source tests, Native29151 build and exactCI43221110869. Native pause/resume uses the ordinary history business methods, preserving the queue/progress/materials and fractional research points. Voyager observes a normally paused queue with no carried required inputs. Both development MCP entry points passed75-tool/one-resource, embedded-guide and SDK/PE checks. The development manifest is49F2392ACFF9249A48D475B0B4806E4E51B968384CAC0A156573833450D774DD and five Plugin/224 MCP files bind cohort index0A7B98409F41D0F86542DFB7507A0C1454377C11B25874199288257B19A98E9A. Installedcd67d5f0 passed one official atomic transaction, physical five/224-file verification and43 actual SDK admission cases including pause/resume. The game is stopped and live acceptance remains pending.
 
 Oil extractor7075/three winds/two towers, seven outlet/145 raised belts and both end sorters normally completed with full service. The new path held two, later43 crude items. A fresh215-object directed trace links its legacy destination to basic refinery707. Actual final insertion and sustained output need follow-up. New basic7235/two X-ray7236/7237 refineries normally completed with recipes16/58/58 and full network3 power. Native collision/terrain observations screened579 objects/45 points before individual full Native construction. Two five-belt basic-product bridges and filtered legacy relays completed. Core input/output connections remain pending. Retain the original failed prepares and the corrected sequence11 Walk/passive-drift flag misuse.
 
@@ -43,6 +43,10 @@ Stress1523 remains22860/360000, leaving1873 sets. Whole mecha buffers hold76 blu
 
 Current charged construction includes467 belts,78 ordinary/eight fast/seven gradeIII sorters,22 towers, one oil extractor/three winds/three refineries. Preserve the90/eight/eight sorter,550-belt and23-tower caps and other inherited spending. All completed external-reader costs are merged in90993 RPCs. Current caller source208-test/exact-CI qualification remains intact.
 
-Cold-install the selected source from the complete backup and prepare first work before launch. Prove live pause/resume conservation, finish supply and parallel Caph construction, then resume normal research. Fresh-check all shell costs, complete manufacture/launch/delivery, sustained receiver electricity and final cold continuation before coherent manual/Thunderstore review archives. Issue #5 remains the open wind-turbine dismantling request. Formal0.6 publication remains outside the current grant.
+The selected source is cold-installed. Prepare first work from the complete backup before launch. Prove live pause/resume conservation, finish supply and parallel Caph construction, then resume normal research. Fresh-check all shell costs, complete manufacture/launch/delivery, sustained receiver electricity and final cold continuation before coherent manual/Thunderstore review archives. Issue #5 remains the open wind-turbine dismantling request. Formal0.6 publication remains outside the current grant.
 
 [前次快照 / Previous snapshot](https://github.com/Arcueid77/Spherewright-Lab/blob/f61ad5cf4761ed9b4b328404980a57ef6e0c77a1/scenarios/v0.6-ascension/current-status.md) · [持续授权 / Standing authority](../../operations/standing-authority.md)
+
+安装环境修复已另立私密回执。141组已完成旧安装的MCP备份已归回双端原收据记录位置。MCP载荷移至标准短目录，原应用私有目录入口以同目录联接保持，旧载荷字节迁移后核验通过。两次安装前拒绝分别保留，成功原子事务为1次。
+
+English. Private repair receipts retain141 completed archive peers restored to their recorded paths and the MCP payload migration to its standard short directory. A directory junction preserves the prior entry point, with prior payload bytes verified after migration. Two pre-transaction refusals remain archived and the successful atomic transaction count is one.
