@@ -138,7 +138,12 @@ class Live:
   self.runtime.put(role+'-intent.private.json',args);self.active='unresolved_submission:'+role
   try: accepted=self.call(tool,args)
   except ToolRefused as e:
-   if e.error.get('code') in ('STALE_STATE','INVALID_REQUEST','USER_CONFIRMATION_REQUIRED','WRITES_DISABLED'):
+   # Native navigation revalidates this exact inspection before registering
+   # either an action or its idempotency key.
+   navigation_inspection_refused=(tool=='spherewright_commit_move'
+    and e.error.get('code')=='ACTION_REJECTED' and e.error.get('retryable') is True
+    and e.error.get('message')=='native_navigation_recent_low_speed_inspection_required')
+   if e.error.get('code') in ('STALE_STATE','INVALID_REQUEST','USER_CONFIRMATION_REQUIRED','WRITES_DISABLED') or navigation_inspection_refused:
     self.active=None;raise NativePreacceptanceRefusal(tool,e.error)
    raise
   self.runtime.put(role+'-accepted.private.json',accepted)

@@ -709,9 +709,38 @@ class LiveDriverTests(unittest.TestCase):
     raise NativePreacceptanceRefusal(captured['tool'],captured['error'])
    return dict(terminal=True,state='succeeded',actionId='new-original')
   a.native_operation_once=once
-  with patch('factory.time.sleep'):r=a.native_operation(dict(role='dose',freshStaleMaximumSeconds=5))
+  with patch('factory.time.sleep') as sleep:r=a.native_operation(dict(role='dose',freshStaleMaximumSeconds=5))
   self.assertEqual(['dose','dose-fresh-01'],seen);self.assertEqual([True],health)
+  sleep.assert_called_once_with(2)
   self.assertFalse(receipts[0][1]['actionAccepted']);self.assertEqual('new-original',r['actionId'])
+
+ def test_native_low_speed_commit_refusal_clears_only_its_unaccepted_submission(self):
+  detail=dict(code='ACTION_REJECTED',retryable=True,message='native_navigation_recent_low_speed_inspection_required')
+  a=Live.__new__(Live);a.active=None;a.runtime=type('Evidence',(),dict(put=lambda *_:None))()
+  def call(tool,args):raise ToolRefused(tool,detail)
+  a.call=call
+  with self.assertRaises(NativePreacceptanceRefusal):a.commit('nav','spherewright_commit_move',{})
+  self.assertIsNone(a.active)
+  detail['message']='native_navigation_other_failure'
+  with self.assertRaises(ToolRefused):a.commit('other','spherewright_commit_move',{})
+  self.assertEqual('unresolved_submission:other',a.active)
+
+ def test_navigation_reprepares_after_its_classified_low_speed_commit_refusal(self):
+  from unittest.mock import patch
+  a=Factory.__new__(Factory);a.active=None;seen=[];receipts=[]
+  a.runtime=type('Evidence',(),dict(put=lambda _,name,value:receipts.append((name,value))))();a.state=lambda:None
+  def once(step,commit_requested):
+   seen.append(step['role'])
+   if len(seen)==1:
+    raise NativePreacceptanceRefusal('spherewright_commit_move',dict(code='ACTION_REJECTED',retryable=True,
+     message='native_navigation_recent_low_speed_inspection_required'))
+   return dict(terminal=True,actionId='one-accepted-navigation')
+  a.native_operation_once=once
+  with patch('factory.time.sleep'):
+   result=a.native_operation(dict(role='nav',prepareTool='spherewright_prepare_move',
+    arguments=dict(useNativeNavigation=True),freshStaleMaximumSeconds=60))
+  self.assertEqual(['nav','nav-fresh-01'],seen)
+  self.assertFalse(receipts[0][1]['actionAccepted']);self.assertEqual('one-accepted-navigation',result['actionId'])
 
  def test_native_navigation_reobserves_only_its_unaccepted_low_speed_refusal(self):
   from unittest.mock import patch

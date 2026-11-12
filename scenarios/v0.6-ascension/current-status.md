@@ -1,47 +1,52 @@
 # Ascension current snapshot / Ascension活动快照
 
-2026-11-12。当前owned游戏持续运行，所选、实装及实际加载源码均为14c7d66c。并行施工正在正常交接，ore-crossing-live已正常EOF，下一调用器为parallel-industry-live，游戏进程沿用，原冷启动时钟保留。资本保存切面127165321对应累计6076059tick。有限累计上限900万，54000返航及3000清理储备持续保留，本次冷启动起的有限墙钟记录扩为172800秒。
+2026-11-12。原owned游戏进程持续运行，所选、实装及实际加载源码均为14c7d66c。当前glass-fast-live调用器已正常EOF，最后一次导航commit的准确低速检查拒绝发生于原生动作及幂等登记前，独立原回执和源码证明已保留。新鲜公开观察确认owned、可写、无隔离及无原生订单，下一调用器oil-capital-live续接剩余取料。调用端分类修正及两秒fresh间隔已通过208项离线回归，准确源码CI待完结。
 
-最近普通保存动作在127165321成功。最近关停后完整保护仍绑定Primary/LastExit127035116及2278项文件，该边界累计5945854tick。后续实耗继续按原游戏tick累计，新关停完整备份待本阶段收尾。
+最近普通保存127199294对应累计6100032tick。最近关停完整保护仍绑定Primary/LastExit127035116及2278项文件，该边界累计5945854tick。当前有限累计上限900万，保留54000返航及3000清理，原冷启动起的有限墙钟172800秒，实际截止2026-11-14T03:29:04Z。游戏、原时钟及全部实耗持续保留。
 
-## 当前实机结果
+## 实际结果
 
-- 应力科研1523已达到4860/360000，尚余1973份五色矩阵需求。本轮新增15红已原生消费，100个新产绿已正常进入机甲科研缓存。最近明确切面为蓝176、黄1973、紫173及绿95整件等效科研点，红缓存0。实物、科研点及实际消费分别记账。
-- 五层引力矩阵工厂已完成原生建造、供电和首批新增入仓验证。首两批正常投料合计90量子/90透镜，对应180绿。已有120个工厂绿正常取入机甲。另取30量子及20透镜，第三批20/20正常投料已完成，对应累计220绿。基础铁料阶段的正常资本制造已完成，资本备齐切面回读40带、8普通分拣器、1仓、2塔、2矿机及3熔炉，新矿及出矿接力已完工并开始实存供料。
-- 卡西米尔供料仓新增200钛晶石和400石墨烯。钛化玻璃仓新增400钛块，玻璃线新增1000石矿，碰撞器供料仓新增400铁。均有原转移终态。处理器、水和后续产物仍需连续补充与产能平衡。
-- 基础电路板和处理器停产链已追到原铁矿输入短缺。新矿机覆盖8矿点，已通过两座接线塔接入主网3，第三座塔覆盖出矿接力，矿机和接力均为完整供电。新仓从原生空仓起点实际捕获11铁矿，10件预声明门槛通过，首批400矿已送入仓28，并通过正常入料接回旧274→282→17→20链，原铁熔炉恢复工作，10秒原生切面已记录铁8件和电路板4件实际产出。旧带1709由独立短带和正常分拣器跨越，原路径保持。 [阶段用料](resource-increment.md)
-- 首次实际工作在268.125秒通过启动门，正常补入8燃料。前次300.656秒超时和数量拒绝原件保留。运行中本次附接的正常导航在78tick完成原生Fly、地表投影抵达及任务释放，随后观察到Walk及20透镜取料成功。
-- 水面低速Drift普通移动及后续8矿点建矿已经通过，结束时仍曾观察到Drift，随后自然转为Walk。先前要求先Walk的等待过严，已改用当前存档的普通被动漂移续移路径。原建筑阻挡、233米飞行门槛拒绝、低速拒绝及严格Walk等待失败原件保留。调用端对准确可重试低速准备拒绝的有限重新观察通过205项离线回归、源码锁、证据核验及准确CI。 [调用端CI](https://github.com/Arcueid77/Spherewright-Lab/actions/runs/43165778859)
-- Issue #5已重新读取，仍为OPEN且无评论。当前产品拆除白名单覆盖矿机、分拣器、限定空仓和基础带头，风机仍需补单台原生拆除、电网影响预览、回收和未触及拓扑核验。 [Issue #5](https://github.com/Arcueid77/Spherewright/issues/5)
+- 应力科研1523已达到13860/360000，尚余1923份五色矩阵需求。新增50红及100绿正常取入后已实际消费50份五色矩阵。当前已观察机甲整件等效点缓存为蓝126、黄1923、紫123、绿145，红0。原生实物、科研点及实际消费分别记账。
+- 原五层绿矩阵三批110量子/110透镜正常投料对应220绿，已正常取走全部220个工厂绿。后续完整2000绿科研需求仍待连续生产。
+- 6座新MkII、3小仓及2电塔已正常制造并原生完工，原电路板台36正常升级MkII。实际分配为2处理器、2位面过滤器、1卡西米尔及1电路板。新处理器共享仓从空仓捕获5件，后续回读22件。新电路板仓从空仓捕获10件。新增位面共享仓已实际捕获6个过滤器，预声明5件门槛通过。各设备实际主网3完整供电，卡西米尔机尚待新原料正向生产验证。
+- 卡西米尔北机的额外高速输入按原生回收后，空出合规输出端点，保留极速输入和正常输出。当前Native非零初始筛选支持2011/2012，极速输入采用0初始筛选及专用/配方需求路径。当前升级策略支持普通→高速及制造台家族，极速升级的明确未接受拒绝保留，已制极速物品通过正常新建使用。
+- 新铁矿覆盖8节点，出矿/跨线/入仓链已在满功率主网3验证。首批400及第二批600铁矿已正常送入原仓28。新增高速入料接回274→282→17→20原输送链，原铁熔炉恢复，磁铁入料已接回并升级，原生10秒切面记录铁8件、电路板4件产出。282及24已正常升级高速。594绑定1101，793继续使用1003。旧带1709保持原路径。
+- 钛化玻璃仓补200水后，6927/6929原输入已正常升级高速。100卡西米尔及20钛化玻璃已正常投入新位面设备并形成上述6件实存。后续水、石矿、钛块及科研供料继续沿实际库存补充。
+- 当前氢线10秒Native切面为144/min产出及138/min消耗，原油66/min产出及72/min消耗。该短切面不代表稳定预测。两处旧油节点538/540均为2500，未采油点542为75124。新油源/基本精炼的有限支撑方案已记录，尚未施工。 [用料记录](resource-increment.md)
+- 水面Drift普通续移、后续建矿及自然转Walk已通过。先前要求先Walk的等待过严，已改用普通被动漂移续移。所有受阻移动、未接受准备/提交和已完成前缀均保留原件，accepted/unknown原动作继续单独核销。
+- Issue #5已读并核对，当前风机拆除仍需单台原生拆除、电网影响预览、回收及未触及拓扑核验。 [Issue #5](https://github.com/Arcueid77/Spherewright/issues/5)
 
-## 源码和执行边界
+## 源码、安装与继续边界
 
-产品源码为 `14c7d66cda64d40c201577313740be05e6918479`，版本0.6.0。准确Native构建、6559项产品回归及源码CI通过。实装清单SHA-256为 `C1A1D058290A683529DDFD8D9C56A4E49EFD7576AEE536CB37CC68D02D90DCEC`，5项Plugin文件及224项MCP文件已核，实际75工具SDK已用于本轮方案完整准入。原安装事务及外层超时保全记录持续保留。 [产品CI](https://github.com/Arcueid77/Spherewright/actions/runs/43098686696)
+产品源码 `14c7d66cda64d40c201577313740be05e6918479`，0.6.0，通过6559产品回归、准确Native构建及对应CI。实装5 Plugin/224 MCP文件清单为 `C1A1D058290A683529DDFD8D9C56A4E49EFD7576AEE536CB37CC68D02D90DCEC`，实际75工具SDK完整生产入口准入通过。原安装事务及超时保全原件保留。 [产品CI](https://github.com/Arcueid77/Spherewright/actions/runs/43098686696)
 
-下一调用器采用199976请求上限，另保留24次已完成只读观察，合计受200000全局上限约束，最终边界统一合并实际账目。标准输出/错误流额度为512MiB/32MiB。并行扩容已正常备齐6MkII、3仓、2塔及分拣器，原电路板台已升级MkII。有限施工上限为矿机2、熔炉6、小仓21、普通分拣器80、电塔20、基础带350、高速分拣器8及极速分拣器6。新增极速分拣器以原生无初始筛选模式接入专用铁矿线，原生非零初始筛选当前支持2011/2012。其余额度沿用。全部既耗、原动作和隔离记录持续保留。
+调用端48小时启动容量修正7a95eb21通过206本地回归及准确CI43183645171，原24小时拒绝发生于进程创建前。本轮低速commit登记前分类和fresh间隔新增208本地回归通过，准确CI待完结。 [48小时调用端CI](https://github.com/Arcueid77/Spherewright-Lab/actions/runs/43183645171)
 
-## 继续顺序
+已完成外部只读观察51请求单列保留，下一写方上限199949，全局200000，最终保存边界合并真实计数。当前并行施工额度为矿机2、熔炉6、MkII14、小仓21、电塔20、普通80/高速8/极速6分拣器及350基础带。新油源方案须在其准确有限增量输入及Native几何/成本上执行。
 
-1. 启动器48小时容量检查修正后，206项离线回归及准确源码CI完结，再接管原游戏，先完成一组处理器设备的原生几何/实际流转验证，展开3位面/2处理器/1电路板并行设备。594已绑定1101，793保留1003，原铁料和磁铁入料已接通。
-2. 按剩余1973份五色科研需求推进生产与实际消费，完成1523。随后在Caph II重新核对6度闭壳设计的210结构点/224细胞点准确成本及现有库存，连续完成当地制造、发射和真实交付。
-3. 建造接收器并绑定实际电网，按预声明游戏tick跨度及最大采样间隔验收持续非零实际电力。正常保存、冷恢复后复核设计、进度、设备及持续电力，再生成最终同源手动/Thunderstore双包。 [实施与验收](implementation-plan.md)
+1. 准确CI完成后，用oil-capital-live从已明确未接受导航的后缀续接铁料/氢取料，保留已经取得的50电路板、80玻璃、50钢及100线圈。原材料及原动作保持账目。
+2. 补齐氢/原油、钛化玻璃、处理器、粒子宽带及各矩阵的完整连续供料，完成剩余1923份五色科研。当前Voyager要求空机甲科研缓冲及限定工厂科研元数据，先完成1523再做Caph航段。
+3. Caph只读统计显示主网2实际发电0、站点电量0，到场先恢复实际供电。重新核对6度闭壳设计210结构点/224细胞点的准确成本及现有库存，完成当地制造、持续发射、真实交付、闭壳及接收器持续非零电力。
+4. 正常保存、完整关停保护及冷恢复后复核设计、进度、设备和持续电力，最后生成同源手动/Thunderstore交审双包。 [实施与验收](implementation-plan.md)
 
 ## English
 
-The owned game continues on selected, installed and loaded14c7d66c. The caller is handing normally from closed ore-crossing-live to parallel-industry-live while preserving the game and original cold-launch clock. Capital save127165321 corresponds to6076059 cumulative spent ticks. The9000000 ceiling retains54000 return/3000 cleanup. The finite wall record is172800 seconds from that same cold launch.
+The original owned game continues on selected, installed and loaded14c7d66c. glass-fast-live closed normally after an exact Native navigation low-speed commit rejection. Verified Native source returns this error before action/idempotency registration. Original receipts remain intact. Fresh public observations prove the owned writable session, no quarantine and no Native order. The next oil-capital-live caller resumes the unaccepted suffix. The classification and two-second fresh observation intervals passed208 local tests, with exact CI pending.
 
-The ordinary save completed at127165321. The latest complete stopped-process protection still binds primary/LastExit127035116 and2278 files, with5945854 spent at that boundary. Later live spending remains cumulative. A new complete stopped backup follows stage cleanup.
+Latest ordinary save127199294 corresponds to6100032 cumulative spent ticks. Complete stopped protection remains primary/LastExit127035116 and2278 files with5945854 spent at that cut. Preserve9000000 cumulative ticks,54000 return/3000 cleanup and172800 finite wall seconds from the original cold launch, ending2026-11-14T03:29:04Z.
 
-Stress research1523 reached4860/360000, leaving1973 of each matrix color. Fifteen additional red cubes were normally consumed. One hundred newly produced green cubes entered the mecha point buffer. The latest explicit whole-equivalent buffers hold176 blue,1973 yellow,173 purple and95 green, with zero red. Physical items, research points and actual consumption retain distinct accounting.
+Stress1523 reached13860/360000, leaving1923 of each color. Fifty additional red and100 green cubes entered normal research. Fifty sets were actually consumed. Observed whole-equivalent mecha buffers hold126 blue,1923 yellow,123 purple and145 green, with zero red. The original five-layer green factory's110/110 feed funded220 normally produced greens, all withdrawn. Complete green research production remains pending.
 
-The five-layer green factory passed normal construction, power and first new stored-output proof. The first two feeds total90 quantum/90 lenses and fund180 greens.120 factory greens were normally withdrawn. Another30 quantum/20 lenses were acquired. The third20/20 feed completed and cumulative feeds fund220 greens. Normal iron-stage capital manufacture completed, with40 belts, eight ordinary sorters, one store, two towers, two miners and three smelters observed in the backpack. The new eight-vein miner completed after a successful ordinary passive-drift move. Native terminal receipts also preserve200 titanium crystals/400 graphene into Casimir supply,400 titanium into titanium glass,1000 stone into glass and400 iron into collider supply.
+All six additional MkII machines, three stores and two towers normally completed. The original board machine upgraded to MkII. Actual allocation is two processor/two plane-filter/one Casimir/one board machine. The new processor store passed five products from zero, later holding22. The board store passed ten from zero. The plane store passed its five-product gate with six physical filters. All have full main-network3 power. The new Casimir producer still needs its raw-material positive proof.
 
-Board/processor stoppage traces to missing original iron-ore input. The complete84-node iron survey and exact existing connections are retained. The bounded support stage reserves one miner, three smelters, one store, eight ordinary sorters, two towers and40 belts. New capital costs35 iron,11 boards, six bricks and three coils. Parallel-stage ceilings are2 miners,6 smelters,21 stores,80 ordinary sorters,20 towers,350 belts,8 fast sorters and6 gradeIII sorters. The new mine and relays have full power on main network3. A normally empty depot captured11 real iron ore, passing the predeclared ten-item gate. The first400 ore reached store28 and the original274→282→17→20 chain. The original iron smelter resumed, with eight iron/four boards produced in a Native ten-second cut. A separate short belt and normal sorters preserve legacy belt1709. The gradeIII pair uses Native unfiltered initialization on the dedicated iron-ore line. Nonzero initial filters currently support2011/2012. Existing allowances and actual spending continue.
+A normally recovered extra Casimir fast input freed a compliant output. Initial nonzero filters support2011/2012, and gradeIII uses normal zero initialization. GradeIII upgrade requests were explicitly rejected by the current supported-pair policy. Manufactured gradeIII items were used through new construction. Retain all original refusals and settled prefixes.
 
-The startup gate passed at268.125 seconds with eight normally loaded fuel rods, retaining the earlier300.656-second miss and exact-count refusals. This attachment's78-tick navigation proved Native Fly, projected arrival and task release, followed by observed Walk and successful20-lens withdrawal. Earlier obstruction,233m-arc refusal, low-speed refusals and the180-second strict-Walk wait remain preserved. The caller now reobserves the exact retryable Native low-speed prepare refusal within the original60-second/16-attempt allowance.205 offline tests, source/evidence checks and exact CI passed. Ordinary low-speed Drift continuation and the following eight-vein construction passed. Drift was still observed immediately after arrival, followed by natural Walk. The earlier requirement to wait for Walk was overly strict and has been corrected in this execution path.
+The eight-vein ore source passed full-power relay/storage flow.400 then600 ore reached the original store28 and274→282→17→20 chain. The original iron supply resumed and the magnet inlet was reconnected/upgraded. A Native ten-second cut recorded8 iron/4 boards.282/24 upgraded normally.594 filters1101 and793 retains1003. Legacy1709 stays in its original path.200 water replenished titanium glass and6927/6929 upgraded to fast.100 Casimir/20 titanium glass funded the six new stored filters.
 
-Product14c7d66c passed6559 cases, exact Native build and source CI. Installed manifest C1A1D058290A683529DDFD8D9C56A4E49EFD7576AEE536CB37CC68D02D90DCEC binds five Plugin/224 MCP files. Actual75-tool SDK admission passed. Original installation/timeout reconciliation is retained. The next writer reserves199976 requests plus24 separately preserved observer requests under the200000 global maximum, with512MiB/32MiB stdout/stderr allowances. Six MkII machines, three stores, two towers and their sorters are normally manufactured. The original board machine upgraded to MkII. Qualify a processor cluster before the parallel expansion. The48-hour launcher capacity fix passed206 offline tests, with exact source CI pending.
+A short Native window showed144 hydrogen/min produced and138 consumed, with66 crude/min produced and72 consumed. It is a bounded sample. Old oil nodes538/540 hold2500 each, while unused542 holds75124. A finite new-oil/basic-refining support plan is recorded and remains unbuilt. Ordinary Drift continuation, subsequent construction and natural Walk passed after correcting the overly strict pre-Walk wait. Issue #5 wind dismantling still needs its Native power-impact/recovery implementation.
 
-Issue #5 remains open without comments. Wind turbines remain outside the current dismantle whitelist and need single-target Native demolition, power-impact preview, recovery and unaffected-topology verification. Continue full research, Caph II manufacture/launch/delivery, the210-point/224-cell closed face, receiver electricity and cold continuation before the final coherent package pair.
+Product14c7d66c passed6559 tests, exact Native build and CI, with five Plugin/224 MCP files bound by manifest C1A1D058290A683529DDFD8D9C56A4E49EFD7576AEE536CB37CC68D02D90DCEC and actual75-tool SDK admission. The48-hour caller7a95eb21 passed206 tests/exactCI43183645171. The208-test commit classification is awaiting exact CI. Preserve51 external reader requests, the next199949 writer allowance and200000 global ceiling.
 
-[前次快照 / Previous snapshot](https://github.com/Arcueid77/Spherewright-Lab/blob/b50363b1545dc1286097088f774b86bbd01a4003/scenarios/v0.6-ascension/current-status.md) · [持续授权 / Standing authority](../../operations/standing-authority.md)
+Continue the original unaccepted navigation suffix, complete normal material supply and1523, then restore actual Caph power before manufacture/launch/delivery. Its main network2 currently reports zero actual generation and the station zero energy. Fresh-check210 structure/224 cell costs, complete the shell/receiver power and normal cold continuation before final coherent review packages. Voyager currently requires empty mecha research buffers and restricted factory-research metadata.
+
+[前次快照 / Previous snapshot](https://github.com/Arcueid77/Spherewright-Lab/blob/7a95eb21afd29ef6540c40509066a34b3106934a/scenarios/v0.6-ascension/current-status.md) · [持续授权 / Standing authority](../../operations/standing-authority.md)
