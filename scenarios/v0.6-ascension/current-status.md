@@ -1,11 +1,16 @@
 # Ascension current snapshot / Ascension活动快照
 
-2026-11-12。实装2f8f72d0已通过标准隔离恢复入口从最新LastExit127407577正常恢复，59.5秒达到真实用料转移。剩余6条空带均通过准确原生回读并正常返还，旋转核验修复实测通过。科研仍暂停于1523，22860进度及全部矩阵点缓存保全。已正常取90燃料棒备Caph并制造1电塔。三座新精炼I/O及同高转接已全部建成，继续核对完整供电、南侧正向产出和原油分配。游戏当前运行。
+2026-11-13。实装2f8f72d0已完成Caph II真实往返和母星正常保存，沿原旅程预算验证600tick稳定抵达。Caph主网2补10燃料棒后，25消费者满供，实际发电387kW。应力科研1523已到40860/360000，当前暂停并保全队列和矩阵缓存。当地铁炉、矿桥和电路板回流正常完工，CPU库存到1063，800处理器及矿/铜/微晶/水/钛化玻璃/位面已正常续供。6裂解氢输出和600氢仓积满，正复用916/918物流站连接氢运输。游戏当前运行，唯一writer沿原时钟累计实耗。
 
 最新完整关停保护仍绑定LastExit127407577、Primary127358921及2334项文件，启动前累计6318315/9000000tick，保留54000返航及3000清理。本轮使用default隔离恢复，准确原生准备回读最低127390736并绑定已完整保护的最新LastExit。早前菜单返回和本次原桥头拆除未知原件均持续隔离，当前运行实耗继续累计。
 
 ## 实际结果
 
+- 2026-11-13更新。当前科研余1773份五色，整件等效缓存为蓝731、黄1773、紫233、绿135，红0。新增100红已实际消费，另70量子/70透镜正常生产140绿，工厂累计绿360，手搓2单列。待增产下界为蓝1042、红1773、紫1540、绿1638。下列22860及1873份记录保留此前切面。
+- 新铁炉7289配方1在主网3满供，复用7053作为有限矿缓冲，3带矿输入与6带电路板回流均正常完工。正常转运2000矿到7053、800处理器到6903、500铜/1000微晶、200水、160钛化玻璃和30位面。共享仓暂满拒绝微晶后缀，后续新鲜容量切面及新准备已正常补入1000，原拒绝与已完成前缀保留。
+- Caph两程各正常消耗1翘曲器，原108000旅程及54000返航储备保持。聚变站20补10棒后回读9棒及已点燃余热，主网2实际供需6450J/t、387kW，25消费者满供。当地化工21正常改配方32、输入39改1011，正向石墨烯产出待核。站点2仍未接电，附近风机16/17可供短连接候选。返航及母星正常保存完成，持续接收器验收待后续。
+- 氢运输增量已核对现有PLS916空槽2、918空槽3及916的5架闲置物流机。有限预留100带/6普通/2塔，累计施工上限650/102/27，已用504/96/24。高速10、极速8、铁炉4，其余账目保留。对应正常制造84带/6普通/2塔已完成，含28齿轮，准确直接消耗96铁/6板/2线圈，复用20带/1塔。实际运输及消费待原生验证。
+- 最新caller交接128042523对应累计6953261/9000000tick和94296/200000请求，当前运行继续计费，54000/3000储备保持。下列495带/92普通/9高速及550/92/25上限为此前切面，由上述新实耗和有限上限更新。
 - 三台新增精炼及全部相关分拣/中继20个用电对象已证明同主网3满供电。氢线4099→4098→4097的实际方向已核对，新增高速回流4097→4100。正常配方制造2高速、实际放置1，当前高速累计9。回流后两台新裂解均观察到工作，10秒Native切面氢产出138/min、消耗72/min，石墨66/min。另已从满600氢的3064正常取80，继续送往工业区。
 - 一次180秒正向等待使用了仅支持buffers的通用计数器检查带货物，形成已知等待失败。后续改用完整Native cargo-path与设备切面，观察到新油路18/11实存及裂解工作。原失败等待和未执行保存后缀保留，后续正常保存已完成。
 - 首次verified_newer_lastexit恢复在读档前因票据隔离状态被拒绝，68.25秒失败收据保留。正常关闭未加载菜单并复核2334项保护后，按新鲜原生default隔离入口完成上述59.5秒恢复。所有请求实耗已计入当前基线。
@@ -32,11 +37,17 @@
 启动前全部运行及外部观察请求已合并为91751，全局上限200000，当前唯一caller继续累计。当前切面施工实耗为基础带495、普通92/高速9/极速8分拣器、电塔24、油井1、风机3、精炼3，其余原账保留。普通92/高速9/极速8、基础带550及电塔25的有限上限保持。另1座电塔已正常制造随身携带，Caph燃料取90已形成等量守恒。
 
 1. 所选/实装2f8f72d0已在59.5秒内恢复实操，6条空带准确回收及科研保全已完成。保留原失败恢复、未知动作、完整关停保护和当前唯一运行记录。
-2. 科研缓存与6条回收均已实证，继续核对三台精炼实际供料并补齐科研链。补齐铁矿、铁块/电路板、钛晶石、水及量子/矩阵供料，再开展并行Caph II建设。应力科研仍余1873份五色，暂停能力保留缓存，后续正常恢复科研。
-3. Caph主网2实际发电0，准确站点2电量0且未接电。到场先核实燃料与拓扑、恢复实际供电。新鲜核对6度闭壳设计210结构点/224细胞点，完成当地制造、持续发射、真实交付、闭壳及接收器持续非零电力。
+2. 接通既有物流站的氢运输并验证下游消费，补齐石矿、水、钛晶石及科研链。应力科研仍余1773份五色，后续正常恢复科研。
+3. Caph主网2已恢复387kW实际供电，站点2接电待处理。新鲜核对6度闭壳设计210结构点/224细胞点，完成当地制造、持续发射、真实交付、闭壳及接收器持续非零电力。
 4. 正常保存、完整关停保护及冷恢复后复核设计、进度、设备和持续电力，最后生成同源手动/Thunderstore交审双包。 [实施与验收](implementation-plan.md)
 
 ## English
+
+2026-11-13 update. Installed2f8f72d0 completed the actual Caph II round trip,600 stable landing ticks and home normal save under the original journey budget. Both legs normally consumed one warper. Fuel10 restored network2 to387kW actual generation with25 consumers fully served. Chemical21 changed normally to fire-ice recipe32 and input39 to1011, with positive production pending. Station2 remains disconnected. Sustained receiver acceptance remains pending.
+
+Stress1523 is paused at40860/360000 with1773 sets remaining. Whole-item buffers are731 blue/1773 yellow/233 purple/135 green/zero red. Another140 factory greens brings factory output to360, plus two handcrafted. Remaining manufacture lower bounds are1042 blue/1773 red/1540 purple/1638 green. A new furnace/three-belt ore feed/six-belt board return completed. CPU stock reached1063. Normal support moved800 CPUs,2000 ore,500 copper,1000 micro-components,200 water,160 titanium glass and30 plane filters. A full-store micro-component refusal retained its completed prefix, followed by a fresh successful1000-unit transfer.
+
+Six X-rays hold58..59 blocked hydrogen outputs and store3064 is full600. Existing916/918 provide free slots2/3 and five idle drones at916. The finite transport allowance reserves100 belts/six ordinary sorters/two towers, with cumulative650/102/27 ceilings and504/96/24 spent. Fast/gradeIII sorters are10/eight and furnaces four. Normal84-belt/six-sorter/two-tower manufacture completed from96 iron/six boards/two coils, including28 gears and reusing20 belts/one tower. Actual transport/consumption remains pending. Latest caller handoff128042523 carries6953261 cumulative ticks and94296 requests, retaining9000000/200000 ceilings and54000/3000 reserves. Earlier22860 progress,1873-set remainder and older construction figures below preserve their earlier observation time.
 
 The complete stopped boundary remains latest LastExit127407577, Primary127358921 and2334 verified protected files. Installed2f8f72d0 normally recovered through the Native default quarantine path and reached actual work in59.5 seconds. Six remaining empty heads normally returned six belts with exact readback, preserving paused queue1523,22860 progress and every matrix point. Preserve6318315 prelaunch cumulative ticks,91751 RPCs, the9000000/200000 ceilings and54000/3000 reserves, with current runtime spending continuing. Both the earlier menu-return unknown and the new empty-belt dismantling unknown retain their original receipts and isolation.
 

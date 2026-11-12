@@ -1,5 +1,13 @@
 # Ascension resource increment / Ascension用料增量
 
+## 2026-11-13氢运输连接 / Hydrogen logistics connections
+
+新鲜原生切面显示氢仓3064满600，6座裂解厂氢输出58至59件并停工。现有PLS916空槽2、918空槽3和916的5架闲置物流机已核对。按合理用料自主授权复用这两站，预留100基础带、6普通分拣器及2电塔，有限累计上限调整为650带、102普通和27塔，保留504/96/24既耗及其余原账。
+
+复用背包20带和1塔，正常制造84带、6普通及2塔已完成，含28齿轮依赖的准确直接用料为96铁、6电路板及2线圈。正常现有仓已补取200铁和20板。连接及站点配置继续绑定新鲜原生条件，实际转运与持续消费分别验证。
+
+Fresh Native cuts show store3064 full at600 hydrogen and six X-rays blocked by58..59 output items. Existing916 has free slot2/five idle drones and918 has free slot3. Under resource autonomy, reuse these stations with up to100 belts/six ordinary sorters/two towers. Cumulative ceilings become650/102/27, retaining504/96/24 spent and every prior account. Normal manufacture of84 belts/six sorters/two towers completed from96 iron/six boards/two coils, including28 gears and reusing20 belts/one tower. Each connection/configuration requires fresh Native admission. Actual delivery and sustained consumption remain separate validation work.
+
 ## 2026-11-12并行矩阵支撑资本 / Parallel matrix-support capital
 
 首批400新铁矿已正常送入母星仓28，并经新增高速入料接回旧274→282→17→20输送链。原铁熔炉恢复工作，原生10秒切面回读铁8件、电路板4件产出。后续282及24已正常从普通升级高速，原电路板制造台36正常升级MkII。
