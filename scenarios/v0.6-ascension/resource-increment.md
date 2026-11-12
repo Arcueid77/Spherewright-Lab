@@ -186,3 +186,11 @@ The slower Casimir input and coal crossings added29 belts, three ordinary/four f
 Finite cumulative placement ceilings are304 belts,64 ordinary/four2012/two2013 sorters,13 stores, eightMkII assemblers, five smelters and15 towers, with actual spending285/63/4/2/13/8/3/15.200 iron entered6657 and64 lenses were captured. One real lens/one handcrafted quantum normally produced two green matrices, verifying both physical products and subsequent7200 research points.1705 unlocked fully, while1523 still needs complete five-color research.
 
 Saved boundary127024506 retains5935244 ticks/77103 requests and2266 verified protected files.64756 remaining ticks include54000 return/3000 cleanup, leaving7756 work ticks. The cumulative-runtime extension answer is pending. The2026-11-03 grant superseded the historical one-hour procedure, preserving the original launch clock and all spending in this5400-second window.
+
+## 2026-11-12 油路精炼配比与接网补量
+
+原油源设备继续正常制造。公开Native配方16每4秒消耗2原油并产出1氢/2精炼油，配方58每4秒消耗1精炼油/2氢并产出3氢/1石墨。三座新增精炼厂分配为1基本精炼、2X射线裂解，名义新增45净氢及30石墨/游戏分钟，精炼油收支平衡。该计算用于有限供料规划，实际原生连续产出仍须验证。
+
+依据原网覆盖及新油井独立供电布局，增加2座电力感应塔的制造/施工额度，直接材料6铁及2磁线圈。累计电塔上限23。油路可使用2个已正常制造的极速分拣器，累计极速施工上限8，其余已记油源/风机/精炼厂/输送带额度保持。由所有者合理用料自主授权执行，保留实际消耗与Native几何、原动作及储备检查。
+
+English. Native recipe16 consumes2 crude per4 seconds and produces1 hydrogen/two refined oil. Recipe58 consumesone refined oil/two hydrogen per4 seconds and produces3 hydrogen/one graphite. Allocate the three new refineries to one basic/two X-ray units for nominal45 net hydrogen and30 graphite per game minute with balanced refined oil. Continuous Native output still needs proof. Two additional Tesla towers cost6 iron/two coils and raise the cumulative cap to23. Up to two normally manufactured gradeIII sorters may serve the oil phase within the cumulative cap8. Apply owner reasonable-material autonomy while retaining actual spending, Native geometry, originals and reserves.
