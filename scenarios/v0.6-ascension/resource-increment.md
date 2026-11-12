@@ -1,5 +1,11 @@
 # Ascension resource increment / Ascension用料增量
 
+## 2026-11-12运行时长自主增量 / Autonomous runtime increment
+
+所有者明确回复“运行时长也合理自行增加”，按[现行运行授权](../../operations/standing-authority.md#current-ascension-runtime-autonomy-2026-11-12--当前ascension运行时长自主授权)将当前有限累计上限设为900万。保存边界127031494保留5942232既耗，余3057768tick，包含54000返航/3000清理储备及3000768工作余额。科研、材料、施工既耗及原动作保持原账目。当前新时窗采用5400秒有限墙钟及既有200000累计请求上限。后续完成0.6所需合理运行增量按同一授权核算记录执行。
+
+The owner explicitly authorized reasonable autonomous runtime additions. The current finite cumulative ceiling is9000000, retaining5942232 spent at boundary127031494.3057768 ticks remain including54000 return/3000 cleanup and3000768 work ticks. Research/material/placement and original-action accounting remain cumulative. The next window uses5400 finite wall seconds and the existing200000 cumulative request limit. Further justified runtime increments needed for0.6 follow the same grant.
+
 2026-11-11。所有者明确回复“批准整案及科研用料”，批准以下准确科研、发射及两座建筑额度，并允许按原生配方正常取用/制造不足量。整案授权时游戏及MCP正常关闭，本次增量的科研/制造/建造消耗为0。
 
 随后所有者明确“只要是合理的，自己加就行，为啥都要我来批准？”，授权0.6合理必要用料增量自行核算、记录和执行。完整配方及母星库存调查确认绿矩阵库存0、配方102仍锁定，前置科技1705须额外蓝/红/黄各1600，其前置1303/1704均已解锁。按此直接授权将科研上限更新如下。当前已恢复游戏并选定1504射线接收科研，继续原生生产和库存核对。
