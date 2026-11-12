@@ -1,5 +1,15 @@
 # Ascension resource increment / Ascension用料增量
 
+## 2026-11-12铁矿短跨线与满功率供料 / Short crossing and full-power ore supply
+
+新矿覆盖8矿点，原支网4仅约49%供电。第二座已批电塔接通主网3，另按原生地形和旧带1709占用事实增加1座接力供电塔及1普通分拣器，新增正常制造耗3铁、1电路板和1线圈。再正常制造2极速分拣器，复用2普通分拣器并耗9铁及5线圈。原7030到7039长对接被原生TooFar拒绝后，增加3点独立东侧短带，正常制造2高速及1普通分拣器，耗4铁、1电路板和1线圈。其中3铁由新节点70正常手采3铁矿并手搓获得，原隔离采集句柄持续保留。
+
+当前有限累计上限为75普通、5高速、4极速分拣器及18电塔，其他施工额度沿用。两只极速分拣器以原生0初始筛选接入专用铁矿路径，入料高速分拣器使用1001筛选。新仓的原生空仓基线及3到11实存切面已保留，首个10矿门槛通过，下一批转运400矿。所有原生拒绝及已完成前缀均独立保留。
+
+The eight-vein miner initially had about49% service on network4. A second approved tower joined main network3. Fresh shore geometry and occupied legacy belt1709 justified one further relay tower/ordinary sorter, costing three iron, one board and one coil. Two normally manufactured gradeIII sorters reused two ordinary sorters and cost nine iron/five coils. Native TooFar rejected the original long pair. A separate three-point eastern belt and two fast/one ordinary sorter cost four iron, one board and one coil. Three iron came from a fresh normal three-ore hand-harvest and iron recipe at node70, retaining the isolated historical harvest original.
+
+Current ceilings are75 ordinary,5 fast,4 gradeIII sorters and18 towers, with other allowances retained. The dedicated ore line uses zero-initial-filter gradeIII sorters and a1001-filtered fast inlet. Its normally empty depot and later3-to11 physical stock cuts are preserved. The ten-item gate passed and400 ore is the next shipment. Original refusals and completed prefixes retain separate records.
+
 ## 2026-11-12基础铁料续产阶段 / Continuous iron support stage
 
 现行自主授权下，按最新原生矿脉、物品配方及现有空料设备事实，预留1矿机、3熔炉、1小仓、8普通分拣器、2电塔和40基础带，用于恢复铁料、电路板、磁线圈及后续矩阵输入。复用背包1矿机、2熔炉、1分拣器、1塔及22带。新增正常制造为1熔炉、1仓、7分拣器、1塔和18带，含6齿轮依赖，准确直接用料为35铁、11电路板、6石材及3磁线圈。新鲜原生准入及实际回执确定每笔施工。
