@@ -20,7 +20,7 @@ def main():
  pages=plan.get('factoryPaginationMaximumPages',0)
  need(type(pages)is int and 0<=pages<=128,'finite_factory_pagination_required')
  r=Runtime(config,config_sha,output);r.cohort();a=Live(r)
- a.c=Client(Path(r.config['pluginDestination'])/'Spherewright.Mcp.exe',r.output/'client',maximum=samples*len(queries)+walk_limit+pages+8,seconds=max(60,samples*(interval+2*len(queries))+2*(walk_limit+pages)+30))
+ a.c=Client(r.mcp_executable(),r.output/'client',maximum=samples*len(queries)+walk_limit+pages+8,seconds=max(60,samples*(interval+2*len(queries))+2*(walk_limit+pages)+30))
  try:
   _,ts,_,_=a.c.initialize();a.schemas={t['name']:t['inputSchema'] for t in ts}
   calls=[dict(q,kind='read') for q in queries]

@@ -232,6 +232,26 @@ class LiveDriverTests(unittest.TestCase):
    rogue=root/'unqualified.exe';rogue.write_bytes(b'synthetic-host');runtime.config['mcpExecutable']=str(rogue)
    with self.assertRaisesRegex(RuntimeError,'not_in_qualified_layout'):runtime.mcp_executable()
 
+ def test_read_only_entry_uses_the_runtime_qualified_host_in_each_layout(self):
+  import read_only
+  from evidence import put,sha
+  from unittest.mock import Mock,patch
+  with tempfile.TemporaryDirectory() as directory:
+   root=Path(directory);plan=root/'read-plan.json'
+   put(plan,dict(queries=[dict(name='player',tool='spherewright_get_player_state')]))
+   for layout in ('plugin','mcp'):
+    with self.subTest(layout=layout):
+     selected=root/layout/'Spherewright.Mcp.exe'
+     runtime=SimpleNamespace(output=root/'output',cohort=Mock(),mcp_executable=Mock(return_value=selected))
+     arguments=['read_only.py','synthetic-config','synthetic-hash',str(plan),sha(plan),str(root/'output')]
+     with patch.object(sys,'argv',arguments),patch.object(read_only,'Runtime',return_value=runtime),\
+       patch.object(read_only,'Live',return_value=SimpleNamespace()),\
+       patch.object(read_only,'Client',side_effect=RuntimeError('synthetic-client-boundary')) as client:
+      with self.assertRaisesRegex(RuntimeError,'synthetic-client-boundary'):read_only.main()
+     runtime.cohort.assert_called_once_with()
+     runtime.mcp_executable.assert_called_once_with()
+     self.assertEqual(selected,client.call_args.args[0])
+
  def test_first_move_waits_for_native_inertia_only_inside_its_original_deadline(self):
   from unittest.mock import patch
   a=Live(None);a.runtime=type('Evidence',(),dict(config=dict(firstOperation=dict(kind='move')),put=lambda *_:None))()
