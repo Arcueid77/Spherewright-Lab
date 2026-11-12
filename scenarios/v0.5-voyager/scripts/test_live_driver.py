@@ -713,6 +713,73 @@ class LiveDriverTests(unittest.TestCase):
   self.assertEqual(['dose','dose-fresh-01'],seen);self.assertEqual([True],health)
   self.assertFalse(receipts[0][1]['actionAccepted']);self.assertEqual('new-original',r['actionId'])
 
+ def test_native_navigation_reobserves_only_its_unaccepted_low_speed_refusal(self):
+  from unittest.mock import patch
+  a=Factory.__new__(Factory);a.active=None;seen=[];receipts=[]
+  a.runtime=type('Evidence',(),dict(put=lambda _,name,value:receipts.append((name,value))))()
+  a.state=lambda:None
+  def once(step,commit_requested):
+   seen.append(step['role'])
+   if len(seen)==1:
+    raise ToolRefused('spherewright_prepare_move',dict(code='ACTION_REJECTED',retryable=True,
+     message='native_navigation_recent_low_speed_inspection_required'))
+   return dict(terminal=True,actionId='one-native-move')
+  a.native_operation_once=once
+  step=dict(role='nav',prepareTool='spherewright_prepare_move',arguments=dict(useNativeNavigation=True),freshStaleMaximumSeconds=60)
+  with patch('factory.time.sleep') as sleep:result=a.native_operation(step)
+  self.assertEqual(['nav','nav-fresh-01'],seen);sleep.assert_called_once_with(2)
+  self.assertEqual('nav-unaccepted-motion.private.json',receipts[0][0])
+  self.assertFalse(receipts[0][1]['actionAccepted']);self.assertEqual('one-native-move',result['actionId'])
+
+ def test_native_motion_reobservation_keeps_exact_scope_and_original_handle(self):
+  base=dict(code='ACTION_REJECTED',retryable=True,message='native_navigation_recent_low_speed_inspection_required')
+  cases=[('spherewright_commit_move',base,True,None,60),
+   ('spherewright_prepare_move',dict(base,message='native_navigation_idle_binding_required'),True,None,60),
+   ('spherewright_prepare_move',dict(base,retryable=False),True,None,60),
+   ('spherewright_prepare_move',base,False,None,60),
+   ('spherewright_prepare_move',base,True,'accepted-original',60),
+   ('spherewright_prepare_move',base,True,None,0)]
+  for tool,detail,native,active,seconds in cases:
+   with self.subTest(tool=tool,detail=detail,native=native,active=active,seconds=seconds):
+    a=Factory.__new__(Factory);a.active=active;seen=[]
+    def once(*_):seen.append(True);raise ToolRefused(tool,detail)
+    a.native_operation_once=once
+    with self.assertRaises(ToolRefused):
+     a.native_operation(dict(role='nav',prepareTool='spherewright_prepare_move',
+      arguments=dict(useNativeNavigation=native),freshStaleMaximumSeconds=seconds))
+    self.assertEqual([True],seen)
+
+ def test_native_motion_reobservation_stops_at_the_existing_attempt_limit(self):
+  from unittest.mock import patch
+  a=Factory.__new__(Factory);a.active=None;seen=[];receipts=[]
+  a.runtime=type('Evidence',(),dict(put=lambda _,name,value:receipts.append((name,value))))()
+  a.state=lambda:None
+  def once(step,commit_requested):
+   seen.append(step['role'])
+   raise ToolRefused('spherewright_prepare_move',dict(code='ACTION_REJECTED',retryable=True,
+    message='native_navigation_recent_low_speed_inspection_required'))
+  a.native_operation_once=once
+  with patch('factory.time.sleep'),patch('factory.time.monotonic',return_value=0):
+   with self.assertRaises(ToolRefused):
+    a.native_operation(dict(role='nav',prepareTool='spherewright_prepare_move',
+     arguments=dict(useNativeNavigation=True),freshStaleMaximumSeconds=60))
+  self.assertEqual(16,len(seen));self.assertEqual('nav-fresh-15',seen[-1]);self.assertEqual(16,len(receipts))
+
+ def test_native_motion_reobservation_keeps_the_original_time_deadline(self):
+  from unittest.mock import patch
+  a=Factory.__new__(Factory);a.active=None;seen=[]
+  a.runtime=type('Evidence',(),dict(put=lambda *_:None))();a.state=lambda:None
+  def once(*_):
+   seen.append(True)
+   raise ToolRefused('spherewright_prepare_move',dict(code='ACTION_REJECTED',retryable=True,
+    message='native_navigation_recent_low_speed_inspection_required'))
+  a.native_operation_once=once
+  with patch('factory.time.sleep'),patch('factory.time.monotonic',side_effect=[0,0,0,5]):
+   with self.assertRaises(ToolRefused):
+    a.native_operation(dict(role='nav',prepareTool='spherewright_prepare_move',
+     arguments=dict(useNativeNavigation=True),freshStaleMaximumSeconds=5))
+  self.assertEqual([True],seen)
+
  def test_captured_transfer_refusal_has_no_accepted_handle(self):
   captured=json.loads((Path(__file__).parent/'fixtures/captured-unaccepted-transfer-stale.json').read_text())
   a=Live.__new__(Live);a.active=None;a.runtime=type('Evidence',(),dict(put=lambda *_:None))()

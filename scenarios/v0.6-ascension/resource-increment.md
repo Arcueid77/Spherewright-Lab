@@ -1,5 +1,19 @@
 # Ascension resource increment / Ascension用料增量
 
+## 2026-11-12基础铁料续产阶段 / Continuous iron support stage
+
+现行自主授权下，按最新原生矿脉、物品配方及现有空料设备事实，预留1矿机、3熔炉、1小仓、8普通分拣器、2电塔和40基础带，用于恢复铁料、电路板、磁线圈及后续矩阵输入。复用背包1矿机、2熔炉、1分拣器、1塔及22带。新增正常制造为1熔炉、1仓、7分拣器、1塔和18带，含6齿轮依赖，准确直接用料为35铁、11电路板、6石材及3磁线圈。新鲜原生准入及实际回执确定每笔施工。
+
+有限累计施工上限更新为矿机2、熔炉6、小仓18、普通分拣器74、电塔17和基础带325。此前实际施工1/3/17/66/15/285持续累计。原生目录和库存核对已完成，本阶段施工尚未开始。科研及发射额度继续沿现行整案记录。
+
+按实测约7.5游戏tick每墙钟秒及剩余自然科研/制造量，将本次冷启动起的有限墙钟上限更新为86400秒。累计游戏tick上限仍为900万，保留54000返航及3000清理储备。全局请求上限200000，其中8次已完成只读观察单列保留，下一调用器采用199992写方请求上限，最终合并实际账目。新调用器输出/错误流额度为512MiB/16MiB，原启动时钟和全部既耗持续保留。
+
+Under the current autonomy grants, reserve one miner, three smelters, one small store, eight ordinary sorters, two Tesla towers and40 basic belts to restore iron, boards, coils and matrix supply. Reuse one carried miner, two smelters, one sorter, one tower and22 belts. Normal new manufacture requires one smelter, one store, seven sorters, one tower and18 belts. Including six dependent gears, exact direct inputs are35 iron,11 boards, six bricks and three coils. Each placement follows fresh Native admission and its actual receipt.
+
+Cumulative placement ceilings become2 miners,6 smelters,18 stores,74 ordinary sorters,17 towers and325 belts, retaining actual1/3/17/66/15/285 spending. The Native catalogue and stock basis are recorded. Stage construction remains pending. Existing research and launch ceilings continue.
+
+Observed cadence is about7.5 game ticks per wall second. Remaining natural research/manufacture justifies86400 finite wall seconds measured from this same cold launch. Preserve the9000000 cumulative tick ceiling,54000 return/3000 cleanup and all actual spending. The global200000-request ceiling reserves eight completed read-only requests separately, leaving199992 for the next writer before final accounting reconciliation. New stdout/stderr allowances are512MiB/16MiB. The original startup clock remains bound.
+
 ## 2026-11-12五层引力矩阵生产 / Five-layer gravity-matrix production
 
 按已授权合理科研/施工增量，使用新鲜配方10/85/86/8制造5研究站、2小仓、2普通分拣器及1电塔，另复用背包1普通分拣器。直接消耗52铁、20玻璃、22电路板、21磁线圈及8石材，原终态及背包5/2/3/1建筑物品已回读。有限累计施工上限更新为研究站20、小仓15、普通分拣器66、电塔16，保留原15/13/63/15既耗。1电塔按实际电网覆盖需要使用。首批50量子及50透镜已正常取入背包，对应100绿矩阵，接入正常五层生产。200水存入6918、200处理器存入6903，解除原有钛化玻璃/量子输入短缺。

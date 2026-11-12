@@ -277,13 +277,20 @@ class Factory(Live):
    if attempt:step['role']=s['role']+f'-fresh-{attempt:02d}'
    try:return self.native_operation_once(step,commit_requested)
    except (ToolRefused,NativePreacceptanceRefusal) as error:
-    # Only an explicit Native STALE_STATE before acceptance permits a NEW
-    # prepare. Transport errors, missing handles and accepted failures never do.
-    if self.active is not None or error.error.get('code')!='STALE_STATE' or seconds==0:raise
-    self.runtime.put(step['role']+'-unaccepted-stale.private.json',dict(tool=error.tool,error=error.error,
+    native_motion_pending=(error.tool==s.get('prepareTool')=='spherewright_prepare_move'
+     and s.get('arguments',{}).get('useNativeNavigation') is True
+     and error.error.get('code')=='ACTION_REJECTED' and error.error.get('retryable') is True
+     and error.error.get('message')=='native_navigation_recent_low_speed_inspection_required')
+    if self.active is not None or seconds==0:raise
+    if error.error.get('code')!='STALE_STATE' and not native_motion_pending:raise
+    suffix='-unaccepted-motion.private.json' if native_motion_pending else '-unaccepted-stale.private.json'
+    self.runtime.put(step['role']+suffix,dict(tool=error.tool,error=error.error,
      actionAccepted=False,originalIntentRetained=True,newPrepareRequired=True))
     if attempt>=15 or time.monotonic()>=end:raise
-    self.state();time.sleep(.1);attempt+=1
+    self.state()
+    time.sleep(min(2 if native_motion_pending else .1,max(0,end-time.monotonic())))
+    if time.monotonic()>=end:raise
+    attempt+=1
 
  def native_operation_once(self,s,commit_requested=True):
   allowed={'spherewright_prepare_move','spherewright_prepare_harvest','spherewright_prepare_transfer',
