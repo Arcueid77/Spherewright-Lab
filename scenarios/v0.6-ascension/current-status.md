@@ -6,6 +6,8 @@
 
 ## 实际结果
 
+- 源头极速7497在主网3满供，正常从3064向7312送料，157带主线、同高高速7496及14带独立南入口已实际将氢送入916。预声明20件门槛回读24氢，通过首次入站供货验证。原21带北入口空路径保留，实际施工继续计账。当前已用696带、96普通/11高速/9极速及24塔，专用卡西米尔氢入口及站间实际到货待继续。
+- 916实际最大充电配置为6MW，实时请求60kW。先前将请求当上限的描述已更正，1.2MW调整准备返回3MW步进与0..0W范围并在接受前拒绝。调用端当前101项驱动回归及准确CI43287639894通过，实装来源2f8f72d0。 [调用端CI](https://github.com/Arcueid77/Spherewright-Lab/actions/runs/43287639894)
 - 氢运输主线157带及北入口21带已原生完工并正常保存，当前主线尾7481已落到地面。既有尾带与物流站的双端绑定准备被原生范围门在创建前拒绝，原回执保留，调用端已加入明确的提前拒绝并通过101项驱动回归。继续以新鲜独立入站段及同高分拣器接通，实际供氢和下游消费待验。
 - 最新交接128216375对应7127113/9000000累计tick、95195写方请求及7单列只读请求，当前继续累计。写方上限199993加单列7合计200000。有限施工上限当前720带、102普通/12高速分拣器、27塔，另预留2极速将其上限从8增至10。最新完成切面为682带、96普通/10高速/8极速、24塔，其余原账保留。
 - 电塔配方8每座需2铁，首批制造的4笔原始完成回执合计94铁，原说明96铁已更正。后续42带/2高速资本正常消耗45铁/1线圈及2普通，另42带消耗42铁，最终接线准备又正常制造30带并消耗30铁。首次空带未知原件持续隔离。
@@ -45,6 +47,8 @@
 4. 正常保存、完整关停保护及冷恢复后复核设计、进度、设备和持续电力，最后生成同源手动/Thunderstore交审双包。 [实施与验收](implementation-plan.md)
 
 ## English
+
+GradeIII source7497 has full network3 service and normally feeds3064→7312. The157-belt main, same-height fast relay7496 and14-belt independent southern inlet delivered actual hydrogen to916. The predeclared20-item gate passed at24 hydrogen. Retain the empty21-belt northern inlet and all charged construction. Current spending is696 belts,96 ordinary/11 fast/nine gradeIII sorters and24 towers. Actual station-to-station receipt and the dedicated Casimir hydrogen inlet remain pending. Station916's configured maximum is6MW and its current request60kW, correcting the earlier field confusion. Native refused the1.2MW proposal before acceptance with a3MW-step range0..0W. Caller101 driver regressions and exactCI43287639894 passed. Installed product source is2f8f72d0. [Caller CI](https://github.com/Arcueid77/Spherewright-Lab/actions/runs/43287639894)
 
 The157-belt hydrogen main and21-belt northern inlet normally completed and saved. Main tail7481 is grounded. Native preparation rejected built-source/device dual binding before creation. The original refusal remains preserved and the caller now explicitly rejects this unsupported combination, with101 driver regressions passing. Continue through a separate inlet and normal same-height sorter, then prove actual hydrogen delivery/consumption. Handoff128216375 carries7127113 cumulative ticks,95195 writer requests and seven separate read-only requests. Writer maximum199993 plus seven retains the global200000 ceiling. Current construction ceilings are720 belts,102 ordinary/12 fast sorters and27 towers, with two gradeIII sorters reserved to raise their ceiling8→10. Latest completed construction is682/96/10/8/24. Native terminal receipts corrected the first capital batch to94 iron from the previously stated96. Preserve the original empty-belt unknown.
 

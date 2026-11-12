@@ -6,11 +6,11 @@
 
 新增42带及2高速资本已正常制造，准确消耗45铁、1线圈和2普通，另两批42/30带分别正常消耗42/30铁。首批含2塔资本的原始4笔完成回执为28+56+6+4合计94铁，说明中先前96铁已据此更正。所有实际施工、正常返还及旧未知原件分别保留。
 
-现有尾带直接接物流站的双端绑定准备在创建前被原生范围门拒绝，调用端已恢复受支持组合并新增提前拒绝，101项驱动回归通过。后续采用独立入站段和同高转接。主网3新鲜容量1672006J/t、实供129231J/t、比例1，916的充电上限按正常配置从60kW调至1.2MW，实际消耗继续观察。现有单列只读7请求从写方上限扣留，199993+7维持全局200000。
+现有尾带直接接物流站的双端绑定准备在创建前被原生范围门拒绝，调用端已恢复受支持组合并新增提前拒绝，101项驱动回归通过。后续采用独立入站段和同高转接。主网3新鲜容量1672006J/t、实供129231J/t、比例1。916回读的实时充电请求为60kW，配置上限为6MW，先前将请求误记为上限的说明已更正。1.2MW设置准备返回3MW步进及0..0W范围并在接受前拒绝，实际配置以6MW原生回读为准。现有单列只读7请求从写方上限扣留，199993+7维持全局200000。
 
 The Native level3 crossing/stepped descent normally completed, retaining157 main belts and21 northern inlet belts. Handoff128216375 carries682 placed belts. Finite ceilings are720 belts,102 ordinary/12 fast sorters and27 towers. Reserve two gradeIII sorters to raise their ceiling8→10. Normal dependencies reuse two fast/two ordinary sorters and need exactly nine iron/five coils, including three gears/three motors/one turbine/one fast-sorter batch. Fresh Native endpoints and flow determine placement.
 
-Another42-belt/two-fast capital batch normally consumed45 iron/one coil/two ordinary sorters. Further42/30-belt batches consumed42/30 iron. Four original terminals show28+56+6+4=94 iron for the initial two-tower batch, correcting the earlier96 description. Native rejected built-source/device dual binding before creation. The caller now rejects that unsupported combination before game calls, with101 driver tests passing. Use a separate inlet/same-height transfer. Fresh network3 capacity1672006J/t, served129231J/t and ratio1 support the normal916 charging setting60kW→1.2MW, with actual draw observed separately. Retain seven separate read-only requests and a199993 writer limit under global200000.
+Another42-belt/two-fast capital batch normally consumed45 iron/one coil/two ordinary sorters. Further42/30-belt batches consumed42/30 iron. Four original terminals show28+56+6+4=94 iron for the initial two-tower batch, correcting the earlier96 description. Native rejected built-source/device dual binding before creation. The caller now rejects that unsupported combination before game calls, with101 driver tests passing. Use a separate inlet/same-height transfer. Fresh network3 capacity is1672006J/t with129231J/t served and ratio1. Station916 reports a60kW current request and6MW configured maximum. The earlier description confused those fields. Native refused the proposed1.2MW setting before acceptance, reporting a3MW-step range0..0W. Its actual maximum is6MW. Retain seven separate read-only requests and a199993 writer limit under global200000.
 
 ## 2026-11-13氢运输连接 / Hydrogen logistics connections
 
