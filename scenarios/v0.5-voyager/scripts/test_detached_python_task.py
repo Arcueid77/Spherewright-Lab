@@ -82,6 +82,14 @@ class AdmissionTests(unittest.TestCase):
                 task.launch_once(self.target, pinned, [], self.root/'unused', self.deadline)
             spawn.assert_not_called()
 
+    def test_48hour_caller_horizon_preserves_its_absolute_deadline(self):
+        now = dt.datetime(2026, 11, 12, tzinfo=dt.timezone.utc)
+        deadline = now + dt.timedelta(hours=48, seconds=60)
+        task.validate_deadline(deadline.isoformat(), now)
+        self.assertEqual(deadline, task.utc(deadline.isoformat()))
+        with self.assertRaises(ValueError):
+            task.validate_deadline((deadline + dt.timedelta(microseconds=1)).isoformat(), now)
+
     def test_expired_unknown_zone_or_extended_deadline_cannot_start(self):
         now = dt.datetime.now(dt.timezone.utc)
         values = [(now-dt.timedelta(seconds=1)).isoformat(),

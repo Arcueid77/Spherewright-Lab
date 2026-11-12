@@ -1,5 +1,23 @@
 # Ascension resource increment / Ascension用料增量
 
+## 2026-11-12并行矩阵支撑资本 / Parallel matrix-support capital
+
+首批400新铁矿已正常送入母星仓28，并经新增高速入料接回旧274→282→17→20输送链。原铁熔炉恢复工作，原生10秒切面回读铁8件、电路板4件产出。后续282及24已正常从普通升级高速，原电路板制造台36正常升级MkII。
+
+按自主用料授权，已正常制好6座新MkII、3小仓、2塔、9普通及4高速分拣器。复用1座旧MkI和原升级退回1座MkI，含60电路板及5座MkI的正常依赖制造，准确直接用料为151铁、30铜、56石墨烯、28处理器、4线圈及12石材，另消耗29电路板及4普通分拣器。背包237铁、70铜、145石墨烯、172处理器、99线圈、37电路板、9普通、4高速、2极速、3仓、2塔和6MkII已回读。
+
+新阶段有限累计施工上限为14座MkII、21小仓、20塔、80普通、8高速、6极速分拣器及350基础带，其余沿用。下一步先以一组处理器设备验证原生几何及实际流转，再部署3组新增位面过滤、2组处理器和1组电路板设备。
+
+依据实测约7.5游戏tick每墙钟秒、剩余自然科研/制造及验收量，将本次原冷启动起的有限墙钟记录扩为172800秒。原启动器86460秒容量检查在任何进程创建前拒绝，新上限172860及206项离线回归已通过，准确源码CI待完结。游戏进程继续保留，原时钟及900万累计游戏tick、54000/3000储备持续适用。三份已正常关闭的只读观察合计24请求单列保留，下一写方上限199976，全局仍200000，最终合并实际账目。输出/错误流512MiB/32MiB。
+
+The first400 newly mined ore reached home store28 and the original274→282→17→20 chain through a normal fast inlet. The original iron smelter resumed. A Native ten-second cut recorded eight iron/four boards produced. Existing282/24 normally upgraded to fast sorters, and board machine36 upgraded to MkII.
+
+Normal capital manufacture completed six new MkII machines, three stores, two towers, nine ordinary/four fast sorters. Reusing one carried and one refunded MkI, including60 boards/five dependent MkI machines, direct inputs were151 iron,30 copper,56 graphene,28 processors,4 coils and12 bricks, plus29 boards/four ordinary sorters. Readback held237 iron,70 copper,145 graphene,172 processors,99 coils,37 boards,9 ordinary/4 fast/2 gradeIII sorters,3 stores,2 towers and6 MkII machines.
+
+New cumulative placement ceilings are14 MkII machines,21 stores,20 towers,80 ordinary/8 fast/6 gradeIII sorters and350 belts. Qualify one processor cluster before the full three-plane/two-processor/one-board expansion. Remaining allowances continue.
+
+The owner runtime grant supports172800 finite wall seconds from this same cold launch, preserving9000000 cumulative ticks and54000/3000 reserves. The former86460 launcher horizon refused before process creation. The172860 capacity and206 offline tests passed, with exact source CI pending. Preserve the game, original clock and every spent tick. Three normally closed readers retain24 requests separately, giving the next writer199976 under the global200000 maximum, to be folded at the final boundary. Stdout/stderr allowances are512MiB/32MiB.
+
 ## 2026-11-12铁矿短跨线与满功率供料 / Short crossing and full-power ore supply
 
 新矿覆盖8矿点，原支网4仅约49%供电。第二座已批电塔接通主网3，另按原生地形和旧带1709占用事实增加1座接力供电塔及1普通分拣器，新增正常制造耗3铁、1电路板和1线圈。再正常制造2极速分拣器，复用2普通分拣器并耗9铁及5线圈。原7030到7039长对接被原生TooFar拒绝后，增加3点独立东侧短带，正常制造2高速及1普通分拣器，耗4铁、1电路板和1线圈。其中3铁由新节点70正常手采3铁矿并手搓获得，原隔离采集句柄持续保留。
