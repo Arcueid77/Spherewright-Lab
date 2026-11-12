@@ -1,8 +1,8 @@
 # Ascension current snapshot / Ascension活动快照
 
-2026-11-12。原owned游戏进程持续运行，所选、实装及实际加载源码均为14c7d66c。当前唯一oil-source-live调用器已正常取走50红矩阵，全部进入五色科研，1523达到22860/360000。新油井7075、7根出口带、3台风机及电塔已正常建成，独立网4满供电并捕获井内12原油，10件门槛通过。首段12根抬高带已原生完工，出口筛选1007的普通分拣器准确准备通过，连接保留至空载抬高线路完工后。下一19根抬高带由原动作施工中。两次飞行后漂移中的STALE_STATE准备均明确未接受，普通Drift续移到干地后正常建成，原飞行动作保留。
+2026-11-12。游戏已正常关闭，Primary/LastExit均为127294538，2328项完整保护文件核验通过。累计6205276tick与90993请求已合并保留。原返回主菜单动作在完整保存后进入超时未知终态，公开MCP随后两次确认世界已卸载，再正常关闭进程并备份，原未知回执保留。所选源码现为cd67d5f0，已通过6588回归、准确29151构建和CI，5 Plugin/224 MCP同源开发载荷及75工具资格通过。实装仍14c7d66c且未运行，下一步进行冷安装及科研暂停/恢复实机保全验证。
 
-最近普通保存127228150对应累计6138888tick。最近关停完整保护仍绑定Primary/LastExit127035116及2278项文件，该边界累计5945854tick。当前有限累计上限900万，保留54000返航及3000清理，原冷启动起的有限墙钟172800秒，实际截止2026-11-14T03:29:04Z。游戏、原时钟及全部实耗持续保留。
+最新完整关停保护绑定127294538及2328项文件，累计6205276/9000000tick，保留54000返航及3000清理。前一冷启动时窗已正常关闭，所有实耗、失败原件和未知动作继续保留。按所有者运行自主授权，下一次同存档源码更新使用有限48小时冷时窗，启动至真实操作继续遵守300秒硬门和120秒目标。
 
 ## 实际结果
 
@@ -12,42 +12,37 @@
 - 卡西米尔北机的额外高速输入按原生回收后，空出合规输出端点，保留极速输入和正常输出。当前Native非零初始筛选支持2011/2012，极速输入采用0初始筛选及专用/配方需求路径。当前升级策略支持普通→高速及制造台家族，极速升级的明确未接受拒绝保留，已制极速物品通过正常新建使用。
 - 新铁矿覆盖8节点，出矿/跨线/入仓链已在满功率主网3验证。首批400及第二批600铁矿已正常送入原仓28。新增高速入料接回274→282→17→20原输送链，原铁熔炉恢复，磁铁入料已接回并升级，原生10秒切面记录铁8件、电路板4件产出。282及24已正常升级高速。594绑定1101，793继续使用1003。旧带1709保持原路径。
 - 钛化玻璃仓补200水后，6927/6929原输入已正常升级高速。100卡西米尔及20钛化玻璃已正常投入新位面设备并形成上述6件实存。后续水、石矿、钛块及科研供料继续沿实际库存补充。
-- 新油源542已正常建设为7075。3风机/1塔构成独立网4，实际需求/供给14000J/t、容量15000J/t、供电比例1，矿内12原油实存通过10件门槛。7根出口带及首段12根抬高带正常完工，筛选1007的入口分拣器准确准备通过，下一19根抬高带仍由原动作施工。整线输送和新精炼连续产出仍待验证。旧油井附近末段增加绕行点，原生生成的两段18/7点已观察并通过选定旧井保守包围检查，实际全条件逐段施工继续。 [用料记录](resource-increment.md)
-- 原氢线10秒Native切面为144/min产出及138/min消耗，原油66/min产出及72/min消耗。该历史短切面保留其时间范围。3座新精炼厂已正常制造，按1基本/2X射线裂解的名义配比规划新增45净氢/游戏分钟及精炼油收支平衡。两座补塔按出口分拣器与后续精炼的实际覆盖使用，累计塔上限23。
+- 新油源542已正常建设为7075，3风机/2塔支撑独立网4，矿内12原油实存通过10件门槛。7根出口带、145根抬高/绕行/下降带、两端分拣器正常完工，入口筛选1007，末端极速输入接入旧2808。两端供电比例均1，新抬高带已观察2件及后续43件原油。新带末端到精炼厂707的215节点有向连接已新鲜核对，实际末端插入和持续产出仍待复核。
+- 新基本精炼7235及两座裂解7236/7237正常建成、配置16/58/58并在主网3满供电。两个裂解位置在579个原生对象/45个地形点的有限包围筛选后分别通过完整原生施工。基本精炼的两条5带独立输出桥及到旧氢/油线的两条筛选中继正常完成。三台设备的本体输入/输出连接仍待补齐。
+- 原氢线10秒Native切面为144/min产出及138/min消耗，原油66/min产出及72/min消耗。该历史短切面保留其时间范围。3座新精炼厂已正常制造，按1基本/2X射线裂解的名义配比规划新增45净氢/游戏分钟及精炼油收支平衡。两座补塔中的一座用于出口分拣器，另一座随身保留。三新精炼复用旧网覆盖，累计塔上限23。
 - 水面Drift普通续移、后续建矿及自然转Walk已通过。先前要求先Walk的等待过严，已改用普通被动漂移续移。所有受阻移动、未接受准备/提交和已完成前缀均保留原件，accepted/unknown原动作继续单独核销。
 - Issue #5已读并核对，当前风机拆除仍需单台原生拆除、电网影响预览、回收及未触及拓扑核验。 [Issue #5](https://github.com/Arcueid77/Spherewright/issues/5)
 
 ## 源码、安装与继续边界
 
-产品源码 `14c7d66cda64d40c201577313740be05e6918479`，0.6.0，通过6559产品回归、准确Native构建及对应CI。实装5 Plugin/224 MCP文件清单为 `C1A1D058290A683529DDFD8D9C56A4E49EFD7576AEE536CB37CC68D02D90DCEC`，实际75工具SDK完整生产入口准入通过。原安装事务及超时保全原件保留。 [产品CI](https://github.com/Arcueid77/Spherewright/actions/runs/43098686696)
+所选产品源码 `cd67d5f0a768ffc55a5cafcfab07c562c3fb3a88`，0.6.0，通过6588准确源码回归、Native构建、双语文档及准确CI。新增可选`researchPaused`，经原生PauseTechQueue/ResumeTechQueue切换，保全队列、进度、库存及分数科研点，Voyager空闲证明识别原生暂停及零随身所需物品。两种开发MCP入口的75工具/1资源与内嵌指南、SDK/PE资格通过，开发目录清单 `49F2392ACFF9249A48D475B0B4806E4E51B968384CAC0A156573833450D774DD`，5/224安装载荷索引 `0A7B98409F41D0F86542DFB7507A0C1454377C11B25874199288257B19A98E9A`。实装仍为14c7d66c、已正常关闭，新能力的安装及实机验收待续。 [产品CI](https://github.com/Arcueid77/Spherewright/actions/runs/43221110869)
 
 调用端48小时启动容量修正7a95eb21通过206本地回归及准确CI43183645171，原24小时拒绝发生于进程创建前。本轮低速commit登记前分类和fresh间隔通过208本地回归及准确CI43195714901。 [48小时调用端CI](https://github.com/Arcueid77/Spherewright-Lab/actions/runs/43183645171) · [拒绝分类CI](https://github.com/Arcueid77/Spherewright-Lab/actions/runs/43195714901)
 
-已完成外部只读观察82请求单列保留，下一写方上限199918，全局200000，最终保存边界合并真实计数。新油源支撑后的累计施工额度为矿机2、油井1、精炼厂3、风机3、熔炉6、MkII14、小仓21、电塔23、普通90/高速8/极速8分拣器及550基础带。当前原写方的51请求预留配置原件保留，下次交接应用82请求后的额度，原生几何/成本及实耗继续核验。
+全部运行及外部观察请求已在关停边界合并为90993，全局上限200000。当前累计施工实耗为基础带467、普通78/高速8/极速7分拣器、电塔22、油井1、风机3、精炼3，其余原账保留。普通90/高速8/极速8、基础带550及电塔23上限保持。新增两条输出桥另正常制造2个普通分拣器，仍在现行施工上限内。
 
-1. 保留当前已接受抬高带原动作，逐段完成空载线路。按80米实际建造范围分段移动，末段绕开旧井后下降，通过新鲜原生准备接入筛选明确的旧油路，验证真实原油输送及1基本/2裂解的连续产出。全部正常取料、制造、施工和准备拒绝保持原账目。
-2. 补齐氢/原油、钛化玻璃、处理器、粒子宽带及各矩阵的完整连续供料，完成剩余1873份五色科研。当前Voyager要求空机甲科研缓冲及限定工厂科研元数据，先完成1523再做Caph航段。
-3. Caph只读统计显示主网2实际发电0、站点电量0，到场先恢复实际供电。重新核对6度闭壳设计210结构点/224细胞点的准确成本及现有库存，完成当地制造、持续发射、真实交付、闭壳及接收器持续非零电力。
+1. 冷安装所选cd67d5f0同源载荷，先准备完备保护与首操作包，再正常启动同owned Primary并在300秒内达到真实操作。原未知主菜单动作保持隔离及不重放。
+2. 实机核对科研暂停/恢复的队列、进度和矩阵点数保全，补齐三新精炼及完整矩阵供料。应力科研仍余1873份五色，新暂停能力允许保留缓存提前开展Caph II建设，后续正常恢复科研。
+3. Caph主网2实际发电0，准确站点2电量0且未接电。到场先核实燃料与拓扑、恢复实际供电。新鲜核对6度闭壳设计210结构点/224细胞点，完成当地制造、持续发射、真实交付、闭壳及接收器持续非零电力。
 4. 正常保存、完整关停保护及冷恢复后复核设计、进度、设备和持续电力，最后生成同源手动/Thunderstore交审双包。 [实施与验收](implementation-plan.md)
 
 ## English
 
-The original owned game continues on selected, installed and loaded14c7d66c. The sole oil-source-live caller normally withdrew50 red cubes, all consumed in five-color research, advancing1523 to22860/360000. New extractor7075, seven outlet belts, three winds and one Tesla normally completed. Independent network4 provides full service and the extractor's12 stored crude passed the ten-item gate. The first12 raised belts completed and the exact filtered1007 source-sorter prepare passed. Preserve the empty raised path until complete. The next19 raised belts are constructing through their original accepted action. Two known-unaccepted stale prepares during post-flight Drift remain archived. Ordinary Drift continuation reached dry ground and construction succeeded.
+The game normally closed with Primary/LastExit127294538 and2328 verified protected files. Preserve6205276 cumulative ticks,90993 merged RPCs, the9000000/200000 ceilings and54000/3000 reserves. The return-to-menu original remains unknown after its confirmed complete save. Subsequent public MCP reads proved the world unloaded, followed by normal application close and full backup. The next finite48-hour source-update window follows owner runtime autonomy and retains the300-second startup-to-work gate.
 
-Latest ordinary save127228150 corresponds to6138888 cumulative spent ticks. Complete stopped protection remains primary/LastExit127035116 and2278 files with5945854 spent at that cut. Preserve9000000 cumulative ticks,54000 return/3000 cleanup and172800 finite wall seconds from the original cold launch, ending2026-11-14T03:29:04Z.
+Selected sourcecd67d5f0 passed6588 exact-source tests, Native29151 build and exactCI43221110869. Native pause/resume uses the ordinary history business methods, preserving the queue/progress/materials and fractional research points. Voyager observes a normally paused queue with no carried required inputs. Both development MCP entry points passed75-tool/one-resource, embedded-guide and SDK/PE checks. The development manifest is49F2392ACFF9249A48D475B0B4806E4E51B968384CAC0A156573833450D774DD and five Plugin/224 MCP files bind cohort index0A7B98409F41D0F86542DFB7507A0C1454377C11B25874199288257B19A98E9A. Installed14c7d66c is stopped. New-source installation and live acceptance remain pending.
 
-Stress1523 reached22860/360000, leaving1873 of each color. Fifty additional red cubes entered normal research and50 five-color sets were consumed. Observed whole-equivalent mecha buffers hold76 blue,1873 yellow,73 purple and95 green, with zero red. The original five-layer green factory's110/110 feed funded220 normally produced greens, all withdrawn. Complete green research production remains pending.
+Oil extractor7075/three winds/two towers, seven outlet/145 raised belts and both end sorters normally completed with full service. The new path held two, later43 crude items. A fresh215-object directed trace links its legacy destination to basic refinery707. Actual final insertion and sustained output need follow-up. New basic7235/two X-ray7236/7237 refineries normally completed with recipes16/58/58 and full network3 power. Native collision/terrain observations screened579 objects/45 points before individual full Native construction. Two five-belt basic-product bridges and filtered legacy relays completed. Core input/output connections remain pending. Retain the original failed prepares and the corrected sequence11 Walk/passive-drift flag misuse.
 
-All six additional MkII machines, three stores and two towers normally completed. The original board machine upgraded to MkII. Actual allocation is two processor/two plane-filter/one Casimir/one board machine. The new processor store passed five products from zero, later holding22. The board store passed ten from zero. The plane store passed its five-product gate with six physical filters. All have full main-network3 power. The new Casimir producer still needs its raw-material positive proof.
+Stress1523 remains22860/360000, leaving1873 sets. Whole mecha buffers hold76 blue/1873 yellow/73 purple/95 green, zero red. Preserve the already-proven CPU5/board10/plane6 gates and220 factory greens. The bounded whole-local-storage scan covered100 unique stores/tanks/stations in seven cuts, with1881 fuel rods and1307 CPUs at that observation. Rocket recipe83 requires840 rods for the210 launch cap. Fresh stock checks still precede each transfer. Caph station2 was freshly identified with zero energy and no power-network connection. Its main network2 reports zero actual generation. Fuel cause awaits local observation.
 
-A normally recovered extra Casimir fast input freed a compliant output. Initial nonzero filters support2011/2012, and gradeIII uses normal zero initialization. GradeIII upgrade requests were explicitly rejected by the current supported-pair policy. Manufactured gradeIII items were used through new construction. Retain all original refusals and settled prefixes.
+Current charged construction includes467 belts,78 ordinary/eight fast/seven gradeIII sorters,22 towers, one oil extractor/three winds/three refineries. Preserve the90/eight/eight sorter,550-belt and23-tower caps and other inherited spending. All completed external-reader costs are merged in90993 RPCs. Current caller source208-test/exact-CI qualification remains intact.
 
-The eight-vein ore source passed full-power relay/storage flow.400 then600 ore reached the original store28 and274→282→17→20 chain. The original iron supply resumed and the magnet inlet was reconnected/upgraded. A Native ten-second cut recorded8 iron/4 boards.282/24 upgraded normally.594 filters1101 and793 retains1003. Legacy1709 stays in its original path.200 water replenished titanium glass and6927/6929 upgraded to fast.100 Casimir/20 titanium glass funded the six new stored filters.
+Cold-install the selected source from the complete backup and prepare first work before launch. Prove live pause/resume conservation, finish supply and parallel Caph construction, then resume normal research. Fresh-check all shell costs, complete manufacture/launch/delivery, sustained receiver electricity and final cold continuation before coherent manual/Thunderstore review archives. Issue #5 remains the open wind-turbine dismantling request. Formal0.6 publication remains outside the current grant.
 
-The earlier bounded Native sample of144 hydrogen/min produced/138 consumed and66 crude/min produced/72 consumed retains its original time scope. New oil source542 is now normally built as7075. Three winds/one Tesla provide14000J/t demand/service against15000J/t capacity, with full service and12 physical crude stored. Seven outlet/12 raised belts completed, the filtered source-sorter prepare passed and the next19 raised belts are constructing. Complete-line flow and new refining remain pending. A dry-side bypass avoids the old oil-extractor envelope. Its18/seven Native-generated points passed a conservative selected-pump screen, with actual construction checks still required. Three new refineries are normally manufactured for one basic/two X-ray allocation. The two supplemental Teslas support source-sorter and refinery coverage within cap23. Ordinary Drift continuation to dry ground and source construction passed. Issue #5 wind dismantling still needs its Native power-impact/recovery implementation.
-
-Product14c7d66c passed6559 tests, exact Native build and CI, with five Plugin/224 MCP files bound by manifest C1A1D058290A683529DDFD8D9C56A4E49EFD7576AEE536CB37CC68D02D90DCEC and actual75-tool SDK admission. The48-hour caller7a95eb21 passed206 tests/exactCI43183645171. The208-test commit classification passed exactCI43195714901. Preserve82 external reader requests, the next199918 writer allowance and200000 global ceiling. The current51-request-reserved writer input remains immutable until its normal handoff. Revised cumulative caps include one oil extractor, three refineries/three winds,23 Tesla towers,90 ordinary/eight fast/eight gradeIII sorters and550 belts.
-
-Continue the accepted original equipment manufacture, normal-save/handoff and fresh Native oil construction, complete normal material supply and1523, then restore actual Caph power before manufacture/launch/delivery. Its main network2 currently reports zero actual generation and the station zero energy. Fresh-check210 structure/224 cell costs, complete the shell/receiver power and normal cold continuation before final coherent review packages. Voyager currently requires empty mecha research buffers and restricted factory-research metadata.
-
-[前次快照 / Previous snapshot](https://github.com/Arcueid77/Spherewright-Lab/blob/0c64813df7ce9f615157399e47a7fbab17ced1bf/scenarios/v0.6-ascension/current-status.md) · [持续授权 / Standing authority](../../operations/standing-authority.md)
+[前次快照 / Previous snapshot](https://github.com/Arcueid77/Spherewright-Lab/blob/f61ad5cf4761ed9b4b328404980a57ef6e0c77a1/scenarios/v0.6-ascension/current-status.md) · [持续授权 / Standing authority](../../operations/standing-authority.md)

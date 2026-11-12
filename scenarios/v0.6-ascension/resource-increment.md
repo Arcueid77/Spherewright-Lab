@@ -194,3 +194,11 @@ Saved boundary127024506 retains5935244 ticks/77103 requests and2266 verified pro
 依据原网覆盖及新油井独立供电布局，增加2座电力感应塔的制造/施工额度，直接材料6铁及2磁线圈。两座补塔用于油井出口分拣器与后续精炼的实际覆盖，累计电塔上限23。油路可使用2个已正常制造的极速分拣器，累计极速施工上限8，其余已记油源/风机/精炼厂/输送带额度保持。由所有者合理用料自主授权执行，保留实际消耗与Native几何、原动作及储备检查。
 
 English. Native recipe16 consumes2 crude per4 seconds and produces1 hydrogen/two refined oil. Recipe58 consumesone refined oil/two hydrogen per4 seconds and produces3 hydrogen/one graphite. Allocate the three new refineries to one basic/two X-ray units for nominal45 net hydrogen and30 graphite per game minute with balanced refined oil. Continuous Native output still needs proof. Two additional Tesla towers cost6 iron/two coils and cover the source outlet sorter and later refineries within cumulative cap23. Up to two normally manufactured gradeIII sorters may serve the oil phase within the cumulative cap8. Apply owner reasonable-material autonomy while retaining actual spending, Native geometry, originals and reserves.
+
+## 2026-11-12 输出桥与正常源码更新时窗
+
+基本精炼的氢与精炼油出口各增加一条5根基础带的独立桥和一条普通筛选中继。另正常制造2个普通分拣器，直接材料2铁及2电路板，累计施工仍在普通90和基础带550上限内。当前全部实耗继续保留。
+
+最新正常关停保护为127294538/2328项，累计6205276tick及90993请求已完整合并。按所有者合理运行时长自主授权，下一次同存档源码更新使用有限48小时冷时窗，保留累计900万、54000返航/3000清理和300秒启动门。前一正常关闭时窗和原菜单超时未知原件保留。
+
+English. Each basic-refinery product gains an independent five-belt bridge and filtered ordinary relay. Two additional normally crafted ordinary sorters costtwo iron/two boards within the90-ordinary/550-belt caps. The next finite48-hour same-owned-source-update window retains6205276 spent ticks/90993 RPCs,9000000 cumulative ticks,54000/3000 reserves and the300-second startup gate, with prior closed-window/menu-unknown evidence preserved.
