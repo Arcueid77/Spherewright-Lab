@@ -1,5 +1,11 @@
 # Ascension resource increment / Ascension用料增量
 
+## 2026-11-12五层引力矩阵生产 / Five-layer gravity-matrix production
+
+按已授权合理科研/施工增量，使用新鲜配方10/85/86/8制造5研究站、2小仓、2普通分拣器及1电塔，另复用背包1普通分拣器。直接消耗52铁、20玻璃、22电路板、21磁线圈及8石材，原终态及背包5/2/3/1建筑物品已回读。有限累计施工上限更新为研究站20、小仓15、普通分拣器66、电塔16，保留原15/13/63/15既耗。1电塔按实际电网覆盖需要使用。首批50量子及50透镜已正常取入背包，对应100绿矩阵，接入正常五层生产。200水存入6918、200处理器存入6903，解除原有钛化玻璃/量子输入短缺。
+
+Native recipes10/85/86/8 normally manufactured five labs, two stores, two ordinary sorters/one tower, reusing one carried sorter. Exact inputs were52 iron,20 glass,22 boards,21 coils/eight bricks. Original terminals and carried5/2/3/1 buildings were observed. Finite cumulative placement ceilings become20 labs,15 stores,66 ordinary sorters/16 towers, preserving15/13/63/15 previously spent. Use the tower according to actual power coverage. Fifty normally withdrawn quantum/fifty lenses fund100 green matrices through five-layer production.200 water entered6918 and200 processors entered6903 to restore titanium-glass/quantum inputs.
+
 ## 2026-11-12运行时长自主增量 / Autonomous runtime increment
 
 所有者明确回复“运行时长也合理自行增加”，按[现行运行授权](../../operations/standing-authority.md#current-ascension-runtime-autonomy-2026-11-12--当前ascension运行时长自主授权)将当前有限累计上限设为900万。保存边界127031494保留5942232既耗，余3057768tick，包含54000返航/3000清理储备及3000768工作余额。科研、材料、施工既耗及原动作保持原账目。当前新时窗采用5400秒有限墙钟及既有200000累计请求上限。后续完成0.6所需合理运行增量按同一授权核算记录执行。

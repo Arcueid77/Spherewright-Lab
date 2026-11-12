@@ -31,7 +31,7 @@
     },
     "evidence": "scenarios/v0.6-ascension/current-status.md",
     "verification": "disk_verified",
-    "runtimeState": "not_running",
+    "runtimeState": "running_verified",
     "developmentArtifact": {
       "kind": "plugin_mcp_directory",
       "manifestSha256": "C1A1D058290A683529DDFD8D9C56A4E49EFD7576AEE536CB37CC68D02D90DCEC",

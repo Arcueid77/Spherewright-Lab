@@ -1,9 +1,12 @@
 # Ascension current snapshot / Ascension活动快照
 
-2026-11-12。游戏及MCP已正常保存退出，Primary/LastExit127031494，2270项完整保护、实装14c7d66c实际加载标记及同源字节核验通过。累计5942232tick、77240请求。所有者已明确回复“运行时长也合理自行增加”，当前有限累计上限900万，余3057768tick，其中54000返航及3000清理储备保留，可施工余额3000768tick。
+2026-11-12。当前owned游戏及MCP保持运行，实装14c7d66c及实际加载标记已核验。最新正常保存边界Primary/LastExit127035116、2278项完整保护，该边界累计5945854tick。当前有限累计上限900万，54000返航/3000清理储备保留，运行中的后续消耗按原始游戏tick及请求记录累计。唯一writer已正常交接到green-live，原始时钟保留，有限墙钟更新为14400秒。
 
 ## 当前结果
 
+- 本轮已实际从907取100氢并送入781，红矩阵恢复生产，随后取2红完成五色各2矩阵的原生消费，1523达到360/360000。启动首操作在268.125秒通过，准确补入8燃料，前次超时及数量拒绝原件保留。
+- 已正常取得50量子及50透镜，并补200水/200处理器至6918/6903。5研究站、2仓、3普通分拣器、1塔已备齐，施工有限上限20/15/66/16，正在部署五层引力矩阵生产。
+- Issue5已核对当前源码，风机仍被拆除白名单拒绝，需要补原生身份、电网影响预览、回收及未触及拓扑保护。 [Issue5](https://github.com/Arcueid77/Spherewright/issues/5)
 - 位面过滤器/量子链回流堵塞已解除。正常拆除过量卡西米尔输入后，首个工厂量子入仓。后续重建较慢的两段输入，原生周期400000/400000、回流2012周期200000。预声明7→10新增入仓验证通过，前次127024506保存前仓6903有50量子、92过滤器及192卡西米尔。
 - 已有5162煤源经短内段、三处跨线连接和四只2012接入熔炉113。原空矿106、闲置输入115正常回收，其ID随后由新带复用。研究及氢线路保留，煤/石墨/红矩阵恢复实际生产。
 - 研究84缺黄矩阵已查明。860改未筛选后提供蓝/黄，随后正常升级2012。引力矩阵科技1705达到576000/576000并解锁，首次正常手搓2绿，物理背包2件及随后机甲7200点科研缓存均已回读。1523已选定，保存时0/360000哈希。
@@ -25,7 +28,7 @@
 
 ## English
 
-Normal save/close preserved primary/LastExit127031494 with2270 verified protected files, actual loaded14c7d66c stamps/coherent bytes,5942232 spent ticks and77240 requests. The owner explicitly authorized reasonable autonomous runtime increments. Current finite ceiling9000000 leaves3057768 ticks including54000 return/3000 cleanup and3000768 work ticks.
+The owned game/MCP are running with verified loaded14c7d66c. The latest normal saved boundary is primary/LastExit127035116 with2278 protected files and5945854 spent ticks. Current finite ceiling9000000 retains54000 return/3000 cleanup. Subsequent live spending remains cumulative. One writer handed to green-live with the original launch clock and14400 finite wall seconds.100 hydrogen moved907→781, red resumed and two of each matrix color were normally consumed, reaching1523 at360/360000.50 quantum/50 lenses were withdrawn,200 water/200 processors replenished6918/6903, and5 labs/2 stores/3 ordinary sorters/1 tower are ready for five-layer green production under20/15/66/16 placement ceilings. Native startup passed at268.125 seconds with an exact8-rod refuel, preserving earlier failures. Issue5 remains a wind-dismantle capability gap in the current explicit whitelist.
 
 The Casimir/plane return blockage was removed. Normal removal of excess input proved the first factory quantum. A slower input was rebuilt with Native cycles400000/400000 against the2012 return200000. The declared7→10 new stored output passed. At the earlier127024506 cut,6903 held50 quantum,92 filters/192 Casimir and5944 held64 lenses. Existing5162 coal now reaches113 through a short inner section, three preserved-line crossings/four2012 couplers. Empty miner106/idle input115 were normally recovered and their IDs later reused by belts. Coal/graphite/red production resumed.
 
