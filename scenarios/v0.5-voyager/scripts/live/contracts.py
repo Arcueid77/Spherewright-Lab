@@ -332,6 +332,10 @@ def validate_steps(steps):
                 raise ValueError('immutable_stack_identity_invalid')
         if kind=='build-resource' and any(type(step[key])is not int or step[key]<=0 for key in ('itemId','nodeId')):
             raise ValueError('immutable_resource_build_identity_invalid')
+        if kind=='build-belt-to-device' and 'source' in step:
+            source=step['source']
+            if not (type(source) is int and source>0 or isinstance(source,str) and bool(source)):
+                raise ValueError('immutable_belt_source_identity_invalid')
         if kind=='observe-receiver-power':
             entity=step['entity']
             if (not (type(entity) is int and entity > 0 or isinstance(entity,str) and bool(entity))
@@ -400,6 +404,11 @@ def validate_native_calls(steps,schemas):
         elif kind == 'build-object' and 'modelIndex' in step:
             call('spherewright_prepare_build', dict(buildingItemId=step['itemId'],
                 expectedPlayerStateHash='schema-placeholder', preferredModelIndex=step['modelIndex']))
+        elif kind=='build-belt-to-device' and 'source' in step:
+            call('spherewright_prepare_build',dict(buildingItemId=2001,expectedPlayerStateHash='schema-placeholder',
+                sourceObjectId=1,expectedSourceStateHash='schema-placeholder',
+                destinationObjectId=2,expectedDestinationStateHash='schema-placeholder',
+                preferredPositionX=0,preferredPositionY=200,preferredPositionZ=0))
         elif kind=='read':call(step['tool'],step.get('arguments',{}))
         elif kind=='observe-receiver-power':
             call('spherewright_get_session_state',{})

@@ -210,8 +210,12 @@ class Factory(Live):
    destination=self.object_id(s['destination']);last=None
    for start in s['starts']:
     target=self.entity(destination);point=self.layout(start)
-    try:return self.build(role,dict(buildingItemId=2001,destinationObjectId=destination,expectedDestinationStateHash=target['endpointStateHash'],
-      **dict(zip(('preferredPositionX','preferredPositionY','preferredPositionZ'),[point[k] for k in 'xyz']))),s['maximumNewBelts'])
+    arguments=dict(buildingItemId=2001,destinationObjectId=destination,expectedDestinationStateHash=target['endpointStateHash'],
+      **dict(zip(('preferredPositionX','preferredPositionY','preferredPositionZ'),[point[k] for k in 'xyz'])))
+    if 'source' in s:
+     source=self.entity(self.object_id(s['source']))
+     arguments.update(sourceObjectId=source['objectId'],expectedSourceStateHash=source['endpointStateHash'])
+    try:return self.build(role,arguments,s['maximumNewBelts'])
     except ToolRefused as error:
      if error.error.get('code') not in ('BUILD_LOCATION_INVALID','BUILD_CONNECTION_INVALID'):raise
      last=error

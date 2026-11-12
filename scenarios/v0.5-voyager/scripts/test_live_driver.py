@@ -10,6 +10,31 @@ from factory import Factory,resolve_refs
 from runtime import freeze,Runtime
 
 class LiveDriverTests(unittest.TestCase):
+ def test_device_belt_preserves_free_start_and_binds_an_explicit_existing_source(self):
+  for source in (None,7):
+   with self.subTest(source=source):
+    adapter=Factory.__new__(Factory);adapter.ctx=dict(planetId=104);adapter.state=lambda:None
+    adapter.entity=lambda object_id:dict(objectId=object_id,endpointStateHash=f'endpoint-{object_id}')
+    calls=[];adapter.build=lambda role,arguments,maximum:calls.append((arguments,maximum)) or 'native-result'
+    step=dict(kind='build-belt-to-device',role='station-input',destination=9,
+      starts=[dict(x=0,y=200,z=0)],maximumNewBelts=12)
+    if source is not None:step['source']=source
+    validate_steps([step]);self.assertEqual('native-result',adapter.step(step))
+    arguments,maximum=calls[0];self.assertEqual(12,maximum)
+    self.assertEqual(9,arguments['destinationObjectId'])
+    self.assertEqual('endpoint-9',arguments['expectedDestinationStateHash'])
+    if source is None:self.assertNotIn('sourceObjectId',arguments)
+    else:
+     self.assertEqual(7,arguments['sourceObjectId'])
+     self.assertEqual('endpoint-7',arguments['expectedSourceStateHash'])
+
+ def test_device_belt_rejects_invalid_explicit_sources_before_native_calls(self):
+  for source in (None,True,0,-1,''):
+   with self.subTest(source=source):
+    with self.assertRaisesRegex(ValueError,'immutable_belt_source_identity_invalid'):
+     validate_steps([dict(kind='build-belt-to-device',role='input',source=source,destination=9,
+       starts=[dict(x=0,y=200,z=0)],maximumNewBelts=12)])
+
  def test_install_alias_uses_observed_directory_identity(self):
   from install_preflight import same_installation_directory
   from unittest.mock import patch
