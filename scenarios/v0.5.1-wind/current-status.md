@@ -1,5 +1,11 @@
 # Wind maintenance snapshot / 风机维护快照
 
+0.5.1发行双包由准确来源c632f2d6生成并通过结构、双语指南、两个实包MCP入口及229项已装程序字节一致性检查；累计请求含16次离线元数据检查为102625。完整包信息与冷恢复范围见[发行资格](../../releases/v0.5.1/qualification-2026-11-13.md)，标签及平台发布另记。 / The exact-source0.5.1 archives passed layout, bilingual guide, both packaged MCP entry point and229 installed-program byte checks. The cumulative102625 requests include16 offline metadata requests. Package and cold-continuation scope are recorded separately from publication.
+
+2026-11-13同源冷恢复在263.766秒进入实操，原位风机、主网136台发电机及消费者满供保持，1石墨正常借还。原拆除成功回执在原进程中经实体编号复用后仍可查询；冷启动后的只读查询返回ACTION_NOT_FOUND，符合接口声明的Plugin进程作用域，不证明动作未执行。原成功回执和冷查询结果均保留，未重放。正常保存退出，Primary/LastExit 130230033、2464项完整保护、累计9140771tick/102609请求。下一步生成并核验同源发行双包。
+
+Same-source cold continuation reached work in263.766 seconds and preserved the rebuilt turbine,136 network generators and full consumer service. One graphite was borrowed and returned. The original successful dismantle remained readable after ID reuse in the original process; the cold read returned ACTION_NOT_FOUND, consistent with the documented Plugin-process scope and not evidence of non-execution. Both records remain; no action was replayed. Normal save/exit protected primary/LastExit130230033 and2464 files, with9140771 ticks and102609 requests. Create and verify the final same-source archives.
+
 冷恢复完整离线预检通过，4次请求已计入累计102158；下一首实操借取1石墨并在复核后归还。 / The full cold-continuation preflight passed; its4 requests are included in cumulative102158. The first real operation borrows one graphite for later return.
 
 2026-11-13当前存档正向通过。c632f2d6在283.765秒完成恢复和首操作。只读预览完整、无断供；单座风机正常回收1件，原生回读确认目标消失、库存增产点、幸存建筑、工厂连接和其他电网保全。独立普通建造消耗该件并在原位重建，电网发电机135→136且消费者满供；复用原实体编号后读取原拆除动作，终态仍为成功。2石墨正常借取并完整归还。调用包一次因私有正文文件名与回执角色冲突在派发前被拒，未接受任何动作，原记录保留。

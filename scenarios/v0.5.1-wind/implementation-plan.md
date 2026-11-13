@@ -1,5 +1,9 @@
 # Wind recovery maintenance / 风机回收维护
 
+2026-11-13验证边界更正：普通动作结果由当前Plugin进程提供，并非跨重启持久查询。实测在原进程重建及实体编号复用后可重复读取成功终态，冷启动后返回ACTION_NOT_FOUND；原回执与冷查询均保留，不重放已完成动作。下面原计划的跨冷启动查询与同键提交不再作为通过条件；已有进程内重复读取、源码幂等检查及冷恢复实体/电网实证分别记账。
+
+Correction to the validation boundary: ordinary action results belong to the current Plugin process and are not promised across restart. The successful original was reread after rebuilding and ID reuse in the original process; the cold read returned ACTION_NOT_FOUND. Both records remain, and completed actions are not replayed. The historical same-key live submission and cross-restart receipt query below are not acceptance requirements; in-process reread, source idempotency checks and cold entity/network evidence are reported separately.
+
 2026-11-13。所有者要求“issue5的修改需要额外同步到0.5里，出一个0.5.1”。当前任务实现并交付风机原生拆除、电网影响预览及独立正常重建验证，同时同步0.6开发线。0.6玩法目标处于暂停状态，保存交接见[Ascension快照](../v0.6-ascension/current-status.md)。 [Issue #5](https://github.com/Arcueid77/Spherewright/issues/5)
 
 ## 来源与实现
