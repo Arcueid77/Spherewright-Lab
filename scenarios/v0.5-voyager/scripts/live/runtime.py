@@ -114,7 +114,11 @@ class Runtime:
         return {role:native_file_proof(p,identity) for role,p in self.native_paths().items()}
 
     def verify_backup(self):
-        c=self.config; m=read(c['backupManifest'])
+        c=self.config
+        if (c.get('recoveryProfile')=='ordinary-owned-home' and c.get('recoveryMode')=='default'
+                and c.get('quarantinedDefaultLastExit') is True):
+            need(c.get('sourceRole','lastExit')=='lastExit','quarantined_default_source_role_mismatch')
+        m=read(c['backupManifest'])
         need(m['complete'] and m['verified'] and len(m['nativeSaveRoles'])==4,'complete_backup_missing')
         need(self.protected_paths()=={Path(r['originalPath']).resolve() for r in m['rows']},'protected_set_changed')
         for r in m['rows']:

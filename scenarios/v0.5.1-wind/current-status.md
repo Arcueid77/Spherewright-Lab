@@ -1,5 +1,9 @@
 # Wind maintenance snapshot / 风机维护快照
 
+2026-11-13恢复预检更正。0.5.1原生恢复预览确认当前owned主档和最低保存tick一致。启动在274.297秒时被调用端的旧LastExit标志与主档角色冲突拦截，原预览及失败记录保留。主菜单已经MCP确认并正常关闭，Primary/LastExit 130226948及2446项完整保护重新核验。旧标志已在新不可变输入中按主档角色修正，恢复预览回显检查通过。共享调用端把该矛盾提前到启动前拒绝，103项驱动回归通过。累计写方101157及14只读，共101171请求；已有实耗和储备保持。
+
+The0.5.1 native recovery preview matched the current owned primary and saved tick. At274.297 seconds the caller rejected a stale LastExit flag paired with the primary role. The original preview/failure are retained. MCP confirmed the menu and normal shutdown, followed by complete2446-file protection at primary/LastExit130226948. New immutable inputs correct the source flag and pass the recorded recovery-echo check. The shared caller now rejects that conflicting configuration before launch and passed103 driver cases. Cumulative writer101157 plus14 readers totals101171 requests.
+
 2026-11-13续接。0.5.1已安装，同源MCP通过13项离线接口调用，17次请求已计入累计账目，当前累计100765请求。首次启动在游戏进程创建前因验证路径仍指向0.6而结束，原记录已保留。新的不可变输入绑定0.5.1来源资格和实装接口证明，继续当前owned存档实测。0.6目标已恢复，科研在风机验收期间保持暂停。
 
 The installed0.5.1 MCP admitted13 offline interface cases. Its17 requests are included in the cumulative100765 request count. The first launch ended before game-process creation because qualification paths referenced0.6. The original record is retained and new immutable inputs bind the0.5.1 source and installed SDK proofs. The0.6 goal is active, with research paused during wind acceptance.

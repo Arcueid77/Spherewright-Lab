@@ -10,6 +10,21 @@ from factory import Factory,resolve_refs
 from runtime import freeze,Runtime
 
 class LiveDriverTests(unittest.TestCase):
+ def test_default_quarantined_last_exit_rejects_a_primary_source_before_backup_reads(self):
+  from unittest.mock import patch
+  runtime=Runtime.__new__(Runtime)
+  runtime.config=dict(recoveryProfile='ordinary-owned-home',recoveryMode='default',
+   quarantinedDefaultLastExit=True,sourceRole='primary',backupManifest='synthetic-backup')
+  with patch('runtime.read',side_effect=RuntimeError('backup_read_reached')):
+   with self.assertRaisesRegex(RuntimeError,'quarantined_default_source_role_mismatch'):
+    runtime.verify_backup()
+   runtime.config['quarantinedDefaultLastExit']=False
+   with self.assertRaisesRegex(RuntimeError,'backup_read_reached'):
+    runtime.verify_backup()
+   runtime.config.update(quarantinedDefaultLastExit=True,sourceRole='lastExit')
+   with self.assertRaisesRegex(RuntimeError,'backup_read_reached'):
+    runtime.verify_backup()
+
  def test_device_belt_rejects_unsupported_source_binding_before_native_calls(self):
   for source in (7,'built-tail',None):
    with self.subTest(source=source):
