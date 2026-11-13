@@ -1,5 +1,11 @@
 # Ascension current snapshot / Ascension活动快照
 
+2026-11-13暂停交接。所有者已暂停0.6并要求Issue #5同步0.5、交付0.5.1。当前Primary/LastExit均130226948，正常保存退出及2446项完整保护通过，累计9137686tick、100734写方加14只读合计100748请求。科研已正常暂停于137160/360000，762绿实际消费、余1238份五色。后续100量子/100透镜已完整送入7019，其中100绿已取入并消费，其余留在成品仓和叠层。停止前切面为86绿、50透镜、43量子、98钛化玻璃及45紫，后续自然生产至正常退出的实际值以恢复读数为准。
+
+微晶仓843已通过原生混合预留保全100硅和100晶格硅，禁格28→20并补500铜，微晶和原处理器产出恢复。848、898和2255已正常升级MkII，3笔升级复用回收MkI，直接新增12铁/4板/24石墨烯/12处理器。两条玻璃石矿输入6922/6924及石墨/石墨烯输入873/3054已正常升级高速。另4高速正常制造耗6铁/2线圈及4普通，其中2用于873/3054，2仍随身，6926/6933升级后缀在接受前因Drift被拒绝。75宽带已送775、500塑料已送899。一次过期分页和两次超距转运均在接受前拒绝，已完成前缀保留并经新位置继续。原菜单准备STALE未接受，暂停科研、普通移至已验证陆地、重新附着关停调用端后，正常菜单保存及完整保护完成。原unknown持续隔离。
+
+Current pause. The owner paused0.6 and requested Issue #5 for0.5.1. Primary/LastExit130226948, normal exit and2446 protected files are verified. Spending is9137686 ticks and100748 RPCs including14 separate readers. Stress is paused at137160/360000 after762 green matrices, leaving1238 sets. A further100 quantum/100 lens batch entered7019 and delivered100 green to research; remaining output/lab material is conserved. Three existing assemblers upgraded to MkII with recycled MkI items, using12 iron/four boards/24 graphene/12 processors.500 copper and native mixed reservations restored microcomponent production. Two glass-stone inputs and two graphite/graphene inputs upgraded to fast. Four fast items cost six iron/two coils/four ordinary sorters; two remain carried after the unaccepted6926/6933 drifting refusal.75 broadband and500 plastic were delivered. Preserve known preacceptance refusals and all accepted prefixes. Normal research pause, movement to proved dry Walk0 and a replacement close caller completed the menu save, exit and full protection. Original unknowns remain isolated.
+
 2026-11-13。应力1523已正常恢复并达到119160/360000，累计正常制造及消费662绿，余1338份五色科研。最新正常保存130187692，对应9098430累计tick。四个既有氢/重氢高速接口已正常回收后分别新建极速接口，两条重氢普通接口正常升级高速，原生10秒切面重氢产出由30/min升至60/min，重氢与奇异物质设备均已观察到工作。供氢站间运输及卡西米尔生产保持已通过状态，916供应上限100、918需求上限500已正常配置，918已有2001氢完整保留。当前唯一调用端沿原PID30000继续补料，累计1200万tick上限、54000返航/3000清理储备和原墙钟截止保持。完整0.6科研、闭壳、当地发射、持续接收电力、冷恢复和交审双包继续推进。
 
 最新完整关停保护仍绑定LastExit127407577、Primary127358921及2334项文件，启动前累计6318315/9000000tick，保留54000返航及3000清理。本轮使用default隔离恢复，准确原生准备回读最低127390736并绑定已完整保护的最新LastExit。早前菜单返回和本次原桥头拆除未知原件均持续隔离，当前运行实耗继续累计。
