@@ -1,5 +1,13 @@
 # Wind maintenance snapshot / 风机维护快照
 
+2026-11-13当前存档实测。来源9711a414/0.5.1在271.219秒完成最新owned存档恢复及首笔普通取料。只读风机预览正确返回不可提交结果，并暴露风机发电功率观察被误判为库存缓冲的问题。已实际取回并归还1石墨，完成普通保存退出，Primary/LastExit 130227633及2452项完整保护，累计9138371tick、101620请求。应力队列及137160/360000进度在加载读数中保全，原unknown持续隔离。
+
+修正来源c632f2d6b01f8a037aa556225e6c038e909956c7识别原生发电功率单位及旧版标签，继续拒绝实际物料和异常缓冲。28项风机策略回归、实际风机快照离线准入以及1005例29151原生电网算法对照通过。0.6本地同步来源c720cf146b0ca530c94cd4d1ef6c6a0f580c81aa，两个准确提交的完整回归和CI正在进行。当前实装仍为9711a414/0.5.1，游戏正常关闭，继续同源修正资格、冷安装和真实拆除/重建验证。
+
+On the current owned save, source9711a414/0.5.1 reached actual work in271.219 seconds. A tokenless wind preview exposed a power-generation observation being rejected as an inventory buffer. One borrowed graphite was returned through a normal transfer. Normal save/close produced complete2452-file protection at primary/LastExit130227633, with9138371 spent ticks and101620 requests. The loaded stress queue and137160/360000 progress were preserved, along with original unknowns.
+
+Sourcec632f2d6b01f8a037aa556225e6c038e909956c7 accepts the Native generation observation and its legacy label while rejecting cargo and malformed buffers.28 wind-policy cases, offline admission of the actual wind snapshot and1005 Native29151 power-graph comparisons passed. The0.6 local counterpart isc720cf146b0ca530c94cd4d1ef6c6a0f580c81aa. Exact-source full regressions and CI are in progress. Installed source remains9711a414/0.5.1 and the game is normally stopped. Continue coherent fix qualification, cold installation and real recovery/rebuild acceptance.
+
 2026-11-13恢复预检更正。0.5.1原生恢复预览确认当前owned主档和最低保存tick一致。启动在274.297秒时被调用端的旧LastExit标志与主档角色冲突拦截，原预览及失败记录保留。主菜单已经MCP确认并正常关闭，Primary/LastExit 130226948及2446项完整保护重新核验。旧标志已在新不可变输入中按主档角色修正，恢复预览回显检查通过。共享调用端把该矛盾提前到启动前拒绝，103项驱动回归通过。累计写方101157及14只读，共101171请求；已有实耗和储备保持。
 
 The0.5.1 native recovery preview matched the current owned primary and saved tick. At274.297 seconds the caller rejected a stale LastExit flag paired with the primary role. The original preview/failure are retained. MCP confirmed the menu and normal shutdown, followed by complete2446-file protection at primary/LastExit130226948. New immutable inputs correct the source flag and pass the recorded recovery-echo check. The shared caller now rejects that conflicting configuration before launch and passed103 driver cases. Cumulative writer101157 plus14 readers totals101171 requests.
