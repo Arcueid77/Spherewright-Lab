@@ -318,6 +318,10 @@ class Factory(Live):
   need(not walking_preview or not commit_requested, 'walking_preview_requires_prepare_only')
   wind_preview = prepare == 'spherewright_prepare_dismantle' and args.get('previewOnly') is True
   need(not wind_preview or not commit_requested, 'wind_preview_requires_prepare_only')
+  wind_impact_hash=s.get('expectedWindPowerTopologyHash')
+  if wind_impact_hash is not None:
+   need(prepare=='spherewright_prepare_dismantle' and not wind_preview and commit_requested,
+    'wind_impact_binding_requires_commit_operation')
   if prepare=='spherewright_prepare_blueprint_build':
    need(bool(args.get('resumeBuildId')) and not args.get('blueprintCode') and args.get('site') is None
     and args.get('allowNewPaidConstructionWindow') is True,'shared_driver_paid_resume_only_no_new_blueprint')
@@ -328,7 +332,12 @@ class Factory(Live):
     and q.get('targetObjectId')==args['objectId'] and preview.get('targetEntityId')==args['objectId']
     and preview.get('evidenceVersion')==1 and preview.get('previewOnly') is True
     and type(preview.get('complete')) is bool and isinstance(preview.get('blockers'),list)
-    and (preview['complete'] or bool(preview['blockers'])),'tokenless_wind_preview_echo_required')
+    and (bool(preview['blockers']) if not preview['complete'] else
+     isinstance(preview.get('powerTopologyHash'),str) and len(preview['powerTopologyHash'])==71
+     and preview['powerTopologyHash'].startswith('sha256:')
+     and type(preview.get('powerNodeId'))is int and preview['powerNodeId']>0
+     and type(preview.get('generatorId'))is int and preview['generatorId']>0),
+    'tokenless_wind_preview_echo_required')
    self.runtime.put(s['role']+'-plan.private.json',q)
    self.runtime.put(s['role']+'-prepare-only.private.json',dict(noCommit=True,
     noGameActionAccepted=True,notAcceptanceEvidence=True))
@@ -345,6 +354,14 @@ class Factory(Live):
     noGameActionAccepted=True, notAcceptanceEvidence=True))
    return q
   need(q['prepared'] and q['commitAllowedNow'] and not q['commitBlockers'],'native_operation_not_prepared')
+  if wind_impact_hash is not None:
+   preview=q.get('windTurbineDismantle') or {}
+   need(q.get('targetObjectId')==args['objectId'] and preview.get('targetEntityId')==args['objectId']
+    and preview.get('evidenceVersion')==1 and preview.get('complete') is True
+    and preview.get('previewOnly') is False and preview.get('powerTopologyHash')==wind_impact_hash
+    and preview.get('blockers')==[] and all(preview.get(key) is True for key in
+     ('nativeDismantleAvailable','playerSettled','targetWithinReach','inventoryRoomAvailable')),
+    'wind_prepared_impact_changed_no_commit')
   if prepare=='spherewright_prepare_blueprint_build':
    need(q.get('plannedPaidConstructionReadmission') is True
     and (q.get('blueprintBuild') or {}).get('buildId')==args['resumeBuildId'],'exact_paid_resume_native_echo_missing_no_commit')

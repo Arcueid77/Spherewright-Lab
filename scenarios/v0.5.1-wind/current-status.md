@@ -1,5 +1,13 @@
 # Wind maintenance snapshot / 风机维护快照
 
+2026-11-13修正来源的完整离线预检通过：同源安装、2452项完整保护、首操作、原动作隔离与预算全部就绪。预检4次请求已计入累计101641，游戏保持正常关闭。0.6同步来源c720cf14的[准确CI](https://github.com/Arcueid77/Spherewright/actions/runs/43392343497)成功。下一步按新鲜原生预览执行风机实测。
+
+The full offline preflight passed for the fixed source, installed cohort,2452 protected files, first operation, original-action isolation and budgets. Its4 requests are included in cumulative101641; the game remains normally stopped. The exact0.6 counterpartc720cf14 CI succeeded. Continue live wind acceptance against fresh Native preview.
+
+2026-11-13修正已实装。来源c632f2d6/0.5.1完成单次官方冷安装，74工具的实装MCP通过13项离线接口调用，17次请求计入累计101637。共享调用端在提交风机拆除前核对只读预览的电网哈希及全部准备条件，104项驱动回归通过。最新Primary/LastExit 130227633及2452项完整保护保留，游戏当前正常关闭。继续最新owned存档恢复和风机只读预览。
+
+Fixc632f2d6/0.5.1 completed one official cold installation. The installed74-tool MCP passed13 offline interface cases. Its17 requests are included in the cumulative101637 count. The shared caller binds wind commit to the observed power hash and readiness checks, with104 driver cases passed. Primary/LastExit130227633 and2452 protected files remain, and the game is normally stopped. Continue current-owned-save recovery and tokenless wind preview.
+
 2026-11-13修正资格完成。0.5.1来源c632f2d6b01f8a037aa556225e6c038e909956c7通过6379项准确回归、实际29151构建、准确CI43391889129及同源开发程序资格。开发目录清单70EE4F1FCC1C8D637E85495FD5DF38A8A18930903ACA7379ECB98088DFFB68B8，载荷索引C6A3FCC8B8CEC0CAA1973D50ED9FB022FD68721BC19C1B67994E55C3B3F1EFDD。0.6同步来源c720cf146b0ca530c94cd4d1ef6c6a0f580c81aa已推送并通过6620项本地回归和Native构建，准确CI继续核验。
 
 当前安装为9711a414/0.5.1，游戏正常关闭。最新Primary/LastExit 130227633及2452项完整保护、9138371tick和101620请求保留。上次1石墨已正常取还，风机预览未产生拆除动作。下一首操作借取2石墨并在验收后归还，之后读取风机和电网并执行只读预览。科研队列保留，0.6目标继续。 [维护CI](https://github.com/Arcueid77/Spherewright/actions/runs/43391889129)

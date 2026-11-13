@@ -361,6 +361,12 @@ def validate_steps(steps):
             seconds=step['freshStaleMaximumSeconds']
             if kind not in ('operation','prepare-only') or type(seconds) not in(int,float) or not 0<=seconds<=60:
                 raise ValueError('finite_fresh_stale_allowance_required')
+        if 'expectedWindPowerTopologyHash' in step:
+            value=step['expectedWindPowerTopologyHash']
+            if (kind!='operation' or step.get('prepareTool')!='spherewright_prepare_dismantle'
+                    or not isinstance(value,str) or len(value)!=71 or not value.startswith('sha256:')
+                    or any(ch not in '0123456789abcdefABCDEF' for ch in value[7:])):
+                raise ValueError('wind_impact_binding_invalid')
         if kind=='dump' and any(not {'name','tool'}<=set(q) for q in step['queries']):
             raise ValueError('immutable_dump_query_shape_invalid')
         if kind=='operation' and step.get('requireObservedShortCrossingDryLanding'):

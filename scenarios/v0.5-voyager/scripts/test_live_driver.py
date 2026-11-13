@@ -455,7 +455,8 @@ class LiveDriverTests(unittest.TestCase):
   adapter.schemas={'spherewright_prepare_dismantle':dict(properties=dict(sessionId={},planetId={},objectId={},previewOnly={}),required=[])}
   calls=[]
   response=dict(prepared=True,commitAllowedNow=False,planToken='',targetObjectId=31,
-   windTurbineDismantle=dict(evidenceVersion=1,previewOnly=True,targetEntityId=31,complete=True,blockers=[]))
+   windTurbineDismantle=dict(evidenceVersion=1,previewOnly=True,targetEntityId=31,complete=True,blockers=[],
+    powerTopologyHash='sha256:'+'a'*64,powerNodeId=4,generatorId=5))
   adapter.call=lambda name,arguments:calls.append(name) or response
   def forbidden(*args):raise AssertionError('wind preview cannot commit')
   adapter.commit=forbidden
@@ -467,10 +468,34 @@ class LiveDriverTests(unittest.TestCase):
   response['windTurbineDismantle']['targetEntityId']=32
   with self.assertRaisesRegex(RuntimeError,'tokenless_wind_preview_echo_required'):
    adapter.native_operation_once(step,commit_requested=False)
-  response['windTurbineDismantle']['targetEntityId']=31
+  response['windTurbineDismantle'].update(targetEntityId=31,complete=False,blockers=['unavailable'])
+  self.assertIs(adapter.native_operation_once(step,commit_requested=False),response)
   response['planToken']='legacy-token'
   with self.assertRaisesRegex(RuntimeError,'tokenless_wind_preview_echo_required'):
    adapter.native_operation_once(step,commit_requested=False)
+
+ def test_wind_commit_requires_the_observed_power_impact(self):
+  adapter=Factory.__new__(Factory);adapter.ctx=dict(sessionId='synthetic-session',planetId=104);adapter.refs={}
+  arguments=dict(objectId=31,expectedEndpointStateHash='endpoint',expectedPlayerStateHash='player')
+  adapter.schemas={
+   'spherewright_prepare_dismantle':dict(properties={k:{} for k in [*adapter.ctx,*arguments]},required=list(arguments)),
+   'spherewright_commit_dismantle':dict(properties={k:{} for k in [*adapter.ctx,'planToken','idempotencyKey']},required=['planToken','idempotencyKey'])}
+  adapter.runtime=SimpleNamespace(put=lambda *_:None);calls=[];power_hash='sha256:'+'a'*64
+  preview=dict(evidenceVersion=1,complete=True,previewOnly=False,targetEntityId=31,powerTopologyHash=power_hash,
+   blockers=[],nativeDismantleAvailable=True,playerSettled=True,targetWithinReach=True,inventoryRoomAvailable=True)
+  adapter.call=lambda *_:dict(prepared=True,commitAllowedNow=True,commitBlockers=[],planToken='native-token',
+   targetObjectId=31,windTurbineDismantle=preview)
+  adapter.commit=lambda role,tool,args:calls.append((tool,args)) or 'original-wind'
+  adapter.successful_original=lambda handle:dict(actionId=handle,terminal=True,succeeded=True,actionKind='dismantle')
+  step=dict(kind='operation',role='recover-wind',prepareTool='spherewright_prepare_dismantle',
+   arguments=arguments,expectedWindPowerTopologyHash=power_hash)
+  validate_steps([step]);self.assertEqual('original-wind',adapter.native_operation_once(step)['actionId'])
+  self.assertEqual(1,len(calls));calls.clear();preview['powerTopologyHash']='sha256:'+'b'*64
+  with self.assertRaisesRegex(RuntimeError,'wind_prepared_impact_changed_no_commit'):
+   adapter.native_operation_once(step)
+  self.assertEqual([],calls)
+  with self.assertRaisesRegex(ValueError,'wind_impact_binding_invalid'):
+   validate_steps([dict(step,expectedWindPowerTopologyHash='invalid')])
 
  def test_stack_step_uses_fresh_hash_and_charges_exactly_one_original_item(self):
   adapter, calls, _ = self.stack_adapter()

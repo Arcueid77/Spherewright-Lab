@@ -18,7 +18,7 @@
     "thunderstore": null
   },
   "installed": {
-    "sourceSha": "9711a4149d7d9670503789c46bcb64a52199641d",
+    "sourceSha": "c632f2d6b01f8a037aa556225e6c038e909956c7",
     "productVersion": "0.5.1",
     "releaseTag": null,
     "native": {
@@ -34,7 +34,7 @@
     "runtimeState": "not_running",
     "developmentArtifact": {
       "kind": "plugin_mcp_directory",
-      "manifestSha256": "8086BD859F7D1A36BF3ED8DA59A15656275CDE09B6769366D28E2A1B2E3D1C04",
+      "manifestSha256": "70EE4F1FCC1C8D637E85495FD5DF38A8A18930903ACA7379ECB98088DFFB68B8",
       "pluginFiles": 5,
       "mcpFiles": 224
     }
