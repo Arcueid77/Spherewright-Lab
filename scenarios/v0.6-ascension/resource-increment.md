@@ -1,5 +1,11 @@
 # Ascension resource increment / Ascension用料增量
 
+## 2026-11-13科研制造运行续额 / Research and manufacturing runtime increment
+
+正常保存交接129845004累计8755742tick及97800写方请求，另7只读请求单列。按现行运行自主授权，当前累计上限由900万调整为1200万，保留54000返航/3000清理储备、全部实耗及原时钟，工作余额3187258。实际源头、两处转接及卡西米尔专用入料均主网3满供，卡西米尔首次库存0→6通过，最新库存186，钛晶石已耗尽。最新另有80位面、68量子及768红矩阵，继续正常转运与科研。当前建筑实耗719带、96普通/12高速/10极速、24塔，沿既有720/102/12/10/27有限上限执行。
+
+Normal saved handoff129845004 carries8755742 ticks/97800 writer requests plus seven separate read-only requests. Under runtime autonomy, raise the cumulative ceiling9000000→12000000, retaining54000/3000 reserves, actual spending and the original clock. Work remainder is3187258. The source/two relays/dedicated Casimir inlet have full network3 service. Casimir stock passed0→6 and now holds186 after exhausting titanium crystal. Current stock also includes80 plane filters/68 quantum chips/768 red matrices. Continue normal transport/research. Charged construction is719 belts,96 ordinary/12 fast/ten gradeIII sorters and24 towers under720/102/12/10/27 finite ceilings.
+
 ## 2026-11-13跨线与最终供氢连接 / Crossover and final hydrogen connections
 
 原生三层跨线及分段下降已正常完工，主线157带和北入口21带均保留实际消耗。交接128216375累计已用682带，有限上限设为720带、102普通/12高速、27塔。预留2极速将其累计上限从8增至10，沿现有2高速及2普通正常制造，准确新增直接用料为9铁及5线圈，含3齿轮、3电动机、1电磁涡轮及1批高速依赖。高速和极速最终用途由新鲜原生端点及流量核对确定。

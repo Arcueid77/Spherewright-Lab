@@ -2,6 +2,10 @@
 
 ## Current Ascension runtime autonomy, 2026-11-12 / 当前Ascension运行时长自主授权
 
+2026-11-13 finite increment. Normal saved handoff129845004 carries8755742 spent ticks. The existing owner grant supports a further3000000 ticks for the remaining1773 five-colour research sets, normal Caph manufacture/launch and receiver/cold-continuation validation. The current cumulative ceiling is12000000, leaving3244258 including54000 return/3000 cleanup reserves and3187258 work ticks. Retain the original launch clock and finite wall deadline, all actual RPC/material accounting and original-action isolation.
+
+2026-11-13有限增量。正常保存交接129845004已累计8755742tick，按现行所有者授权，为剩余1773份五色科研、Caph正常制造/发射及接收器/冷恢复验证追加300万。当前累计上限1200万，余3244258，包含54000返航/3000清理储备及3187258工作余额。保留原启动时钟和有限墙钟截止、实际请求/材料账目及原动作隔离。
+
 The owner explicitly answered “运行时长也合理自行增加” when asked whether runtime needed for completing0.6 may be extended autonomously, initially to9000000 cumulative game ticks. Derive and record reasonable finite game-tick, natural research/manufacturing/construction/transport/launch/measurement waits and live-window allowances, then execute under fresh Native plans. This supersedes the older6000000 ceiling and pending-runtime-answer handoffs for0.6. At the current saved boundary127031494,5942232 ticks remain spent. The initial revised ceiling is9000000, leaving3057768 ticks including54000 return/3000 cleanup reserves and3000768 work ticks. Further justified finite runtime increments within completing0.6 follow this same grant. Retain cumulative spending, energy/warper floors, one writer, complete backups, owned-world/no-loss recovery, original-action reconciliation and unknown isolation. The startup-to-real-work limit remains300 seconds with120 seconds as its target.
 
 所有者对完成0.6所需运行时长能否自主合理追加、先将累计上限设为900万的明确询问回复“运行时长也合理自行增加”。指定执行者可按新鲜原生事实自主核算、记录并执行合理且有限的游戏tick、自然科研/制造/施工/运输/发射/测量等待及实机时窗增量，通过新鲜Native方案执行。旧600万累计上限及待运行额度答复的交接文案在0.6范围内由本授权替代。当前保存边界127031494保留5942232既耗，初始新上限900万，剩余3057768tick包含54000返航/3000清理储备，工作余额3000768tick。完成0.6范围内后续合理必要运行增量按同一授权另记有限额度执行。保留累计实耗、能源/翘曲器下限、唯一writer、完整备份、同owned世界无损恢复及原动作核销/unknown隔离。启动至首笔真实操作仍为300秒硬门及120秒优化目标。

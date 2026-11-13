@@ -1,11 +1,13 @@
 # Ascension current snapshot / Ascension活动快照
 
-2026-11-13。实装2f8f72d0已完成Caph II真实往返和母星正常保存，沿原旅程预算验证600tick稳定抵达。Caph主网2补10燃料棒后，25消费者满供，实际发电387kW。应力科研1523已到40860/360000，当前暂停并保全队列和矩阵缓存。当地铁炉、矿桥和电路板回流正常完工，CPU库存到1063，800处理器及矿/铜/微晶/水/钛化玻璃/位面已正常续供。6裂解氢输出和600氢仓积满，正复用916/918物流站连接氢运输。游戏当前运行，唯一writer沿原时钟累计实耗。
+2026-11-13。供氢闭环已通过实际入站、站间运输和卡西米尔生产。916首批24氢、918实收972氢，四个关键分拣器均主网3满供，卡西米尔库存0→6门槛通过。最新正常保存交接129845004，卡西米尔186、位面80、量子68、红矩阵768，钛晶石及钛化玻璃原料待续供。应力1523暂停于40860/360000并保全队列和缓存。按所有者运行自主授权，当前累计上限1200万，8755742实耗、54000返航/3000清理储备及原时钟保留。新唯一调用端已附着原PID30000继续补料。Caph实际往返、600tick稳定抵达及387kW主网恢复已完成，完整0.6科研、闭壳、当地发射、持续接收电力、冷恢复和交审双包继续推进。
 
 最新完整关停保护仍绑定LastExit127407577、Primary127358921及2334项文件，启动前累计6318315/9000000tick，保留54000返航及3000清理。本轮使用default隔离恢复，准确原生准备回读最低127390736并绑定已完整保护的最新LastExit。早前菜单返回和本次原桥头拆除未知原件均持续隔离，当前运行实耗继续累计。
 
 ## 实际结果
 
+- 正常保存交接129845004已累计8755742tick、97800写方请求及7单列只读。新增有限300万后累计上限1200万，工作余额3187258；写方199993加单列7维持全局200000，原墙钟截止保持。实际施工719带、96普通/12高速/10极速、24塔，沿720/102/12/10/27上限执行。对应源头7497、转接7496/7522及专用输入7521均主网3满供，卡西米尔原生工作和0→6实存已保留，最新库存186。
+- 严格落地等待在一次水面抵达后耗尽，原等待失败保留。后续普通Drift续移正常抵达Walk，速度0，供氢接口继续完工。918需求配置已在Drift状态正常完成。源输出槽9已正常绑定氢仓槽3，输出7带、独立7带升坡/7带下降及2带对齐正常完工，沿同高高速转接及独立极速输入喂入7068。
 - 源头极速7497在主网3满供，正常从3064向7312送料，157带主线、同高高速7496及14带独立南入口已实际将氢送入916。预声明20件门槛回读24氢，通过首次入站供货验证。原21带北入口空路径保留，实际施工继续计账。当前已用696带、96普通/11高速/9极速及24塔，专用卡西米尔氢入口及站间实际到货待继续。
 - 916实际最大充电配置为6MW，实时请求60kW。先前将请求当上限的描述已更正，1.2MW调整准备返回3MW步进与0..0W范围并在接受前拒绝。调用端当前101项驱动回归及准确CI43287639894通过，实装来源2f8f72d0。 [调用端CI](https://github.com/Arcueid77/Spherewright-Lab/actions/runs/43287639894)
 - 氢运输主线157带及北入口21带已原生完工并正常保存，当前主线尾7481已落到地面。既有尾带与物流站的双端绑定准备被原生范围门在创建前拒绝，原回执保留，调用端已加入明确的提前拒绝并通过101项驱动回归。继续以新鲜独立入站段及同高分拣器接通，实际供氢和下游消费待验。
@@ -47,6 +49,10 @@
 4. 正常保存、完整关停保护及冷恢复后复核设计、进度、设备和持续电力，最后生成同源手动/Thunderstore交审双包。 [实施与验收](implementation-plan.md)
 
 ## English
+
+Current runtime increment. Normal saved handoff129845004 carries8755742 ticks,97800 writer requests and seven separate read-only calls. The owner runtime grant supports a finite3000000 increment to12000000, leaving3187258 work ticks after54000/3000 reserves. Retain the original clock/wall deadline and199993+7 global200000 accounting. The replacement sole caller attached to original PID30000. Construction is719 belts,96 ordinary/12 fast/ten gradeIII sorters and24 towers under720/102/12/10/27 ceilings. Source7497/relays7496+7522/dedicated inlet7521 have full network3 service. Native Casimir work and0→6 stock passed. Latest stock is186 Casimir/80 plane filters/68 quantum chips/768 red matrices, with titanium crystal/glass raw supply pending. Stress1523 remains paused at40860/360000 with cache conserved.
+
+Retain the strict grounded-wait failure after a water arrival. Normal Drift continuation reached Walk at zero speed and construction proceeded. The918 demand setting completed while drifting. Output slot9 normally selected hydrogen storage slot3. Seven output belts/seven rising/seven descending/two alignment belts completed, feeding7068 through a same-height fast relay and dedicated gradeIII inlet. Complete the full research, closed shell, local launch, sustained receiver electricity, cold continuation and review archives.
 
 GradeIII source7497 has full network3 service and normally feeds3064→7312. The157-belt main, same-height fast relay7496 and14-belt independent southern inlet delivered actual hydrogen to916. The predeclared20-item gate passed at24 hydrogen. Retain the empty21-belt northern inlet and all charged construction. Current spending is696 belts,96 ordinary/11 fast/nine gradeIII sorters and24 towers. Actual station-to-station receipt and the dedicated Casimir hydrogen inlet remain pending. Station916's configured maximum is6MW and its current request60kW, correcting the earlier field confusion. Native refused the1.2MW proposal before acceptance with a3MW-step range0..0W. Caller101 driver regressions and exactCI43287639894 passed. Installed product source is2f8f72d0. [Caller CI](https://github.com/Arcueid77/Spherewright-Lab/actions/runs/43287639894)
 
