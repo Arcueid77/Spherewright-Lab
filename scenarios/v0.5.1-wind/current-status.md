@@ -1,5 +1,13 @@
 # Wind maintenance snapshot / 风机维护快照
 
+冷恢复完整离线预检通过，4次请求已计入累计102158；下一首实操借取1石墨并在复核后归还。 / The full cold-continuation preflight passed; its4 requests are included in cumulative102158. The first real operation borrows one graphite for later return.
+
+2026-11-13当前存档正向通过。c632f2d6在283.765秒完成恢复和首操作。只读预览完整、无断供；单座风机正常回收1件，原生回读确认目标消失、库存增产点、幸存建筑、工厂连接和其他电网保全。独立普通建造消耗该件并在原位重建，电网发电机135→136且消费者满供；复用原实体编号后读取原拆除动作，终态仍为成功。2石墨正常借取并完整归还。调用包一次因私有正文文件名与回执角色冲突在派发前被拒，未接受任何动作，原记录保留。
+
+正常保存退出后Primary/LastExit均130229416，2458项完整保护通过；累计9140154tick及102154请求，含14次单列只读。风机建造累计4/5，原unknown继续隔离。下一步同源冷恢复，复核保存的风机与电网，再制作0.5.1发行双包。
+
+Live current-save wind recovery and independent same-location rebuild passed on c632f2d6 after283.765-second startup. Native evidence proves exact one-item refund, inventory inc, surviving structures, factory links and unrelated networks. Generator count returned135→136 with consumers fully served; rereading the original dismantle after entity-ID reuse retained its successful terminal result. Two graphite were normally borrowed and returned. A private packet/receipt naming collision was refused before dispatch; its evidence remains. Normal save/exit protected primary/LastExit130229416 and2458 files; cumulative spending is9140154 ticks and102154 requests including14 separate reads. Wind construction is4/5 and original unknowns remain isolated. Cold continuation and final0.5.1 archives remain.
+
 2026-11-13修正来源的完整离线预检通过：同源安装、2452项完整保护、首操作、原动作隔离与预算全部就绪。预检4次请求已计入累计101641，游戏保持正常关闭。0.6同步来源c720cf14的[准确CI](https://github.com/Arcueid77/Spherewright/actions/runs/43392343497)成功。下一步按新鲜原生预览执行风机实测。
 
 The full offline preflight passed for the fixed source, installed cohort,2452 protected files, first operation, original-action isolation and budgets. Its4 requests are included in cumulative101641; the game remains normally stopped. The exact0.6 counterpartc720cf14 CI succeeded. Continue live wind acceptance against fresh Native preview.
