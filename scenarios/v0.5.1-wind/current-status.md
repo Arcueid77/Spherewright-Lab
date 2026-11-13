@@ -1,5 +1,13 @@
 # Wind maintenance snapshot / 风机维护快照
 
+2026-11-13修正资格完成。0.5.1来源c632f2d6b01f8a037aa556225e6c038e909956c7通过6379项准确回归、实际29151构建、准确CI43391889129及同源开发程序资格。开发目录清单70EE4F1FCC1C8D637E85495FD5DF38A8A18930903ACA7379ECB98088DFFB68B8，载荷索引C6A3FCC8B8CEC0CAA1973D50ED9FB022FD68721BC19C1B67994E55C3B3F1EFDD。0.6同步来源c720cf146b0ca530c94cd4d1ef6c6a0f580c81aa已推送并通过6620项本地回归和Native构建，准确CI继续核验。
+
+当前安装为9711a414/0.5.1，游戏正常关闭。最新Primary/LastExit 130227633及2452项完整保护、9138371tick和101620请求保留。上次1石墨已正常取还，风机预览未产生拆除动作。下一首操作借取2石墨并在验收后归还，之后读取风机和电网并执行只读预览。科研队列保留，0.6目标继续。 [维护CI](https://github.com/Arcueid77/Spherewright/actions/runs/43391889129)
+
+Fix sourcec632f2d6b01f8a037aa556225e6c038e909956c7 passed6379 exact regressions, the actual29151 build, exactCI43391889129 and coherent development qualification. Its manifest/index hashes are listed above. The synchronized0.6 sourcec720cf146b0ca530c94cd4d1ef6c6a0f580c81aa is pushed and passed6620 local cases and Native build; exact CI is being checked.
+
+Installed source remains9711a414/0.5.1 and the game is normally stopped. Primary/LastExit130227633 and2452 protected files retain9138371 ticks and101620 requests. The previous one-graphite loan was returned and the wind preview created no dismantle action. The next first operation borrows two graphite for later return, followed by wind/power observation and a tokenless preview. Preserve the research queue and continue the active0.6 goal after maintenance.
+
 2026-11-13当前存档实测。来源9711a414/0.5.1在271.219秒完成最新owned存档恢复及首笔普通取料。只读风机预览正确返回不可提交结果，并暴露风机发电功率观察被误判为库存缓冲的问题。已实际取回并归还1石墨，完成普通保存退出，Primary/LastExit 130227633及2452项完整保护，累计9138371tick、101620请求。应力队列及137160/360000进度在加载读数中保全，原unknown持续隔离。
 
 修正来源c632f2d6b01f8a037aa556225e6c038e909956c7识别原生发电功率单位及旧版标签，继续拒绝实际物料和异常缓冲。28项风机策略回归、实际风机快照离线准入以及1005例29151原生电网算法对照通过。0.6本地同步来源c720cf146b0ca530c94cd4d1ef6c6a0f580c81aa，两个准确提交的完整回归和CI正在进行。当前实装仍为9711a414/0.5.1，游戏正常关闭，继续同源修正资格、冷安装和真实拆除/重建验证。
