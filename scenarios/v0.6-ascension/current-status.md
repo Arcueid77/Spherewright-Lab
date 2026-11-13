@@ -1,11 +1,14 @@
 # Ascension current snapshot / Ascension活动快照
 
-2026-11-13。供氢闭环已通过实际入站、站间运输和卡西米尔生产。916首批24氢、918实收972氢，四个关键分拣器均主网3满供，卡西米尔库存0→6门槛通过。最新正常保存交接129845004，卡西米尔186、位面80、量子68、红矩阵768，钛晶石及钛化玻璃原料待续供。应力1523暂停于40860/360000并保全队列和缓存。按所有者运行自主授权，当前累计上限1200万，8755742实耗、54000返航/3000清理储备及原时钟保留。新唯一调用端已附着原PID30000继续补料。Caph实际往返、600tick稳定抵达及387kW主网恢复已完成，完整0.6科研、闭壳、当地发射、持续接收电力、冷恢复和交审双包继续推进。
+2026-11-13。应力1523已正常恢复并达到119160/360000，累计正常制造及消费662绿，余1338份五色科研。最新正常保存130187692，对应9098430累计tick。四个既有氢/重氢高速接口已正常回收后分别新建极速接口，两条重氢普通接口正常升级高速，原生10秒切面重氢产出由30/min升至60/min，重氢与奇异物质设备均已观察到工作。供氢站间运输及卡西米尔生产保持已通过状态，916供应上限100、918需求上限500已正常配置，918已有2001氢完整保留。当前唯一调用端沿原PID30000继续补料，累计1200万tick上限、54000返航/3000清理储备和原墙钟截止保持。完整0.6科研、闭壳、当地发射、持续接收电力、冷恢复和交审双包继续推进。
 
 最新完整关停保护仍绑定LastExit127407577、Primary127358921及2334项文件，启动前累计6318315/9000000tick，保留54000返航及3000清理。本轮使用default隔离恢复，准确原生准备回读最低127390736并绑定已完整保护的最新LastExit。早前菜单返回和本次原桥头拆除未知原件均持续隔离，当前运行实耗继续累计。
 
 ## 实际结果
 
+- 本轮科研已实际消费后续300绿，工厂绿累计660，手搓2单列。机甲119160/360000等于已消费662份，余1338份。蓝/紫/红补料、旧位面6931工作、钛化玻璃和处理器续供均有正常回执。一次正常补燃料11棒，背包114→103、燃料舱109→120，双侧物品守恒，后续原生飞行准入恢复。
+- 四条氢/重氢接口3075/3076/3068/3347已正常回收并分别用4个新手搓极速物品原生重建，5736/5735正常升级高速。新建累计719带、96普通/12高速/16极速分拣器、24塔，有限上限730/102/14/16/27，升级与回收另列原账。4极速手搓复用4高速并直接消耗12铁/8线圈。首次供氢中继改建曾将复合回执的前置TooSkew当作最终原因，随后按实际Native OutOfReach移近并完成两座极速中继，已知拒绝及多余带/高速物品保留。
+- 最新正常保存130187692保留9098430累计tick。调用端交接写方基线99813，另14只读请求单列，当前持续累计；写方上限199986与单列14维持全局200000。原冷启动、源tick127407577和6318315既耗继续绑定，后续附着均无读档、无重新启动及无退回既耗。
 - 正常保存交接129845004已累计8755742tick、97800写方请求及7单列只读。新增有限300万后累计上限1200万，工作余额3187258；写方199993加单列7维持全局200000，原墙钟截止保持。实际施工719带、96普通/12高速/10极速、24塔，沿720/102/12/10/27上限执行。对应源头7497、转接7496/7522及专用输入7521均主网3满供，卡西米尔原生工作和0→6实存已保留，最新库存186。
 - 严格落地等待在一次水面抵达后耗尽，原等待失败保留。后续普通Drift续移正常抵达Walk，速度0，供氢接口继续完工。918需求配置已在Drift状态正常完成。源输出槽9已正常绑定氢仓槽3，输出7带、独立7带升坡/7带下降及2带对齐正常完工，沿同高高速转接及独立极速输入喂入7068。
 - 源头极速7497在主网3满供，正常从3064向7312送料，157带主线、同高高速7496及14带独立南入口已实际将氢送入916。预声明20件门槛回读24氢，通过首次入站供货验证。原21带北入口空路径保留，实际施工继续计账。当前已用696带、96普通/11高速/9极速及24塔，专用卡西米尔氢入口及站间实际到货待继续。
@@ -44,11 +47,13 @@
 启动前全部运行及外部观察请求已合并为91751，全局上限200000，当前唯一caller继续累计。当前切面施工实耗为基础带495、普通92/高速9/极速8分拣器、电塔24、油井1、风机3、精炼3，其余原账保留。普通92/高速9/极速8、基础带550及电塔25的有限上限保持。另1座电塔已正常制造随身携带，Caph燃料取90已形成等量守恒。
 
 1. 所选/实装2f8f72d0已在59.5秒内恢复实操，6条空带准确回收及科研保全已完成。保留原失败恢复、未知动作、完整关停保护和当前唯一运行记录。
-2. 接通既有物流站的氢运输并验证下游消费，补齐石矿、水、钛晶石及科研链。应力科研仍余1773份五色，后续正常恢复科研。
+2. 氢站间运输及下游消费已验证，继续补齐石矿、水、钛晶石和科研链。应力科研仍余1338份五色，已恢复的原生科研保持正常供料。
 3. Caph主网2已恢复387kW实际供电，站点2接电待处理。新鲜核对6度闭壳设计210结构点/224细胞点，完成当地制造、持续发射、真实交付、闭壳及接收器持续非零电力。
 4. 正常保存、完整关停保护及冷恢复后复核设计、进度、设备和持续电力，最后生成同源手动/Thunderstore交审双包。 [实施与验收](implementation-plan.md)
 
 ## English
+
+Current research has reached119160/360000 after662 normally manufactured and consumed green matrices, leaving1338 five-colour sets. Latest normal save130187692 carries9098430 cumulative ticks. Four existing fast hydrogen/deuterium interfaces were normally recovered and rebuilt with four gradeIII items; two ordinary deuterium interfaces upgraded to fast. A Native ten-second cut increased deuterium production from30/min to60/min, with both deuterium and strange-matter machines observed working. New placement spending is719/96/12/16/24 under730/102/14/16/27 ceilings for belts/ordinary/fast/gradeIII/towers. Upgrades and refunds retain separate original receipts. Normal craft used four fast sorters,12 iron and8 coils. A normal11-rod refuel conserved bag114→103 and chamber109→120 and restored Native flight funding. Writer handoff baseline99813 plus14 separate readers remains cumulative under199986+14 globally. The original game PID, launch clock, source tick, all spending and12000000/54000/3000 runtime/reserve limits remain bound. Continue the remaining live0.6 gates.
 
 Current runtime increment. Normal saved handoff129845004 carries8755742 ticks,97800 writer requests and seven separate read-only calls. The owner runtime grant supports a finite3000000 increment to12000000, leaving3187258 work ticks after54000/3000 reserves. Retain the original clock/wall deadline and199993+7 global200000 accounting. The replacement sole caller attached to original PID30000. Construction is719 belts,96 ordinary/12 fast/ten gradeIII sorters and24 towers under720/102/12/10/27 ceilings. Source7497/relays7496+7522/dedicated inlet7521 have full network3 service. Native Casimir work and0→6 stock passed. Latest stock is186 Casimir/80 plane filters/68 quantum chips/768 red matrices, with titanium crystal/glass raw supply pending. Stress1523 remains paused at40860/360000 with cache conserved.
 

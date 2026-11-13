@@ -1,5 +1,15 @@
 # Ascension resource increment / Ascension用料增量
 
+## 2026-11-13重氢接口吞吐增量 / Deuterium relay throughput increment
+
+应力科研已正常恢复至119160/360000，662绿实际消费，余1338份五色。新鲜原生切面显示重氢设备缺氢，既有进料高速接口为长距离往返，旁边混合仓仍有20氢。按现行合理用料自主授权，有限增加4个极速新建额度，累计上限16，复用4个随身高速并按正常配方5/97/98/90制造4齿轮、4电动机、2电磁涡轮及4极速，直接消耗12铁、8线圈及4高速。原生完成回读已核对，4条既有氢/重氢高速接口正常回收后分别重新准备并建成极速，回收和既耗分别保留。另两条普通重氢路径正常升级高速，保留升级材料原回执。
+
+新建累计719带、96普通/12高速/16极速分拣器及24塔，有限施工上限730/102/14/16/27，其他上限保持。原生10秒切面重氢实际产出由30/min升至60/min，重氢及奇异物质设备均工作。最新正常保存130187692，对应9098430累计tick；1200万总上限、54000/3000储备及原启动时钟保持。写方交接基线99813及14次单列只读持续累计，199986+14合计200000，附着未重启或读档。
+
+Stress research has reached119160/360000 after662 normal green matrices, leaving1338 five-colour sets. Fresh Native evidence showed hydrogen starvation at the deuterium machine while its shared store retained20 hydrogen. The owner autonomy grant supports four additional gradeIII placements, raising the finite cumulative ceiling to16. Normal recipes5/97/98/90 crafted four gears/four motors/two turbines/four gradeIII sorters, consuming12 iron/eight coils/four carried fast sorters. Four existing fast hydrogen/deuterium interfaces were normally recovered and separately freshly rebuilt as gradeIII. Two ordinary deuterium interfaces normally upgraded to fast. Preserve every upgrade/refund and original debit separately.
+
+New placement spending is719 belts,96 ordinary/12 fast/16 gradeIII sorters and24 towers, under730/102/14/16/27 finite ceilings. A Native ten-second cut increased deuterium production from30/min to60/min and observed both deuterium and strange-matter machines working. Normal save130187692 carries9098430 ticks under12000000 with54000/3000 reserves and the original launch clock. Writer handoff99813 plus14 separate readers stays cumulative under199986+14 globally. The sole caller attached without relaunch or Load.
+
 ## 2026-11-13科研制造运行续额 / Research and manufacturing runtime increment
 
 正常保存交接129845004累计8755742tick及97800写方请求，另7只读请求单列。按现行运行自主授权，当前累计上限由900万调整为1200万，保留54000返航/3000清理储备、全部实耗及原时钟，工作余额3187258。实际源头、两处转接及卡西米尔专用入料均主网3满供，卡西米尔首次库存0→6通过，最新库存186，钛晶石已耗尽。最新另有80位面、68量子及768红矩阵，继续正常转运与科研。当前建筑实耗719带、96普通/12高速/10极速、24塔，沿既有720/102/12/10/27有限上限执行。
