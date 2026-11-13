@@ -1,13 +1,13 @@
 {
   "schemaVersion": 2,
   "status": "development",
-  "scenario": "v0.5.1-wind",
+  "scenario": "v0.6-ascension",
   "spherewright": {
     "repository": "Arcueid77/Spherewright",
     "submodulePath": "deps/Spherewright",
-    "sourceSha": "c632f2d6b01f8a037aa556225e6c038e909956c7",
+    "sourceSha": "c720cf146b0ca530c94cd4d1ef6c6a0f580c81aa",
     "releaseTag": null,
-    "productVersion": "0.5.1"
+    "productVersion": "0.6.0"
   },
   "native": {
     "version": "0.10.35.29151",
@@ -52,6 +52,6 @@
     "sourceSha": "e7d5f7d8661092b7c8089710488c448f290638be"
   },
   "development": {
-    "targetVersion": "0.5.1"
+    "targetVersion": "0.6.0"
   }
 }

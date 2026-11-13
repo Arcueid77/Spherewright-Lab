@@ -1,5 +1,9 @@
 # Ascension current snapshot / Ascension活动快照
 
+2026-11-13续接0.6。Issue #5同步来源c720cf146b0ca530c94cd4d1ef6c6a0f580c81aa已通过6620项本地回归、29151原生构建、准确CI和75工具同源开发程序资格；尚未实装。当前停止的实装仍为c632f2d6/0.5.1，其单座风机回收、独立重建及冷恢复已通过，GitHub 0.5.1已正式发布，Thunderstore未提交。最新Primary/LastExit 130230033、2464项完整保护、9140771累计tick及102633请求保留，含离线包/程序元数据请求与14次单列只读。科研队列保持暂停。下一步冷安装0.6，按新鲜原生切面续科研及原定Caph闭壳、持续接收功率、正常保存冷恢复与交审双包。 [准确CI](https://github.com/Arcueid77/Spherewright/actions/runs/43392343497) · [0.5.1发布](../../releases/v0.5.1/publication-2026-11-13.md)
+
+Resume0.6 with selected c720cf14:6620 local cases, Native29151 build, exact CI and a75-tool coherent development cohort passed. It is not installed yet; the stopped installation remains c632f2d6/0.5.1, whose wind recovery, separate rebuild and cold continuation passed. GitHub0.5.1 is published; Thunderstore remains unsubmitted. Primary/LastExit130230033,2464 protected files,9140771 cumulative ticks and102633 requests include offline package/cohort metadata and14 separate reads. Research remains paused. Cold-install0.6, then resume Native research, Caph shell and sustained receiver power, normal save/cold continuation and review archives.
+
 2026-11-13暂停交接。所有者已暂停0.6并要求Issue #5同步0.5、交付0.5.1。当前Primary/LastExit均130226948，正常保存退出及2446项完整保护通过，累计9137686tick、100734写方加14只读合计100748请求。科研已正常暂停于137160/360000，762绿实际消费、余1238份五色。后续100量子/100透镜已完整送入7019，其中100绿已取入并消费，其余留在成品仓和叠层。停止前切面为86绿、50透镜、43量子、98钛化玻璃及45紫，后续自然生产至正常退出的实际值以恢复读数为准。
 
 微晶仓843已通过原生混合预留保全100硅和100晶格硅，禁格28→20并补500铜，微晶和原处理器产出恢复。848、898和2255已正常升级MkII，3笔升级复用回收MkI，直接新增12铁/4板/24石墨烯/12处理器。两条玻璃石矿输入6922/6924及石墨/石墨烯输入873/3054已正常升级高速。另4高速正常制造耗6铁/2线圈及4普通，其中2用于873/3054，2仍随身，6926/6933升级后缀在接受前因Drift被拒绝。75宽带已送775、500塑料已送899。一次过期分页和两次超距转运均在接受前拒绝，已完成前缀保留并经新位置继续。原菜单准备STALE未接受，暂停科研、普通移至已验证陆地、重新附着关停调用端后，正常菜单保存及完整保护完成。原unknown持续隔离。
