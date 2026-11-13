@@ -1,13 +1,13 @@
 {
   "schemaVersion": 2,
   "status": "development",
-  "scenario": "v0.6-ascension",
+  "scenario": "v0.5.1-wind",
   "spherewright": {
     "repository": "Arcueid77/Spherewright",
     "submodulePath": "deps/Spherewright",
-    "sourceSha": "2f8f72d04ae494f35de7fbc9f0f8f92b9bddde7f",
+    "sourceSha": "9711a4149d7d9670503789c46bcb64a52199641d",
     "releaseTag": null,
-    "productVersion": "0.6.0"
+    "productVersion": "0.5.1"
   },
   "native": {
     "version": "0.10.35.29151",
@@ -18,8 +18,8 @@
     "thunderstore": null
   },
   "installed": {
-    "sourceSha": "2f8f72d04ae494f35de7fbc9f0f8f92b9bddde7f",
-    "productVersion": "0.6.0",
+    "sourceSha": "9711a4149d7d9670503789c46bcb64a52199641d",
+    "productVersion": "0.5.1",
     "releaseTag": null,
     "native": {
       "version": "0.10.35.29151",
@@ -29,12 +29,12 @@
       "manual": null,
       "thunderstore": null
     },
-    "evidence": "scenarios/v0.6-ascension/current-status.md",
+    "evidence": "scenarios/v0.5.1-wind/current-status.md",
     "verification": "disk_verified",
     "runtimeState": "not_running",
     "developmentArtifact": {
       "kind": "plugin_mcp_directory",
-      "manifestSha256": "BAE7FD9DAD82AC2E7C90B5C1ECC9C8EEF1CAC8185DF480F3A4B5F2C6CFE8A7C8",
+      "manifestSha256": "8086BD859F7D1A36BF3ED8DA59A15656275CDE09B6769366D28E2A1B2E3D1C04",
       "pluginFiles": 5,
       "mcpFiles": 224
     }
@@ -52,6 +52,6 @@
     "sourceSha": "e7d5f7d8661092b7c8089710488c448f290638be"
   },
   "development": {
-    "targetVersion": "0.6.0"
+    "targetVersion": "0.5.1"
   }
 }
