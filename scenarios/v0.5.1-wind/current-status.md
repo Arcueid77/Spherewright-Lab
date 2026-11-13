@@ -1,5 +1,9 @@
 # Wind maintenance snapshot / 风机维护快照
 
+2026-11-13续接。0.5.1已安装，同源MCP通过13项离线接口调用，17次请求已计入累计账目，当前累计100765请求。首次启动在游戏进程创建前因验证路径仍指向0.6而结束，原记录已保留。新的不可变输入绑定0.5.1来源资格和实装接口证明，继续当前owned存档实测。0.6目标已恢复，科研在风机验收期间保持暂停。
+
+The installed0.5.1 MCP admitted13 offline interface cases. Its17 requests are included in the cumulative100765 request count. The first launch ended before game-process creation because qualification paths referenced0.6. The original record is retained and new immutable inputs bind the0.5.1 source and installed SDK proofs. The0.6 goal is active, with research paused during wind acceptance.
+
 2026-11-13。所有者要求Issue #5同步0.5并交付0.5.1。维护来源9711a4149d7d9670503789c46bcb64a52199641d基于正式v0.5.0，6375项准确回归、实际29151 Plugin构建、双语文档及准确CI43386065088通过。0.6开发线已同步为main来源d337856d247152977d9092c43c1cca4e05b82c35，6616项本地回归、Native构建及准确CI43386050809通过。两个合同字段冲突已保全两侧新增字段后核对。
 
 真实29151 PowerSystem.OnNodeRemoving在独立离线对象上完成1005例对照。0.5.1同源开发目录及单文件MCP完成资格，5个Plugin/224个MCP文件、74工具/1资源、精确源码标记、嵌入指南和PE检查通过。开发目录清单8086BD859F7D1A36BF3ED8DA59A15656275CDE09B6769366D28E2A1B2E3D1C04，载荷索引DB740ED7B276CC241C4EEDC7B8EA13D489F700EC8970E54021173B7690FA759A。共享调用端已支持准确目标绑定的只读风机预览，102项驱动回归通过。 [维护CI](https://github.com/Arcueid77/Spherewright/actions/runs/43386065088) · [0.6 CI](https://github.com/Arcueid77/Spherewright/actions/runs/43386050809)
