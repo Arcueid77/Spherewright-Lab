@@ -630,6 +630,47 @@ class LiveDriverTests(unittest.TestCase):
   self.assertTrue(a.verify_progress(work,result));a.execute_plan=lambda *_:None;a.await_next_plan=lambda:None
   a.continue_prepared_work(result);self.assertTrue(records['first-generator-fuel-native-conservation.private.json']['passed'])
   result['afterTargetAmount']=9;self.assertFalse(a.verify_progress(work,result))
+ def test_research_resume_crosses_startup_with_original_native_preservation_receipt(self):
+  import startup_to_action as gate
+  records={};calls=[];a=Factory.__new__(Factory);a.ctx=dict(sessionId='owned',planetId=104);a.active=None
+  config=dict(firstOperation=dict(kind='resume-research',techId=1523),initialSteps=[])
+  a.runtime=type('Runtime',(),dict(config=config,put=lambda _,name,value:records.__setitem__(name,value)))()
+  a.offline_preflight=lambda:{k:True for k in gate.READINESS_FLAGS};a.launch_once=lambda _:1
+  a.wait_ready=lambda *_:{};a.prepare_resume=lambda *_:'fresh-resume';a.commit_resume_once=lambda _:'original-resume'
+  a.verify_loaded=lambda *_:{}
+  before=dict(currentTechId=0,techQueue=[1523],selectionStateHash='fresh-selection')
+  native=dict(capturedAtGameTick=123,beforeQueue=[1523],afterQueue=[1523],previousCurrentTechId=0,
+   currentTechId=1523,researchProgressPreserved=True,inventoryPreserved=True)
+  terminal=dict(actionId='original-research',actionKind='select-research',terminal=True,state='completed',
+   succeeded=True,completedAtGameTick=123,researchQueueReadback=native)
+  a.wait_original=lambda handle:dict(actionId=handle,terminal=True,state='completed',succeeded=True) if handle=='original-resume' else terminal
+  def call(tool,args):
+   calls.append((tool,args))
+   if tool=='spherewright_get_progression_state':return before
+   self.assertEqual('spherewright_prepare_select_research',tool)
+   self.assertEqual(dict(a.ctx,techId=1523,expectedSelectionStateHash='fresh-selection',researchPaused=False),args)
+   return dict(prepared=True,commitAllowedNow=True,commitBlockers=[],planToken='fresh-research',
+    researchQueueReadbackVersion=1,plannedResearchPaused=False)
+  a.call=call;a.commit=lambda role,tool,args:calls.append((tool,args)) or 'original-research'
+  a.execute_plan=lambda *_:records.__setitem__('continuation',True);a.await_next_plan=lambda:None
+  a.cleanup_known_state=lambda:self.fail('successful research resume cannot trigger cleanup')
+  result=gate.run(a,lambda _:None)
+  self.assertTrue(result.passed,result.failure);self.assertEqual('original-research',result.first_action_id)
+  self.assertTrue(records['actual-progress.private.json']['verified']);self.assertTrue(records['continuation'])
+  self.assertEqual(1,sum(tool=='spherewright_commit_select_research' for tool,_ in calls))
+  native['inventoryPreserved']=False
+  self.assertFalse(a.verify_progress({},terminal))
+ def test_first_research_resume_refuses_changed_queue_and_missing_native_echo(self):
+  a=Live(None);a.runtime=type('Runtime',(),dict(config=dict(firstOperation=dict(kind='resume-research',techId=1523)),put=lambda *_:None))()
+  a.ctx=dict(sessionId='owned',planetId=104);calls=[]
+  a.call=lambda tool,args:calls.append(tool) or dict(currentTechId=0,techQueue=[1522],selectionStateHash='fresh')
+  with self.assertRaisesRegex(RuntimeError,'first_research_paused_queue_changed'):a.prepare_first_work({},0)
+  self.assertEqual(['spherewright_get_progression_state'],calls)
+  def call(tool,args):
+   if tool=='spherewright_get_progression_state':return dict(currentTechId=0,techQueue=[1523],selectionStateHash='fresh')
+   return dict(prepared=True,commitAllowedNow=True,commitBlockers=[],researchQueueReadbackVersion=0,plannedResearchPaused=False)
+  a.call=call
+  with self.assertRaisesRegex(RuntimeError,'first_research_resume_native_echo_unproved'):a.prepare_first_work({},0)
  def test_normal_refuel_crosses_real_startup_dispatch_readback_and_factory_continuation(self):
   import startup_to_action as gate
   records={};a=Factory.__new__(Factory);a.ctx=dict(sessionId='synthetic-owned',planetId=402);a.active=None

@@ -1,5 +1,7 @@
 # Active handoff / 活动交接
 
+**0.6首实操已改为恢复准确暂停科研队首：新鲜原生prepare、单次提交及同tick队列/进度/库存保全回执均必需，106项调用端回归通过。游戏启动后直接推进科研，不再为启动门借取测试材料。** / **The0.6 first operation now resumes the exact paused research head with fresh Native prepare, one commit and same-tick queue/progress/inventory preservation.106 caller cases passed. Startup advances research rather than borrowing test material.**
+
 **2026-11-13恢复0.6。选择c720cf14/0.6.0，6620项本地回归、29151原生构建、准确CI及75工具同源开发程序资格通过；尚未安装，当前实装仍为停止的c632f2d6/0.5.1。最新Primary/LastExit 130230033、2464项完整保护、9140771tick及102633请求保留。继续冷安装、恢复并正常续科研，随后推进Caph闭壳和持续接收功率；Thunderstore 0.5.1提交仍待浏览器可用。** / **Resume0.6 with selected c720cf14:6620 local cases, Native build, exact CI and75-tool coherent development qualification passed. It is not yet installed; the stopped installed cohort remains c632f2d6/0.5.1. Primary/LastExit130230033,2464 protected files,9140771 ticks and102633 requests remain. Cold-install, resume research and continue the Caph shell/receiver goal. Thunderstore0.5.1 remains unsubmitted pending browser availability.**
 
 **2026-11-13 GitHub 0.5.1正式发布。注解标签指向c632f2d6，六个附件的草稿及公开回下载均与本地字节一致；Thunderstore尚未上传，浏览器组件启动时报系统找不到路径。继续0.6源码资格和当前存档科研/闭壳。** / **GitHub0.5.1 is published from annotated tag c632f2d6; all six draft and public downloads matched local bytes. Thunderstore was not submitted because the browser component could not start due to a missing system path. Continue0.6 source qualification, research and shell work.** [Publication / 发布记录](../releases/v0.5.1/publication-2026-11-13.md)

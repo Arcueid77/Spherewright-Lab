@@ -1,5 +1,7 @@
 # Ascension current snapshot / Ascension活动快照
 
+新一轮首实操计划直接恢复已暂停的应力科研队首；调用端须核对新鲜科研选择、一次原生提交及同tick队列/进度/库存保全，106项回归通过。 / The next first real operation directly resumes the paused stress-research head. The caller requires fresh research selection, one Native commit and same-tick queue/progress/inventory preservation;106 cases passed.
+
 2026-11-13续接0.6。Issue #5同步来源c720cf146b0ca530c94cd4d1ef6c6a0f580c81aa已通过6620项本地回归、29151原生构建、准确CI和75工具同源开发程序资格；尚未实装。当前停止的实装仍为c632f2d6/0.5.1，其单座风机回收、独立重建及冷恢复已通过，GitHub 0.5.1已正式发布，Thunderstore未提交。最新Primary/LastExit 130230033、2464项完整保护、9140771累计tick及102633请求保留，含离线包/程序元数据请求与14次单列只读。科研队列保持暂停。下一步冷安装0.6，按新鲜原生切面续科研及原定Caph闭壳、持续接收功率、正常保存冷恢复与交审双包。 [准确CI](https://github.com/Arcueid77/Spherewright/actions/runs/43392343497) · [0.5.1发布](../../releases/v0.5.1/publication-2026-11-13.md)
 
 Resume0.6 with selected c720cf14:6620 local cases, Native29151 build, exact CI and a75-tool coherent development cohort passed. It is not installed yet; the stopped installation remains c632f2d6/0.5.1, whose wind recovery, separate rebuild and cold continuation passed. GitHub0.5.1 is published; Thunderstore remains unsubmitted. Primary/LastExit130230033,2464 protected files,9140771 cumulative ticks and102633 requests include offline package/cohort metadata and14 separate reads. Research remains paused. Cold-install0.6, then resume Native research, Caph shell and sustained receiver power, normal save/cold continuation and review archives.

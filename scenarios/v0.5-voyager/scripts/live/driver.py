@@ -347,6 +347,19 @@ class Live:
      time.sleep(.1)
    need(q['prepared'] and q['commitAllowedNow'] and not q['commitBlockers'],'first_storage_transfer_not_prepared')
    return dict(action_kind='transfer',tool='spherewright_commit_transfer',prepared=q,actualCount=work['count'])
+  if work.get('kind')=='resume-research':
+   tech=work.get('techId');need(type(tech)is int and tech>0,'first_research_technology_invalid')
+   before=self.call('spherewright_get_progression_state',self.ctx);queue=before.get('techQueue') or []
+   need(before.get('currentTechId')==0 and bool(queue) and queue[0]==tech
+    and bool(before.get('selectionStateHash')),'first_research_paused_queue_changed')
+   self.first_before=before
+   q=self.call('spherewright_prepare_select_research',dict(self.ctx,techId=tech,
+    expectedSelectionStateHash=before['selectionStateHash'],researchPaused=False))
+   need(q.get('prepared') is True and q.get('commitAllowedNow') is True and not q.get('commitBlockers')
+    and q.get('researchQueueReadbackVersion')==1 and q.get('plannedResearchPaused') is False,
+    'first_research_resume_native_echo_unproved')
+   self.runtime.put('first-research-resume-plan.private.json',q)
+   return dict(action_kind='select-research',tool='spherewright_commit_select_research',prepared=q)
   if work.get('kind')=='generator-fuel':
    p=self.player();e=self.entity(work['entityId']);self.first_before=dict(player=p,generator=e)
    q=self.call('spherewright_prepare_transfer',dict(self.ctx,direction='player-to-generator-fuel',storageEntityId=work['entityId'],
@@ -451,6 +464,15 @@ class Live:
   raise G.DeadlineExceeded('No original paid Native control effect before startup deadline; reconcile original without replay')
  def verify_progress(self,w,r):
   c=self.runtime.config['firstOperation'];mode=c.get('mode','production')
+  if c.get('kind')=='resume-research':
+   native=r.get('researchQueueReadback') or {};queue=self.first_before.get('techQueue') or []
+   ok=(r.get('terminal') is True and r.get('succeeded') is True and r.get('actionKind')=='select-research'
+    and native.get('beforeQueue')==queue and native.get('afterQueue')==queue and bool(queue) and queue[0]==c['techId']
+    and native.get('previousCurrentTechId')==0 and native.get('currentTechId')==c['techId']
+    and native.get('researchProgressPreserved') is True and native.get('inventoryPreserved') is True
+    and type(native.get('capturedAtGameTick'))is int and native['capturedAtGameTick']==r.get('completedAtGameTick'))
+   self.runtime.put('actual-progress.private.json',dict(verified=ok,actionId=r['actionId'],before=self.first_before,
+    originalSameTickReceipt=r,noReplay=True));return ok
   if c.get('kind')=='storage-transfer':
    amount=w.get('actualCount');sign=1 if c['direction']=='storage-to-player' else -1
    before=r.get('beforeTargetAmount');after=r.get('afterTargetAmount')
