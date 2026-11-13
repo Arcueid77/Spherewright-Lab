@@ -316,10 +316,23 @@ class Factory(Live):
   args=dict(self.ctx,**resolve(s['arguments']));check(prepare,args)
   walking_preview = prepare == 'spherewright_prepare_move' and args.get('previewWalkingRoute') is True
   need(not walking_preview or not commit_requested, 'walking_preview_requires_prepare_only')
+  wind_preview = prepare == 'spherewright_prepare_dismantle' and args.get('previewOnly') is True
+  need(not wind_preview or not commit_requested, 'wind_preview_requires_prepare_only')
   if prepare=='spherewright_prepare_blueprint_build':
    need(bool(args.get('resumeBuildId')) and not args.get('blueprintCode') and args.get('site') is None
     and args.get('allowNewPaidConstructionWindow') is True,'shared_driver_paid_resume_only_no_new_blueprint')
   q=self.call(prepare,args)
+  if wind_preview:
+   preview=q.get('windTurbineDismantle') or {}
+   need(q.get('prepared') is True and q.get('commitAllowedNow') is False and not q.get('planToken')
+    and q.get('targetObjectId')==args['objectId'] and preview.get('targetEntityId')==args['objectId']
+    and preview.get('evidenceVersion')==1 and preview.get('previewOnly') is True
+    and type(preview.get('complete')) is bool and isinstance(preview.get('blockers'),list)
+    and (preview['complete'] or bool(preview['blockers'])),'tokenless_wind_preview_echo_required')
+   self.runtime.put(s['role']+'-plan.private.json',q)
+   self.runtime.put(s['role']+'-prepare-only.private.json',dict(noCommit=True,
+    noGameActionAccepted=True,notAcceptanceEvidence=True))
+   return q
   if walking_preview:
    preview = q.get('walkingRoutePreview') or {}
    geometry = preview.get('geometry') or {}

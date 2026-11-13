@@ -432,6 +432,31 @@ class LiveDriverTests(unittest.TestCase):
   with self.assertRaisesRegex(RuntimeError, 'tokenless_walking_preview_echo_required'):
    adapter.native_operation_once(step, commit_requested=False)
 
+ def test_tokenless_wind_preview_preserves_target_binding_and_never_commits(self):
+  adapter=Factory.__new__(Factory)
+  adapter.ctx=dict(sessionId='synthetic-session',planetId=104)
+  adapter.refs={}
+  adapter.runtime=type('Runtime',(),dict(put=lambda self,name,value:None))()
+  adapter.schemas={'spherewright_prepare_dismantle':dict(properties=dict(sessionId={},planetId={},objectId={},previewOnly={}),required=[])}
+  calls=[]
+  response=dict(prepared=True,commitAllowedNow=False,planToken='',targetObjectId=31,
+   windTurbineDismantle=dict(evidenceVersion=1,previewOnly=True,targetEntityId=31,complete=True,blockers=[]))
+  adapter.call=lambda name,arguments:calls.append(name) or response
+  def forbidden(*args):raise AssertionError('wind preview cannot commit')
+  adapter.commit=forbidden
+  step=dict(role='wind-preview',prepareTool='spherewright_prepare_dismantle',arguments=dict(objectId=31,previewOnly=True))
+  self.assertIs(adapter.native_operation_once(step,commit_requested=False),response)
+  with self.assertRaisesRegex(RuntimeError,'wind_preview_requires_prepare_only'):
+   adapter.native_operation_once(step,commit_requested=True)
+  self.assertEqual(calls,['spherewright_prepare_dismantle'])
+  response['windTurbineDismantle']['targetEntityId']=32
+  with self.assertRaisesRegex(RuntimeError,'tokenless_wind_preview_echo_required'):
+   adapter.native_operation_once(step,commit_requested=False)
+  response['windTurbineDismantle']['targetEntityId']=31
+  response['planToken']='legacy-token'
+  with self.assertRaisesRegex(RuntimeError,'tokenless_wind_preview_echo_required'):
+   adapter.native_operation_once(step,commit_requested=False)
+
  def test_stack_step_uses_fresh_hash_and_charges_exactly_one_original_item(self):
   adapter, calls, _ = self.stack_adapter()
   adapter.step(dict(kind='build-stack', role='stack-one', itemId=2101, anchor='base', modelIndex=51))
