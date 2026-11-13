@@ -1,5 +1,7 @@
 # Wind maintenance snapshot / 风机维护快照
 
+GitHub 0.5.1已正式发布，标签准确指向c632f2d6，六个附件的草稿及公开回下载均逐项匹配。Thunderstore尚未上传：浏览器组件启动返回系统找不到路径。发行包和独立资格记录保留；继续0.6。[发布记录](../../releases/v0.5.1/publication-2026-11-13.md) / GitHub0.5.1 is published from c632f2d6; all six draft/public asset downloads matched. Thunderstore remains unsubmitted because the browser component failed to start with a missing-system-path error. Continue0.6.
+
 0.5.1发行双包由准确来源c632f2d6生成并通过结构、双语指南、两个实包MCP入口及229项已装程序字节一致性检查；累计请求含16次离线元数据检查为102625。完整包信息与冷恢复范围见[发行资格](../../releases/v0.5.1/qualification-2026-11-13.md)，标签及平台发布另记。 / The exact-source0.5.1 archives passed layout, bilingual guide, both packaged MCP entry point and229 installed-program byte checks. The cumulative102625 requests include16 offline metadata requests. Package and cold-continuation scope are recorded separately from publication.
 
 2026-11-13同源冷恢复在263.766秒进入实操，原位风机、主网136台发电机及消费者满供保持，1石墨正常借还。原拆除成功回执在原进程中经实体编号复用后仍可查询；冷启动后的只读查询返回ACTION_NOT_FOUND，符合接口声明的Plugin进程作用域，不证明动作未执行。原成功回执和冷查询结果均保留，未重放。正常保存退出，Primary/LastExit 130230033、2464项完整保护、累计9140771tick/102609请求。下一步生成并核验同源发行双包。
