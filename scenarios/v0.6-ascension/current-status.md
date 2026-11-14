@@ -1,5 +1,11 @@
 # Ascension current snapshot / Ascension活动快照
 
+启动前完整离线预检通过，新增4次请求后累计102693；下一步以恢复科研为首实操。 / Full prelaunch offline preflight passed; cumulative requests are102693 after four further calls. First work resumes research.
+
+2026-11-14来源c720cf14/0.6.0完成一次官方正常冷安装并复核已装同源文件和2464项完整保护；实装75工具通过43项接口及1项无效枚举检查。累计102689请求、9140771tick，Primary/LastExit 130230033。调用端[准确CI](https://github.com/Arcueid77/Spherewright-Lab/actions/runs/43421964116)通过。按所有者运行时长自主授权设本轮有限7200秒实机窗，保留1200万累计tick上限、54000返航/3000清理储备和300秒启动门；首实操直接恢复暂停的应力科研。
+
+Source c720cf14/0.6.0 completed one official normal cold installation; the installed cohort and2464 protected files passed stopped verification. The installed75-tool interface passed43 cases and one invalid-enum check. Cumulative spending is102689 requests and9140771 ticks; primary/LastExit130230033. Exact caller CI passed. The owner's runtime autonomy supports a finite7200-second live window with the12000000 cumulative tick ceiling,54000 return/3000 cleanup reserves and300-second startup gate. First work resumes the paused stress research.
+
 新一轮首实操计划直接恢复已暂停的应力科研队首；调用端须核对新鲜科研选择、一次原生提交及同tick队列/进度/库存保全，106项回归通过。 / The next first real operation directly resumes the paused stress-research head. The caller requires fresh research selection, one Native commit and same-tick queue/progress/inventory preservation;106 cases passed.
 
 2026-11-13续接0.6。Issue #5同步来源c720cf146b0ca530c94cd4d1ef6c6a0f580c81aa已通过6620项本地回归、29151原生构建、准确CI和75工具同源开发程序资格；尚未实装。当前停止的实装仍为c632f2d6/0.5.1，其单座风机回收、独立重建及冷恢复已通过，GitHub 0.5.1已正式发布，Thunderstore未提交。最新Primary/LastExit 130230033、2464项完整保护、9140771累计tick及102633请求保留，含离线包/程序元数据请求与14次单列只读。科研队列保持暂停。下一步冷安装0.6，按新鲜原生切面续科研及原定Caph闭壳、持续接收功率、正常保存冷恢复与交审双包。 [准确CI](https://github.com/Arcueid77/Spherewright/actions/runs/43392343497) · [0.5.1发布](../../releases/v0.5.1/publication-2026-11-13.md)
