@@ -1,5 +1,9 @@
 # Ascension current snapshot / Ascension活动快照
 
+2026-11-15再次只读核对：同一Caph会话的tick、位置、核心能源不变，仍为Drift，原Move仍unknown且写入隔离；本次7请求、累计117592，观察端正常结束。MCP记录的保存边界仍早于现场，10个原已保护原生存档字节未变。本次没有直接读取当前Native Pause标记，也没有Save/Load/Resume或游戏动作；冻结读数不证明接地或保全。
+
+Fresh read-only recheck: the same Caph session, tick, position and core energy remain unchanged, with Drift and the original unknown Move still quarantined. Seven requests bring the total to117592; the observer ended normally. The MCP-recorded saved boundary remains earlier than the live tick and ten previously protected Native saves are unchanged. This cut did not directly expose the current Native Pause flag and performed no Save/Load/Resume or game action; frozen readback is neither grounded nor preservation proof.
+
 2026-11-15源码复核：已装版本中，旧版unknown Move证据、有限新墙钟及水面目标有不同来源/模式门，不能组合成当前`c720cf14`现场的已验证恢复链；即使以后正常保存，仍需另行核验恢复。细节见[移动及保全审计](movement-preservation-audit.md)。
 
 Installed-source review: the legacy unknown-Move evidence, finite new window and surface target have distinct source/mode gates; together they do not establish a recovery chain for the present `c720cf14` scene. A hypothetical later normal save would still require separately proved recovery. See the [movement and preservation audit](movement-preservation-audit.md).
