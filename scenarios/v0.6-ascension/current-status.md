@@ -1,5 +1,13 @@
 # Ascension current snapshot / Ascension活动快照
 
+2026-11-15最新续接：应力科研353160/360000，剩余38份五色；蓝/红/黄/紫机甲科研点已覆盖，继续正常制造及转运绿矩阵。临时普通取氢分拣器已按独立原生动作正常回收并退还1普通，剩余25氢正常返还原供料仓，另80氢送入卡西米尔仓；旧高速取氢器原件及回收独立保留，施工实耗不抵销。应力最后阶段透镜线缺重氢，原线已恢复，按新鲜库存及原生门继续。
+
+按所有者合理运行自主授权，将本轮墙钟窗口由原启动起21600增至43200秒；游戏原进程未变，唯一调用端正常交接，无保存、读档、重启或时钟重置。交接tick131203662对应10114400累计tick、116297写端请求及22次单列只读/离线请求；全球200000上限及54000返航/3000清理储备不变。已从现有库存正常取用4个额外翘曲器，实机回读携带6个。施工新建累计带719、普通99、高速13、极速16、电塔24；石墨输出分拣器升级和临时分拣器回收各留独立原件。选定fbe39898、实装c720cf14仍不同；完整科研、Caph闭壳/发射/持续发电、正常保存冷恢复及最终同源交审双包均未完成。
+
+Latest handoff: stress research353160/360000,38 five-colour sets remaining. Blue/red/yellow/purple mecha points cover the remainder; continue normal green manufacture and transport. The distinct temporary ordinary hydrogen collector was normally recovered with one ordinary sorter refunded;25 residual hydrogen returned to the original source and80 entered the Casimir supply store. Preserve this separately from the earlier fast-collector recovery and never subtract recoveries from historical placement spending. The lens chain currently lacks deuterium; the original route is restored and needs fresh stock/Native checks.
+
+Owner runtime autonomy extended the original-start wall window from21600 to43200 seconds. The sole caller was handed off within the original game without Save/Load/relaunch or clock reset. Handoff tick131203662 corresponds to10114400 cumulative ticks and116297 caller requests plus22 separate read-only/offline requests; the global200000 limit and54000 return/3000 cleanup reserves remain. Four additional warpers were normally withdrawn from existing stock; six were observed carried. New placement spending is719 belts,99 ordinary/13 fast/16 gradeIII sorters and24 towers, with the graphite sorter upgrade and temporary recoveries kept as separate originals. Selected fbe39898 differs from installed c720cf14. Research, actual Caph shell/launch/sustained power, normal save/cold continuation and final same-source review packages remain open.
+
 2026-11-15最新切面：应力科研331630/360000，约余157份五色；蓝/红/黄机甲科研点已覆盖。卡西米尔的常规供氢仍偏紧，已在原主供料分支之后新建另一台普通氢筛选分拣器，从已有线路向兼容仓收集余量。该动作与此前已回收的高速分拣器是不同的原生动作，即使实体ID复用也不重放旧动作。已正常转运150氢及钛化玻璃至卡西米尔供料仓，观察到原有两台位面过滤器工作，并将实产过滤器分批转入量子线；这不构成持续吞吐验收。
 
 普通取氢分拣器当前仍在使用；完成该补料后离场前按新鲜原生门回收，并对仓内余氢正常转回原线或用于本案，保留其施工、回收及所有已接受转运原件。最新tick131102836累计10013574 tick；新建施工带719、普通分拣器99、高速13、极速16、电塔24，上限730/102/14/16/27，另保留石墨分拣器升级/旧高速取氢器回收的独立收支。唯一调用端继续运行、原启动起21600秒和54000/3000储备不变。完整科研、Caph闭壳/发射/持续发电、正常保存冷恢复及最终交审双包仍待完成。
