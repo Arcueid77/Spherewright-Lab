@@ -1,5 +1,9 @@
 # Ascension current snapshot / Ascension活动快照
 
+2026-11-16同源冷安装：`75001eb9`通过1次官方事务安装，5个Plugin/224个MCP文件、版本戳与2476项完整备份实盘核验通过。实装SDK 45种调用形状、50次离线请求及正常EOF通过；首操作包的真实SDK形状及完整生产方案校验通过。无游戏调用或加载，完整离线预检后才恢复保存现场，实际水面上岸尚未证明。
+
+Coherent cold install, 2026-11-16: one official transaction installed `75001eb9`; five Plugin/224 MCP files, revision stamps and2476 complete backup entries passed physical checks. The installed SDK passed45 call shapes,50 offline requests and normal EOF; the first-operation packet passed actual-SDK shape and full production-plan admission. No game calls or loads occurred. Complete offline preflight before restoring the saved scene; actual shore arrival remains unproved.
+
 2026-11-16：Lab已选择产品`75001eb9`，安装仍为`c720cf14`且游戏关闭。调用端217项回归及本地证据核验通过；按现行授权记录43200秒恢复时窗和1600000旅程tick增量，保留实际累计实耗与返航/清理储备。下一步为同源冷安装、实装SDK和首操作预检，之后通过MCP验证恢复及上岸；尚无实机上岸证明。
 
 Lab selection, 2026-11-16: product `75001eb9` is selected; installed runtime remains `c720cf14` and the game is stopped. The caller passed217 regressions and local evidence verification. A43200-second recovery window and1600000 additional journey ticks are recorded under existing authority, retaining cumulative spending and return/cleanup reserves. Coherent cold installation, installed SDK and first-operation preflight precede MCP recovery; actual shore arrival remains unproved.
