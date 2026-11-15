@@ -8,7 +8,7 @@ from evidence import need,read,sha,json_value
 from mcp_client import Client
 from saved_space import exact_last_exit_echo,paused_space_source,exact_ui_supply,saved_identity_token
 from contracts import quarantined_navigation_original_accounted,fully_observed_dry_surface,observed_short_crossing_dry_landing
-from contracts import ordinary_owned_resume_echo,resume_admission_echo,validate_steps,validate_native_calls,strict_native_player_idle,native_warper_auto_supply_enabled,quarantined_paid_original_accounted,quarantined_harvest_no_effect_accounted,isolated_paid_belt_build_accounted,quarantined_local_move_saved_source,completed_saved_surface_move
+from contracts import ordinary_owned_resume_echo,resume_admission_echo,validate_steps,validate_native_calls,strict_native_player_idle,native_warper_auto_supply_enabled,quarantined_paid_original_accounted,quarantined_harvest_no_effect_accounted,isolated_paid_belt_build_accounted,quarantined_local_move_saved_source,completed_saved_surface_move,isolated_surface_unknown_after_saved_home,isolated_saved_menu_unknown
 
 PLAYER_SETTING_MODES=('enable-mecha-construction-drones','disable-mecha-research-auto-supply',
  'enable-mecha-research-auto-supply','enable-mecha-warper-auto-supply')
@@ -93,8 +93,32 @@ class Live:
        'original_local_move_or_covering_saved_source_unproved')
   else:
    need(not local_moves,'local_move_evidence_requires_surface_profile')
+  home_isolation=c.get('homeSavedUnknownIsolation');home_isolated=False
+  if home_isolation:
+   need(c.get('recoveryProfile')=='ordinary-owned-home' and c.get('originalActionsReconciled') is False,
+    'home_isolation_requires_truthful_home_profile')
+   def frozen(key):
+    need(sha(home_isolation[key+'Path'])==home_isolation[key+'Sha256'],'frozen_home_isolation_evidence_changed')
+    return read(home_isolation[key+'Path'])
+   old=frozen('surfaceConfig');originals=old.get('quarantinedLocalMoveOriginals') or []
+   need(len(originals)==1 and sha(old['backupManifest'])==old['backupManifestSha256'],
+    'original_surface_source_or_backup_changed')
+   original=originals[0]
+   for key in ('receipt','session','preservation'):
+    need(sha(original[key+'Path'])==original[key+'Sha256'],'frozen_local_move_evidence_changed')
+   old_backup=read(old['backupManifest']);old_source=old_backup['latest'][old['sourceRole']]
+   rows=[row for row in old_backup['rows'] if Path(row['originalPath']).resolve()==Path(old['savePaths'][old['sourceRole']]).resolve()]
+   need(old_backup.get('complete') is True and old_backup.get('verified') is True and len(rows)==1
+    and rows[0]['sha256']==old_source['sha256'] and sha(rows[0]['backupPath'])==old_source['sha256'],
+    'original_surface_backup_copy_changed')
+   need(isolated_surface_unknown_after_saved_home(c,old,original,read(original['receiptPath']),read(original['sessionPath']),
+    read(original['preservationPath']),old_source,frozen('surfaceProgress'),frozen('loadedSession'),
+    frozen('homeFlight'),frozen('homeSave'),m),'historic_surface_unknown_not_isolated')
+   need(isolated_saved_menu_unknown(c,frozen('menuReceipt'),frozen('menuObservedAction'),frozen('menuObservation'),
+    frozen('closeIntent'),frozen('closeResult'),m),'saved_menu_unknown_not_isolated')
+   home_isolated=True
   need(c['firstOperationReady'] and (c.get('originalActionsReconciled') is True
-    or c.get('recoveryProfile')=='successful-outbound-surface' and bool(local_moves)),'offline_not_ready')
+    or c.get('recoveryProfile')=='successful-outbound-surface' and bool(local_moves) or home_isolated),'offline_not_ready')
   for original in c.get('isolatedPaidBeltBuilds',[]):
    for key in ('receipt','plan','observation','preservation'):
     need(sha(original[key+'Path'])==original[key+'Sha256'],'frozen_belt_original_evidence_changed')
@@ -114,7 +138,7 @@ class Live:
   self.steam=subprocess.check_output(['powershell.exe','-NoProfile','-NonInteractive','-Command',"(Get-ItemProperty -LiteralPath 'HKCU:/Software/Valve/Steam' -Name SteamExe).SteamExe"],text=True,timeout=10).strip()
   need(Path(self.steam).is_file(),'steam_missing')
   proof={key:True for key in G.READINESS_FLAGS}
-  if c.get('recoveryProfile')=='successful-outbound-surface':
+  if c.get('recoveryProfile')=='successful-outbound-surface' or home_isolated:
    proof['original_actions_reconciled']=False
    proof['original_unknowns_isolated']=True
   limit=G.startup_limit(c.get('startupLimitSeconds'))

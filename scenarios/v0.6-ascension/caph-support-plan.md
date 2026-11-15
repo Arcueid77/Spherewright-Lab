@@ -6,9 +6,13 @@ The completed home return and fresh Native stocks support an initial finite batc
 
 The current player already carries20 nanotubes,20 alloy, one quantum chip and130 deuteron rods; local Caph storage observed802 graphene. Under the owner's resource autonomy, the bounded home withdrawal for this batch is up to76 nanotubes, four alloy,24 high-purity silicon,24 processors, seven quantum chips,54 glass,18 iron ore and nine copper ingots. Use fresh Native counts and ordinary transfers/manufacture, record actual debits and keep the existing fuel/warper return reserves. Any later machinery, logistics and remaining-shell resources are derived and recorded separately from fresh facts.
 
+For the first local feed, reserve one existing Mk.I assembler, one small storage, up to31 new basic belts and four new basic sorters; retain the existing three available towers. The player already carries one assembler, nine belts, one sorter, three circuit boards and16 stone. Under the same autonomy, withdraw at most37 iron ingots: four iron/four carried stone normally make the storage,30 iron including ten gears make30 belts, and three iron/three carried boards make three sorters. The corresponding cumulative placement ceilings become750 belts,103 ordinary sorters,22 small storages and one Mk.I assembler; prior719/99/21/0 placement spending remains charged. Actual geometry, placement and positive flow still require fresh Native checks.
+
 母星正常返航及新鲜库存支持先做最多4枚当地正常制造火箭、12片当地发射帆，均在既有210火箭/224发射帆上限内。4枚火箭需8组件、24框架、24片组件帆、24处理器、8量子芯片及16氘棒；配方80制造24框架需96纳米管、24钛合金及24高纯硅。另加12片发射帆，36片帆共需18石墨烯和18光子合并器。配方68/11/50制造18合并器需54玻璃、18铁块和9铜块，经36棱镜和18电路板；18铁矿可正常制造铁块。本首批不等于149火箭/224细胞的完整设计已供料。
 
 当前机甲已携20纳米管、20钛合金、1量子芯片及130氘棒；Caph当地仓观察到802石墨烯。按所有者用料自主授权，首批母星有限取用上限为76纳米管、4钛合金、24高纯硅、24处理器、7量子芯片、54玻璃、18铁矿及9铜块。按新鲜原生库存正常转运和制造，记录实耗并保留燃料/翘曲器返航储备；后续设备、物流和剩余闭壳用料由新鲜事实另行核算记录。
+
+首批当地供料预留1台已有Mk.I制造台、1小仓、最多31条新基础带及4个新普通分拣器，沿用现有可用3塔。机甲已携1制造台、9带、1分拣器、3电路板和16石材。按同一授权最多取37铁块：4铁及携带的4石正常制造1仓，含10齿轮的30铁制造30带，3铁及携带的3电路板制造3分拣器。累计施工上限相应为750带、103普通分拣器、22小仓、1台Mk.I；原719/99/21/0实际新建不清零。实际几何、施工及正向流转仍须新鲜原生检查。
 
 2026-11-15只读现场切面：Caph层1有1个已存在节点，30结构点中已有1点，29点未完成；新鲜6°闭合三角预览复用该节点，新建2节点、3框架及1壳，准确新增120结构点和224细胞点，科技允许。当前无在途火箭或活跃/在途太阳帆。若要将旧节点和该新增设计全部实际填满，基于当前切面的理论需求为149次火箭交付及224个细胞交付；订单、损失、回收或新鲜拓扑变化须另计，不能用设计数代替真实抵达。149枚位于既批210枚发射上限内；224帆是理论无损下界，实际转换及有限寿命需现场观察。
 

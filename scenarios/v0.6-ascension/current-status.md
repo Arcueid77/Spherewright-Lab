@@ -1,5 +1,9 @@
 # Ascension current snapshot / Ascension活动快照
 
+2026-11-16同源冷安装：`22970069`经1次官方事务安装，5个Plugin/224个MCP文件、版本戳及2490项最新备份实盘核验通过；实装SDK 45种调用形状/50次离线请求、正常EOF通过。独立调用端同工作目录预检通过；原水面Move和菜单return仍为unknown，依据完整保存、独立成功恢复/返航、卸载及关停证据隔离，不冒称核销成功。首笔实操为正常取37铁并按记录制造当地供料仓、带及分拣器；游戏当前关闭，后续发射及冷恢复电力待实机。
+
+Coherent cold install, 2026-11-16: one official transaction installed `22970069`; five Plugin/224 MCP files, revision stamps and2490 current backup entries passed physical verification. The installed SDK passed45 call shapes/50 offline requests and normal EOF. Detached-context preflight passed with the original surface Move and menu return still unknown and isolated through complete Save, distinct successful recovery/return, unloaded-menu and normal-close evidence; neither is claimed reconciled. First work is a normal37-iron withdrawal followed by the documented local-feed storage, belts and sorters. The game is stopped; subsequent launch and post-cold-recovery electricity remain live work.
+
 2026-11-16：Lab已选择`22970069`；当前实装仍`75001eb9`且游戏关闭，2490项最新保护备份保留。先完成同源冷安装及实装SDK，再从131399003母星正常存档恢复并继续首批Caph发射供料。
 
 Lab now selects `22970069`; installed runtime remains `75001eb9`, the game is stopped and2490 current protected backup entries remain. Complete coherent cold installation and installed SDK checks, then continue the first Caph launch batch from the normal home save at131399003.
