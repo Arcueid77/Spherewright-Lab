@@ -1,5 +1,9 @@
 # Ascension current snapshot / Ascension活动快照
 
+2026-11-15有限时窗源码：产品main `3447da33` 已推送并通过[准确CI](https://github.com/Arcueid77/Spherewright/actions/runs/43713156798)，Lab源码锁及只读依赖选定该提交。预览可假设核算一个有限新UTC时窗，并保留原截止、已耗tick及返航/能源/翘曲器储备；它不应用时窗、不授权移动或Resume，未安装到当前游戏。当前c720cf14进程仍保留原生暂停和未保存现场，可执行脱困及完整0.6实机验收仍未完成。
+
+Product main `3447da33` is pushed and passed [exact CI](https://github.com/Arcueid77/Spherewright/actions/runs/43713156798); the Lab source lock and read-only dependency select it. The preview assesses a hypothetical finite new UTC window while preserving original deadlines, spent ticks and return/energy/warper reserves. It does not apply a window or authorize a Move or Resume and is not installed in the current game. The c720cf14 process retains the Native pause and unsaved live state. Executable recovery and full 0.6 live acceptance remain open.
+
 2026-11-15源码检查：产品main的只读同会话地表来源预览`cd786b8b`已推送并通过[准确CI](https://github.com/Arcueid77/Spherewright/actions/runs/43711630148)，Lab源码锁和只读依赖已选定该提交。预览既不可执行也不续期，原航程墙钟已过时仍拒绝；当前游戏仍运行已装c720cf14，未热替换，暂停现场尚未正常保存。可执行脱困、有限新墙钟与完整0.6验收均未完成。
 
 Product main's read-only same-session surface source preview `cd786b8b` was pushed and passed [exact CI](https://github.com/Arcueid77/Spherewright/actions/runs/43711630148); the Lab source lock and read-only dependency select it. The preview is not executable and does not renew a window; it still refuses the expired original wall. The running game remains on installed c720cf14 without hot replacement, and the paused live state is not normally saved. Executable recovery, a finite new wall window and full 0.6 acceptance remain open.
