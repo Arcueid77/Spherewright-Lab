@@ -1,5 +1,9 @@
 # Caph movement and preservation audit / Caph移动与保全审计
 
+2026-11-15源码复核：已装`c720cf14`的特定旧版unknown Move证据路径只接受固定旧来源`12e6dfca`及默认LastExit模式，并仍核验原旅程剩余时限；新墙钟的远端主档模式排除该旧版证据输入，水面目标则只属于后者且需已保存落地来源准入。因此，假设以后获得当前现场的普通保存，也不能仅凭上述旧版接口声称这次`c720cf14`原动作、过期时窗及水面脱困已形成可恢复闭环。以上是源码范围核对，不证明其他未来路径不可能；任何保存、关闭、加载和现场恢复仍须各自满足当前所有者指令与新鲜原生证明。
+
+Installed-source review on 2026-11-15: the specific legacy unknown-Move evidence path in `c720cf14` accepts only the fixed older source `12e6dfca` in default LastExit mode and still checks the original remaining journey window. The new-window remote-primary mode excludes that legacy input, while a surface target belongs to the latter and requires completed saved-landing source admission. Even a hypothetical later normal save of this live scene would not by itself prove a supported recovery chain for this `c720cf14` original, expired window and water-to-land task. This is a source-scope finding, not proof that every future path is impossible; Save, shutdown, Load and recovery each remain subject to the owner's current instructions and fresh Native proof.
+
 2026-11-15，当前实机Caph行程在一次已接受普通移动后进入Native Pause与精确写隔离。原动作终态为unknown：失去地面接触后，有限尾部未能证明接地Walk；暂停不是物理静止或成功。此前不同移动以距目标1.72米明确失败并证明静止。两笔原件分别保留，不重放。
 
 本次路线选择有执行失误：调用端将未确认地表的分段点作为远端移动目标。相关原生地表预览为`unavailable / surface_span_outside_bounded_preview`，不是干地或岸线证明。产品现有操作指引要求远端跨水使用当前世界中重新验证的Walk目的地、障碍与有限储备，不应制造未知水面中间目标。此前行走成功不证明当前路径安全。冻结原位只读地形切面确认当前位置浅水、沿候选方向约34米有露出水面的地面；约15米处另一候选点的九点地形切面均比水面高至少0.1米。两个目标的新鲜移动预览完整但因原隔离禁止提交，且不证明障碍清除或实际可达。后续先核查完整现场地形、路径和目标，再作独立新动作。

@@ -1,5 +1,9 @@
 # Ascension current snapshot / Ascension活动快照
 
+2026-11-15源码复核：已装版本中，旧版unknown Move证据、有限新墙钟及水面目标有不同来源/模式门，不能组合成当前`c720cf14`现场的已验证恢复链；即使以后正常保存，仍需另行核验恢复。细节见[移动及保全审计](movement-preservation-audit.md)。
+
+Installed-source review: the legacy unknown-Move evidence, finite new window and surface target have distinct source/mode gates; together they do not establish a recovery chain for the present `c720cf14` scene. A hypothetical later normal save would still require separately proved recovery. See the [movement and preservation audit](movement-preservation-audit.md).
+
 2026-11-15有限时窗源码：产品main `3447da33` 已推送并通过[准确CI](https://github.com/Arcueid77/Spherewright/actions/runs/43713156798)，Lab源码锁及只读依赖选定该提交。预览可假设核算一个有限新UTC时窗，并保留原截止、已耗tick及返航/能源/翘曲器储备；它不应用时窗、不授权移动或Resume，未安装到当前游戏。当前c720cf14进程仍保留原生暂停和未保存现场，可执行脱困及完整0.6实机验收仍未完成。
 
 Product main `3447da33` is pushed and passed [exact CI](https://github.com/Arcueid77/Spherewright/actions/runs/43713156798); the Lab source lock and read-only dependency select it. The preview assesses a hypothetical finite new UTC window while preserving original deadlines, spent ticks and return/energy/warper reserves. It does not apply a window or authorize a Move or Resume and is not installed in the current game. The c720cf14 process retains the Native pause and unsaved live state. Executable recovery and full 0.6 live acceptance remain open.
