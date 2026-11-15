@@ -1,5 +1,13 @@
 # Ascension current snapshot / Ascension活动快照
 
+2026-11-15最新切面：应力科研331630/360000，约余157份五色；蓝/红/黄机甲科研点已覆盖。卡西米尔的常规供氢仍偏紧，已在原主供料分支之后新建另一台普通氢筛选分拣器，从已有线路向兼容仓收集余量。该动作与此前已回收的高速分拣器是不同的原生动作，即使实体ID复用也不重放旧动作。已正常转运150氢及钛化玻璃至卡西米尔供料仓，观察到原有两台位面过滤器工作，并将实产过滤器分批转入量子线；这不构成持续吞吐验收。
+
+普通取氢分拣器当前仍在使用；完成该补料后离场前按新鲜原生门回收，并对仓内余氢正常转回原线或用于本案，保留其施工、回收及所有已接受转运原件。最新tick131102836累计10013574 tick；新建施工带719、普通分拣器99、高速13、极速16、电塔24，上限730/102/14/16/27，另保留石墨分拣器升级/旧高速取氢器回收的独立收支。唯一调用端继续运行、原启动起21600秒和54000/3000储备不变。完整科研、Caph闭壳/发射/持续发电、正常保存冷恢复及最终交审双包仍待完成。
+
+Latest stress cut331630/360000 leaves approximately157 five-colour sets; blue/red/yellow mecha points cover the remainder. Casimir hydrogen remained constrained, so a distinct ordinary filtered sorter was normally built downstream of the original primary supply and collects surplus into a compatible existing warehouse. This is a new Native action, separate from the earlier recovered fast collector even where entity IDs are reused.150 hydrogen and titanium glass were normally transferred into the Casimir input store; both existing plane-filter machines were observed working, and actual products were transferred in batches to quantum production. These are not sustained-throughput acceptance.
+
+The ordinary hydrogen collector is still in use. After this bounded support and before departure, normally recover it under fresh Native admission and return or use the remaining warehouse hydrogen, preserving placement, recovery and all accepted transfer originals. Tick131102836 carries10013574 cumulative ticks. New placement spending is719 belts,99 ordinary/13 fast/16 gradeIII sorters and24 towers under730/102/14/16/27 ceilings; the graphite upgrade and previous fast-collector recovery remain distinct. The sole caller, original-start21600-second window and54000/3000 reserves continue. Full research, actual Caph shell/launch/sustained power, normal save/cold continuation and final review packages remain open.
+
 2026-11-15最新切面：应力科研319144/360000，剩余约227份五色；机甲蓝/红/黄点数均覆盖余量，紫/绿需继续自然生产。实际新增1台筛选精炼油分拣器供既有裂解线路。为补红矩阵临时新建1台高速取氢分拣器，累计正常送入红线190氢；原生回收该分拣器并准确退回1台高速，之后将余下50氢正常返还原供料仓。原石墨出料普通分拣器经原生升级为高速，终态证明消耗1高速、回收1普通，保留携带石墨、原连接和周期比例。该升级与新建施工账分别保留，不以回收抵销既耗。
 
 当前同一游戏及唯一调用端继续运行。最新观察tick131046187对应9956925累计tick；施工新建累计带719、普通分拣器98、高速13、极速16、电塔24，上限730/102/14/16/27，另有上述原生升级/回收原件。截止仍为原启动起21600秒，已选源码fbe39898、当前实装c720cf14的区别不变；原动作、22次单列请求、累计运行及返航/清理储备继续保留。卡西米尔氢、石墨和量子供料仍须持续核对，科研、Caph闭壳/实际发射/持续发电、正常保存冷恢复及最终同源交审双包均未闭合。
