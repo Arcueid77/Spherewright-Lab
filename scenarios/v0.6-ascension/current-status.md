@@ -1,5 +1,13 @@
 # Ascension current snapshot / Ascension活动快照
 
+2026-11-15时限后只读回读：原航程墙钟截止已过，同一游戏进程仍原生暂停在tick131349302，位置、核心能源及原unknown隔离未变；累计117585请求。旧航程、已耗及返航储备不重置。所有者已授权合理增加运行时长，但当前版本尚无可用的同会话脱困入口；后续须经受支持的原生恢复方案核定新的有限墙钟，不将授权当作自动续期。现场尚未正常保存。
+
+After the original journey wall deadline, a fresh read-only cut confirms the same game process remains Native-paused at tick131349302 with unchanged position/core and the original unknown quarantine.117585 requests are accounted. The old journey, actual spending and return reserve are not reset. Owner autonomy permits reasonable runtime increments, but the current version has no same-session recovery entry; a later finite wall window requires a supported fresh Native recovery plan, not an automatic renewal. Current live state remains unsaved.
+
+2026-11-15产品仓已按所有者要求直接在main开发：线性提交`1ebc2622`已正常推送，[准确CI](https://github.com/Arcueid77/Spherewright/actions/runs/43707893193)通过；中英文AGENTS的原有持续授权去重并保留，新增分支前先问所有者。Lab所选源码/gitlink更新至该提交，当前游戏仍为c720cf14且暂停，未热替换。产品main工作区另有双帧来源预览的未提交开发，71项针对性测试与Native构建通过；未提供可执行脱困入口，原unknown及未保存现场继续保留。
+
+Product work now proceeds directly on main as requested. Linear commit `1ebc2622` was normally pushed and passed [exact CI](https://github.com/Arcueid77/Spherewright/actions/runs/43707893193). Bilingual AGENTS authority text was consolidated, with prior owner approval required before a new branch. Lab now selects that gitlink; the paused game remains on c720cf14 without hot replacement. The main worktree also holds uncommitted two-frame source-preview development:71 targeted cases and a Native build passed, but there is no executable recovery entry. Preserve the original unknown and unsaved current state.
+
 2026-11-15再次只读复核：同一游戏进程仍在Caph、Native暂停，tick131349302、位置和核心能源与前次相同，原Move仍unknown、写入仍隔离。累计请求117578。原生旅程墙钟持续，返航储备与原动作未重置。
 
 产品独立工作树本地提交`b96f9036`实现只读同会话来源校验基础：准确unknown Move/暂停姿态及细微位置、原旅程/成功出航文件、静默日志和原生地表采样均有各自的证据边界；88项针对性测试及29151原生构建通过。复制的真实记录和DTO可通过离线兼容检查，但场景引用、地表/能源准入和旅程字段使用合成条件，不能当作实机验证。该代码尚无可执行脱困MCP入口、未推产品主线且未安装当前进程；现场保存/恢复与完整0.6验收仍待解决。
