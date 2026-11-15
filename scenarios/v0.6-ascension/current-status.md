@@ -1,5 +1,13 @@
 # Ascension current snapshot / Ascension活动快照
 
+2026-11-15最新切面：应力科研319144/360000，剩余约227份五色；机甲蓝/红/黄点数均覆盖余量，紫/绿需继续自然生产。实际新增1台筛选精炼油分拣器供既有裂解线路。为补红矩阵临时新建1台高速取氢分拣器，累计正常送入红线190氢；原生回收该分拣器并准确退回1台高速，之后将余下50氢正常返还原供料仓。原石墨出料普通分拣器经原生升级为高速，终态证明消耗1高速、回收1普通，保留携带石墨、原连接和周期比例。该升级与新建施工账分别保留，不以回收抵销既耗。
+
+当前同一游戏及唯一调用端继续运行。最新观察tick131046187对应9956925累计tick；施工新建累计带719、普通分拣器98、高速13、极速16、电塔24，上限730/102/14/16/27，另有上述原生升级/回收原件。截止仍为原启动起21600秒，已选源码fbe39898、当前实装c720cf14的区别不变；原动作、22次单列请求、累计运行及返航/清理储备继续保留。卡西米尔氢、石墨和量子供料仍须持续核对，科研、Caph闭壳/实际发射/持续发电、正常保存冷恢复及最终同源交审双包均未闭合。
+
+Latest cut: stress research319144/360000, approximately227 five-colour sets remaining. Blue/red/yellow mecha points cover the remainder; purple and green still require normal manufacture. One filtered oil sorter feeds the existing cracking line. A temporary fast hydrogen collector supplied the red chain alongside earlier stock, totalling190 normally transferred hydrogen; its original Native dismantle returned one fast sorter, and the unused50 hydrogen was normally returned to the original supply store. The original graphite output sorter was normally upgraded: one fast sorter consumed and one ordinary refunded, with carried graphite, both links and cycle fraction preserved. Keep this upgrade separate from placement spending; recovery does not refund historical spending.
+
+The same original game and sole caller remain live. Observed tick131046187 corresponds to9956925 cumulative ticks. New placement spending is719 belts,98 ordinary/13 fast/16 gradeIII sorters and24 towers under730/102/14/16/27 ceilings, with the distinct upgrade/recovery receipts above. The original-start21600-second deadline, selected fbe39898 versus installed c720cf14 distinction, original actions,22 separately accounted requests and cumulative return/cleanup reserves remain. Continue monitoring Casimir hydrogen, graphite and quantum inputs. Research, actual Caph shell/launch/sustained electricity, normal save/cold continuation and final same-source review packages remain open.
+
 2026-11-15续跑切面：应力科研263340/360000。石矿仓正常移出800石材至兼容仓后，为矿石预留空格并恢复原石材分拣设置；以原生几何和准入新增1台筛选石矿分拣器，已观察实际搬运。先前另一位置在接受前被原生几何检查拒绝，未耗材，原件保留。另按现有产线正常补入铁块、铜块、晶格硅、石墨及石墨烯，观察到第二条紫矩阵链、奇异物质、透镜和卡西米尔设备工作；实际持续吞吐仍需分别观察。紫、绿矩阵及原料按原生转运实耗继续累计，转入不等于消耗。
 
 唯一调用端已在同一原游戏进程正常交接；无Save/Load/重启，原生动作原件及累计账保留。按所有者运行自主授权，有限窗口由原启动起14400延至21600秒（原启动时钟不重置）；交接tick130825494累计9736232 tick、108241写端请求及22次单列只读/离线请求，全球上限200000，返航54000/清理3000 tick储备不变。建设实耗基础带719、普通分拣器97、高速12、极速16、电塔24；上限分别730/102/14/16/27。新调用端继续累计。
