@@ -53,6 +53,36 @@ def quarantined_navigation_original_accounted(config, reference, receipt, sessio
         and 0 <= receipt['completedAtGameTick'] <= session['gameTick']
             <= preservation['currentLastExit'] <= config['sourceTick'])
 
+def quarantined_local_move_saved_source(config, reference, receipt, session, preservation, primary):
+    """Retain an unknown ordinary Move while proving the later saved source.
+
+    This accounts for the old action only; it does not declare arrival, idle,
+    ground contact, or a successful recovery. Runtime separately verifies the
+    complete current backup and Native identity before invoking this check.
+    """
+    tick = config.get('sourceTick'); action = reference.get('actionId')
+    return (config.get('recoveryProfile') == 'successful-outbound-surface'
+        and config.get('recoveryMode') == 'authorize_remote_primary_recovery'
+        and config.get('sourceRole') == 'primary' and type(tick) is int and tick >= 0
+        and isinstance(action, str) and bool(action)
+        and receipt.get('actionId') == action and receipt.get('actionKind') == 'move'
+        and receipt.get('terminal') is True and receipt.get('state') == 'outcome_unknown'
+        and receipt.get('succeeded') is False and receipt.get('reconciledFromOutcomeUnknown') is False
+        and session.get('gameLoaded') is True and session.get('ownedBySpherewright') is True
+        and session.get('writesAllowed') is False and session.get('writeHealth') == 'quarantined'
+        and session.get('writeQuarantineActionId') == action
+        and session.get('sessionId') == receipt.get('sessionId')
+        and session.get('localPlanetId') == receipt.get('planetId') == config.get('planetId')
+        and type(receipt.get('completedAtGameTick')) is int and 0 <= receipt['completedAtGameTick'] <= tick
+        and type(session.get('gameTick')) is int and session['gameTick'] == tick
+        and preservation.get('passed') is True and preservation.get('exactLiveTickMatched') is True
+        and preservation.get('fullFileHashVerified') is True
+        and type(preservation.get('savedGameTick')) is int and preservation['savedGameTick'] == tick
+        and preservation.get('sessionCutSha256') == reference.get('sessionSha256')
+        and isinstance(preservation.get('primarySha256'), str) and bool(preservation['primarySha256'])
+        and type(primary.get('gameTick')) is int and primary['gameTick'] == tick
+        and primary.get('sha256') == preservation['primarySha256'])
+
 def quarantined_harvest_no_effect_accounted(config,reference,receipt,cut,session,preservation):
     action=reference.get('actionId');tick=cut.get('observedGameTick')
     return (owned_saved_recovery_context(config)
@@ -171,6 +201,25 @@ def resume_admission_echo(config,plan):
             and plan.get('additionalVoyagerGameTicks')==0 and config['additionalVoyagerGameTicks']==0)
     if plan.get('remotePrimaryRecoveryAuthorizationUsed') is not True or plan.get('discardedUnstoredProgressGameTicks')!=0:
         return False
+    if config.get('recoveryProfile') == 'successful-outbound-surface':
+        return (config.get('recoveryMode') == 'authorize_remote_primary_recovery'
+            and config.get('sourceRole') == 'primary' and type(config.get('sourceTick')) is int
+            and plan.get('recoveryMode') == config['recoveryMode']
+            and plan.get('exactEmbeddedIdentityVerified') is True
+            and isinstance(config.get('expectedNativeVersion'), str) and bool(config['expectedNativeVersion'])
+            and plan.get('sourceGameVersion') == plan.get('targetGameVersion') == config['expectedNativeVersion']
+            and plan.get('successfulOutboundSurfaceSourceUsed') is True
+            and plan.get('completedSavedLandingAdmissionUsed') is False
+            and plan.get('failedLandingRecoveryAuthorizationUsed') is False
+            and not plan.get('originalFailedFlightActionId')
+            and plan.get('savedLandingAccountingAnchorGameTick') is None
+            and plan.get('nativeOriginalOutcomeProved') is False
+            and type(plan.get('surfaceRecoveryExpectedSourceGameTick')) is int
+            and plan['surfaceRecoveryExpectedSourceGameTick'] == config['sourceTick']
+            and type(plan.get('candidateGameTick')) is int and type(plan.get('minimumGameTick')) is int
+            and plan['candidateGameTick'] == plan['minimumGameTick'] == config['sourceTick'])
+    if plan.get('successfulOutboundSurfaceSourceUsed') is True:
+        return False
     if plan.get('completedSavedLandingAdmissionUsed') is True:
         # A separately completed admission of an old failed outbound.
         return bool(plan.get('originalFailedFlightActionId')) and plan.get('successfulFlightWitnessRetiredAtGameTick') is None
@@ -243,6 +292,41 @@ def strict_native_player_idle(player,allow_passive_drift=False):
             and all(type(physics[key].get(axis)) in (int,float)
                 and physics[key][axis]*physics[key][axis]<=zero_square_maximum
                 for axis in 'xyz') for key in vectors))
+
+
+def completed_saved_surface_move(config, result, session, player):
+    """Prove the distinct native Move embedded in a successful saved recovery."""
+    import math
+    move=(player.get('nativePhysics') or {}).get('resumeSurfaceRecoveryMove') or {}
+    def vector(value):
+        if not isinstance(value,Mapping):return None
+        values=[value.get(k) for k in 'xyz']
+        return values if all(type(x) in (int,float) and math.isfinite(x) for x in values) else None
+    source=vector(move.get('sourcePosition'));target=vector(move.get('targetPosition'))
+    current=vector(move.get('currentPosition'));requested=vector(config.get('surfaceRecoveryTarget'))
+    player_position=vector(player.get('position'))
+    if any(x is None for x in (source,target,current,requested,player_position)):return False
+    source_radius=math.dist(source,[0,0,0]);requested_radius=math.dist(requested,[0,0,0])
+    if source_radius<1 or requested_radius<1:return False
+    normalized=[x*source_radius/requested_radius for x in requested]
+    return (config.get('recoveryProfile')=='successful-outbound-surface'
+        and (config.get('firstOperation') or {}).get('kind')=='surface-recovery-move'
+        and result.get('terminal') is True and result.get('succeeded') is True
+        and result.get('state')=='completed' and result.get('actionKind')=='resume-owned-game'
+        and isinstance(result.get('actionId'),str) and bool(result['actionId'])
+        and session.get('gameLoaded') is True and session.get('ownedBySpherewright') is True
+        and session.get('writesAllowed') is True and session.get('sessionId')==result.get('sessionId')==player.get('sessionId')
+        and session.get('localPlanetId')==result.get('planetId')==player.get('planetId')==config.get('planetId')
+        and type(config.get('sourceTick')) is int and move.get('sourceGameTick')==config['sourceTick']
+        and type(move.get('capturedAtGameTick')) is int and type(player.get('capturedAtGameTick')) is int
+        and config['sourceTick']<=move['capturedAtGameTick']<=player['capturedAtGameTick']
+        and move.get('resumeActionId')==result['actionId'] and move.get('state')=='completed_idle'
+        and move.get('nativeOperation')=='OrderNode.MoveTo/Player.Order'
+        and move.get('nativeOrderAccepted') is True and move.get('strictPhysicalIdleProved') is True
+        and move.get('failure') is None and move.get('newGameTicksGranted') is False
+        and move.get('originalUnknownOutcomeChanged') is False and strict_native_player_idle(player)
+        and math.dist(normalized,target)<=.05 and math.dist(current,target)<=3.5
+        and math.dist(source,current)>1)
 
 
 def fully_observed_dry_surface(prepared):

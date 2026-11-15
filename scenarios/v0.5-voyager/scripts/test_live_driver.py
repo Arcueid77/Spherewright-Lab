@@ -411,7 +411,7 @@ class LiveDriverTests(unittest.TestCase):
    consumedSavedIdentityToken='synthetic-consumed-identity',recoveryWindowSeconds=60,
    additionalVoyagerGameTicks=100,originalJourneyMaximumGameTicks=108000,planetId=402)
   adapter.runtime=type('Runtime',(),dict(config=config,put=lambda *args:None))()
-  plan=dict(prepared=True,userConfirmationRequired=True,commitAllowedNow=False,
+  plan=dict(prepared=True,planToken='synthetic-plan',confirmationDigest='synthetic-digest',userConfirmationRequired=True,commitAllowedNow=False,
    commitBlockers=[dict(code='USER_CONFIRMATION_REQUIRED')],remotePrimaryRecoveryAuthorizationUsed=True,
    discardedUnstoredProgressGameTicks=0,completedSavedLandingAdmissionUsed=False,
    originalFailedFlightActionId=None,savedLandingAccountingAnchorGameTick=None,failedLandingRecoveryAuthorizationUsed=False,

@@ -1,5 +1,6 @@
 """Single-writer shared public MCP lifecycle. Work plans are immutable private input."""
 from pathlib import Path
+from collections.abc import Mapping
 import datetime as dt,json,math,re,subprocess,time,uuid
 import startup_to_action as G
 from geometry_request import complete_geometry_arrays
@@ -7,7 +8,7 @@ from evidence import need,read,sha,json_value
 from mcp_client import Client
 from saved_space import exact_last_exit_echo,paused_space_source,exact_ui_supply,saved_identity_token
 from contracts import quarantined_navigation_original_accounted,fully_observed_dry_surface,observed_short_crossing_dry_landing
-from contracts import ordinary_owned_resume_echo,resume_admission_echo,validate_steps,validate_native_calls,strict_native_player_idle,native_warper_auto_supply_enabled,quarantined_paid_original_accounted,quarantined_harvest_no_effect_accounted,isolated_paid_belt_build_accounted
+from contracts import ordinary_owned_resume_echo,resume_admission_echo,validate_steps,validate_native_calls,strict_native_player_idle,native_warper_auto_supply_enabled,quarantined_paid_original_accounted,quarantined_harvest_no_effect_accounted,isolated_paid_belt_build_accounted,quarantined_local_move_saved_source,completed_saved_surface_move
 
 PLAYER_SETTING_MODES=('enable-mecha-construction-drones','disable-mecha-research-auto-supply',
  'enable-mecha-research-auto-supply','enable-mecha-warper-auto-supply')
@@ -23,6 +24,22 @@ class NativePreacceptanceRefusal(G.CommitRejected):
 class ToolRefused(RuntimeError):
     def __init__(self, tool, error):
         self.tool=tool; self.error=error or {}; super().__init__(tool+':'+str(self.error.get('code')))
+
+def successful_surface_prepare_arguments(config, token, now):
+ target=config.get('surfaceRecoveryTarget');seconds=config.get('recoveryWindowSeconds')
+ need(config.get('recoveryProfile')=='successful-outbound-surface'
+  and config.get('recoveryMode')=='authorize_remote_primary_recovery' and config.get('sourceRole')=='primary'
+  and type(config.get('sourceTick')) is int and config['sourceTick']>=0 and isinstance(target,Mapping)
+  and set(target)==set('xyz') and all(type(target[k]) in (int,float) and math.isfinite(target[k]) for k in 'xyz')
+  and type(seconds) in (int,float) and math.isfinite(seconds) and seconds>0
+  and type(config.get('additionalVoyagerGameTicks')) is int and config['additionalVoyagerGameTicks']>=0
+  and isinstance(token,str) and bool(token),'successful_surface_source_shape_invalid')
+ args=dict(resumeToken=token,recoveryMode=config['recoveryMode'],
+  recoveryDeadlineUtc=(now+dt.timedelta(seconds=seconds)).isoformat(),recoveryScope='continue_original_finite_task',
+  maximumChargeGameTicks=18000,maximumChargeWallSeconds=300,additionalVoyagerGameTicks=config['additionalVoyagerGameTicks'],
+  surfaceRecoveryExpectedSourceGameTick=config['sourceTick'])
+ args.update(dict(zip(('surfaceRecoveryTargetX','surfaceRecoveryTargetY','surfaceRecoveryTargetZ'),(target[k] for k in 'xyz'))))
+ return args
 
 class Live:
  def __init__(self,runtime):
@@ -60,7 +77,19 @@ class Live:
     need(sha(original[path_key])==original[hash_key],'frozen_harvest_original_evidence_changed')
    need(quarantined_harvest_no_effect_accounted(c,original,read(original['path']),read(original['cutPath']),read(original['sessionPath']),read(original['preservationPath'])),
     'unknown_harvest_requires_exact_zero_mutation_cut_and_latest_complete_preservation_no_replay')
-  need(c['firstOperationReady'] and c['originalActionsReconciled'],'offline_not_ready')
+  local_moves=c.get('quarantinedLocalMoveOriginals',())
+  if c.get('recoveryProfile')=='successful-outbound-surface':
+   need(isinstance(local_moves,(list,tuple)) and len(local_moves)==1,'original_local_move_evidence_required')
+   for original in local_moves:
+    for key in ('receipt','session','preservation'):
+     need(sha(original[key+'Path'])==original[key+'Sha256'],'frozen_local_move_evidence_changed')
+    need(quarantined_local_move_saved_source(c,original,read(original['receiptPath']),read(original['sessionPath']),
+       read(original['preservationPath']),m['latest']['primary']),
+       'original_local_move_or_covering_primary_unproved')
+  else:
+   need(not local_moves,'local_move_evidence_requires_surface_profile')
+  need(c['firstOperationReady'] and (c.get('originalActionsReconciled') is True
+    or c.get('recoveryProfile')=='successful-outbound-surface' and bool(local_moves)),'offline_not_ready')
   for original in c.get('isolatedPaidBeltBuilds',[]):
    for key in ('receipt','plan','observation','preservation'):
     need(sha(original[key+'Path'])==original[key+'Sha256'],'frozen_belt_original_evidence_changed')
@@ -74,9 +103,16 @@ class Live:
     total_stdout_limit=c.get('maximumStdoutBytes',64*1024*1024),total_stderr_limit=c.get('maximumStderrBytes',1024*1024))
   _,tools,_,_=self.c.initialize();self.schemas={t['name']:t['inputSchema'] for t in tools}
   validate_steps(c['initialSteps']);validate_native_calls(c['initialSteps'],self.schemas)
+  if c.get('recoveryProfile')=='successful-outbound-surface':
+   shape=successful_surface_prepare_arguments(c,'synthetic-offline-identity',dt.datetime.now(dt.timezone.utc))
+   validate_native_calls([dict(kind='prepare-only',prepareTool='spherewright_prepare_resume_owned_game',arguments=shape)],self.schemas)
   self.steam=subprocess.check_output(['powershell.exe','-NoProfile','-NonInteractive','-Command',"(Get-ItemProperty -LiteralPath 'HKCU:/Software/Valve/Steam' -Name SteamExe).SteamExe"],text=True,timeout=10).strip()
   need(Path(self.steam).is_file(),'steam_missing')
-  proof={key:True for key in G.READINESS_FLAGS};proof.update(sourceSha=c['sourceSha'],completeBackupFiles=len(m['rows']),knownFloor=c['sourceTick'])
+  proof={key:True for key in G.READINESS_FLAGS}
+  if c.get('recoveryProfile')=='successful-outbound-surface':
+   proof['original_actions_reconciled']=False
+   proof['original_unknowns_isolated']=True
+  proof.update(sourceSha=c['sourceSha'],completeBackupFiles=len(m['rows']),knownFloor=c['sourceTick'])
   s.put('offline-ready.private.json',proof);return proof
  def launch_once(self,deadline):
   self.deadline=deadline;self.dispatch_utc=dt.datetime.now(dt.timezone.utc)
@@ -183,18 +219,24 @@ class Live:
      lambda e:any(k in str(e) for k in ('BRIDGE_NOT_READY','BRIDGE_UNAVAILABLE','REQUEST_TIMEOUT')))
    need(p.get('prepared') and ordinary_owned_resume_echo(c,p),'ordinary_home_source_or_nullable_echo_changed')
    self.runtime.put('fresh-resume-plan.private.json',p);return p
-  args=dict(resumeToken=saved_identity_token(c,ready['session']),recoveryMode=c.get('recoveryMode','authorize_remote_primary_recovery'),
-   minimumRecoveryGameTick=c['sourceTick'],expectedRecoveryGameTick=c['sourceTick'],
-   recoveryDeadlineUtc=(now+dt.timedelta(seconds=c['recoveryWindowSeconds'])).isoformat(),
-   recoveryScope='continue_original_finite_task',maximumChargeGameTicks=18000,maximumChargeWallSeconds=300,
-   additionalVoyagerGameTicks=c['additionalVoyagerGameTicks'])
-  if args['recoveryMode']=='authorize_failed_landing_last_exit':args['priorActionKnownTerminalFailed']=True
+  surface_source=c.get('recoveryProfile')=='successful-outbound-surface'
   target=c.get('surfaceRecoveryTarget')
-  if target is not None:
+  if surface_source:
+   args=successful_surface_prepare_arguments(c,saved_identity_token(c,ready['session']),now)
+  else:
+   args=dict(resumeToken=saved_identity_token(c,ready['session']),recoveryMode=c.get('recoveryMode','authorize_remote_primary_recovery'),
+    minimumRecoveryGameTick=c['sourceTick'],expectedRecoveryGameTick=c['sourceTick'],
+    recoveryDeadlineUtc=(now+dt.timedelta(seconds=c['recoveryWindowSeconds'])).isoformat(),
+    recoveryScope='continue_original_finite_task',maximumChargeGameTicks=18000,maximumChargeWallSeconds=300,
+    additionalVoyagerGameTicks=c['additionalVoyagerGameTicks'])
+  if args['recoveryMode']=='authorize_failed_landing_last_exit':args['priorActionKnownTerminalFailed']=True
+  if target is not None and not surface_source:
    args.update(dict(zip(('surfaceRecoveryTargetX','surfaceRecoveryTargetY','surfaceRecoveryTargetZ'),(target[k] for k in 'xyz'))))
   p=G.retry_read_only(lambda:self.call('spherewright_prepare_resume_owned_game',args),deadline,
     lambda e:any(k in str(e) for k in ('BRIDGE_NOT_READY','BRIDGE_UNAVAILABLE','REQUEST_TIMEOUT')))
-  need(p['prepared'] and p['userConfirmationRequired'] and not p['commitAllowedNow']
+  need(p['prepared'] is True and p['userConfirmationRequired'] is True and p['commitAllowedNow'] is False
+    and isinstance(p.get('planToken'),str) and bool(p['planToken'])
+    and isinstance(p.get('confirmationDigest'),str) and bool(p['confirmationDigest'])
     and [b['code'] for b in p['commitBlockers']]==['USER_CONFIRMATION_REQUIRED'],'unexpected_resume_blockers')
   need(resume_admission_echo(c,p)
     and p['expectedPlanetId']==c['planetId'] and p['candidateGameTick']==p['minimumGameTick']==c['sourceTick']
@@ -225,6 +267,24 @@ class Live:
     and s['localPlanetId']==c['planetId'] and s['gameTick']>=c['sourceTick'],'owned_admission_unproved')
   self.loaded=True;self.ctx=dict(sessionId=s['sessionId'],planetId=c['planetId']);self.runtime.put('loaded-session.private.json',s)
   return s
+
+ def verify_recovery_as_first_work(self,prepared,result,loaded,deadline):
+  c=self.runtime.config
+  if c.get('firstOperation',{}).get('kind')!='surface-recovery-move':return False
+  need(c.get('recoveryProfile')=='successful-outbound-surface','surface_first_work_requires_its_saved_source')
+  p=self.player()
+  move=(p.get('nativePhysics') or {}).get('resumeSurfaceRecoveryMove') or {}
+  while (move.get('state')=='completed_idle' and move.get('resumeActionId')==result.get('actionId')
+    and not strict_native_player_idle(p) and time.monotonic()<deadline):
+   time.sleep(min(.25,max(0,deadline-time.monotonic())))
+   p=self.player()
+   move=(p.get('nativePhysics') or {}).get('resumeSurfaceRecoveryMove') or {}
+  ok=completed_saved_surface_move(c,result,loaded,p)
+  self.runtime.put('actual-progress.private.json',dict(verified=ok,actionId=result['actionId'],
+   originalResumeReceipt=result,player=p,nativeSurfaceMove=(p.get('nativePhysics') or {}).get('resumeSurfaceRecoveryMove'),
+   workKind='new-surface-recovery-move',oldUnknownReconciled=False,noReplay=True))
+  need(ok,'completed_saved_surface_move_unproved_no_replay')
+  return True
 
  def cleanup_known_state(self):
   need(not self.cleanup_entered and self.active is None,'original_cleanup_or_action_unsettled')

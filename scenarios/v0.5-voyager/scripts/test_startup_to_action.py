@@ -106,6 +106,19 @@ class StartupGateTests(unittest.TestCase):
         for key in gate.READINESS_FLAGS:
             f = Fixture(); f.proof[key] = False
             self.assertEqual('offline_not_ready', f.run().outcome); self.assertEqual([], f.calls)
+    def test_proved_isolated_unknown_can_start_without_claiming_the_old_action_resolved(self):
+        f = Fixture(); f.proof['original_actions_reconciled'] = False; f.proof['original_unknowns_isolated'] = True
+        self.assertTrue(f.run().passed)
+        self.assertFalse(f.proof['original_actions_reconciled'])
+        f = Fixture(); f.proof['original_actions_reconciled'] = False; f.proof['original_unknowns_isolated'] = False
+        self.assertEqual('offline_not_ready', f.run().outcome); self.assertEqual([], f.calls)
+    def test_proved_new_move_inside_recovery_counts_without_an_artificial_second_order(self):
+        f=Fixture();f.verify_recovery_as_first_work=lambda *_:True
+        result=f.run()
+        self.assertTrue(result.passed);self.assertEqual('resume',result.first_action_id)
+        self.assertIn('commit_resume',f.calls);self.assertNotIn('commit_work',f.calls);self.assertIn('continue',f.calls)
+        f=Fixture();f.verify_recovery_as_first_work=lambda *_:False
+        self.assertTrue(f.run().passed);self.assertIn('commit_work',f.calls)
     def test_late_menu_does_not_load_or_restart(self):
         f = Fixture(); f.ready_seconds = gate.LIMIT_SECONDS - 4
         self.assertFalse(f.run().passed); self.assertEqual(['launch', 'cleanup'], f.calls)

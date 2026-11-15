@@ -6,7 +6,7 @@ from mcp_client import Client
 
 def main():
     executable,output=sys.argv[1:];out=Path(output);out.mkdir(exist_ok=False)
-    c=Client(executable,out/'client',maximum=48,seconds=60)
+    c=Client(executable,out/'client',maximum=64,seconds=60)
     try:
         _,tools,_,_=c.initialize();schemas={t['name']:t['inputSchema'] for t in tools}
         ctx=dict(sessionId='synthetic-offline-session',planetId=402);h='sha256:'+'a'*64
@@ -42,6 +42,11 @@ def main():
                 additionalVoyagerGameTicks=432000,surfaceRecoveryTargetX=1.,surfaceRecoveryTargetY=199.,surfaceRecoveryTargetZ=1.))]
         cases.append(('spherewright_prepare_resume_owned_game',dict(resumeToken='synthetic-offline-token',recoveryMode='authorize_failed_landing_last_exit',minimumRecoveryGameTick=100,expectedRecoveryGameTick=100,
             recoveryDeadlineUtc=(dt.datetime.now(dt.timezone.utc)+dt.timedelta(hours=12)).isoformat(),recoveryScope='continue_original_finite_task',maximumChargeGameTicks=18000,maximumChargeWallSeconds=300,priorActionKnownTerminalFailed=True)))
+        if 'surfaceRecoveryExpectedSourceGameTick' in schemas['spherewright_prepare_resume_owned_game']['properties']:
+            cases.append(('spherewright_prepare_resume_owned_game',dict(resumeToken='synthetic-offline-token',
+                recoveryMode='authorize_remote_primary_recovery',recoveryDeadlineUtc=(dt.datetime.now(dt.timezone.utc)+dt.timedelta(hours=3)).isoformat(),
+                recoveryScope='continue_original_finite_task',maximumChargeGameTicks=18000,maximumChargeWallSeconds=300,
+                surfaceRecoveryTargetX=1.,surfaceRecoveryTargetY=199.,surfaceRecoveryTargetZ=1.,surfaceRecoveryExpectedSourceGameTick=100)))
         for mode in ('disable-mecha-research-auto-supply','enable-mecha-research-auto-supply'):
             cases.append(('spherewright_prepare_configure_building',dict(ctx,entityId=0,recipeId=0,mode=mode,expectedFactoryStateHash=h)))
         cases.append(('spherewright_prepare_configure_building',dict(ctx,entityId=0,recipeId=0,

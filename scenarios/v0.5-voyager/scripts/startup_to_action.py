@@ -98,7 +98,12 @@ def run(adapter: Adapter, emit: Callable[[dict], None], clock=time.monotonic) ->
     """
     report = StartupReport()
     proof = adapter.offline_preflight()
-    if any(proof.get(name) is not True for name in READINESS_FLAGS):
+    # A preserved unknown action is not a successful reconciliation. A
+    # scenario adapter may instead prove it remains isolated and the complete
+    # newer saved source covers its original cut.
+    if (any(proof.get(name) is not True for name in READINESS_FLAGS if name != 'original_actions_reconciled')
+            or not (proof.get('original_actions_reconciled') is True
+                    or proof.get('original_unknowns_isolated') is True)):
         report.outcome = 'offline_not_ready'
         report.failure = 'Complete offline readiness and first-operation preparation before opening the game.'
         emit(asdict(report))
@@ -149,13 +154,18 @@ def run(adapter: Adapter, emit: Callable[[dict], None], clock=time.monotonic) ->
         checkpoint('resume_completed')
         loaded = adapter.verify_loaded(result, deadline)
         checkpoint('owned_world_verified')
-        work = adapter.prepare_first_work(loaded, deadline)
-        if work.get('action_kind') not in ACTUAL_WORK_KINDS:
-            raise RuntimeError('First work must be a prepared real operation, not a read, Load, Save or heartbeat.')
-        checkpoint('first_work_prepared')
-        result = submit(adapter.commit_first_work_once, work, first_effect=True)
-        if not adapter.verify_progress(work, result):
-            raise RuntimeError('No actual progress proven by the original action and fresh state delta.')
+        # A recovery can contain an independently observed real Native Move.
+        # Only its adapter's actual order/arrival proof can count as work;
+        # ordinary Load, Save and a successful recovery alone never do.
+        recovery_work = getattr(adapter, 'verify_recovery_as_first_work', lambda *_: False)(prepared, result, loaded, deadline)
+        if not recovery_work:
+            work = adapter.prepare_first_work(loaded, deadline)
+            if work.get('action_kind') not in ACTUAL_WORK_KINDS:
+                raise RuntimeError('First work must be a prepared real operation, not a read, Load, Save or heartbeat.')
+            checkpoint('first_work_prepared')
+            result = submit(adapter.commit_first_work_once, work, first_effect=True)
+            if not adapter.verify_progress(work, result):
+                raise RuntimeError('No actual progress proven by the original action and fresh state delta.')
         checkpoint('first_actual_work_completed')
         report.passed = True
         report.outcome = 'started_actual_work'

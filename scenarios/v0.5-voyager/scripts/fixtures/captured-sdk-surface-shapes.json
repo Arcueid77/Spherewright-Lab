@@ -1,0 +1,1325 @@
+{
+  "spherewright_get_dyson_state": {
+    "type": "object",
+    "properties": {
+      "sessionId": {
+        "type": "string"
+      },
+      "planetId": {
+        "type": "integer"
+      },
+      "layerId": {
+        "type": "integer"
+      },
+      "stateHashVersion": {
+        "type": "integer"
+      },
+      "designPreview": {
+        "type": [
+          "object",
+          "null"
+        ],
+        "properties": {
+          "expectedDesignStateHash": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "steps": {
+            "type": [
+              "array",
+              "null"
+            ],
+            "items": {
+              "type": [
+                "object",
+                "null"
+              ],
+              "properties": {
+                "localId": {
+                  "type": "integer"
+                },
+                "structure": {
+                  "type": [
+                    "object",
+                    "null"
+                  ],
+                  "properties": {
+                    "kind": {
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "layerId": {
+                      "type": "integer"
+                    },
+                    "prototypeId": {
+                      "type": "integer"
+                    },
+                    "localPosition": {
+                      "type": [
+                        "object",
+                        "null"
+                      ],
+                      "properties": {
+                        "x": {
+                          "type": "number"
+                        },
+                        "y": {
+                          "type": "number"
+                        },
+                        "z": {
+                          "type": "number"
+                        }
+                      }
+                    },
+                    "nodeAId": {
+                      "type": "integer"
+                    },
+                    "nodeBId": {
+                      "type": "integer"
+                    },
+                    "euler": {
+                      "type": "boolean"
+                    },
+                    "boundaryNodeIds": {
+                      "type": [
+                        "array",
+                        "null"
+                      ],
+                      "items": {
+                        "type": "integer"
+                      }
+                    },
+                    "previewOnly": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "required": [
+      "sessionId",
+      "planetId"
+    ]
+  },
+  "spherewright_prepare_blueprint_build": {
+    "type": "object",
+    "properties": {
+      "sessionId": {
+        "type": "string"
+      },
+      "planetId": {
+        "type": "integer"
+      },
+      "expectedStateHash": {
+        "type": "string"
+      },
+      "expectedPlayerStateHash": {
+        "type": "string"
+      },
+      "blueprintCode": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "site": {
+        "type": [
+          "object",
+          "null"
+        ],
+        "properties": {
+          "position": {
+            "type": [
+              "object",
+              "null"
+            ],
+            "properties": {
+              "x": {
+                "type": "number"
+              },
+              "y": {
+                "type": "number"
+              },
+              "z": {
+                "type": "number"
+              }
+            }
+          },
+          "quarterTurns": {
+            "type": "integer"
+          },
+          "expectedPlayerStateHash": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "stateHashVersion": {
+            "type": "integer"
+          }
+        }
+      },
+      "resumeBuildId": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "maximumObjectsToSubmit": {
+        "type": "integer"
+      },
+      "stateHashVersion": {
+        "type": "integer"
+      },
+      "foundryIntent": {
+        "type": [
+          "object",
+          "null"
+        ],
+        "properties": {
+          "targetItemId": {
+            "type": "integer"
+          },
+          "targetRatePerMinute": {
+            "type": "number"
+          },
+          "externalSupplyItemIds": {
+            "type": [
+              "array",
+              "null"
+            ],
+            "items": {
+              "type": "integer"
+            }
+          },
+          "recipeChoices": {
+            "type": [
+              "array",
+              "null"
+            ],
+            "items": {
+              "type": [
+                "object",
+                "null"
+              ],
+              "properties": {
+                "itemId": {
+                  "type": "integer"
+                },
+                "recipeId": {
+                  "type": "integer"
+                },
+                "buildingItemId": {
+                  "type": "integer"
+                }
+              }
+            }
+          },
+          "boundaryPorts": {
+            "type": [
+              "array",
+              "null"
+            ],
+            "items": {
+              "type": [
+                "object",
+                "null"
+              ],
+              "properties": {
+                "itemId": {
+                  "type": "integer"
+                },
+                "direction": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "objectIndex": {
+                  "type": "integer"
+                },
+                "slot": {
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        }
+      },
+      "expectedFoundryPlanHash": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "allowNewPaidConstructionWindow": {
+        "type": "boolean"
+      }
+    },
+    "required": [
+      "sessionId",
+      "planetId",
+      "expectedStateHash",
+      "expectedPlayerStateHash"
+    ]
+  },
+  "spherewright_prepare_build": {
+    "type": "object",
+    "properties": {
+      "sessionId": {
+        "type": "string"
+      },
+      "planetId": {
+        "type": "integer"
+      },
+      "buildingItemId": {
+        "type": "integer"
+      },
+      "expectedPlayerStateHash": {
+        "type": "string"
+      },
+      "preferredDistance": {
+        "type": "number"
+      },
+      "preferredPositionX": {
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "preferredPositionY": {
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "preferredPositionZ": {
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "preferredYaw": {
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "resourceNodeId": {
+        "type": "integer"
+      },
+      "expectedResourceStateHash": {
+        "type": "string"
+      },
+      "sourceObjectId": {
+        "type": "integer"
+      },
+      "expectedSourceStateHash": {
+        "type": "string"
+      },
+      "destinationObjectId": {
+        "type": "integer"
+      },
+      "expectedDestinationStateHash": {
+        "type": "string"
+      },
+      "pathEndX": {
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "pathEndY": {
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "pathEndZ": {
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "pathLength": {
+        "type": "number"
+      },
+      "stateHashVersion": {
+        "type": "integer"
+      },
+      "initialSorterFilterItemId": {
+        "type": "integer"
+      },
+      "beltPathMode": {
+        "type": "string"
+      },
+      "beltStartAltitudeLevel": {
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "beltEndAltitudeLevel": {
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "beltEndpointPreview": {
+        "type": [
+          "object",
+          "null"
+        ],
+        "properties": {
+          "sorterItemId": {
+            "type": "integer"
+          },
+          "filterItemId": {
+            "type": "integer"
+          },
+          "source": {
+            "type": [
+              "object",
+              "null"
+            ],
+            "properties": {
+              "existingObjectId": {
+                "type": "integer"
+              },
+              "expectedEndpointStateHash": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "existingSlot": {
+                "type": "integer"
+              },
+              "existingBeltQuarterTurns": {
+                "type": "integer"
+              },
+              "plannedBeltQuarterTurns": {
+                "type": "integer"
+              }
+            }
+          },
+          "destination": {
+            "type": [
+              "object",
+              "null"
+            ],
+            "properties": {
+              "existingObjectId": {
+                "type": "integer"
+              },
+              "expectedEndpointStateHash": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "existingSlot": {
+                "type": "integer"
+              },
+              "existingBeltQuarterTurns": {
+                "type": "integer"
+              },
+              "plannedBeltQuarterTurns": {
+                "type": "integer"
+              }
+            }
+          }
+        }
+      },
+      "beltRoutePreview": {
+        "type": [
+          "object",
+          "null"
+        ],
+        "properties": {
+          "expectedFactoryGeometryHash": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "filterItemId": {
+            "type": "integer"
+          },
+          "sourceSorterItemId": {
+            "type": "integer"
+          },
+          "destinationSorterItemId": {
+            "type": "integer"
+          },
+          "source": {
+            "type": [
+              "object",
+              "null"
+            ],
+            "properties": {
+              "existingObjectId": {
+                "type": "integer"
+              },
+              "expectedEndpointStateHash": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "existingSlot": {
+                "type": "integer"
+              },
+              "existingBeltQuarterTurns": {
+                "type": "integer"
+              },
+              "plannedBeltQuarterTurns": {
+                "type": "integer"
+              }
+            }
+          },
+          "destination": {
+            "type": [
+              "object",
+              "null"
+            ],
+            "properties": {
+              "existingObjectId": {
+                "type": "integer"
+              },
+              "expectedEndpointStateHash": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "existingSlot": {
+                "type": "integer"
+              },
+              "existingBeltQuarterTurns": {
+                "type": "integer"
+              },
+              "plannedBeltQuarterTurns": {
+                "type": "integer"
+              }
+            }
+          },
+          "segments": {
+            "type": [
+              "array",
+              "null"
+            ],
+            "items": {
+              "type": [
+                "object",
+                "null"
+              ],
+              "properties": {
+                "routingMode": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "start": {
+                  "type": [
+                    "object",
+                    "null"
+                  ],
+                  "properties": {
+                    "x": {
+                      "type": "number"
+                    },
+                    "y": {
+                      "type": "number"
+                    },
+                    "z": {
+                      "type": "number"
+                    }
+                  }
+                },
+                "end": {
+                  "type": [
+                    "object",
+                    "null"
+                  ],
+                  "properties": {
+                    "x": {
+                      "type": "number"
+                    },
+                    "y": {
+                      "type": "number"
+                    },
+                    "z": {
+                      "type": "number"
+                    }
+                  }
+                },
+                "startAltitudeLevel": {
+                  "type": "integer"
+                },
+                "endAltitudeLevel": {
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        }
+      },
+      "stackOnObjectId": {
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "expectedStackStateHash": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "preferredModelIndex": {
+        "type": [
+          "integer",
+          "null"
+        ]
+      }
+    },
+    "required": [
+      "sessionId",
+      "planetId",
+      "buildingItemId",
+      "expectedPlayerStateHash"
+    ]
+  },
+  "spherewright_prepare_configure_building": {
+    "type": "object",
+    "properties": {
+      "sessionId": {
+        "type": "string"
+      },
+      "planetId": {
+        "type": "integer"
+      },
+      "entityId": {
+        "type": "integer"
+      },
+      "recipeId": {
+        "type": "integer"
+      },
+      "expectedFactoryStateHash": {
+        "type": "string"
+      },
+      "mode": {
+        "type": "string"
+      },
+      "techId": {
+        "type": "integer"
+      },
+      "filterItemId": {
+        "type": "integer"
+      },
+      "stationStorageIndex": {
+        "type": "integer"
+      },
+      "stationBeltSlotIndex": {
+        "type": "integer"
+      },
+      "stationBeltStorageIndex": {
+        "type": "integer"
+      },
+      "stationItemId": {
+        "type": "integer"
+      },
+      "stationMaximumCount": {
+        "type": "integer"
+      },
+      "stationLocalLogic": {
+        "type": "string"
+      },
+      "stationRemoteLogic": {
+        "type": "string"
+      },
+      "stationMaximumChargePowerWatts": {
+        "type": "integer"
+      },
+      "stationVesselDeliveryMinimumPercent": {
+        "type": "integer"
+      },
+      "expectedStationConfigurationStateHash": {
+        "type": "string"
+      },
+      "stateHashVersion": {
+        "type": "integer"
+      },
+      "storageOperation": {
+        "type": "string"
+      },
+      "storageBannedGridCount": {
+        "type": "integer"
+      },
+      "ejectorOrbitId": {
+        "type": "integer"
+      },
+      "dysonStructure": {
+        "type": [
+          "object",
+          "null"
+        ],
+        "properties": {
+          "kind": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "layerId": {
+            "type": "integer"
+          },
+          "prototypeId": {
+            "type": "integer"
+          },
+          "localPosition": {
+            "type": [
+              "object",
+              "null"
+            ],
+            "properties": {
+              "x": {
+                "type": "number"
+              },
+              "y": {
+                "type": "number"
+              },
+              "z": {
+                "type": "number"
+              }
+            }
+          },
+          "nodeAId": {
+            "type": "integer"
+          },
+          "nodeBId": {
+            "type": "integer"
+          },
+          "euler": {
+            "type": "boolean"
+          },
+          "boundaryNodeIds": {
+            "type": [
+              "array",
+              "null"
+            ],
+            "items": {
+              "type": "integer"
+            }
+          },
+          "previewOnly": {
+            "type": "boolean"
+          }
+        }
+      },
+      "dysonSwarmOrbit": {
+        "type": [
+          "object",
+          "null"
+        ],
+        "properties": {
+          "radius": {
+            "type": "number"
+          },
+          "inclinationDegrees": {
+            "type": "number"
+          },
+          "longitudeDegrees": {
+            "type": "number"
+          },
+          "previewOnly": {
+            "type": "boolean"
+          }
+        }
+      }
+    },
+    "required": [
+      "sessionId",
+      "planetId",
+      "entityId",
+      "recipeId",
+      "expectedFactoryStateHash"
+    ]
+  },
+  "spherewright_prepare_handcraft": {
+    "type": "object",
+    "properties": {
+      "sessionId": {
+        "type": "string"
+      },
+      "planetId": {
+        "type": "integer"
+      },
+      "recipeId": {
+        "type": "integer"
+      },
+      "count": {
+        "type": "integer"
+      },
+      "expectedPlayerStateHash": {
+        "type": "string"
+      },
+      "stateHashVersion": {
+        "type": "integer"
+      }
+    },
+    "required": [
+      "sessionId",
+      "planetId",
+      "recipeId",
+      "count",
+      "expectedPlayerStateHash"
+    ]
+  },
+  "spherewright_prepare_harvest": {
+    "type": "object",
+    "properties": {
+      "sessionId": {
+        "type": "string"
+      },
+      "planetId": {
+        "type": "integer"
+      },
+      "resourceKind": {
+        "type": "string"
+      },
+      "nodeId": {
+        "type": "integer"
+      },
+      "requestedYieldCount": {
+        "type": "integer"
+      },
+      "expectedResourceStateHash": {
+        "type": "string"
+      },
+      "expectedPlayerStateHash": {
+        "type": "string"
+      },
+      "stateHashVersion": {
+        "type": "integer"
+      }
+    },
+    "required": [
+      "sessionId",
+      "planetId",
+      "resourceKind",
+      "nodeId",
+      "requestedYieldCount",
+      "expectedResourceStateHash",
+      "expectedPlayerStateHash"
+    ]
+  },
+  "spherewright_prepare_interplanetary_flight": {
+    "type": "object",
+    "properties": {
+      "sessionId": {
+        "type": "string"
+      },
+      "planetId": {
+        "type": "integer"
+      },
+      "destinationPlanetId": {
+        "type": "integer"
+      },
+      "expectedPlayerStateHash": {
+        "type": "string"
+      },
+      "expectedStarSystemStateHash": {
+        "type": "string"
+      },
+      "minimumCoreEnergyRatio": {
+        "type": "number"
+      },
+      "stateHashVersion": {
+        "type": "integer"
+      },
+      "stoppedSpaceReturnMaximumGameTicks": {
+        "type": "integer"
+      },
+      "stoppedSpaceReturnMaximumWallSeconds": {
+        "type": "number"
+      },
+      "savedHomeReturnPredecessorActionId": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "priorHomeReturnKnownTerminalFailed": {
+        "type": "boolean"
+      }
+    },
+    "required": [
+      "sessionId",
+      "planetId",
+      "destinationPlanetId",
+      "expectedPlayerStateHash",
+      "expectedStarSystemStateHash"
+    ]
+  },
+  "spherewright_prepare_move": {
+    "type": "object",
+    "properties": {
+      "sessionId": {
+        "type": "string"
+      },
+      "planetId": {
+        "type": "integer"
+      },
+      "targetX": {
+        "type": "number"
+      },
+      "targetY": {
+        "type": "number"
+      },
+      "targetZ": {
+        "type": "number"
+      },
+      "expectedPlayerStateHash": {
+        "type": "string"
+      },
+      "arrivalTolerance": {
+        "type": "number"
+      },
+      "stateHashVersion": {
+        "type": "integer"
+      },
+      "allowPassiveDrift": {
+        "type": "boolean"
+      },
+      "previewWalkingRoute": {
+        "type": "boolean"
+      },
+      "useNativeNavigation": {
+        "type": "boolean"
+      }
+    },
+    "required": [
+      "sessionId",
+      "planetId",
+      "targetX",
+      "targetY",
+      "targetZ",
+      "expectedPlayerStateHash"
+    ]
+  },
+  "spherewright_prepare_refuel": {
+    "type": "object",
+    "properties": {
+      "sessionId": {
+        "type": "string"
+      },
+      "planetId": {
+        "type": "integer"
+      },
+      "itemId": {
+        "type": "integer"
+      },
+      "count": {
+        "type": "integer"
+      },
+      "expectedPlayerStateHash": {
+        "type": "string"
+      },
+      "stateHashVersion": {
+        "type": "integer"
+      }
+    },
+    "required": [
+      "sessionId",
+      "planetId",
+      "itemId",
+      "count",
+      "expectedPlayerStateHash"
+    ]
+  },
+  "spherewright_prepare_resume_owned_game": {
+    "type": "object",
+    "properties": {
+      "resumeToken": {
+        "type": "string"
+      },
+      "recoveryMode": {
+        "type": "string"
+      },
+      "userConfirmedInConversation": {
+        "type": "boolean"
+      },
+      "minimumRecoveryGameTick": {
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "expectedRecoveryGameTick": {
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "recoveryDeadlineUtc": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "format": "date-time"
+      },
+      "recoveryScope": {
+        "type": "string"
+      },
+      "maximumChargeGameTicks": {
+        "type": "integer"
+      },
+      "maximumChargeWallSeconds": {
+        "type": "number"
+      },
+      "priorConsumedResumeToken": {
+        "type": "string"
+      },
+      "priorSourceFingerprint": {
+        "type": "string"
+      },
+      "priorActionKnownTerminalFailed": {
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "priorLegacySourceFingerprint": {
+        "type": "string"
+      },
+      "priorIntermediateSourceFingerprint": {
+        "type": "string"
+      },
+      "expectedRemoteRecoveryContextFingerprint": {
+        "type": "string"
+      },
+      "legacyLocalMoveUnknownEvidenceJson": {
+        "type": "string"
+      },
+      "expectedLegacyLocalMoveUnknownEvidenceHash": {
+        "type": "string"
+      },
+      "priorActionKnownTerminalCompleted": {
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "acceptUnstoredProgressLoss": {
+        "type": "boolean"
+      },
+      "additionalVoyagerGameTicks": {
+        "type": "integer"
+      },
+      "surfaceRecoveryTargetX": {
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "surfaceRecoveryTargetY": {
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "surfaceRecoveryTargetZ": {
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "surfaceRecoveryExpectedSourceGameTick": {
+        "type": [
+          "integer",
+          "null"
+        ]
+      }
+    },
+    "required": [
+      "resumeToken"
+    ]
+  },
+  "spherewright_prepare_save": {
+    "type": "object",
+    "properties": {
+      "sessionId": {
+        "type": "string"
+      },
+      "planetId": {
+        "type": "integer"
+      },
+      "expectedRevision": {
+        "type": "integer"
+      },
+      "stateHashVersion": {
+        "type": "integer"
+      },
+      "preserveQuarantinedProgress": {
+        "type": "boolean"
+      }
+    },
+    "required": [
+      "sessionId",
+      "planetId",
+      "expectedRevision"
+    ]
+  },
+  "spherewright_prepare_select_research": {
+    "type": "object",
+    "properties": {
+      "sessionId": {
+        "type": "string"
+      },
+      "planetId": {
+        "type": "integer"
+      },
+      "techId": {
+        "type": "integer"
+      },
+      "expectedSelectionStateHash": {
+        "type": "string"
+      },
+      "stateHashVersion": {
+        "type": "integer"
+      },
+      "prioritizeQueued": {
+        "type": "boolean"
+      },
+      "researchPaused": {
+        "type": [
+          "boolean",
+          "null"
+        ]
+      }
+    },
+    "required": [
+      "sessionId",
+      "planetId",
+      "techId",
+      "expectedSelectionStateHash"
+    ]
+  },
+  "spherewright_prepare_supply_mecha_warpers": {
+    "type": "object",
+    "properties": {
+      "sessionId": {
+        "type": "string"
+      },
+      "planetId": {
+        "type": "integer"
+      },
+      "expectedPlayerStateHash": {
+        "type": "string"
+      },
+      "count": {
+        "type": "integer"
+      },
+      "stateHashVersion": {
+        "type": "integer"
+      },
+      "uiTopUp": {
+        "type": "boolean"
+      }
+    },
+    "required": [
+      "sessionId",
+      "planetId",
+      "expectedPlayerStateHash"
+    ]
+  },
+  "spherewright_prepare_transfer": {
+    "type": "object",
+    "properties": {
+      "sessionId": {
+        "type": "string"
+      },
+      "planetId": {
+        "type": "integer"
+      },
+      "direction": {
+        "type": "string"
+      },
+      "storageEntityId": {
+        "type": "integer"
+      },
+      "itemId": {
+        "type": "integer"
+      },
+      "count": {
+        "type": "integer"
+      },
+      "expectedPlayerStateHash": {
+        "type": "string"
+      },
+      "expectedStorageStateHash": {
+        "type": "string"
+      },
+      "stateHashVersion": {
+        "type": "integer"
+      }
+    },
+    "required": [
+      "sessionId",
+      "planetId",
+      "direction",
+      "storageEntityId",
+      "itemId",
+      "count",
+      "expectedPlayerStateHash",
+      "expectedStorageStateHash"
+    ]
+  },
+  "spherewright_prepare_upgrade": {
+    "type": "object",
+    "properties": {
+      "sessionId": {
+        "type": "string"
+      },
+      "planetId": {
+        "type": "integer"
+      },
+      "objectId": {
+        "type": "integer"
+      },
+      "targetItemId": {
+        "type": "integer"
+      },
+      "expectedRecipeId": {
+        "type": "integer"
+      },
+      "expectedEndpointStateHash": {
+        "type": "string"
+      },
+      "expectedPlayerStateHash": {
+        "type": "string"
+      },
+      "stateHashVersion": {
+        "type": "integer"
+      },
+      "expectedFilterItemId": {
+        "type": "integer"
+      }
+    },
+    "required": [
+      "sessionId",
+      "planetId",
+      "objectId",
+      "targetItemId",
+      "expectedRecipeId",
+      "expectedEndpointStateHash",
+      "expectedPlayerStateHash"
+    ]
+  },
+  "spherewright_prepare_voyager_flight": {
+    "type": "object",
+    "properties": {
+      "sessionId": {
+        "type": "string"
+      },
+      "planetId": {
+        "type": "integer"
+      },
+      "expectedRouteStateHash": {
+        "type": "string"
+      },
+      "expectedPlayerStateHash": {
+        "type": "string"
+      },
+      "stateHashVersion": {
+        "type": "integer"
+      },
+      "journeyId": {
+        "type": [
+          "string",
+          "null"
+        ]
+      }
+    },
+    "required": [
+      "sessionId",
+      "planetId",
+      "expectedRouteStateHash",
+      "expectedPlayerStateHash"
+    ]
+  },
+  "spherewright_preview_voyager_route": {
+    "type": "object",
+    "properties": {
+      "sessionId": {
+        "type": "string"
+      },
+      "planetId": {
+        "type": "integer"
+      },
+      "destinationPlanetId": {
+        "type": "integer"
+      },
+      "expectedPlayerStateHash": {
+        "type": "string"
+      },
+      "expectedCatalogStateHash": {
+        "type": "string"
+      },
+      "stateHashVersion": {
+        "type": "integer"
+      },
+      "maximumFlightGameTicks": {
+        "type": "integer"
+      },
+      "returnReserveGameTicks": {
+        "type": "integer"
+      },
+      "minimumCoreEnergyRatio": {
+        "type": "number"
+      },
+      "extraWarperReserve": {
+        "type": "integer"
+      },
+      "destinationStarId": {
+        "type": "integer"
+      },
+      "maximumWarpGameTicksPerLeg": {
+        "type": "integer"
+      },
+      "maximumArrivalOffsetMeters": {
+        "type": "number"
+      },
+      "journeyId": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "maximumRoundTripWallSeconds": {
+        "type": [
+          "integer",
+          "null"
+        ]
+      }
+    },
+    "required": [
+      "sessionId",
+      "planetId",
+      "destinationPlanetId",
+      "expectedPlayerStateHash",
+      "expectedCatalogStateHash"
+    ]
+  }
+}
