@@ -1,5 +1,9 @@
 # Ascension current snapshot / Ascension活动快照
 
+2026-11-15源码检查：产品main的只读同会话地表来源预览`cd786b8b`已推送并通过[准确CI](https://github.com/Arcueid77/Spherewright/actions/runs/43711630148)，Lab源码锁和只读依赖已选定该提交。预览既不可执行也不续期，原航程墙钟已过时仍拒绝；当前游戏仍运行已装c720cf14，未热替换，暂停现场尚未正常保存。可执行脱困、有限新墙钟与完整0.6验收均未完成。
+
+Product main's read-only same-session surface source preview `cd786b8b` was pushed and passed [exact CI](https://github.com/Arcueid77/Spherewright/actions/runs/43711630148); the Lab source lock and read-only dependency select it. The preview is not executable and does not renew a window; it still refuses the expired original wall. The running game remains on installed c720cf14 without hot replacement, and the paused live state is not normally saved. Executable recovery, a finite new wall window and full 0.6 acceptance remain open.
+
 2026-11-15时限后只读回读：原航程墙钟截止已过，同一游戏进程仍原生暂停在tick131349302，位置、核心能源及原unknown隔离未变；累计117585请求。旧航程、已耗及返航储备不重置。所有者已授权合理增加运行时长，但当前版本尚无可用的同会话脱困入口；后续须经受支持的原生恢复方案核定新的有限墙钟，不将授权当作自动续期。现场尚未正常保存。
 
 After the original journey wall deadline, a fresh read-only cut confirms the same game process remains Native-paused at tick131349302 with unchanged position/core and the original unknown quarantine.117585 requests are accounted. The old journey, actual spending and return reserve are not reset. Owner autonomy permits reasonable runtime increments, but the current version has no same-session recovery entry; a later finite wall window requires a supported fresh Native recovery plan, not an automatic renewal. Current live state remains unsaved.
