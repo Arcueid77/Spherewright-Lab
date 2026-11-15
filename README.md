@@ -65,6 +65,7 @@ pwsh -File scripts/package-from-submodule.ps1 -DspDir <LOCAL_DSP_DIRECTORY> -Dot
 
 ### 场景与证据导航
 
+- [CommandDeck 蓝矩阵验收](scenarios/commanddeck-blue/acceptance-2026-11-15.md)：独立测试世界的自动产线、连续采样与正常保存。
 - [叠放/步行活动快照](scenarios/v0.5-stacking-navigation/current-status.md)和[验证计划](scenarios/v0.5-stacking-navigation/validation-plan.md)：当前九模型任务及逐行结果。
 - [Voyager 场景](scenarios/v0.5-voyager/README.md)、[固定验收](scenarios/v0.5-voyager/acceptance.md)和[活动快照](scenarios/v0.5-voyager/current-status.md)：已闭合基线与首帆/首枚火箭扩展。
 - [v0.4 场景](scenarios/v0.4-final/README.md)、[原验收](scenarios/v0.4-final/acceptance.md)和[拓扑边界](scenarios/v0.4-final/topology.md)。
@@ -80,6 +81,8 @@ Save、ticket、凭据、私有身份、未脱敏请求、运行描述符、私�
 ### Start here
 
 Read [AGENTS.md](AGENTS.md), [source-lock.json](source-lock.json), [standing authority](operations/standing-authority.md), [active handoff](operations/active-handoff.md) and the [stacking/navigation snapshot](scenarios/v0.5-stacking-navigation/current-status.md) before current work. The [validation plan](scenarios/v0.5-stacking-navigation/validation-plan.md) defines the current matrix. Voyager results remain in its [snapshot](scenarios/v0.5-voyager/current-status.md) and [0.5 lessons](operations/lessons/v0.5-voyager-2026-10-29.md#english).
+
+The separate [CommandDeck blue-matrix acceptance](scenarios/commanddeck-blue/acceptance-2026-11-15.md) records its automatic line, continuous samples and normal save.
 
 `operations/current-status.md` is a manifest-protected historical import, not current status; never overwrite it. Active snapshots place newer sections first. Earlier “next target” paragraphs retain only their historical scope and are not current instructions.
 
