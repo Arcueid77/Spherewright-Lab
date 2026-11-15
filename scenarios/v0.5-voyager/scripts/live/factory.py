@@ -373,6 +373,21 @@ class Factory(Live):
   if s.get('requireObservedShortCrossingDryLanding'):
    need(prepare=='spherewright_prepare_move' and self.ctx['planetId'] in self.runtime.config.get('ordinaryConstructionPlanetIds',[])
     and observed_short_crossing_dry_landing(q,args,values.get('p',{})),'fresh_short_crossing_dry_landing_unproved_no_commit')
+  # The configured ordinary-construction planets distinguish the ordinary
+  # surface from this remote execution scope. A Native Move prepare validates a
+  # target, not its intervening shore. Do not submit a remote waypoint when
+  # the fresh bounded surface cut is missing, incomplete, or contains water.
+  # Remote water crossings require their own complete journey-budget audit.
+  # Read-only prepares remain available for surveying. Native navigation has
+  # its own admission and currently rejects an active Voyager journey.
+  config=getattr(self.runtime,'config',{})
+  ordinary=config.get('ordinaryConstructionPlanetIds')
+  if commit_requested and prepare=='spherewright_prepare_move' and not args.get('useNativeNavigation'):
+   authorized=config.get('authorizedPlanetIds')
+   need(ordinary is not None or authorized is None or len(authorized)<=1,
+    'multi_planet_move_scope_unclassified_no_commit')
+   if ordinary is not None and self.ctx['planetId'] not in ordinary:
+    need(fully_observed_dry_surface(q),'remote_move_surface_unproved_no_commit')
   if not commit_requested:
    self.runtime.put(s['role']+'-prepare-only.private.json',dict(noCommit=True,noGameActionAccepted=True,notAcceptanceEvidence=True));return q
   commit=prepare.replace('_prepare_','_commit_',1)

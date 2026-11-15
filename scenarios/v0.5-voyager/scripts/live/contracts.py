@@ -256,6 +256,7 @@ def fully_observed_dry_surface(prepared):
             and surface.get('unknownSampleCount')==0 and surface.get('shoreRiskSampleCount')==0
             and type(arc) in (int,float) and math.isfinite(arc) and 0<=arc<=64
             and 2<=len(samples)<=65):return False
+    if arc/(len(samples)-1)>1+1e-6:return False
     for sample in samples:
         if sample.get('groundHit') is not True or sample.get('shoreRisk')!='not_detected':return False
         if sample.get('waterHit') is False:continue  # no water: depth is N/A

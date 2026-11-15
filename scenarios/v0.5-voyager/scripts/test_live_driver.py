@@ -1065,6 +1065,33 @@ class LiveDriverTests(unittest.TestCase):
   dry=copy.deepcopy(sample)
   for row in dry['surfacePreview']['samples']:row.update(waterHit=False,groundBelowWaterMetres=None)
   self.assertTrue(fully_observed_dry_surface(dry))
+  sparse=copy.deepcopy(dry);sparse['surfacePreview']['samples']=sparse['surfacePreview']['samples'][::10]
+  self.assertFalse(fully_observed_dry_surface(sparse))
+
+ def test_remote_move_with_unobserved_or_sparse_surface_never_commits(self):
+  a=Factory.__new__(Factory);a.ctx=dict(sessionId='same',planetId=402)
+  a.runtime=SimpleNamespace(config=dict(ordinaryConstructionPlanetIds=[104]),put=lambda *_:None)
+  a.schemas={name:dict(properties={k:{} for k in keys},required=[]) for name,keys in {
+   'spherewright_prepare_move':('sessionId','planetId','targetX','targetY','targetZ','expectedPlayerStateHash'),
+   'spherewright_commit_move':('sessionId','planetId','planToken','idempotencyKey')}.items()}
+  dry=json.loads((Path(__file__).parent/'fixtures/captured-dry-preview-stalled-walk.json').read_text())
+  q=dict(prepared=True,commitAllowedNow=True,commitBlockers=[],planToken='prepared',surfacePreview=copy.deepcopy(dry['surfacePreview']))
+  a.call=lambda *_:q;commits=[]
+  a.commit=lambda *x:commits.append(x) or 'original';a.successful_original=lambda _:dict(succeeded=True)
+  step=dict(role='remote',prepareTool='spherewright_prepare_move',arguments=dict(targetX=1,targetY=2,targetZ=3,expectedPlayerStateHash='fresh'))
+  observed=copy.deepcopy(q['surfacePreview'])
+  q['surfacePreview']=dict(state='unavailable',reasonCode='surface_span_outside_bounded_preview',samples=[])
+  with self.assertRaisesRegex(RuntimeError,'remote_move_surface_unproved_no_commit'):a.native_operation_once(step)
+  self.assertEqual([],commits)
+  self.assertIs(q,a.native_operation_once(step,commit_requested=False))
+  q['surfacePreview']=copy.deepcopy(observed);q['surfacePreview']['samples']=q['surfacePreview']['samples'][::10]
+  with self.assertRaisesRegex(RuntimeError,'remote_move_surface_unproved_no_commit'):a.native_operation_once(step)
+  self.assertEqual([],commits)
+  a.runtime.config=dict(authorizedPlanetIds=[104,402])
+  with self.assertRaisesRegex(RuntimeError,'multi_planet_move_scope_unclassified_no_commit'):a.native_operation_once(step)
+  self.assertEqual([],commits)
+  a.runtime.config=dict(ordinaryConstructionPlanetIds=[104])
+  q['surfacePreview']=observed;a.native_operation_once(step);self.assertEqual(1,len(commits))
 
  def test_opted_in_production_move_rejects_unknown_terrain_before_commit(self):
   sample=json.loads((Path(__file__).parent/'fixtures/captured-dry-preview-stalled-walk.json').read_text())
