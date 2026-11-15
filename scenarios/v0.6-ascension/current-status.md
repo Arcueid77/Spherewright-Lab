@@ -1,5 +1,9 @@
 # Ascension current snapshot / Ascension活动快照
 
+2026-11-15轨道源码：产品main `11948a0e` 新增太阳帆轨道只读观察及一次原生空轨道创建，包含原生半径调整、槽位、旧轨道/帆数量及背包读回；[准确CI](https://github.com/Arcueid77/Spherewright/actions/runs/43717198897)通过，Lab源码锁及只读依赖选定该提交。源码测试使用替身，不是实机；不含轨道编辑/删除或实际发射。当前游戏仍运行已装c720cf14，未热替换，现场保存/脱困及完整0.6实机验收仍待完成。
+
+Product main `11948a0e` adds read-only swarm-orbit observation and one Native empty-orbit creation, with radius, allocation, old-orbit/sail-count and inventory readback. [Exact CI](https://github.com/Arcueid77/Spherewright/actions/runs/43717198897) passed; the Lab source lock and read-only dependency select it. Source tests use substitutes and are not live acceptance; orbit edit/removal and actual launch are not included. The current game still runs installed c720cf14 without hot replacement; scene preservation/recovery and full 0.6 live acceptance remain open.
+
 2026-11-15再次只读核对：同一Caph会话的tick、位置、核心能源不变，仍为Drift，原Move仍unknown且写入隔离；本次7请求、累计117592，观察端正常结束。MCP记录的保存边界仍早于现场，10个原已保护原生存档字节未变。本次没有直接读取当前Native Pause标记，也没有Save/Load/Resume或游戏动作；冻结读数不证明接地或保全。
 
 Fresh read-only recheck: the same Caph session, tick, position and core energy remain unchanged, with Drift and the original unknown Move still quarantined. Seven requests bring the total to117592; the observer ended normally. The MCP-recorded saved boundary remains earlier than the live tick and ten previously protected Native saves are unchanged. This cut did not directly expose the current Native Pause flag and performed no Save/Load/Resume or game action; frozen readback is neither grounded nor preservation proof.
