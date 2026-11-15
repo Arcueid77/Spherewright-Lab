@@ -1,5 +1,9 @@
 # Ascension current snapshot / Ascension活动快照
 
+2026-11-16：Lab已选择产品`75001eb9`，安装仍为`c720cf14`且游戏关闭。调用端217项回归及本地证据核验通过；按现行授权记录43200秒恢复时窗和1600000旅程tick增量，保留实际累计实耗与返航/清理储备。下一步为同源冷安装、实装SDK和首操作预检，之后通过MCP验证恢复及上岸；尚无实机上岸证明。
+
+Lab selection, 2026-11-16: product `75001eb9` is selected; installed runtime remains `c720cf14` and the game is stopped. The caller passed217 regressions and local evidence verification. A43200-second recovery window and1600000 additional journey ticks are recorded under existing authority, retaining cumulative spending and return/cleanup reserves. Coherent cold installation, installed SDK and first-operation preflight precede MCP recovery; actual shore arrival remains unproved.
+
 2026-11-16另名接续：产品`75001eb9`已合入远端最新主线并通过[准确CI](https://github.com/Arcueid77/Spherewright/actions/runs/43735337647)，完整源码回归6229/647/117及原生构建通过，同源开发目录1829项针对性测试、76工具/1资源和5个Plugin/224个MCP文件核验通过。固定LastExit与旧主档的原生创建字段匹配，LastExit覆盖现场tick且保护副本匹配；模拟内存名字恢复不代表实际加载或上岸。用户另名存档及原动作均保留。按此前291/252秒预加载与所有者合理时长指令，本次0.6冷启动采用600秒有限上限、120秒目标；不重置已耗、旧失败或返航储备。
 
 Renamed-save continuation, 2026-11-16: product `75001eb9` is linearly based on the latest remote main and passed [exact CI](https://github.com/Arcueid77/Spherewright/actions/runs/43735337647). Full source regressions passed6229/647/117 and the Native build; its coherent development directory passed1829 targeted cases,76-tool/1-resource and five Plugin/224 MCP file checks. The actual fixed LastExit and old primary match Native creation fields; LastExit covers the live tick and its protected copy matches; a simulated in-memory name restore is not a live Load or shore arrival. The owner's named save and the original action remain preserved. Based on prior291s/252s preloads and the owner's reasonable-runtime direction, this0.6 cold startup uses a600s limit and120s target without resetting actual spending, old failures or return reserves.

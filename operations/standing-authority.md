@@ -12,6 +12,10 @@ The owner said “你这两个拒绝都不合理” and “任何的限制都不
 
 ## Current Ascension runtime autonomy, 2026-11-12 / 当前Ascension运行时长自主授权
 
+2026-11-16 saved-surface continuation allocation: the preserved cut carries10260040 cumulative ticks and29735 ticks on the current journey. Under the owner's runtime grant, prepare a finite43200-second recovery window and add1600000 journey ticks to the original108000, retaining the actual spending and54000 journey return reserve. This leaves1624265 journey work ticks; the unchanged12000000 cumulative ceiling leaves1682960 work ticks after54000 return and3000 cleanup reserves. The new allocation is a proposed execution bound, not proof of resumed gameplay.
+
+2026-11-16保存后上岸续接额度：保全现场累计已耗10260040 tick，本次旅程已耗29735 tick。按所有者运行时长授权，准备43200秒有限恢复时窗，并在原108000旅程tick上追加1600000，保留实际已耗及54000旅程返航储备，旅程工作余额1624265；累计上限仍为12000000，扣除54000返航及3000清理储备后工作余额1682960。此额度是拟执行边界，不代表游戏已恢复。
+
 2026-11-13 finite increment. Normal saved handoff129845004 carries8755742 spent ticks. The existing owner grant supports a further3000000 ticks for the remaining1773 five-colour research sets, normal Caph manufacture/launch and receiver/cold-continuation validation. The current cumulative ceiling is12000000, leaving3244258 including54000 return/3000 cleanup reserves and3187258 work ticks. Retain the original launch clock and finite wall deadline, all actual RPC/material accounting and original-action isolation.
 
 2026-11-13有限增量。正常保存交接129845004已累计8755742tick，按现行所有者授权，为剩余1773份五色科研、Caph正常制造/发射及接收器/冷恢复验证追加300万。当前累计上限1200万，余3244258，包含54000返航/3000清理储备及3187258工作余额。保留原启动时钟和有限墙钟截止、实际请求/材料账目及原动作隔离。
