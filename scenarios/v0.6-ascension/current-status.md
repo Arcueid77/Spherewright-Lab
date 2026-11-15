@@ -1,5 +1,13 @@
 # Ascension current snapshot / Ascension活动快照
 
+2026-11-16闭壳设计：新鲜候选120结构点/224细胞已逐项正常建成两新节点、三框架和一壳，原生终态分别证明准确对象与容量、旧结构和背包保全。层1现3节点/3框架/1壳，总容量150结构点/224细胞；实际交付仍1结构点/0细胞。原高精度节点坐标在MCP绑定校验处两次准备被拒、未提交；邻近二进制可表示坐标经完整新预览后成功，原坐标问题仍待修复。接收器未放置，正在按原生地基、碰撞和电网选择位置；当地制造/发射、实电、正常保存与冷恢复仍待完成。
+
+Closed design, 2026-11-16: the fresh120-structure/224-cell candidate was normally created as two new nodes, three frames and one shell. Individual Native terminal readbacks proved exact objects/capacities and preserved existing structure and inventory. Layer1 now has three nodes/three frames/one shell, with150 structure-point/224-cell total capacity but only one structure point/zero cells actually delivered. The original high-precision node coordinate was twice refused by MCP binding validation before submission; a nearby binary-representable candidate passed a fresh complete preview and succeeded. The original coordinate issue remains open. The receiver is not yet placed; select a site under Native ground, collision and grid checks. Local manufacture/launch, actual receiver electricity, normal save and cold continuation remain pending.
+
+2026-11-16实机恢复：所选/实装`75001eb9`从所有者保存现场恢复，326.5秒内新原生移动实际到达陆地并站稳，原unknown未改。随后4段正常移动到达聚变站旁；10氘棒转运原终态证明背包153→143、机组缓冲0→10，网络2的25消费者实际满供。当前游戏运行、唯一writer工作；新鲜层1闭壳预览完整、科技允许，新增需求120火箭与224帆，旧节点另欠29结构点。逐项设计写入、实际制造/发射/交付、接收电力、保存和冷恢复尚未完成。
+
+Live continuation, 2026-11-16: selected/installed `75001eb9` restored the owner's saved scene and a distinct Native Move actually reached grounded land within326.5 seconds; the original unknown remains unchanged. Four subsequent normal moves reached the fusion generator. The original ten-rod transfer proved player153→143 and generator buffer0→10; all25 network2 consumers received actual power. The game runs under one writer. A fresh layer1 closed-shell preview is complete and technology allows it, requiring120 new rockets and224 sails; the old node additionally lacks29 structure points. Individual design writes, actual manufacture/launch/delivery, receiver power, save and cold continuation remain open.
+
 2026-11-16启动前修正：首个独立调用端因两条备份副本引用为相对路径，在游戏进程创建和启动请求之前结束，原失败保留、无游戏调用。新不可变清单改用完整路径；预检现使用独立调用端工作目录，完整预检及首操作方案复核通过。使用新输入继续，尚未加载或上岸。
 
 Prelaunch correction, 2026-11-16: the first detached caller ended on two relative backup-copy references before game-process creation or launch dispatch; its failure remains preserved and no game calls occurred. A new immutable manifest uses absolute references, and preflight now runs in the detached caller's working directory. Complete preflight and first-operation admission passed. Continue with the new input; no load or shore arrival has occurred.
