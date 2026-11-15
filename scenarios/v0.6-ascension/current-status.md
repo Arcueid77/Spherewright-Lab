@@ -1,5 +1,7 @@
 # Ascension current snapshot / Ascension活动快照
 
+远端产品主线新增fbe39898过期自动存档恢复能力，[准确CI](https://github.com/Arcueid77/Spherewright/actions/runs/43669228500)通过，Lab选定依赖保留该提交；当前实机仍运行c720cf14，未热替换。后续需在正常关停、完整保护与同源资格后再冷切换。 / Remote product main advanced to fbe39898 for expired-autosave recovery and passed exact CI; Lab preserves it as selected dependency. The live game remains on c720cf14 without hot replacement; any later cold switch requires stopped protection and same-source qualification.
+
 2026-11-15当前owned存档已从过期凭据的准确主档新鲜原生恢复，92.672秒完成首笔应力科研恢复。科研从137160推进至214560/360000，正常消耗430份五色；最新观察机甲缓存为蓝266、红235、黄808、紫47份，绿已投入新一批生产。正常取用绿430、紫325、红100，另向绿产线投入185量子芯片/185透镜。原生转运将1400石矿、640水、1400高能石墨、400钛块、300石墨烯、100钛晶石和100氢送至现有产线；这些是入仓量，不冒称全部已消耗。
 
 石矿/水/钛补给后玻璃和钛化玻璃有实际产出，石墨补给后石墨烯36/min、碳纳米管12/min、宽带6/min，铁矿补给后磁铁18/min、线圈12/min、电路板36/min均为各自原生10秒切面，不冒称持续吞吐。只读追踪确认石墨烯生产仓经既有带和筛选分拣器连接碳纳米管输入，末端已观察到石墨烯货物。一次紫矩阵库存不足及一次过短导航在接受前拒绝，原件保留；已完成动作均按原回执核销、不重放。
