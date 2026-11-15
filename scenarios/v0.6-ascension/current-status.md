@@ -1,5 +1,13 @@
 # Ascension current snapshot / Ascension活动快照
 
+2026-11-15再次只读复核：同一游戏进程仍在Caph、Native暂停，tick131349302、位置和核心能源与前次相同，原Move仍unknown、写入仍隔离。累计请求117578。原生旅程墙钟持续，返航储备与原动作未重置。
+
+产品独立工作树本地提交`b96f9036`实现只读同会话来源校验基础：准确unknown Move/暂停姿态及细微位置、原旅程/成功出航文件、静默日志和原生地表采样均有各自的证据边界；88项针对性测试及29151原生构建通过。复制的真实记录和DTO可通过离线兼容检查，但场景引用、地表/能源准入和旅程字段使用合成条件，不能当作实机验证。该代码尚无可执行脱困MCP入口、未推产品主线且未安装当前进程；现场保存/恢复与完整0.6验收仍待解决。
+
+Fresh read-only recheck: the same Caph game process remains Native-paused at tick131349302 with unchanged position/core; the original Move remains unknown and writes remain quarantined.117578 total requests are accounted. Original journey wall time continues, with the original return reserve and action unchanged.
+
+Local product-worktree commit `b96f9036` adds read-only same-session source evidence: the exact unknown Move/paused pose and small position changes, original journey/successful-flight files, quiescent Journal and Native surface capture each have separate boundaries.88 targeted tests and a29151 Native build passed. Copied-real-record/DTO offline compatibility uses synthetic scene, terrain/energy admissions and journey facts; it is not live validation. There is no executable recovery MCP entry yet, and this code is neither on product main nor installed in the current process. Current-state save/recovery and full0.6 acceptance remain open.
+
 2026-11-15最新：接收站1已正常制造并带到Caph II；跨星出航原动作完成并正常消耗1翘曲器。原生现场预览6°闭合三角复用已有1节点，新增2节点/3框架/1壳需求120火箭和224太阳帆，科技允许；旧节点尚欠29结构点，实际发射/交付仍未完成。工厂主网缺燃料。接近工厂时，我在未核实中间点地表的情况下选路，相关地表预览为unavailable；先一笔移动以距目标1.72米明确失败并证明静止；另一笔不同后续移动在水面接触尾部未证实接地，原动作为outcome_unknown，Native Pause与准确写隔离已核对。燃料转运未执行，接收站未放置。
 
 同一进程冻结在Caph tick131349302、累计10260040 tick；原往返航程及54000返航储备不重置。唯一写方已关闭且原unknown保留，额外只读复核证明同tick/同位置/同核心能量和原生暂停；速率为0但Drift不证明接地。只读切面显示当前位置浅水、候选34米外有露出水面的地面；另有约15米处候选点的九点只读地形切面均高于水面0.1米以上。对应移动预览被原隔离禁止提交，未证明无障碍或实际可达。原生原地隔离核销、保全保存及返回菜单预检分别拒绝，原因分别为unknown Move不属可核销类型、缺post-admission idle witness和非接地。不能强制退出、自动Resume、重放或加载旧档。现有2470项保护文件与5个自动档已在游戏暂停时复制并逐项哈希，非当前内存新存档；自动档0为131324408，早于暂停24894 tick，完整自然进度差异尚不能视为无损。请求累计117571（含22旧单列和62新只读/预检）。[移动及保全状态审计](movement-preservation-audit.md)记录调用端失误和后续防线；[Caph供料方案](caph-support-plan.md)记录暂停时实际库存和闭壳理论BOM。离线诊断/修复继续，实际进度回退属单独决定；正式发布不在范围。
