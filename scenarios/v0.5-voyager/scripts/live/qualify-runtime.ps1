@@ -34,8 +34,16 @@ foreach($row in $manifest.files){
 Require (@(Get-ChildItem -LiteralPath $runtime -Recurse -File).Count -eq 243) 'Unexpected development file.'
 $probe=Join-Path $runtime 'Test-SpherewrightStagedMcp.ps1'
 $transaction=Join-Path $runtime 'SpherewrightInstallTransaction.ps1'
-Require ((Hash $probe) -ceq 'AE864396E01F4023024151BB641D13F3E9450D87A5040FB0B13B874EEDD0DADC') 'Official metadata probe differs.'
-Require ((Hash $transaction) -ceq 'D0EEB2D6CA92AAA8F7AA83B64ED142187240CEFA1CABB3EABF21AEF6F28188EA') 'Qualified installer differs.'
+$helperProof=@()
+foreach($pair in @(@('Test-SpherewrightStagedMcp.ps1',$probe),@('SpherewrightInstallTransaction.ps1',$transaction))){
+ $relative='scripts/'+$pair[0];$original=Join-Path $repo $relative
+ $tracked=(& git -C $repo rev-parse ($revision+':'+$relative)).Trim()
+ Require ($LASTEXITCODE -eq 0 -and $tracked -match '^[0-9a-f]{40}$') 'Tracked official helper is unavailable.'
+ $working=(& git -C $repo hash-object ('--path='+$relative) $relative).Trim()
+ Require ($LASTEXITCODE -eq 0 -and $working -ceq $tracked -and (Hash $pair[1]) -ceq (Hash $original)) 'Official staged helper differs from the selected source.'
+ $helperProof+=@{name=$pair[0];gitBlob=$tracked;stagedSha256=(Hash $pair[1]);stagedBytesEqualCleanSource=$true}
+}
+Proof (Join-Path $checks 'official-helper-source-proof.private.json') @{sourceSha=$revision;passed=$true;rows=$helperProof}
 . $probe
 . (Join-Path $repo 'scripts/SpherewrightPackageSurface.ps1')
 $originalRequest=${function:Invoke-SpherewrightStagedMcpMetadataRequest}
