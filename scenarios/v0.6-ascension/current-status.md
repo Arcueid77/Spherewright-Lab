@@ -1,5 +1,9 @@
 # Ascension current snapshot / Ascension活动快照
 
+2026-11-15保存来源续接：产品main `59d60b6d` 增加准确无损保存且原生成功出航后的独立地表恢复来源，目标、调用方观察的准确保存tick、新有限时窗及原旅程预算均绑定新鲜方案；[准确CI](https://github.com/Arcueid77/Spherewright/actions/runs/43724784071)通过，Lab源码锁和只读依赖选定该提交。真实保留的出航/旅程记录通过离线身份、目的地和时间关系核对，但尚无证明覆盖当前现场的保存。当前游戏仍运行已装c720cf14，未热替换；模拟加载和源码测试不证明实机脱困或0.6验收。
+
+Product main `59d60b6d` adds a distinct exact no-loss saved source after a Native-armed successful outbound for bounded surface recovery. The target, caller-observed exact saved tick, new finite window and original journey reserves bind the fresh plan; [exact CI](https://github.com/Arcueid77/Spherewright/actions/runs/43724784071) passed and the Lab source lock and read-only dependency select it. Retained real flight/journey records passed offline identity, destination and timeline comparisons, but no save is proved to cover the live cut. The current game remains on installed c720cf14 without hot replacement; simulated loading/source tests do not establish live recovery or 0.6 acceptance.
+
 2026-11-15轨道方向复核：产品main `5966c07d` 将轨道方案返回的旋转与请求角度独立核对，并以固定角度样例验证；[准确CI](https://github.com/Arcueid77/Spherewright/actions/runs/43718216283)通过，Lab源码锁及只读依赖选定该提交。仅源码验证，当前游戏仍运行c720cf14，原动作隔离且记录的正常保存未覆盖现场；水面脱困、实际发射/接收功率和冷恢复均未完成。
 
 Product main `5966c07d` independently checks returned orbit rotation against the requested angles, including a fixed-angle example. [Exact CI](https://github.com/Arcueid77/Spherewright/actions/runs/43718216283) passed; the Lab source lock and read-only dependency select it. This is source-only verification; the current game remains on c720cf14 with the original action quarantined and its recorded normal save not covering the live cut. Water-to-land recovery, actual launch/receiver power and cold continuation remain open.
