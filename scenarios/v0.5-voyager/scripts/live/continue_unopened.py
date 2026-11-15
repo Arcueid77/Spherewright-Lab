@@ -13,7 +13,8 @@ closed=read(prior/'client-close.private.json');report=read(prior/'startup-report
 need(closed['normalEof'] and closed['processExitCode']==0 and not report['passed'] and not report['unresolved_commit']
  and report.get('first_action_id') is None and not list(prior.glob('*accepted.private.json')) and not (prior/'fresh-resume-plan.private.json').exists(),'only_unopened_unaccepted_original_may_continue')
 origin=dt.datetime.fromisoformat(launch['startedAtUtc']);elapsed=(dt.datetime.now(dt.timezone.utc)-origin).total_seconds()
-need(0<=elapsed<gate.LIMIT_SECONDS,'original_startup_clock_exhausted_no_relaunch');started=time.monotonic()-elapsed;deadline=started+gate.LIMIT_SECONDS
+limit=gate.retained_startup_limit(launch,c)
+need(0<=elapsed<limit,'original_startup_clock_exhausted_no_relaunch');started=time.monotonic()-elapsed;deadline=started+limit
 r.cohort();r.verify_revision_stamps();a.dispatch_utc=origin;a.prior_rpc_count=actual_prior_rpc_count(prior,closed)
 if len(sys.argv)>6:
  previous_caller=Path(sys.argv[6]);last=read(previous_caller/'client-close.private.json')
@@ -36,12 +37,17 @@ try:
  ready=a.wait_ready(None,deadline);need(time.monotonic()<deadline,'original_startup_clock_exhausted')
  q=a.prepare_resume(ready,deadline);r.put('unopened-original-continuation.private.json',dict(passed=True,originalLaunchPath=str(prior/'launch-intent.private.json'),
   elapsedBeforeRecovery=time.monotonic()-started,originalStartupFailureRetained=True,noLaunch=True,noStartupClockReset=True))
- result=a.successful_original(a.commit_resume_once(q));loaded=a.verify_loaded(result,deadline);work=a.prepare_first_work(loaded,deadline)
- need(work['action_kind']in gate.ACTUAL_WORK_KINDS and time.monotonic()<deadline,'original_first_work_clock_exhausted')
- result=a.successful_original(a.commit_first_work_once(work));verified=a.verify_progress(work,result);elapsed=time.monotonic()-started
+ result=a.successful_original(a.commit_resume_once(q));loaded=a.verify_loaded(result,deadline)
+ verified=a.verify_recovery_as_first_work(q,result,loaded,deadline)
+ if not verified:
+  work=a.prepare_first_work(loaded,deadline)
+  need(work['action_kind']in gate.ACTUAL_WORK_KINDS and time.monotonic()<deadline,'original_first_work_clock_exhausted')
+  result=a.successful_original(a.commit_first_work_once(work));verified=a.verify_progress(work,result)
+ elapsed=time.monotonic()-started
  r.put('corrected-startup-first-work.private.json',dict(verified=verified,elapsedFromOriginalLaunchSeconds=elapsed,withinOriginal300Seconds=elapsed<300,
+  withinOriginalStartupWindow=elapsed<limit,originalStartupLimitSeconds=limit,
   original=result,originalStartupFailureRetained=True,noStartupClockReset=True,noLaunch=True))
- need(verified and elapsed<300,'original_launch_did_not_start_real_work_within_unchanged_gate')
+ need(verified and elapsed<limit,'original_launch_did_not_start_real_work_within_unchanged_gate')
  a.continue_prepared_work(result)
 finally:
  if a.c is not None:

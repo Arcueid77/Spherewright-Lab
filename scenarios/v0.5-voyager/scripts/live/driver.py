@@ -27,18 +27,23 @@ class ToolRefused(RuntimeError):
 
 def successful_surface_prepare_arguments(config, token, now):
  target=config.get('surfaceRecoveryTarget');seconds=config.get('recoveryWindowSeconds')
+ renamed=config.get('restoreRenamedLastExitIdentity') is True
+ content_hash=config.get('expectedRenamedLastExitContentHash','')
  need(config.get('recoveryProfile')=='successful-outbound-surface'
-  and config.get('recoveryMode')=='authorize_remote_primary_recovery' and config.get('sourceRole')=='primary'
+  and config.get('recoveryMode')=='authorize_remote_primary_recovery' and config.get('sourceRole')==('lastExit' if renamed else 'primary')
   and type(config.get('sourceTick')) is int and config['sourceTick']>=0 and isinstance(target,Mapping)
   and set(target)==set('xyz') and all(type(target[k]) in (int,float) and math.isfinite(target[k]) for k in 'xyz')
   and type(seconds) in (int,float) and math.isfinite(seconds) and seconds>0
   and type(config.get('additionalVoyagerGameTicks')) is int and config['additionalVoyagerGameTicks']>=0
-  and isinstance(token,str) and bool(token),'successful_surface_source_shape_invalid')
+  and isinstance(token,str) and bool(token)
+  and (isinstance(content_hash,str) and re.fullmatch(r'sha256:[0-9a-f]{64}',content_hash) is not None if renamed else not content_hash),
+  'successful_surface_source_shape_invalid')
  args=dict(resumeToken=token,recoveryMode=config['recoveryMode'],
   recoveryDeadlineUtc=(now+dt.timedelta(seconds=seconds)).isoformat(),recoveryScope='continue_original_finite_task',
   maximumChargeGameTicks=18000,maximumChargeWallSeconds=300,additionalVoyagerGameTicks=config['additionalVoyagerGameTicks'],
   surfaceRecoveryExpectedSourceGameTick=config['sourceTick'])
  args.update(dict(zip(('surfaceRecoveryTargetX','surfaceRecoveryTargetY','surfaceRecoveryTargetZ'),(target[k] for k in 'xyz'))))
+ if renamed:args.update(restoreRenamedLastExitIdentity=True,expectedRenamedLastExitContentHash=content_hash)
  return args
 
 class Live:
@@ -84,8 +89,8 @@ class Live:
     for key in ('receipt','session','preservation'):
      need(sha(original[key+'Path'])==original[key+'Sha256'],'frozen_local_move_evidence_changed')
     need(quarantined_local_move_saved_source(c,original,read(original['receiptPath']),read(original['sessionPath']),
-       read(original['preservationPath']),m['latest']['primary']),
-       'original_local_move_or_covering_primary_unproved')
+       read(original['preservationPath']),m['latest'][c['sourceRole']]),
+       'original_local_move_or_covering_saved_source_unproved')
   else:
    need(not local_moves,'local_move_evidence_requires_surface_profile')
   need(c['firstOperationReady'] and (c.get('originalActionsReconciled') is True
@@ -112,11 +117,14 @@ class Live:
   if c.get('recoveryProfile')=='successful-outbound-surface':
    proof['original_actions_reconciled']=False
    proof['original_unknowns_isolated']=True
-  proof.update(sourceSha=c['sourceSha'],completeBackupFiles=len(m['rows']),knownFloor=c['sourceTick'])
+  limit=G.startup_limit(c.get('startupLimitSeconds'))
+  need(limit<=c['maximumWallSeconds'],'startup_limit_exceeds_caller_window')
+  proof.update(sourceSha=c['sourceSha'],completeBackupFiles=len(m['rows']),knownFloor=c['sourceTick'],startup_limit_seconds=limit)
   s.put('offline-ready.private.json',proof);return proof
  def launch_once(self,deadline):
   self.deadline=deadline;self.dispatch_utc=dt.datetime.now(dt.timezone.utc)
-  self.runtime.put('launch-intent.private.json',dict(sourceSha=self.runtime.config['sourceSha'],startedAtUtc=self.dispatch_utc.isoformat(),maximumLaunches=1,limitSeconds=300))
+  self.runtime.put('launch-intent.private.json',dict(sourceSha=self.runtime.config['sourceSha'],startedAtUtc=self.dispatch_utc.isoformat(),maximumLaunches=1,
+   limitSeconds=G.startup_limit(self.runtime.config.get('startupLimitSeconds'))))
   si=subprocess.STARTUPINFO();si.dwFlags|=subprocess.STARTF_USESHOWWINDOW;si.wShowWindow=0
   p=subprocess.Popen([self.steam,'-applaunch','1366540'],stdin=subprocess.DEVNULL,stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL,startupinfo=si,creationflags=0x200,close_fds=True)
   self.runtime.put('steam-proxy.private.json',dict(processId=p.pid));return p.pid

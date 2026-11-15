@@ -111,7 +111,19 @@ class Runtime:
 
     def native_proofs(self):
         c=self.config; identity=Path(c['savePaths']['primary']).stem
-        return {role:native_file_proof(p,identity) for role,p in self.native_paths().items()}
+        renamed=c.get('restoreRenamedLastExitIdentity') is True
+        selected=c.get('renamedSavedIdentity') if renamed else identity
+        if renamed:
+            need(c.get('recoveryProfile')=='successful-outbound-surface' and c.get('sourceRole')=='lastExit'
+                and isinstance(selected,str) and bool(selected) and selected!=identity
+                and Path(selected).name==selected and not any(ch in selected for ch in '/\\:'),
+                'renamed_saved_identity_invalid')
+        proofs={role:native_file_proof(p,selected if renamed and role=='lastExit' else identity)
+                for role,p in self.native_paths().items()}
+        if renamed:
+            need(c.get('expectedRenamedLastExitContentHash')=='sha256:'+proofs['lastExit']['sha256'].lower(),
+                 'renamed_saved_last_exit_hash_changed')
+        return proofs
 
     def verify_backup(self):
         c=self.config

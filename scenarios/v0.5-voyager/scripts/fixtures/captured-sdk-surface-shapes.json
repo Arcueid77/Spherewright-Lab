@@ -1050,6 +1050,12 @@
           "integer",
           "null"
         ]
+      },
+      "restoreRenamedLastExitIdentity": {
+        "type": "boolean"
+      },
+      "expectedRenamedLastExitContentHash": {
+        "type": "string"
       }
     },
     "required": [

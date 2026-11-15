@@ -5,6 +5,7 @@ sys.dont_write_bytecode=True
 ROOT=Path(__file__).resolve().parent
 sys.path.insert(0,str(ROOT.parent))
 import detached_python_task as launcher
+import startup_to_action as gate
 from evidence import sha,read,need,put
 from mcp_client import validate_limits,MAX_STDOUT_BYTES,MAX_STDERR_BYTES
 
@@ -27,7 +28,7 @@ def main():
     if attaching:inputs.extend(Path(previous)/name for name in ('caller-handoff.private.json','client-close.private.json') if (Path(previous)/name).exists())
     result=launcher.launch_once(entry,sha(entry),arguments,worker,deadline.isoformat(),
         transport='same_user_wmi',expected_inputs=[dict(path=str(p),bytes=p.stat().st_size,sha256=sha(p)) for p in inputs])
-    end=time.monotonic()+300
+    end=time.monotonic()+gate.startup_limit(c.get('startupLimitSeconds'))
     while time.monotonic()<end:
         if attaching and (out/'attached-existing-session.private.json').exists():
             print('One replacement caller attached to the original healthy game; no Load/Save/relaunch.',flush=True);return

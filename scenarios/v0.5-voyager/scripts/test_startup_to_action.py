@@ -102,6 +102,19 @@ class StartupGateTests(unittest.TestCase):
         f = Fixture(); r = f.run()
         self.assertTrue(r.passed); self.assertEqual(85, r.startup_seconds)
         self.assertEqual(['launch', 'prepare_resume', 'commit_resume', 'commit_work', 'continue'], f.calls)
+    def test_approved_longer_startup_keeps_the_original_clock_and_records_its_limit(self):
+        f=Fixture();f.ready_seconds=320;f.proof['startup_limit_seconds']=600
+        result=f.run();self.assertTrue(result.passed);self.assertEqual(335,result.startup_seconds)
+        self.assertEqual(1,f.calls.count('launch'))
+        self.assertTrue(any(e.get('limit_seconds')==600 for e in f.events))
+        self.assertEqual(600,gate.retained_startup_limit(dict(limitSeconds=600),dict(startupLimitSeconds=600)))
+        with self.assertRaisesRegex(ValueError,'original_startup_limit_changed'):
+            gate.retained_startup_limit(dict(limitSeconds=300),dict(startupLimitSeconds=600))
+    def test_invalid_startup_limit_never_launches(self):
+        for value in (0,-1,float('inf'),float('nan'),True,'600'):
+            with self.subTest(value=value):
+                f=Fixture();f.proof['startup_limit_seconds']=value
+                self.assertEqual('offline_not_ready',f.run().outcome);self.assertEqual([],f.calls)
     def test_missing_offline_proof_never_opens_game(self):
         for key in gate.READINESS_FLAGS:
             f = Fixture(); f.proof[key] = False

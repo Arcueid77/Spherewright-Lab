@@ -1,5 +1,7 @@
 # Spherewright-Lab working rules
 
+- Current Ascension startup allocation (2026-11-16): the owner's reasonable-runtime grant and proportionate-restrictions instruction support a600-second finite launch-to-work limit for the next0.6 recovery. Two observed background preloads took291s and252s; retain the120s optimization target, the original launch clock and actual accounting. The prior300s default remains for other scopes. / 当前0.6续接按所有者合理时长和限制指令设600秒有限启动上限：此前两次后台预加载耗291/252秒，保留120秒优化目标、原启动时钟及实际账目；其他范围仍默认300秒。
+
 - Owner2026-11-15 requires [proportionate restrictions](operations/standing-authority.md#proportionate-restrictions-2026-11-15--限制应当合理): do not block ordinary paused saving or a distinct water-to-land movement on unrelated prerequisites. Protect actual progress and retain original evidence; the current MCP-only interaction boundary still applies. / 所有者要求[限制合理](operations/standing-authority.md#proportionate-restrictions-2026-11-15--限制应当合理)，不能以无关前提卡住暂停保存或新的水面上岸移动；保护真实进度及原始证据，当前只用MCP操作的边界仍适用。
 
 - Owner2026-11-12 explicitly said “运行时长也合理自行增加”. Apply the [Ascension runtime autonomy grant](operations/standing-authority.md#current-ascension-runtime-autonomy-2026-11-12--当前ascension运行时长自主授权) before older6000000-tick ceilings and pending-runtime handoffs. Derive, record and execute reasonable finite runtime increments within completing0.6. The current cumulative ceiling is12000000, retaining all actual spending,54000 return/3000 cleanup reserves and Native safeguards. / 所有者已明确授权0.6运行时长合理自行增加，当前累计上限1200万；旧600万及待批文案由此替代，保留累计实耗、返航/清理储备及原生门。

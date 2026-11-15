@@ -65,15 +65,17 @@ def main():
                 'only_unaccepted_first_work_may_continue_original_startup')
             launch=read(origin/'launch-intent.private.json')
             elapsed=(dt.datetime.now(dt.timezone.utc)-dt.datetime.fromisoformat(launch['startedAtUtc'])).total_seconds()
-            need(0<=elapsed<gate.LIMIT_SECONDS,'original_startup_expired_preservation_only')
-            started=time.monotonic()-elapsed;work=a.prepare_first_work(s,started+gate.LIMIT_SECONDS)
-            need(work.get('action_kind') in gate.ACTUAL_WORK_KINDS and time.monotonic()<started+gate.LIMIT_SECONDS,
+            limit=gate.retained_startup_limit(launch,c)
+            need(0<=elapsed<limit,'original_startup_expired_preservation_only')
+            started=time.monotonic()-elapsed;work=a.prepare_first_work(s,started+limit)
+            need(work.get('action_kind') in gate.ACTUAL_WORK_KINDS and time.monotonic()<started+limit,
                 'original_startup_first_work_no_longer_admitted')
             result=a.successful_original(a.commit_first_work_once(work));verified=a.verify_progress(work,result)
             elapsed=time.monotonic()-started
             r.put('corrected-startup-first-work.private.json',dict(verified=verified,original=result,elapsedFromOriginalLaunchSeconds=elapsed,
-                withinOriginal300Seconds=elapsed<gate.LIMIT_SECONDS,originalStartupFailureRetained=True,noStartupClockReset=True))
-            if not verified or elapsed>=gate.LIMIT_SECONDS:
+                withinOriginal300Seconds=elapsed<300,withinOriginalStartupWindow=elapsed<limit,originalStartupLimitSeconds=limit,
+                originalStartupFailureRetained=True,noStartupClockReset=True))
+            if not verified or elapsed>=limit:
                 a.cleanup_known_state();raise RuntimeError('corrected_original_first_work_not_within_startup_gate')
             a.continue_prepared_work(result);return
         try:a.execute_plan(c['initialSteps'],'attached-initial')

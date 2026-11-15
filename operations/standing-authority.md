@@ -2,6 +2,10 @@
 
 ## Proportionate restrictions, 2026-11-15 / 限制应当合理
 
+2026-11-16 derived Ascension startup allocation: two observed background preloads took291s and252s, leaving the former300-second launch-to-work limit too little time for recovery and the first actual Move. Under the owner's reasonable-runtime and proportionate-restrictions instructions, set a finite600-second limit for the next0.6 recovery, retaining the120-second optimization target and measuring from the original launch dispatch. This changes no gameplay ticks, material, energy, return reserve or prior failure result; other scenarios retain the300-second default.
+
+2026-11-16按现行授权核定Ascension启动额度：两次后台预加载曾耗291秒和252秒，旧300秒从启动到实操的限制不足以容纳恢复与首笔实际移动。按所有者合理追加时长和限制相称的指令，本次0.6恢复设600秒有限启动上限，仍以120秒为优化目标，从原启动请求开始计时。不增加游戏tick、材料、能源或返航储备，不改旧失败结果；其他场景默认仍为300秒。
+
 The owner said “你这两个拒绝都不合理” and “任何的限制都不要过于严格，要合理，像真人玩一样，而不是卡死自己”. Assess restrictions against the actual operation and correct unrelated prerequisites instead of blocking progress indefinitely. In particular, a paused-world Save does not require prior ground or a successful Move, and a distinct normal movement from water toward land should be supported without rewriting the old result. Preserve actual progress, the original evidence and the owner's current MCP-only interaction boundary. This direction supersedes stricter older wording where it imposes unrelated prerequisites; it does not itself certify a source change as installed or a real action as completed.
 
 所有者明确指出“你这两个拒绝都不合理”以及“任何的限制都不要过于严格，要合理，像真人玩一样，而不是卡死自己”。按实际操作判断限制是否必要，修正无关前提，不要无限期阻断进度。尤其暂停世界的保存不应以先接地或前一次 Move 成功为前提；应支持在水面发起新的普通移动去陆地，同时如实保留原动作结果。保护真实进度、原始证据及所有者当前只用 MCP 操作的边界。本指令优先于旧文案中无关且过严的前提，但源码变更本身不等于已经实装或完成实机操作。

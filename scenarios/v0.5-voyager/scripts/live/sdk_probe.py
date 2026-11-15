@@ -47,6 +47,12 @@ def main():
                 recoveryMode='authorize_remote_primary_recovery',recoveryDeadlineUtc=(dt.datetime.now(dt.timezone.utc)+dt.timedelta(hours=3)).isoformat(),
                 recoveryScope='continue_original_finite_task',maximumChargeGameTicks=18000,maximumChargeWallSeconds=300,
                 surfaceRecoveryTargetX=1.,surfaceRecoveryTargetY=199.,surfaceRecoveryTargetZ=1.,surfaceRecoveryExpectedSourceGameTick=100)))
+        if {'restoreRenamedLastExitIdentity','expectedRenamedLastExitContentHash'} <= set(schemas['spherewright_prepare_resume_owned_game']['properties']):
+            cases.append(('spherewright_prepare_resume_owned_game',dict(resumeToken='synthetic-offline-token',
+                recoveryMode='authorize_remote_primary_recovery',recoveryDeadlineUtc=(dt.datetime.now(dt.timezone.utc)+dt.timedelta(hours=3)).isoformat(),
+                recoveryScope='continue_original_finite_task',maximumChargeGameTicks=18000,maximumChargeWallSeconds=300,
+                surfaceRecoveryTargetX=1.,surfaceRecoveryTargetY=199.,surfaceRecoveryTargetZ=1.,surfaceRecoveryExpectedSourceGameTick=100,
+                restoreRenamedLastExitIdentity=True,expectedRenamedLastExitContentHash='sha256:'+'a'*64)))
         for mode in ('disable-mecha-research-auto-supply','enable-mecha-research-auto-supply'):
             cases.append(('spherewright_prepare_configure_building',dict(ctx,entityId=0,recipeId=0,mode=mode,expectedFactoryStateHash=h)))
         cases.append(('spherewright_prepare_configure_building',dict(ctx,entityId=0,recipeId=0,

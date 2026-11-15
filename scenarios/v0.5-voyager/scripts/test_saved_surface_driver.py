@@ -14,6 +14,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent / 'live'))
 from contracts import quarantined_local_move_saved_source, resume_admission_echo, completed_saved_surface_move
 from driver import Live
 from evidence import sha
+from runtime import Runtime
 import sdk_probe
 
 
@@ -30,6 +31,7 @@ class SavedSurfaceDriverTests(unittest.TestCase):
             userConfirmationRequired=True, commitAllowedNow=False,
             commitBlockers=[dict(code='USER_CONFIRMATION_REQUIRED')],
             remotePrimaryRecoveryAuthorizationUsed=True, successfulOutboundSurfaceSourceUsed=True,
+            renamedLastExitIdentityRestorationPlanned=False, expectedRenamedLastExitContentHash='',
             completedSavedLandingAdmissionUsed=False, failedLandingRecoveryAuthorizationUsed=False,
             originalFailedFlightActionId='', savedLandingAccountingAnchorGameTick=None,
             nativeOriginalOutcomeProved=False, discardedUnstoredProgressGameTicks=0,
@@ -138,7 +140,7 @@ class SavedSurfaceDriverTests(unittest.TestCase):
                 preservationSha256=sha(preservation))
             config = dict(self.config, sourceSha='source', qualifiedInputs=[], terminalOriginalActions=[],
                 quarantinedLocalMoveOriginals=[original], firstOperationReady=True, originalActionsReconciled=False,
-                priorRpcCount=0, maximumRpc=50, maximumWallSeconds=30, initialSteps=[],
+                priorRpcCount=0, maximumRpc=50, maximumWallSeconds=900, initialSteps=[],
                 qualificationPath=str(qualified), sdkQualificationPath=str(sdk))
             evidence_out = {}
             runtime = SimpleNamespace(config=config, output=root, stopped=lambda:None, cohort=lambda:None,
@@ -146,7 +148,8 @@ class SavedSurfaceDriverTests(unittest.TestCase):
                 mcp_executable=lambda:'synthetic', put=lambda name,value:evidence_out.update({name:value}))
             fields = ('resumeToken','recoveryMode','recoveryDeadlineUtc','recoveryScope','maximumChargeGameTicks',
                 'maximumChargeWallSeconds','additionalVoyagerGameTicks','surfaceRecoveryExpectedSourceGameTick',
-                'surfaceRecoveryTargetX','surfaceRecoveryTargetY','surfaceRecoveryTargetZ')
+                'surfaceRecoveryTargetX','surfaceRecoveryTargetY','surfaceRecoveryTargetZ',
+                'restoreRenamedLastExitIdentity','expectedRenamedLastExitContentHash')
             schema = dict(name='spherewright_prepare_resume_owned_game',
                 inputSchema=dict(properties={key:{} for key in fields}, required=['resumeToken']))
             fake_client = SimpleNamespace(initialize=lambda:(None, [schema], None, None))
@@ -169,9 +172,54 @@ class SavedSurfaceDriverTests(unittest.TestCase):
             # A changed saved primary stops before any client or launch.
             runtime.verify_backup = lambda:dict(rows=[{}], latest=dict(primary=dict(self.primary, sha256='changed')))
             with patch('driver.Client') as client:
-                with self.assertRaisesRegex(RuntimeError, 'original_local_move_or_covering_primary_unproved'):
+                with self.assertRaisesRegex(RuntimeError, 'original_local_move_or_covering_saved_source_unproved'):
                     Live(runtime).offline_preflight()
                 client.assert_not_called()
+
+    def test_renamed_last_exit_is_selected_only_with_its_exact_hash_and_disclosure(self):
+        content = 'A'*64
+        config = dict(self.config, sourceRole='lastExit', restoreRenamedLastExitIdentity=True,
+            expectedRenamedLastExitContentHash='sha256:'+content.lower())
+        plan = dict(self.plan, renamedLastExitIdentityRestorationPlanned=True,
+            expectedRenamedLastExitContentHash=config['expectedRenamedLastExitContentHash'])
+        a = self.adapter(plan); a.runtime.config = config
+        a.prepare_resume(dict(session=dict(restartResumeAvailable=True,restartResumeToken='token')),time.monotonic()+5)
+        request = a.calls[0][1]
+        self.assertTrue(request['restoreRenamedLastExitIdentity'])
+        self.assertEqual(config['expectedRenamedLastExitContentHash'],request['expectedRenamedLastExitContentHash'])
+        self.assertEqual(1200,request['surfaceRecoveryExpectedSourceGameTick'])
+        self.assertNotIn('minimumRecoveryGameTick',request)
+        self.assertTrue(resume_admission_echo(config,plan))
+        self.assertFalse(resume_admission_echo(config,dict(plan,renamedLastExitIdentityRestorationPlanned=False)))
+        self.assertFalse(resume_admission_echo(config,dict(plan,expectedRenamedLastExitContentHash='sha256:'+'b'*64)))
+        preservation = dict(self.preservation, sourceSha256=content, sameNativeWorldCreation=True)
+        source = dict(gameTick=1200,sha256=content)
+        self.assertTrue(quarantined_local_move_saved_source(config,self.reference,self.receipt,self.session,preservation,source))
+        self.assertFalse(quarantined_local_move_saved_source(config,self.reference,self.receipt,self.session,
+            dict(preservation,sameNativeWorldCreation=False),source))
+        self.assertFalse(quarantined_local_move_saved_source(config,self.reference,self.receipt,self.session,
+            preservation,dict(source,sha256='B'*64)))
+
+    def test_backup_reader_uses_the_renamed_identity_only_for_fixed_last_exit(self):
+        content = 'A'*64
+        runtime = Runtime.__new__(Runtime)
+        runtime.config = dict(self.config,sourceRole='lastExit',restoreRenamedLastExitIdentity=True,
+            expectedRenamedLastExitContentHash='sha256:'+content.lower(),renamedSavedIdentity='user-save',
+            savePaths=dict(primary='managed-save.dsv'))
+        runtime.native_paths = lambda:dict(primary=Path('managed-save.dsv'),lastExit=Path('LastExit.dsv'),
+                                         currentCheckpoint=Path('checkpoint.dsv'))
+        observed=[]
+        def file_proof(path,identity):
+            observed.append((path.name,identity));return dict(sha256=content,gameTick=1200)
+        with patch('runtime.native_file_proof',side_effect=file_proof):
+            result=runtime.native_proofs()
+        self.assertEqual(content,result['lastExit']['sha256'])
+        self.assertEqual([('managed-save.dsv','managed-save'),('LastExit.dsv','user-save'),
+                          ('checkpoint.dsv','managed-save')],observed)
+        runtime.config['expectedRenamedLastExitContentHash']='sha256:'+'b'*64
+        with patch('runtime.native_file_proof',side_effect=file_proof):
+            with self.assertRaisesRegex(RuntimeError,'renamed_saved_last_exit_hash_changed'):
+                runtime.native_proofs()
 
     def test_offline_sdk_probe_includes_surface_boundary_within_its_request_budget(self):
         shapes = json.loads((Path(__file__).parent / 'fixtures/captured-sdk-surface-shapes.json').read_text())
@@ -198,9 +246,12 @@ class SavedSurfaceDriverTests(unittest.TestCase):
         client = instances[0]
         self.assertLessEqual(client.count, client.maximum)
         surface = [args for name,args in client.calls if name == 'spherewright_prepare_resume_owned_game'
-                   and 'surfaceRecoveryExpectedSourceGameTick' in args]
+                   and 'surfaceRecoveryExpectedSourceGameTick' in args and not args.get('restoreRenamedLastExitIdentity')]
         self.assertEqual(1, len(surface)); self.assertEqual(100, surface[0]['surfaceRecoveryExpectedSourceGameTick'])
         self.assertNotIn('minimumRecoveryGameTick', surface[0]); self.assertNotIn('expectedRecoveryGameTick', surface[0])
+        renamed = [args for name,args in client.calls if name == 'spherewright_prepare_resume_owned_game'
+                   and args.get('restoreRenamedLastExitIdentity') is True]
+        self.assertEqual(1, len(renamed)); self.assertEqual('sha256:'+'a'*64, renamed[0]['expectedRenamedLastExitContentHash'])
 
     def test_completed_embedded_move_counts_only_with_real_order_and_grounded_arrival(self):
         config = dict(self.config, firstOperation=dict(kind='surface-recovery-move'))

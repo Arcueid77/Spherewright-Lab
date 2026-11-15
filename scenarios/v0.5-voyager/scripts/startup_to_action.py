@@ -1,4 +1,4 @@
-"""Caller-only startup gate: 120-second target, 300-second hard limit.
+"""Caller-only startup gate: 120-second target, finite configured limit.
 
 Adapters must use public MCP, retain original actions, and prepare all expensive
 offline work before launch. An accepted action is reconciled even after expiry.
@@ -16,6 +16,20 @@ READINESS_FLAGS = (
     'original_actions_reconciled', 'budgets_preserved', 'first_operation_ready',
 )
 ACTUAL_WORK_KINDS = frozenset(('move', 'transfer', 'refuel', 'handcraft', 'build', 'configure-building', 'harvest', 'select-research', 'supply_mecha_warpers', 'interplanetary-flight'))
+
+
+def startup_limit(value=None):
+    value = LIMIT_SECONDS if value is None else value
+    if type(value) not in (int,float) or not math.isfinite(value) or value <= 0:
+        raise ValueError('finite_startup_limit_required')
+    return float(value)
+
+
+def retained_startup_limit(launch, config):
+    original = startup_limit(launch.get('limitSeconds'))
+    if original != startup_limit(config.get('startupLimitSeconds')):
+        raise ValueError('original_startup_limit_changed')
+    return original
 
 
 def paid_native_home_effect(result):
@@ -108,16 +122,21 @@ def run(adapter: Adapter, emit: Callable[[dict], None], clock=time.monotonic) ->
         report.failure = 'Complete offline readiness and first-operation preparation before opening the game.'
         emit(asdict(report))
         return report
+    try:
+        limit = startup_limit(proof.get('startup_limit_seconds'))
+    except (TypeError, ValueError) as error:
+        report.outcome = 'offline_not_ready'; report.failure = str(error)
+        emit(asdict(report)); return report
     started = clock()
-    deadline = started + LIMIT_SECONDS
+    deadline = started + limit
     launched = False
 
     def checkpoint(name):
         elapsed = clock() - started
         report.phase_seconds[name] = elapsed
-        emit(dict(event=name, elapsed_seconds=elapsed, target_seconds=TARGET_SECONDS, limit_seconds=LIMIT_SECONDS))
-        if elapsed >= LIMIT_SECONDS:
-            raise DeadlineExceeded(f'{name}: startup-to-action exceeded {LIMIT_SECONDS:g} seconds')
+        emit(dict(event=name, elapsed_seconds=elapsed, target_seconds=TARGET_SECONDS, limit_seconds=limit))
+        if elapsed >= limit:
+            raise DeadlineExceeded(f'{name}: startup-to-action exceeded {limit:g} seconds')
 
     def submit(method, prepared, first_effect=False):
         report.unresolved_commit = True

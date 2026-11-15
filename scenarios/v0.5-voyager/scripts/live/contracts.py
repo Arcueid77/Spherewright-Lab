@@ -53,7 +53,7 @@ def quarantined_navigation_original_accounted(config, reference, receipt, sessio
         and 0 <= receipt['completedAtGameTick'] <= session['gameTick']
             <= preservation['currentLastExit'] <= config['sourceTick'])
 
-def quarantined_local_move_saved_source(config, reference, receipt, session, preservation, primary):
+def quarantined_local_move_saved_source(config, reference, receipt, session, preservation, saved_source):
     """Retain an unknown ordinary Move while proving the later saved source.
 
     This accounts for the old action only; it does not declare arrival, idle,
@@ -61,9 +61,11 @@ def quarantined_local_move_saved_source(config, reference, receipt, session, pre
     complete current backup and Native identity before invoking this check.
     """
     tick = config.get('sourceTick'); action = reference.get('actionId')
+    renamed = config.get('restoreRenamedLastExitIdentity') is True
+    saved_hash = preservation.get('sourceSha256') if renamed else preservation.get('primarySha256')
     return (config.get('recoveryProfile') == 'successful-outbound-surface'
         and config.get('recoveryMode') == 'authorize_remote_primary_recovery'
-        and config.get('sourceRole') == 'primary' and type(tick) is int and tick >= 0
+        and config.get('sourceRole') == ('lastExit' if renamed else 'primary') and type(tick) is int and tick >= 0
         and isinstance(action, str) and bool(action)
         and receipt.get('actionId') == action and receipt.get('actionKind') == 'move'
         and receipt.get('terminal') is True and receipt.get('state') == 'outcome_unknown'
@@ -79,9 +81,11 @@ def quarantined_local_move_saved_source(config, reference, receipt, session, pre
         and preservation.get('fullFileHashVerified') is True
         and type(preservation.get('savedGameTick')) is int and preservation['savedGameTick'] == tick
         and preservation.get('sessionCutSha256') == reference.get('sessionSha256')
-        and isinstance(preservation.get('primarySha256'), str) and bool(preservation['primarySha256'])
-        and type(primary.get('gameTick')) is int and primary['gameTick'] == tick
-        and primary.get('sha256') == preservation['primarySha256'])
+        and isinstance(saved_hash, str) and bool(saved_hash)
+        and (not renamed or preservation.get('sameNativeWorldCreation') is True
+            and config.get('expectedRenamedLastExitContentHash') == 'sha256:' + saved_hash.lower())
+        and type(saved_source.get('gameTick')) is int and saved_source['gameTick'] == tick
+        and saved_source.get('sha256') == saved_hash)
 
 def quarantined_harvest_no_effect_accounted(config,reference,receipt,cut,session,preservation):
     action=reference.get('actionId');tick=cut.get('observedGameTick')
@@ -202,12 +206,15 @@ def resume_admission_echo(config,plan):
     if plan.get('remotePrimaryRecoveryAuthorizationUsed') is not True or plan.get('discardedUnstoredProgressGameTicks')!=0:
         return False
     if config.get('recoveryProfile') == 'successful-outbound-surface':
+        renamed = config.get('restoreRenamedLastExitIdentity') is True
         return (config.get('recoveryMode') == 'authorize_remote_primary_recovery'
-            and config.get('sourceRole') == 'primary' and type(config.get('sourceTick')) is int
+            and config.get('sourceRole') == ('lastExit' if renamed else 'primary') and type(config.get('sourceTick')) is int
             and plan.get('recoveryMode') == config['recoveryMode']
             and plan.get('exactEmbeddedIdentityVerified') is True
             and isinstance(config.get('expectedNativeVersion'), str) and bool(config['expectedNativeVersion'])
             and plan.get('sourceGameVersion') == plan.get('targetGameVersion') == config['expectedNativeVersion']
+            and plan.get('renamedLastExitIdentityRestorationPlanned') is renamed
+            and (not renamed or plan.get('expectedRenamedLastExitContentHash') == config.get('expectedRenamedLastExitContentHash'))
             and plan.get('successfulOutboundSurfaceSourceUsed') is True
             and plan.get('completedSavedLandingAdmissionUsed') is False
             and plan.get('failedLandingRecoveryAuthorizationUsed') is False
