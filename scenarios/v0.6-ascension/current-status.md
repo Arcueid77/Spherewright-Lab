@@ -1,5 +1,9 @@
 # Ascension current snapshot / Ascension活动快照
 
+2026-11-15开发文件资格：`da8a1736`同源开发目录已通过1809项针对性测试、原生构建、准确产品CI、76工具/1资源及内嵌指南检查，5个Plugin/224个MCP文件和源码版本戳均核验；脚本行尾差异沿已复核的Git blob和当前暂存字节证明。不生成发行包、不安装、无游戏调用。现场仍运行c720cf14且尚无覆盖内存的保存；所有者询问先保存还是先关闭，已说明先保存，界面例外选择待复。同会话水面新动作仍未实现，0.6实机验收未完成。
+
+Development qualification, 2026-11-15: the same-source `da8a1736` development directory passed1809 targeted cases, Native build, exact product CI,76-tool/1-resource and embedded-guide checks. Five Plugin and224 MCP files and source stamps were verified; script line endings follow the checked Git blob and staged-byte proof. No distribution archives, installation or game calls occurred. The scene still runs c720cf14 with no Save covering live memory. The owner asked whether to save before closing; save-first was explained and the UI exception choice is pending. A distinct same-session water movement and live0.6 acceptance remain open.
+
 2026-11-15源码采用：产品`da8a1736`经[准确CI](https://github.com/Arcueid77/Spherewright/actions/runs/43728202934)通过，Lab只读依赖/源码锁已选定；当前运行实装仍为`c720cf14`。这是源码更新，不是现场保存、安装或上岸证明。
 
 Source adoption, 2026-11-15: exact product [CI](https://github.com/Arcueid77/Spherewright/actions/runs/43728202934) passed for `da8a1736`, now selected by the Lab read-only dependency and source lock. The running installation remains `c720cf14`. This source update is not proof of a live Save, installation or shore arrival.
