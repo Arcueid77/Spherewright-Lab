@@ -1,5 +1,15 @@
 # Ascension resource increment / Ascension用料增量
 
+## 2026-11-15射线接收站有限制造预算 / Finite ray receiver manufacture
+
+整案已有1座射线接收站额度。按最新已解锁原生配方及背包，正常制造1座需要钢材20、高纯硅20、处理器5、光子合并器10及超级磁场环20；分解依赖并复用现有67磁线圈，有限基础投入为铁240、磁铁154、铜47、高能石墨20、玻璃30、电路板10，另直接投入上述钢材20、高纯硅20及处理器5。配方6执行47次得94线圈，配方5执行80次得80齿轮，97执行80次得80电动机，98执行40次得40涡轮，103执行20次得20磁环；配方11执行10次得20棱镜，68执行10次得10合并器，72执行1次得接收站。按各原生新鲜准备及独立原动作终态/实际回读执行，不把转运当作消耗。
+
+当前背包实读已具备铁240、磁铁154、铜47、石墨20、玻璃30、线圈67、钢20、硅20、板13、处理器5。铁230、玻璃16、石墨20及其余缺料已从既有仓正常转运；仍以每笔原生准入和实际消耗为准。无新增接收站额度，无直接存档修改。其部署及发电另经Caph新鲜原生门。
+
+The already approved scope includes one ray receiver. Fresh unlocked Native recipes require20 steel,20 high-purity silicon, five processors, ten photon combiners and20 super-magnetic rings. Expanding the dependencies and reusing67 carried coils gives a finite base budget of240 iron,154 magnets,47 copper,20 energetic graphite,30 glass and ten boards, plus the direct steel/silicon/processors above. Recipe6 runs47 times for94 coils;5 runs80 for80 gears;97 runs80 for80 motors;98 runs40 for40 turbines;103 runs20 for20 rings. Recipe11 runs ten for20 prisms;68 runs ten for ten combiners;72 runs once for one receiver. Execute each under fresh Native preparation, retaining its original terminal and actual readback; transfers do not equal consumption.
+
+Current backpack readback contains240 iron,154 magnets,47 copper,20 graphite,30 glass,67 coils,20 steel,20 silicon,13 boards and five processors.230 iron,16 glass,20 graphite and the other missing materials were normally transferred from existing stock. Actual Native admission and receipts govern consumption. No additional receiver placement is granted here; Caph placement and power require fresh admission.
+
 ## 2026-11-13重氢接口吞吐增量 / Deuterium relay throughput increment
 
 应力科研已正常恢复至119160/360000，662绿实际消费，余1338份五色。新鲜原生切面显示重氢设备缺氢，既有进料高速接口为长距离往返，旁边混合仓仍有20氢。按现行合理用料自主授权，有限增加4个极速新建额度，累计上限16，复用4个随身高速并按正常配方5/97/98/90制造4齿轮、4电动机、2电磁涡轮及4极速，直接消耗12铁、8线圈及4高速。原生完成回读已核对，4条既有氢/重氢高速接口正常回收后分别重新准备并建成极速，回收和既耗分别保留。另两条普通重氢路径正常升级高速，保留升级材料原回执。

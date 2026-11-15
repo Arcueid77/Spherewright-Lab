@@ -1,5 +1,13 @@
 # Ascension current snapshot / Ascension活动快照
 
+2026-11-15最新切面：应力科研第1档已完成；1523条目现为第2档、0/540000且队列为空，这是下一档而非第1档回退。原生戴森状态回读可建节点纬度15°。一次原先较长导航已接受后明确失败，原件保留，机甲自然下降、原生写健康恢复；唯一调用端在同一进程交接，未Save/Load/重启。此后使用不同短航段正常转运，已集齐一座已批射线接收站的基础材料，制造预算见[用料增量](resource-increment.md)。
+
+完成切面tick131281050对应10191788累计tick及117237总请求（含22单列），原启动起43200秒有限窗口、12000000累计上限及54000返航/3000清理储备不变；继续累计实际使用。施工新建既耗带719、普通99、高速13、极速16、塔24，回收及升级独立保留。当前所选fbe39898，运行中实装c720cf14，未热替换。接收站正常制造、Caph新鲜航程及实际闭壳/发射/持续发电、正常保存冷恢复和最终同源交审双包尚未完成。
+
+Latest cut: stress tier1 completed;1523 displays tier2 at0/540000 with an empty queue, representing the next tier rather than a regression. Native Dyson state reports15° unlocked node latitude. One previously accepted longer navigation terminally failed; its original remains preserved and the player naturally descended with healthy Native write status. The sole caller handed off in the same process without Save/Load/relaunch. Distinct short Native legs and transfers then collected the base materials for one already authorized ray receiver; the finite manufacture budget is linked above.
+
+Completed cut tick131281050 carries10191788 cumulative ticks and117237 total requests including22 separately accounted. The original-start43200-second window,12000000 cumulative cap and54000 return/3000 cleanup reserves remain; actual use continues. New placement spending is719 belts,99 ordinary/13 fast/16 gradeIII sorters and24 towers, with recoveries/upgrades retained separately. Selected fbe39898 differs from running installed c720cf14; there was no hot swap. Normal receiver manufacture, fresh Caph route admission and actual shell/launch/sustained power, normal save/cold continuation and final same-source review packages remain open.
+
 2026-11-15最新续接：应力科研353160/360000，剩余38份五色；蓝/红/黄/紫机甲科研点已覆盖，继续正常制造及转运绿矩阵。临时普通取氢分拣器已按独立原生动作正常回收并退还1普通，剩余25氢正常返还原供料仓，另80氢送入卡西米尔仓；旧高速取氢器原件及回收独立保留，施工实耗不抵销。应力最后阶段透镜线缺重氢，原线已恢复，按新鲜库存及原生门继续。
 
 按所有者合理运行自主授权，将本轮墙钟窗口由原启动起21600增至43200秒；游戏原进程未变，唯一调用端正常交接，无保存、读档、重启或时钟重置。交接tick131203662对应10114400累计tick、116297写端请求及22次单列只读/离线请求；全球200000上限及54000返航/3000清理储备不变。已从现有库存正常取用4个额外翘曲器，实机回读携带6个。施工新建累计带719、普通99、高速13、极速16、电塔24；石墨输出分拣器升级和临时分拣器回收各留独立原件。选定fbe39898、实装c720cf14仍不同；完整科研、Caph闭壳/发射/持续发电、正常保存冷恢复及最终同源交审双包均未完成。
