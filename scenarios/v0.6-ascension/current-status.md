@@ -1,5 +1,15 @@
 # Ascension current snapshot / Ascension活动快照
 
+2026-11-15当前owned存档已从过期凭据的准确主档新鲜原生恢复，92.672秒完成首笔应力科研恢复。科研从137160推进至214560/360000，正常消耗430份五色；最新观察机甲缓存为蓝266、红235、黄808、紫47份，绿已投入新一批生产。正常取用绿430、紫325、红100，另向绿产线投入185量子芯片/185透镜。原生转运将1400石矿、640水、1400高能石墨、400钛块、300石墨烯、100钛晶石和100氢送至现有产线；这些是入仓量，不冒称全部已消耗。
+
+石矿/水/钛补给后玻璃和钛化玻璃有实际产出，石墨补给后石墨烯36/min、碳纳米管12/min、宽带6/min，铁矿补给后磁铁18/min、线圈12/min、电路板36/min均为各自原生10秒切面，不冒称持续吞吐。只读追踪确认石墨烯生产仓经既有带和筛选分拣器连接碳纳米管输入，末端已观察到石墨烯货物。一次紫矩阵库存不足及一次过短导航在接受前拒绝，原件保留；已完成动作均按原回执核销、不重放。
+
+原游戏未关闭；唯一调用端正常交接到同一会话，无Save/Load/重启。按所有者运行时长自主授权，有限墙钟窗从原启动起7200秒增至14400秒；原启动时钟与1200万累计tick、54000返航/3000清理储备不变。交接切面130536305保留9447043累计tick和104990请求（含14单列只读），实际继续累计。下一步继续五色供料和应力科研，再执行Caph闭壳、当地发射、接收器持续电力及正常保存冷恢复。
+
+Current owned save resumed through fresh expired-primary Native admission and reached first research work in92.672 seconds. Stress advanced137160→214560/360000 after430 five-colour sets; latest mecha buffers are266 blue,235 red,808 yellow and47 purple, with green in a new production batch. Actual withdrawals were430 green,325 purple and100 red;185 quantum chips and185 lenses were fed to green production. Normal transfers delivered1400 stone,640 water,1400 graphite,400 titanium,300 graphene,100 titanium crystals and100 hydrogen to existing lines; transferred is not synonymous with consumed.
+
+Glass and titanium glass resumed positive output. Separate Native ten-second cuts observed graphene36/min, nanotubes12/min, broadband6/min, magnets18/min, coils12/min and boards36/min, not a sustained-rate claim. Read-only tracing linked the graphene output store through existing belts and filtered sorters to the nanotube input; graphene cargo was observed at the far end. A purple-stock shortage and a too-short navigation were refused before acceptance and preserved. The same game remains open with one caller after an orderly no-Save/no-Load/no-relaunch handoff. Owner runtime autonomy increased the finite window from7200 to14400 seconds from the original launch; cumulative12000000 ticks and54000/3000 reserves remain. Handoff tick130536305 carried9447043 ticks and104990 requests including14 separate reads; spending continues.
+
 2026-11-15上次启动因恢复凭据过期在读档前被拒，未接受恢复或科研动作。MCP确认空主菜单后正常关闭；2464项保护、Primary/LastExit 130230033及9140771tick不变。凭据元数据匹配当前版本和主档tick、未消费；按已有持续授权使用过期主档的全新原生预览及digest，离线预检通过。累计102787请求；首实操继续恢复应力科研。 / The prior startup was refused before load because the recovery ticket expired; no resume/research action was accepted. MCP verified the unloaded menu and normal close preserved2464 files, primary/LastExit130230033 and9140771 ticks. Ticket metadata matches Native/primary and is unconsumed. Use a fresh expired-primary Native preview/digest under existing standing authority; offline preflight passed. Cumulative requests are102787; first work remains stress-research resume.
 
 启动前完整离线预检通过，新增4次请求后累计102693；下一步以恢复科研为首实操。 / Full prelaunch offline preflight passed; cumulative requests are102693 after four further calls. First work resumes research.
