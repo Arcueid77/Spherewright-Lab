@@ -1,5 +1,7 @@
 # Ascension current snapshot / Ascension活动快照
 
+2026-11-15上次启动因恢复凭据过期在读档前被拒，未接受恢复或科研动作。MCP确认空主菜单后正常关闭；2464项保护、Primary/LastExit 130230033及9140771tick不变。凭据元数据匹配当前版本和主档tick、未消费；按已有持续授权使用过期主档的全新原生预览及digest，离线预检通过。累计102787请求；首实操继续恢复应力科研。 / The prior startup was refused before load because the recovery ticket expired; no resume/research action was accepted. MCP verified the unloaded menu and normal close preserved2464 files, primary/LastExit130230033 and9140771 ticks. Ticket metadata matches Native/primary and is unconsumed. Use a fresh expired-primary Native preview/digest under existing standing authority; offline preflight passed. Cumulative requests are102787; first work remains stress-research resume.
+
 启动前完整离线预检通过，新增4次请求后累计102693；下一步以恢复科研为首实操。 / Full prelaunch offline preflight passed; cumulative requests are102693 after four further calls. First work resumes research.
 
 2026-11-14来源c720cf14/0.6.0完成一次官方正常冷安装并复核已装同源文件和2464项完整保护；实装75工具通过43项接口及1项无效枚举检查。累计102689请求、9140771tick，Primary/LastExit 130230033。调用端[准确CI](https://github.com/Arcueid77/Spherewright-Lab/actions/runs/43421964116)通过。按所有者运行时长自主授权设本轮有限7200秒实机窗，保留1200万累计tick上限、54000返航/3000清理储备和300秒启动门；首实操直接恢复暂停的应力科研。
