@@ -1,5 +1,13 @@
 # Ascension current snapshot / Ascension活动快照
 
+2026-11-15续跑切面：应力科研263340/360000。石矿仓正常移出800石材至兼容仓后，为矿石预留空格并恢复原石材分拣设置；以原生几何和准入新增1台筛选石矿分拣器，已观察实际搬运。先前另一位置在接受前被原生几何检查拒绝，未耗材，原件保留。另按现有产线正常补入铁块、铜块、晶格硅、石墨及石墨烯，观察到第二条紫矩阵链、奇异物质、透镜和卡西米尔设备工作；实际持续吞吐仍需分别观察。紫、绿矩阵及原料按原生转运实耗继续累计，转入不等于消耗。
+
+唯一调用端已在同一原游戏进程正常交接；无Save/Load/重启，原生动作原件及累计账保留。按所有者运行自主授权，有限窗口由原启动起14400延至21600秒（原启动时钟不重置）；交接tick130825494累计9736232 tick、108241写端请求及22次单列只读/离线请求，全球上限200000，返航54000/清理3000 tick储备不变。建设实耗基础带719、普通分拣器97、高速12、极速16、电塔24；上限分别730/102/14/16/27。新调用端继续累计。
+
+Stress research reached263340/360000. The stone store was normally cleared of800 bricks into a compatible store, its freed grids reserved for ore, and its original brick sorter restored. One additional Native filtered stone sorter was built and observed moving cargo; a different geometry was refused before acceptance with no material debit and is retained. Normal transfers restored iron, copper, crystal silicon, graphite and graphene inputs. The second purple chain, strange matter, lens and Casimir machines were observed working; these samples are not sustained-throughput proof. Matrix and ingredient transfers continue to be accounted separately from actual consumption.
+
+The sole caller handed off within the same original game process without Save/Load/relaunch. Owner runtime autonomy increased the finite window from14400 to21600 seconds measured from the original launch, without resetting that clock. Handoff tick130825494 carried9736232 cumulative ticks and108241 caller requests plus22 separate read-only/offline requests under the global200000 limit;54000 return and3000 cleanup ticks remain reserved. Construction spending is719 belts,97 ordinary/12 fast/16 gradeIII sorters and24 towers under730/102/14/16/27 ceilings. The replacement caller continues actual accounting. Research, Caph shell/local manufacture/sustained launches, receiver power, cold continuation and final review packages remain open.
+
 远端产品主线新增fbe39898过期自动存档恢复能力，[准确CI](https://github.com/Arcueid77/Spherewright/actions/runs/43669228500)通过，Lab选定依赖保留该提交；当前实机仍运行c720cf14，未热替换。后续需在正常关停、完整保护与同源资格后再冷切换。 / Remote product main advanced to fbe39898 for expired-autosave recovery and passed exact CI; Lab preserves it as selected dependency. The live game remains on c720cf14 without hot replacement; any later cold switch requires stopped protection and same-source qualification.
 
 2026-11-15当前owned存档已从过期凭据的准确主档新鲜原生恢复，92.672秒完成首笔应力科研恢复。科研从137160推进至214560/360000，正常消耗430份五色；最新观察机甲缓存为蓝266、红235、黄808、紫47份，绿已投入新一批生产。正常取用绿430、紫325、红100，另向绿产线投入185量子芯片/185透镜。原生转运将1400石矿、640水、1400高能石墨、400钛块、300石墨烯、100钛晶石和100氢送至现有产线；这些是入仓量，不冒称全部已消耗。
