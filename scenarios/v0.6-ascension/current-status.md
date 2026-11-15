@@ -1,5 +1,9 @@
 # Ascension current snapshot / Ascension活动快照
 
+2026-11-16母星续供：原返航正常退出翘曲、母星600tick接地落稳并正常保存131383980，原旅程已关闭；Caph设计、接收站和21钛矿保全。正常补13氘棒入机甲舱后，两段原生地表导航到达生产区。已按[首批供料方案](caph-support-plan.md#initial-local-launch-batch-2026-11-16--首批当地发射供料)取20处理器、18铁矿和9铜块，18铁块正常制造，9次电路板制造原动作正在执行。当前游戏及唯一writer运行，母星取用/制造在该保存后，尚需正常保存；其余补料、当地发射、冷恢复和双包待完成。
+
+Home resupply, 2026-11-16: the original return normally exited warp and proved600 grounded home ticks; Save131383980 closed that journey and preserved Caph's design, receiver and21 titanium ore. After a normal13-rod mecha top-up, two Native surface navigations reached the production area. Under the [first-batch plan](caph-support-plan.md#initial-local-launch-batch-2026-11-16--首批当地发射供料),20 processors,18 iron ore and nine copper ingots were withdrawn,18 iron ingots normally made, and the original nine-execution circuit-board task is in progress. The game and sole writer run; these home changes postdate the save and need a normal save. Further supplies, local launch, cold continuation and review archives remain open.
+
 2026-11-16修复同源资格：`9453a536`通过1819项针对性回归、原生构建及准确产品CI；同源开发目录和单文件通过76工具/1资源、5个Plugin/224个MCP文件、版本戳与官方帮助脚本源码一致性核验，尚未安装或形成发行包。现有运行仍为`75001eb9`；原返航已正常退出翘曲并在母星系接近，最终落地和保存待原终态。
 
 Fix-source qualification, 2026-11-16: `9453a536` passed1819 targeted regressions, Native build and exact product CI. Its coherent development directory and standalone MCP passed76-tool/1-resource, five Plugin/224 MCP file, revision-stamp and official-helper source checks; it is not installed or packaged for distribution. The active runtime remains `75001eb9`; the original return has normally exited warp and is approaching in the home system, with final landing and Save still pending its original terminal.
