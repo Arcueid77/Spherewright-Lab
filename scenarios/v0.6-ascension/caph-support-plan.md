@@ -1,5 +1,15 @@
 # Caph closed-shell support plan / Caph闭壳供料方案
 
+## Initial local launch batch, 2026-11-16 / 首批当地发射供料
+
+The completed home return and fresh Native stocks support an initial finite batch of at most four locally manufactured rockets and12 locally launched sails, within the existing210-rocket/224-sail launch ceilings. Four rockets need eight components,24 frames,24 component sails,24 processors, eight quantum chips and16 deuteron rods. Recipe80 makes the24 frames from96 nanotubes,24 titanium alloy and24 high-purity silicon. Twelve additional launched sails plus the24 component sails need18 graphene and18 photon combiners. Recipes68/11/50 make those18 combiners from54 glass,18 iron ingots and nine copper ingots via36 prisms and18 circuit boards;18 iron ore can normally produce the ingots. This first batch does not claim the complete149-rocket/224-cell design is supplied.
+
+The current player already carries20 nanotubes,20 alloy, one quantum chip and130 deuteron rods; local Caph storage observed802 graphene. Under the owner's resource autonomy, the bounded home withdrawal for this batch is up to76 nanotubes, four alloy,24 high-purity silicon,24 processors, seven quantum chips,54 glass,18 iron ore and nine copper ingots. Use fresh Native counts and ordinary transfers/manufacture, record actual debits and keep the existing fuel/warper return reserves. Any later machinery, logistics and remaining-shell resources are derived and recorded separately from fresh facts.
+
+母星正常返航及新鲜库存支持先做最多4枚当地正常制造火箭、12片当地发射帆，均在既有210火箭/224发射帆上限内。4枚火箭需8组件、24框架、24片组件帆、24处理器、8量子芯片及16氘棒；配方80制造24框架需96纳米管、24钛合金及24高纯硅。另加12片发射帆，36片帆共需18石墨烯和18光子合并器。配方68/11/50制造18合并器需54玻璃、18铁块和9铜块，经36棱镜和18电路板；18铁矿可正常制造铁块。本首批不等于149火箭/224细胞的完整设计已供料。
+
+当前机甲已携20纳米管、20钛合金、1量子芯片及130氘棒；Caph当地仓观察到802石墨烯。按所有者用料自主授权，首批母星有限取用上限为76纳米管、4钛合金、24高纯硅、24处理器、7量子芯片、54玻璃、18铁矿及9铜块。按新鲜原生库存正常转运和制造，记录实耗并保留燃料/翘曲器返航储备；后续设备、物流和剩余闭壳用料由新鲜事实另行核算记录。
+
 2026-11-15只读现场切面：Caph层1有1个已存在节点，30结构点中已有1点，29点未完成；新鲜6°闭合三角预览复用该节点，新建2节点、3框架及1壳，准确新增120结构点和224细胞点，科技允许。当前无在途火箭或活跃/在途太阳帆。若要将旧节点和该新增设计全部实际填满，基于当前切面的理论需求为149次火箭交付及224个细胞交付；订单、损失、回收或新鲜拓扑变化须另计，不能用设计数代替真实抵达。149枚位于既批210枚发射上限内；224帆是理论无损下界，实际转换及有限寿命需现场观察。
 
 按已解锁基础配方、不使用增产、无其他存量抵扣估算149枚火箭：298戴森球组件、596氘核燃料棒及298量子芯片；298组件又需894框架材料、894太阳帆及894处理器；894框架需3576碳纳米管、894钛合金和894高纯硅。若以现有配方33生产纳米管，需5364石墨烯与1788钛块。224发射帆与894组件帆合计1118帆；以配方70制造需559石墨烯和559光子合并器。合并这两部分为5923石墨烯；559合并器按配方68/11需1118棱镜、1677玻璃及559电路板。298量子若按配方52生产还需596处理器和596位面过滤器。以上仅是理论直接需求，已把中间产物嵌入上游，绝不把转运当消耗；实际以新鲜库存、原生成品/增产点和逐笔回执抵扣，损失及额外基础配方另核。
