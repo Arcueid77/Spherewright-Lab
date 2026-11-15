@@ -10,6 +10,8 @@
 
 本次Lab调用端补充提交前防线：多星配置缺少普通施工星球分类时拒绝普通移动；配置为远端的普通移动仅在新鲜、完整、最多64米且每米至少一采样的干地切面通过后提交。只读预检不受此限制；原生导航依旧使用自己的准入。该防线不证明障碍或实际落地，也不覆盖远端水面续行。水面到陆地应作为独立状态模型与旅程预算问题审查：原动作和原储备保留，明确冻结/漂浮/陆地接触的不同状态及失败保全，再经原生实现、准确测试和实机验证；不能单纯放宽接地检查或把预览当到达。
 
+现有产品`VoyagerSurfaceRecoveryPolicy`已有16米、600游戏tick/20秒的受控水面向陆地移动，但仅绑定到准确加载并接纳的远端保存恢复，不能把当前原地暂停伪装成读档接纳。约15米候选在有限距离内，九点射线只是调查，不等于该控制器的原生九点当前地形碰撞体、同一场景、全程逐tick能源及到达证明。若新增同会话入口，应采用独立新动作和真实来源类型，绑定原unknown动作、当前位置/物理、目标、现存旅程及未改变的返航储备；原动作仍为unknown。提交前必须完成原生地形/控制器/成本准入，执行中保留151/501逐tick守卫，失败仍暂停并保全两个原动作，不得伪造已加载证明或简单清除隔离。
+
 进一步产品设计应单独评估严格绑定原unknown移动、同会话/世界/旅程、原生暂停稳定尾部及无其他活跃动作的**仅序列化保全**，并区分其与核销、Resume、Load和健康返航。现行运行中的版本不能从离线源码修复中获益；必须先形成不丢当前进度且得到Native支持的具体恢复路径。旧自动档较当前暂停切面早，进度回退仍是单独决定，不能以新累计额度抵销。
 
 ## English
@@ -23,5 +25,7 @@ The existing same-session reconciliation handles an exact unknown build or a pro
 Caller source commit `7f91af793035ff4c84460a10cf97c100862ac364` passed216 local cases and [exact CI](https://github.com/Arcueid77/Spherewright-Lab/actions/runs/43691530232). It has not been loaded into the current paused caller or validated by a new remote live Move.
 
 The Lab caller now refuses normal Move commits on classified remote planets unless a fresh complete dry surface cut covers at most64m with at least one sample per metre. Multi-planet configurations must classify ordinary-construction planets; absent classification, unavailable, partial or sparse cuts reject before action. Read-only prepares remain available and Native navigation retains its separate admission. This is advisory terrain evidence, not obstacle clearance or landing, and does not admit remote water continuation. Audit water-to-land continuation as a distinct state-and-journey-budget model: preserve the original action/reserves, distinguish frozen, drifting and ground-contact states, and require Native implementation, exact tests and live proof. Do not simply weaken grounded checks or treat preview as arrival.
+
+The product already has `VoyagerSurfaceRecoveryPolicy` for a16m,600-game-tick/20-second controlled water-to-land move, but only as part of an exact loaded and admitted remote save recovery. Do not pretend the current same-session pause is a loaded adoption. The15m candidate fits the finite distance; its nine terrain rays are a survey, not the controller’s Native collider ownership, scene, per-tick energy or arrival proof. A same-session entry would require a distinct new action and genuine source role, binding the original unknown, frozen pose, target, existing journey and unchanged return reserves. Retain the unknown original. Require fresh Native terrain/controller/cost admission, preserve151/501 per-tick guards, and pause/preserve both originals on failure; do not synthesize loaded provenance or clear quarantine by assertion.
 
 A separate product design should evaluate serialization-only preservation bound to the exact unknown Move, same world/session/journey, stable Native-paused tail and no other active actions, without conflating Save with reconciliation, Resume, Load or healthy return. Offline changes cannot alter the running cohort. First establish a Native-supported path that preserves current progress; the older autosave is earlier than the frozen cut, and rollback remains a separate decision rather than a budget refund.

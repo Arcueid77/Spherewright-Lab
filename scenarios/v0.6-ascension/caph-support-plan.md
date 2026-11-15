@@ -1,0 +1,19 @@
+# Caph closed-shell support plan / Caph闭壳供料方案
+
+2026-11-15只读现场切面：Caph层1有1个已存在节点，30结构点中已有1点，29点未完成；新鲜6°闭合三角预览复用该节点，新建2节点、3框架及1壳，准确新增120结构点和224细胞点，科技允许。当前无在途火箭或活跃/在途太阳帆。若要将旧节点和该新增设计全部实际填满，基于当前切面的理论需求为149次火箭交付及224个细胞交付；订单、损失、回收或新鲜拓扑变化须另计，不能用设计数代替真实抵达。149枚位于既批210枚发射上限内；224帆是理论无损下界，实际转换及有限寿命需现场观察。
+
+按已解锁基础配方、不使用增产、无其他存量抵扣估算149枚火箭：298戴森球组件、596氘核燃料棒及298量子芯片；298组件又需894框架材料、894太阳帆及894处理器；894框架需3576碳纳米管、894钛合金和894高纯硅。若以现有配方33生产纳米管，需5364石墨烯与1788钛块。224发射帆与894组件帆合计1118帆；以配方70制造需559石墨烯和559光子合并器。合并这两部分为5923石墨烯；559合并器按配方68/11需1118棱镜、1677玻璃及559电路板。298量子若按配方52生产还需596处理器和596位面过滤器。以上仅是理论直接需求，已把中间产物嵌入上游，绝不把转运当消耗；实际以新鲜库存、原生成品/增产点和逐笔回执抵扣，损失及额外基础配方另核。
+
+当前暂停只读切面：主网2无发电/供电，聚变站无缓冲燃料；加工仓23内有802石墨烯、420氢，化工厂另有40石墨烯/20氢输出。三台既有MkII分别为框架、组件、火箭，原弹射器及发射井均存在但未供电，井内0火箭；旧太阳帆生产设备已改用于上述链，故不能假设帆及火箭会自动产出。旧星际站内有97电路板、0燃料棒，电网和跨星配送待新鲜验收；先前存在的实体或历史配送不证明当前连续供料。
+
+恢复时先保留原unknown动作和返航预算，在原生允许后移至已核对陆地、补聚变燃料并核真实同网供电；重新读取设备、库存、物流槽及轨道/射界。依据完整BOM设计必要的当地帆/组件/火箭自动供料和外星站供电，有限新增设施与材料由当前自主授权核算并记录，逐项按新鲜原生准入执行。以当地正常生产、实际发射、飞行、结构/细胞抵达分别验收；接收站布置、电力连续采样、正常保存与冷恢复仍单独待完成。当前仅计划和只读切面，未新增施工或投入这些材料。
+
+## English
+
+The frozen Caph cut has one existing layer1 node with1/30 structure points. A fresh permitted6° triangle preview reuses it and plans two nodes, three frames and one shell, costing120 new structure points and224 cells. There are no active/in-flight sails or rockets. Filling the existing node and the new design from this cut theoretically needs149 delivered rockets and224 delivered cells; actual orders, loss, recovery and topology changes require fresh accounting.149 launches fit the approved210 ceiling.224 sail launches are a no-loss lower bound, not proof of delivery; observe conversion and finite sail lifetime.
+
+At base recipes, without proliferation or other stock deductions,149 rockets need298 sphere components,596 deuteron rods and298 quantum chips. The components need894 frames,894 sails and894 processors; frames need3576 nanotubes,894 titanium alloy and894 high-purity silicon. Recipe33 would make those nanotubes from5364 graphene and1788 titanium ingots. The224 launched sails plus894 component sails total1118 sails: recipe70 needs559 graphene and559 photon combiners, for5923 graphene across nanotubes/sails. Recipes68/11 make those combiners from1118 prisms,1677 glass and559 boards. Recipe52 for298 quantum chips adds596 processors and596 plane filters. These are theoretical direct requirements with intermediates expanded, not additional duplicated consumption. Fresh physical stock, actual output/inc and individual receipts determine the real debit.
+
+The paused read-only cut shows network2 has no generation/service and the fusion generator has no buffered fuel. Mixed storage23 contains802 graphene/420 hydrogen; chemical output separately holds40 graphene/20 hydrogen. Three existing MkII machines are set to frames/components/rockets. The existing ejector/silo are unpowered and the silo holds zero rockets. The prior sail machines were repurposed, so no automatic sail/rocket production is assumed. The old interstellar station holds97 boards/zero rods; present power and interstellar delivery remain to be validated. Historical equipment or delivery is not continuous supply proof.
+
+After preserving the unknown original and return budget, use Native admission to reach freshly verified land, refuel the fusion generator and prove network service. Re-read machines, stock, logistics slots, orbit and line of sight. Derive and record finite additional local sail/component/rocket feed and station-power construction under current resource autonomy, with each action freshly admitted. Verify local normal manufacture, actual launch, flight and structure/cell delivery separately. Receiver placement, sustained sampled electricity, normal save and cold continuation remain separate. This is planning and read-only observation only; no new construction or material debit is claimed.
