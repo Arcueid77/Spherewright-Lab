@@ -1,5 +1,9 @@
 # Ascension current snapshot / Ascension活动快照
 
+2026-11-15轨道方向复核：产品main `5966c07d` 将轨道方案返回的旋转与请求角度独立核对，并以固定角度样例验证；[准确CI](https://github.com/Arcueid77/Spherewright/actions/runs/43718216283)通过，Lab源码锁及只读依赖选定该提交。仅源码验证，当前游戏仍运行c720cf14，原动作隔离且记录的正常保存未覆盖现场；水面脱困、实际发射/接收功率和冷恢复均未完成。
+
+Product main `5966c07d` independently checks returned orbit rotation against the requested angles, including a fixed-angle example. [Exact CI](https://github.com/Arcueid77/Spherewright/actions/runs/43718216283) passed; the Lab source lock and read-only dependency select it. This is source-only verification; the current game remains on c720cf14 with the original action quarantined and its recorded normal save not covering the live cut. Water-to-land recovery, actual launch/receiver power and cold continuation remain open.
+
 2026-11-15轨道源码：产品main `11948a0e` 新增太阳帆轨道只读观察及一次原生空轨道创建，包含原生半径调整、槽位、旧轨道/帆数量及背包读回；[准确CI](https://github.com/Arcueid77/Spherewright/actions/runs/43717198897)通过，Lab源码锁及只读依赖选定该提交。源码测试使用替身，不是实机；不含轨道编辑/删除或实际发射。当前游戏仍运行已装c720cf14，未热替换，现场保存/脱困及完整0.6实机验收仍待完成。
 
 Product main `11948a0e` adds read-only swarm-orbit observation and one Native empty-orbit creation, with radius, allocation, old-orbit/sail-count and inventory readback. [Exact CI](https://github.com/Arcueid77/Spherewright/actions/runs/43717198897) passed; the Lab source lock and read-only dependency select it. Source tests use substitutes and are not live acceptance; orbit edit/removal and actual launch are not included. The current game still runs installed c720cf14 without hot replacement; scene preservation/recovery and full 0.6 live acceptance remain open.
