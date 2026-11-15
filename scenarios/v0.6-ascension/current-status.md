@@ -1,5 +1,9 @@
 # Ascension current snapshot / Ascension活动快照
 
+2026-11-15恢复开发载荷：`59d60b6d`的同源0.6开发目录已通过1778项针对性测试、原生构建、准确产品CI、76工具/1资源及内嵌指南检查，5个Plugin/224个MCP文件均核验；未生成发行压缩包、未安装、无游戏调用。旧资格脚本的CRLF字节哈希与当前LF不同：已核实两份脚本的原/新Git blob及规范化内容相同、暂存字节等于干净源码，再用记录的当前哈希完成资格。此前2475项保护副本和155条持久Journal已复核。尚无覆盖当前内存的保存证明、界面操作未授权；安装/加载前须先证明同一现场的正常保存并遵守所有者界面边界。
+
+The coherent0.6 development directory for `59d60b6d` passed1778 targeted cases, Native build, exact product CI,76-tool/1-resource metadata and embedded-playbook checks; five Plugin and224 MCP files were verified. No distribution archives, installation or game calls were made. The old qualifier's CRLF hashes differed from current LF bytes: both tracked Git blobs and normalized content were matched, and staged bytes matched clean source before qualification with recorded current hashes. The2475 protected copies and155 durable Journal entries were rechecked. No save is proved to cover current memory and UI operation is not authorized; prove a normal save of the same live cut and obey the owner's UI boundary before installation/Load.
+
 2026-11-15日志复核：同一隔离会话经公共MCP读回155条Journal，序号连续、全部持久化、无pending/error，tick与此前现场一致；本次6请求、累计117598，观察端正常结束。随后重算2475项原文件哈希，均与已验证保护副本一致。这是记录及备份检查，不是现场保存、当前Native Pause/接地证明或恢复权限。
 
 Public MCP readback of the same quarantined session found155 continuous, fully durable Journal entries with no pending/error and the same live tick. Six requests bring the total to117598; the observer ended normally. A subsequent hash check of2475 original files matched their previously verified protected copies. This is journal/backup evidence, not a live-state Save, fresh Native Pause/ground proof or recovery authority.
