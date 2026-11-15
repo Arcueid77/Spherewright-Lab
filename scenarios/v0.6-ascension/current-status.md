@@ -1,5 +1,9 @@
 # Ascension current snapshot / Ascension活动快照
 
+2026-11-16：Lab已选择`22970069`；当前实装仍`75001eb9`且游戏关闭，2490项最新保护备份保留。先完成同源冷安装及实装SDK，再从131399003母星正常存档恢复并继续首批Caph发射供料。
+
+Lab now selects `22970069`; installed runtime remains `75001eb9`, the game is stopped and2490 current protected backup entries remain. Complete coherent cold installation and installed SDK checks, then continue the first Caph launch batch from the normal home save at131399003.
+
 2026-11-16已正常关停：首批携96纳米管、24钛合金、24高纯硅、24处理器、8量子、18光子合并器和130氘棒。正常保存/菜单确认完整保存131399003；菜单动作回读超时为unknown，随后公开MCP只读确认同一进程已卸载世界，保留原件且未重放，进程正常关闭。Primary/LastExit均131399003、2490项完整保护备份通过，累计10309741tick和120142请求，返航/清理储备保留。产品`22970069`含坐标绑定及慢tick墙钟修复，通过1850项针对性回归、原生构建、[准确CI](https://github.com/Arcueid77/Spherewright/actions/runs/43748272173)及5/224同源开发资格；Lab仍选/实装`75001eb9`。先采用新源码并冷安装，准备首操作后恢复；当地发射、冷恢复电力及最终双包未闭合。
 
 Stopped boundary, 2026-11-16: the first batch carries96 nanotubes,24 alloy,24 high-purity silicon,24 processors, eight quantum chips,18 photon combiners and130 deuteron rods. Normal Save/menu confirmed complete Save131399003; the menu action's readback timed out as unknown, and a later public MCP read-only observation proved the same process had unloaded the world. Its original record remains unchanged and unreplayed; the process closed normally. Primary/LastExit both reach131399003 with2490 protected backup files,10309741 spent ticks and120142 requests, retaining return/cleanup reserves. Product `22970069` contains coordinate-binding and slow-tick wall fixes and passed1850 targeted regressions, Native build, [exact CI](https://github.com/Arcueid77/Spherewright/actions/runs/43748272173) and five/224 coherent development qualification; Lab still selects/installs `75001eb9`. Adopt and cold-install the new source and prepare first work before recovery. Local launches, post-recovery electricity and final archives remain open.
