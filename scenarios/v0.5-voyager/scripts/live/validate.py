@@ -1,6 +1,6 @@
 """Run the real detached entry's complete preflight without opening the game."""
 from pathlib import Path
-import sys
+import os,sys
 sys.dont_write_bytecode=True
 ROOT=Path(__file__).resolve().parent
 sys.path.insert(0,str(ROOT));sys.path.insert(0,str(ROOT.parent))
@@ -9,6 +9,11 @@ from factory import Factory
 
 def main():
     config,config_sha,output=sys.argv[1:]
+    # The detached worker starts beside run.py, not in the invoking shell's
+    # directory. Resolve caller arguments first, then verify all referenced
+    # evidence in that same context before promising a launch-ready packet.
+    config=str(Path(config).resolve());output=str(Path(output).resolve())
+    os.chdir(ROOT)
     r=Runtime(config,config_sha,output);a=Factory(r)
     try:
         proof=a.offline_preflight()

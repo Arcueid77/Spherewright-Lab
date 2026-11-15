@@ -1,5 +1,9 @@
 # Ascension current snapshot / Ascension活动快照
 
+2026-11-16启动前修正：首个独立调用端因两条备份副本引用为相对路径，在游戏进程创建和启动请求之前结束，原失败保留、无游戏调用。新不可变清单改用完整路径；预检现使用独立调用端工作目录，完整预检及首操作方案复核通过。使用新输入继续，尚未加载或上岸。
+
+Prelaunch correction, 2026-11-16: the first detached caller ended on two relative backup-copy references before game-process creation or launch dispatch; its failure remains preserved and no game calls occurred. A new immutable manifest uses absolute references, and preflight now runs in the detached caller's working directory. Complete preflight and first-operation admission passed. Continue with the new input; no load or shore arrival has occurred.
+
 2026-11-16同源冷安装：`75001eb9`通过1次官方事务安装，5个Plugin/224个MCP文件、版本戳与2476项完整备份实盘核验通过。实装SDK 45种调用形状、50次离线请求及正常EOF通过；首操作包的真实SDK形状及完整生产方案校验通过。无游戏调用或加载，完整离线预检后才恢复保存现场，实际水面上岸尚未证明。
 
 Coherent cold install, 2026-11-16: one official transaction installed `75001eb9`; five Plugin/224 MCP files, revision stamps and2476 complete backup entries passed physical checks. The installed SDK passed45 call shapes,50 offline requests and normal EOF; the first-operation packet passed actual-SDK shape and full production-plan admission. No game calls or loads occurred. Complete offline preflight before restoring the saved scene; actual shore arrival remains unproved.
