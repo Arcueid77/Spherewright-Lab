@@ -1,5 +1,9 @@
 # Ascension current snapshot / Ascension活动快照
 
+2026-11-16最新停机：按所有者要求，Caph II现场经普通保存和完整文件核验后返回主菜单并正常关闭。Primary及LastExit均为131998959，2502项保护文件完整备份通过；游戏和唯一writer已停止，累计10909697 tick及123067请求，54000返航和3000清理储备保留。此次已实际抵达Caph并走近供料仓；被障碍物挡住的原移动明确失败，另一路径正常离开，未重放。本批当地帆/火箭供料、发射、交付以及后续冷恢复验证仍待完成。
+
+Latest stopped state, 2026-11-16: at the owner's request, the Caph II scene was normally saved, the complete file verified, and the game returned to menu and closed normally. Primary and LastExit both reached131998959; a complete backup covers2502 protected files. The game and sole writer are stopped, with10909697 cumulative ticks and123067 requests, retaining54000 return and3000 cleanup reserves. The player reached Caph and approached the feed storage; an obstructed move was a known failure and a distinct path escaped without replay. This batch's local sail/rocket supply, launches, delivery and later cold-continuation verification remain open.
+
 2026-11-16最新实机：`22970069`从较新LastExit正常恢复，83.266秒内完成燃料舱补给；首批96纳米管、24合金/硅/处理器、8量子、18光子合并器、1仓、39带、4普通分拣器和1制造台保全，正常保存131941062。最初900000 tick新旅程请求因当前108000上限在接受前被拒；新鲜108000/54000返航、21600秒路线及准备通过。游戏和唯一writer运行，继续Caph出航、当地供料及真实发射；原拒绝不重放。
 
 Latest live state, 2026-11-16: `22970069` normally recovered the newer LastExit and completed the fuel-chamber top-up in83.266 seconds. The first batch retains96 nanotubes,24 each alloy/silicon/processors, eight quantum chips,18 photon combiners, one storage,39 belts, four ordinary sorters and one assembler; normal Save reached131941062. The initial900000-tick new-journey request was refused before acceptance by the current108000 cap; fresh108000/54000-return/21600-second route and preparation passed. The game and sole writer run. Continue the Caph outbound, local feed and actual launch without replaying the refusal.
