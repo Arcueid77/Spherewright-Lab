@@ -162,6 +162,12 @@ def consumer_network(entity):
 
 def observed_item_count(entity,item_id):
     """Physical stock only; station orders and demand metadata are not cargo."""
+    if entity.get('componentKind')=='power-generator' and entity.get('itemId') in (2204,2211):
+        fuel=entity.get('fuelPowerState') or {};fuel_item=fuel.get('bufferedFuelItemId');count=fuel.get('bufferedFuelCount')
+        if not (fuel.get('state')=='observed' and type(fuel_item)is int and fuel_item>=0
+                and type(count)is int and count>=0 and (fuel_item>0 or count==0)):
+            raise ValueError('generator_fuel_stock_unobserved')
+        return count if fuel_item==item_id else 0
     if entity.get('componentKind')=='station':
         station=entity.get('logisticsStation') or {}
         if station.get('entityId')!=entity.get('objectId'):

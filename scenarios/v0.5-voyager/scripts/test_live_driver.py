@@ -4,12 +4,24 @@ import copy
 import sys,unittest,tempfile,json,subprocess
 from types import SimpleNamespace
 sys.path.insert(0,str(Path(__file__).resolve().parent/'live'))
-from contracts import ordinary_owned_resume_echo,powered_consumers_share_network,paused_failed_cut,validate_steps,resume_admission_echo,validate_native_calls,strict_native_player_idle,fully_observed_dry_surface,observed_short_crossing_dry_landing,native_warper_auto_supply_enabled
+from contracts import ordinary_owned_resume_echo,powered_consumers_share_network,paused_failed_cut,validate_steps,resume_admission_echo,validate_native_calls,strict_native_player_idle,fully_observed_dry_surface,observed_short_crossing_dry_landing,native_warper_auto_supply_enabled,observed_item_count
 from driver import Live,ToolRefused,AcceptedActionFailure,NativePreacceptanceRefusal
 from factory import Factory,resolve_refs
 from runtime import freeze,Runtime
 
 class LiveDriverTests(unittest.TestCase):
+ def test_generator_stock_uses_buffered_items_and_never_loaded_heat_or_power(self):
+  generator=dict(componentKind='power-generator',itemId=2211,
+   buffers=[dict(itemId=1802,count=6750,countUnit='joules_per_tick',unitsPerItem=0)],
+   fuelPowerState=dict(state='observed',bufferedFuelItemId=1802,bufferedFuelCount=5,
+    loadedFuelEnergyJoules=500000000,generatedEnergyPerTick=6750))
+  self.assertEqual(5,observed_item_count(generator,1802))
+  self.assertEqual(0,observed_item_count(generator,1801))
+  generator['fuelPowerState']['bufferedFuelCount']=0
+  self.assertEqual(0,observed_item_count(generator,1802))
+  generator['fuelPowerState']['state']='unavailable'
+  with self.assertRaisesRegex(ValueError,'generator_fuel_stock_unobserved'):observed_item_count(generator,1802)
+
  def test_default_quarantined_last_exit_rejects_a_primary_source_before_backup_reads(self):
   from unittest.mock import patch
   runtime=Runtime.__new__(Runtime)
