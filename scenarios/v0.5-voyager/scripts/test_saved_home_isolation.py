@@ -63,7 +63,7 @@ class SavedHomeIsolationTests(unittest.TestCase):
         self.assertTrue(self.surface());self.assertEqual('outcome_unknown',self.receipt['state'])
         for obj,key,value in [(self.receipt,'state','completed'),(self.progress,'oldUnknownReconciled',True),
             (self.flight['voyagerFlightReadback'],'actualPlanetId',105),(self.home_save,'completedAtGameTick',1301),
-            (self.backup['latest']['lastExit'],'gameTick',1299)]:
+            (self.backup['latest']['primary'],'gameTick',1299)]:
             with self.subTest(key=key):
                 old=obj[key];obj[key]=value;self.assertFalse(self.surface());obj[key]=old
 
@@ -75,6 +75,13 @@ class SavedHomeIsolationTests(unittest.TestCase):
             (self.backup['latest']['primary'],'gameTick',1294)]:
             with self.subTest(key=key):
                 old=obj[key];obj[key]=value;self.assertFalse(self.menu_check());obj[key]=old
+
+    def test_newer_last_exit_covers_the_same_saved_home_without_claiming_old_success(self):
+        self.config.update(sourceRole='lastExit',recoveryMode='verified_newer_lastexit',sourceTick=1400)
+        self.backup['latest']['lastExit']['gameTick']=1400
+        self.assertTrue(self.surface());self.assertTrue(self.menu_check())
+        self.backup['latest']['lastExit']['gameTick']=1399
+        self.assertFalse(self.surface());self.assertFalse(self.menu_check())
 
     def test_home_preflight_reports_isolation_without_using_surface_resume_schema(self):
         with tempfile.TemporaryDirectory() as directory:

@@ -336,13 +336,22 @@ def completed_saved_surface_move(config, result, session, player):
         and math.dist(source,current)>1)
 
 
+def saved_home_source_covers(config, backup, floor):
+    """The selected complete home save must cover the old proven boundary."""
+    latest=backup.get('latest') or {};primary=(latest.get('primary') or {}).get('gameTick')
+    last_exit=(latest.get('lastExit') or {}).get('gameTick');tick=config.get('sourceTick');role=config.get('sourceRole')
+    return (owned_saved_recovery_context(config) and role in ('primary','lastExit')
+        and all(type(x)is int for x in (primary,last_exit,tick,floor)) and 0<=floor<=primary<=tick
+        and floor<=last_exit<=tick and max(primary,last_exit)==tick
+        and (primary if role=='primary' else last_exit)==tick)
+
+
 def isolated_surface_unknown_after_saved_home(config, old_config, original, receipt, session, preservation,
                                              old_source, progress, loaded, flight, home_save, backup):
     """Carry the old unknown unchanged through a distinct proved return and Save."""
     native=flight.get('voyagerFlightReadback') or {}
-    latest=backup.get('latest') or {}
     tick=config.get('sourceTick'); saved=home_save.get('completedAtGameTick')
-    return (owned_saved_recovery_context(config) and config.get('sourceRole')=='primary'
+    return (saved_home_source_covers(config,backup,saved)
         and original.get('actionId') in config.get('originalUnknownActionsNeverReplayed',())
         and quarantined_local_move_saved_source(old_config,original,receipt,session,preservation,old_source)
         and progress.get('verified') is True and progress.get('oldUnknownReconciled') is False and progress.get('noReplay') is True
@@ -356,16 +365,15 @@ def isolated_surface_unknown_after_saved_home(config, old_config, original, rece
         and home_save.get('state')=='completed' and home_save.get('succeeded') is True
         and home_save.get('sessionId')==loaded.get('sessionId') and home_save.get('planetId')==config.get('planetId')
         and all(type(x)is int for x in (flight.get('completedAtGameTick'),saved,tick))
-        and old_config['sourceTick']<=flight['completedAtGameTick']<=saved<=tick
-        and (latest.get('primary') or {}).get('gameTick')==(latest.get('lastExit') or {}).get('gameTick')==tick)
+        and old_config['sourceTick']<=flight['completedAtGameTick']<=saved<=tick)
 
 
 def isolated_saved_menu_unknown(config, receipt, observed_action, observation, close_intent, close_result, backup):
     """A complete Save plus observed unloaded menu isolates, not resolves, the old return."""
-    native=receipt.get('mainMenuReturnReadback') or {};latest=backup.get('latest') or {}
+    native=receipt.get('mainMenuReturnReadback') or {}
     observed=(observed_action.get('response') or {}).get('result') or {}
     saved=native.get('savedGameTick');tick=config.get('sourceTick');pid=observation.get('processId')
-    return (owned_saved_recovery_context(config) and config.get('sourceRole')=='primary'
+    return (saved_home_source_covers(config,backup,saved)
         and receipt.get('actionId') in config.get('originalUnknownActionsNeverReplayed',())
         and receipt.get('actionKind')=='return-to-main-menu' and receipt.get('terminal') is True
         and receipt.get('state')=='outcome_unknown' and receipt.get('succeeded') is False
@@ -377,8 +385,7 @@ def isolated_saved_menu_unknown(config, receipt, observed_action, observation, c
         and observed.get('state')=='outcome_unknown' and observed.get('reconciledFromOutcomeUnknown') is False
         and observation.get('gameLoaded') is False and observation.get('originalActionReplayed') is False
         and type(pid)is int and pid>0 and close_intent.get('processId')==pid and close_intent.get('forceKill') is False
-        and close_intent.get('maximumRequests')==1 and close_result.get('passed') is True and close_result.get('gameStopped') is True
-        and (latest.get('primary') or {}).get('gameTick')==(latest.get('lastExit') or {}).get('gameTick')==tick)
+        and close_intent.get('maximumRequests')==1 and close_result.get('passed') is True and close_result.get('gameStopped') is True)
 
 
 def fully_observed_dry_surface(prepared):

@@ -474,10 +474,24 @@ class Factory(Live):
   self.runtime.put(label+'-complete.private.json',dict(refs=self.refs,materialUsed=self.used,materialReservations=self.material_holds,session=self.call('spherewright_get_session_state',{})))
 
  def await_next_plan(self):
-  sequence=1;next_budget_check=time.monotonic()
+  sequence=1;next_budget_check=time.monotonic();idle_read_failures=0
   while self.c is not None and time.monotonic()<self.c.deadline-60:
    if time.monotonic()>=next_budget_check:
     try:self.state()
+    except ToolRefused as error:
+     # A timed-out read is not an action failure. Keep the same sole writer,
+     # do not consume queued work, and retry only this explicitly retryable
+     # session observation inside the original caller deadline.
+     if (getattr(self,'active',None) is not None or error.tool!='spherewright_get_session_state'
+       or error.error.get('retryable') is not True
+       or error.error.get('code') not in ('REQUEST_TIMEOUT','BRIDGE_NOT_READY','BRIDGE_UNAVAILABLE')):raise
+     process=self.process()
+     need(process is not None and process.get('Id')==self.pid,'original_game_process_changed_during_idle_read')
+     idle_read_failures+=1
+     self.runtime.put(f'idle-read-retry-{idle_read_failures:04d}.private.json',dict(
+      tool=error.tool,error=error.error,originalActionAccepted=False,queuedWorkNotDispatched=True,noReplay=True))
+     time.sleep(min(5,max(0,self.c.deadline-60-time.monotonic())))
+     continue
     except RuntimeError as error:
      if str(error)!='finite_stage_work_reserve_reached':raise
      self.runtime.put('idle-work-budget-ended.private.json',dict(reason=str(error),noActionReplayed=True))

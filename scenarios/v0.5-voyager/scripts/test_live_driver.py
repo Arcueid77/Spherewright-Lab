@@ -383,6 +383,28 @@ class LiveDriverTests(unittest.TestCase):
   with self.assertRaisesRegex(RuntimeError,'owned_world_health_changed'):adapter.await_next_plan()
   self.assertEqual(events,['idle-work-budget-ended.private.json','normal-save-close'])
 
+ def test_idle_read_timeout_keeps_same_writer_and_waits_for_a_fresh_state(self):
+  import time,json
+  from unittest.mock import patch
+  from evidence import sha
+  from driver import ToolRefused
+  with tempfile.TemporaryDirectory() as folder:
+   root=Path(folder);plan=root/'plan.json';plan.write_text(json.dumps(dict(steps=[])),encoding='utf-8')
+   (root/'next-plan-001.private.json').write_text(json.dumps(dict(path=str(plan),sha256=sha(plan))),encoding='utf-8')
+   a=Factory.__new__(Factory);a.c=type('Client',(),dict(deadline=time.monotonic()+120))();a.active=None;a.pid=123;a.process=lambda:dict(Id=123);events=[]
+   a.runtime=type('Runtime',(),dict(output=root,put=lambda self,name,value:events.append(name)))()
+   def state():
+    events.append('read')
+    if events.count('read')==1:raise ToolRefused('spherewright_get_session_state',dict(code='REQUEST_TIMEOUT',retryable=True))
+   def execute(*_):events.append('execute');a.c=None
+   a.state=state;a.execute_plan=execute
+   with patch('factory.time.sleep',return_value=None):a.await_next_plan()
+   self.assertEqual(['read','idle-read-retry-0001.private.json','read','execute'],events)
+   a.c=type('Client',(),dict(deadline=time.monotonic()+120))();a.process=lambda:None;events.clear()
+   with patch('factory.time.sleep',return_value=None):
+    with self.assertRaisesRegex(RuntimeError,'original_game_process_changed_during_idle_read'):a.await_next_plan()
+   self.assertEqual(['read'],events)
+
  def test_closed_home_recovery_retains_frozen_unknowns_in_a_separate_saved_context(self):
   from contracts import owned_saved_recovery_context
   config=dict(recoveryProfile='ordinary-owned-home',recoveryMode='default',sourceRole='primary',planetId=104,
