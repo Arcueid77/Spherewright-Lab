@@ -23,15 +23,29 @@ def blocked_suffix(steps,wait_role,prefix_role):
   and type(wait['itemId'])is int and wait['itemId']>0 and type(wait['minimumCount'])is int
   and wait['minimumCount']>0,'explicit_positive_native_buffer_wait_required')
  writes=[s for s in steps[:index] if s['kind'] not in ('read','dump','wait-buffer','wait-player-still','prepare-only','prove-network')]
- need(writes and writes[-1]['role']==prefix_role and writes[-1]['kind']=='operation','exact_last_settled_prefix_required')
+ need(writes and writes[-1]['role']==prefix_role and writes[-1]['kind'] in ('operation','build-sorter'),
+  'exact_last_settled_prefix_required')
  return wait,[s['role'] for s in steps[index+1:]]
+
+
+def settled_sorter_prefix(step,receipt,account):
+ control=receipt.get('constructionControl') or {};budget=account.get('actualConsumedBudget') or {}
+ item=step.get('itemId',2011);ids=receipt.get('targetObjectIds') or []
+ return (step.get('kind')=='build-sorter' and receipt.get('actionKind')=='build'
+  and receipt.get('terminal') is True and receipt.get('succeeded') is True and receipt.get('state')=='completed'
+  and control.get('executionKind')=='structured_native' and control.get('physicalIdleVerified') is True
+  and control.get('exactBindingVerified') is True and len(ids)==1 and type(ids[0])is int and ids[0]>0
+  and account.get('originalActionId')==receipt.get('actionId') and budget.get('itemId')==item and budget.get('count')==1
+  and sum(x.get('delta',0) for x in receipt.get('itemDeltas',[]) if x.get('itemId')==item)==-1
+  and not account.get('materialReservations'))
 
 
 def main():
  config,digest,prior,sequence,wait_role,prefix_role,output=sys.argv[1:];prior=Path(prior).resolve();sequence=int(sequence)
  r=Runtime(config,digest,output);r.cohort();a=Live(r);pause=None;retired=False
  envelope=read(prior/f'next-plan-{sequence:03d}.private.json');need(sha(envelope['path'])==envelope['sha256'],'original_plan_changed')
- wait,suffix=blocked_suffix(read(envelope['path'])['steps'],wait_role,prefix_role)
+ steps=read(envelope['path'])['steps'];wait,suffix=blocked_suffix(steps,wait_role,prefix_role)
+ prefix=next(s for s in steps if s['role']==prefix_role)
  need(not(prior/f'continuation-{sequence:03d}-complete.private.json').exists(),'original_plan_already_complete')
  accepted=prior/(prefix_role+'-accepted.private.json');end=time.monotonic()+7200
  while True:
@@ -44,6 +58,10 @@ def main():
   if(r.output/'cancel-request.private.flag').exists():return
   time.sleep(.5)
  need(read(terminal)['terminal'] and read(terminal)['succeeded'],'prefix_not_successfully_settled')
+ if prefix['kind']=='build-sorter':
+  account=prior/(prefix_role+'-native-success-material-account.private.json')
+  need(account.exists() and settled_sorter_prefix(prefix,read(terminal),read(account)),
+   'sorter_prefix_receipt_or_material_account_unproved')
  # Enter the existing read-only wait's completed-I/O gap, not a forge callback.
  ready=time.monotonic()+120
  while True:
@@ -73,7 +91,7 @@ def main():
    if action:
     result=read(prior/('terminal-'+action+'.private.json'))
     need(result['terminal'] and result['state']!='outcome_unknown','unsettled_original_prevents_handoff')
-  a.c=Client(Path(r.config['pluginDestination'])/'Spherewright.Mcp.exe',r.output/'observer',maximum=20,seconds=60)
+  a.c=Client(r.mcp_executable(),r.output/'observer',maximum=20,seconds=60)
   a.c.initialize();state=a.call('spherewright_get_session_state',{});origin=read(Path(r.config['liveSessionOrigin'])/'loaded-session.private.json')
   need(state['sessionId']==origin['sessionId'] and state['gameLoaded'] and state['ownedBySpherewright'] and state['writesAllowed']
    and state['localPlanetId']==r.config['attachmentPlanetId'],'same_healthy_world_unproved')
@@ -95,7 +113,9 @@ def main():
    if result.returncode==0:break
    time.sleep(.5)
   else:raise RuntimeError('old_mcp_eof_exit_unproved_no_replacement')
-  r.put('observer-client-close.private.json',a.c.close());a.c=None
+  observer_close=a.c.close();r.put('observer-client-close.private.json',observer_close);a.c=None
+  need(observer_close.get('normalEof') is True and type(observer_close.get('requestCount')) is int
+   and observer_close['requestCount']>=0,'observer_rpc_close_unproved')
   events=[json.loads(line) for line in(prior/'client/client-events.private.jsonl').read_text().splitlines()]
   request_count=max(e['requestCount'] for e in events if e['kind']=='request_dispatch')
   total=actual_prior_rpc_count(prior,dict(priorRpcCount=c.get('priorRpcCount',0),requestCount=request_count))
@@ -109,9 +129,10 @@ def main():
     ids=[row['requestCount'] for row in rows if row['kind']=='request_dispatch']
     need(sorted(ids)==list(range(1,len(ids)+1)),'supplemental_rpc_dispatch_ledger_incomplete')
     supplemental.append(dict(path=str(path),sha256=sha(path),requestCount=len(ids)))
-  total+=sum(row['requestCount'] for row in supplemental)
+  total+=observer_close['requestCount']+sum(row['requestCount'] for row in supplemental)
   r.put('supplemental-rpc-accounting.private.json',dict(originalCounterRetained=True,additionalSources=supplemental,
-   additionalRequestCount=sum(row['requestCount'] for row in supplemental),alreadyCountedSources=list(map(str,covered))))
+   observerRequestCount=observer_close['requestCount'],additionalRequestCount=sum(row['requestCount'] for row in supplemental),
+   alreadyCountedSources=list(map(str,covered))))
   accounts=list(prior.glob('*-native-success-material-account.private.json'))
   material=read(max(accounts,key=lambda p:p.stat().st_mtime_ns)) if accounts else {}
   from evidence import put

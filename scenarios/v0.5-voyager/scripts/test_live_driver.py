@@ -795,6 +795,21 @@ class LiveDriverTests(unittest.TestCase):
   with self.assertRaisesRegex(RuntimeError,'explicit_positive_native_buffer'):blocked_suffix(invalid,'product','chips')
   invalid=copy.deepcopy(steps);invalid[2]['entity']='unresolved-reference'
   with self.assertRaisesRegex(RuntimeError,'explicit_positive_native_buffer'):blocked_suffix(invalid,'product','chips')
+ def test_blocked_handoff_accepts_only_a_settled_accounted_sorter_prefix(self):
+  from handoff_blocked_buffer import blocked_suffix,settled_sorter_prefix
+  step=dict(kind='build-sorter',role='sorter',source=4,destination=5,filterItemId=1123)
+  wait=dict(kind='wait-buffer',role='product',entity=5,itemId=1123,minimumCount=2)
+  self.assertEqual((wait,[]),blocked_suffix([step,wait],'product','sorter'))
+  receipt=dict(actionId='original',actionKind='build',terminal=True,succeeded=True,state='completed',targetObjectIds=[9],
+   constructionControl=dict(executionKind='structured_native',physicalIdleVerified=True,exactBindingVerified=True),
+   itemDeltas=[dict(itemId=2011,delta=-1)])
+  account=dict(originalActionId='original',actualConsumedBudget=dict(itemId=2011,count=1),materialReservations={})
+  self.assertTrue(settled_sorter_prefix(step,receipt,account))
+  for container,key,value in [(receipt,'state','outcome_unknown'),(receipt,'targetObjectIds',[]),
+   (receipt['constructionControl'],'physicalIdleVerified',False),(account,'originalActionId','other'),
+   (account,'materialReservations',{'pending':1}),(account['actualConsumedBudget'],'count',2)]:
+   with self.subTest(key=key):
+    old=container[key];container[key]=value;self.assertFalse(settled_sorter_prefix(step,receipt,account));container[key]=old
  def test_old_module_stamp_refuses_offline_before_game_or_file_loading(self):
   with tempfile.TemporaryDirectory() as folder:
    p=Path(folder)/'stamps.json';p.write_text(json.dumps(dict(passed=True,sourceSha='old')))
