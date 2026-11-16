@@ -1,5 +1,9 @@
 # Ascension current snapshot / Ascension活动快照
 
+2026-11-16停机续接准备：调用端现可将历史隔离、独立成功出航和完整远端保存串接；实际2502项备份及所装MCP接口通过三次停机预检，首个待执行操作为正常取18石墨烯，未读档或转运。按所有者合理时长授权，拟在原旅程上限外增800000 tick，原实耗及返航/清理储备保持，详见[供料方案](caph-support-plan.md)。当前累计10909697/12000000 tick、123083请求，游戏关闭；真实续接、生产和发射仍未完成。
+
+Stopped continuation preparation, 2026-11-16: the caller now chains historic isolation, the distinct successful outbound and the complete remote save. Three stopped preflights checked the actual2502-file backup and installed MCP interface; the first planned real action is a normal18-graphene withdrawal, with no Load or transfer yet. Under the owner's finite-runtime grant, the proposal adds800000 ticks above the original journey cap while preserving actual spending and return/cleanup reserves; see the [support plan](caph-support-plan.md). Cumulative spending is10909697/12000000 ticks and123083 requests. The game is stopped; actual continuation, production and launch remain open.
+
 2026-11-16最新停机：按所有者要求，Caph II现场经普通保存和完整文件核验后返回主菜单并正常关闭。Primary及LastExit均为131998959，2502项保护文件完整备份通过；游戏和唯一writer已停止，累计10909697 tick及123067请求，54000返航和3000清理储备保留。此次已实际抵达Caph并走近供料仓；被障碍物挡住的原移动明确失败，另一路径正常离开，未重放。本批当地帆/火箭供料、发射、交付以及后续冷恢复验证仍待完成。
 
 Latest stopped state, 2026-11-16: at the owner's request, the Caph II scene was normally saved, the complete file verified, and the game returned to menu and closed normally. Primary and LastExit both reached131998959; a complete backup covers2502 protected files. The game and sole writer are stopped, with10909697 cumulative ticks and123067 requests, retaining54000 return and3000 cleanup reserves. The player reached Caph and approached the feed storage; an obstructed move was a known failure and a distinct path escaped without replay. This batch's local sail/rocket supply, launches, delivery and later cold-continuation verification remain open.

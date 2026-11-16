@@ -4,7 +4,7 @@ import copy,math,sys,tempfile,unittest
 from types import SimpleNamespace
 from unittest.mock import patch
 sys.path.insert(0,str(Path(__file__).resolve().parent/'live'))
-from contracts import isolated_surface_unknown_after_saved_home,isolated_saved_menu_unknown
+from contracts import isolated_surface_unknown_after_saved_home,isolated_saved_menu_unknown,remote_saved_after_isolated_home,owned_saved_recovery_context
 from driver import Live
 
 
@@ -82,6 +82,48 @@ class SavedHomeIsolationTests(unittest.TestCase):
         self.assertTrue(self.surface());self.assertTrue(self.menu_check())
         self.backup['latest']['lastExit']['gameTick']=1399
         self.assertFalse(self.surface());self.assertFalse(self.menu_check())
+
+    def test_isolated_history_survives_a_distinct_successful_outbound_and_complete_remote_save(self):
+        self.config.update(originalActionsReconciled=False,expectedNativeVersion='native',nativeAssemblySha256='assembly')
+        remote=dict(recoveryProfile='ordinary-owned-remote',recoveryMode='authorize_remote_primary_recovery',
+            sourceRole='primary',sourceTick=1600,planetId=201,originalActionsReconciled=False,
+            originalUnknownActionsNeverReplayed=['old-move','old-menu'],expectedNativeVersion='native',nativeAssemblySha256='assembly')
+        loaded=dict(gameLoaded=True,ownedBySpherewright=True,writesAllowed=True,sessionId='later-session',localPlanetId=104,gameTick=1310)
+        outbound=dict(actionId='new-flight',actionKind='interplanetary-flight',terminal=True,state='completed',succeeded=True,
+            sessionId='later-session',planetId=104,startedAtGameTick=1320,completedAtGameTick=1400,
+            voyagerFlightReadback=dict(isReturnLeg=False,bindingVerified=True,nativeExitObserved=True,
+                actualPlanetId=201,selectedDestinationPlanetId=201))
+        menu=dict(actionId='new-menu',actionKind='return-to-main-menu',terminal=True,state='completed',succeeded=True,
+            sessionId='later-session',planetId=201,completedAtGameTick=1600,
+            mainMenuReturnReadback=dict(normalSaveConfirmed=True,completeSaveVerified=True,nativeEndRequested=True,
+                mainMenuVerified=True,savedGameTick=1600))
+        backup=dict(complete=True,verified=True,latest=dict(primary=dict(gameTick=1600),lastExit=dict(gameTick=1600)))
+        check=lambda:remote_saved_after_isolated_home(remote,self.config,loaded,outbound,menu,backup)
+        self.assertTrue(check())
+        for obj,key,value in [(remote,'originalActionsReconciled',True),
+            (remote,'originalUnknownActionsNeverReplayed',['old-move']),
+            (remote,'expectedNativeVersion','different-native'),(loaded,'localPlanetId',201),
+            (outbound,'actionId','old-move'),(outbound,'sessionId','different-session'),
+            (outbound['voyagerFlightReadback'],'isReturnLeg',True),
+            (outbound['voyagerFlightReadback'],'actualPlanetId',202),
+            (menu,'actionId','old-menu'),(menu,'sessionId','different-session'),
+            (menu['mainMenuReturnReadback'],'completeSaveVerified',False),
+            (menu['mainMenuReturnReadback'],'savedGameTick',1599),
+            (backup['latest']['primary'],'gameTick',1599),(backup,'verified',False)]:
+            with self.subTest(key=key,value=value):
+                old=obj[key];obj[key]=value;self.assertFalse(check());obj[key]=old
+        remote['originalUnknownActionsNeverReplayed']=tuple(remote['originalUnknownActionsNeverReplayed'])
+        self.assertTrue(check())  # Runtime freezes config lists before preflight.
+        backup['latest']['lastExit']['gameTick']=1590
+        self.assertTrue(check())  # A verified current primary covers the remote save.
+        backup['latest']['lastExit']['gameTick']=1601
+        self.assertFalse(check())  # Never prefer an older primary over a newer exit save.
+        backup['latest']['lastExit']['gameTick']=1600
+        self.assertFalse(owned_saved_recovery_context(remote))
+        remote['remoteSavedUnknownIsolation']=dict(homeConfigPath='bound-evidence')
+        self.assertTrue(owned_saved_recovery_context(remote))
+        remote['originalActionsReconciled']=True
+        self.assertFalse(owned_saved_recovery_context(remote))
 
     def test_home_preflight_reports_isolation_without_using_surface_resume_schema(self):
         with tempfile.TemporaryDirectory() as directory:

@@ -8,7 +8,7 @@ from evidence import need,read,sha,json_value
 from mcp_client import Client
 from saved_space import exact_last_exit_echo,paused_space_source,exact_ui_supply,saved_identity_token
 from contracts import quarantined_navigation_original_accounted,fully_observed_dry_surface,observed_short_crossing_dry_landing
-from contracts import ordinary_owned_resume_echo,resume_admission_echo,validate_steps,validate_native_calls,strict_native_player_idle,native_warper_auto_supply_enabled,quarantined_paid_original_accounted,quarantined_harvest_no_effect_accounted,isolated_paid_belt_build_accounted,quarantined_local_move_saved_source,completed_saved_surface_move,isolated_surface_unknown_after_saved_home,isolated_saved_menu_unknown
+from contracts import ordinary_owned_resume_echo,resume_admission_echo,validate_steps,validate_native_calls,strict_native_player_idle,native_warper_auto_supply_enabled,quarantined_paid_original_accounted,quarantined_harvest_no_effect_accounted,isolated_paid_belt_build_accounted,quarantined_local_move_saved_source,completed_saved_surface_move,isolated_surface_unknown_after_saved_home,isolated_saved_menu_unknown,remote_saved_after_isolated_home
 
 PLAYER_SETTING_MODES=('enable-mecha-construction-drones','disable-mecha-research-auto-supply',
  'enable-mecha-research-auto-supply','enable-mecha-warper-auto-supply')
@@ -46,6 +46,21 @@ def successful_surface_prepare_arguments(config, token, now):
  if renamed:args.update(restoreRenamedLastExitIdentity=True,expectedRenamedLastExitContentHash=content_hash)
  return args
 
+
+def ordinary_remote_prepare_arguments(config,token,now):
+ seconds=config.get('recoveryWindowSeconds');extra=config.get('additionalVoyagerGameTicks')
+ need(config.get('recoveryProfile')=='ordinary-owned-remote'
+  and config.get('recoveryMode')=='authorize_remote_primary_recovery' and config.get('sourceRole')=='primary'
+  and config.get('surfaceRecoveryTarget') is None and type(config.get('sourceTick')) is int and config['sourceTick']>=0
+  and type(seconds) in (int,float) and math.isfinite(seconds) and 0<seconds<=86400
+  and type(extra) is int and 0<=extra<=5184000 and isinstance(token,str) and bool(token),
+  'ordinary_remote_source_shape_invalid')
+ return dict(resumeToken=token,recoveryMode=config['recoveryMode'],minimumRecoveryGameTick=config['sourceTick'],
+  expectedRecoveryGameTick=config['sourceTick'],recoveryDeadlineUtc=(now+dt.timedelta(seconds=seconds)).isoformat(),
+  recoveryScope='continue_original_finite_task',maximumChargeGameTicks=18000,maximumChargeWallSeconds=300,
+  additionalVoyagerGameTicks=extra)
+
+
 class Live:
  def __init__(self,runtime):
   self.runtime=runtime;self.c=None;self.seq=0;self.ctx=None;self.pid=None;self.loaded=False;self.cleanup_entered=False;self.active=None
@@ -57,6 +72,54 @@ class Live:
   r,bad=self.c.call(name,args);self.runtime.put(f'response-{self.seq:05d}.private.json',dict(response=r,toolError=bad))
   if bad or not r.get('success'): raise ToolRefused(name,r.get('error'))
   return r.get('result',r.get('status'))
+
+ def assert_home_unknowns_isolated(self,c,backup):
+  isolation=c.get('homeSavedUnknownIsolation')
+  need(isolation and c.get('recoveryProfile')=='ordinary-owned-home'
+    and c.get('originalActionsReconciled') is False,'home_isolation_requires_truthful_home_profile')
+  def frozen(key):
+   need(sha(isolation[key+'Path'])==isolation[key+'Sha256'],'frozen_home_isolation_evidence_changed')
+   return read(isolation[key+'Path'])
+  old=frozen('surfaceConfig');originals=old.get('quarantinedLocalMoveOriginals') or []
+  need(len(originals)==1 and sha(old['backupManifest'])==old['backupManifestSha256'],
+   'original_surface_source_or_backup_changed')
+  original=originals[0]
+  for key in ('receipt','session','preservation'):
+   need(sha(original[key+'Path'])==original[key+'Sha256'],'frozen_local_move_evidence_changed')
+  old_backup=read(old['backupManifest']);old_source=old_backup['latest'][old['sourceRole']]
+  rows=[row for row in old_backup['rows'] if Path(row['originalPath']).resolve()==Path(old['savePaths'][old['sourceRole']]).resolve()]
+  need(old_backup.get('complete') is True and old_backup.get('verified') is True and len(rows)==1
+   and rows[0]['sha256']==old_source['sha256'] and sha(rows[0]['backupPath'])==old_source['sha256'],
+   'original_surface_backup_copy_changed')
+  need(isolated_surface_unknown_after_saved_home(c,old,original,read(original['receiptPath']),read(original['sessionPath']),
+   read(original['preservationPath']),old_source,frozen('surfaceProgress'),frozen('loadedSession'),
+   frozen('homeFlight'),frozen('homeSave'),backup),'historic_surface_unknown_not_isolated')
+  need(isolated_saved_menu_unknown(c,frozen('menuReceipt'),frozen('menuObservedAction'),frozen('menuObservation'),
+   frozen('closeIntent'),frozen('closeResult'),backup),'saved_menu_unknown_not_isolated')
+
+ def assert_remote_unknowns_isolated(self,c,backup):
+  isolation=c.get('remoteSavedUnknownIsolation')
+  need(isolation and not c.get('homeSavedUnknownIsolation'),'remote_isolation_evidence_missing')
+  def frozen(key):
+   need(sha(isolation[key+'Path'])==isolation[key+'Sha256'],'frozen_remote_isolation_evidence_changed')
+   return read(isolation[key+'Path'])
+  home=frozen('homeConfig')
+  need(sha(home['backupManifest'])==home['backupManifestSha256'],'home_backup_manifest_changed')
+  previous=read(home['backupManifest'])
+  need(previous.get('complete') is True and previous.get('verified') is True,'home_backup_unproved')
+  for role in ('primary','lastExit'):
+   home_path=Path(home['savePaths'][role]).resolve()
+   need(home_path==Path(c['savePaths'][role]).resolve(),'remote_save_identity_changed')
+   rows=[row for row in previous['rows'] if Path(row['originalPath']).resolve()==home_path]
+   proof=previous['latest'][role]
+   need(len(rows)==1 and rows[0]['sha256']==proof['sha256'] and sha(rows[0]['backupPath'])==proof['sha256'],
+    'historical_home_backup_copy_changed')
+  self.assert_home_unknowns_isolated(home,previous)
+  loaded=frozen('homeLoadedSession')
+  need(loaded.get('saveName')==Path(home['savePaths']['primary']).stem,'loaded_home_identity_changed')
+  need(remote_saved_after_isolated_home(c,home,loaded,frozen('outbound'),
+   frozen('remoteMenuSave'),backup),'remote_saved_outbound_isolation_unproved')
+
  def offline_preflight(self):
   s=self.runtime;c=s.config;s.stopped();s.cohort();s.verify_revision_stamps();m=s.verify_backup()
   for ref in c['qualifiedInputs']:
@@ -93,30 +156,11 @@ class Live:
        'original_local_move_or_covering_saved_source_unproved')
   else:
    need(not local_moves,'local_move_evidence_requires_surface_profile')
-  home_isolation=c.get('homeSavedUnknownIsolation');home_isolated=False
-  if home_isolation:
-   need(c.get('recoveryProfile')=='ordinary-owned-home' and c.get('originalActionsReconciled') is False,
-    'home_isolation_requires_truthful_home_profile')
-   def frozen(key):
-    need(sha(home_isolation[key+'Path'])==home_isolation[key+'Sha256'],'frozen_home_isolation_evidence_changed')
-    return read(home_isolation[key+'Path'])
-   old=frozen('surfaceConfig');originals=old.get('quarantinedLocalMoveOriginals') or []
-   need(len(originals)==1 and sha(old['backupManifest'])==old['backupManifestSha256'],
-    'original_surface_source_or_backup_changed')
-   original=originals[0]
-   for key in ('receipt','session','preservation'):
-    need(sha(original[key+'Path'])==original[key+'Sha256'],'frozen_local_move_evidence_changed')
-   old_backup=read(old['backupManifest']);old_source=old_backup['latest'][old['sourceRole']]
-   rows=[row for row in old_backup['rows'] if Path(row['originalPath']).resolve()==Path(old['savePaths'][old['sourceRole']]).resolve()]
-   need(old_backup.get('complete') is True and old_backup.get('verified') is True and len(rows)==1
-    and rows[0]['sha256']==old_source['sha256'] and sha(rows[0]['backupPath'])==old_source['sha256'],
-    'original_surface_backup_copy_changed')
-   need(isolated_surface_unknown_after_saved_home(c,old,original,read(original['receiptPath']),read(original['sessionPath']),
-    read(original['preservationPath']),old_source,frozen('surfaceProgress'),frozen('loadedSession'),
-    frozen('homeFlight'),frozen('homeSave'),m),'historic_surface_unknown_not_isolated')
-   need(isolated_saved_menu_unknown(c,frozen('menuReceipt'),frozen('menuObservedAction'),frozen('menuObservation'),
-    frozen('closeIntent'),frozen('closeResult'),m),'saved_menu_unknown_not_isolated')
-   home_isolated=True
+  home_isolated=False
+  if c.get('homeSavedUnknownIsolation'):
+   self.assert_home_unknowns_isolated(c,m);home_isolated=True
+  if c.get('remoteSavedUnknownIsolation'):
+   self.assert_remote_unknowns_isolated(c,m);home_isolated=True
   need(c['firstOperationReady'] and (c.get('originalActionsReconciled') is True
     or c.get('recoveryProfile')=='successful-outbound-surface' and bool(local_moves) or home_isolated),'offline_not_ready')
   for original in c.get('isolatedPaidBeltBuilds',[]):
@@ -135,6 +179,19 @@ class Live:
   if c.get('recoveryProfile')=='successful-outbound-surface':
    shape=successful_surface_prepare_arguments(c,'synthetic-offline-identity',dt.datetime.now(dt.timezone.utc))
    validate_native_calls([dict(kind='prepare-only',prepareTool='spherewright_prepare_resume_owned_game',arguments=shape)],self.schemas)
+  if c.get('recoveryProfile')=='ordinary-owned-remote':
+   shape=ordinary_remote_prepare_arguments(c,'synthetic-offline-identity',dt.datetime.now(dt.timezone.utc))
+   validate_native_calls([dict(kind='prepare-only',prepareTool='spherewright_prepare_resume_owned_game',arguments=shape)],self.schemas)
+  work=c.get('firstOperation') or {}
+  if work.get('kind')=='storage-transfer':
+   need(work.get('direction') in ('storage-to-player','player-to-storage')
+    and all(type(work.get(k)) is int and work[k]>0 for k in ('entityId','itemId','count')),
+    'first_storage_transfer_shape_invalid')
+   shape=dict(direction=work['direction'],storageEntityId=work['entityId'],itemId=work['itemId'],count=work['count'],
+    expectedPlayerStateHash='schema-placeholder',expectedStorageStateHash='schema-placeholder')
+   validate_native_calls([dict(kind='prepare-only',prepareTool='spherewright_prepare_transfer',arguments=shape),
+    dict(kind='prepare-only',prepareTool='spherewright_commit_transfer',
+         arguments=dict(planToken='schema-placeholder',idempotencyKey='00000000-0000-4000-8000-000000000001'))],self.schemas)
   self.steam=subprocess.check_output(['powershell.exe','-NoProfile','-NonInteractive','-Command',"(Get-ItemProperty -LiteralPath 'HKCU:/Software/Valve/Steam' -Name SteamExe).SteamExe"],text=True,timeout=10).strip()
   need(Path(self.steam).is_file(),'steam_missing')
   proof={key:True for key in G.READINESS_FLAGS}
@@ -255,6 +312,8 @@ class Live:
   target=c.get('surfaceRecoveryTarget')
   if surface_source:
    args=successful_surface_prepare_arguments(c,saved_identity_token(c,ready['session']),now)
+  elif c.get('recoveryProfile')=='ordinary-owned-remote':
+   args=ordinary_remote_prepare_arguments(c,saved_identity_token(c,ready['session']),now)
   else:
    args=dict(resumeToken=saved_identity_token(c,ready['session']),recoveryMode=c.get('recoveryMode','authorize_remote_primary_recovery'),
     minimumRecoveryGameTick=c['sourceTick'],expectedRecoveryGameTick=c['sourceTick'],

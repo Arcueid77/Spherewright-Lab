@@ -2,6 +2,11 @@
 
 def owned_saved_recovery_context(config):
     if config.get('recoveryMode')=='authorize_remote_primary_recovery' and config.get('sourceRole')=='lastExit':return True
+    if (config.get('recoveryProfile')=='ordinary-owned-remote'
+            and config.get('recoveryMode')=='authorize_remote_primary_recovery' and config.get('sourceRole')=='primary'):
+        # The driver separately validates this evidence, its historical home
+        # source and the later complete remote save before allowing any launch.
+        return bool(config.get('remoteSavedUnknownIsolation')) and config.get('originalActionsReconciled') is False
     home=config.get('closedJourneyHome') or {}
     return (config.get('recoveryProfile')=='ordinary-owned-home'
         and config.get('recoveryMode') in ('default','verified_newer_lastexit','reauthorize_expired_primary')
@@ -205,6 +210,16 @@ def resume_admission_echo(config,plan):
             and plan.get('additionalVoyagerGameTicks')==0 and config['additionalVoyagerGameTicks']==0)
     if plan.get('remotePrimaryRecoveryAuthorizationUsed') is not True or plan.get('discardedUnstoredProgressGameTicks')!=0:
         return False
+    if config.get('recoveryProfile')=='ordinary-owned-remote':
+        return (config.get('recoveryMode')=='authorize_remote_primary_recovery' and config.get('sourceRole')=='primary'
+            and plan.get('recoveryMode')==config['recoveryMode'] and plan.get('exactEmbeddedIdentityVerified') is True
+            and isinstance(config.get('expectedNativeVersion'),str) and bool(config['expectedNativeVersion'])
+            and plan.get('sourceGameVersion')==plan.get('targetGameVersion')==config['expectedNativeVersion']
+            and plan.get('successfulOutboundSurfaceSourceUsed') is False
+            and plan.get('completedSavedLandingAdmissionUsed') is False
+            and plan.get('failedLandingRecoveryAuthorizationUsed') is False
+            and not plan.get('originalFailedFlightActionId') and plan.get('savedLandingAccountingAnchorGameTick') is None
+            and plan.get('nativeOriginalOutcomeProved') is False)
     if config.get('recoveryProfile') == 'successful-outbound-surface':
         renamed = config.get('restoreRenamedLastExitIdentity') is True
         return (config.get('recoveryMode') == 'authorize_remote_primary_recovery'
@@ -386,6 +401,62 @@ def isolated_saved_menu_unknown(config, receipt, observed_action, observation, c
         and observation.get('gameLoaded') is False and observation.get('originalActionReplayed') is False
         and type(pid)is int and pid>0 and close_intent.get('processId')==pid and close_intent.get('forceKill') is False
         and close_intent.get('maximumRequests')==1 and close_result.get('passed') is True and close_result.get('gameStopped') is True)
+
+
+def remote_saved_after_isolated_home(config, home, loaded, outbound, menu_save, backup):
+    """Carry a previously isolated history through a distinct saved outbound.
+
+    The caller independently verifies the historical isolation and both complete
+    backups. This only binds that history to the later owned session, original
+    successful outbound, and exact remote save; it never resolves old actions.
+    """
+    current_unknowns=config.get('originalUnknownActionsNeverReplayed')
+    home_unknowns=home.get('originalUnknownActionsNeverReplayed')
+    if not (isinstance(current_unknowns,(list,tuple)) and isinstance(home_unknowns,(list,tuple))
+            and current_unknowns and all(isinstance(x,str) and x for x in (*current_unknowns,*home_unknowns))
+            and len(set(current_unknowns))==len(current_unknowns)
+            and len(set(home_unknowns))==len(home_unknowns) and set(current_unknowns)==set(home_unknowns)):
+        return False
+    latest=backup.get('latest') or {};primary=(latest.get('primary') or {}).get('gameTick')
+    last_exit=(latest.get('lastExit') or {}).get('gameTick');tick=config.get('sourceTick')
+    launch=outbound.get('voyagerFlightReadback') or {};saved=menu_save.get('mainMenuReturnReadback') or {}
+    home_tick=home.get('sourceTick');loaded_tick=loaded.get('gameTick')
+    start=outbound.get('startedAtGameTick');arrival=outbound.get('completedAtGameTick')
+    save_tick=menu_save.get('completedAtGameTick');session=loaded.get('sessionId')
+    return (config.get('recoveryProfile')=='ordinary-owned-remote'
+        and config.get('recoveryMode')=='authorize_remote_primary_recovery'
+        and config.get('sourceRole')=='primary' and config.get('surfaceRecoveryTarget') is None
+        and config.get('originalActionsReconciled') is False
+        and home.get('recoveryProfile')=='ordinary-owned-home' and home.get('originalActionsReconciled') is False
+        and type(config.get('planetId')) is int and config['planetId']>0
+        and type(home.get('planetId')) is int and home['planetId']>0
+        and config['planetId']!=home['planetId'] and bool(session)
+        and isinstance(config.get('expectedNativeVersion'),str) and bool(config['expectedNativeVersion'])
+        and config.get('expectedNativeVersion')==home.get('expectedNativeVersion')
+        and isinstance(config.get('nativeAssemblySha256'),str) and bool(config['nativeAssemblySha256'])
+        and config.get('nativeAssemblySha256')==home.get('nativeAssemblySha256')
+        and all(type(x)is int for x in (home_tick,loaded_tick,start,arrival,save_tick,tick,primary,last_exit))
+        and 0<=home_tick<=loaded_tick<=start<=arrival<=save_tick==tick==primary
+        and 0<=last_exit<=tick
+        and backup.get('complete') is True and backup.get('verified') is True
+        and loaded.get('gameLoaded') is True and loaded.get('ownedBySpherewright') is True
+        and loaded.get('writesAllowed') is True and loaded.get('localPlanetId')==home.get('planetId')
+        and isinstance(outbound.get('actionId'),str) and bool(outbound['actionId'])
+        and outbound['actionId'] not in current_unknowns
+        and outbound.get('actionKind')=='interplanetary-flight' and outbound.get('terminal') is True
+        and outbound.get('state')=='completed' and outbound.get('succeeded') is True
+        and outbound.get('sessionId')==session and outbound.get('planetId')==home.get('planetId')
+        and launch.get('isReturnLeg') is False and launch.get('bindingVerified') is True
+        and launch.get('nativeExitObserved') is True
+        and launch.get('actualPlanetId')==launch.get('selectedDestinationPlanetId')==config.get('planetId')
+        and isinstance(menu_save.get('actionId'),str) and bool(menu_save['actionId'])
+        and menu_save['actionId'] not in current_unknowns and menu_save['actionId']!=outbound['actionId']
+        and menu_save.get('actionKind')=='return-to-main-menu' and menu_save.get('terminal') is True
+        and menu_save.get('state')=='completed' and menu_save.get('succeeded') is True
+        and menu_save.get('sessionId')==session and menu_save.get('planetId')==config.get('planetId')
+        and saved.get('normalSaveConfirmed') is True and saved.get('completeSaveVerified') is True
+        and saved.get('nativeEndRequested') is True and saved.get('mainMenuVerified') is True
+        and saved.get('savedGameTick')==save_tick)
 
 
 def fully_observed_dry_surface(prepared):
