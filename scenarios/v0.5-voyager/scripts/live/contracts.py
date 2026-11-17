@@ -217,7 +217,8 @@ def resume_admission_echo(config,plan):
     if plan.get('remotePrimaryRecoveryAuthorizationUsed') is not True or plan.get('discardedUnstoredProgressGameTicks')!=0:
         return False
     if config.get('recoveryProfile')=='ordinary-owned-remote':
-        return (config.get('recoveryMode')=='authorize_remote_primary_recovery' and config.get('sourceRole')=='primary'
+        return (config.get('recoveryMode')=='authorize_remote_primary_recovery'
+            and (config.get('sourceRole')=='primary' or config.get('sourceRole')=='lastExit' and bool(config.get('remoteFailedResumeSavedIsolation')))
             and plan.get('recoveryMode')==config['recoveryMode'] and plan.get('exactEmbeddedIdentityVerified') is True
             and isinstance(config.get('expectedNativeVersion'),str) and bool(config['expectedNativeVersion'])
             and plan.get('sourceGameVersion')==plan.get('targetGameVersion')==config['expectedNativeVersion']
@@ -545,6 +546,51 @@ def remote_paid_saved_after_isolated_remote(config, previous, loaded, original, 
     a=station.get('position') or {};p=specs[0].get('position') or {}
     return (set(a)==set(p)=={'x','y','z'} and all(type(v)in(int,float) and math.isfinite(v) for v in (*a.values(),*p.values()))
         and math.dist([a[k] for k in 'xyz'],[p[k] for k in 'xyz'])<=.01)
+
+
+def remote_failed_resume_saved_after_paid(config, previous, failed, cut, closed, backup):
+    """Carry a known failed recovery and its newer normal LastExit without replay."""
+    old=previous.get('originalUnknownActionsNeverReplayed');current=config.get('originalUnknownActionsNeverReplayed')
+    before=previous.get('sourceTick');tick=config.get('sourceTick');session=cut.get('session') or {}
+    player=cut.get('player') or {};station=cut.get('station') or {};builds=(cut.get('build') or {}).get('builds') or []
+    failure=failed.get('nativeFirstFailure') or {};latest=backup.get('latest') or {}
+    if not (config.get('recoveryProfile')==previous.get('recoveryProfile')=='ordinary-owned-remote'
+            and config.get('recoveryMode')==previous.get('recoveryMode')=='authorize_remote_primary_recovery'
+            and config.get('sourceRole')=='lastExit' and previous.get('sourceRole')=='primary'
+            and config.get('originalActionsReconciled') is previous.get('originalActionsReconciled') is False
+            and isinstance(old,(list,tuple)) and isinstance(current,(list,tuple)) and bool(old)
+            and all(isinstance(x,str) and x for x in (*old,*current)) and len(set(old))==len(old)
+            and len(set(current))==len(current) and set(current)==set(old)
+            and type(before)is int and type(tick)is int and 0<=before<tick
+            and type(previous.get('spentGameTicks'))is int and previous['spentGameTicks']>=0
+            and config.get('spentGameTicks')==previous['spentGameTicks']+tick-before
+            and config.get('returnReserveGameTicks')==previous.get('returnReserveGameTicks')
+            and config.get('cleanupReserveGameTicks')==previous.get('cleanupReserveGameTicks')
+            and config.get('expectedNativeVersion')==previous.get('expectedNativeVersion')
+            and config.get('nativeAssemblySha256')==previous.get('nativeAssemblySha256')
+            and failed.get('actionKind')=='resume-owned-game' and failed.get('terminal') is True
+            and failed.get('succeeded') is False and failed.get('state')=='action_failed'
+            and cut.get('noReplay') is True
+            and isinstance(failed.get('actionId'),str) and bool(failed['actionId']) and failed['actionId'] not in current
+            and failure.get('capturedAtGameTick')==tick and session.get('gameTick')==tick
+            and session.get('gameLoaded') is True and session.get('ownedBySpherewright') is True and session.get('writesAllowed') is False
+            and session.get('writeQuarantineActionId')==failed['actionId'] and session.get('sessionId')==failed.get('sessionId')
+            and session.get('localPlanetId')==failed.get('planetId')==player.get('planetId')==station.get('planetId')==config.get('planetId')
+            and player.get('sessionId')==station.get('sessionId')==session.get('sessionId')
+            and player.get('capturedAtGameTick')==station.get('capturedAtGameTick')==tick
+            and station.get('itemId')==2103 and type(station.get('objectId'))is int and station['objectId']>0
+            and len(builds)==1 and builds[0].get('actionId') in old and builds[0].get('phase')=='outcome_unknown'
+            and builds[0].get('completedCount')==1 and len(builds[0].get('objects') or [])==1
+            and builds[0]['objects'][0].get('state')=='completed' and builds[0]['objects'][0].get('entityId')==station['objectId']
+            and closed.get('passed') is True and closed.get('noReplay') is True and closed.get('actualDiscardedTicks')==0
+            and closed.get('pausedCutTick')==closed.get('lastExitTick')==closed.get('latestTick')==tick
+            and closed.get('primaryTick')==before and backup.get('complete') is True and backup.get('verified') is True
+            and (latest.get('primary') or {}).get('gameTick')==before and (latest.get('lastExit') or {}).get('gameTick')==tick):return False
+    drones=player.get('constructionDrones') or {};active=drones.get('activeObservations') or []
+    return (drones.get('enabled') is False and drones.get('activeObservationsComplete') is True
+        and all(type(drones.get(k))is int and drones[k]>=0 for k in ('working','idle','total'))
+        and drones['working']+drones['idle']==drones['total'] and len(active)==drones['working']
+        and all(x.get('stage')==4 and x.get('targetObjectId')==0 and x.get('nextTargetObjectIds')==[0,0,0] for x in active))
 
 
 def fully_observed_dry_surface(prepared):

@@ -2,7 +2,7 @@
 from pathlib import Path
 import copy,sys,unittest
 sys.path.insert(0,str(Path(__file__).parent/'live'))
-from contracts import remote_paid_saved_after_isolated_remote
+from contracts import remote_paid_saved_after_isolated_remote,remote_failed_resume_saved_after_paid
 
 
 def fixture():
@@ -36,7 +36,40 @@ def fixture():
     return [current,old,loaded,original,observed,session,player,station,saved,closed,backup]
 
 
+def failed_resume_fixture():
+    previous,_,_,_,observed,session,player,station,_,_,_=fixture()
+    current=dict(previous,sourceRole='lastExit',sourceTick=140,spentGameTicks=1040)
+    failed=dict(actionId='resume-failed',actionKind='resume-owned-game',sessionId='session',planetId=402,
+        terminal=True,succeeded=False,state='action_failed',nativeFirstFailure=dict(capturedAtGameTick=140))
+    session=dict(session,gameTick=140,writeQuarantineActionId='resume-failed')
+    player=dict(player,capturedAtGameTick=140);station=dict(station,capturedAtGameTick=140)
+    cut=dict(session=session,player=player,station=station,build=observed,noReplay=True)
+    closed=dict(passed=True,noReplay=True,actualDiscardedTicks=0,pausedCutTick=140,lastExitTick=140,latestTick=140,primaryTick=130)
+    backup=dict(complete=True,verified=True,latest=dict(primary=dict(gameTick=130),lastExit=dict(gameTick=140)))
+    return [current,previous,failed,cut,closed,backup]
+
+
 class RemotePaidIsolationTests(unittest.TestCase):
+    def test_later_failed_recovery_can_carry_the_newer_exact_normal_exit(self):
+        self.assertTrue(remote_failed_resume_saved_after_paid(*failed_resume_fixture()))
+
+    def test_newer_exit_never_implies_an_unknown_or_rolled_back_resume_succeeded(self):
+        changes=[
+            lambda a:a[0].update(sourceRole='primary'),
+            lambda a:a[0].update(spentGameTicks=1039),
+            lambda a:a[2].update(state='outcome_unknown'),
+            lambda a:a[2].update(succeeded=True),
+            lambda a:a[3]['session'].update(writeQuarantineActionId='different'),
+            lambda a:a[3]['station'].update(itemId=2104),
+            lambda a:a[3]['build']['builds'][0]['objects'][0].update(entityId=10),
+            lambda a:a[4].update(actualDiscardedTicks=1),
+            lambda a:a[5]['latest']['lastExit'].update(gameTick=139),
+        ]
+        for change in changes:
+            with self.subTest(change=change):
+                args=copy.deepcopy(failed_resume_fixture());change(args)
+                self.assertFalse(remote_failed_resume_saved_after_paid(*args))
+
     def test_completed_paid_entity_and_distinct_returning_drone_remain_unknown(self):
         self.assertTrue(remote_paid_saved_after_isolated_remote(*fixture()))
 

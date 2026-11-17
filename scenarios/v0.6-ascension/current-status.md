@@ -1,5 +1,9 @@
 # Ascension current snapshot / Ascension活动快照
 
+2026-11-17最新停机：`150f519b` 读入已付行星站并让原无人机返航121 tick，随后尾段绑定检查失败并暂停；新的恢复原动作明确失败，原付费施工仍unknown。暂停保存预检通过但提交在接受前被无关闲置控制器检查拒绝。所有者允许舍弃这121 tick并坚持只用MCP；实际正常关闭时游戏自动保存了覆盖现场的LastExit，未丢失tick。Primary为133446957、LastExit为133447078，2564项完整备份通过；累计12357816/15000000 tick、133966/199346请求及原返航/清理储备保留。继续修复并从准确新LastExit恢复，绝不重放原施工或失败恢复。
+
+Latest stopped boundary, 2026-11-17: `150f519b` loaded the paid station and let the original drone return for121 ticks, then a saved-tail binding check failed and paused; the new recovery's original action is known failed, while the paid construction remains unknown. Paused Save prepared but was rejected before acceptance by an unrelated idle-controller check. The owner allowed discarding those121 ticks and required MCP-only gameplay; normal close actually saved a LastExit covering the current cut, so no ticks were lost. Primary is133446957, LastExit133447078, and the complete2564-file backup passed. Cumulative spending is12357816/15000000 ticks and133966/199346 requests, retaining original return/cleanup reserves. Continue repairing and recover the exact newer LastExit without replaying either original.
+
 已选并冷安装源码 `150f519b`：无损当前主档恢复可绑定成功出航后的准确隔离已付施工，独立核对并等待原无人机返航，不重建实体或改写旧unknown；普通隔离核销不再将站体建成误判为无人机归位。本地完整7055项、原生构建、双语文档、准确CI及同源开发组件资格与安装核验通过。游戏关闭，现场恢复及无人机归位尚未实机验证。
 
 Selected and cold-installed source `150f519b`: no-loss current-primary recovery can bind the exact quarantined paid construction after a proved successful outbound and independently wait for the original returning drone, without recreating the entity or rewriting the old unknown. Ordinary quarantine reconciliation no longer treats the completed building as physical drone idle. All7055 local tests, Native build, bilingual documentation, exact CI and coherent development-cohort qualification and installation checks passed. The game is stopped; live recovery and physical drone return remain unverified.
