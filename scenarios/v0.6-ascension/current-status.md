@@ -1,8 +1,8 @@
 # Ascension current snapshot / Ascension活动快照
 
-已选源码 `150f519b`：无损当前主档恢复可绑定成功出航后的准确隔离已付施工，独立核对并等待原无人机返航，不重建实体或改写旧unknown；普通隔离核销不再将站体建成误判为无人机归位。本地完整7055项、原生构建、双语文档、准确CI及同源开发组件资格通过。Lab已选新源码，游戏关闭、实装仍为 `f47ef691`；冷安装及现场恢复尚未执行。
+已选并冷安装源码 `150f519b`：无损当前主档恢复可绑定成功出航后的准确隔离已付施工，独立核对并等待原无人机返航，不重建实体或改写旧unknown；普通隔离核销不再将站体建成误判为无人机归位。本地完整7055项、原生构建、双语文档、准确CI及同源开发组件资格与安装核验通过。游戏关闭，现场恢复及无人机归位尚未实机验证。
 
-Selected source `150f519b`: no-loss current-primary recovery can bind the exact quarantined paid construction after a proved successful outbound and independently wait for the original returning drone, without recreating the entity or rewriting the old unknown. Ordinary quarantine reconciliation no longer treats the completed building as physical drone idle. All7055 local tests, Native build, bilingual documentation, exact CI and coherent development-cohort qualification passed. Lab selects the new source; the game is stopped and installed runtime remains `f47ef691`. Cold installation and live recovery have not yet occurred.
+Selected and cold-installed source `150f519b`: no-loss current-primary recovery can bind the exact quarantined paid construction after a proved successful outbound and independently wait for the original returning drone, without recreating the entity or rewriting the old unknown. Ordinary quarantine reconciliation no longer treats the completed building as physical drone idle. All7055 local tests, Native build, bilingual documentation, exact CI and coherent development-cohort qualification and installation checks passed. The game is stopped; live recovery and physical drone return remain unverified.
 
 2026-11-17最新停机：行星站实际建成并正常扣料1座，独立读取确认本地站身份；它尚未通电或配置。施工无人机返航时，静止玩家锚点自然位移约5.8毫米超过高站2.5毫米界限，保护将原动作标为unknown并暂停。建成实体及单次扣料已证实，但无人机归位尚未证明；不得重建或重复扣料。暂停中正常保存并核实后正常关闭，Primary/LastExit均为133446957，2560项完整备份通过。累计12357695/15000000 tick、请求133496/199346，原返航/清理储备保留。继续处理原付费动作及保存恢复链，修复过严位移判断并冷部署；完整物流和闭壳仍未完成。
 
