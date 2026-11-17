@@ -14,6 +14,12 @@ For an initial ten-component batch, the current native recipes require 30 frames
 
 ## Candidate local logistics connection / 当地物流连接候选
 
+The last on-site complete Dyson cut observed five of 150 structure points and zero of 224 shell cells, with 12 sails in orbit. At that cut, 145 additional delivered rockets were needed for structure completion; orbiting sails were not yet shell-cell delivery. This is a historical physical observation, not a current count: re-read the design and actual launch/cell progress before sizing subsequent production, and preserve the goal of a complete shell and sustained operation. / 上次现场完整戴森观察为150结构点中已交付5点、224壳细胞中已交付0点，另有12帆在轨。该切面距结构完成还需145枚实际到达的火箭；在轨帆不等于壳细胞已交付。此为历史实测而非当前数量，后续扩产前须重新读取设计和实际发射/细胞进度，完整闭壳及持续运行目标不变。
+
+As a non-proliferated upper-level planning estimate from that historical cut, 145 rockets require 290 components, 290 quantum chips and 580 deuteron rods. Their components require 870 frames, 870 sails and 870 processors; the quantum chips add 580 processors and 580 plane filters. Frames require 3,480 nanotubes, 870 titanium alloy and 870 high-purity silicon. Allowing 224 additional sail launches if none of the 12 existing sails are captured, the 1,094 component/launch sails require 547 graphene and 547 photon combiners. If all nanotubes use the observed graphene/titanium recipe, they add 5,220 graphene and 1,740 titanium ingots; the 547 combiners need 1,094 prisms, 1,641 glass and 547 boards. These are overlapping recipe expansions, not amounts to debit twice; existing cargo, later delivered progress, production bonuses, sail lifetime and actual Native receipts must be reconciled before setting a new finite execution batch.
+
+按该历史切面、不计增产估算，145枚火箭需290组件、290量子及580氘棒。组件需870框架、870帆、870处理器；量子另需580处理器和580位面过滤器。框架需3480纳米管、870钛合金和870高纯硅。若原有12帆均未被吸收，再预留224次发射用帆，则1094片组件/发射帆需547石墨烯和547光子合并器；若全部纳米管使用已观察到的石墨烯/钛块配方，另需5220石墨烯及1740钛块；547合并器需1094棱镜、1641玻璃和547电路板。这些是相互展开的配方而非可重复扣除的多份物料；确定下一有限执行批次前，须核对现存货物、后续交付进度、增产、帆寿命及实际原生回执。
+
 The last Caph observation placed the existing interstellar station and rocket assembler about 207 metres apart; fresh on-site geometry and power observations are still required. A compact candidate is one planetary logistics station near the rocket assembler, supplied by two normally made logistics drones and connected to the existing local power network. Configure local demand for the three rocket inputs and test whether its drones can collect the actual stock from the distant interstellar station, whose local slots supply those items. The interstellar station was previously unpowered, so passive local pickup is a hypothesis to test, not a proven behavior; if it prevents service, derive and normally build a finite local power/fuel connection. Use short, separately Native-checked station-output belts and ordinary sorters to feed the rocket assembler; verify each selector, actual delivered cargo and sustained launch separately.
 
 The current cross-star read strengthens that hypothesis without proving pickup: the unpowered station reports local supply counts of 30 fuel rods and ten quantum chips. Inspection of the installed Native local-drone dispatch code shows the requesting station checks its own dispatch energy and the supplier's physical and available stock, without an explicit supplier-energy check in that path. Actual pair formation, drone launch and delivery remain live acceptance requirements.
@@ -22,6 +28,8 @@ For initial preparation, reserve at most one planetary station and two drones. T
 
 If the 44 processors, six sorter boards and four thrusters all need normal manufacture, a finite unproliferated upper bound for the station, two drones, 30 belts and six sorters is 140 iron, 147 copper, 176 high-purity silicon, 48 steel, 40 titanium ingots and 20 particle containers. This includes 47 board executions for 94 boards, 88 microcrystalline components, ten gears for the belts and four thrusters. Reuse freshly observed finished stock where available and count actual debits once; the bound does not add a second copy of the intermediate requirements.
 
+An earlier complete home-storage cut showed finished thrusters, so the first capital-gathering packet may reuse four of them and withdraw at most 140 iron, 135 copper, 176 high-purity silicon, 40 steel, 40 titanium and 20 particle containers. Reserve up to twelve additional actual warpers from home stock for future station replenishment while preserving the mecha's existing return supply. Fresh Native source counts, package capacity and player range decide each transfer. If any stock changed, the refused transfer is not an accepted action and the remaining amount must be derived from a new observation.
+
 上次Caph观察中，现有星际站与火箭制造台相距约207米；仍须到场重新核对地形和电网。紧凑候选是在火箭制造台附近建一座行星物流站，正常制造两架物流机并接入当地现有电网，为三种火箭原料设本地需求，试验物流机从远处星际站的本地供应槽取货。星际站此前无电，因此“可被本地物流机被动取货”仅为待测假设；若无法服务，再依据现场事实正常建设有限供电及燃料连接。站输出到火箭机的短传送带、分拣器分别接受新鲜原生预检，再分别核验输出筛选、真实到货及持续发射。
 
 当前跨星只读结果增强了该假设但不证明取货：无电站的本地可供应量分别显示30燃料棒和10量子芯片。检查已装原生版本的本地物流机派遣代码时，需求站检查自身派遣能源及供应站实存和可供应量，该路径没有显式检查供应站能源。实际配对、物流机出航和到货仍须实机验证。
@@ -29,6 +37,8 @@ If the 44 processors, six sorter boards and four thrusters all need normal manuf
 首轮准备最多预留1座行星站和2架物流机。核对的正常配方连同4个推进器共需48钢、40钛块、44处理器、20粒子容器、10铁和12铜；另预留最多30基础带及6普通分拣器，必要时复用随身2座电塔。按最近实际施工切面，拟定有限累计上限为行星站1、基础带765、普通分拣器110，原已耗735带和104分拣器不退账；这只是准备上限，不代表已制造或建成。执行前重新核对实际库存、机甲返航燃料/翘曲器、现有站配置、落点几何和电网，并以正常用料、原生准备、原动作核销及实际结果为准。
 
 若44处理器、6个分拣器用电路板和4推进器都需正常制造，则行星站、两架物流机、30带和6分拣器的有限无增产上限为140铁、147铜、176高纯硅、48钢、40钛块及20粒子容器；其中包括47次配方产94电路板、88微晶元件、10齿轮及4推进器。存在新鲜现成库存时优先复用，实际扣料只算一次，不重复叠加中间品需求。
+
+此前完整母星库存观察到现成推进器，首轮资本材料可复用其中4个，最多正常取140铁、135铜、176高纯硅、40钢、40钛块及20粒子容器；另从实际库存预留至多12个翘曲器供后续补站，保留机甲现有返航供给。每笔转运由新鲜原生库存、背包容量和实际距离决定；若库存变化而被拒，该笔没有被接受，应重新观察剩余用量。
 
 ## Initial local launch batch, 2026-11-16 / 首批当地发射供料
 
