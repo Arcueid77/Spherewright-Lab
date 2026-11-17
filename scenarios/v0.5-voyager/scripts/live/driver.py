@@ -144,7 +144,8 @@ class Live:
    frozen('observedBuild'),frozen('quarantinedSession'),frozen('pausedPlayer'),frozen('observedStation'),
    frozen('pausedSave'),frozen('normalClose'),backup),'remote_paid_saved_isolation_unproved')
 
- def assert_remote_failed_resume_saved_isolated(self,c,backup):
+ def assert_remote_failed_resume_saved_isolated(self,c,backup,depth=0):
+  need(type(depth)is int and 0<=depth<16,'failed_resume_isolation_chain_outside_bound')
   isolation=c.get('remoteFailedResumeSavedIsolation')
   need(isolation and not c.get('homeSavedUnknownIsolation') and not c.get('remoteSavedUnknownIsolation')
    and not c.get('remotePaidSavedUnknownIsolation'),'remote_failed_resume_isolation_evidence_missing')
@@ -162,9 +163,14 @@ class Live:
    proof=older['latest'][role]
    need(len(rows)==1 and rows[0]['sha256']==proof['sha256'] and sha(rows[0]['backupPath'])==proof['sha256'],
     'previous_paid_backup_copy_changed')
-  self.assert_remote_paid_unknowns_isolated(previous,older)
+  if previous.get('remotePaidSavedUnknownIsolation'):
+   self.assert_remote_paid_unknowns_isolated(previous,older)
+  else:
+   need(bool(previous.get('remoteFailedResumeSavedIsolation')),'previous_paid_or_failed_resume_isolation_missing')
+   self.assert_remote_failed_resume_saved_isolated(previous,older,depth+1)
+  paused_save=frozen('pausedSave') if isolation.get('pausedSavePath') else None
   need(remote_failed_resume_saved_after_paid(c,previous,frozen('failedResume'),frozen('pausedCut'),
-   frozen('normalClose'),backup),'failed_resume_saved_isolation_unproved')
+   frozen('normalClose'),backup,paused_save),'failed_resume_saved_isolation_unproved')
 
  def offline_preflight(self):
   s=self.runtime;c=s.config;s.stopped();s.cohort();s.verify_revision_stamps();m=s.verify_backup()

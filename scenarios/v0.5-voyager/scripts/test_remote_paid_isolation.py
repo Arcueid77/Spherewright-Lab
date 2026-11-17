@@ -51,7 +51,30 @@ def failed_resume_fixture():
     return [current,previous,failed,cut,closed,backup]
 
 
+def failed_resume_with_paused_save_fixture():
+    previous,_,_,oldcut,_,_=failed_resume_fixture()
+    current=dict(previous,sourceRole='primary',sourceTick=150,spentGameTicks=1050)
+    failed=dict(actionId='resume-failed-again',actionKind='resume-owned-game',sessionId='session',planetId=402,
+        terminal=True,succeeded=False,state='action_failed',nativeFirstFailure=dict(capturedAtGameTick=150))
+    cut=copy.deepcopy(oldcut);cut['session'].update(gameTick=150,writeQuarantineActionId='resume-failed-again')
+    cut['player']['capturedAtGameTick']=150;cut['station']['capturedAtGameTick']=150
+    receipt=dict(actionId='save2',actionKind='save',sessionId='session',planetId=402,completedAtGameTick=150,terminal=True,succeeded=True)
+    saved=dict(passed=True,originalResumeActionId='resume-failed-again',noLoad=True,noReplay=True,noResume=True,savedGameTick=150,originalSave=receipt)
+    closed=dict(passed=True,noReplay=True,savedTick=150,primaryTick=150,lastExitTick=150,latestTick=150)
+    backup=dict(complete=True,verified=True,latest=dict(primary=dict(gameTick=150),lastExit=dict(gameTick=150)))
+    return [current,previous,failed,cut,closed,backup,saved]
+
+
 class RemotePaidIsolationTests(unittest.TestCase):
+    def test_later_failed_resume_can_carry_an_exact_paused_primary_save(self):
+        self.assertTrue(remote_failed_resume_saved_after_paid(*failed_resume_with_paused_save_fixture()))
+        for mutate in (lambda a:a[6].update(originalResumeActionId='different'),
+                       lambda a:a[6]['originalSave'].update(succeeded=False),
+                       lambda a:a[4].update(savedTick=149),
+                       lambda a:a[5]['latest']['primary'].update(gameTick=149)):
+            args=copy.deepcopy(failed_resume_with_paused_save_fixture());mutate(args)
+            self.assertFalse(remote_failed_resume_saved_after_paid(*args))
+
     def test_newer_exit_preparation_requires_its_distinct_isolation_chain(self):
         c=failed_resume_fixture()[0]
         c.update(surfaceRecoveryTarget=None,recoveryWindowSeconds=7200,additionalVoyagerGameTicks=800000,

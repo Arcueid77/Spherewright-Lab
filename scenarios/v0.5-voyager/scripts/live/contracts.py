@@ -548,15 +548,15 @@ def remote_paid_saved_after_isolated_remote(config, previous, loaded, original, 
         and math.dist([a[k] for k in 'xyz'],[p[k] for k in 'xyz'])<=.01)
 
 
-def remote_failed_resume_saved_after_paid(config, previous, failed, cut, closed, backup):
-    """Carry a known failed recovery and its newer normal LastExit without replay."""
+def remote_failed_resume_saved_after_paid(config, previous, failed, cut, closed, backup, saved=None):
+    """Carry a known failed recovery through an exact current owned save."""
     old=previous.get('originalUnknownActionsNeverReplayed');current=config.get('originalUnknownActionsNeverReplayed')
     before=previous.get('sourceTick');tick=config.get('sourceTick');session=cut.get('session') or {}
     player=cut.get('player') or {};station=cut.get('station') or {};builds=(cut.get('build') or {}).get('builds') or []
     failure=failed.get('nativeFirstFailure') or {};latest=backup.get('latest') or {}
     if not (config.get('recoveryProfile')==previous.get('recoveryProfile')=='ordinary-owned-remote'
             and config.get('recoveryMode')==previous.get('recoveryMode')=='authorize_remote_primary_recovery'
-            and config.get('sourceRole')=='lastExit' and previous.get('sourceRole')=='primary'
+            and config.get('sourceRole') in ('primary','lastExit') and previous.get('sourceRole') in ('primary','lastExit')
             and config.get('originalActionsReconciled') is previous.get('originalActionsReconciled') is False
             and isinstance(old,(list,tuple)) and isinstance(current,(list,tuple)) and bool(old)
             and all(isinstance(x,str) and x for x in (*old,*current)) and len(set(old))==len(old)
@@ -582,10 +582,21 @@ def remote_failed_resume_saved_after_paid(config, previous, failed, cut, closed,
             and len(builds)==1 and builds[0].get('actionId') in old and builds[0].get('phase')=='outcome_unknown'
             and builds[0].get('completedCount')==1 and len(builds[0].get('objects') or [])==1
             and builds[0]['objects'][0].get('state')=='completed' and builds[0]['objects'][0].get('entityId')==station['objectId']
-            and closed.get('passed') is True and closed.get('noReplay') is True and closed.get('actualDiscardedTicks')==0
-            and closed.get('pausedCutTick')==closed.get('lastExitTick')==closed.get('latestTick')==tick
-            and closed.get('primaryTick')==before and backup.get('complete') is True and backup.get('verified') is True
-            and (latest.get('primary') or {}).get('gameTick')==before and (latest.get('lastExit') or {}).get('gameTick')==tick):return False
+            and closed.get('passed') is True and closed.get('noReplay') is True
+            and closed.get('latestTick')==tick and backup.get('complete') is True and backup.get('verified') is True
+            and closed.get('primaryTick')==(latest.get('primary') or {}).get('gameTick')
+            and closed.get('lastExitTick')==(latest.get('lastExit') or {}).get('gameTick')):return False
+    if config['sourceRole']=='lastExit':
+        if not (saved is None and closed.get('actualDiscardedTicks')==0 and closed.get('pausedCutTick')==tick
+                and closed.get('primaryTick')==before and closed.get('lastExitTick')==tick):return False
+    else:
+        receipt=(saved or {}).get('originalSave') or {}
+        if not ((saved or {}).get('passed') is True and saved.get('originalResumeActionId')==failed['actionId']
+                and all(saved.get(k)is True for k in ('noLoad','noReplay','noResume')) and saved.get('savedGameTick')==tick
+                and receipt.get('actionKind')=='save' and receipt.get('terminal') is True and receipt.get('succeeded') is True
+                and receipt.get('sessionId')==session.get('sessionId') and receipt.get('planetId')==config.get('planetId')
+                and receipt.get('completedAtGameTick')==tick and closed.get('savedTick')==tick
+                and closed.get('primaryTick')==closed.get('lastExitTick')==tick):return False
     drones=player.get('constructionDrones') or {};active=drones.get('activeObservations') or []
     return (drones.get('enabled') is False and drones.get('activeObservationsComplete') is True
         and all(type(drones.get(k))is int and drones[k]>=0 for k in ('working','idle','total'))
