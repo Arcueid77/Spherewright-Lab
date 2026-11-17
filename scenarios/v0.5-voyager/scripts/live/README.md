@@ -1,5 +1,7 @@
 # Shared live driver / 共享实机驱动
 
+`wait-player-still` accepts a finite `pollSeconds` from 0.25 to 30 (default 0.5), so a long natural recharge can use fewer read-only calls. Its finite wait, exact physical-idle readback, energy threshold, original caller deadline and later fresh Native admission still apply. / `wait-player-still` 可指定0.25至30秒的有限 `pollSeconds`（默认0.5秒），较长的自然充能等待可减少只读请求；有限等待、实际物理停稳、能量门槛、原调用期限及后续新鲜原生准入均保留。
+
 The caller accepts the published tokenless `beltEndpointPreview` and `beltRoutePreview` responses through `prepare-only`, checking the player, session, endpoint and route-geometry bindings and preserving both positive assessments and explicit Native rejections. It refuses commit-capable, mismatched or mixed preview responses; no preview submits a game action. This is caller support covered by offline tests, not proof that the currently running writer has been replaced or that any planned route has been built. / 调用端可通过 `prepare-only` 接收公开的无令牌 `beltEndpointPreview` 和 `beltRoutePreview`，核对玩家、会话、端点和路线几何绑定，并保留正向评估及明确原生拒绝；可提交、绑定不符或混合的预检结果均被拒绝，预检不提交游戏动作。这是离线测试覆盖的调用端支持，不代表当前运行中的writer已替换，也不代表任何规划路线已经建成。
 
 While idle, an explicitly retryable session-read timeout keeps the same writer and leaves queued work undispatched until a fresh healthy read succeeds. It retries only while the original game process remains present and within the original caller deadline; accepted or unknown writes are never retried. / 闲置期间，明确可重试的会话读取超时保留原唯一writer，在新鲜健康读回前不派发排队任务；仅在原游戏进程仍存在且原调用期限内重试只读，不重试已接受或unknown写入。

@@ -294,12 +294,14 @@ class Factory(Live):
     time.sleep(interval)
    raise RuntimeError('finite_product_wait_exhausted')
   if kind=='wait-player-still':
+   interval=s.get('pollSeconds',.5)
+   need(type(interval) in (int,float) and .25<=interval<=30,'bounded_player_poll_interval_required')
    end=time.monotonic()+s['maximumSeconds']
    while time.monotonic()<end:
     self.state();p=self.player();physics=p.get('nativePhysics') or {};velocity=physics.get('velocity') or {};ground=physics.get('groundContact') or {}
     if strict_native_player_idle(p) and p.get('coreEnergy',0)>=s.get('minimumCoreEnergy',0):
      self.runtime.put(role+'-physical-still.private.json',p);return p
-    time.sleep(.5)
+    time.sleep(min(interval,max(0,end-time.monotonic())))
    raise RuntimeError('finite_grounded_physical_still_wait_exhausted')
   if kind=='prove-network':
    entities=[self.entity(self.object_id(ref)) for ref in s['entities']]

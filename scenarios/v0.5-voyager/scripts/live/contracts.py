@@ -572,6 +572,12 @@ def validate_steps(steps):
                            for key,value in expected.items())
                     or type(seconds)not in(int,float) or not 0<seconds<=900):
                 raise ValueError('bounded_stack_device_observation_required')
+        if kind=='wait-player-still':
+            seconds=step['maximumSeconds'];interval=step.get('pollSeconds',.5);energy=step.get('minimumCoreEnergy',0)
+            if (type(seconds) not in (int,float) or not 0<seconds<=7200
+                    or type(interval) not in (int,float) or not .25<=interval<=30
+                    or type(energy) not in (int,float) or not 0<=energy<float('inf')):
+                raise ValueError('bounded_player_observation_required')
         if kind=='observe-piler-aggregation' and (type(step['maximumItems'])is not int or not 2<=step['maximumItems']<=64
                 or type(step['itemId'])is not int or step['itemId']<=0
                 or type(step['maximumSeconds'])not in(int,float) or not 0<step['maximumSeconds']<=1800):

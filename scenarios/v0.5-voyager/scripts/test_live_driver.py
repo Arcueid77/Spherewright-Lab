@@ -10,6 +10,20 @@ from factory import Factory,resolve_refs
 from runtime import freeze,Runtime
 
 class LiveDriverTests(unittest.TestCase):
+ def test_energy_wait_polls_at_the_declared_bounded_interval_and_keeps_idle_proof(self):
+  from unittest.mock import patch
+  player=json.loads((Path(__file__).parent/'fixtures/captured-known-move-stop.json').read_text())['player']
+  first=dict(player,coreEnergy=100);second=dict(player,coreEnergy=200)
+  a=Factory.__new__(Factory);a.ctx=dict(planetId=402);a.state=lambda:None;observed=iter([first,second]);a.player=lambda:next(observed)
+  recorded=[];a.runtime=SimpleNamespace(put=lambda name,value:recorded.append((name,value)))
+  step=dict(kind='wait-player-still',role='charge',maximumSeconds=60,pollSeconds=15,minimumCoreEnergy=200)
+  validate_steps([step])
+  with patch('factory.time.monotonic',side_effect=[0,0,0,1]),patch('factory.time.sleep') as sleep:
+   self.assertIs(second,a.step(step))
+  sleep.assert_called_once_with(15);self.assertEqual('charge-physical-still.private.json',recorded[0][0])
+  for change in (dict(pollSeconds=0),dict(pollSeconds=31),dict(maximumSeconds=0),dict(minimumCoreEnergy=float('nan'))):
+   with self.assertRaisesRegex(ValueError,'bounded_player_observation_required'):validate_steps([dict(step,**change)])
+
  def test_generator_stock_uses_buffered_items_and_never_loaded_heat_or_power(self):
   generator=dict(componentKind='power-generator',itemId=2211,
    buffers=[dict(itemId=1802,count=6750,countUnit='joules_per_tick',unitsPerItem=0)],
