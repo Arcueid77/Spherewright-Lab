@@ -1,8 +1,8 @@
 # Ascension current snapshot / Ascension活动快照
 
-已选 `ad26eaf6`：修复已绑定暂停保存被无关远端闲置检查拒绝，支持无损新LastExit保留较早已付施工与后续失败恢复，并按支持的最慢原生节奏固定有限返航墙钟、补充失败诊断。针对性测试、原生构建、准确CI及同源组件资格通过。游戏关闭，实装仍为 `150f519b`；冷安装及实机恢复待完成，尾段实际失败原因尚未证实。
+已选并冷安装 `ad26eaf6`：修复已绑定暂停保存被无关远端闲置检查拒绝，支持无损新LastExit保留较早已付施工与后续失败恢复，并按支持的最慢原生节奏固定有限返航墙钟、补充失败诊断。针对性测试、原生构建、准确CI及同源组件资格与安装核验通过。游戏关闭，实机恢复待完成，尾段实际失败原因尚未证实。
 
-Selected `ad26eaf6`: fixes an unrelated remote idle check blocking bound paused Save; the exact no-loss newer LastExit can retain the earlier paid construction and later failed recovery. The saved return tail uses a finite wall allowance based on the slowest supported Native cadence and reports more failure evidence. Targeted tests, Native build, exact CI and coherent cohort qualification passed. The game is stopped and installed runtime remains `150f519b`; cold installation and live recovery are pending, and the tail failure cause is not yet proved.
+Selected and cold-installed `ad26eaf6`: fixes an unrelated remote idle check blocking bound paused Save; the exact no-loss newer LastExit can retain the earlier paid construction and later failed recovery. The saved return tail uses a finite wall allowance based on the slowest supported Native cadence and reports more failure evidence. Targeted tests, Native build, exact CI, coherent cohort qualification and installation checks passed. The game is stopped; live recovery is pending and the tail failure cause is not yet proved.
 
 2026-11-17最新停机：`150f519b` 读入已付行星站并让原无人机返航121 tick，随后尾段绑定检查失败并暂停；新的恢复原动作明确失败，原付费施工仍unknown。暂停保存预检通过但提交在接受前被无关闲置控制器检查拒绝。所有者允许舍弃这121 tick并坚持只用MCP；实际正常关闭时游戏自动保存了覆盖现场的LastExit，未丢失tick。Primary为133446957、LastExit为133447078，2564项完整备份通过；累计12357816/15000000 tick、133966/199346请求及原返航/清理储备保留。继续修复并从准确新LastExit恢复，绝不重放原施工或失败恢复。
 
