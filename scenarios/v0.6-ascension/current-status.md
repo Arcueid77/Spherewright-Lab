@@ -1,8 +1,12 @@
 # Ascension current snapshot / Ascension活动快照
 
-产品修复 `f47ef691` 已直接推送main：支持远端2103的原生身份与付费施工、带有界本地物流机的行星站保存现场准入，并将不支持物品改为不可重试的明确拒绝。完整回归7033项、原生构建、接口元数据、双语文档及准确提交CI通过；同源开发组件已冷安装并核验磁盘文件和接口。游戏关闭，现场施工及保存恢复仍待实机验证。
+2026-11-17当前实机：`f47ef691` 从最新Caph主档恢复，280.5秒内正常取得10石墨烯；一段新鲜44.7米步行成功后，动作结束与闲置保护停稳标准不一致，引发同tick隔离。已通过公开MCP新鲜复核并在原会话解除，未重放、未读旧档或重置旅程；新调用端继续同一游戏。行星站预检正在等待机甲充能，尚无施工或扣料，落点碰撞、建站及物流未通过实机验证。观察tick133436666对应累计12347404/15000000 tick，原返航/清理储备保留。移动交接修复 `15cf55bb` 已推送独立产品main，本地完整7041项及原生构建通过、准确提交CI待核，不热替换运行中的组件。
 
-Product fix `f47ef691` is pushed to main: remote2103 uses native identity and paid construction, saved-site admission recognizes bounded local drones, and unsupported items receive a nonretryable rejection. Full regression passed7033 cases, with Native build, SDK metadata, bilingual documentation and exact-commit CI checks passing. The coherent development cohort was cold-installed and its files and interfaces verified. The game is stopped; live construction and save/recovery remain unverified.
+Current live state, 2026-11-17: `f47ef691` recovered the latest Caph primary and normally withdrew ten graphene within280.5 seconds. A distinct44.7m walk completed successfully, then mismatched stop predicates caused same-tick quarantine. Fresh physical and journey proof through public MCP cleared it in the original session, without replay, older Load or journey reset; a replacement caller continues the same game. The planetary-station preparation is waiting for mecha energy, with no accepted construction or debit; site collision, placement and logistics remain unverified. Observation tick133436666 corresponds to12347404/15000000 cumulative ticks, retaining original return/cleanup reserves. Movement-handoff fix `15cf55bb` is pushed on independent product main;7041 local tests and the Native build passed, while exact-commit CI is pending. The running cohort was not hot-swapped.
+
+此前冷安装切面：产品修复 `f47ef691` 已直接推送main，支持远端2103的原生身份、付费施工及带有界本地物流机的保存现场准入，并将不支持物品改为不可重试的明确拒绝。完整回归7033项、原生构建、接口元数据、双语文档及准确提交CI通过；同源开发组件已冷安装并核验。之后的实机状态见上，施工及建站后保存恢复仍待验证。
+
+Earlier cold-install cut: product fix `f47ef691` was pushed to main, adding remote2103 native identity, paid construction and saved-site admission with bounded local drones; unsupported items receive a nonretryable rejection. Full regression passed7033 cases, with Native build, SDK metadata, bilingual documentation and exact-commit CI checks passing. The coherent development cohort was cold-installed and verified. Later live status is above; construction and post-build save/recovery remain unverified.
 
 2026-11-17最新停机：Caph正常步行到现有电站并补10氘棒，电网满足率由约27%恢复至100%。背包保有1座行星站、2物流机及预备带/分拣器；旧版远端站落点预检在接受前被拒，没有建造或扣料。现场正常保存退出，Primary/LastExit均为133428570，2552项完整备份通过，累计12339308/15000000 tick及原返航/清理储备保留。游戏及writer已停；修正版已安装，准备恢复最新现场。完整闭壳、持续供应及最终双包未完成。
 
