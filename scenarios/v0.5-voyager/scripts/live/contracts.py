@@ -6,7 +6,7 @@ def owned_saved_recovery_context(config):
             and config.get('recoveryMode')=='authorize_remote_primary_recovery' and config.get('sourceRole')=='primary'):
         # The driver separately validates this evidence, its historical home
         # source and the later complete remote save before allowing any launch.
-        return bool(config.get('remoteSavedUnknownIsolation')) and config.get('originalActionsReconciled') is False
+        return bool(config.get('remoteSavedUnknownIsolation') or config.get('remotePaidSavedUnknownIsolation')) and config.get('originalActionsReconciled') is False
     home=config.get('closedJourneyHome') or {}
     return (config.get('recoveryProfile')=='ordinary-owned-home'
         and config.get('recoveryMode') in ('default','verified_newer_lastexit','reauthorize_expired_primary')
@@ -463,6 +463,88 @@ def remote_saved_after_isolated_home(config, home, loaded, outbound, menu_save, 
         and saved.get('normalSaveConfirmed') is True and saved.get('completeSaveVerified') is True
         and saved.get('nativeEndRequested') is True and saved.get('mainMenuVerified') is True
         and saved.get('savedGameTick')==save_tick)
+
+
+def remote_paid_saved_after_isolated_remote(config, previous, loaded, original, observed, session, player, station, saved, closed, backup):
+    """Carry one observed paid remote building through its normal paused save.
+
+    The historical remote source and both complete backups are independently
+    checked by the caller. Entity completion and debit do not resolve the old
+    action or certify its physically returning drone.
+    """
+    import math
+    old=previous.get('originalUnknownActionsNeverReplayed');current=config.get('originalUnknownActionsNeverReplayed')
+    action=original.get('actionId');tick=config.get('sourceTick');before=previous.get('sourceTick')
+    builds=observed.get('builds') or [];drones=player.get('constructionDrones') or {}
+    active=drones.get('activeObservations') or [];receipt=saved.get('originalSave') or {}
+    latest=backup.get('latest') or {};primary=(latest.get('primary') or {}).get('gameTick');last=(latest.get('lastExit') or {}).get('gameTick')
+    if not (config.get('recoveryProfile')==previous.get('recoveryProfile')=='ordinary-owned-remote'
+            and config.get('recoveryMode')==previous.get('recoveryMode')=='authorize_remote_primary_recovery'
+            and config.get('sourceRole')==previous.get('sourceRole')=='primary'
+            and config.get('originalActionsReconciled') is previous.get('originalActionsReconciled') is False
+            and isinstance(old,(list,tuple)) and isinstance(current,(list,tuple)) and bool(old)
+            and all(isinstance(x,str) and x for x in (*old,*current)) and isinstance(action,str) and bool(action)
+            and len(set(old))==len(old) and len(set(current))==len(current)
+            and action not in old and set(current)==set(old)|{action}
+            and type(before)is int and type(tick)is int and 0<=before<tick
+            and type(previous.get('spentGameTicks'))is int and previous['spentGameTicks']>=0
+            and config.get('spentGameTicks')==previous.get('spentGameTicks')+tick-before
+            and config.get('returnReserveGameTicks')==previous.get('returnReserveGameTicks')
+            and config.get('cleanupReserveGameTicks')==previous.get('cleanupReserveGameTicks')
+            and config.get('expectedNativeVersion')==previous.get('expectedNativeVersion')
+            and config.get('nativeAssemblySha256')==previous.get('nativeAssemblySha256')
+            and loaded.get('gameLoaded') is True and loaded.get('ownedBySpherewright') is True and loaded.get('writesAllowed') is True
+            and type(loaded.get('gameTick'))is int and before<=loaded['gameTick']<=tick
+            and loaded.get('localPlanetId')==config.get('planetId')==previous.get('planetId')
+            and session.get('sessionId')==player.get('sessionId')==station.get('sessionId')==original.get('sessionId')==loaded.get('sessionId')
+            and session.get('localPlanetId')==player.get('planetId')==station.get('planetId')==original.get('planetId')==config.get('planetId')
+            and session.get('gameLoaded') is True and session.get('ownedBySpherewright') is True and session.get('writesAllowed') is False
+            and session.get('writeQuarantineActionId')==action and session.get('gameTick')==tick
+            and player.get('capturedAtGameTick')==station.get('capturedAtGameTick')==tick
+            and original.get('actionKind')=='build' and original.get('terminal') is True and original.get('succeeded') is False
+            and original.get('state')=='outcome_unknown' and original.get('reconciledFromOutcomeUnknown') is False
+            and type(original.get('completedAtGameTick'))is int and loaded['gameTick']<=original['completedAtGameTick']<=tick
+            and len(original.get('itemDeltas') or [])==1 and original['itemDeltas'][0].get('delta')==-1
+            and original['itemDeltas'][0].get('itemId')==station.get('itemId')==2103
+            and len(builds)==1 and saved.get('passed') is True and saved.get('originalActionId')==action
+            and all(saved.get(k)is True for k in ('noLoad','noReplay','noResume')) and saved.get('savedGameTick')==tick
+            and receipt.get('actionKind')=='save' and receipt.get('terminal') is True and receipt.get('succeeded') is True
+            and receipt.get('sessionId')==loaded.get('sessionId') and receipt.get('planetId')==config.get('planetId')
+            and receipt.get('completedAtGameTick')==tick and receipt.get('actionId')!=action
+            and closed.get('passed') is True and closed.get('paidOriginalRetained') is True and closed.get('noReplay') is True
+            and closed.get('primaryTick')==closed.get('lastExitTick')==primary==last==tick
+            and backup.get('complete') is True and backup.get('verified') is True): return False
+    b=builds[0];objects=b.get('objects') or [];originals=original.get('blueprintObjects') or []
+    specs=(b.get('site') or {}).get('objects') or [];station_detail=station.get('logisticsStation') or {}
+    control=original.get('constructionControl') or {}
+    if not (b.get('actionId')==action and b.get('buildId')==original.get('blueprintBuildId') and bool(b.get('buildId'))
+            and b.get('sessionId')==loaded.get('sessionId') and b.get('planetId')==config.get('planetId')
+            and b.get('capturedAtGameTick')==tick and b.get('phase')=='outcome_unknown'
+            and b.get('persistenceHealthy') is True and b.get('freshWorldReconciled') is True
+            and b.get('doNotReplayWholeBlueprint') is True
+            and b.get('submittedCount')==b.get('completedCount')==1 and len(objects)==len(originals)==len(specs)==1
+            and control.get('executionKind')=='structured_native' and control.get('dispatchDisabled') is True
+            and control.get('physicalIdleVerified') is False and control.get('wholeBatchDebitSharedByObjectReceipts') is True
+            and objects[0].get('state')=='completed' and objects[0].get('entityId')==station.get('objectId')
+            and type(station.get('objectId'))is int and station['objectId']>0
+            and type(objects[0].get('prebuildId'))is int and objects[0]['prebuildId']>0
+            and objects[0].get('prebuildId')==originals[0].get('prebuildId')
+            and all(objects[0].get(k)==originals[0].get(k) and objects[0].get(k) is not None
+                    for k in ('inventoryBefore','inventoryAfter','beforeInventoryHash','afterInventoryHash'))
+            and type(objects[0]['inventoryBefore'])is int and objects[0]['inventoryAfter']==objects[0]['inventoryBefore']-1
+            and original['itemDeltas'][0].get('beforeCount')==objects[0]['inventoryBefore']
+            and original['itemDeltas'][0].get('afterCount')==objects[0]['inventoryAfter']
+            and specs[0].get('itemId')==2103 and station_detail.get('isInterstellar') is False
+            and station_detail.get('isCollector') is False and station_detail.get('galacticStationId')==0
+            and drones.get('enabled') is False and drones.get('activeObservationsComplete') is True
+            and all(type(drones.get(k))is int and drones[k]>=0 for k in ('working','idle','total'))
+            and drones['working']+drones['idle']==drones['total']
+            and type(drones.get('working'))is int and drones['working']>0 and len(active)==drones['working']
+            and all(x.get('stage')==4 and x.get('targetObjectId')==0
+                    and x.get('nextTargetObjectIds')==[0,0,0] for x in active)): return False
+    a=station.get('position') or {};p=specs[0].get('position') or {}
+    return (set(a)==set(p)=={'x','y','z'} and all(type(v)in(int,float) and math.isfinite(v) for v in (*a.values(),*p.values()))
+        and math.dist([a[k] for k in 'xyz'],[p[k] for k in 'xyz'])<=.01)
 
 
 def fully_observed_dry_surface(prepared):

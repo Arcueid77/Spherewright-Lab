@@ -8,7 +8,7 @@ from evidence import need,read,sha,json_value
 from mcp_client import Client
 from saved_space import exact_last_exit_echo,paused_space_source,exact_ui_supply,saved_identity_token
 from contracts import quarantined_navigation_original_accounted,fully_observed_dry_surface,observed_short_crossing_dry_landing
-from contracts import ordinary_owned_resume_echo,resume_admission_echo,validate_steps,validate_native_calls,strict_native_player_idle,native_warper_auto_supply_enabled,quarantined_paid_original_accounted,quarantined_harvest_no_effect_accounted,isolated_paid_belt_build_accounted,quarantined_local_move_saved_source,completed_saved_surface_move,isolated_surface_unknown_after_saved_home,isolated_saved_menu_unknown,remote_saved_after_isolated_home
+from contracts import ordinary_owned_resume_echo,resume_admission_echo,validate_steps,validate_native_calls,strict_native_player_idle,native_warper_auto_supply_enabled,quarantined_paid_original_accounted,quarantined_harvest_no_effect_accounted,isolated_paid_belt_build_accounted,quarantined_local_move_saved_source,completed_saved_surface_move,isolated_surface_unknown_after_saved_home,isolated_saved_menu_unknown,remote_saved_after_isolated_home,remote_paid_saved_after_isolated_remote
 
 PLAYER_SETTING_MODES=('enable-mecha-construction-drones','disable-mecha-research-auto-supply',
  'enable-mecha-research-auto-supply','enable-mecha-warper-auto-supply')
@@ -120,6 +120,29 @@ class Live:
   need(remote_saved_after_isolated_home(c,home,loaded,frozen('outbound'),
    frozen('remoteMenuSave'),backup),'remote_saved_outbound_isolation_unproved')
 
+ def assert_remote_paid_unknowns_isolated(self,c,backup):
+  isolation=c.get('remotePaidSavedUnknownIsolation')
+  need(isolation and not c.get('homeSavedUnknownIsolation') and not c.get('remoteSavedUnknownIsolation'),
+   'remote_paid_isolation_evidence_missing')
+  def frozen(key):
+   need(sha(isolation[key+'Path'])==isolation[key+'Sha256'],'frozen_remote_paid_evidence_changed')
+   return read(isolation[key+'Path'])
+  previous=frozen('previousConfig')
+  need(sha(previous['backupManifest'])==previous['backupManifestSha256'],'previous_remote_backup_manifest_changed')
+  older=read(previous['backupManifest'])
+  need(older.get('complete') is True and older.get('verified') is True,'previous_remote_backup_unproved')
+  for role in ('primary','lastExit'):
+   path=Path(previous['savePaths'][role]).resolve()
+   need(path==Path(c['savePaths'][role]).resolve(),'remote_paid_save_identity_changed')
+   rows=[row for row in older['rows'] if Path(row['originalPath']).resolve()==path]
+   proof=older['latest'][role]
+   need(len(rows)==1 and rows[0]['sha256']==proof['sha256'] and sha(rows[0]['backupPath'])==proof['sha256'],
+    'previous_remote_backup_copy_changed')
+  self.assert_remote_unknowns_isolated(previous,older)
+  need(remote_paid_saved_after_isolated_remote(c,previous,frozen('loadedSession'),frozen('originalAction'),
+   frozen('observedBuild'),frozen('quarantinedSession'),frozen('pausedPlayer'),frozen('observedStation'),
+   frozen('pausedSave'),frozen('normalClose'),backup),'remote_paid_saved_isolation_unproved')
+
  def offline_preflight(self):
   s=self.runtime;c=s.config;s.stopped();s.cohort();s.verify_revision_stamps();m=s.verify_backup()
   for ref in c['qualifiedInputs']:
@@ -161,6 +184,8 @@ class Live:
    self.assert_home_unknowns_isolated(c,m);home_isolated=True
   if c.get('remoteSavedUnknownIsolation'):
    self.assert_remote_unknowns_isolated(c,m);home_isolated=True
+  if c.get('remotePaidSavedUnknownIsolation'):
+   self.assert_remote_paid_unknowns_isolated(c,m);home_isolated=True
   need(c['firstOperationReady'] and (c.get('originalActionsReconciled') is True
     or c.get('recoveryProfile')=='successful-outbound-surface' and bool(local_moves) or home_isolated),'offline_not_ready')
   for original in c.get('isolatedPaidBeltBuilds',[]):
