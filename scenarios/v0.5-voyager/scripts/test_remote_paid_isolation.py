@@ -3,7 +3,7 @@ from pathlib import Path
 import copy,datetime as dt,sys,unittest
 sys.path.insert(0,str(Path(__file__).parent/'live'))
 sys.path.insert(0,str(Path(__file__).parent))
-from contracts import remote_paid_saved_after_isolated_remote,remote_failed_resume_saved_after_paid
+from contracts import remote_paid_saved_after_isolated_remote,remote_failed_resume_saved_after_paid,owned_saved_recovery_context
 from driver import ordinary_remote_prepare_arguments
 
 
@@ -68,6 +68,9 @@ def failed_resume_with_paused_save_fixture():
 class RemotePaidIsolationTests(unittest.TestCase):
     def test_later_failed_resume_can_carry_an_exact_paused_primary_save(self):
         self.assertTrue(remote_failed_resume_saved_after_paid(*failed_resume_with_paused_save_fixture()))
+        c=failed_resume_with_paused_save_fixture()[0];c['remoteFailedResumeSavedIsolation']={'frozen':'evidence'}
+        self.assertTrue(owned_saved_recovery_context(c))
+        c['originalActionsReconciled']=True;self.assertFalse(owned_saved_recovery_context(c))
         for mutate in (lambda a:a[6].update(originalResumeActionId='different'),
                        lambda a:a[6]['originalSave'].update(succeeded=False),
                        lambda a:a[4].update(savedTick=149),

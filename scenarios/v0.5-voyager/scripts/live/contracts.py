@@ -6,7 +6,8 @@ def owned_saved_recovery_context(config):
             and config.get('recoveryMode')=='authorize_remote_primary_recovery' and config.get('sourceRole')=='primary'):
         # The driver separately validates this evidence, its historical home
         # source and the later complete remote save before allowing any launch.
-        return bool(config.get('remoteSavedUnknownIsolation') or config.get('remotePaidSavedUnknownIsolation')) and config.get('originalActionsReconciled') is False
+        return bool(config.get('remoteSavedUnknownIsolation') or config.get('remotePaidSavedUnknownIsolation')
+            or config.get('remoteFailedResumeSavedIsolation')) and config.get('originalActionsReconciled') is False
     home=config.get('closedJourneyHome') or {}
     return (config.get('recoveryProfile')=='ordinary-owned-home'
         and config.get('recoveryMode') in ('default','verified_newer_lastexit','reauthorize_expired_primary')
