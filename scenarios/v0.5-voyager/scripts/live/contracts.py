@@ -7,7 +7,7 @@ def owned_saved_recovery_context(config):
         # The driver separately validates this evidence, its historical home
         # source and the later complete remote save before allowing any launch.
         return bool(config.get('remoteSavedUnknownIsolation') or config.get('remotePaidSavedUnknownIsolation')
-            or config.get('remoteFailedResumeSavedIsolation')) and config.get('originalActionsReconciled') is False
+            or config.get('remoteFailedResumeSavedIsolation') or config.get('remoteHealthySavedIsolation')) and config.get('originalActionsReconciled') is False
     home=config.get('closedJourneyHome') or {}
     return (config.get('recoveryProfile')=='ordinary-owned-home'
         and config.get('recoveryMode') in ('default','verified_newer_lastexit','reauthorize_expired_primary')
@@ -603,6 +603,41 @@ def remote_failed_resume_saved_after_paid(config, previous, failed, cut, closed,
         and all(type(drones.get(k))is int and drones[k]>=0 for k in ('working','idle','total'))
         and drones['working']+drones['idle']==drones['total'] and len(active)==drones['working']
         and all(x.get('stage')==4 and x.get('targetObjectId')==0 and x.get('nextTargetObjectIds')==[0,0,0] for x in active))
+
+
+def remote_healthy_saved_after_isolation(config, previous, loaded, resumed, menu_save, backup):
+    """Carry unchanged old unknowns through one distinct healthy remote save."""
+    old=previous.get('originalUnknownActionsNeverReplayed');current=config.get('originalUnknownActionsNeverReplayed')
+    before=previous.get('sourceTick');tick=config.get('sourceTick');latest=backup.get('latest') or {}
+    save=menu_save.get('mainMenuReturnReadback') or {};session=loaded.get('sessionId')
+    return (config.get('recoveryProfile')==previous.get('recoveryProfile')=='ordinary-owned-remote'
+        and config.get('recoveryMode')==previous.get('recoveryMode')=='authorize_remote_primary_recovery'
+        and config.get('sourceRole')=='primary' and previous.get('sourceRole') in ('primary','lastExit')
+        and config.get('originalActionsReconciled') is previous.get('originalActionsReconciled') is False
+        and isinstance(old,(list,tuple)) and isinstance(current,(list,tuple)) and bool(old)
+        and all(isinstance(x,str) and x for x in (*old,*current)) and len(set(old))==len(old)
+        and len(set(current))==len(current) and set(old)==set(current)
+        and type(before)is int and type(tick)is int and 0<=before<=tick
+        and type(previous.get('spentGameTicks'))is int and previous['spentGameTicks']>=0
+        and config.get('spentGameTicks')==previous['spentGameTicks']+tick-before
+        and config.get('returnReserveGameTicks')==previous.get('returnReserveGameTicks')
+        and config.get('cleanupReserveGameTicks')==previous.get('cleanupReserveGameTicks')
+        and config.get('expectedNativeVersion')==previous.get('expectedNativeVersion')
+        and config.get('nativeAssemblySha256')==previous.get('nativeAssemblySha256')
+        and isinstance(session,str) and bool(session) and loaded.get('gameLoaded') is True
+        and loaded.get('ownedBySpherewright') is True and loaded.get('writesAllowed') is True
+        and loaded.get('localPlanetId')==config.get('planetId')==previous.get('planetId')
+        and type(loaded.get('gameTick'))is int and before<=loaded['gameTick']<=tick
+        and resumed.get('actionKind')=='resume-owned-game' and resumed.get('terminal') is True and resumed.get('succeeded') is True
+        and resumed.get('state')=='completed' and resumed.get('sessionId')==session and resumed.get('planetId')==config.get('planetId')
+        and resumed.get('actionId') not in current and menu_save.get('actionId') not in current
+        and menu_save.get('actionId')!=resumed.get('actionId') and menu_save.get('actionKind')=='return-to-main-menu'
+        and menu_save.get('terminal') is True and menu_save.get('succeeded') is True and menu_save.get('state')=='completed'
+        and menu_save.get('sessionId')==session and menu_save.get('planetId')==config.get('planetId')
+        and menu_save.get('completedAtGameTick')==tick and save.get('savedGameTick')==tick
+        and all(save.get(k)is True for k in ('normalSaveConfirmed','completeSaveVerified','nativeEndRequested','mainMenuVerified'))
+        and backup.get('complete') is True and backup.get('verified') is True
+        and (latest.get('primary') or {}).get('gameTick')==(latest.get('lastExit') or {}).get('gameTick')==tick)
 
 
 def fully_observed_dry_surface(prepared):

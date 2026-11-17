@@ -3,7 +3,7 @@ from pathlib import Path
 import copy,datetime as dt,sys,unittest
 sys.path.insert(0,str(Path(__file__).parent/'live'))
 sys.path.insert(0,str(Path(__file__).parent))
-from contracts import remote_paid_saved_after_isolated_remote,remote_failed_resume_saved_after_paid,owned_saved_recovery_context
+from contracts import remote_paid_saved_after_isolated_remote,remote_failed_resume_saved_after_paid,remote_healthy_saved_after_isolation,owned_saved_recovery_context
 from driver import ordinary_remote_prepare_arguments
 
 
@@ -65,7 +65,31 @@ def failed_resume_with_paused_save_fixture():
     return [current,previous,failed,cut,closed,backup,saved]
 
 
+def healthy_saved_fixture():
+    previous=failed_resume_with_paused_save_fixture()[0]
+    current=dict(previous,sourceRole='primary',sourceTick=200,spentGameTicks=1100,
+        originalUnknownActionsNeverReplayed=list(previous['originalUnknownActionsNeverReplayed']))
+    loaded=dict(sessionId='healthy-session',localPlanetId=402,gameTick=151,gameLoaded=True,ownedBySpherewright=True,writesAllowed=True)
+    resumed=dict(actionId='successful-resume',actionKind='resume-owned-game',sessionId='healthy-session',planetId=402,
+        terminal=True,succeeded=True,state='completed')
+    menu=dict(actionId='new-menu-save',actionKind='return-to-main-menu',sessionId='healthy-session',planetId=402,
+        terminal=True,succeeded=True,state='completed',completedAtGameTick=200,
+        mainMenuReturnReadback=dict(savedGameTick=200,normalSaveConfirmed=True,completeSaveVerified=True,nativeEndRequested=True,mainMenuVerified=True))
+    backup=dict(complete=True,verified=True,latest=dict(primary=dict(gameTick=200),lastExit=dict(gameTick=200)))
+    return [current,previous,loaded,resumed,menu,backup]
+
+
 class RemotePaidIsolationTests(unittest.TestCase):
+    def test_healthy_remote_save_keeps_prior_unknowns_and_actual_spending(self):
+        self.assertTrue(remote_healthy_saved_after_isolation(*healthy_saved_fixture()))
+        changes=[lambda a:a[0].update(spentGameTicks=1099),lambda a:a[0]['originalUnknownActionsNeverReplayed'].remove('paid'),
+                 lambda a:a[2].update(writesAllowed=False),lambda a:a[3].update(succeeded=False),
+                 lambda a:a[4]['mainMenuReturnReadback'].update(completeSaveVerified=False),
+                 lambda a:a[5]['latest']['lastExit'].update(gameTick=199)]
+        for change in changes:
+            args=copy.deepcopy(healthy_saved_fixture());change(args)
+            self.assertFalse(remote_healthy_saved_after_isolation(*args))
+
     def test_later_failed_resume_can_carry_an_exact_paused_primary_save(self):
         self.assertTrue(remote_failed_resume_saved_after_paid(*failed_resume_with_paused_save_fixture()))
         c=failed_resume_with_paused_save_fixture()[0];c['remoteFailedResumeSavedIsolation']={'frozen':'evidence'}
