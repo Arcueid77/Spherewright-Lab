@@ -1,8 +1,10 @@
 """A completed paid remote object stays distinct from its unknown drone tail."""
 from pathlib import Path
-import copy,sys,unittest
+import copy,datetime as dt,sys,unittest
 sys.path.insert(0,str(Path(__file__).parent/'live'))
+sys.path.insert(0,str(Path(__file__).parent))
 from contracts import remote_paid_saved_after_isolated_remote,remote_failed_resume_saved_after_paid
+from driver import ordinary_remote_prepare_arguments
 
 
 def fixture():
@@ -50,6 +52,16 @@ def failed_resume_fixture():
 
 
 class RemotePaidIsolationTests(unittest.TestCase):
+    def test_newer_exit_preparation_requires_its_distinct_isolation_chain(self):
+        c=failed_resume_fixture()[0]
+        c.update(surfaceRecoveryTarget=None,recoveryWindowSeconds=7200,additionalVoyagerGameTicks=800000,
+            remoteFailedResumeSavedIsolation={'frozen':'evidence'})
+        args=ordinary_remote_prepare_arguments(c,'synthetic',dt.datetime.now(dt.timezone.utc))
+        self.assertEqual(140,args['minimumRecoveryGameTick']);self.assertEqual(140,args['expectedRecoveryGameTick'])
+        c.pop('remoteFailedResumeSavedIsolation')
+        with self.assertRaisesRegex(RuntimeError,'ordinary_remote_source_shape_invalid'):
+            ordinary_remote_prepare_arguments(c,'synthetic',dt.datetime.now(dt.timezone.utc))
+
     def test_later_failed_recovery_can_carry_the_newer_exact_normal_exit(self):
         self.assertTrue(remote_failed_resume_saved_after_paid(*failed_resume_fixture()))
 
