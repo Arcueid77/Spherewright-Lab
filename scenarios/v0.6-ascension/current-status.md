@@ -1,8 +1,8 @@
 # Ascension current snapshot / Ascension活动快照
 
-产品修复 `f47ef691` 已直接推送main：支持远端2103的原生身份与付费施工、带有界本地物流机的行星站保存现场准入，并将不支持物品改为不可重试的明确拒绝。最新本地完整回归7033项、原生构建、接口元数据及双语文档检查通过；准确提交CI与同源实装资格进行中。游戏关闭、实装仍为 `22970069`；源码和离线结果不代表新版本实机通过。
+产品修复 `f47ef691` 已直接推送main：支持远端2103的原生身份与付费施工、带有界本地物流机的行星站保存现场准入，并将不支持物品改为不可重试的明确拒绝。最新本地完整回归7033项、原生构建、接口元数据及双语文档检查通过；准确提交CI及同源开发组件资格通过，Lab已采用新源码，冷安装尚未完成。游戏关闭、实装仍为 `22970069`；源码和离线结果不代表新版本实机通过。
 
-Product fix `f47ef691` is pushed directly to main: remote2103 uses native identity and paid construction, saved-site admission recognizes bounded planetary local drones, and unsupported items receive a nonretryable rejection. The latest local full regression passed7033 cases; Native build, SDK metadata and bilingual documentation checks passed. Exact-commit CI and coherent installation qualification are in progress. The game is closed and installed runtime remains `22970069`; source/offline results do not establish live acceptance of the new version.
+Product fix `f47ef691` is pushed directly to main: remote2103 uses native identity and paid construction, saved-site admission recognizes bounded planetary local drones, and unsupported items receive a nonretryable rejection. The latest local full regression passed7033 cases; Native build, SDK metadata and bilingual documentation checks passed. Exact-commit CI and coherent development-cohort qualification passed, and Lab now selects the new source; cold installation is still pending. The game is closed and installed runtime remains `22970069`; source/offline results do not establish live acceptance of the new version.
 
 2026-11-17最新停机：Caph正常步行到现有电站并补10氘棒，电网满足率由约27%恢复至100%。背包保有1座行星站、2物流机及预备带/分拣器；远端站落点预检因产品施工白名单不支持2103在接受前被拒，没有建造或扣料。现场正常保存退出，Primary/LastExit均为133428570，2552项完整备份通过，累计12339308/15000000 tick及原返航/清理储备保留。游戏及writer已停；先在独立产品main修复并验证原生站点身份/付费施工，再同源冷部署、恢复最新现场并继续。完整闭壳、持续供应及最终双包未完成。
 
