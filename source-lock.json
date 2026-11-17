@@ -5,7 +5,7 @@
   "spherewright": {
     "repository": "Arcueid77/Spherewright",
     "submodulePath": "deps/Spherewright",
-    "sourceSha": "ad26eaf6d82ad1bdf831c94a76bdda931d4fda8b",
+    "sourceSha": "685b1f9bcc10bd717448ee0b5acd3ac4fe5c8d91",
     "releaseTag": null,
     "productVersion": "0.6.0"
   },

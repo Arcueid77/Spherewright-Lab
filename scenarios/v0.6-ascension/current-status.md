@@ -1,5 +1,9 @@
 # Ascension current snapshot / Ascension活动快照
 
+已选 `685b1f9b`：远端闲置交接容许不超过0.00001米/秒的极小原生物理噪声，RTS仍须为零，真实接地与原能源/返航预算不变。针对性114项、原生构建、双语文档、准确CI及同源组件资格通过。游戏关闭，实装仍为 `ad26eaf6`；冷安装及无人机恢复尚待实机验证。
+
+Selected `685b1f9b`: remote idle handoff permits only tiny Native physical noise up to0.00001m/s, retaining zero RTS, actual ground and original energy/return budgets. All114 targeted tests, Native build, bilingual documentation, exact CI and coherent cohort qualification passed. The game is stopped and installed runtime remains `ad26eaf6`; cold installation and live drone recovery remain pending.
+
 2026-11-17最新停机：`ad26eaf6` 从较新LastExit读入原站与返航无人机，恢复因接地角色约6.6×10⁻¹⁰米/秒的原生速度残差失败并暂停；原已付施工仍unknown，新恢复明确失败。修复后的MCP暂停保存已实机成功，随后正常关闭；Primary/LastExit均为133447080、2568项完整备份通过。累计12357818/15000000 tick、134437/199346请求及原返航/清理储备保留。暂停保存已通过实机，无人机归位尚未通过；下一修复容许极小物理浮点残差并保留零RTS与原预算，验证后从该最新主档续接。
 
 Latest stopped boundary, 2026-11-17: `ad26eaf6` loaded the newer LastExit with the original station and returning drone; recovery failed and paused on a grounded Native speed residual of about6.6×10⁻¹⁰m/s. The paid construction remains unknown and the new recovery is known failed. The corrected MCP paused Save succeeded live, followed by normal close; Primary/LastExit both equal133447080, with a complete2568-file backup. Cumulative spending is12357818/15000000 ticks and134437/199346 requests with original return/cleanup reserves. Paused Save passed live, but drone return did not; qualify a fix for tiny physical float residuals that retains zero RTS and original budgets, then continue from this latest primary.
