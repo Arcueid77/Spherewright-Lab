@@ -11,6 +11,56 @@ from dyson_observers import observe_receiver_power
 def distance(a,b): return math.dist([a[k] for k in 'xyz'],[b[k] for k in 'xyz'])
 def count(player,item): return sum(r['count'] for r in player['inventory'] if r['itemId']==item)
 
+def read_only_belt_preview_matches(kind,args,plan,context):
+ """Accept a bound tokenless assessment, including a reported Native rejection."""
+ if not isinstance(args.get('expectedPlayerStateHash'),str) or not args['expectedPlayerStateHash'] \
+   or not isinstance(plan,Mapping) or plan.get('prepared') is not False or plan.get('commitAllowedNow') is not False \
+   or plan.get('planToken') or plan.get('actionKind')!='build' \
+   or plan.get('expectedStateHash')!=args.get('expectedPlayerStateHash') \
+   or plan.get('sourceObjectId') is not None or plan.get('destinationObjectId') is not None:
+  return False
+ request=args.get(kind)
+ if not isinstance(request,Mapping):return False
+ snapshot=plan.get(kind)
+ if not isinstance(snapshot,Mapping) or snapshot.get('executable') is not False:return False
+ if kind=='beltEndpointPreview':
+  if plan.get('buildKind')!='belt_endpoint_preview' or snapshot.get('phase')!='read_only_belt_endpoint_preview':return False
+  endpoints=snapshot
+ else:
+  if plan.get('buildKind')!='belt_route_preview' or snapshot.get('phase')!='read_only_bounded_belt_route_preview_v2' \
+    or snapshot.get('factoryGeometryHash')!=request.get('expectedFactoryGeometryHash'):return False
+  segments=snapshot.get('segments');requested=request.get('segments');points=snapshot.get('points')
+  if not isinstance(segments,list) or not isinstance(requested,list) or not 1<=len(requested)<=12 \
+    or len(segments)!=len(requested) or not isinstance(points,list) or not 2<=len(points)<=192:return False
+  endpoints=snapshot.get('endpoints')
+ if not isinstance(endpoints,Mapping) or endpoints.get('phase')!='read_only_belt_endpoint_preview' \
+   or endpoints.get('executable') is not False or endpoints.get('sessionId')!=context.get('sessionId') \
+   or endpoints.get('planetId')!=context.get('planetId') or not isinstance(endpoints.get('assessmentHash'),str) \
+   or not endpoints['assessmentHash'] \
+   or not isinstance(endpoints.get('attachments'),list) or not isinstance(endpoints.get('blockers'),list):return False
+ if type(endpoints.get('nativeCheckPerformed')) is not bool or type(endpoints.get('nativeCheckPassed')) is not bool \
+   or (endpoints['nativeCheckPassed'] and (not endpoints['nativeCheckPerformed'] or endpoints['blockers'])) \
+   or (not endpoints['nativeCheckPassed'] and not endpoints['blockers']):return False
+ bindings=[(name,request.get(name)) for name in ('source','destination') if request.get(name) is not None]
+ if not bindings or (kind=='beltRoutePreview' and len(bindings)!=2):return False
+ if kind=='beltEndpointPreview' and len(bindings)!=len(endpoints['attachments']):return False
+ if endpoints['attachments']:
+  if len(bindings)!=len(endpoints['attachments']):return False
+  for name,binding in bindings:
+   rows=[row for row in endpoints['attachments'] if isinstance(row,Mapping) and row.get('role')==name]
+   if not isinstance(binding,Mapping) or len(rows)!=1 or rows[0].get('existingObjectId')!=binding.get('existingObjectId') \
+     or rows[0].get('endpointStateHash')!=binding.get('expectedEndpointStateHash'):return False
+ if kind=='beltRoutePreview':
+  if type(snapshot.get('nativePathCheckPerformed')) is not bool or type(snapshot.get('nativePathCheckPassed')) is not bool \
+    or type(snapshot.get('jointNativeCheckPerformed')) is not bool or type(snapshot.get('jointNativeCheckPassed')) is not bool \
+    or snapshot['jointNativeCheckPerformed']!=endpoints['nativeCheckPerformed'] \
+    or (snapshot['nativePathCheckPassed'] and not snapshot['nativePathCheckPerformed']) \
+    or (snapshot['jointNativeCheckPerformed'] and not snapshot['nativePathCheckPassed']) \
+    or (endpoints['nativeCheckPassed'] and not snapshot['jointNativeCheckPassed']) \
+    or (snapshot['jointNativeCheckPassed'] and not (snapshot['nativePathCheckPerformed'] and snapshot['nativePathCheckPassed']
+     and snapshot['jointNativeCheckPerformed'] and endpoints['nativeCheckPassed'] and len(endpoints['attachments'])==2)):return False
+ return True
+
 def resolve_refs(x,values):
  if isinstance(x,Mapping) and set(x)=={'ref'}:
   value=values
@@ -316,6 +366,9 @@ class Factory(Live):
   args=dict(self.ctx,**resolve(s['arguments']));check(prepare,args)
   walking_preview = prepare == 'spherewright_prepare_move' and args.get('previewWalkingRoute') is True
   need(not walking_preview or not commit_requested, 'walking_preview_requires_prepare_only')
+  belt_previews=[key for key in ('beltEndpointPreview','beltRoutePreview') if args.get(key) is not None]
+  need(not belt_previews or prepare=='spherewright_prepare_build' and not commit_requested and len(belt_previews)==1,
+   'belt_preview_requires_prepare_only')
   wind_preview = prepare == 'spherewright_prepare_dismantle' and args.get('previewOnly') is True
   need(not wind_preview or not commit_requested, 'wind_preview_requires_prepare_only')
   wind_impact_hash=s.get('expectedWindPowerTopologyHash')
@@ -326,6 +379,12 @@ class Factory(Live):
    need(bool(args.get('resumeBuildId')) and not args.get('blueprintCode') and args.get('site') is None
     and args.get('allowNewPaidConstructionWindow') is True,'shared_driver_paid_resume_only_no_new_blueprint')
   q=self.call(prepare,args)
+  if belt_previews:
+   need(read_only_belt_preview_matches(belt_previews[0],args,q,self.ctx),'tokenless_belt_preview_echo_required')
+   self.runtime.put(s['role']+'-plan.private.json',q)
+   self.runtime.put(s['role']+'-prepare-only.private.json',dict(noCommit=True,
+    noGameActionAccepted=True,notAcceptanceEvidence=True))
+   return q
   if wind_preview:
    preview=q.get('windTurbineDismantle') or {}
    need(q.get('prepared') is True and q.get('commitAllowedNow') is False and not q.get('planToken')

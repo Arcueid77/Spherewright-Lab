@@ -481,6 +481,63 @@ class LiveDriverTests(unittest.TestCase):
   with self.assertRaisesRegex(RuntimeError, 'tokenless_walking_preview_echo_required'):
    adapter.native_operation_once(step, commit_requested=False)
 
+ def test_tokenless_belt_endpoint_preview_preserves_binding_and_never_commits(self):
+  adapter=Factory.__new__(Factory);adapter.ctx=dict(sessionId='synthetic-session',planetId=104);adapter.refs={}
+  written=[];adapter.runtime=type('Runtime',(),dict(put=lambda self,name,value:written.append((name,value))))()
+  arguments=dict(expectedPlayerStateHash='player-hash',beltEndpointPreview=dict(sorterItemId=2011,filterItemId=1305,
+   source=dict(existingObjectId=31,expectedEndpointStateHash='endpoint-hash')))
+  adapter.schemas={'spherewright_prepare_build':dict(properties={k:{} for k in [*adapter.ctx,*arguments]},required=[])}
+  response=dict(prepared=False,commitAllowedNow=False,planToken='',actionKind='build',buildKind='belt_endpoint_preview',
+   expectedStateHash='player-hash',sourceObjectId=None,destinationObjectId=None,
+   beltEndpointPreview=dict(phase='read_only_belt_endpoint_preview',executable=False,sessionId='synthetic-session',planetId=104,
+    assessmentHash='assessment',nativeCheckPerformed=True,nativeCheckPassed=True,blockers=[],
+    attachments=[dict(role='source',existingObjectId=31,endpointStateHash='endpoint-hash')]))
+  calls=[];adapter.call=lambda name,args:calls.append(name) or response
+  adapter.commit=lambda *args: self.fail('read-only belt preview cannot commit')
+  step=dict(role='belt-preview',prepareTool='spherewright_prepare_build',arguments=arguments)
+  self.assertIs(adapter.native_operation_once(step,commit_requested=False),response)
+  self.assertEqual(calls,['spherewright_prepare_build']);self.assertEqual(len(written),2)
+  with self.assertRaisesRegex(RuntimeError,'operation_family_not_allowed'):
+   adapter.native_operation_once(step,commit_requested=True)
+  self.assertEqual(calls,['spherewright_prepare_build'])
+  response['beltEndpointPreview'].update(nativeCheckPassed=False,blockers=['native_connection_rejected'])
+  self.assertIs(adapter.native_operation_once(step,commit_requested=False),response)
+  response['beltEndpointPreview']['attachments'][0]['endpointStateHash']='wrong-endpoint'
+  with self.assertRaisesRegex(RuntimeError,'tokenless_belt_preview_echo_required'):
+   adapter.native_operation_once(step,commit_requested=False)
+  response['beltEndpointPreview']['attachments'][0]['endpointStateHash']='endpoint-hash';response['planToken']='unexpected-token'
+  with self.assertRaisesRegex(RuntimeError,'tokenless_belt_preview_echo_required'):
+   adapter.native_operation_once(step,commit_requested=False)
+
+ def test_tokenless_belt_route_preview_binds_geometry_and_never_commits(self):
+  adapter=Factory.__new__(Factory);adapter.ctx=dict(sessionId='synthetic-session',planetId=104);adapter.refs={}
+  adapter.runtime=type('Runtime',(),dict(put=lambda *_:None))()
+  arguments=dict(expectedPlayerStateHash='player-hash',beltRoutePreview=dict(expectedFactoryGeometryHash='geometry-hash',segments=[{}],
+   source=dict(existingObjectId=31,expectedEndpointStateHash='source-hash'),
+   destination=dict(existingObjectId=32,expectedEndpointStateHash='destination-hash')))
+  adapter.schemas={'spherewright_prepare_build':dict(properties={k:{} for k in [*adapter.ctx,*arguments]},required=[])}
+  endpoints=dict(phase='read_only_belt_endpoint_preview',executable=False,sessionId='synthetic-session',planetId=104,
+   assessmentHash='assessment',nativeCheckPerformed=True,nativeCheckPassed=True,blockers=[],
+   attachments=[dict(role='source',existingObjectId=31,endpointStateHash='source-hash'),
+    dict(role='destination',existingObjectId=32,endpointStateHash='destination-hash')])
+  response=dict(prepared=False,commitAllowedNow=False,planToken='',actionKind='build',buildKind='belt_route_preview',
+   expectedStateHash='player-hash',sourceObjectId=None,destinationObjectId=None,
+   beltRoutePreview=dict(phase='read_only_bounded_belt_route_preview_v2',executable=False,factoryGeometryHash='geometry-hash',
+    nativePathCheckPerformed=True,nativePathCheckPassed=True,jointNativeCheckPerformed=True,jointNativeCheckPassed=True,
+    segments=[{}],points=[{},{}],endpoints=endpoints))
+  adapter.call=lambda *_:response;adapter.commit=lambda *args:self.fail('read-only route preview cannot commit')
+  step=dict(role='route-preview',prepareTool='spherewright_prepare_build',arguments=arguments)
+  self.assertIs(adapter.native_operation_once(step,commit_requested=False),response)
+  response['beltRoutePreview'].update(nativePathCheckPassed=False,jointNativeCheckPerformed=False,jointNativeCheckPassed=False)
+  endpoints.update(nativeCheckPerformed=False,nativeCheckPassed=False,blockers=['native_path_rejected'],attachments=[])
+  self.assertIs(adapter.native_operation_once(step,commit_requested=False),response)
+  response['beltRoutePreview']['factoryGeometryHash']='other-geometry'
+  with self.assertRaisesRegex(RuntimeError,'tokenless_belt_preview_echo_required'):
+   adapter.native_operation_once(step,commit_requested=False)
+  response['beltRoutePreview']['factoryGeometryHash']='geometry-hash';endpoints['sessionId']='other-session'
+  with self.assertRaisesRegex(RuntimeError,'tokenless_belt_preview_echo_required'):
+   adapter.native_operation_once(step,commit_requested=False)
+
  def test_tokenless_wind_preview_preserves_target_binding_and_never_commits(self):
   adapter=Factory.__new__(Factory)
   adapter.ctx=dict(sessionId='synthetic-session',planetId=104)

@@ -1,5 +1,7 @@
 # Shared live driver / 共享实机驱动
 
+The caller accepts the published tokenless `beltEndpointPreview` and `beltRoutePreview` responses through `prepare-only`, checking the player, session, endpoint and route-geometry bindings and preserving both positive assessments and explicit Native rejections. It refuses commit-capable, mismatched or mixed preview responses; no preview submits a game action. This is caller support covered by offline tests, not proof that the currently running writer has been replaced or that any planned route has been built. / 调用端可通过 `prepare-only` 接收公开的无令牌 `beltEndpointPreview` 和 `beltRoutePreview`，核对玩家、会话、端点和路线几何绑定，并保留正向评估及明确原生拒绝；可提交、绑定不符或混合的预检结果均被拒绝，预检不提交游戏动作。这是离线测试覆盖的调用端支持，不代表当前运行中的writer已替换，也不代表任何规划路线已经建成。
+
 While idle, an explicitly retryable session-read timeout keeps the same writer and leaves queued work undispatched until a fresh healthy read succeeds. It retries only while the original game process remains present and within the original caller deadline; accepted or unknown writes are never retried. / 闲置期间，明确可重试的会话读取超时保留原唯一writer，在新鲜健康读回前不派发排队任务；仅在原游戏进程仍存在且原调用期限内重试只读，不重试已接受或unknown写入。
 
 Buffer waits for ordinary thermal/fusion generators read the observed `fuelPowerState.bufferedFuelItemId` and `bufferedFuelCount`. Loaded heat and current joules per tick are energy, not additional items; unavailable fuel state cannot satisfy a stock wait. / 普通火电和聚变机组的库存等待读取已观察的缓冲燃料物品与数量；已加载热值和每tick电量属于能源，不能当作额外物品，燃料状态不可用时不算库存达到。
