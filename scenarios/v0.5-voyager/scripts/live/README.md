@@ -1,5 +1,9 @@
 # Shared live driver / 共享实机驱动
 
+A known terminal Move or harvest failure leaves the caller available when the owned session is healthy and the original Native order is released, even if the player is still drifting. The next distinct action uses a fresh Native prepare; the failed action is not replayed. Build preparation also refreshes the player after an explicitly unaccepted, retryable player-state change. / 移动或采集明确失败后，只要会话健康且原生指令已释放，调用端可继续等待后续操作，包括角色仍在漂移的情况；下一次不同动作重新原生准备，不重放原动作。建造准备因玩家状态瞬变在接受前被拒时，也会刷新玩家状态后继续。
+
+`build-belt-between` binds fresh hashes for two existing endpoints and uses the normal Native build and material accounting. It can join already built empty belt ends where Native admits them; a preview alone is not a completed connection. / `build-belt-between` 对两个已有端点读取新鲜哈希，走正常原生建造与用料核销；可在原生允许时连接已建的空带端点，预览通过不代表连接已建成。
+
 `wait-player-still` accepts a finite `pollSeconds` from 0.25 to 30 (default 0.5), so a long natural recharge can use fewer read-only calls. Its finite wait, exact physical-idle readback, energy threshold, original caller deadline and later fresh Native admission still apply. / `wait-player-still` 可指定0.25至30秒的有限 `pollSeconds`（默认0.5秒），较长的自然充能等待可减少只读请求；有限等待、实际物理停稳、能量门槛、原调用期限及后续新鲜原生准入均保留。
 
 For a Move that opted into passive Drift, a fresh player read showing non-flying Walk drops the now-inapplicable Drift option before Native preparation. A player still in Drift keeps the option; no extra player read or automatic replay is introduced. / 移动已选择允许水面漂移时，若新鲜玩家状态显示已转为非飞行 Walk，调用端在原生准备前去掉不再适用的漂移选项；仍在 Drift 则保持原选项。不增加额外读数或自动重放。

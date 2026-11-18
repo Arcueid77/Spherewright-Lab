@@ -1503,15 +1503,19 @@ class LiveDriverTests(unittest.TestCase):
   a.call=call;a.commit=lambda *_:'original';a.successful_original=lambda _:dict(succeeded=True)
   s=freeze(dict(role='move',prepareTool='spherewright_prepare_move',reads=[dict(name='p',tool='spherewright_get_player_state',arguments={})],arguments=dict(targetX=1,targetY=2,targetZ=3,expectedPlayerStateHash=dict(ref='p.stateHash'))))
   a.native_operation(s);self.assertEqual('fresh',observed[-1][1]['expectedPlayerStateHash'])
- def test_known_failed_move_keeps_healthy_idle_writer_but_unknown_cannot_do_so(self):
+ def test_known_failed_move_keeps_healthy_released_writer_but_unknown_cannot_do_so(self):
   a=Factory.__new__(Factory);a.active=None;a.ctx=dict(sessionId='same')
   a.call=lambda *_:dict(gameLoaded=True,ownedBySpherewright=True,writesAllowed=True,sessionId='same')
-  a.player=lambda:dict(movementState='Walk',speed=0,nativePhysics=dict(groundContact=dict(checkSphereHit=True),currentOrderPresent=False,queuedOrderCount=0,**{k:dict(x=0,y=0,z=0) for k in ('velocity','walkRtsVelocity','driftRtsVelocity','walkManualVelocity','driftManualVelocity')}),handcraftQueue=[],constructionDrones=dict(working=0))
+  a.player=lambda:dict(isAlive=True,isOnPlanet=True,movementState='Drift',speed=1,
+   nativePhysics=dict(currentOrderPresent=False,queuedOrderCount=0))
   result=dict(actionId='original',actionKind='move',state='action_failed',terminal=True)
   self.assertTrue(a.can_await_after_known_move(AcceptedActionFailure('known',result)))
   result['state']='outcome_unknown';self.assertFalse(a.can_await_after_known_move(AcceptedActionFailure('unknown',result)))
-  result['state']='action_failed';a.player=lambda:dict(movementState='Drift',speed=1)
-  self.assertFalse(a.can_await_after_known_move(AcceptedActionFailure('moving',result)))
+  result['state']='action_failed';a.player=lambda:dict(isAlive=True,isOnPlanet=True,
+   nativePhysics=dict(currentOrderPresent=True,queuedOrderCount=0))
+  self.assertFalse(a.can_await_after_known_move(AcceptedActionFailure('order active',result)))
+  a.player=lambda:dict(isAlive=True,isOnPlanet=True,nativePhysics={})
+  self.assertFalse(a.can_await_after_known_move(AcceptedActionFailure('order unknown',result)))
  def test_actual_detached_runpy_entry_resolves_shared_modules_outside_its_directory(self):
   script=Path(__file__).resolve().parent/'live/run.py'
   with tempfile.TemporaryDirectory() as folder:

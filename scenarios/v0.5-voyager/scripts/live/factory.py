@@ -596,8 +596,8 @@ class Factory(Live):
     if self.active is not None:raise
     if isinstance(error,AcceptedActionFailure):
      if not self.can_await_after_known_move(error):raise
-     self.runtime.put(f'continuation-{sequence:03d}-known-failed-idle.private.json',dict(originalActionId=error.receipt['actionId'],
-      originalFailureRetained=True,healthyIdleReadbackProved=True,nextPlanMustFreshPrepare=True,noAutomaticReplay=True))
+     self.runtime.put(f'continuation-{sequence:03d}-known-failed-ready.private.json',dict(originalActionId=error.receipt['actionId'],
+      originalFailureRetained=True,healthyOrderReleasedReadbackProved=True,nextPlanMustFreshPrepare=True,noAutomaticReplay=True))
    sequence+=1
   if self.c is not None:self.cleanup_known_state()
 
@@ -613,5 +613,9 @@ class Factory(Live):
   if r.get('state')!='action_failed' or r.get('actionKind') not in ('move','harvest') or not r.get('terminal') or self.active is not None:return False
   s=self.call('spherewright_get_session_state',{})
   if not (s.get('gameLoaded') and s.get('ownedBySpherewright') and s.get('writesAllowed') and s.get('sessionId')==self.ctx['sessionId']):return False
-  p=self.player();physics=p.get('nativePhysics') or {};ground=physics.get('groundContact') or {};velocity=physics.get('velocity') or {}
-  return (strict_native_player_idle(p) and p.get('handcraftQueue')==[] and (p.get('constructionDrones') or {}).get('working')==0)
+  p=self.player();physics=p.get('nativePhysics') or {}
+  # A released, known-failed move may stop within reach or leave the player
+  # drifting. Keep the healthy caller available; the next distinct Native
+  # prepare decides whether its actual action can proceed from that state.
+  return (p.get('isAlive') is True and p.get('isOnPlanet') is True
+   and physics.get('currentOrderPresent') is False and physics.get('queuedOrderCount')==0)
