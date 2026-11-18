@@ -8,7 +8,7 @@ def owned_saved_recovery_context(config):
         # source and the later complete remote save before allowing any launch.
         return bool(config.get('remoteSavedUnknownIsolation') or config.get('remotePaidSavedUnknownIsolation')
             or config.get('remoteFailedResumeSavedIsolation') or config.get('remoteHealthySavedIsolation')
-            or config.get('remotePausedHarvestSavedIsolation')) and config.get('originalActionsReconciled') is False
+            or config.get('remotePausedHarvestSavedIsolation') or config.get('remoteFailedSameTickSavedIsolation')) and config.get('originalActionsReconciled') is False
     home=config.get('closedJourneyHome') or {}
     return (config.get('recoveryProfile')=='ordinary-owned-home'
         and config.get('recoveryMode') in ('default','verified_newer_lastexit','reauthorize_expired_primary')
@@ -678,6 +678,38 @@ def remote_paused_harvest_saved_after_isolation(config, previous, loaded, resume
         and saved.get('planetId')==config.get('planetId') and saved.get('completedAtGameTick')==tick
         and saved.get('actionId') not in current and resumed.get('actionId') not in current
         and closed.get('passed') is True and closed.get('gameStopped') is True
+        and backup.get('complete') is True and backup.get('verified') is True
+        and (latest.get('primary') or {}).get('gameTick')==(latest.get('lastExit') or {}).get('gameTick')==tick)
+
+
+def remote_failed_same_tick_saved_after_isolation(config, previous, failed, session, save_plan, saved, closed, backup):
+    """A known failed load at the saved tick does not erase earlier progress."""
+    old=previous.get('originalUnknownActionsNeverReplayed');current=config.get('originalUnknownActionsNeverReplayed')
+    tick=config.get('sourceTick');latest=backup.get('latest') or {};failure=failed.get('nativeFirstFailure') or {}
+    return (config.get('recoveryProfile')==previous.get('recoveryProfile')=='ordinary-owned-remote'
+        and config.get('recoveryMode')==previous.get('recoveryMode')=='authorize_remote_primary_recovery'
+        and config.get('sourceRole')=='primary' and previous.get('sourceRole')=='primary'
+        and config.get('originalActionsReconciled') is previous.get('originalActionsReconciled') is False
+        and isinstance(old,(list,tuple)) and isinstance(current,(list,tuple)) and bool(old)
+        and len(set(old))==len(old) and len(set(current))==len(current) and set(old)==set(current)
+        and type(tick)is int and tick==previous.get('sourceTick')
+        and config.get('spentGameTicks')==previous.get('spentGameTicks')
+        and config.get('returnReserveGameTicks')==previous.get('returnReserveGameTicks')
+        and config.get('cleanupReserveGameTicks')==previous.get('cleanupReserveGameTicks')
+        and config.get('expectedNativeVersion')==previous.get('expectedNativeVersion')
+        and config.get('nativeAssemblySha256')==previous.get('nativeAssemblySha256')
+        and failed.get('actionKind')=='resume-owned-game' and failed.get('terminal') is True
+        and failed.get('succeeded') is False and failed.get('state')=='action_failed'
+        and failure.get('capturedAtGameTick')==tick and failed.get('actionId') not in current
+        and session.get('sessionId')==failed.get('sessionId') and session.get('localPlanetId')==config.get('planetId')
+        and session.get('gameTick')==tick and session.get('gameLoaded') is True and session.get('ownedBySpherewright') is True
+        and session.get('writesAllowed') is False and session.get('writeQuarantineActionId')==failed.get('actionId')
+        and save_plan.get('prepared') is True and save_plan.get('commitAllowedNow') is True
+        and save_plan.get('preservesQuarantine') is True and save_plan.get('preservationGameTick')==tick
+        and saved.get('actionKind')=='save' and saved.get('terminal') is True and saved.get('succeeded') is True
+        and saved.get('state')=='completed' and saved.get('sessionId')==session.get('sessionId')
+        and saved.get('planetId')==config.get('planetId') and saved.get('completedAtGameTick')==tick
+        and saved.get('actionId') not in current and closed.get('passed') is True and closed.get('gameStopped') is True
         and backup.get('complete') is True and backup.get('verified') is True
         and (latest.get('primary') or {}).get('gameTick')==(latest.get('lastExit') or {}).get('gameTick')==tick)
 

@@ -3,7 +3,7 @@ from pathlib import Path
 import copy,datetime as dt,sys,unittest
 sys.path.insert(0,str(Path(__file__).parent/'live'))
 sys.path.insert(0,str(Path(__file__).parent))
-from contracts import remote_paid_saved_after_isolated_remote,remote_failed_resume_saved_after_paid,remote_healthy_saved_after_isolation,remote_paused_harvest_saved_after_isolation,remote_live_exit_after_isolation,completed_home_window_admitted,owned_saved_recovery_context
+from contracts import remote_paid_saved_after_isolated_remote,remote_failed_resume_saved_after_paid,remote_healthy_saved_after_isolation,remote_paused_harvest_saved_after_isolation,remote_failed_same_tick_saved_after_isolation,remote_live_exit_after_isolation,completed_home_window_admitted,owned_saved_recovery_context
 from driver import ordinary_remote_prepare_arguments
 
 
@@ -123,7 +123,38 @@ def paused_harvest_fixture():
     return [current,previous,loaded,resumed,reference,harvest,cut,session,plan,saved,closed,preservation,backup]
 
 
+def failed_same_tick_fixture():
+    previous=paused_harvest_fixture()[0]
+    current=dict(previous,remoteFailedSameTickSavedIsolation={'present':True},
+        originalUnknownActionsNeverReplayed=list(previous['originalUnknownActionsNeverReplayed']))
+    current.pop('remotePausedHarvestSavedIsolation',None)
+    failed=dict(actionId='failed-resume',actionKind='resume-owned-game',sessionId='new-session',planetId=402,
+        terminal=True,succeeded=False,state='action_failed',nativeFirstFailure={'capturedAtGameTick':250})
+    session=dict(sessionId='new-session',localPlanetId=402,gameTick=250,gameLoaded=True,ownedBySpherewright=True,
+        writesAllowed=False,writeQuarantineActionId='failed-resume')
+    plan=dict(prepared=True,commitAllowedNow=True,preservesQuarantine=True,preservationGameTick=250)
+    saved=dict(actionId='save',actionKind='save',sessionId='new-session',planetId=402,
+        terminal=True,succeeded=True,state='completed',completedAtGameTick=250)
+    closed=dict(passed=True,gameStopped=True)
+    backup=dict(complete=True,verified=True,latest=dict(primary=dict(gameTick=250),lastExit=dict(gameTick=250)))
+    return [current,previous,failed,session,plan,saved,closed,backup]
+
+
 class RemotePaidIsolationTests(unittest.TestCase):
+    def test_failed_resume_at_the_same_tick_can_preserve_the_exact_current_world(self):
+        self.assertTrue(remote_failed_same_tick_saved_after_isolation(*failed_same_tick_fixture()))
+        changes=[lambda a:a[0].update(spentGameTicks=1149),
+                 lambda a:a[0]['originalUnknownActionsNeverReplayed'].remove('harvest'),
+                 lambda a:a[2]['nativeFirstFailure'].update(capturedAtGameTick=251),
+                 lambda a:a[3].update(writeQuarantineActionId='other'),
+                 lambda a:a[4].update(preservesQuarantine=False),
+                 lambda a:a[5].update(completedAtGameTick=249),
+                 lambda a:a[6].update(gameStopped=False),
+                 lambda a:a[7]['latest']['lastExit'].update(gameTick=249)]
+        for change in changes:
+            altered=copy.deepcopy(failed_same_tick_fixture());change(altered)
+            self.assertFalse(remote_failed_same_tick_saved_after_isolation(*altered))
+
     def test_paused_no_effect_harvest_continues_from_new_saved_world(self):
         self.assertTrue(remote_paused_harvest_saved_after_isolation(*paused_harvest_fixture()))
         changes=[lambda a:a[0].update(spentGameTicks=1149),

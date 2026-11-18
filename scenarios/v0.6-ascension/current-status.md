@@ -2,6 +2,10 @@
 
 按日期查证 0.6 实跑结果；续跑看[活动交接页首](../../operations/active-handoff.md)。/ Use the entries below for dated evidence. Resume from the top of the active handoff.
 
+2026-11-18最新停机：一次新恢复在读取 tick 134693838 后、任何游戏 tick 前明确失败并暂停；原生首次失败为 `cast_distance_bounded`，实际检测命中当前活体植被球形碰撞体，距离 0.51028556 米、支撑法线约 0.925，旧非地形支撑限额为 0.250 米。该失败恢复没有完成，不改变先前采集 unknown。已通过 MCP 暂停保存并正常关闭；主档和 LastExit 均为 tick 134693838，2614 项完整备份通过，累计 13604576 / 15000000 tick。产品修复 `bd28eb20` 已推送，针对经原生身份核对的活体植被支持最多 1 米的自然落地观察；586 项相关回归、原生构建、双语文档、包说明检查及[准确提交 CI](https://github.com/Arcueid77/Spherewright/actions/runs/44288297964) 通过。尚未冷安装或实机验证该修复。
+
+Latest stopped boundary, 2026-11-18: a distinct recovery failed and paused at tick 134693838 before any game tick advanced. Its first Native failure was `cast_distance_bounded`: the current live vegetation sphere was observed 0.51028556 m below the player with support normal about 0.925, beyond the old 0.250 m non-terrain allowance. The failed recovery remains failed and the earlier harvest remains unknown. MCP saved the paused world and the game closed normally; primary and LastExit remain at tick 134693838 with 2614 protected entries verified and 13604576 / 15000000 cumulative ticks. Product fix `bd28eb20` is pushed to observe natural settling within 1 m of an identity-bound live vegetation support. All 586 targeted regressions, Native build, bilingual documentation, package-surface checks and [exact-commit CI](https://github.com/Arcueid77/Spherewright/actions/runs/44288297964) passed. The fix is not yet cold-installed or live-validated.
+
 2026-11-18最新停机：`6ee72407` 冷恢复到首次实操耗 280.2 秒。该版本实机将 Caph 新站已有输出口由氘棒改选芯片，4 个量子芯片经新站、原带、中转仓和分拣器进入火箭组装机；该机同时有 8 氘棒、0 戴森球组件。随后正常转 100 石墨烯至另一现有中转仓，暂将其下游分拣器选为石墨烯；太阳帆机实际收到石墨烯，但光子合并器仍为 0。以上为有限供料，不证明持续生产或两个物品可同时从同一已选站口输出。
 
 一次距目标约 26.6 米的石料采集在原生自动靠近途中触发 `voyager_local_native_tail_unproved` 并暂停；原采集终态为 unknown。暂停切面显示目标植物剩余 1、背包石矿 5，与采集前一致，未观察到采集效果；角色静止、距地约 0.9 米，不能据此声称已接地。当前暂停现场已通过 MCP 正常保存并正常关闭；Primary/LastExit 均为 tick 134693838，2610 项完整保护通过，累计 13604576 / 15000000 tick，返航/清理储备保留。原采集保留 unknown，不重新提交。组件和太阳帆上游、持续发射、闭壳与持续发电仍未完成。
