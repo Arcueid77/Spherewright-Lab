@@ -2,6 +2,10 @@
 
 按日期查证 0.6 实跑结果；续跑看[活动交接页首](../../operations/active-handoff.md)。/ Use the entries below for dated evidence. Resume from the top of the active handoff.
 
+2026-11-18后续实机切面：9 个光子合并器的原手工动作已成功完成，与先前 1 个合计 10；框架材料实际出仓持续增加，曾观察 1 → 5 → 10。玩家正常取出 9 框架和 6 处理器，保存于母星 tick 134729661；保存后读取成品仓另有 8 框架，原有推进器保留。依据已完成返航及正常保存，在同一游戏会话内更换唯一调用端并续入有限工作窗口；新 Caph 出航已接受、正在进行，尚不能声明抵达或入料。`10bb112` 改善漂移转 Walk 后的后续准备，已通过调用端回归；原调用端未热替换，后来的接手调用端使用更新后的源码。
+
+Later live cut, 2026-11-18: the original handcraft of nine photon combiners completed, making ten with the one previously crafted; observed frame stock rose from one to five to ten. The player normally withdrew nine frames and six processors, then saved at home at tick 134729661; a subsequent read showed eight frames remaining in the output warehouse, with the original thrusters preserved. After the completed home return and normal save, the sole caller was handed off in the same game session with a fresh finite work window. The new Caph flight is accepted and in progress; arrival and input are not yet claimed. Caller change `10bb112` improves preparation after Drift changes to Walk and passed its regressions; the earlier caller was not hot-replaced, and the later handoff runs the updated source.
+
 2026-11-18当前实机切面：`bd28eb20` 从 tick 134693838 的保存现场冷恢复，272.1 秒到首笔实操；之后真实读取为接地 Walk、速度 0，原采集仍为 unknown，先前恢复仍为失败。玩家选择另一株植物正常采集到 19 石矿，外星手工制造请求则在接受前被当前接口拒绝。Caph 现场随后正常保存，原生返航母星并正常保存；母星使用随身材料正常制造 1 个光子合并器，从现有仓库取出石矿、电路板、高纯硅、钛合金和 120 碳纳米管。
 
 母星一台有电、空闲且原配方为加力推进器的制造台已改为框架材料；原有钛合金分拣器保留，另一分拣器暂改为高纯硅，新增 1 分拣器供碳纳米管。投入 120 碳纳米管、30 高纯硅、30 钛合金后，制造台实际工作，首个框架材料已进入原成品仓（仓内原有 32 推进器保留）。该有限生产线已在 tick 134722445 正常保存，后续应在批次完成后按需要恢复原配方和筛选。随后原生手工制造 9 个光子合并器的动作已接受、仍在进行；不重复提交，终态及实际成品数量待核销。
