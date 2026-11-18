@@ -3,7 +3,7 @@ from pathlib import Path
 import copy,datetime as dt,sys,unittest
 sys.path.insert(0,str(Path(__file__).parent/'live'))
 sys.path.insert(0,str(Path(__file__).parent))
-from contracts import remote_paid_saved_after_isolated_remote,remote_failed_resume_saved_after_paid,remote_healthy_saved_after_isolation,remote_live_exit_after_isolation,completed_home_window_admitted,owned_saved_recovery_context
+from contracts import remote_paid_saved_after_isolated_remote,remote_failed_resume_saved_after_paid,remote_healthy_saved_after_isolation,remote_paused_harvest_saved_after_isolation,remote_live_exit_after_isolation,completed_home_window_admitted,owned_saved_recovery_context
 from driver import ordinary_remote_prepare_arguments
 
 
@@ -97,7 +97,48 @@ def live_exit_fixture():
     return [current,previous,loaded,resumed,last,closed,[resumed,move],backup]
 
 
+def paused_harvest_fixture():
+    previous=healthy_saved_fixture()[0]
+    previous.update(sourceTick=200,spentGameTicks=1100)
+    current=dict(previous,sourceRole='primary',sourceTick=250,spentGameTicks=1150,
+        originalUnknownActionsNeverReplayed=list(previous['originalUnknownActionsNeverReplayed'])+['harvest'],
+        remotePausedHarvestSavedIsolation={'present':True})
+    loaded=dict(sessionId='live-session',localPlanetId=402,gameTick=201,gameLoaded=True,ownedBySpherewright=True,writesAllowed=True)
+    resumed=dict(actionId='resume',actionKind='resume-owned-game',sessionId='live-session',planetId=402,
+        terminal=True,succeeded=True,state='completed')
+    reference=dict(actionId='harvest',nodeId=4,itemId=1005)
+    harvest=dict(actionId='harvest',actionKind='harvest',sessionId='live-session',targetObjectId=4,
+        requestedCount=1,beforeTargetAmount=1,completedAtGameTick=250,terminal=True,state='outcome_unknown')
+    cut=dict(originalActionId='harvest',nodeId=4,itemId=1005,beforeNodeAmount=1,afterNodeAmount=1,
+        beforePackageCount=5,afterPackageCount=5,nodeDecrease=0,packageIncrease=0,observedGameTick=250,
+        noReplay=True,noResume=True)
+    session=dict(sessionId='live-session',gameTick=250,gameLoaded=True,ownedBySpherewright=True,writesAllowed=False,
+        writeQuarantineActionId='harvest')
+    plan=dict(prepared=True,commitAllowedNow=True,preservesQuarantine=True,preservationGameTick=250)
+    saved=dict(actionId='save',actionKind='save',sessionId='live-session',planetId=402,
+        terminal=True,succeeded=True,state='completed',completedAtGameTick=250)
+    closed=dict(passed=True,gameStopped=True)
+    preservation=dict(passed=True,originalUnknownRetained=True,noReplay=True,noResume=True,currentLastExit=250)
+    backup=dict(complete=True,verified=True,latest=dict(primary=dict(gameTick=250),lastExit=dict(gameTick=250)))
+    return [current,previous,loaded,resumed,reference,harvest,cut,session,plan,saved,closed,preservation,backup]
+
+
 class RemotePaidIsolationTests(unittest.TestCase):
+    def test_paused_no_effect_harvest_continues_from_new_saved_world(self):
+        self.assertTrue(remote_paused_harvest_saved_after_isolation(*paused_harvest_fixture()))
+        changes=[lambda a:a[0].update(spentGameTicks=1149),
+                 lambda a:a[0]['originalUnknownActionsNeverReplayed'].remove('harvest'),
+                 lambda a:a[5].update(beforeTargetAmount=2),
+                 lambda a:a[6].update(packageIncrease=1),
+                 lambda a:a[7].update(writeQuarantineActionId='another'),
+                 lambda a:a[8].update(preservesQuarantine=False),
+                 lambda a:a[9].update(completedAtGameTick=249),
+                 lambda a:a[10].update(gameStopped=False),
+                 lambda a:a[12]['latest']['primary'].update(gameTick=249)]
+        for change in changes:
+            altered=copy.deepcopy(paused_harvest_fixture());change(altered)
+            self.assertFalse(remote_paused_harvest_saved_after_isolation(*altered))
+
     def test_completed_saved_home_return_can_start_a_fresh_finite_work_window(self):
         config=dict(completedHomeWindowSeconds=7200,attachmentPlanetId=104,authorizedPlanetIds=[104,402])
         loaded=dict(sessionId='session')

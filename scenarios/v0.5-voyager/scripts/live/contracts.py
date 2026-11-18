@@ -7,7 +7,8 @@ def owned_saved_recovery_context(config):
         # The driver separately validates this evidence, its historical home
         # source and the later complete remote save before allowing any launch.
         return bool(config.get('remoteSavedUnknownIsolation') or config.get('remotePaidSavedUnknownIsolation')
-            or config.get('remoteFailedResumeSavedIsolation') or config.get('remoteHealthySavedIsolation')) and config.get('originalActionsReconciled') is False
+            or config.get('remoteFailedResumeSavedIsolation') or config.get('remoteHealthySavedIsolation')
+            or config.get('remotePausedHarvestSavedIsolation')) and config.get('originalActionsReconciled') is False
     home=config.get('closedJourneyHome') or {}
     return (config.get('recoveryProfile')=='ordinary-owned-home'
         and config.get('recoveryMode') in ('default','verified_newer_lastexit','reauthorize_expired_primary')
@@ -637,6 +638,46 @@ def remote_healthy_saved_after_isolation(config, previous, loaded, resumed, menu
         and menu_save.get('sessionId')==session and menu_save.get('planetId')==config.get('planetId')
         and menu_save.get('completedAtGameTick')==tick and save.get('savedGameTick')==tick
         and all(save.get(k)is True for k in ('normalSaveConfirmed','completeSaveVerified','nativeEndRequested','mainMenuVerified'))
+        and backup.get('complete') is True and backup.get('verified') is True
+        and (latest.get('primary') or {}).get('gameTick')==(latest.get('lastExit') or {}).get('gameTick')==tick)
+
+
+def remote_paused_harvest_saved_after_isolation(config, previous, loaded, resumed, reference, harvest, cut,
+                                                session, save_plan, saved, closed, preservation, backup):
+    """Carry a no-effect harvest and prior unknowns through the actual paused save."""
+    old=previous.get('originalUnknownActionsNeverReplayed'); current=config.get('originalUnknownActionsNeverReplayed')
+    before=previous.get('sourceTick'); tick=config.get('sourceTick'); action=reference.get('actionId')
+    latest=backup.get('latest') or {}; session_id=loaded.get('sessionId')
+    return (config.get('recoveryProfile')==previous.get('recoveryProfile')=='ordinary-owned-remote'
+        and config.get('recoveryMode')==previous.get('recoveryMode')=='authorize_remote_primary_recovery'
+        and config.get('sourceRole')=='primary' and previous.get('sourceRole') in ('primary','lastExit')
+        and config.get('originalActionsReconciled') is previous.get('originalActionsReconciled') is False
+        and isinstance(old,(list,tuple)) and isinstance(current,(list,tuple)) and bool(old) and bool(action)
+        and len(set(old))==len(old) and len(set(current))==len(current) and action not in old
+        and set(current)==set(old)|{action}
+        and type(before)is int and type(tick)is int and 0<=before<=tick
+        and type(previous.get('spentGameTicks'))is int and previous['spentGameTicks']>=0
+        and config.get('spentGameTicks')==previous['spentGameTicks']+tick-before
+        and config.get('returnReserveGameTicks')==previous.get('returnReserveGameTicks')
+        and config.get('cleanupReserveGameTicks')==previous.get('cleanupReserveGameTicks')
+        and config.get('expectedNativeVersion')==previous.get('expectedNativeVersion')
+        and config.get('nativeAssemblySha256')==previous.get('nativeAssemblySha256')
+        and isinstance(session_id,str) and bool(session_id) and loaded.get('gameLoaded') is True
+        and loaded.get('ownedBySpherewright') is True and loaded.get('writesAllowed') is True
+        and loaded.get('localPlanetId')==config.get('planetId')==previous.get('planetId')
+        and type(loaded.get('gameTick'))is int and before<=loaded['gameTick']<=tick
+        and resumed.get('actionKind')=='resume-owned-game' and resumed.get('terminal') is True
+        and resumed.get('succeeded') is True and resumed.get('state')=='completed'
+        and resumed.get('sessionId')==session_id and resumed.get('planetId')==config.get('planetId')
+        and quarantined_harvest_no_effect_accounted(config,reference,harvest,cut,session,preservation)
+        and session.get('sessionId')==session_id and session.get('gameTick')==tick
+        and save_plan.get('prepared') is True and save_plan.get('commitAllowedNow') is True
+        and save_plan.get('preservesQuarantine') is True and save_plan.get('preservationGameTick')==tick
+        and saved.get('actionKind')=='save' and saved.get('terminal') is True and saved.get('succeeded') is True
+        and saved.get('state')=='completed' and saved.get('sessionId')==session_id
+        and saved.get('planetId')==config.get('planetId') and saved.get('completedAtGameTick')==tick
+        and saved.get('actionId') not in current and resumed.get('actionId') not in current
+        and closed.get('passed') is True and closed.get('gameStopped') is True
         and backup.get('complete') is True and backup.get('verified') is True
         and (latest.get('primary') or {}).get('gameTick')==(latest.get('lastExit') or {}).get('gameTick')==tick)
 
