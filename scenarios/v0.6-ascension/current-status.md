@@ -2,6 +2,14 @@
 
 按日期查证 0.6 实跑结果；续跑看[活动交接页首](../../operations/active-handoff.md)。/ Use the entries below for dated evidence. Resume from the top of the active handoff.
 
+2026-11-18当前 Caph 切面：新出航实际完成并正常保存，玩家带 10 光子合并器、9 框架和 6 处理器抵达工厂；原有仓库出料器已改为仅取石墨烯，三种材料正常放入仓库。两个新分拣器将仓库经现有带头接到组件机，观察到组件机框架输入增至 6；已有太阳帆和处理器输入均为 0。太阳帆机有 2 石墨烯、0 光子合并器，火箭机有 8 氘棒、4 芯片、0 组件；上述现场已在 tick 134770494 正常保存。组件输入尚未齐全，不能据此声称组件或火箭已产出。
+
+产品源码 `cacf19a0` 新增 `player-to-assembler-input`：以原生业务路径把实际背包物品送入当前配方输入，并返回同 tick 数量和增产点守恒回读。准确源码本地构建、针对性测试、双语文档及包说明检查通过，[准确提交 CI](https://github.com/Arcueid77/Spherewright/actions/runs/44316254225) 正在核验；当前游戏仍运行已装的 `bd28eb20`，新能力尚未安装或实机验证。
+
+Current Caph cut, 2026-11-18: the new outbound completed and was normally saved. The player reached the factory carrying ten photon combiners, nine frames and six processors; the existing warehouse output was restricted to graphene and the three materials were normally deposited. Two new sorters connected the warehouse through the existing belt head to the component assembler, whose frame input was observed at six. Its sail and processor inputs remained zero. The sail assembler held two graphene and no photon combiners; the rocket assembler held eight fuel rods, four chips and no components. The scene was normally saved at tick 134770494; component or rocket output is not yet claimed.
+
+Product `cacf19a0` adds `player-to-assembler-input` using the Native business path, with same-tick item/proliferator conservation readback. Local exact-source build, targeted tests, bilingual documentation and package-surface checks passed; [exact-commit CI](https://github.com/Arcueid77/Spherewright/actions/runs/44316254225) is running. The current game still uses installed `bd28eb20`; the new capability is not installed or live-validated.
+
 2026-11-18后续实机切面：9 个光子合并器的原手工动作已成功完成，与先前 1 个合计 10；框架材料实际出仓持续增加，曾观察 1 → 5 → 10。玩家正常取出 9 框架和 6 处理器，保存于母星 tick 134729661；保存后读取成品仓另有 8 框架，原有推进器保留。依据已完成返航及正常保存，在同一游戏会话内更换唯一调用端并续入有限工作窗口；新 Caph 出航已接受、正在进行，尚不能声明抵达或入料。`10bb112` 改善漂移转 Walk 后的后续准备，已通过调用端回归；原调用端未热替换，后来的接手调用端使用更新后的源码。
 
 Later live cut, 2026-11-18: the original handcraft of nine photon combiners completed, making ten with the one previously crafted; observed frame stock rose from one to five to ten. The player normally withdrew nine frames and six processors, then saved at home at tick 134729661; a subsequent read showed eight frames remaining in the output warehouse, with the original thrusters preserved. After the completed home return and normal save, the sole caller was handed off in the same game session with a fresh finite work window. The new Caph flight is accepted and in progress; arrival and input are not yet claimed. Caller change `10bb112` improves preparation after Drift changes to Walk and passed its regressions; the earlier caller was not hot-replaced, and the later handoff runs the updated source.
