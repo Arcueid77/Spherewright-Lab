@@ -2,9 +2,9 @@
 
 按日期查证 0.6 实跑结果；续跑看[活动交接页首](../../operations/active-handoff.md)。/ Use the entries below for dated evidence. Resume from the top of the active handoff.
 
-2026-11-18最新停机：Caph 组件机保有 6 框架，太阳帆机有 2 石墨烯，中转仓有 10 光子合并器和 6 处理器；原框架带及分拣器上的在途货物均按原样保留。现场正常保存退出，Primary/LastExit 均为 tick 134778722，2636 项完整备份通过，累计 13689460 / 15000000 tick。`cacf19a0` 玩家向制造台供料能力已通过[准确提交 CI](https://github.com/Arcueid77/Spherewright/actions/runs/44316254225) 及同源离线资格，尚未安装或实机验证；继续冷安装后实际供料与生产验证。
+2026-11-18最新停机：Caph 组件机保有 6 框架，太阳帆机有 2 石墨烯，中转仓有 10 光子合并器和 6 处理器；原框架带及分拣器上的在途货物均按原样保留。现场正常保存退出，Primary/LastExit 均为 tick 134778722，2636 项完整备份通过，累计 13689460 / 15000000 tick。`cacf19a0` 玩家向制造台供料能力已通过[准确提交 CI](https://github.com/Arcueid77/Spherewright/actions/runs/44316254225)、同源离线资格及冷安装后的 46 项接口检查；实际供料和生产尚未实机验证。
 
-Latest stopped boundary, 2026-11-18: the Caph component assembler holds six frames, the sail assembler holds two graphene, and the relay warehouse holds ten photon combiners and six processors. In-flight frame cargo on the existing belt and sorter is retained. Normal Save and exit produced primary/LastExit tick 134778722, with 2636 protected entries verified and 13689460 / 15000000 cumulative ticks. Player-to-assembler input on `cacf19a0` passed [exact-commit CI](https://github.com/Arcueid77/Spherewright/actions/runs/44316254225) and coherent offline qualification; it is not yet installed or live-validated. Continue with cold installation and actual feed/production observations.
+Latest stopped boundary, 2026-11-18: the Caph component assembler holds six frames, the sail assembler holds two graphene, and the relay warehouse holds ten photon combiners and six processors. In-flight frame cargo on the existing belt and sorter is retained. Normal Save and exit produced primary/LastExit tick 134778722, with 2636 protected entries verified and 13689460 / 15000000 cumulative ticks. Player-to-assembler input on `cacf19a0` passed [exact-commit CI](https://github.com/Arcueid77/Spherewright/actions/runs/44316254225), coherent offline qualification and 46 installed SDK checks. Actual feed and production remain unvalidated.
 
 2026-11-18此前 Caph 切面：新出航实际完成并正常保存，玩家带 10 光子合并器、9 框架和 6 处理器抵达工厂；原有仓库出料器已改为仅取石墨烯，三种材料正常放入仓库。两个新分拣器将仓库经现有带头接到组件机，观察到组件机框架输入增至 6；已有太阳帆和处理器输入均为 0。太阳帆机有 2 石墨烯、0 光子合并器，火箭机有 8 氘棒、4 芯片、0 组件；上述现场已在 tick 134770494 正常保存。组件输入尚未齐全，不能据此声称组件或火箭已产出。
 
