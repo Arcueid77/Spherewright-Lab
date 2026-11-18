@@ -89,11 +89,18 @@ class Factory(Live):
   return values
 
  def prepare_build(self,args):
-  start=time.monotonic();c=self.runtime.config;refusals=0
+  start=time.monotonic();c=self.runtime.config;refusals=0;stale_refusals=0
   while True:
    self.state();p=self.player();args=dict(args,**self.ctx,expectedPlayerStateHash=p['stateHash'])
    try:q=self.call('spherewright_prepare_build',args);return q,p
    except ToolRefused as e:
+    player_changed=(e.tool=='spherewright_prepare_build' and e.error.get('code')=='STALE_STATE'
+     and e.error.get('retryable') is True
+     and e.error.get('message')=='Player inventory, construction queue, or position changed after inspection.')
+    if self.active is None and player_changed and stale_refusals<15 and time.monotonic()-start<min(10,c['maximumFundingWaitSeconds']):
+     # No build was accepted. Re-read the changing player state before a fresh
+     # prepare; endpoint and other refusals retain their original handling.
+     stale_refusals+=1;time.sleep(.1);continue
     first=e.error.get('nativeFirstFailure') or {}
     if self.active is not None or first.get('code') not in ('native_drone_core_or_return_funding_unproved','native_construction_anchor_not_settled'):raise
     need(time.monotonic()-start<c['maximumFundingWaitSeconds'],'finite_funding_wait_exhausted')

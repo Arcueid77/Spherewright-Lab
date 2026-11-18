@@ -1088,6 +1088,37 @@ class LiveDriverTests(unittest.TestCase):
    with self.assertRaises(type(error)):a.native_operation(dict(role='dose',freshStaleMaximumSeconds=5))
    self.assertEqual([True],calls)
 
+ def test_build_reobserves_player_after_unaccepted_player_state_change(self):
+  from unittest.mock import patch
+  a=Factory.__new__(Factory);a.active=None;a.ctx=dict(sessionId='session',planetId=104)
+  a.runtime=SimpleNamespace(config=dict(maximumFundingWaitSeconds=30));a.state=lambda:None
+  players=iter([dict(stateHash='old'),dict(stateHash='fresh')]);a.player=lambda:next(players)
+  calls=[];prepared=dict(prepared=True)
+  def call(tool,args):
+   calls.append((tool,dict(args)))
+   if len(calls)==1:raise ToolRefused(tool,dict(code='STALE_STATE',retryable=True,
+    message='Player inventory, construction queue, or position changed after inspection.'))
+   return prepared
+  a.call=call
+  with patch('factory.time.sleep'):
+   result,player=a.prepare_build(dict(buildingItemId=2011,expectedSourceStateHash='source'))
+  self.assertIs(result,prepared);self.assertEqual('fresh',player['stateHash'])
+  self.assertEqual(['old','fresh'],[args['expectedPlayerStateHash'] for _,args in calls])
+  self.assertTrue(all(tool=='spherewright_prepare_build' and args['expectedSourceStateHash']=='source' for tool,args in calls))
+
+ def test_build_does_not_reprepare_other_refusals_or_an_active_action(self):
+  cases=[(dict(code='STALE_STATE',retryable=True,message='Source endpoint changed.'),None),
+   (dict(code='STALE_STATE',retryable=False,message='Player inventory, construction queue, or position changed after inspection.'),None),
+   (dict(code='STALE_STATE',retryable=True,message='Player inventory, construction queue, or position changed after inspection.'),'accepted')]
+  for error,active in cases:
+   with self.subTest(error=error,active=active):
+    a=Factory.__new__(Factory);a.active=active;a.ctx={};a.runtime=SimpleNamespace(config=dict(maximumFundingWaitSeconds=30))
+    a.state=lambda:None;a.player=lambda:dict(stateHash='state');calls=[]
+    def call(tool,args):calls.append(tool);raise ToolRefused(tool,error)
+    a.call=call
+    with self.assertRaises(ToolRefused):a.prepare_build(dict(buildingItemId=2011))
+    self.assertEqual(['spherewright_prepare_build'],calls)
+
  def test_dependent_plan_requires_actual_complete_receipt(self):
   with tempfile.TemporaryDirectory() as folder:
    a=Factory.__new__(Factory);a.runtime=type('Evidence',(),dict(output=Path(folder)))()
