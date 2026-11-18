@@ -40,6 +40,10 @@ def main():
             ('spherewright_prepare_resume_owned_game',dict(resumeToken='synthetic-offline-token',recoveryMode='authorize_remote_primary_recovery',minimumRecoveryGameTick=100,expectedRecoveryGameTick=100,
                 recoveryDeadlineUtc=(dt.datetime.now(dt.timezone.utc)+dt.timedelta(hours=3)).isoformat(),recoveryScope='continue_original_finite_task',maximumChargeGameTicks=18000,maximumChargeWallSeconds=300,
                 additionalVoyagerGameTicks=432000,surfaceRecoveryTargetX=1.,surfaceRecoveryTargetY=199.,surfaceRecoveryTargetZ=1.))]
+        transfer=next(t for t in tools if t['name']=='spherewright_prepare_transfer')
+        if 'player-to-assembler-input' in transfer.get('description',''):
+            cases.append(('spherewright_prepare_transfer',dict(ctx,direction='player-to-assembler-input',
+                storageEntityId=987,itemId=1404,count=10,expectedPlayerStateHash=h,expectedStorageStateHash=h)))
         cases.append(('spherewright_prepare_resume_owned_game',dict(resumeToken='synthetic-offline-token',recoveryMode='authorize_failed_landing_last_exit',minimumRecoveryGameTick=100,expectedRecoveryGameTick=100,
             recoveryDeadlineUtc=(dt.datetime.now(dt.timezone.utc)+dt.timedelta(hours=12)).isoformat(),recoveryScope='continue_original_finite_task',maximumChargeGameTicks=18000,maximumChargeWallSeconds=300,priorActionKnownTerminalFailed=True)))
         if 'surfaceRecoveryExpectedSourceGameTick' in schemas['spherewright_prepare_resume_owned_game']['properties']:
