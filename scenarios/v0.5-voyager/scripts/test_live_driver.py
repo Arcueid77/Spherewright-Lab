@@ -1119,6 +1119,17 @@ class LiveDriverTests(unittest.TestCase):
     with self.assertRaises(ToolRefused):a.prepare_build(dict(buildingItemId=2011))
     self.assertEqual(['spherewright_prepare_build'],calls)
 
+ def test_belt_between_uses_both_fresh_endpoint_hashes(self):
+  a=Factory.__new__(Factory);a.ctx=dict(planetId=104);a.refs={'source':[7],'destination':[8]};a.state=lambda:None
+  a.entity=lambda i:dict(objectId=i,endpointStateHash='endpoint-'+str(i));seen=[]
+  a.build=lambda role,args,maximum:seen.append((role,args,maximum)) or 'built'
+  step=dict(kind='build-belt-between',role='join',source='source',destination='destination',maximumNewBelts=4)
+  validate_steps([step]);self.assertEqual('built',a.step(step))
+  self.assertEqual(('join',dict(buildingItemId=2001,sourceObjectId=7,expectedSourceStateHash='endpoint-7',
+   destinationObjectId=8,expectedDestinationStateHash='endpoint-8',beltPathMode='native_grid'),4),seen[0])
+  with self.assertRaisesRegex(ValueError,'immutable_belt_endpoints_invalid'):
+   validate_steps([dict(step,source=7,destination=7)])
+
  def test_dependent_plan_requires_actual_complete_receipt(self):
   with tempfile.TemporaryDirectory() as folder:
    a=Factory.__new__(Factory);a.runtime=type('Evidence',(),dict(output=Path(folder)))()

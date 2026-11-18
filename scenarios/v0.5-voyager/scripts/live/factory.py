@@ -257,6 +257,12 @@ class Factory(Live):
      if err.error.get('code') not in ('BUILD_LOCATION_INVALID','BUILD_CONNECTION_INVALID'):raise
      last=err
    raise last or RuntimeError('no_belt_candidate')
+  if kind=='build-belt-between':
+   source=self.entity(self.object_id(s['source']));destination=self.entity(self.object_id(s['destination']))
+   args=dict(buildingItemId=2001,sourceObjectId=source['objectId'],expectedSourceStateHash=source['endpointStateHash'],
+    destinationObjectId=destination['objectId'],expectedDestinationStateHash=destination['endpointStateHash'],
+    beltPathMode=s.get('beltPathMode','native_grid'))
+   return self.build(role,args,s['maximumNewBelts'])
   if kind=='build-free-belt':
    last=None
    for candidate in s['candidates']:

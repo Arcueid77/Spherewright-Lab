@@ -855,7 +855,7 @@ def validate_steps(steps):
         'operation':{'prepareTool','arguments'},'prepare-only':{'prepareTool','arguments'},'adopt-paid-build':{'buildId','expectedObjects','itemId'},
         'read':{'tool'},'dump':{'queries'},'build-object':{'itemId','positions'},'build-resource':{'itemId','nodeId'},
         'build-stack':{'itemId','anchor'},
-        'build-belt':{'source','ends','maximumNewBelts'},'build-free-belt':{'candidates','maximumNewBelts'},'build-belt-to-device':{'starts','destination','maximumNewBelts'},
+        'build-belt':{'source','ends','maximumNewBelts'},'build-belt-between':{'source','destination','maximumNewBelts'},'build-free-belt':{'candidates','maximumNewBelts'},'build-belt-to-device':{'starts','destination','maximumNewBelts'},
         'build-sorter':{'source','destination','filterItemId'},'configure':{'entity'},
         'wait-buffer':{'entity','itemId','minimumCount','maximumSeconds'},'wait-stack-device':{'entity','expected','maximumSeconds'},'wait-player-still':{'maximumSeconds'},'prove-network':{'entities','networkId'},'save-close':set(),'handoff-caller':set(),
         'observe-sail-conversion':{'entity','count','orbitId','maximumSeconds','baselinePath','baselineSha256'},
@@ -873,6 +873,10 @@ def validate_steps(steps):
                 raise ValueError('immutable_stack_identity_invalid')
         if kind=='build-resource' and any(type(step[key])is not int or step[key]<=0 for key in ('itemId','nodeId')):
             raise ValueError('immutable_resource_build_identity_invalid')
+        if kind=='build-belt-between' and (any(not (type(step[key]) is int and step[key]>0 or isinstance(step[key],str) and bool(step[key]))
+                for key in ('source','destination')) or step['source']==step['destination']
+                or type(step['maximumNewBelts']) is not int or step['maximumNewBelts']<=0):
+            raise ValueError('immutable_belt_endpoints_invalid')
         if kind=='build-belt-to-device' and 'source' in step:
             raise ValueError('native_bound_belt_to_device_unsupported')
         if kind=='observe-receiver-power':
@@ -946,7 +950,11 @@ def validate_native_calls(steps,schemas):
             if 'enum' in spec and value not in spec['enum']:raise ValueError('actual_sdk_enum:'+key)
     for step in steps:
         kind=step['kind']
-        if kind == 'build-stack':
+        if kind == 'build-belt-between':
+            call('spherewright_prepare_build',dict(buildingItemId=2001,expectedPlayerStateHash='schema-placeholder',
+                sourceObjectId=1,expectedSourceStateHash='schema-placeholder',destinationObjectId=2,
+                expectedDestinationStateHash='schema-placeholder',beltPathMode=step.get('beltPathMode','native_grid')))
+        elif kind == 'build-stack':
             arguments = dict(buildingItemId=step['itemId'], expectedPlayerStateHash='schema-placeholder',
                 stackOnObjectId=1, expectedStackStateHash='schema-placeholder')
             if 'modelIndex' in step:
