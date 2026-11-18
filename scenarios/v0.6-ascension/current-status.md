@@ -1,5 +1,7 @@
 # Ascension current snapshot / Ascension活动快照
 
+按日期查证 0.6 实跑结果；续跑看[活动交接页首](../../operations/active-handoff.md)。/ Use the entries below for dated evidence. Resume from the top of the active handoff.
+
 2026-11-17最新停机：`685b1f9b` 无损恢复后，原施工无人机实际全部归位、普通开关恢复，原付费动作仍为unknown；1座新电塔使行星站接入2号电网，观察到100%供电。2架物流机实际从旧站送达30氘棒、10组件、10量子芯片。现场正常保存退出，Primary/LastExit均为133520614，2576项完整备份通过；累计12431352/15000000 tick、135200/199346请求及原返航/清理储备保留。此前短移动因有限时窗返航时间不足在接受前被拒、未执行；按所有者运行自主授权准备新有限恢复窗，再接火箭线。闭壳与持续运行尚未验收。
 
 Latest stopped boundary, 2026-11-17: after no-loss recovery on `685b1f9b`, the original construction drones actually returned and the ordinary switch was restored; the original paid action remains unknown. One new tower connected the station to network2 with100% observed service. Two logistics drones actually delivered30 fuel rods, ten components and ten quantum chips from the old station. Normal Save and exit reached Primary/LastExit133520614 with a complete2576-file backup; cumulative spending is12431352/15000000 ticks and135200/199346 requests, retaining original return/cleanup reserves. A later short Move was rejected before acceptance for insufficient return time in the finite window and did not execute. Under owner runtime autonomy prepare a new finite recovery window and continue the rocket feed. Full shell and sustained operation remain incomplete.

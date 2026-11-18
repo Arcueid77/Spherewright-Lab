@@ -1,5 +1,15 @@
 # Active handoff / 活动交接
 
+## 从这里续跑 / Resume here
+
+- **已证：** Caph II 新行星站已通电，两架物流机已送达 30 根氘棒、10 个戴森球组件和 10 个量子芯片。此前当地已有火箭抵达节点，见 [0.6 实跑记录](../scenarios/v0.6-ascension/current-status.md)。/ The new Caph II station has power. Two drones delivered 30 fuel rods, 10 Dyson sphere components and 10 quantum chips. Earlier local launches delivered rockets to a node.
+- **卡点：** 从新站出料口到火箭组装机，还没观察到原料自动通过。站端和收料端已有布局候选；站间配送已有实证，无需为本段重跑。/ The open link is the station outlet to the rocket assembler. Both ends have candidate layouts; no item has been observed traversing this feed yet. Station-to-station delivery is already proven.
+- **下一步：** 从两端实际端口选一条短线，复用已有带、供料仓或分拣器，先让新站的一份氘棒进入火箭组装机。看到机器实际收料后，接齐组件和芯片，再看连续出箭并送进发射井。后续持续发射、壳面闭合、接收站持续供电和冷恢复复核见[整版计划](../scenarios/v0.6-ascension/implementation-plan.md)；施工和用料参考[供料方案](../scenarios/v0.6-ascension/caph-support-plan.md)。/ Pick a short route between the actual ports, reusing existing belts, feed storage or sorters. Trace a new rod into the assembler, then connect components and chips and observe repeated rocket output reaching the silo. The linked plans cover the remaining launch, shell, receiver and recovery work.
+
+## 历次交接 / Handoff history
+
+以下段落是当时的现场和账目；其中的“最新”和“下一步”均以各自日期为准。/ These entries preserve the scene and accounts at the time they were written. Their next steps are historical.
+
 **2026-11-17最新停机：`685b1f9b` 无损恢复后，原施工无人机实际全部归位并正常恢复开关，原付费动作仍保留unknown；新站由新建1塔接入2号电网、观察到100%供电。2架物流机实际从旧站送达30氘棒、10组件、10量子芯片。现场已正常保存退出，Primary/LastExit均为133520614，2576项完整备份通过；累计12431352/15000000 tick、135200/199346请求，原返航/清理储备保留。上次短移动因有限时窗的返航时间不足在接受前拒绝，未移动；按所有者合理时长授权准备新有限恢复窗后继续接火箭线。闭壳与持续运行尚未验收。** / **Latest stopped boundary, 2026-11-17: after no-loss recovery on `685b1f9b`, the original construction drones actually returned and the ordinary switch was restored; the original paid action remains unknown. One new tower connected the station to network2 with100% observed service. Two logistics drones actually delivered30 fuel rods, ten components and ten quantum chips from the old station. Normal Save and exit reached Primary/LastExit133520614 with a complete2576-file backup; cumulative spending is12431352/15000000 ticks and135200/199346 requests, retaining original return/cleanup reserves. A later short Move was rejected before acceptance because the finite window lacked return time; no movement occurred. Under the owner's runtime grant prepare a new finite recovery window and continue the rocket feed. Full shell and sustained operation remain open.**
 
 **已选并冷安装 `685b1f9b`：远端闲置交接对极小原生物理噪声使用0.00001米/秒有限容差，RTS仍须为零，真实接地与原能源/返航预算不变。针对性114项、原生构建、双语文档、[准确CI](https://github.com/Arcueid77/Spherewright/actions/runs/44073521089)、同源组件资格及安装核验通过。游戏关闭，无人机恢复尚待实机验证。** / **Selected and cold-installed `685b1f9b`: remote idle handoff permits only tiny Native physical noise up to0.00001m/s, retaining zero RTS, actual ground and original energy/return budgets. All114 targeted tests, Native build, bilingual documentation, [exact CI](https://github.com/Arcueid77/Spherewright/actions/runs/44073521089), coherent cohort qualification and installation checks passed. The game is stopped; live drone recovery remains pending.**

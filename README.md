@@ -13,25 +13,18 @@ This repository owns public scenarios, operational handoffs and black-box accept
 | 工作规则与写入边界 | [AGENTS.md](AGENTS.md) |
 | 当前源码、实装、候选与历史锁 | [source-lock.json](source-lock.json) |
 | 当前授权范围 | [operations/standing-authority.md](operations/standing-authority.md) |
-| 当前安全交接 | [operations/active-handoff.md](operations/active-handoff.md) |
-| 当前叠放/步行任务 | [scenarios/v0.5-stacking-navigation/current-status.md](scenarios/v0.5-stacking-navigation/current-status.md) |
-| 当前验证计划 | [scenarios/v0.5-stacking-navigation/validation-plan.md](scenarios/v0.5-stacking-navigation/validation-plan.md) |
+| 现在从哪里续跑 | [活动交接页首：已证结果、卡点、下一步](operations/active-handoff.md) |
+| 0.6 Ascension 整版目标和依赖 | [实施与验证计划](scenarios/v0.6-ascension/implementation-plan.md) |
+| 0.6 各次实跑的依据 | [Ascension 场景记录](scenarios/v0.6-ascension/current-status.md) |
 | Voyager 固定结果与经验 | [Voyager 快照](scenarios/v0.5-voyager/current-status.md)、[0.5 经验复盘](operations/lessons/v0.5-voyager-2026-10-29.md) |
 
-`operations/current-status.md` 是受 manifest 保护的历史导入，不是当前状态，不得覆盖。活动快照和交接采用“最新段落在前”的记录方式；较早段落只保留各自历史范围，不要把其中的“下一目标”当成当前指令，也不要加载完整历史账本作为工作计划。
+`operations/current-status.md` 是受 manifest 保护的历史导入，不得覆盖。续跑只从活动交接页首取下一步；需要核实某个结果时，再查对应日期的场景记录。
 
 ### 当前基线
 
-| 项目 | 当前状态 |
-| --- | --- |
-| 当前任务 | 叠放/步行验证：9 个模型、19 组有向组合，自演化研究站及黑雾科研/材料已移出本轮 |
-| 活动源码与开发实装 | `28f4af96ba666998d9f82f8cd529c9a7911978ed`，产品 `0.5.0`，DSP `0.10.35.29151`；以根锁为机器可读依据 |
-| 当前运行态 | `not_running`；最新正常保存、完整备份和后续逐行验收以叠放/步行活动快照为准 |
-| 当前候选字段 | 根锁为 `development`，`packages.manual` / `packages.thunderstore` 均为 `null`；最终发行包留待当前功能验收闭合 |
-| Voyager 基线 | 原三项条款已闭合，[固定基线交审](releases/v0.5.0/review-delivery.md)及旧双包不改 |
-| 首帆/首枚火箭扩展 | 2026-11-06 已有界闭合并形成交审双包，选定源码 `d3b7ac897bb44d62c8a7ed54c51a55ff2b8de7b0`；[固定交审记录](releases/v0.5.0/expansion-review-delivery-2026-11-06.md)保留证据边界，不正式发布 |
+0.6 Ascension 验证 Caph II 持续制造与发射、壳面闭合、接收站实际供电，以及正常存读档后能否延续。所选产品源码、实装与候选包状态从根目录的 `source-lock.json` 读取，首页不另抄版本号。
 
-当前验证目标包括 44 座测试建筑上限及对应科研/物料范围；每个模型、组合、功能和恢复行仍须分别通过，不能用已完成的小仓库三层正例代替完整矩阵。游戏和 MCP 当前均正常退出，不因阅读文档自动启动、载入或推进游戏。
+0.5 的结果保留在 [Voyager 基线交审](releases/v0.5.0/review-delivery.md)、[首帆/首枚火箭交审](releases/v0.5.0/expansion-review-delivery-2026-11-06.md)和[叠放/步行快照](scenarios/v0.5-stacking-navigation/current-status.md)中，可按需引用。
 
 ### 初始化与离线核验
 
@@ -66,7 +59,7 @@ pwsh -File scripts/package-from-submodule.ps1 -DspDir <LOCAL_DSP_DIRECTORY> -Dot
 ### 场景与证据导航
 
 - [CommandDeck 蓝矩阵验收](scenarios/commanddeck-blue/acceptance-2026-11-15.md)：独立测试世界的自动产线、连续采样与正常保存。
-- [叠放/步行活动快照](scenarios/v0.5-stacking-navigation/current-status.md)和[验证计划](scenarios/v0.5-stacking-navigation/validation-plan.md)：当前九模型任务及逐行结果。
+- [叠放/步行快照](scenarios/v0.5-stacking-navigation/current-status.md)和[验证计划](scenarios/v0.5-stacking-navigation/validation-plan.md)：0.5 的九模型范围及逐行结果。
 - [Voyager 场景](scenarios/v0.5-voyager/README.md)、[固定验收](scenarios/v0.5-voyager/acceptance.md)和[活动快照](scenarios/v0.5-voyager/current-status.md)：已闭合基线与首帆/首枚火箭扩展。
 - [v0.4 场景](scenarios/v0.4-final/README.md)、[原验收](scenarios/v0.4-final/acceptance.md)和[拓扑边界](scenarios/v0.4-final/topology.md)。
 - [0.4 最终摘要](releases/v0.4.0/validation-summary.md)、[完整证据](releases/v0.4.0/evidence/README.md)、[规范化清单](releases/v0.4.0/manifests/evidence-manifest.json)和[冻结包校验和](releases/v0.4.0/hashes/SHA256SUMS.txt)。
@@ -80,21 +73,17 @@ Save、ticket、凭据、私有身份、未脱敏请求、运行描述符、私�
 
 ### Start here
 
-Read [AGENTS.md](AGENTS.md), [source-lock.json](source-lock.json), [standing authority](operations/standing-authority.md), [active handoff](operations/active-handoff.md) and the [stacking/navigation snapshot](scenarios/v0.5-stacking-navigation/current-status.md) before current work. The [validation plan](scenarios/v0.5-stacking-navigation/validation-plan.md) defines the current matrix. Voyager results remain in its [snapshot](scenarios/v0.5-voyager/current-status.md) and [0.5 lessons](operations/lessons/v0.5-voyager-2026-10-29.md#english).
+Start with [AGENTS.md](AGENTS.md), [source-lock.json](source-lock.json) and the top of the [active handoff](operations/active-handoff.md). The [Ascension plan](scenarios/v0.6-ascension/implementation-plan.md) describes 0.6 outcomes and dependencies; the [scenario record](scenarios/v0.6-ascension/current-status.md) holds dated evidence. See the [standing authority](operations/standing-authority.md) for the existing grants.
 
 The separate [CommandDeck blue-matrix acceptance](scenarios/commanddeck-blue/acceptance-2026-11-15.md) records its automatic line, continuous samples and normal save.
 
-`operations/current-status.md` is a manifest-protected historical import, not current status; never overwrite it. Active snapshots place newer sections first. Earlier “next target” paragraphs retain only their historical scope and are not current instructions.
+`operations/current-status.md` is a manifest-protected historical import; never overwrite it. Resume from the top of the active handoff. Consult dated entries when an earlier result matters.
 
 ### Current baseline
 
-- Current scope: nine models and 19 directed pairs, with the self-evolution lab and Dark Fog research/material dependency removed from this run.
-- Active source and development installation: `28f4af96ba666998d9f82f8cd529c9a7911978ed`, product `0.5.0`, DSP `0.10.35.29151`, with the root lock as machine-readable authority.
-- Runtime is `not_running`; use the stacking/navigation snapshot for the latest normal save, complete backup and per-row acceptance.
-- The root lock is `development`, with both final package fields `null` until current functional acceptance closes.
-- The original Voyager clauses are closed in the [fixed baseline review](releases/v0.5.0/review-delivery.md). The first-sail/carrier-rocket extension is review-ready on `d3b7ac897bb44d62c8a7ed54c51a55ff2b8de7b0` in the [fixed expansion review](releases/v0.5.0/expansion-review-delivery-2026-11-06.md). Neither is a formal 0.5 publication.
+Ascension tests sustained local manufacture and launch on Caph II, a closed shell, actual receiver output, and continuity after a normal save and cold recovery. The root lock records the selected source, installation and package state.
 
-The current matrix has a 44-building ceiling and explicit research/material limits. Each model, combination, function and recovery row requires its own evidence; the completed three-layer small-storage example does not close the full matrix. Reading documentation does not start or advance DSP/MCP.
+0.5 results remain in the [Voyager baseline review](releases/v0.5.0/review-delivery.md), [first-sail/first-rocket review](releases/v0.5.0/expansion-review-delivery-2026-11-06.md) and [stacking/navigation snapshot](scenarios/v0.5-stacking-navigation/current-status.md) with its [validation matrix](scenarios/v0.5-stacking-navigation/validation-plan.md).
 
 ### Checks and source adoption
 
