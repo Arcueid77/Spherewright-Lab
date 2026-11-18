@@ -2,9 +2,9 @@
 
 ## 2026-11-19 量子芯片与过滤器自动输送 / Quantum chips and filter transport
 
-按既有自主用料授权复用量子芯片、卡西米尔晶体和位面过滤器设备：已向相关仓投入处理器 40、石墨烯 70、钛化晶石 60，并将新产出的 13 个过滤器正常转入芯片线；转运不等于全部消耗。为减少后续手工转运，正常制造 90 条基础带和 2 个分拣器，直接消耗铁块 92、电路板 2；拟将累计放置上限由基础带 925 增至 1025、普通分拣器 126 增至 128，原有实耗不退回。路线位置、实际建造、连续供料和目标站到货均须各自观察。
+按既有自主用料授权复用量子芯片、卡西米尔晶体和位面过滤器设备：已向相关仓投入处理器 40、石墨烯 70、钛化晶石 60，并将新产出的 13 个过滤器正常转入芯片线；后续又投入 30 处理器，转运不等于全部消耗。为减少后续手工转运，正常制造 90 条基础带和 2 个分拣器，直接消耗铁块 92、电路板 2；累计放置上限由基础带 925 增至 1025、普通分拣器 126 增至 128，原有实耗不退回。新线实际使用 78 带、2 分拣器，累计已用 1000 带、128 分拣器；有限过滤器流转已观察，连续供料和目标站到货仍须观察。
 
-Under the existing autonomous resource grant, reuse the quantum-chip, Casimir-crystal and plane-filter machines. Forty processors, 70 graphene and 60 titanium crystals were put into their stores, and 13 newly produced filters were normally moved into the chip line; transfers are not the same as total consumption. To reduce later manual transfers, 90 basic belts and two sorters were normally crafted using 92 iron ingots and two circuit boards. Raise cumulative placement ceilings from 925 to 1025 basic belts and from 126 to 128 ordinary sorters, retaining prior use. Site, actual construction, continuing input and destination arrival require separate observation.
+Under the existing autonomous resource grant, reuse the quantum-chip, Casimir-crystal and plane-filter machines. Forty processors, 70 graphene and 60 titanium crystals were put into their stores, 13 newly produced filters were normally moved into the chip line, and another 30 processors were supplied later; transfers are not the same as total consumption. To reduce later manual transfers, 90 basic belts and two sorters were normally crafted using 92 iron ingots and two circuit boards. Cumulative placement ceilings rose from 925 to 1025 basic belts and from 126 to 128 ordinary sorters, retaining prior use. The new line used 78 belts and two sorters, for cumulative use of 1000 belts and 128 sorters. Finite filter flow was observed; continuing input and destination arrival still require observation.
 
 ## 2026-11-19 光子合并器生产 / Photon-combiner production
 
