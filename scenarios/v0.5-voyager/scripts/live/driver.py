@@ -8,7 +8,7 @@ from evidence import need,read,sha,json_value
 from mcp_client import Client
 from saved_space import exact_last_exit_echo,paused_space_source,exact_ui_supply,saved_identity_token
 from contracts import quarantined_navigation_original_accounted,fully_observed_dry_surface,observed_short_crossing_dry_landing
-from contracts import ordinary_owned_resume_echo,resume_admission_echo,validate_steps,validate_native_calls,strict_native_player_idle,native_warper_auto_supply_enabled,quarantined_paid_original_accounted,quarantined_harvest_no_effect_accounted,isolated_paid_belt_build_accounted,quarantined_local_move_saved_source,completed_saved_surface_move,isolated_surface_unknown_after_saved_home,isolated_saved_menu_unknown,remote_saved_after_isolated_home,remote_paid_saved_after_isolated_remote,remote_failed_resume_saved_after_paid,remote_healthy_saved_after_isolation
+from contracts import ordinary_owned_resume_echo,resume_admission_echo,validate_steps,validate_native_calls,strict_native_player_idle,native_warper_auto_supply_enabled,quarantined_paid_original_accounted,quarantined_harvest_no_effect_accounted,isolated_paid_belt_build_accounted,quarantined_local_move_saved_source,completed_saved_surface_move,isolated_surface_unknown_after_saved_home,isolated_saved_menu_unknown,remote_saved_after_isolated_home,remote_paid_saved_after_isolated_remote,remote_failed_resume_saved_after_paid,remote_healthy_saved_after_isolation,remote_live_exit_after_isolation
 
 PLAYER_SETTING_MODES=('enable-mecha-construction-drones','disable-mecha-research-auto-supply',
  'enable-mecha-research-auto-supply','enable-mecha-warper-auto-supply')
@@ -51,7 +51,8 @@ def ordinary_remote_prepare_arguments(config,token,now):
  seconds=config.get('recoveryWindowSeconds');extra=config.get('additionalVoyagerGameTicks')
  need(config.get('recoveryProfile')=='ordinary-owned-remote'
   and config.get('recoveryMode')=='authorize_remote_primary_recovery'
-  and (config.get('sourceRole')=='primary' or config.get('sourceRole')=='lastExit' and bool(config.get('remoteFailedResumeSavedIsolation')))
+  and (config.get('sourceRole')=='primary' or config.get('sourceRole')=='lastExit' and bool(
+   config.get('remoteFailedResumeSavedIsolation') or config.get('remoteLiveExitIsolation')))
   and config.get('surfaceRecoveryTarget') is None and type(config.get('sourceTick')) is int and config['sourceTick']>=0
   and type(seconds) in (int,float) and math.isfinite(seconds) and 0<seconds<=86400
   and type(extra) is int and 0<=extra<=5184000 and isinstance(token,str) and bool(token),
@@ -176,7 +177,7 @@ class Live:
   need(type(depth)is int and 0<=depth<16,'healthy_remote_isolation_chain_outside_bound')
   isolation=c.get('remoteHealthySavedIsolation')
   need(isolation and not any(c.get(k) for k in ('homeSavedUnknownIsolation','remoteSavedUnknownIsolation',
-   'remotePaidSavedUnknownIsolation','remoteFailedResumeSavedIsolation')),'healthy_remote_isolation_evidence_missing')
+   'remotePaidSavedUnknownIsolation','remoteFailedResumeSavedIsolation','remoteLiveExitIsolation')),'healthy_remote_isolation_evidence_missing')
   def frozen(key):
    need(sha(isolation[key+'Path'])==isolation[key+'Sha256'],'frozen_healthy_remote_evidence_changed')
    return read(isolation[key+'Path'])
@@ -192,11 +193,60 @@ class Live:
     'previous_remote_backup_copy_changed')
   if previous.get('remoteFailedResumeSavedIsolation'):
    self.assert_remote_failed_resume_saved_isolated(previous,older)
+  elif previous.get('remoteLiveExitIsolation'):
+   self.assert_remote_live_exit_isolated(previous,older,depth+1)
   else:
    need(bool(previous.get('remoteHealthySavedIsolation')),'previous_remote_isolation_missing')
    self.assert_remote_healthy_saved_isolated(previous,older,depth+1)
   need(remote_healthy_saved_after_isolation(c,previous,frozen('loadedSession'),frozen('successfulResume'),
    frozen('menuSave'),backup),'healthy_remote_saved_isolation_unproved')
+
+ def assert_remote_live_exit_isolated(self,c,backup,depth=0):
+  need(type(depth)is int and 0<=depth<16,'remote_live_exit_isolation_chain_outside_bound')
+  isolation=c.get('remoteLiveExitIsolation')
+  need(isolation and not any(c.get(k) for k in ('homeSavedUnknownIsolation','remoteSavedUnknownIsolation',
+   'remotePaidSavedUnknownIsolation','remoteFailedResumeSavedIsolation','remoteHealthySavedIsolation')),
+   'remote_live_exit_isolation_evidence_missing')
+  def frozen(key):
+   need(sha(isolation[key+'Path'])==isolation[key+'Sha256'],'frozen_remote_live_exit_evidence_changed')
+   return read(isolation[key+'Path'])
+  previous=frozen('previousConfig')
+  need(sha(previous['backupManifest'])==previous['backupManifestSha256'],'previous_remote_backup_manifest_changed')
+  older=read(previous['backupManifest'])
+  need(older.get('complete') is True and older.get('verified') is True,'previous_remote_backup_unproved')
+  for role in ('primary','lastExit'):
+   path=Path(previous['savePaths'][role]).resolve()
+   need(path==Path(c['savePaths'][role]).resolve(),'remote_live_exit_save_identity_changed')
+   rows=[row for row in older['rows'] if Path(row['originalPath']).resolve()==path];proof=older['latest'][role]
+   need(len(rows)==1 and rows[0]['sha256']==proof['sha256'] and sha(rows[0]['backupPath'])==proof['sha256'],
+    'previous_remote_backup_copy_changed')
+  if previous.get('remoteFailedResumeSavedIsolation'):
+   self.assert_remote_failed_resume_saved_isolated(previous,older)
+  elif previous.get('remoteHealthySavedIsolation'):
+   self.assert_remote_healthy_saved_isolated(previous,older,depth+1)
+  elif previous.get('remoteLiveExitIsolation'):
+   self.assert_remote_live_exit_isolated(previous,older,depth+1)
+  else:raise RuntimeError('previous_remote_isolation_missing')
+  actions=[]
+  for ref in isolation['terminalActions']:
+   need(sha(ref['path'])==ref['sha256'],'frozen_remote_live_action_changed')
+   actions.append(read(ref['path']))
+  origin=Path(isolation['clientClosePath']).parent
+  accepted=set()
+  for request in origin.glob('request-*.private.json'):
+   call=read(request)
+   if '_commit_' not in call.get('tool',''):continue
+   response=read(origin/request.name.replace('request-','response-',1)).get('response') or {}
+   if response.get('success') is False:continue
+   result=response.get('result') or {};action=result.get('actionId')
+   need(result.get('accepted') is True and isinstance(action,str) and action not in accepted,
+    'remote_live_original_commit_unreconciled')
+   accepted.add(action)
+  need(accepted=={a.get('actionId') for a in actions},'remote_live_original_commit_set_changed')
+  response=frozen('lastSession')
+  last=(response.get('response') or {}).get('result') or {}
+  need(remote_live_exit_after_isolation(c,previous,frozen('loadedSession'),frozen('successfulResume'),
+   last,frozen('clientClose'),actions,backup),'remote_live_exit_saved_isolation_unproved')
 
  def offline_preflight(self):
   s=self.runtime;c=s.config;s.stopped();s.cohort();s.verify_revision_stamps();m=s.verify_backup()
@@ -245,6 +295,8 @@ class Live:
    self.assert_remote_failed_resume_saved_isolated(c,m);home_isolated=True
   if c.get('remoteHealthySavedIsolation'):
    self.assert_remote_healthy_saved_isolated(c,m);home_isolated=True
+  if c.get('remoteLiveExitIsolation'):
+   self.assert_remote_live_exit_isolated(c,m);home_isolated=True
   need(c['firstOperationReady'] and (c.get('originalActionsReconciled') is True
     or c.get('recoveryProfile')=='successful-outbound-surface' and bool(local_moves) or home_isolated),'offline_not_ready')
   for original in c.get('isolatedPaidBeltBuilds',[]):

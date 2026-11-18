@@ -219,7 +219,8 @@ def resume_admission_echo(config,plan):
         return False
     if config.get('recoveryProfile')=='ordinary-owned-remote':
         return (config.get('recoveryMode')=='authorize_remote_primary_recovery'
-            and (config.get('sourceRole')=='primary' or config.get('sourceRole')=='lastExit' and bool(config.get('remoteFailedResumeSavedIsolation')))
+            and (config.get('sourceRole')=='primary' or config.get('sourceRole')=='lastExit' and bool(
+                config.get('remoteFailedResumeSavedIsolation') or config.get('remoteLiveExitIsolation')))
             and plan.get('recoveryMode')==config['recoveryMode'] and plan.get('exactEmbeddedIdentityVerified') is True
             and isinstance(config.get('expectedNativeVersion'),str) and bool(config['expectedNativeVersion'])
             and plan.get('sourceGameVersion')==plan.get('targetGameVersion')==config['expectedNativeVersion']
@@ -638,6 +639,77 @@ def remote_healthy_saved_after_isolation(config, previous, loaded, resumed, menu
         and all(save.get(k)is True for k in ('normalSaveConfirmed','completeSaveVerified','nativeEndRequested','mainMenuVerified'))
         and backup.get('complete') is True and backup.get('verified') is True
         and (latest.get('primary') or {}).get('gameTick')==(latest.get('lastExit') or {}).get('gameTick')==tick)
+
+
+def remote_live_exit_after_isolation(config, previous, loaded, resumed, last, closed, actions, backup):
+    """Carry an independently resumed remote world through its exact newer LastExit."""
+    old=previous.get('originalUnknownActionsNeverReplayed'); current=config.get('originalUnknownActionsNeverReplayed')
+    before=previous.get('sourceTick'); tick=config.get('sourceTick'); latest=backup.get('latest') or {}
+    session=loaded.get('sessionId'); blockers=last.get('writeBlockers') or []
+    if not (config.get('recoveryProfile')==previous.get('recoveryProfile')=='ordinary-owned-remote'
+        and config.get('recoveryMode')==previous.get('recoveryMode')=='authorize_remote_primary_recovery'
+        and config.get('sourceRole')=='lastExit' and previous.get('sourceRole') in ('primary','lastExit')
+        and config.get('originalActionsReconciled') is previous.get('originalActionsReconciled') is False
+        and isinstance(old,(list,tuple)) and isinstance(current,(list,tuple)) and bool(old)
+        and len(set(old))==len(old) and len(set(current))==len(current) and set(old)==set(current)
+        and type(before)is int and type(tick)is int and before<tick
+        and type(previous.get('spentGameTicks'))is int
+        and config.get('spentGameTicks')==previous['spentGameTicks']+tick-before
+        and config.get('returnReserveGameTicks')==previous.get('returnReserveGameTicks')
+        and config.get('cleanupReserveGameTicks')==previous.get('cleanupReserveGameTicks')
+        and config.get('expectedNativeVersion')==previous.get('expectedNativeVersion')
+        and config.get('nativeAssemblySha256')==previous.get('nativeAssemblySha256')
+        and isinstance(session,str) and bool(session)
+        and loaded.get('gameLoaded') is True and loaded.get('ownedBySpherewright') is True and loaded.get('writesAllowed') is True
+        and loaded.get('localPlanetId')==last.get('localPlanetId')==config.get('planetId')==previous.get('planetId')
+        and type(loaded.get('gameTick'))is int and before<=loaded['gameTick']<=tick
+        and resumed.get('actionKind')=='resume-owned-game' and resumed.get('terminal') is True
+        and resumed.get('succeeded') is True and resumed.get('state')=='completed'
+        and resumed.get('sessionId')==last.get('sessionId')==session and resumed.get('planetId')==config.get('planetId')
+        and resumed.get('actionId') not in current
+        and last.get('gameLoaded') is True and last.get('ownedBySpherewright') is True
+        and last.get('writesAllowed') is False and last.get('writeHealth')=='quarantined'
+        and last.get('writeQuarantineActionId')==resumed.get('actionId') and last.get('gameTick')==tick
+        and any(x.get('code')=='WRITE_SUBSYSTEM_QUARANTINED' for x in blockers if isinstance(x,dict))
+        and closed.get('normalEof') is True and closed.get('processExitCode')==0
+        and closed.get('readerThreadsStopped') is True and closed.get('phaseClosed') is True
+        and type(closed.get('priorRpcCount'))is int and type(closed.get('requestCount'))is int
+        and config.get('priorRpcCount',-1)>=closed['priorRpcCount']+closed['requestCount']
+        and backup.get('complete') is True and backup.get('verified') is True
+        and (latest.get('lastExit') or {}).get('gameTick')==tick
+        and type((latest.get('primary') or {}).get('gameTick'))is int
+        and before<=(latest['primary']['gameTick'])<tick
+        and isinstance(actions,(list,tuple)) and actions):return False
+    ids=[a.get('actionId') for a in actions]
+    return (len(set(ids))==len(ids) and resumed.get('actionId') in ids
+        and all(isinstance(a.get('actionId'),str) and a['actionId'] and a['actionId'] not in current
+            and a.get('sessionId')==session and a.get('planetId')==config.get('planetId')
+            and a.get('terminal') is True and a.get('succeeded') is True and a.get('state')=='completed'
+            and (a.get('actionKind')=='resume-owned-game' or
+                 type(a.get('completedAtGameTick'))is int and loaded['gameTick']<=a['completedAtGameTick']<=tick)
+            for a in actions))
+
+
+def completed_home_window_admitted(config, loaded, arrival, saved, journey, handoff):
+    """A saved, completed return can start a new finite home work window."""
+    seconds=config.get('completedHomeWindowSeconds'); home=config.get('attachmentPlanetId')
+    native=arrival.get('voyagerFlightReadback') or {};session=loaded.get('sessionId')
+    arrived=arrival.get('completedAtGameTick');saved_tick=saved.get('completedAtGameTick')
+    return (type(seconds) in (int,float) and 0<seconds<=86400
+        and type(home)is int and home>0 and home in config.get('authorizedPlanetIds',())
+        and isinstance(session,str) and bool(session)
+        and arrival.get('terminal') is True and arrival.get('succeeded') is True
+        and arrival.get('sessionId')==session and native.get('actualPlanetId')==home
+        and native.get('nativeExitObserved') is True and type(arrived)is int
+        and saved.get('terminal') is True and saved.get('succeeded') is True and saved.get('actionKind')=='save'
+        and saved.get('sessionId')==session and saved.get('planetId')==home
+        and type(saved_tick)is int and saved_tick>=arrived
+        and journey.get('phase')=='completed' and journey.get('homePlanetId')==home
+        and journey.get('completedSaveGameTick')==saved_tick
+        and journey.get('completedSaveActionId')==saved.get('actionId')
+        and journey.get('completedSaveSessionId')==session
+        and handoff.get('callerStopped') is True and handoff.get('noActiveGameAction') is True
+        and handoff.get('gameProcessRetained') is True)
 
 
 def fully_observed_dry_surface(prepared):

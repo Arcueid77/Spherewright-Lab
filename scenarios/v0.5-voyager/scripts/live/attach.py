@@ -8,7 +8,7 @@ from evidence import read,sha,need,actual_prior_rpc_count
 from runtime import Runtime
 from factory import Factory
 from mcp_client import Client
-from contracts import validate_steps,validate_native_calls
+from contracts import validate_steps,validate_native_calls,completed_home_window_admitted
 import startup_to_action as gate
 
 def main():
@@ -20,7 +20,17 @@ def main():
         old=read(prior/'caller-handoff.private.json');need(old['callerStopped'] and old['noActiveGameAction'] and old['gameProcessRetained'],'old_caller_handoff_unproved')
     origin=Path(c.get('liveSessionOrigin',str(prior)))
     prepared=read(origin/'fresh-resume-plan.private.json')
-    if c.get('recoveryProfile')=='ordinary-owned-home':
+    original=read(origin/'loaded-session.private.json')
+    original_deadline=prepared.get('effectiveRecoveryDeadlineUtc')
+    home_window=c.get('completedHomeWindowSeconds')
+    if home_window is not None:
+        def frozen(key):
+            ref=c[key];need(sha(ref['path'])==ref['sha256'],'completed_home_evidence_changed');return read(ref['path'])
+        arrival=frozen('completedPlanetTransition');saved=frozen('completedHomeSave');journey=frozen('completedHomeJourney')
+        handoff=read(prior/'caller-handoff.private.json')
+        need(completed_home_window_admitted(c,original,arrival,saved,journey,handoff),'completed_home_window_unproved')
+        deadline=dt.datetime.now(dt.timezone.utc)+dt.timedelta(seconds=home_window)
+    elif c.get('recoveryProfile')=='ordinary-owned-home':
         need(prepared['recoveryMode']==c['recoveryMode'] and prepared.get('effectiveRecoveryDeadlineUtc') is None,'ordinary_home_native_deadline_not_applicable')
         events=[json.loads(line) for line in (origin/'timings.private.jsonl').read_text(encoding='utf-8').splitlines()]
         dispatched=[e for e in events if e.get('event')=='launch_dispatched'];need(len(dispatched)==1,'original_launch_clock_unproved')
@@ -39,7 +49,7 @@ def main():
     try:
         _,tools,_,_=a.c.initialize();a.schemas={t['name']:t['inputSchema'] for t in tools}
         validate_steps(c['initialSteps']);validate_native_calls(c['initialSteps'],a.schemas)
-        original=read(origin/'loaded-session.private.json');s=a.call('spherewright_get_session_state',{})
+        s=a.call('spherewright_get_session_state',{})
         expected_planet=c.get('attachmentPlanetId',original['localPlanetId'])
         if expected_planet!=original['localPlanetId']:
             proof=c['completedPlanetTransition'];need(sha(proof['path'])==proof['sha256'],'original_arrival_receipt_changed')
@@ -55,7 +65,9 @@ def main():
             'current_native_order_ownership_unproved')
         process=a.process();need(process is not None and process['Id']==a.pid,'original_live_process_changed')
         r.put('attached-existing-session.private.json',dict(passed=True,sessionId=s['sessionId'],gameProcessId=a.pid,
-            gameTick=s['gameTick'],priorRpcCount=prior_count,remainingRpc=remaining,originalDeadlineUtc=deadline.isoformat(),
+            gameTick=s['gameTick'],priorRpcCount=prior_count,remainingRpc=remaining,
+            originalDeadlineUtc=original_deadline or deadline.isoformat(),effectiveCallerDeadlineUtc=deadline.isoformat(),
+            completedHomeWindowGranted=home_window is not None,
             noLoad=True,noSave=True,noLaunch=True,noTickRefund=True,noStartupClockReset=True,sourceSha=c['sourceSha']))
         if c.get('continueRefusedStartup') is True:
             report=read(origin/'startup-report.private.json')

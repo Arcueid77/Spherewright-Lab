@@ -50,6 +50,8 @@ jobs:
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
           python ./scenarios/v0.5-voyager/scripts/test_saved_remote_driver.py
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          python ./scenarios/v0.5-voyager/scripts/test_remote_paid_isolation.py
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
           python ./scenarios/v0.5-voyager/scripts/test_saved_space_driver.py
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
           python ./scenarios/v0.5-voyager/scripts/test_first_storage_transfer.py

@@ -3,7 +3,7 @@ from pathlib import Path
 import copy,datetime as dt,sys,unittest
 sys.path.insert(0,str(Path(__file__).parent/'live'))
 sys.path.insert(0,str(Path(__file__).parent))
-from contracts import remote_paid_saved_after_isolated_remote,remote_failed_resume_saved_after_paid,remote_healthy_saved_after_isolation,owned_saved_recovery_context
+from contracts import remote_paid_saved_after_isolated_remote,remote_failed_resume_saved_after_paid,remote_healthy_saved_after_isolation,remote_live_exit_after_isolation,completed_home_window_admitted,owned_saved_recovery_context
 from driver import ordinary_remote_prepare_arguments
 
 
@@ -79,7 +79,73 @@ def healthy_saved_fixture():
     return [current,previous,loaded,resumed,menu,backup]
 
 
+def live_exit_fixture():
+    previous=healthy_saved_fixture()[0]
+    previous.update(priorRpcCount=100,sourceTick=200,spentGameTicks=1100)
+    current=dict(previous,sourceRole='lastExit',sourceTick=250,spentGameTicks=1150,priorRpcCount=110,
+        originalUnknownActionsNeverReplayed=list(previous['originalUnknownActionsNeverReplayed']))
+    loaded=dict(sessionId='live-session',localPlanetId=402,gameTick=201,gameLoaded=True,ownedBySpherewright=True,writesAllowed=True)
+    resumed=dict(actionId='resume',actionKind='resume-owned-game',sessionId='live-session',planetId=402,
+        terminal=True,succeeded=True,state='completed')
+    move=dict(actionId='move',actionKind='move',sessionId='live-session',planetId=402,completedAtGameTick=220,
+        terminal=True,succeeded=True,state='completed')
+    last=dict(sessionId='live-session',localPlanetId=402,gameTick=250,gameLoaded=True,ownedBySpherewright=True,
+        writesAllowed=False,writeHealth='quarantined',writeQuarantineActionId='resume',
+        writeBlockers=[dict(code='WRITE_SUBSYSTEM_QUARANTINED')])
+    closed=dict(normalEof=True,processExitCode=0,readerThreadsStopped=True,phaseClosed=True,priorRpcCount=100,requestCount=10)
+    backup=dict(complete=True,verified=True,latest=dict(primary=dict(gameTick=202),lastExit=dict(gameTick=250)))
+    return [current,previous,loaded,resumed,last,closed,[resumed,move],backup]
+
+
 class RemotePaidIsolationTests(unittest.TestCase):
+    def test_completed_saved_home_return_can_start_a_fresh_finite_work_window(self):
+        config=dict(completedHomeWindowSeconds=7200,attachmentPlanetId=104,authorizedPlanetIds=[104,402])
+        loaded=dict(sessionId='session')
+        arrival=dict(terminal=True,succeeded=True,sessionId='session',completedAtGameTick=200,
+            voyagerFlightReadback=dict(actualPlanetId=104,nativeExitObserved=True))
+        saved=dict(actionId='save',actionKind='save',terminal=True,succeeded=True,sessionId='session',
+            planetId=104,completedAtGameTick=201)
+        journey=dict(phase='completed',homePlanetId=104,completedSaveGameTick=201,
+            completedSaveActionId='save',completedSaveSessionId='session')
+        handoff=dict(callerStopped=True,noActiveGameAction=True,gameProcessRetained=True)
+        args=[config,loaded,arrival,saved,journey,handoff]
+        self.assertTrue(completed_home_window_admitted(*args))
+        changes=[lambda a:a[0].update(completedHomeWindowSeconds=0),
+                 lambda a:a[2]['voyagerFlightReadback'].update(actualPlanetId=402),
+                 lambda a:a[3].update(succeeded=False),
+                 lambda a:a[4].update(completedSaveGameTick=200),
+                 lambda a:a[5].update(noActiveGameAction=False)]
+        for change in changes:
+            altered=copy.deepcopy(args);change(altered)
+            self.assertFalse(completed_home_window_admitted(*altered))
+
+    def test_successful_live_resume_and_exact_newer_exit_preserve_prior_progress(self):
+        self.assertTrue(remote_live_exit_after_isolation(*live_exit_fixture()))
+        changes=[
+            lambda a:a[0].update(sourceRole='primary'),
+            lambda a:a[0].update(spentGameTicks=1149),
+            lambda a:a[0].update(priorRpcCount=109),
+            lambda a:a[0]['originalUnknownActionsNeverReplayed'].remove('paid'),
+            lambda a:a[2].update(sessionId='other'),
+            lambda a:a[3].update(succeeded=False),
+            lambda a:a[4].update(writeQuarantineActionId='other'),
+            lambda a:a[4].update(gameTick=249),
+            lambda a:a[5].update(normalEof=False),
+            lambda a:a[6][1].update(succeeded=False),
+            lambda a:a[7]['latest']['lastExit'].update(gameTick=249),
+        ]
+        for change in changes:
+            args=copy.deepcopy(live_exit_fixture());change(args)
+            self.assertFalse(remote_live_exit_after_isolation(*args))
+
+    def test_exact_live_exit_can_prepare_a_new_remote_window(self):
+        c=live_exit_fixture()[0]
+        c.update(surfaceRecoveryTarget=None,recoveryWindowSeconds=7200,additionalVoyagerGameTicks=800000,
+            remoteLiveExitIsolation={'frozen':'evidence'})
+        args=ordinary_remote_prepare_arguments(c,'synthetic',dt.datetime.now(dt.timezone.utc))
+        self.assertEqual(250,args['minimumRecoveryGameTick'])
+        self.assertEqual(250,args['expectedRecoveryGameTick'])
+
     def test_healthy_remote_save_keeps_prior_unknowns_and_actual_spending(self):
         self.assertTrue(remote_healthy_saved_after_isolation(*healthy_saved_fixture()))
         changes=[lambda a:a[0].update(spentGameTicks=1099),lambda a:a[0]['originalUnknownActionsNeverReplayed'].remove('paid'),
