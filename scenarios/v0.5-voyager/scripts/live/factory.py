@@ -70,6 +70,13 @@ def resolve_refs(x,values):
  if isinstance(x,(list,tuple)):return [resolve_refs(v,values) for v in x]
  return x
 
+def move_arguments_for_observed_mode(arguments, player):
+ """An opted-in Drift move can use ordinary Walk after the player lands."""
+ if (arguments.get('allowPassiveDrift') is True and isinstance(player,Mapping)
+     and player.get('movementState')=='Walk' and player.get('isFlying') is False):
+  arguments=dict(arguments);arguments.pop('allowPassiveDrift')
+ return arguments
+
 class Factory(Live):
  def __init__(self,runtime):
   super().__init__(runtime);self.refs=dict(runtime.config['existingEntities']);self.used={int(k):v for k,v in runtime.config.get('materialUsedAtHandoff',{}).items()}
@@ -365,7 +372,11 @@ class Factory(Live):
    need(is_read_tool(query['tool']),'read_dependency_cannot_submit')
    name=query['name'];args=self.read_args(query['tool'],resolve(query.get('arguments',{})));check(query['tool'],args)
    values[name]=self.call(query['tool'],args);self.runtime.put(s['role']+'-'+name+'-before.private.json',values[name])
-  args=dict(self.ctx,**resolve(s['arguments']));check(prepare,args)
+  args=dict(self.ctx,**resolve(s['arguments']))
+  if prepare=='spherewright_prepare_move':
+   players=[values[q['name']] for q in s.get('reads',[]) if q['tool']=='spherewright_get_player_state']
+   if len(players)==1:args=move_arguments_for_observed_mode(args,players[0])
+  check(prepare,args)
   walking_preview = prepare == 'spherewright_prepare_move' and args.get('previewWalkingRoute') is True
   need(not walking_preview or not commit_requested, 'walking_preview_requires_prepare_only')
   belt_previews=[key for key in ('beltEndpointPreview','beltRoutePreview') if args.get(key) is not None]

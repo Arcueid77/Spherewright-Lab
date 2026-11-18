@@ -6,10 +6,18 @@ from types import SimpleNamespace
 sys.path.insert(0,str(Path(__file__).resolve().parent/'live'))
 from contracts import ordinary_owned_resume_echo,powered_consumers_share_network,paused_failed_cut,validate_steps,resume_admission_echo,validate_native_calls,strict_native_player_idle,fully_observed_dry_surface,observed_short_crossing_dry_landing,native_warper_auto_supply_enabled,observed_item_count
 from driver import Live,ToolRefused,AcceptedActionFailure,NativePreacceptanceRefusal
-from factory import Factory,resolve_refs
+from factory import Factory,resolve_refs,move_arguments_for_observed_mode
 from runtime import freeze,Runtime
 
 class LiveDriverTests(unittest.TestCase):
+ def test_drift_move_uses_fresh_walk_when_player_has_already_landed(self):
+  args=dict(targetX=1,allowPassiveDrift=True)
+  self.assertEqual(dict(targetX=1),move_arguments_for_observed_mode(args,dict(movementState='Walk',isFlying=False)))
+  self.assertEqual(args,move_arguments_for_observed_mode(args,dict(movementState='Drift',isFlying=False)))
+  self.assertEqual(args,move_arguments_for_observed_mode(args,dict(movementState='Fly',isFlying=True)))
+  self.assertEqual(args,move_arguments_for_observed_mode(args,None))
+  self.assertEqual(dict(targetX=1),move_arguments_for_observed_mode(dict(targetX=1),dict(movementState='Walk',isFlying=False)))
+
  def test_energy_wait_polls_at_the_declared_bounded_interval_and_keeps_idle_proof(self):
   from unittest.mock import patch
   player=json.loads((Path(__file__).parent/'fixtures/captured-known-move-stop.json').read_text())['player']
