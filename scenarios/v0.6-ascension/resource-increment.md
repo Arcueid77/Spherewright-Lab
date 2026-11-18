@@ -1,10 +1,28 @@
 # Ascension resource increment / Ascension用料增量
 
+## 2026-11-19 量子芯片与过滤器自动输送 / Quantum chips and filter transport
+
+按既有自主用料授权复用量子芯片、卡西米尔晶体和位面过滤器设备：已向相关仓投入处理器 40、石墨烯 70、钛化晶石 60，并将新产出的 13 个过滤器正常转入芯片线；转运不等于全部消耗。为减少后续手工转运，正常制造 90 条基础带和 2 个分拣器，直接消耗铁块 92、电路板 2；拟将累计放置上限由基础带 925 增至 1025、普通分拣器 126 增至 128，原有实耗不退回。路线位置、实际建造、连续供料和目标站到货均须各自观察。
+
+Under the existing autonomous resource grant, reuse the quantum-chip, Casimir-crystal and plane-filter machines. Forty processors, 70 graphene and 60 titanium crystals were put into their stores, and 13 newly produced filters were normally moved into the chip line; transfers are not the same as total consumption. To reduce later manual transfers, 90 basic belts and two sorters were normally crafted using 92 iron ingots and two circuit boards. Raise cumulative placement ceilings from 925 to 1025 basic belts and from 126 to 128 ordinary sorters, retaining prior use. Site, actual construction, continuing input and destination arrival require separate observation.
+
+## 2026-11-19 光子合并器生产 / Photon-combiner production
+
+为补齐 Caph 太阳帆上游，按既有自主用料授权建设两台普通制造台、两座小仓和五个普通分拣器；累计放置上限调整为制造台 Mk.I 2、小仓 27、普通分拣器 126，原有实耗不退回。复用背包已有 1 台制造台，另正常制造 1 台、2 座小仓及 5 个分拣器，直接消耗铁块 25、电路板 9、石材砖 8。首批已正常取玻璃 300、电路板 100，其中 1 板用来制造补充分拣器；余料最多可按原生配方生产 99 光子合并器；该批属于有限投料，后续持续来源和实际产出另行验证。各设备候选已分别通过原生位置准备，成组碰撞、连接和供电以实际建造回读为准。
+
+Under the existing autonomous resource grant, build two Mk.I assemblers, two small stores and five ordinary sorters for the photon-combiner supply needed on Caph. Cumulative placement ceilings become two Mk.I assemblers, 27 small stores and 126 ordinary sorters; prior consumption remains charged. Reuse one carried assembler and normally craft the other, two stores and five sorters using 25 iron ingots, nine circuit boards and eight stone bricks. A first 300 glass and 100 boards were normally withdrawn; one board made the additional sorter, leaving enough by Native recipes for at most 99 photon combiners; this is finite feed and continuing sources and actual output require separate observation. Each candidate location passed an individual Native prepare; combined placement, connections and power still require actual readback.
+
+## 2026-11-19 建设无人机升级 / Construction-drone upgrades
+
+为减少 0.6 施工等待，按现有自主科研授权研究通讯控制 1、2、3：原生总需求依次为蓝矩阵 100，蓝、红各 200，以及蓝、红各 400，合计蓝 700、红 600。已从现有库存正常取蓝 500、红 500，其余由已有背包或研究设施提供；转运不等于科研消耗。1、2、3 级均已完成，实读建设无人机由 3 增至 6；3 级的多任务效果仍需在后续施工中观察。
+
+Under the existing autonomous research grant, Communication Control 1, 2 and 3 are being researched to reduce 0.6 construction waits. Their Native total requirements are 100 blue matrices, then 200 blue and 200 red, then 400 blue and 400 red: 700 blue and 600 red in all. Five hundred blue and 500 red were normally withdrawn from existing stores, with the remainder supplied from already carried stock or research facilities; transfer is not the same as consumption. Levels 1, 2 and 3 completed and the observed construction-drone count rose from three to six. The level-3 multiple-task effect still needs observation in later construction.
+
 ## 2026-11-19 母星自动供铁 / Home automatic iron supply
 
-依据既有合理用料自主授权，为连接已运行的铁冶炼仓与缺料的老线，将累计基础带放置上限由 865 增至 925、普通分拣器上限由 119 增至 121；此前实耗不退回。当前累计已用 853 条基础带、119 个普通分拣器，剩余上限分别为 72 和 2。已正常制造 60 条基础带及 2 个分拣器，直接消耗铁块 62、电路板 2；现持基础带 64、普通分拣器 2。起点、终点及两段中间候选分别通过原生预检，实际拼接、消耗与货物流转仍以施工和回读为准。
+依据既有合理用料自主授权，为连接已运行的铁冶炼仓与缺料的老线，将累计基础带放置上限由 865 增至 925、普通分拣器上限由 119 增至 121；此前实耗不退回。当前累计已用 853 条基础带、119 个普通分拣器，剩余上限分别为 72 和 2。已先正常制造 60 条基础带及 2 个分拣器，后续再制造 12 条备用基础带；合计直接消耗铁块 74、电路板 2。施工前实持基础带 76、普通分拣器 2。起点、终点及两段中间候选分别通过原生预检，实际拼接、消耗与货物流转仍以施工和回读为准。
 
-Under the existing reasonable-resource grant, raise the cumulative basic-belt placement ceiling from 865 to 925 and the ordinary-sorter ceiling from 119 to 121 for the connection between the working iron-smelting store and the starved older line; prior consumption is retained. Current cumulative use is 853 belts and 119 sorters, leaving placement allowances of 72 and two. Sixty belts and two sorters were normally crafted using 62 iron ingots and two circuit boards; the player holds 64 belts and two sorters. The source, destination and two middle candidates each passed Native previews; actual joins, consumption and item flow remain to be proved.
+Under the existing reasonable-resource grant, raise the cumulative basic-belt placement ceiling from 865 to 925 and the ordinary-sorter ceiling from 119 to 121 for the connection between the working iron-smelting store and the starved older line; prior consumption is retained. Current cumulative use is 853 belts and 119 sorters, leaving placement allowances of 72 and two. Sixty belts and two sorters were normally crafted, followed by twelve reserve belts, for 74 iron ingots and two circuit boards in total; the player held 76 belts and two sorters before construction. The source, destination and two middle candidates each passed Native previews; actual joins, consumption and item flow remain to be proved.
 
 ## 2026-11-15射线接收站有限制造预算 / Finite ray receiver manufacture
 
