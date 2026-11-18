@@ -1,5 +1,11 @@
 # Ascension resource increment / Ascension用料增量
 
+## 2026-11-19 母星自动供铁 / Home automatic iron supply
+
+依据既有合理用料自主授权，为连接已运行的铁冶炼仓与缺料的老线，将累计基础带放置上限由 865 增至 925、普通分拣器上限由 119 增至 121；此前实耗不退回。当前累计已用 853 条基础带、119 个普通分拣器，剩余上限分别为 72 和 2。已正常制造 60 条基础带及 2 个分拣器，直接消耗铁块 62、电路板 2；现持基础带 64、普通分拣器 2。起点、终点及两段中间候选分别通过原生预检，实际拼接、消耗与货物流转仍以施工和回读为准。
+
+Under the existing reasonable-resource grant, raise the cumulative basic-belt placement ceiling from 865 to 925 and the ordinary-sorter ceiling from 119 to 121 for the connection between the working iron-smelting store and the starved older line; prior consumption is retained. Current cumulative use is 853 belts and 119 sorters, leaving placement allowances of 72 and two. Sixty belts and two sorters were normally crafted using 62 iron ingots and two circuit boards; the player holds 64 belts and two sorters. The source, destination and two middle candidates each passed Native previews; actual joins, consumption and item flow remain to be proved.
+
 ## 2026-11-15射线接收站有限制造预算 / Finite ray receiver manufacture
 
 整案已有1座射线接收站额度。按最新已解锁原生配方及背包，正常制造1座需要钢材20、高纯硅20、处理器5、光子合并器10及超级磁场环20；分解依赖并复用现有67磁线圈，有限基础投入为铁240、磁铁154、铜47、高能石墨20、玻璃30、电路板10，另直接投入上述钢材20、高纯硅20及处理器5。配方6执行47次得94线圈，配方5执行80次得80齿轮，97执行80次得80电动机，98执行40次得40涡轮，103执行20次得20磁环；配方11执行10次得20棱镜，68执行10次得10合并器，72执行1次得接收站。按各原生新鲜准备及独立原动作终态/实际回读执行，不把转运当作消耗。

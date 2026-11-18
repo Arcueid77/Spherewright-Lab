@@ -2,6 +2,10 @@
 
 按日期查证 0.6 实跑结果；续跑看[活动交接页首](../../operations/active-handoff.md)。/ Use the entries below for dated evidence. Resume from the top of the active handoff.
 
+2026-11-19燃料产量切面：后续 600 tick 游戏统计记录 1 磁环产出并消耗、2 氘燃料棒产出；该切面源仓未积存，此前已观察到自动输出。Caph 星际站读取到 291 棒、当地行星站 100 棒；该实时观察晚于最近保存。供铁两端已建，中间第一段 27 条带的原施工动作已接受并执行中，须等待终态，不重放。该读取另计 9 次请求。
+
+Fuel production cut, 2026-11-19: a later 600-tick game-statistics window recorded one magnetic ring produced and consumed and two deuteron fuel rods produced. The source store had no accumulated stock in this cut; automatic output had been observed earlier. The Caph interstellar station held 291 rods and its local station 100 in a live observation after the latest save. Both ends of the iron line are built; the original 27-belt middle construction was accepted and remains in progress, so await its terminal result without replay. This observation added nine requests.
+
 2026-11-19燃料再生产：正常向现有电动机供料仓投入 200 铁块，向现有磁铁线路投入 100 磁铁；电动机、涡轮和氘燃料棒机均观察到工作，磁环成品已进入燃料棒机；仍须观察持续产出。留出 100 处理器后，已将处理器到科研线的分拣器恢复原筛选 1303；铜到微晶线的临时筛选仍待恢复。最近正常保存 tick 135074896，累计 13985634 tick。后续活体读取显示 Caph 星际站 283 枚氘棒、当地站 100 枚，此读数晚于该次保存；游戏仍由 live-13 运行。
 
 Fuel production, 2026-11-19: 200 iron was normally fed to the existing motor input store and 100 magnets to the existing magnetic line. The motor, turbine and deuteron-fuel-rod machines were each observed working, and magnetic-ring output reached the fuel-rod machine; sustained output still needs observation. After reserving 100 processors, the processor-to-research sorter was restored to its original 1303 filter; the temporary copper-to-microcrystalline filter remains to restore. Latest normal save is tick 135074896, with 13985634 cumulative ticks. A later live read showed 283 rods at the Caph interstellar station and 100 at the local station, after that save; the game remains under live-13.
