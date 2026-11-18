@@ -63,6 +63,7 @@ def retry_read_only(probe, deadline, is_transient, clock=time.monotonic, sleep=t
     A read timeout is not a terminal game result. Never wrap a commit in this
     helper; accepted actions keep their original handle and are not resubmitted.
     """
+    delay = .25
     while clock() < deadline:
         try:
             return probe()
@@ -71,7 +72,8 @@ def retry_read_only(probe, deadline, is_transient, clock=time.monotonic, sleep=t
                 raise
         remaining = deadline - clock()
         if remaining > 0:
-            sleep(min(.25, remaining))
+            sleep(min(delay, remaining))
+            delay = min(1.0, delay * 2)
     raise DeadlineExceeded('Read-only readiness observation exceeded the original startup budget')
 
 

@@ -90,6 +90,16 @@ class StartupGateTests(unittest.TestCase):
         with self.assertRaises(gate.DeadlineExceeded):
             gate.retry_read_only(probe, 120, lambda e: isinstance(e, TimeoutError), clock, sleep)
         self.assertEqual(120, clock.now)
+
+    def test_repeated_preload_reads_back_off_without_delaying_first_retry(self):
+        clock = Clock(); calls = []; waits = []
+        def probe():
+            calls.append(clock.now)
+            if len(calls) < 4: raise TimeoutError()
+            return 'ready'
+        def sleep(seconds): waits.append(seconds); clock.now += seconds
+        self.assertEqual('ready', gate.retry_read_only(probe, 120, lambda e: isinstance(e, TimeoutError), clock, sleep))
+        self.assertEqual([.25, .5, 1.0], waits)
     def test_cleanup_failure_keeps_original_failure_and_report(self):
         f = Fixture(); f.ready_seconds = gate.LIMIT_SECONDS - 4
         def fail_cleanup(): raise RuntimeError('menu read pending')
