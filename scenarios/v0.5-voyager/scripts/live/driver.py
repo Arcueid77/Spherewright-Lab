@@ -117,7 +117,10 @@ class Live:
    proof=previous['latest'][role]
    need(len(rows)==1 and rows[0]['sha256']==proof['sha256'] and sha(rows[0]['backupPath'])==proof['sha256'],
     'historical_home_backup_copy_changed')
-  self.assert_home_unknowns_isolated(home,previous)
+  if home.get('homeAfterRemoteIsolation'):
+   self.assert_home_after_remote_isolated(home,previous)
+  else:
+   self.assert_home_unknowns_isolated(home,previous)
   loaded=frozen('homeLoadedSession')
   need(loaded.get('saveName')==Path(home['savePaths']['primary']).stem,'loaded_home_identity_changed')
   if isolation.get('remotePausedSavePath'):

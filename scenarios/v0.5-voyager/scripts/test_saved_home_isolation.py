@@ -315,5 +315,27 @@ class SavedHomeIsolationTests(unittest.TestCase):
                 proof=Live(runtime).offline_preflight()
             self.assertFalse(proof['original_actions_reconciled']);self.assertTrue(proof['original_unknowns_isolated'])
 
+    def test_remote_save_can_follow_a_verified_home_return_from_isolated_remote_history(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root=Path(directory);paths={role:str(root/(role+'.dsv')) for role in ('primary','lastExit')}
+            keys=('homeConfig','homeLoadedSession','outbound','remoteMenuSave')
+            refs={}
+            for key in keys:refs[key+'Path']=str(root/(key+'.json'));refs[key+'Sha256']='HASH'
+            home=dict(homeAfterRemoteIsolation={'previousConfigPath':'bound'},savePaths=paths,
+                backupManifest=str(root/'backup.json'),backupManifestSha256='HASH')
+            backup=dict(complete=True,verified=True,latest={role:dict(sha256='HASH') for role in paths},
+                rows=[dict(originalPath=path,backupPath=str(root/(role+'-copy.dsv')),sha256='HASH') for role,path in paths.items()])
+            docs={refs['homeConfigPath']:home,home['backupManifest']:backup,
+                refs['homeLoadedSessionPath']:dict(saveName=Path(paths['primary']).stem),
+                refs['outboundPath']:{},refs['remoteMenuSavePath']:{}}
+            current=dict(remoteSavedUnknownIsolation=refs,savePaths=paths)
+            live=Live(SimpleNamespace(config={}))
+            with patch('driver.sha',return_value='HASH'),patch('driver.read',side_effect=lambda p:docs[str(p)]),\
+                 patch.object(live,'assert_home_after_remote_isolated') as prior,\
+                 patch.object(live,'assert_home_unknowns_isolated',side_effect=AssertionError('wrong home history')),\
+                 patch('driver.remote_saved_after_isolated_home',return_value=True):
+                live.assert_remote_unknowns_isolated(current,{'complete':True,'verified':True})
+            prior.assert_called_once_with(home,backup)
+
 
 if __name__=='__main__':unittest.main()

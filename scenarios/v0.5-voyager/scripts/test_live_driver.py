@@ -1024,6 +1024,17 @@ class LiveDriverTests(unittest.TestCase):
   with self.assertRaises(ToolRefused):a.commit('other','spherewright_commit_move',{})
   self.assertEqual('unresolved_submission:other',a.active)
 
+ def test_remote_action_family_refusal_does_not_retry_as_changing_stale_state(self):
+  a=Factory.__new__(Factory);a.active=None;seen=[]
+  def once(step,commit_requested):
+   seen.append(step['role'])
+   raise NativePreacceptanceRefusal('spherewright_commit_handcraft',dict(code='STALE_STATE',retryable=True,
+    message='The remote reserve admits finite move/harvest, exact normal factory/station configuration, ordinary package/storage or fleet transfer, native refuel and save only; construction needs its separately proved native drone lease.'))
+  a.native_operation_once=once
+  with self.assertRaises(NativePreacceptanceRefusal):
+   a.native_operation(dict(role='craft',prepareTool='spherewright_prepare_handcraft',freshStaleMaximumSeconds=30))
+  self.assertEqual(['craft'],seen)
+
  def test_navigation_reprepares_after_its_classified_low_speed_commit_refusal(self):
   from unittest.mock import patch
   a=Factory.__new__(Factory);a.active=None;seen=[];receipts=[]

@@ -356,6 +356,10 @@ class Factory(Live):
      and error.error.get('code')=='ACTION_REJECTED' and error.error.get('retryable') is True
      and error.error.get('message')=='native_navigation_recent_low_speed_inspection_required')
     if self.active is not None or seconds==0:raise
+    # This is an unsupported action family for the current remote journey,
+    # not a changing player snapshot. Fresh prepares cannot make it admissible.
+    if (error.error.get('code')=='STALE_STATE' and error.error.get('message','').startswith(
+      'The remote reserve admits finite move/harvest,')):raise
     if error.error.get('code')!='STALE_STATE' and not native_motion_pending:raise
     suffix='-unaccepted-motion.private.json' if native_motion_pending else '-unaccepted-stale.private.json'
     self.runtime.put(step['role']+suffix,dict(tool=error.tool,error=error.error,
