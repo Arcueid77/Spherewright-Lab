@@ -9,13 +9,34 @@ from driver import Live
 from mcp_client import Client
 from evidence import read,need,actual_prior_rpc_count
 
+def closed_caller_for_preservation(origin):
+ closed=read(origin/'client-close.private.json')
+ need(closed.get('normalEof') is True and closed.get('processExitCode')==0
+      and closed.get('readerThreadsStopped') is True,'original_caller_not_cleanly_closed')
+ for path in origin.glob('*-accepted.private.json'):
+  accepted=read(path);action=accepted.get('actionId')
+  if not action:continue
+  terminal_path=origin/('terminal-'+action+'.private.json')
+  need(terminal_path.is_file(),'accepted_action_terminal_missing')
+  terminal=read(terminal_path)
+  need(terminal.get('terminal') is True and terminal.get('state')!='outcome_unknown',
+       'accepted_action_not_terminally_known')
+ return closed
+
 def main():
  config,digest,origin,output=sys.argv[1:];origin=Path(origin)
- handoff=read(origin/'caller-handoff.private.json')
- need(handoff['callerStopped'] and handoff['noActiveGameAction'] and handoff.get('preservationOnlyQuarantined'),
-      'only_exact_quarantined_preservation_handoff_allowed')
+ handoff_path=origin/'caller-handoff.private.json'
+ if handoff_path.exists():
+  prior=read(handoff_path)
+  need(prior['callerStopped'] and prior['noActiveGameAction'] and prior.get('preservationOnlyQuarantined'),
+       'only_exact_quarantined_preservation_handoff_allowed')
+ else:
+  # An idle caller can stop itself after observing a Native quarantine.
+  # Its closed pipe and every accepted terminal are checked before the fresh
+  # same-session paused cut below; no handoff receipt is invented.
+  prior=closed_caller_for_preservation(origin)
  r=Runtime(config,digest,output);r.cohort();a=Live(r);c=r.config
- a.prior_rpc_count=actual_prior_rpc_count(origin,handoff)
+ a.prior_rpc_count=actual_prior_rpc_count(origin,prior)
  game_origin=Path(c['liveSessionOrigin']);a.pid=read(game_origin/'process-observed.private.json')['Id']
  a.c=Client(Path(c['pluginDestination'])/'Spherewright.Mcp.exe',r.output/'client',maximum=50,seconds=180)
  try:

@@ -10,6 +10,21 @@ from factory import Factory,resolve_refs,move_arguments_for_observed_mode
 from runtime import freeze,Runtime
 
 class LiveDriverTests(unittest.TestCase):
+ def test_cleanly_closed_quarantined_caller_preserves_only_known_terminal_actions(self):
+  from preserve_quarantined import closed_caller_for_preservation
+  with tempfile.TemporaryDirectory() as folder:
+   root=Path(folder);closed=dict(normalEof=True,processExitCode=0,readerThreadsStopped=True,requestCount=8)
+   (root/'client-close.private.json').write_text(json.dumps(closed))
+   (root/'move-accepted.private.json').write_text(json.dumps(dict(actionId='original')))
+   terminal=root/'terminal-original.private.json';terminal.write_text(json.dumps(dict(terminal=True,state='completed')))
+   self.assertEqual(closed,closed_caller_for_preservation(root))
+   terminal.write_text(json.dumps(dict(terminal=True,state='outcome_unknown')))
+   with self.assertRaisesRegex(RuntimeError,'accepted_action_not_terminally_known'):closed_caller_for_preservation(root)
+   terminal.unlink()
+   with self.assertRaisesRegex(RuntimeError,'accepted_action_terminal_missing'):closed_caller_for_preservation(root)
+   (root/'client-close.private.json').write_text(json.dumps(dict(closed,normalEof=False)))
+   with self.assertRaisesRegex(RuntimeError,'original_caller_not_cleanly_closed'):closed_caller_for_preservation(root)
+
  def test_drift_move_uses_fresh_walk_when_player_has_already_landed(self):
   args=dict(targetX=1,allowPassiveDrift=True)
   self.assertEqual(dict(targetX=1),move_arguments_for_observed_mode(args,dict(movementState='Walk',isFlying=False)))
@@ -1239,7 +1254,7 @@ class LiveDriverTests(unittest.TestCase):
   sparse=copy.deepcopy(dry);sparse['surfacePreview']['samples']=sparse['surfacePreview']['samples'][::10]
   self.assertFalse(fully_observed_dry_surface(sparse))
 
- def test_remote_move_with_unobserved_or_sparse_surface_never_commits(self):
+ def test_remote_move_uses_native_admission_without_mandatory_dry_preview(self):
   a=Factory.__new__(Factory);a.ctx=dict(sessionId='same',planetId=402)
   a.runtime=SimpleNamespace(config=dict(ordinaryConstructionPlanetIds=[104]),put=lambda *_:None)
   a.schemas={name:dict(properties={k:{} for k in keys},required=[]) for name,keys in {
@@ -1252,17 +1267,14 @@ class LiveDriverTests(unittest.TestCase):
   step=dict(role='remote',prepareTool='spherewright_prepare_move',arguments=dict(targetX=1,targetY=2,targetZ=3,expectedPlayerStateHash='fresh'))
   observed=copy.deepcopy(q['surfacePreview'])
   q['surfacePreview']=dict(state='unavailable',reasonCode='surface_span_outside_bounded_preview',samples=[])
-  with self.assertRaisesRegex(RuntimeError,'remote_move_surface_unproved_no_commit'):a.native_operation_once(step)
-  self.assertEqual([],commits)
+  a.native_operation_once(step);self.assertEqual(1,len(commits))
   self.assertIs(q,a.native_operation_once(step,commit_requested=False))
   q['surfacePreview']=copy.deepcopy(observed);q['surfacePreview']['samples']=q['surfacePreview']['samples'][::10]
-  with self.assertRaisesRegex(RuntimeError,'remote_move_surface_unproved_no_commit'):a.native_operation_once(step)
-  self.assertEqual([],commits)
+  a.native_operation_once(step);self.assertEqual(2,len(commits))
   a.runtime.config=dict(authorizedPlanetIds=[104,402])
-  with self.assertRaisesRegex(RuntimeError,'multi_planet_move_scope_unclassified_no_commit'):a.native_operation_once(step)
-  self.assertEqual([],commits)
-  a.runtime.config=dict(ordinaryConstructionPlanetIds=[104])
-  q['surfacePreview']=observed;a.native_operation_once(step);self.assertEqual(1,len(commits))
+  q['surfacePreview']=observed;q['commitAllowedNow']=False
+  with self.assertRaisesRegex(RuntimeError,'native_operation_not_prepared'):a.native_operation_once(step)
+  self.assertEqual(2,len(commits))
 
  def test_opted_in_production_move_rejects_unknown_terrain_before_commit(self):
   sample=json.loads((Path(__file__).parent/'fixtures/captured-dry-preview-stalled-walk.json').read_text())

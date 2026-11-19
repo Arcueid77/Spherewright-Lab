@@ -4,7 +4,7 @@ import copy,math,sys,tempfile,unittest
 from types import SimpleNamespace
 from unittest.mock import patch
 sys.path.insert(0,str(Path(__file__).resolve().parent/'live'))
-from contracts import isolated_surface_unknown_after_saved_home,isolated_saved_menu_unknown,remote_saved_after_isolated_home,owned_saved_recovery_context
+from contracts import isolated_surface_unknown_after_saved_home,isolated_saved_menu_unknown,remote_saved_after_isolated_home,remote_paused_saved_after_isolated_home,owned_saved_recovery_context
 from driver import Live
 
 
@@ -124,6 +124,39 @@ class SavedHomeIsolationTests(unittest.TestCase):
         self.assertTrue(owned_saved_recovery_context(remote))
         remote['originalActionsReconciled']=True
         self.assertFalse(owned_saved_recovery_context(remote))
+
+    def test_completed_outbound_can_preserve_its_exact_paused_save_without_resolving_old_unknowns(self):
+        self.config.update(originalActionsReconciled=False,expectedNativeVersion='native',nativeAssemblySha256='assembly',
+            spentGameTicks=1000,returnReserveGameTicks=54000,cleanupReserveGameTicks=3000)
+        remote=dict(recoveryProfile='ordinary-owned-remote',recoveryMode='authorize_remote_primary_recovery',
+            sourceRole='primary',sourceTick=1600,planetId=201,originalActionsReconciled=False,
+            originalUnknownActionsNeverReplayed=['old-move','old-menu'],expectedNativeVersion='native',
+            nativeAssemblySha256='assembly',spentGameTicks=1300,returnReserveGameTicks=54000,cleanupReserveGameTicks=3000)
+        loaded=dict(gameLoaded=True,ownedBySpherewright=True,writesAllowed=True,sessionId='later-session',localPlanetId=104,gameTick=1310)
+        outbound=dict(actionId='new-flight',actionKind='interplanetary-flight',terminal=True,state='completed',succeeded=True,
+            sessionId='later-session',planetId=104,startedAtGameTick=1320,completedAtGameTick=1400,
+            voyagerFlightReadback=dict(isReturnLeg=False,bindingVerified=True,nativeExitObserved=True,
+                actualPlanetId=201,selectedDestinationPlanetId=201))
+        session=dict(gameLoaded=True,ownedBySpherewright=True,writesAllowed=False,writeHealth='quarantined',
+            writeQuarantineActionId='new-flight',sessionId='later-session',localPlanetId=201,gameTick=1600,
+            writeBlockers=[dict(code='WRITE_SUBSYSTEM_QUARANTINED')])
+        player=dict(sessionId='later-session',planetId=201,nativeLocalControlEnergy=dict(blockers=['native_paused_not_execution_ready']))
+        cut=dict(session=session,player=player,noResume=True)
+        plan=dict(prepared=True,commitAllowedNow=True,preservesQuarantine=True,preservationGameTick=1600,commitBlockers=[])
+        saved=dict(actionId='paused-save',actionKind='save',terminal=True,state='completed',succeeded=True,
+            sessionId='later-session',planetId=201,completedAtGameTick=1600)
+        closed=dict(passed=True,gameStopped=True)
+        preserved=dict(passed=True,minimumCurrentTick=1600,originalQuarantineRetained=True,noResume=True)
+        backup=dict(complete=True,verified=True,latest=dict(primary=dict(gameTick=1600),lastExit=dict(gameTick=1600)))
+        check=lambda:remote_paused_saved_after_isolated_home(remote,self.config,loaded,outbound,cut,plan,saved,closed,preserved,backup)
+        self.assertTrue(check())
+        for obj,key,value in [(remote,'spentGameTicks',1299),(remote,'originalUnknownActionsNeverReplayed',['old-move']),
+            (outbound,'succeeded',False),(outbound['voyagerFlightReadback'],'actualPlanetId',202),
+            (session,'writeQuarantineActionId','different'),(cut,'noResume',False),
+            (plan,'preservesQuarantine',False),(saved,'completedAtGameTick',1599),
+            (closed,'gameStopped',False),(backup['latest']['lastExit'],'gameTick',1599)]:
+            with self.subTest(key=key,value=value):
+                old=obj[key];obj[key]=value;self.assertFalse(check());obj[key]=old
 
     def test_home_preflight_reports_isolation_without_using_surface_resume_schema(self):
         with tempfile.TemporaryDirectory() as directory:

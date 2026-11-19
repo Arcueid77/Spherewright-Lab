@@ -1,5 +1,11 @@
 # Ascension resource increment / Ascension用料增量
 
+## 2026-11-19 Caph 续跑时间与供电 / Caph runtime and power
+
+原新航程的 108000 tick 包含 54000 返航储备，本地运行后触发暂停。按所有者“运行时长合理自行增加”的授权，全局累计上限由 15000000 增至 17000000 tick，并为当前旅程追加 2000000 tick；截至暂停实际已用 14231173 tick，原返航 54000 与清理 3000 tick 储备保留。计划从本地既有仓转运 100 石墨烯，若新鲜原生检查确认聚变机组空冷，则从随身库存正常补入 10 氘棒；转运不等于消耗，实际数量与发电以回读为准。
+
+The original new journey's 108000 ticks included a 54000-tick return reserve and Native paused after local work. Under the owner's runtime grant, raise the global cumulative ceiling from 15000000 to 17000000 ticks and add 2000000 ticks to the current journey; actual spending at pause is 14231173 ticks, with the existing 54000 return and 3000 cleanup reserves retained. Plan to transfer 100 graphene from local stock and, if a fresh Native check confirms the fusion generator is empty and cold, normally insert ten carried fuel rods. Transfers are not consumption; actual counts and generation require readback.
+
 ## 2026-11-19 处理器持续供料准备 / Processor feed preparation
 
 按既有自主用料授权，为连接处理器成品仓与芯片输入仓，已正常制造 120 条基础带及 2 个普通分拣器，直接配方消耗铁块 122、电路板 2；复用背包原有 19 条基础带。累计放置上限由基础带 1025 增至 1150、普通分拣器 128 增至 130，既有实耗不退回。新线起点实际放置 3 带，累计已用 1003 带、128 分拣器；剩余路径、施工和流转仍以原生终态及回读为准。

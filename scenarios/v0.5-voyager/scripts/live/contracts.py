@@ -480,6 +480,62 @@ def remote_saved_after_isolated_home(config, home, loaded, outbound, menu_save, 
         and saved.get('savedGameTick')==save_tick)
 
 
+def remote_paused_saved_after_isolated_home(config, home, loaded, outbound, cut, save_plan, saved, closed, preservation, backup):
+    """Carry the same isolated home history through a paused outbound save."""
+    old=home.get('originalUnknownActionsNeverReplayed');current=config.get('originalUnknownActionsNeverReplayed')
+    session=cut.get('session') or {};player=cut.get('player') or {};native=outbound.get('voyagerFlightReadback') or {}
+    latest=backup.get('latest') or {};tick=config.get('sourceTick');home_tick=home.get('sourceTick')
+    start=outbound.get('startedAtGameTick');arrival=outbound.get('completedAtGameTick');loaded_tick=loaded.get('gameTick')
+    ident=loaded.get('sessionId');action=outbound.get('actionId');blockers=session.get('writeBlockers') or []
+    return (config.get('recoveryProfile')=='ordinary-owned-remote'
+        and config.get('recoveryMode')=='authorize_remote_primary_recovery' and config.get('sourceRole')=='primary'
+        and config.get('surfaceRecoveryTarget') is None and config.get('originalActionsReconciled') is False
+        and home.get('recoveryProfile')=='ordinary-owned-home' and home.get('originalActionsReconciled') is False
+        and isinstance(old,(list,tuple)) and isinstance(current,(list,tuple)) and bool(old)
+        and len(set(old))==len(old) and len(set(current))==len(current) and set(old)==set(current)
+        and config.get('planetId')!=home.get('planetId') and type(config.get('planetId')) is int and config['planetId']>0
+        and isinstance(config.get('expectedNativeVersion'),str) and bool(config['expectedNativeVersion'])
+        and config.get('expectedNativeVersion')==home.get('expectedNativeVersion')
+        and isinstance(config.get('nativeAssemblySha256'),str) and bool(config['nativeAssemblySha256'])
+        and config.get('nativeAssemblySha256')==home.get('nativeAssemblySha256')
+        and all(type(x)is int for x in (home_tick,loaded_tick,start,arrival,tick))
+        and 0<=home_tick<=loaded_tick<=start<=arrival<=tick
+        and type(home.get('spentGameTicks')) is int
+        and config.get('spentGameTicks')==home['spentGameTicks']+tick-home_tick
+        and config.get('returnReserveGameTicks')==home.get('returnReserveGameTicks')
+        and config.get('cleanupReserveGameTicks')==home.get('cleanupReserveGameTicks')
+        and isinstance(ident,str) and bool(ident) and loaded.get('gameLoaded') is True
+        and loaded.get('ownedBySpherewright') is True and loaded.get('writesAllowed') is True
+        and loaded.get('localPlanetId')==home.get('planetId')
+        and isinstance(action,str) and bool(action) and action not in current
+        and outbound.get('actionKind')=='interplanetary-flight' and outbound.get('terminal') is True
+        and outbound.get('state')=='completed' and outbound.get('succeeded') is True
+        and outbound.get('sessionId')==ident and outbound.get('planetId')==home.get('planetId')
+        and native.get('isReturnLeg') is False and native.get('bindingVerified') is True
+        and native.get('nativeExitObserved') is True
+        and native.get('actualPlanetId')==native.get('selectedDestinationPlanetId')==config.get('planetId')
+        and session.get('gameLoaded') is True and session.get('ownedBySpherewright') is True
+        and session.get('sessionId')==player.get('sessionId')==ident
+        and session.get('localPlanetId')==player.get('planetId')==config.get('planetId')
+        and session.get('writesAllowed') is False and session.get('writeHealth')=='quarantined'
+        and session.get('writeQuarantineActionId')==action and cut.get('noResume') is True
+        and session.get('gameTick')==tick and any(x.get('code')=='WRITE_SUBSYSTEM_QUARANTINED' for x in blockers if isinstance(x,dict))
+        and 'native_paused_not_execution_ready' in (player.get('nativeLocalControlEnergy') or {}).get('blockers',[])
+        and save_plan.get('prepared') is True and save_plan.get('commitAllowedNow') is True
+        and save_plan.get('preservesQuarantine') is True and save_plan.get('preservationGameTick')==tick
+        and save_plan.get('commitBlockers')==[]
+        and saved.get('actionKind')=='save' and saved.get('terminal') is True and saved.get('succeeded') is True
+        and saved.get('state')=='completed' and saved.get('sessionId')==ident
+        and saved.get('planetId')==config.get('planetId') and saved.get('completedAtGameTick')==tick
+        and isinstance(saved.get('actionId'),str) and bool(saved['actionId'])
+        and saved['actionId'] not in current and saved['actionId']!=action
+        and closed.get('passed') is True and closed.get('gameStopped') is True
+        and preservation.get('passed') is True and preservation.get('minimumCurrentTick')==tick
+        and preservation.get('originalQuarantineRetained') is True and preservation.get('noResume') is True
+        and backup.get('complete') is True and backup.get('verified') is True
+        and (latest.get('primary') or {}).get('gameTick')==(latest.get('lastExit') or {}).get('gameTick')==tick)
+
+
 def remote_paid_saved_after_isolated_remote(config, previous, loaded, original, observed, session, player, station, saved, closed, backup):
     """Carry one observed paid remote building through its normal paused save.
 

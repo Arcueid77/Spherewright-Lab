@@ -8,7 +8,7 @@ from evidence import need,read,sha,json_value
 from mcp_client import Client
 from saved_space import exact_last_exit_echo,paused_space_source,exact_ui_supply,saved_identity_token
 from contracts import quarantined_navigation_original_accounted,fully_observed_dry_surface,observed_short_crossing_dry_landing
-from contracts import native_movement_order_released
+from contracts import native_movement_order_released,remote_paused_saved_after_isolated_home
 from contracts import ordinary_owned_resume_echo,resume_admission_echo,validate_steps,validate_native_calls,strict_native_player_idle,native_warper_auto_supply_enabled,quarantined_paid_original_accounted,quarantined_harvest_no_effect_accounted,isolated_paid_belt_build_accounted,quarantined_local_move_saved_source,completed_saved_surface_move,isolated_surface_unknown_after_saved_home,isolated_saved_menu_unknown,remote_saved_after_isolated_home,remote_paid_saved_after_isolated_remote,remote_failed_resume_saved_after_paid,remote_healthy_saved_after_isolation,remote_paused_harvest_saved_after_isolation,remote_failed_same_tick_saved_after_isolation,remote_live_exit_after_isolation
 
 PLAYER_SETTING_MODES=('enable-mecha-construction-drones','disable-mecha-research-auto-supply',
@@ -120,8 +120,14 @@ class Live:
   self.assert_home_unknowns_isolated(home,previous)
   loaded=frozen('homeLoadedSession')
   need(loaded.get('saveName')==Path(home['savePaths']['primary']).stem,'loaded_home_identity_changed')
-  need(remote_saved_after_isolated_home(c,home,loaded,frozen('outbound'),
-   frozen('remoteMenuSave'),backup),'remote_saved_outbound_isolation_unproved')
+  if isolation.get('remotePausedSavePath'):
+   need(remote_paused_saved_after_isolated_home(c,home,loaded,frozen('outbound'),
+    frozen('remotePausedCut'),frozen('remotePausedSavePlan'),frozen('remotePausedSave'),
+    frozen('remoteNormalClose'),frozen('remotePreservation'),backup),
+    'remote_paused_outbound_saved_isolation_unproved')
+  else:
+   need(remote_saved_after_isolated_home(c,home,loaded,frozen('outbound'),
+    frozen('remoteMenuSave'),backup),'remote_saved_outbound_isolation_unproved')
 
  def assert_remote_paid_unknowns_isolated(self,c,backup):
   isolation=c.get('remotePaidSavedUnknownIsolation')
@@ -195,6 +201,8 @@ class Live:
     'previous_remote_backup_copy_changed')
   if previous.get('remoteFailedResumeSavedIsolation'):
    self.assert_remote_failed_resume_saved_isolated(previous,older)
+  elif previous.get('remoteSavedUnknownIsolation'):
+   self.assert_remote_unknowns_isolated(previous,older)
   elif previous.get('remoteLiveExitIsolation'):
    self.assert_remote_live_exit_isolated(previous,older,depth+1)
   elif previous.get('remotePausedHarvestSavedIsolation'):
@@ -229,6 +237,8 @@ class Live:
     'previous_remote_backup_copy_changed')
   if previous.get('remoteFailedResumeSavedIsolation'):
    self.assert_remote_failed_resume_saved_isolated(previous,older)
+  elif previous.get('remoteSavedUnknownIsolation'):
+   self.assert_remote_unknowns_isolated(previous,older)
   elif previous.get('remoteHealthySavedIsolation'):
    self.assert_remote_healthy_saved_isolated(previous,older,depth+1)
   elif previous.get('remoteLiveExitIsolation'):
@@ -280,6 +290,8 @@ class Live:
     'previous_remote_backup_copy_changed')
   if previous.get('remoteHealthySavedIsolation'):
    self.assert_remote_healthy_saved_isolated(previous,older,depth+1)
+  elif previous.get('remoteSavedUnknownIsolation'):
+   self.assert_remote_unknowns_isolated(previous,older)
   elif previous.get('remoteLiveExitIsolation'):
    self.assert_remote_live_exit_isolated(previous,older,depth+1)
   elif previous.get('remotePausedHarvestSavedIsolation'):
@@ -313,6 +325,8 @@ class Live:
     'previous_remote_backup_copy_changed')
   if previous.get('remotePausedHarvestSavedIsolation'):
    self.assert_remote_paused_harvest_saved_isolated(previous,older,depth+1)
+  elif previous.get('remoteSavedUnknownIsolation'):
+   self.assert_remote_unknowns_isolated(previous,older)
   elif previous.get('remoteHealthySavedIsolation'):
    self.assert_remote_healthy_saved_isolated(previous,older,depth+1)
   elif previous.get('remoteFailedSameTickSavedIsolation'):
