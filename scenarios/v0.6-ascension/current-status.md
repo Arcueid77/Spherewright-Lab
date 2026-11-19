@@ -2,6 +2,10 @@
 
 按日期查证 0.6 实跑结果；续跑看[活动交接页首](../../operations/active-handoff.md)。/ Use the entries below for dated evidence. Resume from the top of the active handoff.
 
+2026-11-19 实机进展：`281e9b34` 在该存档中从水面正常走到真实地面并保存，随后普通制造台在远端正常付料建成。新化工厂与框架机产出、框架经新带到原供料仓及组件机均已观察；共有燃料与框架混带的堵塞，已改成独立燃料供发电站并暂时人工桥接组件输入，旧石墨烯带残留框架仍待清理。聚变站缓冲回升至 10，井充电 18 MW 超出现网约 15.5 MW。最新出发切面结构 28 / 150、细胞 0 / 224、1 火箭在途；原返航已接受并执行中。
+
+Live progress, 2026-11-19. `281e9b34` moved the saved player normally from water to actual supported ground and saved; the ordinary assembler was then normally built remotely with its paid item. Production from the new chemical and frame machines and frame delivery through the new belt to the original feed store and component machine were observed. Mixed fuel and frame cargo caused congestion; generator fuel now has a separately proven line, the component input uses ordinary manual transfers for now, and frames remain to be cleared from the old graphene belt. The fusion generator refilled to ten; the silo’s 18 MW charging exceeds approximately 15.5 MW local capacity. At departure structure was 28 / 150, cells 0 / 224, with one rocket in flight; the original homeward flight was accepted and is active.
+
 2026-11-19 水面恢复修正：17.2 米目标先被产品的 16 米固定上限拒绝；15 米新目标又因水面下无近距地面及目标周围不全干被拒，均未开始新移动。MCP 已保存准确暂停现场并正常关闭，Primary / LastExit 均为 135472150，2888 项备份通过。产品修复 `281e9b34` 允许有界原生漂移越水，抵达真实地面并停稳才完成；源码与本地回归通过，实机恢复仍待验证。
 
 Water recovery correction, 2026-11-19. A 17.2 m target was rejected by the product’s fixed 16 m limit; a distinct 15 m target was then refused before movement because no near ground was beneath the water and the target patch was not completely dry. MCP saved the exact paused scene and the game closed normally. Primary and LastExit are 135472150 with 2888 verified backup files. Product fix `281e9b34` permits bounded Native Drift across water and requires actual supported ground and idle for completion. Source and local regressions passed; live recovery remains to be verified.

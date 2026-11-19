@@ -4,6 +4,10 @@
 
 以下保留各次供料设计、预算与当时的建议；当前要打通哪一段，以[活动交接页首](../../operations/active-handoff.md)为准。/ The entries below preserve supply designs, allocations and proposals from each run. Use the active handoff for the next connection to build.
 
+2026-11-19 最新规划：出发前实读结构 28 / 150、细胞 0 / 224，另有 1 火箭在途。从零粗算其余 122 火箭需 244 组件、732 框架、732 处理器、244 芯片、488 氘棒；组件所需 732 帆加 224 细胞至少需 956 帆、478 光子合并器和 478 石墨烯。以上均为未抵扣现有机器、仓库、物流货物和在途火箭的毛需求。实测火箭井充电时需约 18 MW，而现网容量约 15.5 MW，峰值满足率曾低至约 74%；下一次母星补给优先带一座额外发电设备并配套燃料，同时处理芯片、原料和接续。新框架线能向原供料仓送货，组件机暂用人工转运；旧石墨烯带混入的框架待清理，勿将首次到货当作持续闭环。
+
+Latest plan, 2026-11-19. At departure structure was 28 / 150 and cells 0 / 224, with one rocket in flight. From zero, the remaining 122 rockets require 244 components, 732 frames, 732 processors, 244 chips and 488 rods. Their components need 732 sails, plus 224 for cells: at least 956 sails, 478 photon combiners and 478 graphene. These are gross figures before crediting existing buffers, stores, freight or the in-flight rocket. The silo was observed drawing about 18 MW against about 15.5 MW local capacity, with peak service around 74%. The next home supply trip should add generation and fuel while addressing chips, inputs and the following batch. The new frame route delivers to the original feed store; ordinary manual transfers bridge the component input for now. Frames on the old graphene line still need cleanup, and a first delivery is not sustained-flow proof.
+
 按最近的实机需求安排下一批。结构还差 134 点，量子芯片毛需求为 268 个，对应 536 个位面过滤器、1072 个钛化玻璃和 6432 氢。母星已有过滤器和芯片设备，需要持续补氢、石墨烯、钛化玻璃和处理器。最近一轮读到 Caph 两站共 357 根氘棒、母星另有 371 根库存。先把现有棒分别送进火箭机和聚变站，并观察实际流量，再按消耗补生产。现有共享输出切换未补到聚变站，优先利用空闲站口接独立燃料带。
 
 下一轮按约 30 枚火箭配套备货，约需 180 框架、180 处理器、90 光子合并器、60 芯片和 120 氘棒，实际按 Caph 可进入设备的库存抵扣。已解锁的母星产线并行补玻璃、光子和芯片。Caph 有石墨烯原料和既有产线，拟把碳纳米管、框架的主要产能放在发射点附近，携带钛块、高纯硅和钛合金过渡。两台化工厂的碳纳米管名义上限约 60 个/游戏分钟，配合两台普通制造台是约 15 框架/游戏分钟，可对应约 2.5 火箭/游戏分钟。实际批次和产量按供电、源料流转和芯片到料调整。发射同时读结构变化，具备吸收条件时继续投送太阳帆，最终复核闭壳、持续接收功率及冷恢复后的运行。
