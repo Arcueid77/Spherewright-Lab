@@ -16,13 +16,15 @@ from mcp_client import Client
 from pause_handcraft_poll import owned_caller,ProcessPause
 
 
-def blocked_suffix(steps,wait_role,prefix_role):
+def blocked_suffix(steps,wait_role,prefix_role,previous_steps=None):
  matches=[i for i,s in enumerate(steps) if s['role']==wait_role]
  need(len(matches)==1,'unique_buffer_wait_required');index=matches[0];wait=steps[index]
  need(wait['kind']=='wait-buffer' and type(wait['entity'])is int and wait['entity']>0
   and type(wait['itemId'])is int and wait['itemId']>0 and type(wait['minimumCount'])is int
   and wait['minimumCount']>0,'explicit_positive_native_buffer_wait_required')
  writes=[s for s in steps[:index] if s['kind'] not in ('read','dump','wait-buffer','wait-player-still','prepare-only','prove-network')]
+ if not writes and previous_steps is not None:
+  writes=[s for s in previous_steps if s['kind'] not in ('read','dump','wait-buffer','wait-player-still','prepare-only','prove-network')]
  need(writes and writes[-1]['role']==prefix_role and writes[-1]['kind'] in ('operation','build-sorter'),
   'exact_last_settled_prefix_required')
  return wait,[s['role'] for s in steps[index+1:]]
@@ -44,8 +46,15 @@ def main():
  config,digest,prior,sequence,wait_role,prefix_role,output=sys.argv[1:];prior=Path(prior).resolve();sequence=int(sequence)
  r=Runtime(config,digest,output);r.cohort();a=Live(r);pause=None;retired=False
  envelope=read(prior/f'next-plan-{sequence:03d}.private.json');need(sha(envelope['path'])==envelope['sha256'],'original_plan_changed')
- steps=read(envelope['path'])['steps'];wait,suffix=blocked_suffix(steps,wait_role,prefix_role)
- prefix=next(s for s in steps if s['role']==prefix_role)
+ steps=read(envelope['path'])['steps'];previous_steps=None
+ if not any(s['role']==prefix_role for s in steps):
+  need(sequence>1 and (prior/f'continuation-{sequence-1:03d}-complete.private.json').is_file(),
+   'previous_plan_not_completed')
+  previous=read(prior/f'next-plan-{sequence-1:03d}.private.json')
+  need(sha(previous['path'])==previous['sha256'],'previous_plan_changed')
+  previous_steps=read(previous['path'])['steps']
+ wait,suffix=blocked_suffix(steps,wait_role,prefix_role,previous_steps)
+ prefix=next(s for s in (previous_steps or steps) if s['role']==prefix_role)
  need(not(prior/f'continuation-{sequence:03d}-complete.private.json').exists(),'original_plan_already_complete')
  accepted=prior/(prefix_role+'-accepted.private.json');end=time.monotonic()+7200
  while True:
@@ -129,7 +138,8 @@ def main():
     ids=[row['requestCount'] for row in rows if row['kind']=='request_dispatch']
     need(sorted(ids)==list(range(1,len(ids)+1)),'supplemental_rpc_dispatch_ledger_incomplete')
     supplemental.append(dict(path=str(path),sha256=sha(path),requestCount=len(ids)))
-  total+=observer_close['requestCount']+sum(row['requestCount'] for row in supplemental)
+  extra=observer_close['requestCount']+sum(row['requestCount'] for row in supplemental)
+  if not c.get('deferSupplementalRpcToMaximum'):total+=extra
   r.put('supplemental-rpc-accounting.private.json',dict(originalCounterRetained=True,additionalSources=supplemental,
    observerRequestCount=observer_close['requestCount'],additionalRequestCount=sum(row['requestCount'] for row in supplemental),
    alreadyCountedSources=list(map(str,covered))))
@@ -142,6 +152,7 @@ def main():
    noSave=True,noLoad=True,noLaunch=True,noReplay=True,materialUsed=material.get('materialUsed'),
    materialReservations=material.get('materialReservations'),nativeIdleEvidence=str(r.output/'fresh-blocked-native-idle-before-handoff.private.json'))
   handoff['supplementalRpcAccounting']=str(r.output/'supplemental-rpc-accounting.private.json')
+  if c.get('deferSupplementalRpcToMaximum'):handoff['separatelyAccountedRpcCount']=extra
   handoff['coveredRpcEventPaths']=list(map(str,covered))+[row['path'] for row in supplemental]
   put(prior/'caller-handoff.private.json',handoff);r.put('blocked-buffer-handoff-complete.private.json',handoff)
  finally:

@@ -914,6 +914,16 @@ class LiveDriverTests(unittest.TestCase):
   with self.assertRaisesRegex(RuntimeError,'explicit_positive_native_buffer'):blocked_suffix(invalid,'product','chips')
   invalid=copy.deepcopy(steps);invalid[2]['entity']='unresolved-reference'
   with self.assertRaisesRegex(RuntimeError,'explicit_positive_native_buffer'):blocked_suffix(invalid,'product','chips')
+ def test_blocked_first_step_can_follow_the_last_completed_plan_write(self):
+  from handoff_blocked_buffer import blocked_suffix
+  previous=[dict(kind='build-sorter',role='feed'),dict(kind='operation',role='save'),dict(kind='dump',role='cut')]
+  wait=dict(kind='wait-buffer',role='stock',entity=7,itemId=1106,minimumCount=30)
+  current=[wait,dict(kind='operation',role='transfer')]
+  self.assertEqual((wait,['transfer']),blocked_suffix(current,'stock','save',previous))
+  with self.assertRaisesRegex(RuntimeError,'exact_last_settled_prefix_required'):
+   blocked_suffix(current,'stock','feed',previous)
+  with self.assertRaisesRegex(RuntimeError,'exact_last_settled_prefix_required'):
+   blocked_suffix(current,'stock','save')
  def test_blocked_handoff_accepts_only_a_settled_accounted_sorter_prefix(self):
   from handoff_blocked_buffer import blocked_suffix,settled_sorter_prefix
   step=dict(kind='build-sorter',role='sorter',source=4,destination=5,filterItemId=1123)
