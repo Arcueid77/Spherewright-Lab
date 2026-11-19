@@ -8,7 +8,7 @@ from evidence import need,read,sha,json_value
 from mcp_client import Client
 from saved_space import exact_last_exit_echo,paused_space_source,exact_ui_supply,saved_identity_token
 from contracts import quarantined_navigation_original_accounted,fully_observed_dry_surface,observed_short_crossing_dry_landing
-from contracts import native_movement_order_released,remote_paused_saved_after_isolated_home,remote_roundtrip_paused_after_isolation,surface_unknown_after_isolated_remote,surface_failed_resume_saved_after_isolation
+from contracts import native_movement_order_released,remote_paused_saved_after_isolated_home,remote_roundtrip_paused_after_isolation,surface_unknown_after_isolated_remote,surface_failed_resume_saved_after_isolation,home_saved_after_isolated_remote
 from contracts import ordinary_owned_resume_echo,resume_admission_echo,validate_steps,validate_native_calls,strict_native_player_idle,native_warper_auto_supply_enabled,quarantined_paid_original_accounted,quarantined_harvest_no_effect_accounted,isolated_paid_belt_build_accounted,quarantined_local_move_saved_source,completed_saved_surface_move,isolated_surface_unknown_after_saved_home,isolated_saved_menu_unknown,remote_saved_after_isolated_home,remote_paid_saved_after_isolated_remote,remote_failed_resume_saved_after_paid,remote_healthy_saved_after_isolation,remote_paused_harvest_saved_after_isolation,remote_failed_same_tick_saved_after_isolation,remote_live_exit_after_isolation
 
 PLAYER_SETTING_MODES=('enable-mecha-construction-drones','disable-mecha-research-auto-supply',
@@ -172,6 +172,27 @@ class Live:
   need(remote_roundtrip_paused_after_isolation(c,previous,frozen('loadedSession'),frozen('homeReturn'),
    frozen('homeSave'),frozen('outbound'),frozen('pausedCut'),frozen('pausedSavePlan'),frozen('pausedSave'),
    frozen('normalClose'),frozen('preservation'),backup),'roundtrip_paused_saved_isolation_unproved')
+
+ def assert_home_after_remote_isolated(self,c,backup):
+  isolation=c.get('homeAfterRemoteIsolation') or {}
+  def frozen(key):
+   need(sha(isolation[key+'Path'])==isolation[key+'Sha256'],'frozen_home_return_evidence_changed')
+   return read(isolation[key+'Path'])
+  previous=frozen('previousConfig')
+  need(sha(previous['backupManifest'])==previous['backupManifestSha256'],'previous_remote_backup_manifest_changed')
+  older=read(previous['backupManifest'])
+  need(older.get('complete') is True and older.get('verified') is True,'previous_remote_backup_unproved')
+  for role in ('primary','lastExit'):
+   path=Path(previous['savePaths'][role]).resolve()
+   need(path==Path(c['savePaths'][role]).resolve(),'home_return_save_identity_changed')
+   rows=[row for row in older['rows'] if Path(row['originalPath']).resolve()==path];proof=older['latest'][role]
+   need(len(rows)==1 and rows[0]['sha256']==proof['sha256'] and sha(rows[0]['backupPath'])==proof['sha256'],
+    'previous_remote_backup_copy_changed')
+  self.assert_remote_roundtrip_paused_isolated(previous,older)
+  loaded=frozen('loadedSession')
+  need(loaded.get('saveName')==Path(previous['savePaths']['primary']).stem,'loaded_remote_identity_changed')
+  need(home_saved_after_isolated_remote(c,previous,loaded,frozen('homeFlight'),frozen('homeSave'),
+   frozen('menuSave'),frozen('normalClose'),backup),'home_return_saved_isolation_unproved')
 
  def assert_surface_previous_remote_isolated(self,c):
   link=c.get('surfacePreviousRemoteIsolation') or {}
@@ -488,6 +509,8 @@ class Live:
   home_isolated=False
   if c.get('homeSavedUnknownIsolation'):
    self.assert_home_unknowns_isolated(c,m);home_isolated=True
+  if c.get('homeAfterRemoteIsolation'):
+   self.assert_home_after_remote_isolated(c,m);home_isolated=True
   if c.get('remoteSavedUnknownIsolation'):
    self.assert_remote_unknowns_isolated(c,m);home_isolated=True
   if c.get('remoteRoundtripPausedIsolation'):

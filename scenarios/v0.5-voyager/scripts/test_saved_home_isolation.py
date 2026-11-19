@@ -4,7 +4,7 @@ import copy,math,sys,tempfile,unittest
 from types import SimpleNamespace
 from unittest.mock import patch
 sys.path.insert(0,str(Path(__file__).resolve().parent/'live'))
-from contracts import isolated_surface_unknown_after_saved_home,isolated_saved_menu_unknown,remote_saved_after_isolated_home,remote_paused_saved_after_isolated_home,remote_roundtrip_paused_after_isolation,surface_unknown_after_isolated_remote,surface_failed_resume_saved_after_isolation,owned_saved_recovery_context
+from contracts import isolated_surface_unknown_after_saved_home,isolated_saved_menu_unknown,remote_saved_after_isolated_home,remote_paused_saved_after_isolated_home,remote_roundtrip_paused_after_isolation,surface_unknown_after_isolated_remote,surface_failed_resume_saved_after_isolation,owned_saved_recovery_context,home_saved_after_isolated_remote
 from driver import Live
 
 
@@ -207,6 +207,39 @@ class SavedHomeIsolationTests(unittest.TestCase):
             (home_save,'completedAtGameTick',1121),(outbound,'sessionId','other'),
             (session,'writeQuarantineActionId','home'),(saved,'completedAtGameTick',1299),
             (closed,'gameStopped',False),(backup['latest']['lastExit'],'gameTick',1299)]:
+            with self.subTest(key=key,value=value):
+                old=obj[key];obj[key]=value;self.assertFalse(check());obj[key]=old
+
+    def test_isolated_remote_history_survives_a_real_home_return_and_normal_close(self):
+        previous=dict(recoveryProfile='ordinary-owned-remote',sourceTick=1000,planetId=201,
+            originalActionsReconciled=False,originalUnknownActionsNeverReplayed=['old-move','old-menu'],
+            expectedNativeVersion='native',nativeAssemblySha256='assembly',spentGameTicks=200,
+            returnReserveGameTicks=54000,cleanupReserveGameTicks=3000)
+        current=dict(previous,recoveryProfile='ordinary-owned-home',recoveryMode='default',sourceRole='primary',
+            sourceTick=1300,planetId=104,spentGameTicks=500,
+            closedJourneyHome=dict(phase='completed',homePlanetId=104,completedSaveGameTick=1110))
+        loaded=dict(sessionId='same',gameLoaded=True,ownedBySpherewright=True,localPlanetId=201,gameTick=1010)
+        flight=dict(actionId='return',actionKind='interplanetary-flight',terminal=True,state='completed',succeeded=True,
+            sessionId='same',planetId=201,startedAtGameTick=1020,completedAtGameTick=1100,
+            voyagerFlightReadback=dict(isReturnLeg=True,bindingVerified=True,nativeExitObserved=True,
+                actualPlanetId=104,selectedDestinationPlanetId=104))
+        saved=dict(actionId='home-save',actionKind='save',terminal=True,state='completed',succeeded=True,
+            sessionId='same',planetId=104,completedAtGameTick=1110)
+        menu=dict(actionId='menu',actionKind='return-to-main-menu',terminal=True,state='completed',succeeded=True,
+            sessionId='same',planetId=104,mainMenuReturnReadback=dict(normalSaveConfirmed=True,
+                completeSaveVerified=True,nativeEndRequested=True,mainMenuVerified=True,savedGameTick=1300))
+        closed=dict(passed=True,gameStopped=True)
+        backup=dict(complete=True,verified=True,latest=dict(primary=dict(gameTick=1300),lastExit=dict(gameTick=1300)))
+        check=lambda:home_saved_after_isolated_remote(current,previous,loaded,flight,saved,menu,closed,backup)
+        self.assertTrue(check())
+        for obj,key,value in [(current,'spentGameTicks',499),(previous,'spentGameTicks',None),
+            (current,'originalUnknownActionsNeverReplayed',['old-move']),
+            (current,'originalUnknownActionsNeverReplayed',['old-move','old-menu','old-menu']),
+            (flight,'actionId','old-move'),(flight,'sessionId','other'),
+            (flight['voyagerFlightReadback'],'actualPlanetId',105),(saved,'completedAtGameTick',1000),
+            (menu['mainMenuReturnReadback'],'completeSaveVerified',False),
+            (closed,'gameStopped',False),(backup,'verified',False),
+            (backup['latest']['primary'],'gameTick',1299)]:
             with self.subTest(key=key,value=value):
                 old=obj[key];obj[key]=value;self.assertFalse(check());obj[key]=old
 

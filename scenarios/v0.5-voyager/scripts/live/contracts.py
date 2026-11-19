@@ -453,6 +453,47 @@ def saved_home_source_covers(config, backup, floor):
         and (primary if role=='primary' else last_exit)==tick)
 
 
+def home_saved_after_isolated_remote(config, previous, loaded, flight, home_save, menu_save, closed, backup):
+    """Carry an already-isolated remote history through a real home return and normal close."""
+    old=previous.get('originalUnknownActionsNeverReplayed');current=config.get('originalUnknownActionsNeverReplayed')
+    native=flight.get('voyagerFlightReadback') or {};menu=menu_save.get('mainMenuReturnReadback') or {}
+    before=previous.get('sourceTick');tick=config.get('sourceTick');land=flight.get('completedAtGameTick')
+    saved=home_save.get('completedAtGameTick');menu_tick=menu.get('savedGameTick');session=loaded.get('sessionId')
+    times=(before,loaded.get('gameTick'),flight.get('startedAtGameTick'),land,saved,menu_tick,tick)
+    return (config.get('recoveryProfile')=='ordinary-owned-home' and config.get('recoveryMode')=='default'
+        and config.get('sourceRole')=='primary' and config.get('originalActionsReconciled') is False
+        and previous.get('recoveryProfile')=='ordinary-owned-remote'
+        and previous.get('originalActionsReconciled') is False
+        and isinstance(old,(list,tuple)) and isinstance(current,(list,tuple)) and bool(old)
+        and all(isinstance(x,str) and x for x in (*old,*current))
+        and len(set(old))==len(old)==len(current) and set(old)==set(current) and bool(session)
+        and all(isinstance(a.get('actionId'),str) and a['actionId'] not in old for a in (flight,home_save,menu_save))
+        and len({a['actionId'] for a in (flight,home_save,menu_save)})==3
+        and all(type(x)is int for x in times) and 0<=times[0]<=times[1]<=times[2]<=times[3]<=times[4]<=times[5]<=times[6]
+        and type(previous.get('spentGameTicks')) is int
+        and config.get('spentGameTicks')==previous.get('spentGameTicks')+tick-before
+        and config.get('returnReserveGameTicks')==previous.get('returnReserveGameTicks')
+        and config.get('cleanupReserveGameTicks')==previous.get('cleanupReserveGameTicks')
+        and config.get('expectedNativeVersion')==previous.get('expectedNativeVersion')
+        and config.get('nativeAssemblySha256')==previous.get('nativeAssemblySha256')
+        and loaded.get('gameLoaded') is True and loaded.get('ownedBySpherewright') is True
+        and loaded.get('localPlanetId')==previous.get('planetId')
+        and flight.get('sessionId')==home_save.get('sessionId')==menu_save.get('sessionId')==session
+        and flight.get('actionKind')=='interplanetary-flight' and flight.get('terminal') is True
+        and flight.get('state')=='completed' and flight.get('succeeded') is True
+        and flight.get('planetId')==previous.get('planetId') and native.get('isReturnLeg') is True
+        and native.get('bindingVerified') is True and native.get('nativeExitObserved') is True
+        and native.get('actualPlanetId')==native.get('selectedDestinationPlanetId')==config.get('planetId')
+        and home_save.get('actionKind')=='save' and home_save.get('planetId')==config.get('planetId')
+        and home_save.get('terminal') is True and home_save.get('state')=='completed' and home_save.get('succeeded') is True
+        and menu_save.get('actionKind')=='return-to-main-menu' and menu_save.get('planetId')==config.get('planetId')
+        and menu_save.get('terminal') is True and menu_save.get('state')=='completed' and menu_save.get('succeeded') is True
+        and all(menu.get(k) is True for k in ('normalSaveConfirmed','completeSaveVerified','nativeEndRequested','mainMenuVerified'))
+        and closed.get('passed') is True and closed.get('gameStopped') is True
+        and backup.get('complete') is True and backup.get('verified') is True
+        and saved_home_source_covers(config,backup,menu_tick))
+
+
 def isolated_surface_unknown_after_saved_home(config, old_config, original, receipt, session, preservation,
                                              old_source, progress, loaded, flight, home_save, backup):
     """Carry the old unknown unchanged through a distinct proved return and Save."""

@@ -62,6 +62,10 @@ def main():
         cases.append(('spherewright_prepare_configure_building',dict(ctx,entityId=0,recipeId=0,
             mode='enable-mecha-warper-auto-supply',expectedFactoryStateHash=h)))
         cases.append(('spherewright_prepare_resume_owned_game',dict(resumeToken='synthetic-offline-token',recoveryMode='default')))
+        if 'plannedSurfaceWorkGameTicks' in schemas['spherewright_preview_voyager_route']['properties']:
+            cases.append(('spherewright_preview_voyager_route',dict(ctx,destinationPlanetId=104,
+                expectedPlayerStateHash=h,expectedCatalogStateHash=h,maximumFlightGameTicks=108000,
+                returnReserveGameTicks=54000,plannedSurfaceWorkGameTicks=2000000)))
         cases.append(('spherewright_prepare_resume_owned_game',dict(resumeToken='synthetic-offline-token',
             recoveryMode='reauthorize_expired_primary')))
         cases.append(('spherewright_prepare_resume_owned_game',dict(resumeToken='synthetic-offline-token',
