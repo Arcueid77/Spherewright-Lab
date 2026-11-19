@@ -1,10 +1,16 @@
 # Ascension resource increment / Ascension用料增量
 
+## 2026-11-19 Caph 补充物流接口 / Additional Caph logistics connections
+
+为继续打通聚变燃料和太阳帆输送，已按既有自主用料授权从 Caph 星际站正常取 50 电路板。原计划复用随身铁块制造 3 个普通分拣器，但当前接口在接受前拒绝外星手搓，未消耗材料、未制造；返母星后结合下一批物资统一制造并自行调整有限施工额度。
+
+Under the existing resource grant, 50 circuit boards were normally withdrawn from the Caph interstellar station for further fusion-fuel and solar-sail connections. The planned remote handcraft of three sorters was rejected by the installed interface before acceptance, with no material consumed or sorters made. Manufacture the needed parts with the next batch at home and adjust finite placement allowances autonomously.
+
 ## 2026-11-19 Caph 续跑时间与供电 / Caph runtime and power
 
-原新航程的 108000 tick 包含 54000 返航储备，本地运行后触发暂停。按所有者“运行时长合理自行增加”的授权，全局累计上限由 15000000 增至 17000000 tick，并为当前旅程追加 2000000 tick；截至暂停实际已用 14231173 tick，原返航 54000 与清理 3000 tick 储备保留。计划从本地既有仓转运 100 石墨烯，若新鲜原生检查确认聚变机组空冷，则从随身库存正常补入 10 氘棒；转运不等于消耗，实际数量与发电以回读为准。
+原新航程的 108000 tick 包含 54000 返航储备，本地运行后触发暂停。按所有者“运行时长合理自行增加”的授权，全局累计上限由 15000000 增至 17000000 tick，并为当前旅程追加 2000000 tick；截至暂停实际已用 14231173 tick，原返航 54000 与清理 3000 tick 储备保留。已从本地既有仓转运 100 石墨烯，并在新鲜原生检查确认聚变机组空冷后补入 10 氘棒，实际发电和满供已观察。后续为疏通混合仓又转运 500 石墨烯及 80 氢；转运不等于消耗。
 
-The original new journey's 108000 ticks included a 54000-tick return reserve and Native paused after local work. Under the owner's runtime grant, raise the global cumulative ceiling from 15000000 to 17000000 ticks and add 2000000 ticks to the current journey; actual spending at pause is 14231173 ticks, with the existing 54000 return and 3000 cleanup reserves retained. Plan to transfer 100 graphene from local stock and, if a fresh Native check confirms the fusion generator is empty and cold, normally insert ten carried fuel rods. Transfers are not consumption; actual counts and generation require readback.
+The original new journey's 108000 ticks included a 54000-tick return reserve and Native paused after local work. Under the owner's runtime grant, the global cumulative ceiling rose from 15000000 to 17000000 ticks and this journey received 2000000 additional ticks; actual spending at pause was 14231173 ticks, with the existing 54000 return and 3000 cleanup reserves retained. One hundred graphene was moved from local stock and ten carried rods were normally inserted after a fresh Native check confirmed the fusion generator was empty and cold; actual generation and full service were observed. Another 500 graphene and 80 hydrogen were later moved to clear the mixed store. Transfers are not consumption.
 
 ## 2026-11-19 处理器持续供料准备 / Processor feed preparation
 
