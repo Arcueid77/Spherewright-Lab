@@ -10,7 +10,7 @@ from factory import Factory,resolve_refs,move_arguments_for_observed_mode
 from runtime import freeze,Runtime
 
 class LiveDriverTests(unittest.TestCase):
- def test_cleanly_closed_quarantined_caller_preserves_only_known_terminal_actions(self):
+ def test_cleanly_closed_caller_preserves_only_its_exact_quarantined_unknown(self):
   from preserve_quarantined import closed_caller_for_preservation
   with tempfile.TemporaryDirectory() as folder:
    root=Path(folder);closed=dict(normalEof=True,processExitCode=0,readerThreadsStopped=True,requestCount=8)
@@ -20,6 +20,8 @@ class LiveDriverTests(unittest.TestCase):
    self.assertEqual(closed,closed_caller_for_preservation(root))
    terminal.write_text(json.dumps(dict(terminal=True,state='outcome_unknown')))
    with self.assertRaisesRegex(RuntimeError,'accepted_action_not_terminally_known'):closed_caller_for_preservation(root)
+   with self.assertRaisesRegex(RuntimeError,'accepted_action_not_terminally_known'):closed_caller_for_preservation(root,'different')
+   self.assertEqual(closed,closed_caller_for_preservation(root,'original'))
    terminal.unlink()
    with self.assertRaisesRegex(RuntimeError,'accepted_action_terminal_missing'):closed_caller_for_preservation(root)
    (root/'client-close.private.json').write_text(json.dumps(dict(closed,normalEof=False)))

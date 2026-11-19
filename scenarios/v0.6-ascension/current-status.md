@@ -2,6 +2,10 @@
 
 按日期查证 0.6 实跑结果；续跑看[活动交接页首](../../operations/active-handoff.md)。/ Use the entries below for dated evidence. Resume from the top of the active handoff.
 
+2026-11-19 现场扩产：恢复原组件机和火箭机后，本地产出的 20 框架进入组件机，3 枚火箭实际抵达，结构 16 → 19 / 150。新化工厂、原料仓及 3 分拣器已正常付料建成，最近观察到仓中 130 纳米管；普通制造台在原生接受前被产品能力限制拒绝，未扣料。后续一段绕行移动以 unknown 暂停，MCP 已保存准确切面并正常关闭；Primary / LastExit 135472149，2880 项完整备份通过，累计 14382887 tick。邻近曾实际落地的位置用于新上岸动作，旧 unknown 保留。
+
+Caph expansion, 2026-11-19. The restored component machine received 20 locally made frames; three rocket arrivals raised structure from 16 to 19 / 150. A chemical plant, input store and three sorters were normally built with paid materials; the latest read showed 130 nanotubes in storage. The carried ordinary assembler was rejected before Native acceptance and no item was debited. A later distinct movement ended unknown and paused; MCP saved that exact cut and the game closed normally. Primary and LastExit are 135472149, with 2880 files backed up and 14382887 cumulative ticks. The nearby previously grounded position is the target of a new shore action; the original unknown stays unknown.
+
 2026-11-19 Caph 续接：新航班完成并保存，电网满供。临时复用现有设备，将 120 石墨烯和 40 钛块制成 80 碳纳米管并投入框架机；暂停前观察到 18 个框架分别位于背包、下游机器和框架机，另有 2 件在完成。原石墨烯配方及可燃冰输入已恢复；其余临时机器和筛选待接续恢复。原航程工作余量耗尽后，MCP 保存准确暂停现场并正常关闭，Primary / LastExit 均为 135437448，2868 项备份通过，累计 14348186 tick。尚未据此声称新火箭或闭壳完成。
 
 Caph continuation, 2026-11-19. The new flight arrived and was saved with full network service. Existing machines temporarily converted 120 graphene and 40 titanium into 80 nanotubes and fed them into frames. The last pre-pause observation found 18 frames across the package, downstream machine and frame machine, with two more in progress. The original graphene recipe and fire-ice feed were restored; the other temporary machine settings still need restoration. After the original local-work allowance ended, MCP preserved the exact paused cut and the game closed normally: Primary and LastExit 135437448, 2868 verified backup files, 14348186 cumulative ticks. This does not establish another rocket or shell completion.

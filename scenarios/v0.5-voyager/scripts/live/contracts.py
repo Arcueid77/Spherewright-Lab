@@ -10,6 +10,9 @@ def owned_saved_recovery_context(config):
             or config.get('remoteFailedResumeSavedIsolation') or config.get('remoteHealthySavedIsolation')
             or config.get('remotePausedHarvestSavedIsolation') or config.get('remoteFailedSameTickSavedIsolation')
             or config.get('remoteRoundtripPausedIsolation')) and config.get('originalActionsReconciled') is False
+    if (config.get('recoveryProfile')=='successful-outbound-surface'
+            and config.get('recoveryMode')=='authorize_remote_primary_recovery' and config.get('sourceRole')=='primary'):
+        return bool(config.get('surfacePreviousRemoteIsolation')) and config.get('originalActionsReconciled') is False
     home=config.get('closedJourneyHome') or {}
     return (config.get('recoveryProfile')=='ordinary-owned-home'
         and config.get('recoveryMode') in ('default','verified_newer_lastexit','reauthorize_expired_primary')
@@ -94,6 +97,29 @@ def quarantined_local_move_saved_source(config, reference, receipt, session, pre
             and config.get('expectedRenamedLastExitContentHash') == 'sha256:' + saved_hash.lower())
         and type(saved_source.get('gameTick')) is int and saved_source['gameTick'] == tick
         and saved_source.get('sha256') == saved_hash)
+
+def surface_unknown_after_isolated_remote(config,previous,action):
+    """Keep earlier isolated outcomes when a later saved Move needs shore recovery."""
+    old=previous.get('originalUnknownActionsNeverReplayed');current=config.get('originalUnknownActionsNeverReplayed')
+    before=previous.get('sourceTick');tick=config.get('sourceTick')
+    return (config.get('recoveryProfile')=='successful-outbound-surface'
+        and previous.get('recoveryProfile')=='ordinary-owned-remote'
+        and config.get('recoveryMode')==previous.get('recoveryMode')=='authorize_remote_primary_recovery'
+        and config.get('sourceRole')==previous.get('sourceRole')=='primary'
+        and config.get('planetId')==previous.get('planetId')
+        and config.get('originalActionsReconciled') is previous.get('originalActionsReconciled') is False
+        and isinstance(old,(list,tuple)) and isinstance(current,(list,tuple)) and bool(old)
+        and all(isinstance(x,str) and x for x in (*old,*current,action))
+        and len(set(old))==len(old) and len(set(current))==len(current)
+        and action not in old and set(current)==set(old)|{action}
+        and type(before)is int and type(tick)is int and 0<=before<=tick
+        and type(previous.get('spentGameTicks'))is int and previous['spentGameTicks']>=0
+        and config.get('spentGameTicks')==previous['spentGameTicks']+tick-before
+        and config.get('returnReserveGameTicks')==previous.get('returnReserveGameTicks')
+        and config.get('cleanupReserveGameTicks')==previous.get('cleanupReserveGameTicks')
+        and config.get('expectedNativeVersion')==previous.get('expectedNativeVersion')
+        and config.get('nativeAssemblySha256')==previous.get('nativeAssemblySha256'))
+
 
 def quarantined_harvest_no_effect_accounted(config,reference,receipt,cut,session,preservation):
     action=reference.get('actionId');tick=cut.get('observedGameTick')

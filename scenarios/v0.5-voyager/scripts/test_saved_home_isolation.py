@@ -4,7 +4,7 @@ import copy,math,sys,tempfile,unittest
 from types import SimpleNamespace
 from unittest.mock import patch
 sys.path.insert(0,str(Path(__file__).resolve().parent/'live'))
-from contracts import isolated_surface_unknown_after_saved_home,isolated_saved_menu_unknown,remote_saved_after_isolated_home,remote_paused_saved_after_isolated_home,remote_roundtrip_paused_after_isolation,owned_saved_recovery_context
+from contracts import isolated_surface_unknown_after_saved_home,isolated_saved_menu_unknown,remote_saved_after_isolated_home,remote_paused_saved_after_isolated_home,remote_roundtrip_paused_after_isolation,surface_unknown_after_isolated_remote,owned_saved_recovery_context
 from driver import Live
 
 
@@ -196,6 +196,20 @@ class SavedHomeIsolationTests(unittest.TestCase):
             (session,'writeQuarantineActionId','home'),(saved,'completedAtGameTick',1299),
             (closed,'gameStopped',False),(backup['latest']['lastExit'],'gameTick',1299)]:
             with self.subTest(key=key,value=value):
+                old=obj[key];obj[key]=value;self.assertFalse(check());obj[key]=old
+
+    def test_later_surface_move_keeps_previous_remote_unknowns_and_real_spending(self):
+        previous=dict(recoveryProfile='ordinary-owned-remote',recoveryMode='authorize_remote_primary_recovery',
+            sourceRole='primary',sourceTick=1000,planetId=201,originalActionsReconciled=False,
+            originalUnknownActionsNeverReplayed=['old-move','old-menu'],expectedNativeVersion='native',
+            nativeAssemblySha256='assembly',spentGameTicks=200,returnReserveGameTicks=54000,cleanupReserveGameTicks=3000)
+        current=dict(previous,recoveryProfile='successful-outbound-surface',sourceTick=1300,spentGameTicks=500,
+            originalUnknownActionsNeverReplayed=['old-move','old-menu','new-move'],surfacePreviousRemoteIsolation={'previousConfigPath':'bound'})
+        check=lambda:surface_unknown_after_isolated_remote(current,previous,'new-move')
+        self.assertTrue(check());self.assertTrue(owned_saved_recovery_context(current))
+        for obj,key,value in [(current,'spentGameTicks',499),(current,'planetId',202),
+            (current,'originalUnknownActionsNeverReplayed',['new-move']),(current,'nativeAssemblySha256','other')]:
+            with self.subTest(key=key):
                 old=obj[key];obj[key]=value;self.assertFalse(check());obj[key]=old
 
     def test_home_preflight_reports_isolation_without_using_surface_resume_schema(self):

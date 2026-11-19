@@ -9,7 +9,7 @@ from driver import Live
 from mcp_client import Client
 from evidence import read,need,actual_prior_rpc_count
 
-def closed_caller_for_preservation(origin):
+def closed_caller_for_preservation(origin, quarantined_action_id=None):
  closed=read(origin/'client-close.private.json')
  need(closed.get('normalEof') is True and closed.get('processExitCode')==0
       and closed.get('readerThreadsStopped') is True,'original_caller_not_cleanly_closed')
@@ -19,12 +19,14 @@ def closed_caller_for_preservation(origin):
   terminal_path=origin/('terminal-'+action+'.private.json')
   need(terminal_path.is_file(),'accepted_action_terminal_missing')
   terminal=read(terminal_path)
-  need(terminal.get('terminal') is True and terminal.get('state')!='outcome_unknown',
+  need(terminal.get('terminal') is True and (terminal.get('state')!='outcome_unknown'
+       or action==quarantined_action_id),
        'accepted_action_not_terminally_known')
  return closed
 
 def main():
  config,digest,origin,output=sys.argv[1:];origin=Path(origin)
+ r=Runtime(config,digest,output);c=r.config
  handoff_path=origin/'caller-handoff.private.json'
  if handoff_path.exists():
   prior=read(handoff_path)
@@ -34,8 +36,8 @@ def main():
   # An idle caller can stop itself after observing a Native quarantine.
   # Its closed pipe and every accepted terminal are checked before the fresh
   # same-session paused cut below; no handoff receipt is invented.
-  prior=closed_caller_for_preservation(origin)
- r=Runtime(config,digest,output);r.cohort();a=Live(r);c=r.config
+  prior=closed_caller_for_preservation(origin,c.get('expectedPreservationQuarantineActionId'))
+ r.cohort();a=Live(r)
  a.prior_rpc_count=actual_prior_rpc_count(origin,prior)
  game_origin=Path(c['liveSessionOrigin']);a.pid=read(game_origin/'process-observed.private.json')['Id']
  a.c=Client(Path(c['pluginDestination'])/'Spherewright.Mcp.exe',r.output/'client',maximum=50,seconds=180)

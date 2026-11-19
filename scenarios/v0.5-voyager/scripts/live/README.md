@@ -1,5 +1,7 @@
 # Shared live driver / 共享实机驱动
 
+A cleanly closed caller can preserve the exact Native-paused quarantine even when its original Move ended `outcome_unknown`; other unresolved actions are not silently accepted. Shore recovery carries the earlier remote isolation and actual spending forward. / 调用端正常关闭后，可保存与暂停隔离准确绑定的原 unknown 移动，其他未决动作不会被忽略；上岸恢复继续保留此前远端隔离与实际账目。
+
 An isolated remote save may continue through an observed return home, normal Save, successful new outbound and exact paused preservation. The driver carries the original action history and actual cumulative spending through the later save; it never treats the old unknowns as resolved or replays the completed flight. / 已隔离的远端存档可经实测返母星、正常保存、新出航成功及准确暂停保存续接；调用端保留原动作历史与累计实耗，不将旧 unknown 视作已解决，也不重放已完成的航班。
 
 A known terminal Move or harvest failure leaves the caller available when the owned session is healthy and the original Native order is released, even if the player is still drifting. The next distinct action uses a fresh Native prepare; the failed action is not replayed. Build preparation also refreshes the player after an explicitly unaccepted, retryable player-state change. / 移动或采集明确失败后，只要会话健康且原生指令已释放，调用端可继续等待后续操作，包括角色仍在漂移的情况；下一次不同动作重新原生准备，不重放原动作。建造准备因玩家状态瞬变在接受前被拒时，也会刷新玩家状态后继续。
