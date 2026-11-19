@@ -1,5 +1,7 @@
 # Shared live driver / 共享实机驱动
 
+An isolated remote save may continue through an observed return home, normal Save, successful new outbound and exact paused preservation. The driver carries the original action history and actual cumulative spending through the later save; it never treats the old unknowns as resolved or replays the completed flight. / 已隔离的远端存档可经实测返母星、正常保存、新出航成功及准确暂停保存续接；调用端保留原动作历史与累计实耗，不将旧 unknown 视作已解决，也不重放已完成的航班。
+
 A known terminal Move or harvest failure leaves the caller available when the owned session is healthy and the original Native order is released, even if the player is still drifting. The next distinct action uses a fresh Native prepare; the failed action is not replayed. Build preparation also refreshes the player after an explicitly unaccepted, retryable player-state change. / 移动或采集明确失败后，只要会话健康且原生指令已释放，调用端可继续等待后续操作，包括角色仍在漂移的情况；下一次不同动作重新原生准备，不重放原动作。建造准备因玩家状态瞬变在接受前被拒时，也会刷新玩家状态后继续。
 
 `build-belt-between` binds fresh hashes for two existing endpoints and uses the normal Native build and material accounting. It can join already built empty belt ends where Native admits them; a preview alone is not a completed connection. / `build-belt-between` 对两个已有端点读取新鲜哈希，走正常原生建造与用料核销；可在原生允许时连接已建的空带端点，预览通过不代表连接已建成。

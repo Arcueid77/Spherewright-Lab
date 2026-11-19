@@ -4,7 +4,7 @@ import copy,math,sys,tempfile,unittest
 from types import SimpleNamespace
 from unittest.mock import patch
 sys.path.insert(0,str(Path(__file__).resolve().parent/'live'))
-from contracts import isolated_surface_unknown_after_saved_home,isolated_saved_menu_unknown,remote_saved_after_isolated_home,remote_paused_saved_after_isolated_home,owned_saved_recovery_context
+from contracts import isolated_surface_unknown_after_saved_home,isolated_saved_menu_unknown,remote_saved_after_isolated_home,remote_paused_saved_after_isolated_home,remote_roundtrip_paused_after_isolation,owned_saved_recovery_context
 from driver import Live
 
 
@@ -155,6 +155,46 @@ class SavedHomeIsolationTests(unittest.TestCase):
             (session,'writeQuarantineActionId','different'),(cut,'noResume',False),
             (plan,'preservesQuarantine',False),(saved,'completedAtGameTick',1599),
             (closed,'gameStopped',False),(backup['latest']['lastExit'],'gameTick',1599)]:
+            with self.subTest(key=key,value=value):
+                old=obj[key];obj[key]=value;self.assertFalse(check());obj[key]=old
+
+    def test_remote_roundtrip_keeps_original_unknowns_and_preserves_the_new_outbound(self):
+        previous=dict(recoveryProfile='ordinary-owned-remote',recoveryMode='authorize_remote_primary_recovery',
+            sourceRole='primary',sourceTick=1000,planetId=201,originalActionsReconciled=False,
+            originalUnknownActionsNeverReplayed=['old-move','old-menu'],expectedNativeVersion='native',
+            nativeAssemblySha256='assembly',spentGameTicks=200,returnReserveGameTicks=54000,cleanupReserveGameTicks=3000)
+        current=dict(previous,sourceTick=1300,spentGameTicks=500,surfaceRecoveryTarget=None,
+            remoteRoundtripPausedIsolation={'previousConfigPath':'bound'})
+        loaded=dict(sessionId='same',gameLoaded=True,ownedBySpherewright=True,writesAllowed=True,localPlanetId=201,gameTick=1010)
+        home=dict(actionId='home',actionKind='interplanetary-flight',terminal=True,state='completed',succeeded=True,
+            sessionId='same',planetId=201,startedAtGameTick=1020,completedAtGameTick=1100,
+            voyagerFlightReadback=dict(isReturnLeg=True,bindingVerified=True,nativeExitObserved=True,
+                actualPlanetId=104,selectedDestinationPlanetId=104))
+        home_save=dict(actionId='home-save',actionKind='save',terminal=True,state='completed',succeeded=True,
+            sessionId='same',planetId=104,completedAtGameTick=1110)
+        outbound=dict(actionId='outbound',actionKind='interplanetary-flight',terminal=True,state='completed',succeeded=True,
+            sessionId='same',planetId=104,startedAtGameTick=1120,completedAtGameTick=1200,
+            voyagerFlightReadback=dict(isReturnLeg=False,bindingVerified=True,nativeExitObserved=True,
+                actualPlanetId=201,selectedDestinationPlanetId=201))
+        session=dict(sessionId='same',gameLoaded=True,ownedBySpherewright=True,writesAllowed=False,
+            writeHealth='quarantined',writeQuarantineActionId='outbound',localPlanetId=201,gameTick=1300,
+            writeBlockers=[dict(code='WRITE_SUBSYSTEM_QUARANTINED')])
+        player=dict(sessionId='same',planetId=201,nativeLocalControlEnergy=dict(blockers=['native_paused_not_execution_ready']))
+        cut=dict(session=session,player=player,noResume=True)
+        plan=dict(prepared=True,commitAllowedNow=True,preservesQuarantine=True,preservationGameTick=1300,commitBlockers=[])
+        saved=dict(actionId='paused-save',actionKind='save',terminal=True,state='completed',succeeded=True,
+            sessionId='same',planetId=201,completedAtGameTick=1300)
+        closed=dict(passed=True,gameStopped=True)
+        preserved=dict(passed=True,minimumCurrentTick=1300,originalQuarantineRetained=True,noResume=True)
+        backup=dict(complete=True,verified=True,latest=dict(primary=dict(gameTick=1300),lastExit=dict(gameTick=1300)))
+        check=lambda:remote_roundtrip_paused_after_isolation(current,previous,loaded,home,home_save,outbound,
+            cut,plan,saved,closed,preserved,backup)
+        self.assertTrue(check());self.assertTrue(owned_saved_recovery_context(current))
+        for obj,key,value in [(current,'spentGameTicks',499),(current,'originalUnknownActionsNeverReplayed',['old-move']),
+            (home,'succeeded',False),(home['voyagerFlightReadback'],'isReturnLeg',False),
+            (home_save,'completedAtGameTick',1121),(outbound,'sessionId','other'),
+            (session,'writeQuarantineActionId','home'),(saved,'completedAtGameTick',1299),
+            (closed,'gameStopped',False),(backup['latest']['lastExit'],'gameTick',1299)]:
             with self.subTest(key=key,value=value):
                 old=obj[key];obj[key]=value;self.assertFalse(check());obj[key]=old
 
