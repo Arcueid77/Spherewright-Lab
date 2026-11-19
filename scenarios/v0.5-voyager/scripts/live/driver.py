@@ -161,6 +161,11 @@ class Live:
    self.assert_remote_failed_same_tick_saved_isolated(previous,older,depth+1)
   elif previous.get('remoteFailedResumeSavedIsolation'):
    self.assert_remote_failed_resume_saved_isolated(previous,older,depth+1)
+  elif previous.get('recoveryProfile')=='successful-outbound-surface':
+   # The earlier surface recovery may itself have preserved a failed resume.
+   # Verify that complete chain before carrying it through the later round trip.
+   need(bool(previous.get('surfaceAfterFailedResumeIsolation')),'previous_surface_isolation_missing')
+   self.assert_surface_failed_saved_isolated(previous,older)
   else:
    need(bool(previous.get('remoteRoundtripPausedIsolation')),'previous_remote_isolation_missing')
    self.assert_remote_roundtrip_paused_isolated(previous,older,depth+1)

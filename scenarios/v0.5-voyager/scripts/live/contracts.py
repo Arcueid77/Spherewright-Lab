@@ -618,7 +618,8 @@ def remote_roundtrip_paused_after_isolation(config, previous, loaded, home_retur
     times=(before,loaded.get('gameTick'),home_return.get('startedAtGameTick'),home_return.get('completedAtGameTick'),
            home_save.get('completedAtGameTick'),outbound.get('startedAtGameTick'),outbound.get('completedAtGameTick'),tick)
     ids=(home_return.get('actionId'),home_save.get('actionId'),action,saved.get('actionId'))
-    return (config.get('recoveryProfile')==previous.get('recoveryProfile')=='ordinary-owned-remote'
+    return (config.get('recoveryProfile')=='ordinary-owned-remote'
+        and previous.get('recoveryProfile') in ('ordinary-owned-remote','successful-outbound-surface')
         and config.get('recoveryMode')==previous.get('recoveryMode')=='authorize_remote_primary_recovery'
         and config.get('sourceRole')==previous.get('sourceRole')=='primary'
         and config.get('originalActionsReconciled') is previous.get('originalActionsReconciled') is False

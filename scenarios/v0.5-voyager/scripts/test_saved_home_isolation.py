@@ -190,6 +190,18 @@ class SavedHomeIsolationTests(unittest.TestCase):
         check=lambda:remote_roundtrip_paused_after_isolation(current,previous,loaded,home,home_save,outbound,
             cut,plan,saved,closed,preserved,backup)
         self.assertTrue(check());self.assertTrue(owned_saved_recovery_context(current))
+        # A successful saved-surface recovery can also precede this exact
+        # home return, outbound flight and paused preservation.  The current
+        # continuation uses ordinary remote recovery, while the earlier
+        # surface evidence remains bound and separately validated.
+        previous['recoveryProfile']='successful-outbound-surface'
+        previous['surfaceRecoveryTarget']={'x':1,'y':2,'z':3}
+        self.assertTrue(check())
+        outbound['succeeded']=False
+        self.assertFalse(check())
+        outbound['succeeded']=True
+        previous['recoveryProfile']='ordinary-owned-remote'
+        previous.pop('surfaceRecoveryTarget')
         for obj,key,value in [(current,'spentGameTicks',499),(current,'originalUnknownActionsNeverReplayed',['old-move']),
             (home,'succeeded',False),(home['voyagerFlightReadback'],'isReturnLeg',False),
             (home_save,'completedAtGameTick',1121),(outbound,'sessionId','other'),
