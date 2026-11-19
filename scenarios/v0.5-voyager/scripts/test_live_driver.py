@@ -308,19 +308,20 @@ class LiveDriverTests(unittest.TestCase):
      runtime.mcp_executable.assert_called_once_with()
      self.assertEqual(selected,client.call_args.args[0])
 
- def test_first_move_waits_for_native_inertia_only_inside_its_original_deadline(self):
+ def test_first_move_waits_for_order_release_only_inside_its_original_deadline(self):
   from unittest.mock import patch
   a=Live(None);a.runtime=type('Evidence',(),dict(config=dict(firstOperation=dict(kind='move')),put=lambda *_:None))()
-  a.first_before=dict(position=dict(x=0,y=200,z=0));a.first_work_deadline=2
-  idle=dict(position=dict(x=2,y=200,z=0),movementState='Walk',speed=0,nativePhysics=dict(groundContact=dict(checkSphereHit=True),currentOrderPresent=False,queuedOrderCount=0,**{k:dict(x=0,y=0,z=0)for k in ('velocity','walkRtsVelocity','driftRtsVelocity','walkManualVelocity','driftManualVelocity')}))
-  moving=copy.deepcopy(idle);moving['speed']=4;moving['nativePhysics']['walkRtsVelocity']['x']=4
-  states=iter([moving,idle]);a.player=lambda:next(states)
+  a.first_before=dict(sessionId='same',planetId=7,position=dict(x=0,y=200,z=0));a.first_work_deadline=2
+  idle=dict(sessionId='same',planetId=7,isAlive=True,isOnPlanet=True,position=dict(x=2,y=200,z=0),movementState='Drift',speed=.3,nativePhysics=dict(groundContact=dict(checkSphereHit=False),currentOrderPresent=False,queuedOrderCount=0))
+  active=copy.deepcopy(idle);active['nativePhysics']['currentOrderPresent']=True
+  result=dict(terminal=True,state='completed',actionKind='move',succeeded=True,actionId='synthetic-original',sessionId='same',planetId=7)
+  states=iter([active,idle]);a.player=lambda:next(states)
   with patch('driver.time.monotonic',return_value=1),patch('driver.time.sleep')as wait:
-   self.assertTrue(a.verify_progress({},dict(succeeded=True,actionId='synthetic-original')))
+   self.assertTrue(a.verify_progress({},result))
    wait.assert_called_once()
   a.first_work_deadline=0;a.player=lambda:idle
   with patch('driver.time.monotonic',return_value=1):
-   self.assertFalse(a.verify_progress({},dict(succeeded=True,actionId='synthetic-original')))
+   self.assertFalse(a.verify_progress({},result))
 
  def test_device_wait_requires_the_selected_complete_native_layer_and_exact_types(self):
   from contracts import observed_stack_device_matches as matches
@@ -1369,12 +1370,20 @@ class LiveDriverTests(unittest.TestCase):
    self.assertEqual(current.resolve(),r.native_paths()['currentCheckpoint']);self.assertEqual(str(old),r.config['savePaths']['currentCheckpoint'])
    ticket.write_text(json.dumps(dict(ownedSaveName='foreign-owned',gameVersion='synthetic-native',checkpointSaveName=current.stem)))
    with self.assertRaisesRegex(RuntimeError,'current_checkpoint_identity_changed'):r.native_paths()
- def test_first_real_move_requires_actual_delta_grounded_walk_and_zero_native_velocity(self):
+ def test_first_real_move_accepts_released_drift_but_requires_terminal_proof(self):
   a=Live(None);a.runtime=type('Evidence',(),dict(config=dict(firstOperation=dict(kind='move')),put=lambda *_:None))()
-  a.first_before=dict(position=dict(x=0,y=200,z=0));p=dict(position=dict(x=2,y=200,z=0),movementState='Walk',speed=0,nativePhysics=dict(groundContact=dict(checkSphereHit=True),currentOrderPresent=False,queuedOrderCount=0,**{k:dict(x=0,y=0,z=0) for k in ('velocity','walkRtsVelocity','driftRtsVelocity','walkManualVelocity','driftManualVelocity')}))
-  a.player=lambda:p;result=dict(succeeded=True,actionId='original')
-  self.assertTrue(a.verify_progress({},result));p['nativePhysics']['groundContact']['checkSphereHit']=False
-  self.assertFalse(a.verify_progress({},result))
+  a.first_before=dict(sessionId='same',planetId=7,position=dict(x=0,y=200,z=0))
+  p=dict(sessionId='same',planetId=7,isAlive=True,isOnPlanet=True,position=dict(x=2,y=200,z=0),movementState='Drift',speed=.2,nativePhysics=dict(groundContact=dict(checkSphereHit=False),currentOrderPresent=False,queuedOrderCount=0))
+  a.player=lambda:p;result=dict(terminal=True,state='completed',actionKind='move',succeeded=True,actionId='original',sessionId='same',planetId=7)
+  self.assertTrue(a.verify_progress({},result))
+  for change in (dict(terminal=False),dict(state='failed'),dict(actionKind='build'),dict(succeeded=False),dict(sessionId='other'),dict(planetId=8)):
+   with self.subTest(change=change):self.assertFalse(a.verify_progress({},dict(result,**change)))
+  for field,value in [('sessionId','other'),('planetId',8),('isAlive',False),('isOnPlanet',False)]:
+   original=p[field];p[field]=value
+   with self.subTest(field=field):self.assertFalse(a.verify_progress({},result))
+   p[field]=original
+  p['nativePhysics']['currentOrderPresent']=True;self.assertFalse(a.verify_progress({},result))
+  p['nativePhysics']['currentOrderPresent']=False;p['nativePhysics']['queuedOrderCount']=1;self.assertFalse(a.verify_progress({},result))
  def test_actual_global_read_does_not_receive_planet_context_and_explicit_unknowns_reject(self):
   a=Factory.__new__(Factory);a.ctx=dict(sessionId='same',planetId=7)
   a.schemas={'spherewright_get_session_state':dict(properties={},required=[]),'spherewright_get_gameplay_journal':dict(properties=dict(sessionId={}),required=['sessionId'])}

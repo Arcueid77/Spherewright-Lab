@@ -306,6 +306,17 @@ def powered_consumers_share_network(entities, network_id):
     return bool(consumers) and all(consumer_network(e)==network_id for e in consumers)
 
 
+def native_movement_order_released(player,before):
+    """A completed move can be real progress before its player lands."""
+    physics=player.get('nativePhysics') or {}
+    return (player.get('isAlive') is True and player.get('isOnPlanet') is True
+        and bool(before.get('sessionId')) and player.get('sessionId')==before.get('sessionId')
+        and type(before.get('planetId')) is int and before['planetId']>0
+        and player.get('planetId')==before['planetId']
+        and physics.get('currentOrderPresent') is False
+        and type(physics.get('queuedOrderCount')) is int and physics['queuedOrderCount']==0)
+
+
 def strict_native_player_idle(player,allow_passive_drift=False):
     physics=player.get('nativePhysics') or {};ground=physics.get('groundContact') or {}
     drift=allow_passive_drift and player.get('movementState')=='Drift'

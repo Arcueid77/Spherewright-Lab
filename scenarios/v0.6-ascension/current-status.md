@@ -2,6 +2,10 @@
 
 按日期查证 0.6 实跑结果；续跑看[活动交接页首](../../operations/active-handoff.md)。/ Use the entries below for dated evidence. Resume from the top of the active handoff.
 
+2026-11-19同会话恢复：更新的 LastExit 以 2786 项备份保护后恢复；首笔移动约 271 秒内原生完成并释放订单，但旧调用端等待接地直到 600 秒超时，原失败报告保留。已修正第一笔独立移动的判断：核对原生完成、位移、会话和订单释放，后续动作另用新鲜原生准入；117 项调用端回归通过，新启动路径尚未实机验证。未重载或重启即由 live-19 接手，角色随后实际落地并经原生导航接近处理器产线；将分拣器 5099 由 1303 暂改 1302，最近读到成品仓积存 3 处理器。最近正常保存 tick 135225554，累计 14136292 tick，游戏和唯一调用端仍运行。
+
+Same-session continuation, 2026-11-19: the newer LastExit was recovered after a verified 2786-file backup. The first move completed and released its order in about 271 seconds, but the old caller waited for ground contact until the 600-second limit; the original failed report remains. First independent Move verification was corrected to check Native completion, displacement, session and order release, leaving later actions to fresh Native admission. All 117 caller regressions pass; a new startup has not yet live-tested the corrected path. Live-19 attached without another load or launch. The player later landed and navigated to the processor line; sorter 5099 was temporarily changed from 1303 to 1302, and its output store was later observed holding three processors. Latest normal save is tick 135225554 with 14136292 cumulative ticks; the game and sole caller remain active.
+
 2026-11-19中断后核对：游戏和唯一调用端已退出，最后现场读取为 tick 135219858；随后桥接失联，未证明具体退出方式。LastExit 为 tick 135220197，晚于该读取及主档 tick 135211639；已核验 2786 项完整备份。累计 14130935 tick，近期 217 次单列观察已计入 162455 次调用。下一次使用较新的 LastExit 恢复；处理器短步行仅预检、未提交，早前飞行式预检在接受前被拒。
 
 Post-interruption check, 2026-11-19: the game and sole caller have exited. The last live read was tick 135219858 before bridge loss; the exit method is unproved. LastExit is tick 135220197, later than that read and primary tick 135211639; a complete 2786-file backup has been verified. Cumulative use is 14130935 ticks and 162455 calls, including 217 recent separate observations. Resume the newer LastExit; the short processor-supply walk was only previewed, and the earlier flying-navigation preview was rejected before acceptance.

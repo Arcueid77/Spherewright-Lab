@@ -1,5 +1,11 @@
 # Ascension resource increment / Ascension用料增量
 
+## 2026-11-19 处理器持续供料准备 / Processor feed preparation
+
+按既有自主用料授权，为连接处理器成品仓与芯片输入仓，计划正常制造 120 条基础带及 2 个普通分拣器，直接配方合计需铁块 122、电路板 2；背包现有 19 条基础带可一并使用。拟将累计放置上限由基础带 1025 增至 1150、普通分拣器 128 增至 130，既有实耗 1000 带、128 分拣器不退回。母星现有候选仓新鲜读到 800 铁块及 947 电路板；实际取用、路径、施工和流转以原生终态及回读为准。
+
+Under the existing resource-autonomy grant, prepare a continuing connection from the processor output store to the chip input store. Normally craft 120 basic belts and two ordinary sorters using 122 iron ingots and two circuit boards; 19 carried belts are also available. The planned cumulative placement ceilings rise from 1025 to 1150 belts and from 128 to 130 ordinary sorters, retaining the 1000 belts and 128 sorters already used. Fresh reads show 800 iron and 947 boards in existing home stores. Actual transfers, routing, construction and flow remain subject to Native results.
+
 ## 2026-11-19 量子芯片与过滤器自动输送 / Quantum chips and filter transport
 
 按既有自主用料授权复用量子芯片、卡西米尔晶体和位面过滤器设备：已向相关仓投入处理器 40、石墨烯 70、钛化晶石 60，并将新产出的 13 个过滤器正常转入芯片线；后续又投入 30 处理器，转运不等于全部消耗。为减少后续手工转运，正常制造 90 条基础带和 2 个分拣器，直接消耗铁块 92、电路板 2；累计放置上限由基础带 925 增至 1025、普通分拣器 126 增至 128，原有实耗不退回。新线实际使用 78 带、2 分拣器，累计已用 1000 带、128 分拣器；有限过滤器流转已观察，连续供料和目标站到货仍须观察。

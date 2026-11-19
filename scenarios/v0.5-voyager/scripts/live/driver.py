@@ -8,6 +8,7 @@ from evidence import need,read,sha,json_value
 from mcp_client import Client
 from saved_space import exact_last_exit_echo,paused_space_source,exact_ui_supply,saved_identity_token
 from contracts import quarantined_navigation_original_accounted,fully_observed_dry_surface,observed_short_crossing_dry_landing
+from contracts import native_movement_order_released
 from contracts import ordinary_owned_resume_echo,resume_admission_echo,validate_steps,validate_native_calls,strict_native_player_idle,native_warper_auto_supply_enabled,quarantined_paid_original_accounted,quarantined_harvest_no_effect_accounted,isolated_paid_belt_build_accounted,quarantined_local_move_saved_source,completed_saved_surface_move,isolated_surface_unknown_after_saved_home,isolated_saved_menu_unknown,remote_saved_after_isolated_home,remote_paid_saved_after_isolated_remote,remote_failed_resume_saved_after_paid,remote_healthy_saved_after_isolation,remote_paused_harvest_saved_after_isolation,remote_failed_same_tick_saved_after_isolation,remote_live_exit_after_isolation
 
 PLAYER_SETTING_MODES=('enable-mecha-construction-drones','disable-mecha-research-auto-supply',
@@ -868,10 +869,15 @@ class Live:
   if c.get('kind')=='move':
    e=self.player();ground=(e.get('nativePhysics') or {}).get('groundContact') or {};velocity=(e.get('nativePhysics') or {}).get('velocity') or {}
    deadline=getattr(self,'first_work_deadline',None)
-   # A terminal Native order may retain RTS inertia for a few physics frames.
-   # Observe its stop within the original startup clock without another order.
+   # Native can complete a real move while the mecha is still drifting or
+   # descending. The next operation receives its own fresh Native admission;
+   # requiring ground contact here would block ordinary water-to-land recovery.
    native_navigation=c.get('useNativeNavigation') is True
-   while not native_navigation and r['succeeded'] and deadline is not None and not strict_native_player_idle(e) and time.monotonic()<deadline:
+   completed_move=(r.get('terminal') is True and r.get('state')=='completed'
+    and r.get('succeeded') is True and r.get('actionKind')=='move'
+    and r.get('sessionId')==self.first_before.get('sessionId')
+    and r.get('planetId')==self.first_before.get('planetId'))
+   while not native_navigation and completed_move and deadline is not None and not native_movement_order_released(e,self.first_before) and time.monotonic()<deadline:
     time.sleep(min(.25,max(0,deadline-time.monotonic())))
     e=self.player()
    moved=math.dist([self.first_before['position'][k] for k in 'xyz'],[e['position'][k] for k in 'xyz'])
@@ -884,7 +890,7 @@ class Live:
     ok=ok and bool(native.get('planBindingHash')) and native.get('planBindingHash')==w['prepared']['expectedStateHash']
     ok=ok and native.get('movementState') in ('Walk','Drift','Fly')
     ok=ok and type(native.get('finalSurfaceDistanceMetres'))in(int,float) and 0<=native['finalSurfaceDistanceMetres']<=c['arrivalTolerance']
-   else:ok=ok and strict_native_player_idle(e)
+   else:ok=ok and completed_move and native_movement_order_released(e,self.first_before)
    self.runtime.put('actual-progress.private.json',dict(verified=ok,actionId=r['actionId'],before=self.first_before,after=e,
     movedMetres=moved,originalStartupDeadlineRespected=within));return ok
   e=self.player() if mode in PLAYER_SETTING_MODES else self.entity(c['entityId'])
