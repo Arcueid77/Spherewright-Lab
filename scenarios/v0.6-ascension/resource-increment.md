@@ -1,5 +1,11 @@
 # Ascension resource increment / Ascension用料增量
 
+## 2026-11-19 Caph 框架批次与燃料 / Caph frame batch and fuel
+
+母星取 360 钛块、180 高纯硅、180 钛合金作为 Caph 框架的首批原料，若当地能持续供应约 1080 石墨烯，可支持约 180 框架、约 30 枚火箭的框架需求。另取 300 处理器，其中 80 投入母星芯片线、220 随航。已给出口线转入 240 根氘棒，给母星星际站补 36 翘曲器，给机甲专用槽正常补 18。另制造 3 电塔，消耗 6 铁块及 3 磁线圈。累计放置上限调整为化工厂 2、Mk.I 制造台 4、小仓 31、普通分拣器 148、电塔 30，基础带保持 1150，前序实耗保留。施工优先满足单套框架生产和独立燃料供给，然后依据实际流量扩第二套。
+
+Withdrawals of 360 titanium, 180 high-purity silicon and 180 alloy support about 180 frames for 30 rockets if Caph can supply about 1080 graphene. Of 300 processors withdrawn, 80 were fed to the home chip line and 220 went with the player. The export line received 240 rods, the home station 36 warpers and the native chamber 18. Three additional power towers used six iron and three coils. Cumulative placement ceilings are two chemical plants, four Mk.I assemblers, 31 stores, 148 ordinary sorters and 30 power towers. The existing 1150-belt ceiling and all actual spending carry forward. Establish one frame module and independent fuel flow, then add the second module according to throughput.
+
 ## 2026-11-19 母星上游恢复 / Home upstream restart
 
 按既有自主用料授权，已投入 1000 高能石墨、240 硫酸、1200 石矿以及钛化玻璃线的 200 水、200 钛块。先用随身 3 铁块和 3 电路板制造 3 分拣器。其后为 Caph 本地框架扩产又制造 2 化工厂、2 Mk.I 制造台、4 小仓、15 分拣器，消耗 55 铁块、16 钢材、32 石材、16 玻璃、27 电路板，包括制造台的齿轮用铁。上游转运和施工件制造分别记账。
