@@ -4,7 +4,7 @@ import copy,math,sys,tempfile,unittest
 from types import SimpleNamespace
 from unittest.mock import patch
 sys.path.insert(0,str(Path(__file__).resolve().parent/'live'))
-from contracts import isolated_surface_unknown_after_saved_home,isolated_saved_menu_unknown,remote_saved_after_isolated_home,remote_paused_saved_after_isolated_home,remote_roundtrip_paused_after_isolation,surface_unknown_after_isolated_remote,owned_saved_recovery_context
+from contracts import isolated_surface_unknown_after_saved_home,isolated_saved_menu_unknown,remote_saved_after_isolated_home,remote_paused_saved_after_isolated_home,remote_roundtrip_paused_after_isolation,surface_unknown_after_isolated_remote,surface_failed_resume_saved_after_isolation,owned_saved_recovery_context
 from driver import Live
 
 
@@ -209,6 +209,32 @@ class SavedHomeIsolationTests(unittest.TestCase):
         self.assertTrue(check());self.assertTrue(owned_saved_recovery_context(current))
         for obj,key,value in [(current,'spentGameTicks',499),(current,'planetId',202),
             (current,'originalUnknownActionsNeverReplayed',['new-move']),(current,'nativeAssemblySha256','other')]:
+            with self.subTest(key=key):
+                old=obj[key];obj[key]=value;self.assertFalse(check());obj[key]=old
+
+    def test_failed_surface_resume_keeps_the_old_unknown_through_a_new_paused_save(self):
+        previous=dict(recoveryProfile='successful-outbound-surface',recoveryMode='authorize_remote_primary_recovery',
+            sourceRole='primary',sourceTick=1000,planetId=201,originalActionsReconciled=False,
+            originalUnknownActionsNeverReplayed=['old-move'],expectedNativeVersion='native',nativeAssemblySha256='assembly',
+            spentGameTicks=200,returnReserveGameTicks=54000,cleanupReserveGameTicks=3000)
+        current=dict(previous,sourceTick=1001,spentGameTicks=201)
+        failed=dict(actionId='failed-resume',actionKind='resume-owned-game',terminal=True,state='action_failed',
+            succeeded=False,sessionId='new',nativeFirstFailure=dict(capturedAtGameTick=1001))
+        session=dict(gameLoaded=True,ownedBySpherewright=True,writesAllowed=False,writeHealth='quarantined',
+            writeQuarantineActionId='failed-resume',sessionId='new',localPlanetId=201,gameTick=1001)
+        player=dict(sessionId='new',planetId=201,nativeLocalControlEnergy=dict(blockers=['native_paused_not_execution_ready']))
+        cut=dict(session=session,player=player,noResume=True)
+        plan=dict(prepared=True,commitAllowedNow=True,preservesQuarantine=True,preservationGameTick=1001,commitBlockers=[])
+        saved=dict(actionId='save',actionKind='save',terminal=True,state='completed',succeeded=True,
+            sessionId='new',planetId=201,completedAtGameTick=1001)
+        closed=dict(passed=True,gameStopped=True);preserved=dict(passed=True,minimumCurrentTick=1001,
+            originalQuarantineRetained=True,noResume=True)
+        backup=dict(complete=True,verified=True,latest=dict(primary=dict(gameTick=1001),lastExit=dict(gameTick=1001)))
+        check=lambda:surface_failed_resume_saved_after_isolation(current,previous,failed,cut,plan,saved,closed,preserved,backup)
+        self.assertTrue(check())
+        for obj,key,value in [(current,'spentGameTicks',200),(failed,'state','outcome_unknown'),
+            (session,'writeQuarantineActionId','old-move'),(plan,'preservesQuarantine',False),
+            (saved,'completedAtGameTick',1000),(backup['latest']['lastExit'],'gameTick',1000)]:
             with self.subTest(key=key):
                 old=obj[key];obj[key]=value;self.assertFalse(check());obj[key]=old
 

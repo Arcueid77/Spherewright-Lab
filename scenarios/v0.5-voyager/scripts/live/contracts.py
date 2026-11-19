@@ -121,6 +121,51 @@ def surface_unknown_after_isolated_remote(config,previous,action):
         and config.get('nativeAssemblySha256')==previous.get('nativeAssemblySha256'))
 
 
+def surface_failed_resume_saved_after_isolation(config,previous,failed,cut,save_plan,saved,closed,preservation,backup):
+    """A later failed surface resume is saved without resolving the old Move."""
+    old=previous.get('originalUnknownActionsNeverReplayed');current=config.get('originalUnknownActionsNeverReplayed')
+    before=previous.get('sourceTick');tick=config.get('sourceTick');session=cut.get('session') or {}
+    player=cut.get('player') or {};action=failed.get('actionId');failure=failed.get('nativeFirstFailure') or {}
+    latest=backup.get('latest') or {}
+    return (config.get('recoveryProfile')==previous.get('recoveryProfile')=='successful-outbound-surface'
+        and config.get('recoveryMode')==previous.get('recoveryMode')=='authorize_remote_primary_recovery'
+        and config.get('sourceRole')==previous.get('sourceRole')=='primary'
+        and config.get('planetId')==previous.get('planetId')
+        and config.get('originalActionsReconciled') is previous.get('originalActionsReconciled') is False
+        and isinstance(old,(list,tuple)) and isinstance(current,(list,tuple)) and bool(old)
+        and all(isinstance(x,str) and x for x in (*old,*current)) and len(set(old))==len(old)
+        and len(set(current))==len(current) and set(old)==set(current)
+        and type(before)is int and type(tick)is int and 0<=before<=tick
+        and type(previous.get('spentGameTicks'))is int and previous['spentGameTicks']>=0
+        and config.get('spentGameTicks')==previous['spentGameTicks']+tick-before
+        and config.get('returnReserveGameTicks')==previous.get('returnReserveGameTicks')
+        and config.get('cleanupReserveGameTicks')==previous.get('cleanupReserveGameTicks')
+        and config.get('expectedNativeVersion')==previous.get('expectedNativeVersion')
+        and config.get('nativeAssemblySha256')==previous.get('nativeAssemblySha256')
+        and isinstance(action,str) and bool(action) and action not in current
+        and failed.get('actionKind')=='resume-owned-game' and failed.get('terminal') is True
+        and failed.get('state')=='action_failed' and failed.get('succeeded') is False
+        and type(failure.get('capturedAtGameTick'))is int and before<=failure['capturedAtGameTick']<=tick
+        and session.get('gameLoaded') is True and session.get('ownedBySpherewright') is True
+        and session.get('writesAllowed') is False and session.get('writeHealth')=='quarantined'
+        and session.get('writeQuarantineActionId')==action and session.get('gameTick')==tick
+        and session.get('sessionId')==player.get('sessionId')==failed.get('sessionId')==saved.get('sessionId')
+        and session.get('localPlanetId')==player.get('planetId')==saved.get('planetId')==config.get('planetId')
+        and cut.get('noResume') is True
+        and 'native_paused_not_execution_ready' in (player.get('nativeLocalControlEnergy') or {}).get('blockers',[])
+        and save_plan.get('prepared') is True and save_plan.get('commitAllowedNow') is True
+        and save_plan.get('preservesQuarantine') is True and save_plan.get('preservationGameTick')==tick
+        and save_plan.get('commitBlockers')==[] and saved.get('actionKind')=='save'
+        and saved.get('terminal') is True and saved.get('state')=='completed' and saved.get('succeeded') is True
+        and saved.get('completedAtGameTick')==tick and isinstance(saved.get('actionId'),str)
+        and bool(saved['actionId']) and saved['actionId'] not in (*current,action)
+        and closed.get('passed') is True and closed.get('gameStopped') is True
+        and preservation.get('passed') is True and preservation.get('minimumCurrentTick')==tick
+        and preservation.get('originalQuarantineRetained') is True and preservation.get('noResume') is True
+        and backup.get('complete') is True and backup.get('verified') is True
+        and (latest.get('primary') or {}).get('gameTick')==(latest.get('lastExit') or {}).get('gameTick')==tick)
+
+
 def quarantined_harvest_no_effect_accounted(config,reference,receipt,cut,session,preservation):
     action=reference.get('actionId');tick=cut.get('observedGameTick')
     return (owned_saved_recovery_context(config)
@@ -395,8 +440,7 @@ def completed_saved_surface_move(config, result, session, player):
         and move.get('nativeOrderAccepted') is True and move.get('strictPhysicalIdleProved') is True
         and move.get('failure') is None and move.get('newGameTicksGranted') is False
         and move.get('originalUnknownOutcomeChanged') is False and strict_native_player_idle(player)
-        and math.dist(normalized,target)<=.05 and math.dist(current,target)<=3.5
-        and math.dist(source,current)>1)
+        and math.dist(normalized,target)<=.05 and math.dist(current,player_position)<=.2)
 
 
 def saved_home_source_covers(config, backup, floor):

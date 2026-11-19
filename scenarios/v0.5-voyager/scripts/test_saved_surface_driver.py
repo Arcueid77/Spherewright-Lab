@@ -272,6 +272,10 @@ class SavedSurfaceDriverTests(unittest.TestCase):
         session = dict(gameLoaded=True, ownedBySpherewright=True, writesAllowed=True, sessionId='new-session', localPlanetId=201)
         # This fixture uses a target just over two metres from the source.
         self.assertTrue(completed_saved_surface_move(config,result,session,player))
+        # The owned action may stop on actual grounded land before its target.
+        early=copy.deepcopy(player);early['position']=dict(x=199.99,y=10.,z=0.)
+        early['nativePhysics']['resumeSurfaceRecoveryMove']['currentPosition']=dict(early['position'])
+        self.assertTrue(completed_saved_surface_move(config,result,session,early))
         for key,value in [('resumeActionId','old-move'),('state','armed'),('nativeOrderAccepted',False),
             ('strictPhysicalIdleProved',False),('failure','failed'),('originalUnknownOutcomeChanged',True),
             ('sourceGameTick',1199),('currentPosition',dict(x=150.,y=0.,z=0.)),

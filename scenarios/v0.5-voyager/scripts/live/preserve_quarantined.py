@@ -24,6 +24,19 @@ def closed_caller_for_preservation(origin, quarantined_action_id=None):
        'accepted_action_not_terminally_known')
  return closed
 
+def original_session_for_preservation(origin, quarantined_action_id):
+ loaded=origin/'loaded-session.private.json'
+ if loaded.exists():return read(loaded)
+ # A resume may fail after loading and before the regular loaded receipt.
+ # Bind the paused session to that exact failed action, not a guessed success.
+ need(bool(quarantined_action_id),'failed_resume_identity_missing')
+ receipt=read(origin/('terminal-'+quarantined_action_id+'.private.json'))
+ need(receipt.get('actionId')==quarantined_action_id and receipt.get('actionKind')=='resume-owned-game'
+      and receipt.get('terminal') is True and receipt.get('state')=='action_failed'
+      and receipt.get('succeeded') is False and bool(receipt.get('sessionId')),
+      'failed_resume_session_unproved')
+ return receipt
+
 def main():
  config,digest,origin,output=sys.argv[1:];origin=Path(origin)
  r=Runtime(config,digest,output);c=r.config
@@ -42,7 +55,7 @@ def main():
  game_origin=Path(c['liveSessionOrigin']);a.pid=read(game_origin/'process-observed.private.json')['Id']
  a.c=Client(Path(c['pluginDestination'])/'Spherewright.Mcp.exe',r.output/'client',maximum=50,seconds=180)
  try:
-  a.c.initialize();s=a.call('spherewright_get_session_state',{});original=read(game_origin/'loaded-session.private.json')
+  a.c.initialize();s=a.call('spherewright_get_session_state',{});original=original_session_for_preservation(game_origin,c['expectedPreservationQuarantineActionId'])
   need(s['gameLoaded'] and s['ownedBySpherewright'] and not s['writesAllowed']
        and s['sessionId']==original['sessionId'] and s['localPlanetId']==c['planetId']
        and s.get('writeQuarantineActionId')==c['expectedPreservationQuarantineActionId'],'exact_native_quarantine_changed')

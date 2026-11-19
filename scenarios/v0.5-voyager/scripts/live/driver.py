@@ -8,7 +8,7 @@ from evidence import need,read,sha,json_value
 from mcp_client import Client
 from saved_space import exact_last_exit_echo,paused_space_source,exact_ui_supply,saved_identity_token
 from contracts import quarantined_navigation_original_accounted,fully_observed_dry_surface,observed_short_crossing_dry_landing
-from contracts import native_movement_order_released,remote_paused_saved_after_isolated_home,remote_roundtrip_paused_after_isolation,surface_unknown_after_isolated_remote
+from contracts import native_movement_order_released,remote_paused_saved_after_isolated_home,remote_roundtrip_paused_after_isolation,surface_unknown_after_isolated_remote,surface_failed_resume_saved_after_isolation
 from contracts import ordinary_owned_resume_echo,resume_admission_echo,validate_steps,validate_native_calls,strict_native_player_idle,native_warper_auto_supply_enabled,quarantined_paid_original_accounted,quarantined_harvest_no_effect_accounted,isolated_paid_belt_build_accounted,quarantined_local_move_saved_source,completed_saved_surface_move,isolated_surface_unknown_after_saved_home,isolated_saved_menu_unknown,remote_saved_after_isolated_home,remote_paid_saved_after_isolated_remote,remote_failed_resume_saved_after_paid,remote_healthy_saved_after_isolation,remote_paused_harvest_saved_after_isolation,remote_failed_same_tick_saved_after_isolation,remote_live_exit_after_isolation
 
 PLAYER_SETTING_MODES=('enable-mecha-construction-drones','disable-mecha-research-auto-supply',
@@ -192,6 +192,38 @@ class Live:
    self.assert_remote_healthy_saved_isolated(previous,backup)
   else:
    raise RuntimeError('previous_surface_remote_isolation_missing')
+
+ def assert_surface_failed_saved_isolated(self,c,backup,depth=0):
+  need(type(depth)is int and 0<=depth<16,'surface_failed_isolation_chain_outside_bound')
+  isolation=c.get('surfaceAfterFailedResumeIsolation') or {}
+  def frozen(key):
+   need(sha(isolation[key+'Path'])==isolation[key+'Sha256'],'frozen_surface_failed_evidence_changed')
+   return read(isolation[key+'Path'])
+  previous=frozen('previousConfig')
+  need(json_value(c.get('quarantinedLocalMoveOriginals'))==previous.get('quarantinedLocalMoveOriginals'),
+   'surface_original_move_reference_changed')
+  need(sha(previous['backupManifest'])==previous['backupManifestSha256'],'previous_surface_backup_changed')
+  older=read(previous['backupManifest'])
+  need(older.get('complete') is True and older.get('verified') is True,'previous_surface_backup_unproved')
+  for role in ('primary','lastExit'):
+   path=Path(previous['savePaths'][role]).resolve()
+   need(path==Path(c['savePaths'][role]).resolve(),'surface_save_identity_changed')
+   rows=[row for row in older['rows'] if Path(row['originalPath']).resolve()==path];proof=older['latest'][role]
+   need(len(rows)==1 and rows[0]['sha256']==proof['sha256'] and sha(rows[0]['backupPath'])==proof['sha256'],
+    'previous_surface_backup_copy_changed')
+  if previous.get('surfaceAfterFailedResumeIsolation'):
+   self.assert_surface_failed_saved_isolated(previous,older,depth+1)
+  else:
+   moves=previous.get('quarantinedLocalMoveOriginals') or ()
+   need(len(moves)==1,'previous_surface_original_move_missing');original=moves[0]
+   for key in ('receipt','session','preservation'):
+    need(sha(original[key+'Path'])==original[key+'Sha256'],'previous_surface_move_evidence_changed')
+   need(quarantined_local_move_saved_source(previous,original,read(original['receiptPath']),read(original['sessionPath']),
+    read(original['preservationPath']),older['latest'][previous['sourceRole']]),'previous_surface_move_unproved')
+   if previous.get('surfacePreviousRemoteIsolation'):self.assert_surface_previous_remote_isolated(previous)
+  need(surface_failed_resume_saved_after_isolation(c,previous,frozen('failedResume'),frozen('pausedCut'),
+   frozen('pausedSavePlan'),frozen('pausedSave'),frozen('normalClose'),frozen('preservation'),backup),
+   'surface_failed_saved_isolation_unproved')
 
  def assert_remote_paid_unknowns_isolated(self,c,backup):
   isolation=c.get('remotePaidSavedUnknownIsolation')
@@ -435,12 +467,15 @@ class Live:
   local_moves=c.get('quarantinedLocalMoveOriginals',())
   if c.get('recoveryProfile')=='successful-outbound-surface':
    need(isinstance(local_moves,(list,tuple)) and len(local_moves)==1,'original_local_move_evidence_required')
-   for original in local_moves:
-    for key in ('receipt','session','preservation'):
-     need(sha(original[key+'Path'])==original[key+'Sha256'],'frozen_local_move_evidence_changed')
-    need(quarantined_local_move_saved_source(c,original,read(original['receiptPath']),read(original['sessionPath']),
-       read(original['preservationPath']),m['latest'][c['sourceRole']]),
-       'original_local_move_or_covering_saved_source_unproved')
+   if c.get('surfaceAfterFailedResumeIsolation'):
+    self.assert_surface_failed_saved_isolated(c,m)
+   else:
+    for original in local_moves:
+     for key in ('receipt','session','preservation'):
+      need(sha(original[key+'Path'])==original[key+'Sha256'],'frozen_local_move_evidence_changed')
+     need(quarantined_local_move_saved_source(c,original,read(original['receiptPath']),read(original['sessionPath']),
+        read(original['preservationPath']),m['latest'][c['sourceRole']]),
+        'original_local_move_or_covering_saved_source_unproved')
   else:
    need(not local_moves,'local_move_evidence_requires_surface_profile')
   if c.get('surfacePreviousRemoteIsolation'):

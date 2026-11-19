@@ -2,6 +2,10 @@
 
 按日期查证 0.6 实跑结果；续跑看[活动交接页首](../../operations/active-handoff.md)。/ Use the entries below for dated evidence. Resume from the top of the active handoff.
 
+2026-11-19 水面恢复修正：17.2 米目标先被产品的 16 米固定上限拒绝；15 米新目标又因水面下无近距地面及目标周围不全干被拒，均未开始新移动。MCP 已保存准确暂停现场并正常关闭，Primary / LastExit 均为 135472150，2888 项备份通过。产品修复 `281e9b34` 允许有界原生漂移越水，抵达真实地面并停稳才完成；源码与本地回归通过，实机恢复仍待验证。
+
+Water recovery correction, 2026-11-19. A 17.2 m target was rejected by the product’s fixed 16 m limit; a distinct 15 m target was then refused before movement because no near ground was beneath the water and the target patch was not completely dry. MCP saved the exact paused scene and the game closed normally. Primary and LastExit are 135472150 with 2888 verified backup files. Product fix `281e9b34` permits bounded Native Drift across water and requires actual supported ground and idle for completion. Source and local regressions passed; live recovery remains to be verified.
+
 2026-11-19 现场扩产：恢复原组件机和火箭机后，本地产出的 20 框架进入组件机，3 枚火箭实际抵达，结构 16 → 19 / 150。新化工厂、原料仓及 3 分拣器已正常付料建成，最近观察到仓中 130 纳米管；普通制造台在原生接受前被产品能力限制拒绝，未扣料。后续一段绕行移动以 unknown 暂停，MCP 已保存准确切面并正常关闭；Primary / LastExit 135472149，2880 项完整备份通过，累计 14382887 tick。邻近曾实际落地的位置用于新上岸动作，旧 unknown 保留。
 
 Caph expansion, 2026-11-19. The restored component machine received 20 locally made frames; three rocket arrivals raised structure from 16 to 19 / 150. A chemical plant, input store and three sorters were normally built with paid materials; the latest read showed 130 nanotubes in storage. The carried ordinary assembler was rejected before Native acceptance and no item was debited. A later distinct movement ended unknown and paused; MCP saved that exact cut and the game closed normally. Primary and LastExit are 135472149, with 2880 files backed up and 14382887 cumulative ticks. The nearby previously grounded position is the target of a new shore action; the original unknown stays unknown.

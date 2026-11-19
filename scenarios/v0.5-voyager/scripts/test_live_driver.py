@@ -35,6 +35,16 @@ class LiveDriverTests(unittest.TestCase):
   self.assertEqual(args,move_arguments_for_observed_mode(args,None))
   self.assertEqual(dict(targetX=1),move_arguments_for_observed_mode(dict(targetX=1),dict(movementState='Walk',isFlying=False)))
 
+ def test_failed_loaded_resume_preservation_binds_exact_original_session(self):
+  from preserve_quarantined import original_session_for_preservation
+  with tempfile.TemporaryDirectory() as folder:
+   root=Path(folder);path=root/'terminal-original.private.json'
+   receipt=dict(actionId='original',actionKind='resume-owned-game',terminal=True,state='action_failed',succeeded=False,sessionId='same')
+   path.write_text(json.dumps(receipt));self.assertEqual(receipt,original_session_for_preservation(root,'original'))
+   for key,value in [('state','outcome_unknown'),('actionKind','move'),('succeeded',True),('sessionId','')]:
+    changed=dict(receipt);changed[key]=value;path.write_text(json.dumps(changed))
+    with self.subTest(key=key),self.assertRaisesRegex(RuntimeError,'failed_resume_session_unproved'):
+     original_session_for_preservation(root,'original')
  def test_energy_wait_polls_at_the_declared_bounded_interval_and_keeps_idle_proof(self):
   from unittest.mock import patch
   player=json.loads((Path(__file__).parent/'fixtures/captured-known-move-stop.json').read_text())['player']
