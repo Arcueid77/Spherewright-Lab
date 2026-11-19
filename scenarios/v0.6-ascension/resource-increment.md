@@ -1,5 +1,11 @@
 # Ascension resource increment / Ascension用料增量
 
+## 2026-11-19 母星上游恢复 / Home upstream restart
+
+按既有自主用料授权，已投入 1000 高能石墨、240 硫酸、1200 石矿以及钛化玻璃线的 200 水、200 钛块。先用随身 3 铁块和 3 电路板制造 3 分拣器。其后为 Caph 本地框架扩产又制造 2 化工厂、2 Mk.I 制造台、4 小仓、15 分拣器，消耗 55 铁块、16 钢材、32 石材、16 玻璃、27 电路板，包括制造台的齿轮用铁。上游转运和施工件制造分别记账。
+
+Under the existing resource grant, 1000 energetic graphite, 240 acid, 1200 stone, 200 water and 200 titanium were fed into existing lines. Three sorters used three carried iron and three boards. The Caph kit then added two chemical plants, two Mk.I assemblers, four stores and 15 sorters, using 55 iron, 16 steel, 32 stone bricks, 16 glass and 27 boards. The iron total includes the assembler gears. Account for upstream transfers and crafting separately.
+
 ## 2026-11-19 Caph 补充物流接口 / Additional Caph logistics connections
 
 为继续打通聚变燃料和太阳帆输送，已按既有自主用料授权从 Caph 星际站正常取 50 电路板。原计划复用随身铁块制造 3 个普通分拣器，但当前接口在接受前拒绝外星手搓，未消耗材料、未制造；返母星后结合下一批物资统一制造并自行调整有限施工额度。
