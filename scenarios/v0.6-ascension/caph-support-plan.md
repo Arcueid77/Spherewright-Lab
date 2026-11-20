@@ -1,5 +1,11 @@
 # Caph closed-shell support plan / Caph闭壳供料方案
 
+## 提速与工具改进 / Throughput and tooling improvements
+
+- **按实际目标距离计算施工。** 水面恢复的固定 16 米由产品提交 `21af9f48` 引入，已在 `281e9b34` 移除；普通移动无需受它约束。另有只读步行路线预览的 16 米范围，以及结构化施工的 26 米目标 / 28 米无人机证明范围；这些都是当前实现的范围，不是游戏的普遍距离上限。后续改为结合实际目标、无人机轨迹和当前能耗评估，避免近处施工也按固定最大行程估算；实机继续可先走近施工。/ **Budget construction from actual reach.** Product commit `21af9f48` introduced the fixed 16 m water-recovery target and `281e9b34` removed it; ordinary movement is not constrained by that value. A separate read-only walking-route preview still has a 16 m range, and structured construction uses a 26 m target / 28 m drone proof envelope. These are implementation ranges, not general game limits. Improve them using actual target distance, drone motion and present energy costs instead of pricing nearby builds at a fixed maximum; in-game work can continue by walking closer.
+- **减少供料与发射切换。** 优先为太阳帆和火箭建立各自可用的输出路径，让现有生产和发射并行；在新路径可用前继续按库存进行有限批次切换。处理器同时分配给戴森组件和量子芯片，按实际在途、设备缓冲及剩余壳面一起核算。/ **Reduce feed and launch switching.** Give sails and rockets separate usable output paths where practical, so production and launch can proceed together; until then use finite batches based on actual stock. Allocate processors across both Dyson components and quantum chips, accounting for in-flight cargo, machine buffers and remaining shell work together.
+- **补齐远端普通手搓。** 现行产品曾在外星工厂作业时拒绝普通手搓，应支持按实际配方、库存和机甲运行情况执行，避免为少量普通零件专门往返母星。此项尚待产品实现和实机验证。/ **Support normal remote handcraft.** The current product previously rejected ordinary handcraft at the off-world factory. Support it using actual recipes, inventory and mecha operation to avoid a home round trip for small ordinary parts. Implementation and live verification remain open.
+
 ## Current saved Caph continuation / 当前Caph存档续接
 
 以下保留各次供料设计、预算与当时的建议；当前要打通哪一段，以[活动交接页首](../../operations/active-handoff.md)为准。/ The entries below preserve supply designs, allocations and proposals from each run. Use the active handoff for the next connection to build.
