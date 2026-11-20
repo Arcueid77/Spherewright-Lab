@@ -2,6 +2,10 @@
 
 按日期查证 0.6 实跑结果；续跑看[活动交接页首](../../operations/active-handoff.md)。/ Use the entries below for dated evidence. Resume from the top of the active handoff.
 
+2026-11-20 闭壳与冷恢复实机验收：结构 150 / 150、细胞 224 / 224，冷恢复后相同拓扑与完成数保全。闭壳后日照 1800 tick 采样最低 123660 W；恢复后 1846 tick 采样最低 122520 W。回菜单修复已通过后续正常保存、主菜单回读和关停；最新主档 / LastExit 136886110、3288 项完整备份，原超时仍保持 unknown。[验收范围与失败样本](acceptance-2026-11-20.md)。
+
+Closed shell and cold continuity, 2026-11-20: structure 150 / 150 and cells 224 / 224 remained complete with identical topology after cold recovery. Declared daylight samples covered 1800 ticks at a minimum 123660 W after closure and 1846 ticks at a minimum 122520 W after recovery. The menu fix passed a later normal save, menu readback and stop. Latest primary / LastExit are 136886110 with 3288 verified backup files; the original timeout remains unknown. See [acceptance scope and failed samples](acceptance-2026-11-20.md).
+
 2026-11-20 实装续接：`e221b263` 同源冷安装及磁盘核验通过，已核 5 个插件文件、224 个 MCP 文件与 47 项已装接口形状；游戏关闭，最新存档和 3278 项完整保护仍在。闭壳和发电需在新版本冷恢复后复核，原回菜单超时保持 unknown。
 
 Installed continuation, 2026-11-20: coherent `e221b263` cold installation and disk verification passed, covering five Plugin files, 224 MCP files and 47 installed interface cases. The game is stopped and the latest save plus 3278 protected files remain backed up. Recheck closure and electricity after cold recovery on this version; the original menu timeout stays unknown.
