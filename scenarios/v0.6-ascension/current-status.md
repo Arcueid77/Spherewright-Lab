@@ -2,6 +2,10 @@
 
 按日期查证 0.6 实跑结果；续跑看[活动交接页首](../../operations/active-handoff.md)。/ Use the entries below for dated evidence. Resume from the top of the active handoff.
 
+2026-11-20 本地包体候选：产品源码 `78274df5` 与实机源码 `e221b263` 相差 6 个说明文件，准确 CI、双语包链接、两包结构、手动包模拟安装与两种包内 MCP 检查通过；完整哈希和范围见[交审记录](../../releases/v0.6.0/review-candidate-2026-11-20.md)。尚未打标签或正式发布。
+
+Local package candidates, 2026-11-20: product source `78274df5` differs from live-tested `e221b263` in six documentation files. Exact CI, bilingual package links, both layouts, simulated manual installation and both packaged MCP checks passed. See the [review record](../../releases/v0.6.0/review-candidate-2026-11-20.md) for full hashes and scope. No tag or formal publication has been made.
+
 2026-11-20 闭壳与冷恢复实机验收：结构 150 / 150、细胞 224 / 224，冷恢复后相同拓扑与完成数保全。闭壳后日照 1800 tick 采样最低 123660 W；恢复后 1846 tick 采样最低 122520 W。回菜单修复已通过后续正常保存、主菜单回读和关停；最新主档 / LastExit 136886110、3288 项完整备份，原超时仍保持 unknown。[验收范围与失败样本](acceptance-2026-11-20.md)。
 
 Closed shell and cold continuity, 2026-11-20: structure 150 / 150 and cells 224 / 224 remained complete with identical topology after cold recovery. Declared daylight samples covered 1800 ticks at a minimum 123660 W after closure and 1846 ticks at a minimum 122520 W after recovery. The menu fix passed a later normal save, menu readback and stop. Latest primary / LastExit are 136886110 with 3288 verified backup files; the original timeout remains unknown. See [acceptance scope and failed samples](acceptance-2026-11-20.md).
