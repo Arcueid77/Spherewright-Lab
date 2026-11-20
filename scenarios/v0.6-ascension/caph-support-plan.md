@@ -12,13 +12,13 @@
 
 返航途中跨星只读切面显示母星站 918 有 2 处理器、7536 处理器与芯片均为 0、7579 有 1 芯片；这是站内现货，不代表全部仓库。抵达后先检查现有仓储并恢复处理器上游，同时启动芯片与光子补料。
 
-两条既有带经过原中转候选点，原生预检因与带 77 / 91 碰撞拒绝了仓库，未建造或扣料。回程可正常准备一座额外电磁轨道弹射器及分拣器，探索从存帆仓直接供料，从而使火箭和帆并行；现有首座弹射器和原有带保持运行。按原生配方，一座弹射器直接需要 20 钢材、20 齿轮、5 处理器和 10 电磁涡轮；检查现有供电后再按实需补电。额外科研、用料及施工按既有 0.6 自主授权核算执行。
+两条既有带经过原中转候选点，原生预检因与带 77 / 91 碰撞拒绝了仓库，未建造或扣料。曾考虑追加电磁轨道弹射器和分拣器，但核对后发现还需生产较多磁环及其上游部件，会与处理器争用铜料；现阶段优先保障剩余火箭和现有弹射器分批发帆。若后续实测仍受共用带明显限制，再按实际库存决定是否建设独立发射线。合理科研、用料及施工继续按既有 0.6 自主授权自行执行。
 
 At departure, structure was 136 / 150 and cells 128 / 224, with 22 sails in the swarm, 20 loaded and no rocket in flight. Fourteen further rockets gross 84 processors, 84 frames, 84 component sails, 28 quantum chips and 56 rods. Store 45 held 43 frames / 84 sails; the component machine held six frames / six sails, the rocket machine four chips / four rods, and the local station one processor / two rods. Nanotubes were still being made but the frame line lacked titanium alloy. Cells need another 96; the 42 swarm / loaded sails are potential supply and still require actual launch and absorption. Recheck live stock, combine processor, chip, fuel, photon and frame / alloy supplies with a reasonable margin, and do not count the same sails for both components and shell cells.
 
 An in-flight remote read found two processors at home station 918, zero processors and chips at 7536, and one chip at 7579. These are station stocks, not a complete warehouse inventory. After arrival, inspect existing stores, restart upstream processors and begin chip and photon replenishment in parallel.
 
-Two existing belts occupied the proposed intermediate-store area; Native previews rejected collisions with belts 77 / 91 before construction or debit. Prepare an additional electromagnetic rail ejector and sorter at home, then explore direct feed from the sail store so rockets and sails can run concurrently while the existing ejector and belts remain in service. Its Native direct recipe uses 20 steel, 20 gears, five processors and ten electromagnetic turbines. Check the actual grid before adding needed power. Apply the existing 0.6 autonomy for reasonable research, materials and construction.
+Two existing belts occupied the proposed intermediate-store area; Native previews rejected collisions with belts 77 / 91 before construction or debit. An additional rail ejector and sorter were considered, but the remaining magnetic rings and upstream parts would compete with processors for copper. Prioritize the remaining rockets and finite sail batches through the existing ejector; revisit a separate line if fresh results show the shared belt is still the limiting factor. Continue reasonable research, materials and construction under the existing 0.6 autonomy.
 
 ## Current saved Caph continuation / 当前Caph存档续接
 
