@@ -283,6 +283,36 @@ class SavedHomeIsolationTests(unittest.TestCase):
             with self.subTest(key=key):
                 old=obj[key];obj[key]=value;self.assertFalse(check());obj[key]=old
 
+    def test_home_return_accepts_previously_verified_healthy_remote_history(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            keys = ('previousConfig', 'loadedSession', 'homeFlight', 'homeSave', 'menuSave', 'normalClose')
+            refs = {}
+            for key in keys:
+                refs[key + 'Path'] = str(root / (key + '.json'))
+                refs[key + 'Sha256'] = 'HASH'
+            paths = dict(primary=str(root / 'primary.dsv'), lastExit=str(root / 'last-exit.dsv'))
+            previous = dict(backupManifest=str(root / 'old-backup.json'), backupManifestSha256='HASH',
+                savePaths=paths, remoteHealthySavedIsolation={'verified': True})
+            older = dict(complete=True, verified=True,
+                latest={role: dict(sha256='HASH') for role in paths},
+                rows=[dict(originalPath=path, backupPath=str(root / (role + '-copy.dsv')), sha256='HASH')
+                    for role, path in paths.items()])
+            docs = {refs[key + 'Path']: {} for key in keys}
+            docs[refs['previousConfigPath']] = previous
+            docs[previous['backupManifest']] = older
+            docs[refs['loadedSessionPath']] = dict(saveName='primary')
+            current = dict(homeAfterRemoteIsolation=refs, savePaths=paths)
+            current_backup = dict(complete=True, verified=True)
+            live = Live(SimpleNamespace(config={}))
+            with patch('driver.sha', return_value='HASH'), patch('driver.read', side_effect=lambda p: docs[str(p)]), \
+                 patch.object(live, 'assert_remote_healthy_saved_isolated') as healthy, \
+                 patch.object(live, 'assert_remote_roundtrip_paused_isolated', side_effect=AssertionError('wrong predecessor')), \
+                 patch('driver.home_saved_after_isolated_remote', return_value=True) as home:
+                live.assert_home_after_remote_isolated(current, current_backup)
+            healthy.assert_called_once_with(previous, older)
+            self.assertIs(home.call_args.args[-1], current_backup)
+
     def test_home_preflight_reports_isolation_without_using_surface_resume_schema(self):
         with tempfile.TemporaryDirectory() as directory:
             root=Path(directory);steam=root/'steam.exe';steam.write_text('synthetic',encoding='utf-8')

@@ -191,7 +191,12 @@ class Live:
    rows=[row for row in older['rows'] if Path(row['originalPath']).resolve()==path];proof=older['latest'][role]
    need(len(rows)==1 and rows[0]['sha256']==proof['sha256'] and sha(rows[0]['backupPath'])==proof['sha256'],
     'previous_remote_backup_copy_changed')
-  self.assert_remote_roundtrip_paused_isolated(previous,older)
+  if previous.get('remoteRoundtripPausedIsolation'):
+   self.assert_remote_roundtrip_paused_isolated(previous,older)
+  elif previous.get('remoteHealthySavedIsolation'):
+   self.assert_remote_healthy_saved_isolated(previous,older)
+  else:
+   raise RuntimeError('previous_remote_isolation_missing')
   loaded=frozen('loadedSession')
   need(loaded.get('saveName')==Path(previous['savePaths']['primary']).stem,'loaded_remote_identity_changed')
   need(home_saved_after_isolated_remote(c,previous,loaded,frozen('homeFlight'),frozen('homeSave'),
