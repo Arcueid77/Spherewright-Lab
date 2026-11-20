@@ -6,6 +6,20 @@
 - **减少供料与发射切换。** 优先为太阳帆和火箭建立各自可用的输出路径，让现有生产和发射并行；在新路径可用前继续按库存进行有限批次切换。处理器同时分配给戴森组件和量子芯片，按实际在途、设备缓冲及剩余壳面一起核算。/ **Reduce feed and launch switching.** Give sails and rockets separate usable output paths where practical, so production and launch can proceed together; until then use finite batches based on actual stock. Allocate processors across both Dyson components and quantum chips, accounting for in-flight cargo, machine buffers and remaining shell work together.
 - **补齐远端普通手搓。** 现行产品曾在外星工厂作业时拒绝普通手搓，应支持按实际配方、库存和机甲运行情况执行，避免为少量普通零件专门往返母星。此项尚待产品实现和实机验证。/ **Support normal remote handcraft.** The current product previously rejected ordinary handcraft at the off-world factory. Support it using actual recipes, inventory and mecha operation to avoid a home round trip for small ordinary parts. Implementation and live verification remain open.
 
+## 2026-11-20 最后一批合并补给 / Consolidated remaining supply
+
+出发切面为结构 136 / 150、细胞 128 / 224，另有 22 帆在蜂群、20 帆装填、无在途火箭。余下 14 枚火箭的毛需求为 84 处理器、84 框架、84 组件帆、28 量子芯片和 56 氘棒。Caph 仓 45 当时有 43 框架、84 帆，组件机另有 6 框架及 6 帆，火箭机有 4 芯片和 4 氘棒，行星站有 1 处理器及 2 氘棒；纳米管仍在生产，但框架线缺钛合金。细胞另需 96；蜂群 / 装填的 42 帆仅是潜在供给，需实际发射和吸收。按新鲜实际库存优先合并处理器、芯片、燃料、光子和框架 / 合金，留有合理余量；不重复计算供组件与供壳面的太阳帆。
+
+返航途中跨星只读切面显示母星站 918 有 2 处理器、7536 处理器与芯片均为 0、7579 有 1 芯片；这是站内现货，不代表全部仓库。抵达后先检查现有仓储并恢复处理器上游，同时启动芯片与光子补料。
+
+两条既有带经过原中转候选点，原生预检因与带 77 / 91 碰撞拒绝了仓库，未建造或扣料。回程可正常准备一座额外电磁轨道弹射器及分拣器，探索从存帆仓直接供料，从而使火箭和帆并行；现有首座弹射器和原有带保持运行。按原生配方，一座弹射器直接需要 20 钢材、20 齿轮、5 处理器和 10 电磁涡轮；检查现有供电后再按实需补电。额外科研、用料及施工按既有 0.6 自主授权核算执行。
+
+At departure, structure was 136 / 150 and cells 128 / 224, with 22 sails in the swarm, 20 loaded and no rocket in flight. Fourteen further rockets gross 84 processors, 84 frames, 84 component sails, 28 quantum chips and 56 rods. Store 45 held 43 frames / 84 sails; the component machine held six frames / six sails, the rocket machine four chips / four rods, and the local station one processor / two rods. Nanotubes were still being made but the frame line lacked titanium alloy. Cells need another 96; the 42 swarm / loaded sails are potential supply and still require actual launch and absorption. Recheck live stock, combine processor, chip, fuel, photon and frame / alloy supplies with a reasonable margin, and do not count the same sails for both components and shell cells.
+
+An in-flight remote read found two processors at home station 918, zero processors and chips at 7536, and one chip at 7579. These are station stocks, not a complete warehouse inventory. After arrival, inspect existing stores, restart upstream processors and begin chip and photon replenishment in parallel.
+
+Two existing belts occupied the proposed intermediate-store area; Native previews rejected collisions with belts 77 / 91 before construction or debit. Prepare an additional electromagnetic rail ejector and sorter at home, then explore direct feed from the sail store so rockets and sails can run concurrently while the existing ejector and belts remain in service. Its Native direct recipe uses 20 steel, 20 gears, five processors and ten electromagnetic turbines. Check the actual grid before adding needed power. Apply the existing 0.6 autonomy for reasonable research, materials and construction.
+
 ## Current saved Caph continuation / 当前Caph存档续接
 
 以下保留各次供料设计、预算与当时的建议；当前要打通哪一段，以[活动交接页首](../../operations/active-handoff.md)为准。/ The entries below preserve supply designs, allocations and proposals from each run. Use the active handoff for the next connection to build.
