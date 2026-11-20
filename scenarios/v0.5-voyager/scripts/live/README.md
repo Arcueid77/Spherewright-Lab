@@ -32,6 +32,8 @@ The caller accepts the published tokenless `beltEndpointPreview` and `beltRouteP
 
 After the original homebound flight has actually completed and a normal home Save has closed the journey, an attached successor can use a new finite home-work window under the owner's runtime grant. It binds the original successful landing, matching completed Save/journey and stopped-caller handoff; the old remote deadline remains recorded and no spent ticks are refunded. / 原返航确实完成且母星普通保存关闭旅程后，接替调用端可依所有者时长授权开启新的有限母星工作窗口；绑定原成功落地、对应完成保存与旅程、已停调用端交接，旧远端截止和既耗均保留。
 
+A remote menu return that times out after a confirmed complete save can retain its unknown outcome while the independently observed unloaded world, normal process close and complete backup carry the owned save forward. The original action is not replayed or relabeled; cumulative use and earlier isolated history continue. / 远端回菜单在完整保存后回读超时时，可保留原 unknown，通过独立观察到的世界已卸载、正常关停及完整备份续接原存档；不重放或改写原动作结果，累计实耗与此前隔离历史继续保留。
+
 While idle, an explicitly retryable session-read timeout keeps the same writer and leaves queued work undispatched until a fresh healthy read succeeds. It retries only while the original game process remains present and within the original caller deadline; accepted or unknown writes are never retried. / 闲置期间，明确可重试的会话读取超时保留原唯一writer，在新鲜健康读回前不派发排队任务；仅在原游戏进程仍存在且原调用期限内重试只读，不重试已接受或unknown写入。
 
 Buffer waits for ordinary thermal/fusion generators read the observed `fuelPowerState.bufferedFuelItemId` and `bufferedFuelCount`. Loaded heat and current joules per tick are energy, not additional items; unavailable fuel state cannot satisfy a stock wait. / 普通火电和聚变机组的库存等待读取已观察的缓冲燃料物品与数量；已加载热值和每tick电量属于能源，不能当作额外物品，燃料状态不可用时不算库存达到。

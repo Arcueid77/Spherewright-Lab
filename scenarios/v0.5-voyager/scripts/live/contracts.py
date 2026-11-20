@@ -592,6 +592,61 @@ def remote_saved_after_isolated_home(config, home, loaded, outbound, menu_save, 
         and saved.get('savedGameTick')==save_tick)
 
 
+def remote_unknown_menu_saved_after_isolated_home(config, home, loaded, outbound, receipt,
+                                                   observed_action, observation, close_intent, close_result, backup):
+    """Preserve an independently observed unloaded world without relabeling an unknown menu action."""
+    old=home.get('originalUnknownActionsNeverReplayed');current=config.get('originalUnknownActionsNeverReplayed')
+    action=receipt.get('actionId');tick=config.get('sourceTick');home_tick=home.get('sourceTick')
+    latest=backup.get('latest') or {};primary=(latest.get('primary') or {}).get('gameTick')
+    last_exit=(latest.get('lastExit') or {}).get('gameTick');native=receipt.get('mainMenuReturnReadback') or {}
+    observed=(observed_action.get('response') or {}).get('result') or {};flight=outbound.get('voyagerFlightReadback') or {}
+    ident=loaded.get('sessionId');pid=observation.get('processId')
+    times=(home_tick,loaded.get('gameTick'),outbound.get('startedAtGameTick'),outbound.get('completedAtGameTick'),
+           receipt.get('completedAtGameTick'),tick,primary,last_exit)
+    return (config.get('recoveryProfile')=='ordinary-owned-remote'
+        and config.get('recoveryMode')=='authorize_remote_primary_recovery' and config.get('sourceRole')=='primary'
+        and config.get('surfaceRecoveryTarget') is None and config.get('originalActionsReconciled') is False
+        and home.get('recoveryProfile')=='ordinary-owned-home' and home.get('originalActionsReconciled') is False
+        and isinstance(old,(list,tuple)) and isinstance(current,(list,tuple)) and bool(old)
+        and all(isinstance(x,str) and x for x in (*old,*current)) and isinstance(action,str) and bool(action)
+        and len(set(old))==len(old) and len(set(current))==len(current) and action not in old
+        and set(current)==set(old)|{action}
+        and type(config.get('planetId')) is int and config['planetId']>0
+        and type(home.get('planetId')) is int and home['planetId']>0 and config['planetId']!=home['planetId']
+        and isinstance(ident,str) and bool(ident)
+        and isinstance(config.get('expectedNativeVersion'),str) and bool(config['expectedNativeVersion'])
+        and config.get('expectedNativeVersion')==home.get('expectedNativeVersion')
+        and isinstance(config.get('nativeAssemblySha256'),str) and bool(config['nativeAssemblySha256'])
+        and config.get('nativeAssemblySha256')==home.get('nativeAssemblySha256')
+        and all(type(x)is int for x in times) and 0<=times[0]<=times[1]<=times[2]<=times[3]<=times[4]==tick==primary
+        and 0<=last_exit<=tick and type(home.get('spentGameTicks')) is int
+        and config.get('spentGameTicks')==home['spentGameTicks']+tick-home_tick
+        and config.get('returnReserveGameTicks')==home.get('returnReserveGameTicks')
+        and config.get('cleanupReserveGameTicks')==home.get('cleanupReserveGameTicks')
+        and backup.get('complete') is True and backup.get('verified') is True
+        and loaded.get('gameLoaded') is True and loaded.get('ownedBySpherewright') is True
+        and loaded.get('writesAllowed') is True and loaded.get('localPlanetId')==home.get('planetId')
+        and isinstance(outbound.get('actionId'),str) and bool(outbound['actionId']) and outbound['actionId'] not in current
+        and outbound.get('actionKind')=='interplanetary-flight' and outbound.get('terminal') is True
+        and outbound.get('state')=='completed' and outbound.get('succeeded') is True
+        and outbound.get('sessionId')==ident and outbound.get('planetId')==home.get('planetId')
+        and flight.get('isReturnLeg') is False and flight.get('bindingVerified') is True and flight.get('nativeExitObserved') is True
+        and flight.get('actualPlanetId')==flight.get('selectedDestinationPlanetId')==config.get('planetId')
+        and receipt.get('actionKind')=='return-to-main-menu' and receipt.get('terminal') is True
+        and receipt.get('state')=='outcome_unknown' and receipt.get('succeeded') is False
+        and receipt.get('reconciledFromOutcomeUnknown') is False and receipt.get('sessionId')==ident
+        and receipt.get('planetId')==config.get('planetId')
+        and native.get('normalSaveConfirmed') is True and native.get('completeSaveVerified') is True
+        and native.get('nativeEndRequested') is True and native.get('savedGameTick')==tick
+        and observed_action.get('toolError') is False and (observed_action.get('response') or {}).get('success') is True
+        and observed.get('actionId')==action and observed.get('terminal') is True
+        and observed.get('state')=='outcome_unknown' and observed.get('reconciledFromOutcomeUnknown') is False
+        and observation.get('gameLoaded') is False and observation.get('originalActionReplayed') is False
+        and observation.get('originalActionId')==action and type(pid)is int and pid>0
+        and close_intent.get('processId')==pid and close_intent.get('forceKill') is False
+        and close_intent.get('maximumRequests')==1 and close_result.get('passed') is True and close_result.get('gameStopped') is True)
+
+
 def remote_paused_saved_after_isolated_home(config, home, loaded, outbound, cut, save_plan, saved, closed, preservation, backup):
     """Carry the same isolated home history through a paused outbound save."""
     old=home.get('originalUnknownActionsNeverReplayed');current=config.get('originalUnknownActionsNeverReplayed')

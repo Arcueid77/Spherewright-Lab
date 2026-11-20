@@ -4,7 +4,7 @@ import copy,math,sys,tempfile,unittest
 from types import SimpleNamespace
 from unittest.mock import patch
 sys.path.insert(0,str(Path(__file__).resolve().parent/'live'))
-from contracts import isolated_surface_unknown_after_saved_home,isolated_saved_menu_unknown,remote_saved_after_isolated_home,remote_paused_saved_after_isolated_home,remote_roundtrip_paused_after_isolation,surface_unknown_after_isolated_remote,surface_failed_resume_saved_after_isolation,owned_saved_recovery_context,home_saved_after_isolated_remote
+from contracts import isolated_surface_unknown_after_saved_home,isolated_saved_menu_unknown,remote_saved_after_isolated_home,remote_unknown_menu_saved_after_isolated_home,remote_paused_saved_after_isolated_home,remote_roundtrip_paused_after_isolation,surface_unknown_after_isolated_remote,surface_failed_resume_saved_after_isolation,owned_saved_recovery_context,home_saved_after_isolated_remote
 from driver import Live
 
 
@@ -124,6 +124,40 @@ class SavedHomeIsolationTests(unittest.TestCase):
         self.assertTrue(owned_saved_recovery_context(remote))
         remote['originalActionsReconciled']=True
         self.assertFalse(owned_saved_recovery_context(remote))
+
+    def test_unloaded_remote_menu_timeout_preserves_the_unknown_and_complete_save(self):
+        self.config.update(originalActionsReconciled=False,expectedNativeVersion='native',nativeAssemblySha256='assembly',
+            spentGameTicks=1000,returnReserveGameTicks=54000,cleanupReserveGameTicks=3000)
+        remote=dict(recoveryProfile='ordinary-owned-remote',recoveryMode='authorize_remote_primary_recovery',
+            sourceRole='primary',sourceTick=1600,planetId=201,originalActionsReconciled=False,
+            originalUnknownActionsNeverReplayed=['old-move','old-menu','new-menu'],expectedNativeVersion='native',
+            nativeAssemblySha256='assembly',spentGameTicks=1300,returnReserveGameTicks=54000,cleanupReserveGameTicks=3000)
+        loaded=dict(gameLoaded=True,ownedBySpherewright=True,writesAllowed=True,sessionId='later-session',localPlanetId=104,gameTick=1310)
+        outbound=dict(actionId='new-flight',actionKind='interplanetary-flight',terminal=True,state='completed',succeeded=True,
+            sessionId='later-session',planetId=104,startedAtGameTick=1320,completedAtGameTick=1400,
+            voyagerFlightReadback=dict(isReturnLeg=False,bindingVerified=True,nativeExitObserved=True,
+                actualPlanetId=201,selectedDestinationPlanetId=201))
+        receipt=dict(actionId='new-menu',actionKind='return-to-main-menu',terminal=True,state='outcome_unknown',succeeded=False,
+            reconciledFromOutcomeUnknown=False,sessionId='later-session',planetId=201,completedAtGameTick=1600,
+            mainMenuReturnReadback=dict(normalSaveConfirmed=True,completeSaveVerified=True,nativeEndRequested=True,
+                mainMenuVerified=False,savedGameTick=1600))
+        response=dict(toolError=False,response=dict(success=True,result=dict(actionId='new-menu',terminal=True,
+            state='outcome_unknown',reconciledFromOutcomeUnknown=False)))
+        observation=dict(gameLoaded=False,originalActionReplayed=False,originalActionId='new-menu',processId=123)
+        intent=dict(processId=123,forceKill=False,maximumRequests=1);closed=dict(passed=True,gameStopped=True)
+        backup=dict(complete=True,verified=True,latest=dict(primary=dict(gameTick=1600),lastExit=dict(gameTick=1600)))
+        args=[remote,self.config,loaded,outbound,receipt,response,observation,intent,closed,backup]
+        self.assertTrue(remote_unknown_menu_saved_after_isolated_home(*args))
+        for index,path,value in [(0,'spentGameTicks',1299),(0,'originalUnknownActionsNeverReplayed',['old-move','old-menu']),
+            (3,'sessionId','different'),(3,'succeeded',False),(4,'state','completed'),
+            (4,'completedAtGameTick',1599),(5,'toolError',True),(6,'gameLoaded',True),
+            (6,'originalActionReplayed',True),(7,'forceKill',True),(8,'gameStopped',False),
+            (9,'verified',False)]:
+            with self.subTest(index=index,path=path):
+                changed=copy.deepcopy(args);changed[index][path]=value
+                self.assertFalse(remote_unknown_menu_saved_after_isolated_home(*changed))
+        changed=copy.deepcopy(args);changed[9]['latest']['lastExit']['gameTick']=1601
+        self.assertFalse(remote_unknown_menu_saved_after_isolated_home(*changed))
 
     def test_completed_outbound_can_preserve_its_exact_paused_save_without_resolving_old_unknowns(self):
         self.config.update(originalActionsReconciled=False,expectedNativeVersion='native',nativeAssemblySha256='assembly',
