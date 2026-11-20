@@ -10,6 +10,8 @@ A known terminal Move or harvest failure leaves the caller available when the ow
 
 `wait-player-still` accepts a finite `pollSeconds` from 0.25 to 30 (default 0.5), so a long natural recharge can use fewer read-only calls. Its finite wait, exact physical-idle readback, energy threshold, original caller deadline and later fresh Native admission still apply. / `wait-player-still` 可指定0.25至30秒的有限 `pollSeconds`（默认0.5秒），较长的自然充能等待可减少只读请求；有限等待、实际物理停稳、能量门槛、原调用期限及后续新鲜原生准入均保留。
 
+The separate read-only sampler accepts up to 64 samples with an interval of 0–60 seconds. Use longer intervals for slow natural production or shell absorption to avoid unnecessary requests; it never prepares or commits game actions. / 独立只读采样最多支持64次、间隔0至60秒；自然生产或壳面吸收较慢时可延长间隔以减少请求，不会准备或提交游戏动作。
+
 For a Move that opted into passive Drift, a fresh player read showing non-flying Walk drops the now-inapplicable Drift option before Native preparation. A player still in Drift keeps the option; no extra player read or automatic replay is introduced. / 移动已选择允许水面漂移时，若新鲜玩家状态显示已转为非飞行 Walk，调用端在原生准备前去掉不再适用的漂移选项；仍在 Drift 则保持原选项。不增加额外读数或自动重放。
 
 Repeated transient readiness reads back off from 0.25 to at most 1 second while retaining the original startup deadline. This reduces preload polling and leaves actual action submission unchanged. / 连续的临时未就绪读取从 0.25 秒递增至最多 1 秒，沿用原启动时限；减少预加载轮询，不改变实际动作提交。

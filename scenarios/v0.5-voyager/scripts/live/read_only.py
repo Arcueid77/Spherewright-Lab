@@ -14,7 +14,7 @@ def main():
  config,config_sha,plan_path,plan_sha,output=sys.argv[1:];need(sha(plan_path)==plan_sha.upper(),'immutable_read_plan_changed')
  plan=read(plan_path);queries=plan['queries'];need(0<len(queries)<=16 and all(is_read_tool(q['tool']) for q in queries),'read_only_entry_rejects_prepare_or_commit')
  samples=plan.get('sampleCount',1);interval=plan.get('sampleIntervalSeconds',0)
- need(type(samples)is int and 1<=samples<=64 and type(interval)in(int,float) and 0<=interval<=5,'finite_read_sample_envelope_required')
+ need(type(samples)is int and 1<=samples<=64 and type(interval)in(int,float) and 0<=interval<=60,'finite_read_sample_envelope_required')
  walk=plan.get('upstreamBeltWalk');walk_limit=0 if walk is None else walk.get('maximumObjects',0)
  need(walk is None or type(walk_limit)is int and 1<=walk_limit<=64 and type(walk.get('startObjectId'))is int and walk['startObjectId']>0,'finite_native_belt_walk_required')
  pages=plan.get('factoryPaginationMaximumPages',0)
