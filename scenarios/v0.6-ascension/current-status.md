@@ -2,6 +2,10 @@
 
 按日期查证 0.6 实跑结果；续跑看[活动交接页首](../../operations/active-handoff.md)。/ Use the entries below for dated evidence. Resume from the top of the active handoff.
 
+2026-11-20 实装续接：`e221b263` 同源冷安装及磁盘核验通过，已核 5 个插件文件、224 个 MCP 文件与 47 项已装接口形状；游戏关闭，最新存档和 3278 项完整保护仍在。闭壳和发电需在新版本冷恢复后复核，原回菜单超时保持 unknown。
+
+Installed continuation, 2026-11-20: coherent `e221b263` cold installation and disk verification passed, covering five Plugin files, 224 MCP files and 47 installed interface cases. The game is stopped and the latest save plus 3278 protected files remain backed up. Recheck closure and electricity after cold recovery on this version; the original menu timeout stays unknown.
+
 2026-11-20 回菜单超时修复候选：产品 `e221b263` 在正常保存与原生退出调用返回后开始等待主菜单，允许较慢切换并接受延迟轮询中实际观察到的主菜单。准确源码构建、16 项针对性测试、[准确 CI 的 7136 项测试](https://github.com/Arcueid77/Spherewright/actions/runs/44723503219) 和同源 5 插件 / 224 MCP 文件资格通过。Lab 选中此源码，磁盘仍安装 `066ff782`；冷安装与实机复核待执行。此前原回菜单动作的 `outcome_unknown` 不变，当前存档与完整备份已核验。
 
 Menu-timeout fix candidate, 2026-11-20: product `e221b263` starts the main-menu wait after normal save and native exit return, allowing slower transitions and accepting a menu actually observed on a delayed poll. Its exact-source build, 16 targeted tests, [7136 exact-CI tests](https://github.com/Arcueid77/Spherewright/actions/runs/44723503219) and coherent five-plugin / 224-MCP-file qualification passed. Lab selects this source while disk still has `066ff782`; cold installation and live validation remain open. The earlier original menu action remains `outcome_unknown`; the current save and complete backup are verified.

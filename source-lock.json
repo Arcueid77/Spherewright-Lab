@@ -18,7 +18,7 @@
     "thunderstore": null
   },
   "installed": {
-    "sourceSha": "066ff7827db4f86205cad8c1bc5860620cdfb5cb",
+    "sourceSha": "e221b263496c6f786f1c42e7b71d38e4312f9b62",
     "productVersion": "0.6.0",
     "releaseTag": null,
     "native": {
@@ -31,10 +31,10 @@
     },
     "evidence": "scenarios/v0.6-ascension/current-status.md",
     "verification": "disk_verified",
-    "runtimeState": "running_verified",
+    "runtimeState": "not_running",
     "developmentArtifact": {
       "kind": "plugin_mcp_directory",
-      "manifestSha256": "E9CF0F90FFABD987F8408FF98E84BDFFF2720B75364649B375D6BDE37456C466",
+      "manifestSha256": "6D5F8BC2980E66AB300F7F8D25757F528728BFEDEC04569B225A23DBB40923A6",
       "pluginFiles": 5,
       "mcpFiles": 224
     }
