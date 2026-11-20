@@ -25,7 +25,7 @@ def blocked_suffix(steps,wait_role,prefix_role,previous_steps=None):
  writes=[s for s in steps[:index] if s['kind'] not in ('read','dump','wait-buffer','wait-player-still','prepare-only','prove-network')]
  if not writes and previous_steps is not None:
   writes=[s for s in previous_steps if s['kind'] not in ('read','dump','wait-buffer','wait-player-still','prepare-only','prove-network')]
- need(writes and writes[-1]['role']==prefix_role and writes[-1]['kind'] in ('operation','build-sorter'),
+ need(writes and writes[-1]['role']==prefix_role and writes[-1]['kind'] in ('operation','configure','build-sorter'),
   'exact_last_settled_prefix_required')
  return wait,[s['role'] for s in steps[index+1:]]
 

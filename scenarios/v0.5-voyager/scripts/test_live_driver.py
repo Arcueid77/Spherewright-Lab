@@ -914,6 +914,13 @@ class LiveDriverTests(unittest.TestCase):
   with self.assertRaisesRegex(RuntimeError,'explicit_positive_native_buffer'):blocked_suffix(invalid,'product','chips')
   invalid=copy.deepcopy(steps);invalid[2]['entity']='unresolved-reference'
   with self.assertRaisesRegex(RuntimeError,'explicit_positive_native_buffer'):blocked_suffix(invalid,'product','chips')
+ def test_blocked_handoff_accepts_exact_completed_configuration_prefix(self):
+  from handoff_blocked_buffer import blocked_suffix
+  steps=[dict(kind='operation',role='earlier'),dict(kind='configure',role='select',entity=132,mode='sorter-filter',filterItemId=1501),
+   dict(kind='wait-buffer',role='prisms',entity=43,itemId=1111,minimumCount=30),dict(kind='operation',role='extract')]
+  wait,suffix=blocked_suffix(steps,'prisms','select')
+  self.assertEqual(43,wait['entity']);self.assertEqual(['extract'],suffix)
+  with self.assertRaisesRegex(RuntimeError,'exact_last_settled_prefix'):blocked_suffix(steps,'prisms','earlier')
  def test_blocked_first_step_can_follow_the_last_completed_plan_write(self):
   from handoff_blocked_buffer import blocked_suffix
   previous=[dict(kind='build-sorter',role='feed'),dict(kind='operation',role='save'),dict(kind='dump',role='cut')]
