@@ -2,6 +2,10 @@
 
 按日期查证 0.6 实跑结果；续跑看[活动交接页首](../../operations/active-handoff.md)。/ Use the entries below for dated evidence. Resume from the top of the active handoff.
 
+2026-11-20 回菜单超时修复候选：产品 `e221b263` 在正常保存与原生退出调用返回后开始等待主菜单，允许较慢切换并接受延迟轮询中实际观察到的主菜单。准确源码构建、16 项针对性测试、[准确 CI 的 7136 项测试](https://github.com/Arcueid77/Spherewright/actions/runs/44723503219) 和同源 5 插件 / 224 MCP 文件资格通过。Lab 选中此源码，磁盘仍安装 `066ff782`；冷安装与实机复核待执行。此前原回菜单动作的 `outcome_unknown` 不变，当前存档与完整备份已核验。
+
+Menu-timeout fix candidate, 2026-11-20: product `e221b263` starts the main-menu wait after normal save and native exit return, allowing slower transitions and accepting a menu actually observed on a delayed poll. Its exact-source build, 16 targeted tests, [7136 exact-CI tests](https://github.com/Arcueid77/Spherewright/actions/runs/44723503219) and coherent five-plugin / 224-MCP-file qualification passed. Lab selects this source while disk still has `066ff782`; cold installation and live validation remain open. The earlier original menu action remains `outcome_unknown`; the current save and complete backup are verified.
+
 2026-11-20 近距施工候选：产品 `8f991c14` 按实测抬高目标和原生默认模型高度中较大者计算新普通施工窗口的无人机行程，旧窗口保留原方案；源码完整构建、本地 1923 项相关回归、双语文档及[准确 CI 的 7135 项测试](https://github.com/Arcueid77/Spherewright/actions/runs/44690969012) 通过，同源 5 插件 / 224 MCP 文件资格通过。Lab 已选用此源码，但游戏仍运行、磁盘仍安装 `066ff782`；新候选尚未冷安装或实机验证。
 
 Near-range construction candidate, 2026-11-20: product `8f991c14` budgets new ordinary construction windows from the larger measured raised reach of the selected and Native-default models; old windows retain their original profile. Full source build, 1923 relevant local cases, bilingual documentation, [7135 exact-CI tests](https://github.com/Arcueid77/Spherewright/actions/runs/44690969012) and coherent five-plugin / 224-MCP-file qualification passed. Lab selects this source, but the game is still running and the disk remains installed at `066ff782`; the candidate is neither cold-installed nor live-verified.
