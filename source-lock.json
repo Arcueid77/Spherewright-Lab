@@ -5,7 +5,7 @@
   "spherewright": {
     "repository": "Arcueid77/Spherewright",
     "submodulePath": "deps/Spherewright",
-    "sourceSha": "71aebff4421f070723aeeea0c6a15b1624405f38",
+    "sourceSha": "066ff7827db4f86205cad8c1bc5860620cdfb5cb",
     "releaseTag": null,
     "productVersion": "0.6.0"
   },
@@ -31,7 +31,7 @@
     },
     "evidence": "scenarios/v0.6-ascension/current-status.md",
     "verification": "disk_verified",
-    "runtimeState": "running_verified",
+    "runtimeState": "not_running",
     "developmentArtifact": {
       "kind": "plugin_mcp_directory",
       "manifestSha256": "683A184DC8A09CA6CF81012228967FDA698E97A7976D44B56F342B8272F3F489",
