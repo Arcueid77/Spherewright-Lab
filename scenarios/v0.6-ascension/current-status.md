@@ -2,6 +2,10 @@
 
 按日期查证 0.6 实跑结果；续跑看[活动交接页首](../../operations/active-handoff.md)。/ Use the entries below for dated evidence. Resume from the top of the active handoff.
 
+2026-11-21 正式发行。GitHub 最新稳定版 `v0.6.0` 指向 `78274df5`，公开下载的六项附件均通过字节数和 SHA-256 核验。实机记录仍对应 `e221b263`。见[发布记录](../../releases/v0.6.0/publication-2026-11-21.md)。
+
+GitHub published `v0.6.0` as the latest stable release on 2026-11-21. The tag points to `78274df5`, and all six public assets matched their local sizes and SHA-256 values. The live record applies to `e221b263`. See the [publication record](../../releases/v0.6.0/publication-2026-11-21.md).
+
 2026-11-20 本地包体候选：产品源码 `78274df5` 与实机源码 `e221b263` 相差 6 个说明文件，准确 CI、双语包链接、两包结构、手动包模拟安装与两种包内 MCP 检查通过；完整哈希和范围见[交审记录](../../releases/v0.6.0/review-candidate-2026-11-20.md)。尚未打标签或正式发布。
 
 Local package candidates, 2026-11-20: product source `78274df5` differs from live-tested `e221b263` in six documentation files. Exact CI, bilingual package links, both layouts, simulated manual installation and both packaged MCP checks passed. See the [review record](../../releases/v0.6.0/review-candidate-2026-11-20.md) for full hashes and scope. No tag or formal publication has been made.
